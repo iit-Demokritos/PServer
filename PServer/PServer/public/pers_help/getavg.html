@@ -1,0 +1,38 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-getavg
+template: pers?clnt=&lt;name|pass&gt;&amp;com=getavg&amp;ftr=&lt;ftr_pattern&gt;[&amp;usr=&lt;usr&gt;]
+          Order of query params is not important. Query param 'usr'
+          is optional. If ommited, all users are considered.
+pattern : * | name[.*], where name is a path expression.
+descript: for the specified feature(s) and (maybe) user, the average
+          value of the numeric feature values 'num_value' is returned.
+          If no feature in DB matches the pattern, or if user does not
+          exist, the result will not have any 'row' elements (200 OK
+          will still be returned).
+example : pers?clnt=name|pass&amp;com=getavg&amp;ftr=laptop.weight&amp;usr=kostas
+          pers?clnt=name|pass&amp;com=getavg&amp;ftr=speed.*
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/average_featureval.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;avg&gt;average value&lt;/avg&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

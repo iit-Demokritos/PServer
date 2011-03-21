@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-addddt
+template: pers?clnt=&lt;name|pass&gt;&amp;com=addddt&amp;sid=&lt;id&gt;&amp;&lt;usr&gt;&amp;&lt;ftr_1&gt;=&lt;timestamp_pattern_1&gt;&amp;&lt;ftr_2&gt;=...
+          Order of query params may be important: among features whose
+          timestamp pattern delegates the timestamping to PServer, the
+          leftmost features are considered first when assigning a
+          timestamp (as if being visited first by the user).
+pattern : - | &lt;date/time&gt;, where '-' means that the PServer assigns a
+          transaction timestamp, otherwise the &lt;date/time&gt; provided by
+          the application is used. The &lt;date/time&gt; format must be a
+          long integer giving the milliseconds passed since January
+          1st, 1970 00:00:00.000 GMT.
+descript: for the specified user and for each 'ftr' parameter in the
+          request, a new tuple (user, feature, timestamp, sid) is inserted
+          in table 'decay_data'. In case the timestamp for a feature
+          is provided by the application, it denotes when the (user,
+          feature) interaction took place. In case the timestamping is
+          is delegated to PServer, it is the date/time of the
+          insertion of the tuple in the DB (the transaction time).
+          In both cases the timestamps can be used to put feature
+          interactions in the order they occured. For this however,
+          session timestamping of all features in a decay feature group must
+          be consistent and correct (either PServer or application
+          generated, not both / mixed). If a request contains many
+          features and some of them are assigned to be timestamped
+          by PServer, some may end up with identical timestamps.
+          This does not create any problem as long as the features
+          are different. The DB however cannot record more than one
+          identical (user, feature, timestamp) tuples. In case some
+          timestamps are the same, the order of the corresponding
+          interactions will be arbitrary. If a timestamp pattern is
+          not legal, or if the request leads to two or more identical
+          tuples, or if a feature 'ftr' does not already exist in the
+          'up_features' table (feature column of two tables is linked
+          through a referential integrity constraint), 401 is returned.
+          If the sid is ommited then the last sid is assumed to be the desirable          
+          If the error code 401 is returned then no changes have taken
+          place in the DB.
+example : pers?clnt=name|pass&amp;com=addddt&amp;usr=kostas&amp;advert.link16=-&amp;page5.combo8.choice2=1005854668670
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.
+          Note that the contents of the table 'decay_data' are not
+          constraint or in any other way affected by the table
+          'decay_groups'.</pre>
+
+</body>
+
+</html>

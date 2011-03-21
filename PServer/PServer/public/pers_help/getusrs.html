@@ -1,0 +1,34 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-getusrs
+template: pers?com=getusrs&amp;whr=&lt;cond&gt;
+          &lt;num_pattern&gt;&amp;srt=&lt;order_pattern&gt;&amp;cmp=&lt;comp_pattern&gt;
+          Order of query params is not important.
+pattern : * The '*' means all character sequences.                 
+descript: Returns all the users that has a name that satisfies the whr pattern
+example : pers?com=getusrs&amp;whr=*
+          pers?com=getusrs&amp;whr=sample*
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/user_profile.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;usr&gt;user&lt;/usr&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser.  In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

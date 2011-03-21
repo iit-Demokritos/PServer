@@ -1,0 +1,41 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-setattrdef
+template: pers?clnt=&lt;name|pass&gt;&amp;com=setattrdef&amp;&lt;attr_pattern_1&gt;=&lt;new_def_val_1&gt;&amp;...
+          Order of query params is important: position of 'com'
+          is not important, however updates of attribute values
+          are performed in the order they appear in the request.
+pattern : * | name[.*], where name is a path expression
+descript: updates the def value of all features matching
+          the feature pattern(s) to the new def value(s).
+          The new def values will affect only subsequent
+          user profiles. Old profiles keep the old def values.
+          If no feature in DB matches a pattern, no def value
+          will be updated (200 OK will still be returned).
+          If the error code 401 is returned then none
+          of the features matching the request pattern(s)
+          has been updated to the new def value(s).
+example : pers?clnt=name|pass&amp;com=setattrdef&amp;age=24&amp;lang.*=0&amp;lang.gr=1
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

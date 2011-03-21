@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-getusrftr or getusr
+template: pers?com=getusrftr&amp;usr=&lt;usr&gt;&amp;ftr=&lt;ftr_pattern&gt;[&amp;num=
+          &lt;num_pattern&gt;&amp;srt=&lt;order_pattern&gt;&amp;cmp=&lt;comp_pattern&gt;]
+          Order of query params is not important. Query params
+          'num', 'srt', and 'cmp' are optional. If ommited, 'num'
+          defaults to '*', 'srt' defaults to 'desc', and 'cmp' to 'n'.
+pattern : for feature, * | name[.*], where name is a path expression.
+          For num, * | &lt;integer&gt;.
+          For srt, asc | desc. For A-&gt;Z use 'asc', for 10-&gt;1 use 'desc'.
+          For cmp, s | n. Values are compared as strings if cmp==s,
+          while they are compared as numbers (doubles) if cmp==n.
+          String values that cannot be converted to doubles are
+          represented as NULLs in numeric comparison.
+descript: for the specified user, the features matching the pattern
+          are found and sorted according to value (based on 'srt' and
+          'cmp'), and secondarily according to feature name (asc, A-&gt;Z) .
+          Then the first &lt;num_pattern&gt; rows are selected (or all, if
+          &lt;num_pattern&gt; is '*') and an XML answer is formed. If no
+          feature in DB matches the pattern or if &lt;num_pattern&gt; &lt;=0
+          or if user does not exist, the result will not have any
+          'row' elements (200 OK will still be returned).
+          Note that 'srt' and 'cmp' affect the sorting on value.
+          Note that in case a number of features matching the pattern
+          have the same value, some of them may be part of the
+          results, while others not. This depends on 'num', which
+          determines in absolute terms the number of result rows.
+          Which of the features with the same value will be part of
+          the result depends on the feature name, which is a secondary
+          field of ordering.
+example : pers?com=getusrftr&amp;usr=john&amp;ftr=lang.*&amp;num=3
+          pers?com=getusrftr&amp;usr=152&amp;ftr=page5.*
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/singleuser_profile.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;ftr&gt;feature&lt;/ftr&gt;&lt;val&gt;value&lt;/val&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-caldcy
+template: pers?clnt=&lt;name|pass&gt;&amp;com=caldcy&amp;usr=&lt;user&gt;&amp;grp=&lt;ftr_group&gt;[&amp;drt=&lt;decay_rate&gt;]
+              [&amp;num=&lt;num_pattern&gt;]
+          Order of query params is not important. Query params
+          'drt' and 'num' are optional. If ommited, decay rate
+          is looked up in table 'decay_groups', and if it is
+          not found there either, it defaults to 0. If ommited,
+          'num' defaults to '*'.
+pattern : For 'num', * | &lt;integer&gt;.
+descript: for the specified user, and for the features matching
+          the specified feature group (that is, for the features
+          whose pathname starts with &lt;ftr_group&gt;), the (user, feature,
+          timestamp) tuples are retrieved from decay data, sorted
+          by timestamp descenting (10-&gt;1). Based on those data, a
+          decay value is calculated, using a special formula, for
+          each of the distinct features in the group visited by
+          the user. The decay value of a feature depends on how
+          many times the user selected the feature in comparison
+          to the rest of the features in the group, and how recent
+          those selections are in comparison again to the rest of
+          the features in the group. High decay values mean frequent
+          and / or recent selections of a feature. The higher the
+          decay value, the more interested the user is in a feature.
+          The features of the group are then sorted by their decay
+          value descenting. If 'num' is specified as an &lt;integer&gt;,
+          then the first &lt;integer&gt; (feature, decay value) tuples
+          will be returned. Else, if 'num' is ommited or if it is
+          set to '*', all (feature, decay value) of the group will
+          be returned. If no feature in 'decay_data' matches the
+          specified group, or no user matches the specified user,
+          or 'num' &lt; 1, the result will not have any 'row' elements
+          (200 OK will still be returned). Note that decay value
+          has only a meaning when compared with other decay values
+          from within the same calculation. Also check the 'addddt'
+          for further information on the validity of decay data used
+          to calculate decay values. An important issue is the decay
+          rate, which is a number between 1 and 0, both inclusive.
+          The higher the rate, the more easily users forget (loose
+          interest in) visited features. If rate is set to 0, the user
+          does not forget (or loose interest) and the decay mechanism
+          is reduced to sorting features based only on how frequently
+          a user has visited them (not when). In this case, the decay
+          value calculated by the server for any feature of the group
+          for a specified user, is the total number of visits the
+          user paid to the feature. The decay rate can be set in the
+          request, but it is optional. If it is ommited, the specified
+          feature group is looked up in table 'decay_groups', and if
+          it exists the associated rate is extracted from there. If
+          no rate is defined and the specified group does not exist
+          in 'decay_groups', 0 is used as a default rate. In case
+          the specified rate is out of range ([0,1]), or rate is not
+          numeric, or the specified number pattern 'num' is illegal,
+          error code 401 will be returned.
+example : pers?clnt=name|pass&amp;com=caldcy&amp;usr=takis&amp;grp=advert.banners
+          pers?clnt=name|pass&amp;com=caldcy&amp;usr=petros&amp;grp=page10.links&amp;num=*
+          pers?clnt=name|pass&amp;com=caldcy&amp;usr=takis&amp;grp=page10&amp;drt=1&amp;num=3
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/decay_values.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;ftr&gt;feature&lt;/ftr&gt;&lt;decay_val&gt;decay value&lt;/decay_val&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.
+          Note that the formula used for calculating the decay
+          is explained in the paper &quot;Adaptation to drifting user's
+          interest&quot; by Ivan Koychev and Ingo Schwab.</pre>
+
+</body>
+
+</html>

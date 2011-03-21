@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-addattr
+template: pers?clnt=&lt;name|pass&gt;&amp;com=addattr&amp;&lt;attr_1&gt;=&lt;def_val_1&gt;&amp;&lt;ftr_2&gt;=...
+          Order of query params is not important. Feature
+          names must not end with '*' to be legal.
+descript: inserts new (attribute, default value) pairs. Must
+          be used while initializing the personalization service
+          For attributes that are added at a later stage, the
+          profile of all users is updated to include them as well.
+          If one or more attribute names already exist in DB, or
+          if one or more attribute names are not legal names,
+          code 401 (request error) will be returned. If the
+          error code 401 is returned then none of the feature
+          pairs in the request has been inserted in the DB.
+example : pers?clnt=name|pass&com=addattr&amp;lang.en=0&amp;lang.1=ENGLISH&amp;lang.2=GREEK&amp;gender=male
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : no response body exists.</pre>
+
+</body>
+
+</html>

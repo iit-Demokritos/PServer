@@ -1,0 +1,48 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-remdcy
+template: pers?clnt=&lt;name|pass&gt;&amp;com=remdcy[&amp;grp=&lt;ftr_group_1&gt;&amp;grp=...]
+          Order of query params is not important. The 'grp'
+          query parameters are optional.
+descript: removes all decay group records specified by 'grp'
+          query parameters. If no matching records are found
+          no records will be deleted (200 OK will still be
+          returned). If no 'grp' query parameters exist, the
+          records for all feature groups will be deleted. If
+          the error code 401 is returned then no record has
+          been deleted. Note that for initializing the Personal
+          Mode DB (removing all records in all tables) this
+          request (the 'delete everything' version) must be
+          used together with 'remftr', as the 'remftr' does not
+          affect the table 'decay_groups'.
+example : pers?clnt=name|pass&amp;com=remdcy&amp;grp=page10&amp;grp=advertisements.clothing
+          pers?clnt=name|pass&amp;com=remdcy   (deletes everything in table)
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.
+          Note that an important reason why this request does not
+          delete decay data as well (the timestamped user-feature
+          interactions with features that belong to the specified
+          groups) is that a feature name may correspond to more
+          than one groups (eg. page10.banners.banner2 corresponds
+          to both page10 and page10.banners groups).</pre>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-mkcom
+template: commu?clnt=&lt;name|pass&gt;&amp;com=mkcom&amp;algorithm=clustermining&amp;th=&lt;num&gt;&amp;params=&lt;param1|param2|..&gt;
+descript: Creates new clusters of users. The algorithm parameter is the algorithm that will be used for the clustering.
+	  The params takes the needed parameters for the algorithm and must be seperated by the chaacter |.
+	  Final the exclude defines the features that will be not given aw input to the cluster algorithm. If there are more than
+	  one features that must be excluded the character | is used.The th is the threashold that distances must pass to create the binarized graph
+example : commu?clnt=name|pass&amp;com=mkcom&amp;algorithm=bk&amp;params=0&amp;exclude=ftr1|ftr2
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : no response body exists.</pre>
+
+</body>
+
+</html>
