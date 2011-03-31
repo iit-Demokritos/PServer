@@ -59,9 +59,11 @@ public class Csv implements pserver.pservlets.PService {
         } else if (com.equalsIgnoreCase("loadftrgrp")) {//create user communities
             respCode = loadFeatureGroup(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("loadcommu")) {//create user communities
-            respCode = loadCommunity(queryParam, respBody, dbAccess);
+            //respCode = loadCommunity(queryParam, respBody, dbAccess);
+            respCode = 0;
         } else if (com.equalsIgnoreCase("loadftrgrph")) {//create user communities
-            respCode = loadFeatureGraph(queryParam, respBody, dbAccess);
+            //respCode = loadFeatureGraph(queryParam, respBody, dbAccess);
+            respCode = 0;
         } else {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Request command not recognized");
@@ -98,14 +100,14 @@ public class Csv implements pserver.pservlets.PService {
             }
             //disconnect from DB anyway
             dbAccess.disconnect();
-        } catch (SQLException e) {  //problem with transaction
+        } catch (Exception e) {  //problem with transaction
             respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-DB Transaction problem: " + e);
+            WebServer.win.log.error("-Transaction problem: " + e);
         }
         return respCode;
     }
 
-    private boolean execLoadFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+    private boolean execLoadFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         boolean success = true;
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -155,36 +157,31 @@ public class Csv implements pserver.pservlets.PService {
         }
         //System.out.println( "defValue = " + defValue );
 
-        try {
-            File csvFile = new File(filePath);
-            if (csvFile.exists() == false || csvFile.isDirectory() == true) {
-                WebServer.win.log.error("The specified file does not exists or it is a directory");
-                return false;
-            }
-
-            BufferedReader input = new BufferedReader(new FileReader(csvFile));
-            String line;
-            int rows = 0;
-            Connection con = dbAccess.getConnection();
-            Statement stmt = con.createStatement();
-            while ((line = input.readLine()) != null) {
-                String tokens[] = line.split(cs);
-                String ftr = prefix + tokens[ftrCol];
-                //PFeature feature = new PFeature( ftr, defValue, defValue );
-                String sql = "REPLACE INTO " + DBAccess.FEATURE_TABLE + " " + "(uf_feature, uf_defvalue, uf_numdefvalue, " + DBAccess.FIELD_PSCLIENT + " ) VALUES ('" + ftr + "', '" + defValue + "', " + defValue + ",'" + clientName + "')";
-                //rows += dbAccess.insertNewFeature( feature , clientName);
-                rows += stmt.executeUpdate(sql);
-            }
-            stmt.close();
-
-            respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
-            respBody.append("<result>\n");
-            respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
-            respBody.append("</result>");
-        } catch (Exception e) {
-            success = false;
-            WebServer.win.log.error("-Problem inserting to DB: " + e);
+        File csvFile = new File(filePath);
+        if (csvFile.exists() == false || csvFile.isDirectory() == true) {
+            WebServer.win.log.error("The specified file does not exists or it is a directory");
+            return false;
         }
+
+        BufferedReader input = new BufferedReader(new FileReader(csvFile));
+        String line;
+        int rows = 0;
+        Connection con = dbAccess.getConnection();
+        Statement stmt = con.createStatement();
+        while ((line = input.readLine()) != null) {
+            String tokens[] = line.split(cs);
+            String ftr = prefix + tokens[ftrCol];
+            //PFeature feature = new PFeature( ftr, defValue, defValue );
+            String sql = "REPLACE INTO " + DBAccess.FEATURE_TABLE + " " + "(uf_feature, uf_defvalue, uf_numdefvalue, " + DBAccess.FIELD_PSCLIENT + " ) VALUES ('" + ftr + "', '" + defValue + "', " + defValue + ",'" + clientName + "')";
+            //rows += dbAccess.insertNewFeature( feature , clientName);
+            rows += stmt.executeUpdate(sql);
+        }
+        stmt.close();
+
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
+        respBody.append("</result>");
         return success;
     }
 
@@ -309,14 +306,14 @@ public class Csv implements pserver.pservlets.PService {
             }
             //disconnect from DB anyway
             dbAccess.disconnect();
-        } catch (SQLException e) {  //problem with transaction
+        } catch (Exception e) {  //problem with transaction
             respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-DB Transaction problem: " + e);
+            WebServer.win.log.error("-Transaction problem: " + e);
         }
         return respCode;
     }
 
-    private boolean execLoadLog(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+    private boolean execLoadLog(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         boolean success = true;
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -367,13 +364,13 @@ public class Csv implements pserver.pservlets.PService {
         int timeIdx = queryParam.qpIndexOfKeyNoCase("timecol");
         int timeCol;
         if (timeIdx == -1) {
-            WebServer.win.log.debug("Parameter timecol is missing, assuming it is 3");
-            timeCol = 1;
+            WebServer.win.log.debug("Parameter timecol is missing, assuming it is 2");
+            timeCol = 2;
         }
         timeCol = Integer.parseInt((String) queryParam.getVal(timeIdx));
 
         String extra;
-        int renIdx = queryParam.qpIndexOfKeyNoCase("ren");
+        int renIdx = queryParam.qpIndexOfKeyNoCase("prefix");
         if (renIdx == -1) {
             extra = "";
         } else {
@@ -397,96 +394,126 @@ public class Csv implements pserver.pservlets.PService {
             ses = Integer.parseInt((String) queryParam.getVal(sesGenColIdx));
         }
 
-        try {
-            File csvFile = new File(filePath);
-            if (csvFile.exists() == false || csvFile.isDirectory() == true) {
-                WebServer.win.log.error("The specified file does not exists or it is a directory");
-                return false;
+        File csvFile = new File(filePath);
+        if (csvFile.exists() == false || csvFile.isDirectory() == true) {
+            WebServer.win.log.error("The specified file does not exists or it is a directory");
+            return false;
+        }
+
+        int sesId;
+        BufferedReader input = new BufferedReader(new FileReader(csvFile));
+        String line;
+        //int sesId = 0;
+        long curTime = System.currentTimeMillis();
+        int rowsAffected = 0;
+        Statement stmtDecay = dbAccess.getConnection().createStatement();
+        Statement stmtNum = dbAccess.getConnection().createStatement();
+        HashMap<String, Integer> nextSesIds = new HashMap<String, Integer>(100);
+        HashMap<String, Long> prevTime = new HashMap<String, Long>(100);
+        int lineNum = 0;
+        while ((line = input.readLine()) != null) {
+            lineNum++;
+            if (line.trim().equals("")) {
+                continue;
             }
+            String tokens[] = line.split(cs);
+            if (tokens.length < usrCol - 1 || tokens.length < ftrCol - 1) {
+                throw new Exception("invalid contant at line " + lineNum);
+            }
+            String usr = tokens[usrCol];
+            String ftr = extra + tokens[ftrCol];
+            long time = Long.parseLong(tokens[timeCol]);
+            System.out.println(usr + " --- " + ftr + " --- " + time);
+            if (sesColIdx != -1) {
+                //System.out.println("i will read the session id");
+                sesId = Integer.parseInt(tokens[sesColIdx]);
+            } else {
 
-            int sesId;
-            BufferedReader input = new BufferedReader(new FileReader(csvFile));
-            String line;
-            //int sesId = 0;
-            long curTime = System.currentTimeMillis();
-            int rowsAffected = 0;
-            Statement stmtDecay = dbAccess.getConnection().createStatement();
-            Statement stmtNum = dbAccess.getConnection().createStatement();
-            HashMap<String, Integer> nextSesIds = new HashMap<String, Integer>(100);
-            HashMap<String, Long> prevTime = new HashMap<String, Long>(100);
-            int lineNum = 0;
-            while ((line = input.readLine()) != null) {
-                lineNum++;
-                if (line.trim().equals("")) {
-                    continue;
-                }
-                String tokens[] = line.split(cs);
-                if (tokens.length < usrCol - 1 || tokens.length < ftrCol - 1) {
-                    throw new Exception("invalid contant at line " + lineNum);
-                }
-                String usr = tokens[usrCol];
-                String ftr = extra + tokens[ftrCol];
-                long time = Long.parseLong(tokens[timeCol]);
-                System.out.println(usr + " --- " + ftr + " --- " + time);
-                if (sesColIdx != -1) {
-                    //System.out.println("i will read the session id");
-                    sesId = Integer.parseInt(tokens[sesColIdx]);
+                Integer nextSes = nextSesIds.get(usr);
+                //System.out.println( "User " + usr );
+                if (nextSes == null) {
+                    nextSes = 0;
+                    sesId = 0;
+                    nextSesIds.put(usr, nextSes);
+                    prevTime.put(usr, time);
                 } else {
-
-                    Integer nextSes = nextSesIds.get(usr);
-                    //System.out.println( "User " + usr );
-                    if (nextSes == null) {
-                        nextSes = 0;
-                        sesId = 0;
+                    Long prevTimeStamp = prevTime.get(usr);
+                    if (prevTimeStamp == null) {
+                        prevTimeStamp = 0L;
+                    }
+                    //System.out.println( "prev " + prevTimeStamp + " diff " + ( time - prevTimeStamp ) + " ses " + ses );
+                    if (time - prevTimeStamp > ses) {
+                        nextSes++;
                         nextSesIds.put(usr, nextSes);
                         prevTime.put(usr, time);
-                    } else {
-                        Long prevTimeStamp = prevTime.get(usr);
-                        if (prevTimeStamp == null) {
-                            prevTimeStamp = 0L;
-                        }
-                        //System.out.println( "prev " + prevTimeStamp + " diff " + ( time - prevTimeStamp ) + " ses " + ses );
-                        if (time - prevTimeStamp > ses) {
-                            nextSes++;
-                            nextSesIds.put(usr, nextSes);
-                            prevTime.put(usr, time);
-                        }
-                        sesId = nextSes;
                     }
-                    //System.out.println("new ses " + nextSes );
+                    sesId = nextSes;
                 }
-                //System.out.println( "User " + usr + " sid " + sesId );
-                String query = "INSERT DELAYED INTO decay_data (dd_user, dd_feature, dd_timestamp, "
-                        + DBAccess.FIELD_PSCLIENT + ", FK_session ) VALUES ('" + usr + "', '"
-                        + ftr + "', '" + time + "' ,'"
-                        + clientName + "'," + sesId + ")";
-                rowsAffected += stmtDecay.executeUpdate(query);
-
-                if (numCol != -1) {
-                    float val = Float.parseFloat(tokens[numCol]);
-                    //PNumData num = new PNumData( usr, ftr, val, time, sesId );
-                    //dbAccess.insertDelayedNewNumData( num, clientName );
-                    query = "INSERT DELAYED INTO num_data (nd_user, nd_feature, nd_timestamp, nd_value, sessionId, "
-                            + DBAccess.FIELD_PSCLIENT + " ) VALUES ('" + usr + "', '" + ftr
-                            + "', " + time + ", " + val + ","
-                            + sesId + ",'" + clientName + "')";
-
-                    rowsAffected += stmtNum.executeUpdate(query);
-                }
+                //System.out.println("new ses " + nextSes );
             }
+            //System.out.println( "User " + usr + " sid " + sesId );
+            String query = "INSERT DELAYED INTO decay_data (dd_user, dd_feature, dd_timestamp, "
+                    + DBAccess.FIELD_PSCLIENT + ", FK_session ) VALUES ('" + usr + "', '"
+                    + ftr + "', '" + time + "' ,'"
+                    + clientName + "'," + sesId + ")";
+            rowsAffected += stmtDecay.executeUpdate(query);
 
-            stmtDecay.close();
-            stmtNum.close();
+            if (numCol != -1) {
+                float val = Float.parseFloat(tokens[numCol]);
+                //PNumData num = new PNumData( usr, ftr, val, time, sesId );
+                //dbAccess.insertDelayedNewNumData( num, clientName );
+                query = "INSERT DELAYED INTO num_data (nd_user, nd_feature, nd_timestamp, nd_value, sessionId, "
+                        + DBAccess.FIELD_PSCLIENT + " ) VALUES ('" + usr + "', '" + ftr
+                        + "', " + time + ", " + val + ","
+                        + sesId + ",'" + clientName + "')";
 
-            respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
-            respBody.append("<result>\n");
-            respBody.append("<row><num_of_rows>" + rowsAffected + "</num_of_rows></row>\n");
-            respBody.append("</result>");
-        } catch (Exception e) {
-            success = false;
-            WebServer.win.log.error("-Problem inserting to DB: " + e);
-            e.printStackTrace();
+                rowsAffected += stmtNum.executeUpdate(query);
+            }
         }
+
+        stmtDecay.close();
+        stmtNum.close();
+
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>" + rowsAffected + "</num_of_rows></row>\n");
+        respBody.append("</result>");
         return success;
+    }
+
+    private int loadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        //execute the command
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            success = execLoadFeatureGroup(queryParam, respBody, dbAccess);
+            //-end transaction body
+            if (success) {
+                dbAccess.commit();
+            } else {
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+            //disconnect from DB anyway
+            dbAccess.disconnect();
+        } catch (Exception e) {  //problem with transaction
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+        }
+        return respCode;
+    }
+
+    private boolean execLoadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
