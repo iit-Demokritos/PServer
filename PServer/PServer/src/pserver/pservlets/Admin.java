@@ -441,6 +441,9 @@ public class Admin implements pserver.pservlets.PService {
                 "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >" +
                 "<A href=\"/commu_help/commu_mode.html\" target=\"_blank\">Commu mode help</a>" +
                 "</TD</TR>" +
+                "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >" +
+                "<A href=\"/csv_help/csv_mode.html\" target=\"_blank\">Csv mode help</a>" +
+                "</TD</TR>" +
                 "</TABLE></TD</TR></TABLE>";
     }
 

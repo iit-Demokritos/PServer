@@ -977,3 +977,35 @@
 1/4/2011 7:37:54  >  Connected to DB: MySQL
 1/4/2011 7:58:31  >  Request from /127.0.1.1 (37181)
 1/4/2011 7:58:31  >  37181-        /commu?clnt=test1|test1&com=addftrgrp&ftrs=ftr1|ftr2|ftr3|ftr4&usrs=usr1|usr2|usr3&name=custom1
+1/4/2011 8:39:58  >  Request from /127.0.0.1 (47957)
+1/4/2011 8:39:58  >  47957-        /
+1/4/2011 8:39:58  >  Request from /127.0.0.1 (47958)
+1/4/2011 8:39:58  >  47958-        /favicon.ico
+1/4/2011 8:39:58  >  Request from /127.0.0.1 (47959)
+1/4/2011 8:39:58  >  47959-        /favicon.ico
+1/4/2011 8:40:4  >  Request from /127.0.0.1 (47960)
+1/4/2011 8:40:4  >  47960-        /admin?com=login&login_name=admin&login_password=admin
+1/4/2011 8:40:11  >  Request from /127.0.0.1 (47961)
+1/4/2011 8:40:11  >  47961-        /
+1/4/2011 8:40:48  >  Request from /127.0.0.1 (47962)
+1/4/2011 8:40:48  >  47962-        /admin?com=login&login_name=root&login_password=root
+1/4/2011 8:40:52  >  Request from /127.0.0.1 (47963)
+1/4/2011 8:40:52  >  47963-        /commu_help/commu_mode.html
+1/4/2011 8:40:52  >  Request from /127.0.0.1 (47965)
+1/4/2011 8:40:52  >  47965-        /commu_help/commu_index.html
+1/4/2011 8:40:52  >  Request from /127.0.0.1 (47964)
+1/4/2011 8:40:52  >  47964-        /commu_help/menu.html
+1/4/2011 8:41:10  >  Request from /127.0.0.1 (47966)
+1/4/2011 8:41:10  >  47966-        /commu_help/rmftrgrp.html
+1/4/2011 8:41:11  >  Request from /127.0.0.1 (47967)
+1/4/2011 8:41:11  >  47967-        /commu_help/addftrgrp.html
+1/4/2011 8:43:10  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 8:43:10  >  Messages log mode set to: on
+1/4/2011 8:43:10  >  Connected to DB: MySQL
+1/4/2011 8:43:27  >  Request from /127.0.0.1 (38380)
+1/4/2011 8:43:27  >  38380-        /admin?com=login&login_name=root&login_password=root
+1/4/2011 8:43:29  >  Request from /127.0.0.1 (38381)
+1/4/2011 8:43:29  >  38381-        /commu_help/csv_mode.html
+1/4/2011 8:44:0  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 8:44:0  >  Messages log mode set to: on
+1/4/2011 8:44:0  >  Connected to DB: MySQL
