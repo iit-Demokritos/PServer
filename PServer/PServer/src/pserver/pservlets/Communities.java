@@ -807,60 +807,6 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
-    private int removeFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int respCode = PSReqWorker.NORMAL;
-        try {
-            //first connect to DB
-            dbAccess.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return PSReqWorker.SERVER_ERR;
-        }
-
-        //execute the command
-        try {
-            boolean success = true;
-            dbAccess.setAutoCommit(false);
-            success = removeGroup(queryParam, respBody, dbAccess);
-            //-end transaction body
-            if (success) {
-                dbAccess.commit();
-            } else {
-                dbAccess.rollback();
-                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
-                WebServer.win.log.warn("-DB rolled back, data not saved");
-            }
-            //disconnect from DB anyway
-            dbAccess.disconnect();
-        } catch (Exception e) {  //problem with transaction
-            respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-DB Transaction problem: " + e);
-            e.printStackTrace();
-        }
-        return respCode;
-    }
-
-    private boolean removeGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        String clientName = (String) queryParam.getVal(clntIdx);
-
-        int grpIdx = queryParam.qpIndexOfKeyNoCase("grp");
-        if (grpIdx == -1) {
-            WebServer.win.log.error("-The parameter grp is missing: ");
-            return false;
-        }
-        String groupName = (String) queryParam.getVal(grpIdx);
-
-        PFeatureGroupDBAccess fgAccess = new PFeatureGroupDBAccess(dbAccess);
-        int rows = fgAccess.remove(groupName, clientName);
-
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
-        respBody.append("<result>\n");
-        respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
-        respBody.append("</result>");
-        return true;
-    }
-
     private boolean execAddFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -919,6 +865,60 @@ public class Communities implements pserver.pservlets.PService {
         respBody.append("</result>");
         return true;
     }
+
+    private int removeFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        //execute the command
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            success = removeGroup(queryParam, respBody, dbAccess);
+            //-end transaction body
+            if (success) {
+                dbAccess.commit();
+            } else {
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+            //disconnect from DB anyway
+            dbAccess.disconnect();
+        } catch (Exception e) {  //problem with transaction
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-DB Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
+    }
+
+    private boolean removeGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int grpIdx = queryParam.qpIndexOfKeyNoCase("grp");
+        if (grpIdx == -1) {
+            WebServer.win.log.error("-The parameter grp is missing: ");
+            return false;
+        }
+        String groupName = (String) queryParam.getVal(grpIdx);
+
+        PFeatureGroupDBAccess fgAccess = new PFeatureGroupDBAccess(dbAccess);
+        int rows = fgAccess.remove(groupName, clientName);
+
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
+        respBody.append("</result>");
+        return true;
+    }    
 }
 
 class CollaborativeProfileBuilderThread extends Thread {

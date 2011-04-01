@@ -975,3 +975,5 @@
 1/4/2011 7:37:54  >  Server started at dev-machine/127.0.1.1, port 1111
 1/4/2011 7:37:54  >  Messages log mode set to: on
 1/4/2011 7:37:54  >  Connected to DB: MySQL
+1/4/2011 7:58:31  >  Request from /127.0.1.1 (37181)
+1/4/2011 7:58:31  >  37181-        /commu?clnt=test1|test1&com=addftrgrp&ftrs=ftr1|ftr2|ftr3|ftr4&usrs=usr1|usr2|usr3&name=custom1

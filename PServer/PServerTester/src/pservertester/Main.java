@@ -106,8 +106,9 @@ public class Main {
             //commands.add( "/commu?clnt=test1|test1&com=mkcom&algorithm=alexone&th=>0.9" );
             //System.out.println( "10" );
             //commands.add( "/commu?clnt=test1|test1&com=mkcom&algorithm=alexone&th=>1.0" );
-            commands.add( "/commu?clnt=test1|test1&com=rmftrgrp&grp=grp2" );
-            
+            //commands.add( "/commu?clnt=test1|test1&com=rmftrgrp&grp=grp2" );
+            commands.add( "/commu?clnt=test1|test1&com=addftrgrp&ftrs=ftr1|ftr2|ftr3|ftr4&usrs=usr1|usr2|usr3&name=custom1" );
+
             //commands.add( "/commu?clnt=test|test&com=calcudist&smetric=cos" );
             //commands.add( "/commu?clnt=test|test&com=mkcom&algorithm=bk&th=>0.8" );
             //commands.add( "/commu?clnt=test|test&com=calcftrdist&smetric=cos" );
