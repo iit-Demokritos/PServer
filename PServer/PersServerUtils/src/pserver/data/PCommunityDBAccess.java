@@ -74,21 +74,7 @@ public class PCommunityDBAccess {
         PServerResultSet prs = getDbAccess().executeQuery(query);
         PCommunityProfileResultSet result = new PCommunityProfileResultSet(prs.getStmt(), prs.getRs());
         return result;
-    }
-
-    public PFeatureGroupResultSet getFeatureGroups(String whrCondition) throws SQLException {
-        String query = "SELECT * FROM " + DBAccess.FTRGROUPS_TABLE + whrCondition;
-        PServerResultSet prs = getDbAccess().executeQuery(query);
-        PFeatureGroupResultSet result = new PFeatureGroupResultSet(prs.getStmt(), prs.getRs());
-        return result;
-    }
-
-    public PFeatureGroupProfileResultSet getFeatureGroupProfiles(String whrCondition) throws SQLException {
-        String query = "SELECT * FROM " + DBAccess.FTRGROUP_FEATURES_TABLE + " " + whrCondition;
-        PServerResultSet prs = getDbAccess().executeQuery(query);
-        PFeatureGroupProfileResultSet result = new PFeatureGroupProfileResultSet(prs.getStmt(), prs.getRs());
-        return result;
-    }
+    }    
 
     public void generateUserDistances(String clientName, VectorMetric metric, int dataStorageType, int numOfThreads, String features) throws SQLException {
         features = features.replace("*", "%");

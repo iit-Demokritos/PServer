@@ -776,3 +776,166 @@
 4/11/2010 10:59:11  >  Messages log mode set to: on
 4/11/2010 10:59:11  >  Database connection failed
 4/11/2010 10:59:11  >  Shutting down server, normal: false
+1/4/2011 5:13:6  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:13:6  >  Messages log mode set to: on
+1/4/2011 5:13:6  >  Database connection failed
+1/4/2011 5:13:6  >  Shutting down server, normal: false
+1/4/2011 5:14:38  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:14:38  >  Messages log mode set to: on
+1/4/2011 5:14:38  >  Database connection failed
+1/4/2011 5:14:38  >  Shutting down server, normal: false
+1/4/2011 5:15:27  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:15:27  >  Messages log mode set to: on
+1/4/2011 5:15:27  >  Connected to DB: MySQL
+1/4/2011 5:29:21  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:29:21  >  Messages log mode set to: on
+1/4/2011 5:29:21  >  Connected to DB: MySQL
+1/4/2011 5:29:25  >  Request from /127.0.1.1 (51690)
+1/4/2011 5:29:25  >  51690-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer&fs=\|&cs=\,&nmcol=0&ftrcol=1&isrcol=2
+1/4/2011 5:29:59  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:29:59  >  Messages log mode set to: on
+1/4/2011 5:29:59  >  Connected to DB: MySQL
+1/4/2011 5:30:1  >  Request from /127.0.1.1 (51698)
+1/4/2011 5:30:1  >  51698-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer&fs=\|&cs=\,&nmcol=0&ftrcol=1&isrcol=2
+1/4/2011 5:30:43  >  Problem starting server: java.net.BindException: Address already in use
+1/4/2011 5:30:43  >  Shutting down server, normal: false
+1/4/2011 5:30:53  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:30:53  >  Messages log mode set to: on
+1/4/2011 5:30:53  >  Connected to DB: MySQL
+1/4/2011 5:30:56  >  Request from /127.0.1.1 (51704)
+1/4/2011 5:30:56  >  51704-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:31:25  >  Request from /127.0.1.1 (51707)
+1/4/2011 5:31:25  >  51707-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:32:18  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:32:18  >  Messages log mode set to: on
+1/4/2011 5:32:18  >  Connected to DB: MySQL
+1/4/2011 5:32:20  >  Request from /127.0.1.1 (56241)
+1/4/2011 5:32:20  >  56241-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:37:12  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:37:12  >  Messages log mode set to: on
+1/4/2011 5:37:12  >  Connected to DB: MySQL
+1/4/2011 5:37:32  >  Request from /127.0.1.1 (48494)
+1/4/2011 5:37:32  >  48494-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:38:11  >  Request from /127.0.1.1 (48500)
+1/4/2011 5:38:11  >  48500-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:38:44  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:38:44  >  Messages log mode set to: on
+1/4/2011 5:38:45  >  Connected to DB: MySQL
+1/4/2011 5:38:56  >  Request from /127.0.1.1 (48506)
+1/4/2011 5:38:56  >  48506-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:40:20  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:40:20  >  Messages log mode set to: on
+1/4/2011 5:40:20  >  Connected to DB: MySQL
+1/4/2011 5:40:29  >  Request from /127.0.1.1 (48515)
+1/4/2011 5:40:29  >  48515-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:41:23  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:41:23  >  Messages log mode set to: on
+1/4/2011 5:41:23  >  Connected to DB: MySQL
+1/4/2011 5:41:28  >  Request from /127.0.1.1 (48521)
+1/4/2011 5:41:29  >  48521-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:41:40  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:41:40  >  Messages log mode set to: on
+1/4/2011 5:41:40  >  Connected to DB: MySQL
+1/4/2011 5:41:42  >  Request from /127.0.1.1 (48527)
+1/4/2011 5:41:42  >  48527-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:45:7  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:45:7  >  Messages log mode set to: on
+1/4/2011 5:45:7  >  Connected to DB: MySQL
+1/4/2011 5:45:10  >  Request from /127.0.1.1 (41376)
+1/4/2011 5:45:10  >  41376-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:46:23  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:46:23  >  Messages log mode set to: on
+1/4/2011 5:46:23  >  Connected to DB: MySQL
+1/4/2011 5:46:29  >  Request from /127.0.1.1 (41383)
+1/4/2011 5:46:29  >  41383-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:49:19  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:49:19  >  Messages log mode set to: on
+1/4/2011 5:49:19  >  Connected to DB: MySQL
+1/4/2011 5:49:21  >  Request from /127.0.1.1 (47464)
+1/4/2011 5:49:21  >  47464-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:49:33  >  Request from /127.0.1.1 (47476)
+1/4/2011 5:49:33  >  47476-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:49:57  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:49:57  >  Messages log mode set to: on
+1/4/2011 5:49:57  >  Connected to DB: MySQL
+1/4/2011 5:50:1  >  Request from /127.0.1.1 (47485)
+1/4/2011 5:50:1  >  47485-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:50:55  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:50:55  >  Messages log mode set to: on
+1/4/2011 5:50:56  >  Connected to DB: MySQL
+1/4/2011 5:51:3  >  Request from /127.0.1.1 (47493)
+1/4/2011 5:51:3  >  47493-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 5:53:36  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:53:36  >  Messages log mode set to: on
+1/4/2011 5:53:36  >  Connected to DB: MySQL
+1/4/2011 5:53:44  >  Request from /127.0.1.1 (43473)
+1/4/2011 5:53:44  >  43473-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1
+1/4/2011 5:54:28  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:54:28  >  Messages log mode set to: on
+1/4/2011 5:54:29  >  Connected to DB: MySQL
+1/4/2011 5:54:31  >  Request from /127.0.1.1 (43478)
+1/4/2011 5:54:31  >  43478-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1
+1/4/2011 5:54:46  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:54:46  >  Messages log mode set to: on
+1/4/2011 5:54:46  >  Connected to DB: MySQL
+1/4/2011 5:54:49  >  Request from /127.0.1.1 (43487)
+1/4/2011 5:54:49  >  43487-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1
+1/4/2011 5:57:34  >  Request from /127.0.1.1 (55014)
+1/4/2011 5:57:34  >  55014-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1
+1/4/2011 5:59:9  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 5:59:9  >  Messages log mode set to: on
+1/4/2011 5:59:9  >  Connected to DB: MySQL
+1/4/2011 5:59:18  >  Request from /127.0.1.1 (55023)
+1/4/2011 5:59:18  >  55023-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1
+1/4/2011 6:1:54  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:1:54  >  Messages log mode set to: on
+1/4/2011 6:1:54  >  Connected to DB: MySQL
+1/4/2011 6:1:57  >  Request from /127.0.1.1 (55031)
+1/4/2011 6:1:57  >  55031-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:2:22  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:2:22  >  Messages log mode set to: on
+1/4/2011 6:2:22  >  Connected to DB: MySQL
+1/4/2011 6:2:24  >  Request from /127.0.1.1 (42544)
+1/4/2011 6:2:24  >  42544-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:3:48  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:3:48  >  Messages log mode set to: on
+1/4/2011 6:3:48  >  Connected to DB: MySQL
+1/4/2011 6:3:50  >  Request from /127.0.1.1 (42552)
+1/4/2011 6:3:50  >  42552-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:5:47  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:5:47  >  Messages log mode set to: on
+1/4/2011 6:5:47  >  Connected to DB: MySQL
+1/4/2011 6:5:50  >  Request from /127.0.1.1 (42559)
+1/4/2011 6:5:50  >  42559-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:9:40  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:9:40  >  Messages log mode set to: on
+1/4/2011 6:9:40  >  Connected to DB: MySQL
+1/4/2011 6:9:44  >  Request from /127.0.1.1 (43600)
+1/4/2011 6:9:44  >  43600-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:11:27  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:11:27  >  Messages log mode set to: on
+1/4/2011 6:11:27  >  Connected to DB: MySQL
+1/4/2011 6:11:43  >  Request from /127.0.1.1 (43605)
+1/4/2011 6:11:43  >  43605-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:12:7  >  Request from /127.0.1.1 (53888)
+1/4/2011 6:12:7  >  53888-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:13:36  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:13:36  >  Messages log mode set to: on
+1/4/2011 6:13:36  >  Connected to DB: MySQL
+1/4/2011 6:13:46  >  Request from /127.0.1.1 (53899)
+1/4/2011 6:13:46  >  53899-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:15:2  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:15:2  >  Messages log mode set to: on
+1/4/2011 6:15:3  >  Connected to DB: MySQL
+1/4/2011 6:15:7  >  Request from /127.0.1.1 (53909)
+1/4/2011 6:15:7  >  53909-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:15:56  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:15:56  >  Messages log mode set to: on
+1/4/2011 6:15:56  >  Connected to DB: MySQL
+1/4/2011 6:16:4  >  Request from /127.0.1.1 (53917)
+1/4/2011 6:16:4  >  53917-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2
+1/4/2011 6:16:59  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 6:16:59  >  Messages log mode set to: on
+1/4/2011 6:16:59  >  Connected to DB: MySQL
+1/4/2011 6:17:8  >  Request from /127.0.1.1 (50512)
+1/4/2011 6:17:8  >  50512-        /csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\|&cs=\,&nmcol=0&ftrcol=1&usrcol=2

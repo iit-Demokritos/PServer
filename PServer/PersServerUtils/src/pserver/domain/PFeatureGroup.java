@@ -1,81 +1,56 @@
 package pserver.domain;
+
 import java.util.*;
 
-public class PFeatureGroup{
-    //sto anisma afto apothikebode i xristes pou anikoun stin kinotita
-    private Vector users=null;
-    private Hashtable features=null;
+public class PFeatureGroup {
+    //sto anisma afto apothikebode i xristes pou anikoun stin kinotita    
+
+    private LinkedList<String> features = null;
+    private LinkedList<String> users = null;
     //to onoma tis kinotitas
-    private String name=null;
-    
+    private String name = null;
+
     public PFeatureGroup() {
-        name="";
-        users=new Vector();
-        features=new Hashtable();
+        name = "";
+        features = new LinkedList<String>();
+        users = new LinkedList<String>();
     }
-    
-    public PFeatureGroup(String name){
-        this.name=name;
-        users=new Vector();
-        features=new Hashtable();
+
+    public PFeatureGroup(String name) {
+        this.name = name;
+        features = new LinkedList<String>();
+        users = new LinkedList<String>();
     }
-    
-    public void setName(String name){
-        this.name=name;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    
-    public void addUser(String user){
-        users.add(user);
-    }
-    
-    public Vector getUsers(){
-        return users;
-    }
-    
-    public String getUser(int index){
-        return (String)users.get(index);
-    }
-    
-    public void addFeature(String feature,boolean value){
-        features.put(feature,new Boolean(value));
-        
-    }
-    
-    public Hashtable getFeatures(){
+
+    public LinkedList<String> getFeatures() {
         return features;
     }
-    
-    public String getFeature(int index){
-        return (String)features.get (index);
+
+    public void setFeatures(LinkedList<String> features) {
+        this.features = features;
     }
-    
-    public boolean getFeature_value(String feature){
-        return ((Boolean)features.get(feature)).booleanValue();
+
+    public LinkedList<String> getUsers() {
+        return users;
     }
-    
-    public boolean containsFeature(String feature){
-        return features.contains(feature);
+
+    public void setUsers(LinkedList<String> users) {
+        this.users = users;
     }
-    
-    public int getNumberOfFeatures(){
-        return features.size();
+
+    public void addFeature(String ftr) {
+        this.features.add(ftr);
     }
-    
-    public String[] getFeatureNames(){
-        Enumeration e=features.keys();
-        Vector keys=new Vector();
-        while(e.hasMoreElements()){
-            keys.add((String)e.nextElement());
-        }
-        
-        String[] keyNames=new String[keys.size()];
-        for(int i=0;i<keyNames.length;i++){
-            keyNames[i]=(String)keys.get(i);
-        }
-        return keyNames;
+
+    public void addUser(String user) {
+        this.users.add(user);
     }
 }

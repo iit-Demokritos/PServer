@@ -53,6 +53,14 @@ public class DBAccess {
     public static final String FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP = "feature_group";
     public static final String FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME = "feature_name";    
 
+    public static final String FTRGROUPSUSERS_TABLE = "ftrgroup_users";
+    public static final String FTRGROUPSUSERS_TABLE_FIELD_GROUP = "feature_group";
+    public static final String FTRGROUPSUSERS_TABLE_FIELD_USER = "user_name";
+
+    public static final String FTRGROUPSFTRS_TABLE = "ftrgroup_features";
+    public static final String FTRGROUPSFTRS_TABLE_FIELD_GROUP = "feature_group";
+    public static final String FTRGROUPSFTRS_TABLE_TABLE_FIELD_FTR = "feature_name";
+
     public static final String DECAY_DATA_TABLE = "decay_data";
     public static final String DECAY_DATA_TABLE_FIELD_USER = "dd_user";
     public static final String DECAY_DATA_TABLE_FIELD_FEATURE = "dd_feature";
@@ -122,11 +130,6 @@ public class DBAccess {
 
     public static final String STEREOTYPE_TABLE = "stereotypes";
     public static final String STEREOTYPE_TABLE_FIELD_STEREOTYPE = "st_stereotype";
-
-    public static final String STEREOTYPE_ATTIBUTE_TABLE = "stereotype_attributes";
-    public static final String STEREOTYPE_ATTIBUTE_TABLE_FIELD_STEREOTYPE = "sp_stereotype";
-    public static final String STEREOTYPE_ATTIBUTE_TABLE_FIELD_ATTRIBUTE = "sp_attribute";
-    public static final String STEREOTYPE_ATTIBUTE_TABLE_FIELD_VALUE = "sp_value";
 
     public static final String FEATURE_STATISTICS_TABLE = "user_feature_statistics";
     public static final String FEATURE_STATISTICS_TABLE_FIELD_USER = "user";
@@ -281,10 +284,10 @@ public class DBAccess {
 
     public void deleteClient( String client ) throws SQLException {
         Statement stmt = (Statement) connection.createStatement();
+        stmt.execute( "DELETE FROM ftrgroup_users WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM user_feature_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM user_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM stereotype_feature_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM stereotype_attributes WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
+        stmt.execute( "DELETE FROM stereotype_feature_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );        
         stmt.execute( "DELETE FROM community_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM community_feature_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM decay_data WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
@@ -293,8 +296,7 @@ public class DBAccess {
         stmt.execute( "DELETE FROM community_profiles WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM decay_data WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM decay_groups WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM ftrgroup_features WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM stereotype_attributes WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
+        stmt.execute( "DELETE FROM ftrgroup_features WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );        
         stmt.execute( "DELETE FROM stereotype_profiles WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM stereotype_users WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM user_attributes WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );

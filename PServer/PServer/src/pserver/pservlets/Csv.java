@@ -9,7 +9,9 @@ import java.sql.Statement;
 import java.util.HashMap;
 import pserver.WebServer;
 import pserver.data.DBAccess;
+import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.VectorMap;
+import pserver.domain.PFeatureGroup;
 import pserver.logic.PSReqWorker;
 
 /**
@@ -509,11 +511,119 @@ public class Csv implements pserver.pservlets.PService {
         } catch (Exception e) {  //problem with transaction
             respCode = PSReqWorker.SERVER_ERR;
             WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
         }
         return respCode;
     }
 
     private boolean execLoadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
-        throw new UnsupportedOperationException("Not yet implemented");
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        //System.out.println( "clnt = " + clientName );
+
+        int filePathIdx = queryParam.qpIndexOfKeyNoCase("path");
+        if (filePathIdx == -1) {
+            WebServer.win.log.error("Parameter path is missing");
+            return false;
+        }
+        String filePath = (String) queryParam.getVal(filePathIdx);
+        //System.out.println( "filePath = " + filePath );
+
+        int csIdx = queryParam.qpIndexOfKeyNoCase("cs");
+        if (csIdx == -1) {
+            WebServer.win.log.error("Parameter cs is missing");
+            return false;
+        }
+        String cs = (String) queryParam.getVal(csIdx);
+
+        int nameColIdx = queryParam.qpIndexOfKeyNoCase("nmcol");
+        int nameCol;
+        if (nameColIdx == -1) {
+            WebServer.win.log.debug("Parameter name is missing, assuming it is 0");
+            nameCol = 0;
+        }
+        nameCol = Integer.parseInt((String) queryParam.getVal(nameColIdx));
+
+        int ftrColIdx = queryParam.qpIndexOfKeyNoCase("ftrcol");
+        int ftrCol;
+        if (ftrColIdx == -1) {
+            WebServer.win.log.debug("Parameter ftrcol is missing, assuming it is 1");
+            ftrCol = 1;
+        }
+        ftrCol = Integer.parseInt((String) queryParam.getVal(ftrColIdx));
+        if (ftrCol < 0) {
+            WebServer.win.log.debug("Parameter ftrCol is neggative");
+            return false;
+        }
+
+        int usrColIdx = queryParam.qpIndexOfKeyNoCase("usrcol");
+        int usrCol;
+        if (usrColIdx == -1) {
+            WebServer.win.log.debug("Parameter usrcol is missing, assuming it is NULL");
+            usrCol = -1;
+        } else {
+            usrCol = Integer.parseInt((String) queryParam.getVal(usrColIdx));
+        }
+
+        int fsIdx = queryParam.qpIndexOfKeyNoCase("fs");
+        if (fsIdx == -1) {
+            WebServer.win.log.error("Parameter fs is missing");
+            return false;
+        }
+        String fs = (String) queryParam.getVal(fsIdx);
+
+        File csvFile = new File(filePath);
+        if (csvFile.exists() == false || csvFile.isDirectory() == true) {
+            WebServer.win.log.error("The specified file does not exists or it is a directory");
+            return false;
+        }
+
+        BufferedReader input = new BufferedReader(new FileReader(csvFile));
+        String line;
+        int rows = 0;
+        Connection con = dbAccess.getConnection();
+        String sql = "";
+        Statement stmt = con.prepareStatement(sql);
+        int lineNo = 0;
+        PFeatureGroupDBAccess pfAccess = new PFeatureGroupDBAccess(dbAccess);
+        while ((line = input.readLine()) != null) {
+            lineNo++;
+            String tokens[] = line.split(cs);
+            if (tokens.length <= nameCol || tokens.length <= ftrCol ) {
+                WebServer.win.log.warn("Not enough fields in line " + lineNo + " Line:" + line);
+                return false;
+            }
+            String ftrGroupName = tokens[nameCol];
+            String features = tokens[ftrCol];
+
+            PFeatureGroup ftrGroup = new PFeatureGroup(ftrGroupName);
+
+            String[] ftrs = features.split(fs);
+            for (int i = 0; i < ftrs.length; i++) {
+                ftrGroup.addFeature(ftrs[i].trim());
+            }
+
+            if (usrCol >= 0 && tokens.length > usrCol ) {
+                System.out.println("line " + line);
+                System.out.println( usrCol );
+                System.out.println(" length " + tokens.length );
+                String users = tokens[usrCol];
+                if( users.trim().equals("") == false ) {
+                    String[] usrs = users.split(fs);
+                    for (int i = 0; i < usrs.length; i++) {                        
+                        ftrGroup.addUser(usrs[i].trim());
+                    }
+                }
+            }
+
+            rows += pfAccess.addFeatureGroup(ftrGroup, clientName);
+        }
+        stmt.close();
+
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
+        respBody.append("</result>");
+        return true;
     }
 }

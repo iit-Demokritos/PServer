@@ -1,5 +1,6 @@
 package pserver.data;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pserver.algorithms.metrics.VectorMetric;
 import pserver.domain.PFeature;
+import pserver.domain.PFeatureGroup;
 import pserver.domain.PUser;
 
 /**
@@ -129,6 +131,46 @@ public class PFeatureGroupDBAccess {
 
     public DBAccess getDbAccess() {
         return dbAccess;
+    }
+
+    public int addFeatureGroup(PFeatureGroup ftrGroup, String clientName ) throws SQLException {
+        int rows = 0;
+        //sabe name
+        PreparedStatement stmtAddFtrGroup = this.dbAccess.getConnection().prepareStatement("INSERT INTO " + DBAccess.FTRGROUPS_TABLE + "(" + DBAccess.FTRGROUPS_TABLE_FIELD_FTRGROUP + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( ?,'" + clientName + "')");
+        stmtAddFtrGroup.setString(1, ftrGroup.getName());
+        rows += stmtAddFtrGroup.executeUpdate();
+        stmtAddFtrGroup.close();
+
+        //save features
+        PreparedStatement stmtAddFeatures = this.dbAccess.getConnection().prepareStatement("INSERT INTO " + DBAccess.FTRGROUPSFTRS_TABLE + "(" + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + "," + DBAccess.FTRGROUPSFTRS_TABLE_TABLE_FIELD_FTR + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( ?,?, '" + clientName + "')");
+        stmtAddFeatures.setString(1, ftrGroup.getName());
+        for( String ftr : ftrGroup.getFeatures() ) {
+            
+            stmtAddFeatures.setString(2, ftr );
+            stmtAddFeatures.addBatch();
+        }
+        
+        int[] r= stmtAddFeatures.executeBatch();
+        for ( int i = 0; i < r.length ; i ++ ) {
+            rows += r[ i];
+        }
+        stmtAddFeatures.close();
+
+        //save users
+        PreparedStatement stmtAddUsers = this.dbAccess.getConnection().prepareStatement("INSERT INTO " + DBAccess.FTRGROUPSUSERS_TABLE + "(" + DBAccess.FTRGROUPSUSERS_TABLE_FIELD_GROUP + "," + DBAccess.FTRGROUPSUSERS_TABLE_FIELD_USER + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( ?,?, '" + clientName + "')");
+        stmtAddUsers.setString(1, ftrGroup.getName());
+        for( String usr : ftrGroup.getUsers() ) {            
+            stmtAddUsers.setString(2, usr );
+            stmtAddUsers.addBatch();
+        }
+        
+        r= stmtAddUsers.executeBatch();
+        for ( int i = 0; i < r.length ; i ++ ) {
+            rows += r[ i];
+        }
+        stmtAddUsers.close();
+        
+        return rows;
     }
 
     class CompareThread extends Thread {

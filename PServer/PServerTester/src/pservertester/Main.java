@@ -110,7 +110,7 @@ public class Main {
             
             //commands.add( "/commu?clnt=test|test&com=calcudist&smetric=cos" );
             //commands.add( "/commu?clnt=test|test&com=mkcom&algorithm=bk&th=>0.8" );
-            commands.add( "/commu?clnt=test|test&com=calcftrdist&smetric=cos" );
+            //commands.add( "/commu?clnt=test|test&com=calcftrdist&smetric=cos" );
             //commands.add( "/commu?clnt=test|test&com=mkftrgrp&algorithm=bk&th=>0.5" );
 
 
@@ -125,6 +125,9 @@ public class Main {
             //commands.add( "/csv?clnt=test1|test1&com=loadftr&path=/home/alexm/workspacePServer/PServer/TestSets/medium/movies.dat&cs=::&ftrcol=0&defvalue=0.0" );
             //commands.add( "/csv?clnt=test1|test1&com=loadusr&path=/home/alexm/workspacePServer/PServer/TestSets/huge/ratings.dat&cs=::&usrcol=0" );
             //commands.add( "/csv?clnt=test1|test1&com=loadlog&path=/home/alexm/workspacePServer/PServer/TestSets/medium/ratings.dat&cs=::&usrcol=0&ftrcol=1&numcol=2&timecol=3&sesgen=1000000000" );
+            commands.add( "/csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\\|&cs=\\,&nmcol=0&ftrcol=1&usrcol=2" );
+            //commands.add( "/csv?clnt=test1|test1&com=loadftrgrp&path=/home/alexm/NetBeansProjects/pserver/PServer/PServer/test.csv&fs=\\|&cs=\\,&nmcol=0&ftrcol=1" );
+
 
             /*
              * Movielens
@@ -171,7 +174,6 @@ public class Main {
             //commands.add( "/madgik?clnt=madgik|madgik&com=recquery&user=&query=work" );
             //commands.add( "/nootropia?clnt=test1|test1&com=genweights" );
             //commands.add( "/nootropia?clnt=test1|test1&com=genpersweights" );
-
 
             for ( String command : commands ) {
                 long t = System.currentTimeMillis();

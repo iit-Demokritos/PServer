@@ -1938,7 +1938,9 @@ public class Stereotypes implements pserver.pservlets.PService {
     }
 
     private boolean makeStereotypes(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        try {
+        return false;
+        //try {
+            /*
             boolean success = true;
             int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
             String clientName = (String) queryParam.getVal(clntIdx);
@@ -2018,7 +2020,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             WebServer.win.log.error(ex.toString());
             ex.printStackTrace();
             return false;
-        }
+        }*/
     }
 
     private int comSterUpdate(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -2044,7 +2046,8 @@ public class Stereotypes implements pserver.pservlets.PService {
     }
 
     private boolean updateStereotypes(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        try {
+        return false;
+        /*try {
             boolean success = true;
             int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
             String clientName = (String) queryParam.getVal(clntIdx);
@@ -2159,5 +2162,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             ex.printStackTrace();
             return false;
         }
+         *
+         */
     }
 }

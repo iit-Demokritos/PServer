@@ -297,7 +297,7 @@ public class Communities implements pserver.pservlets.PService {
         boolean success = true;
         try {
             //get matching user profiles
-            PCommunityDBAccess mdbAccess = new PCommunityDBAccess(dbAccess);
+            PFeatureGroupDBAccess mdbAccess = new PFeatureGroupDBAccess(dbAccess);
             PFeatureGroupProfileResultSet rs = mdbAccess.getFeatureGroupProfiles(whrCondition);
             //format response body
             respBody.append(DBAccess.xmlHeader("/resp_xsl/groups.xsl"));
