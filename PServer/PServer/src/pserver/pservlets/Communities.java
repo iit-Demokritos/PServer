@@ -1,5 +1,6 @@
 package pserver.pservlets;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.PFeatureGroupProfileResultSet;
 import pserver.data.PUserDBAccess;
 import pserver.data.UserCommunityManager;
+import pserver.domain.PFeatureGroup;
 import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
 
@@ -470,7 +472,7 @@ public class Communities implements pserver.pservlets.PService {
 
         boolean success = true;
 
-        try {            
+        try {
             PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
             pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_BINARY_SIMILARITY);
             pdbAccess.generateBinarySimilarities(dbAccess, clientName, op, threashold);
@@ -773,7 +775,36 @@ public class Communities implements pserver.pservlets.PService {
     }
 
     private int addFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        return 1;
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        //execute the command
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            success = execAddFeatureGroup(queryParam, respBody, dbAccess);
+            //-end transaction body
+            if (success) {
+                dbAccess.commit();
+            } else {
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+            //disconnect from DB anyway
+            dbAccess.disconnect();
+        } catch (Exception e) {  //problem with transaction
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     private int removeFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -809,7 +840,7 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
-    private boolean removeGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception{
+    private boolean removeGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
 
@@ -821,7 +852,66 @@ public class Communities implements pserver.pservlets.PService {
         String groupName = (String) queryParam.getVal(grpIdx);
 
         PFeatureGroupDBAccess fgAccess = new PFeatureGroupDBAccess(dbAccess);
-        int rows = fgAccess.remove( groupName, clientName  );
+        int rows = fgAccess.remove(groupName, clientName);
+
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
+        respBody.append("</result>");
+        return true;
+    }
+
+    private boolean execAddFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        //System.out.println( "clnt = " + clientName )
+
+        int nameColIdx = queryParam.qpIndexOfKeyNoCase("name");
+        String ftrGroupName;
+        if (nameColIdx == -1) {
+            WebServer.win.log.error("Parameter name is missing");
+            return false;
+        }
+        ftrGroupName = (String) queryParam.getVal(nameColIdx);
+
+        int ftrColIdx = queryParam.qpIndexOfKeyNoCase("ftrs");
+        String features;
+        if (ftrColIdx == -1) {
+            WebServer.win.log.error("Parameter ftrs is missing");
+            return false;
+        }
+        features = (String) queryParam.getVal(ftrColIdx);
+
+        int usrColIdx = queryParam.qpIndexOfKeyNoCase("usrs");
+        String users;
+        if (usrColIdx == -1) {
+            WebServer.win.log.echo("Parameter usrs is missing. Assuming NULL");
+            users = null;
+        } else {
+            users = (String) queryParam.getVal(usrColIdx);
+        }
+
+        Connection con = dbAccess.getConnection();
+        String sql = "";
+        int lineNo = 0;
+        PFeatureGroupDBAccess pfAccess = new PFeatureGroupDBAccess(dbAccess);
+        PFeatureGroup ftrGroup = new PFeatureGroup(ftrGroupName);
+
+        String[] ftrs = features.split("\\|");
+        for (int i = 0; i < ftrs.length; i++) {
+            ftrGroup.addFeature(ftrs[i].trim());
+        }
+
+        if ( users != null ) {
+            if (users.trim().equals("") == false) {
+                String[] usrs = users.split("\\|");
+                for (int i = 0; i < usrs.length; i++) {
+                    ftrGroup.addUser(usrs[i].trim());
+                }
+            }
+        }
+
+        int rows = pfAccess.addFeatureGroup(ftrGroup, clientName);
 
         respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
         respBody.append("<result>\n");
@@ -912,7 +1002,7 @@ class CollaborativeProfileBuilderThread extends Thread {
             }
             cfFtrStmt.executeBatch();
             cfFtrStmt.close();
-            
+
             sql = "INSERT DELAYED INTO " + DBAccess.CFFEATURE_STATISTICS_TABLE + " VALUES (?,?," + DBAccess.STATISTICS_FREQUENCY + ",?,'" + clientName + "')";
             PreparedStatement cfFtrfrStmt = dbAccess.getConnection().prepareStatement(sql);
             cfFtrfrStmt.setString(1, this.user);
@@ -927,7 +1017,7 @@ class CollaborativeProfileBuilderThread extends Thread {
             }
             cfFtrfrStmt.executeBatch();
             cfFtrfrStmt.close();
-            
+
             sql = "INSERT DELAYED INTO " + DBAccess.CFFTRASSOCIATIONS_TABLE + " VALUES (?,?,?," + DBAccess.RELATION_SIMILARITY + ",?,'" + clientName + "')";
             PreparedStatement cfAssocFtrStmt = dbAccess.getConnection().prepareStatement(sql);
             cfAssocFtrStmt.setString(4, this.user);

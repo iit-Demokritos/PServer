@@ -972,3 +972,6 @@
 1/4/2011 7:12:59  >  Connected to DB: MySQL
 1/4/2011 7:13:5  >  Request from /127.0.1.1 (47265)
 1/4/2011 7:13:5  >  47265-        /commu?clnt=test1|test1&com=rmftrgrp&grp=grp2
+1/4/2011 7:37:54  >  Server started at dev-machine/127.0.1.1, port 1111
+1/4/2011 7:37:54  >  Messages log mode set to: on
+1/4/2011 7:37:54  >  Connected to DB: MySQL

@@ -20,13 +20,16 @@ import pserver.logic.PSReqWorker;
  */
 public class Csv implements pserver.pservlets.PService {
 
+    @Override
     public void init(String[] params) throws Exception {
     }
 
+    @Override
     public String getMimeType() {
         return pserver.pservlets.PService.xml;
     }
 
+    @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         int respCode;
         VectorMap queryParam;
@@ -539,7 +542,7 @@ public class Csv implements pserver.pservlets.PService {
         int nameColIdx = queryParam.qpIndexOfKeyNoCase("nmcol");
         int nameCol;
         if (nameColIdx == -1) {
-            WebServer.win.log.debug("Parameter name is missing, assuming it is 0");
+            WebServer.win.log.debug("Parameter nmcol is missing, assuming it is 0");
             nameCol = 0;
         }
         nameCol = Integer.parseInt((String) queryParam.getVal(nameColIdx));
@@ -582,8 +585,7 @@ public class Csv implements pserver.pservlets.PService {
         String line;
         int rows = 0;
         Connection con = dbAccess.getConnection();
-        String sql = "";
-        Statement stmt = con.prepareStatement(sql);
+        String sql = "";        
         int lineNo = 0;
         PFeatureGroupDBAccess pfAccess = new PFeatureGroupDBAccess(dbAccess);
         while ((line = input.readLine()) != null) {
@@ -603,10 +605,7 @@ public class Csv implements pserver.pservlets.PService {
                 ftrGroup.addFeature(ftrs[i].trim());
             }
 
-            if (usrCol >= 0 && tokens.length > usrCol ) {
-                System.out.println("line " + line);
-                System.out.println( usrCol );
-                System.out.println(" length " + tokens.length );
+            if (usrCol >= 0 && tokens.length > usrCol ) {                
                 String users = tokens[usrCol];
                 if( users.trim().equals("") == false ) {
                     String[] usrs = users.split(fs);
@@ -617,8 +616,7 @@ public class Csv implements pserver.pservlets.PService {
             }
 
             rows += pfAccess.addFeatureGroup(ftrGroup, clientName);
-        }
-        stmt.close();
+        }        
 
         respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
         respBody.append("<result>\n");
