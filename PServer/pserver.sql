@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.1.41, for debian-linux-gnu (i486)
 --
--- Host: localhost    Database: pserver
+-- Host: localhost    Database: pserver3
 -- ------------------------------------------------------
--- Server version	5.1.41-3ubuntu12.6
+-- Server version	5.1.41-3ubuntu12.10
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -211,6 +211,22 @@ CREATE TABLE `ftrgroup_features` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `ftrgroup_users`
+--
+
+DROP TABLE IF EXISTS `ftrgroup_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ftrgroup_users` (
+  `feature_group` varchar(50) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `FK_psclient` varchar(50) NOT NULL,
+  PRIMARY KEY (`feature_group`,`user_name`,`FK_psclient`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
+/*!50100 PARTITION BY KEY (FK_psclient) */;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `ftrgroups`
 --
 
@@ -260,23 +276,6 @@ CREATE TABLE `pserver_clients` (
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `stereotype_attributes`
---
-
-DROP TABLE IF EXISTS `stereotype_attributes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `stereotype_attributes` (
-  `sp_stereotype` varchar(50) NOT NULL,
-  `sp_attribute` varchar(50) NOT NULL,
-  `sp_value` varchar(50) DEFAULT NULL,
-  `FK_psclient` varchar(50) NOT NULL,
-  PRIMARY KEY (`sp_stereotype`,`sp_attribute`,`FK_psclient`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
-/*!50100 PARTITION BY KEY (FK_psclient,sp_stereotype) */;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,6 +362,7 @@ DROP TABLE IF EXISTS `stereotypes`;
 CREATE TABLE `stereotypes` (
   `st_stereotype` varchar(50) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
+  `st_rule` text NOT NULL,
   PRIMARY KEY (`st_stereotype`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
 /*!50100 PARTITION BY KEY (FK_psclient) */;
@@ -564,4 +564,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-10-19  3:55:39
+-- Dump completed on 2011-04-01  7:16:08

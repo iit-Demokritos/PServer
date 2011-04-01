@@ -173,6 +173,38 @@ public class PFeatureGroupDBAccess {
         return rows;
     }
 
+    /**
+     * Removes a feature group from the database
+     *
+     * @param groupName
+     * @param clientName
+     * @return
+     * @throws SQLException
+     */
+    public int remove(String groupName, String clientName ) throws SQLException {
+        int rows = 0;
+
+        PreparedStatement stmt = this.getDbAccess().getConnection().prepareStatement("DELETE FROM " + DBAccess.FTRGROUPSFTRS_TABLE + " WHERE " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP + "=? AND " + DBAccess.FIELD_PSCLIENT + "=?");
+        stmt.setString(1, groupName);
+        stmt.setString(2, clientName);
+        rows += stmt.executeUpdate();
+        stmt.close();
+
+        stmt = this.getDbAccess().getConnection().prepareStatement("DELETE FROM " + DBAccess.FTRGROUPSUSERS_TABLE + " WHERE " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP + "=? AND " + DBAccess.FIELD_PSCLIENT + "=?");
+        stmt.setString(1, groupName);
+        stmt.setString(2, clientName);
+        rows += stmt.executeUpdate();
+        stmt.close();
+
+        stmt = this.getDbAccess().getConnection().prepareStatement("DELETE FROM " + DBAccess.FTRGROUPS_TABLE + " WHERE " + DBAccess.FTRGROUPS_TABLE_FIELD_FTRGROUP+ "=? AND " + DBAccess.FIELD_PSCLIENT + "=?");
+        stmt.setString(1, groupName);
+        stmt.setString(2, clientName);        
+        rows += stmt.executeUpdate();
+        stmt.close();
+
+        return rows;
+    }
+
     class CompareThread extends Thread {
 
         String clientName;
