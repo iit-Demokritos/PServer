@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.ArrayList;
 import pserver.domain.PFeature;
 
 /**
@@ -22,17 +22,17 @@ class PFeatureResultSet {
     Connection con;
     Statement stmt;
     String clientName;
-    Vector<HashMap<String, PFeature>> features;
-    int vectorPtr;
+    ArrayList<HashMap<String, PFeature>> features;
+    int ArrayListPtr;
     int firstTotalPtr;
     int totalPtr;
     int cacheSize;
 
     PFeatureResultSet( DBAccess dbAccess, String clientName, int cacheSize ) throws SQLException {
         this.dbAccess = dbAccess;
-        vectorPtr = totalPtr = firstTotalPtr = 0;
+        ArrayListPtr = totalPtr = firstTotalPtr = 0;
         this.cacheSize = cacheSize;
-        this.features = new Vector( cacheSize );
+        this.features = new ArrayList<HashMap<String, PFeature>>( cacheSize );
 
         con = dbAccess.newConnection();
         stmt = con.createStatement();
@@ -43,9 +43,9 @@ class PFeatureResultSet {
 
     PFeatureResultSet( DBAccess dbAccess, String clientName, int cacheSize, String name ) throws SQLException {
         this.dbAccess = dbAccess;
-        vectorPtr = 0;
+        ArrayListPtr = 0;
         this.cacheSize = cacheSize;
-        this.features = new Vector( cacheSize );
+        this.features = new ArrayList<HashMap<String, PFeature>>( cacheSize );
 
         con = dbAccess.newConnection();
         stmt = con.createStatement();
@@ -84,7 +84,7 @@ class PFeatureResultSet {
             String prevFtr = "";
 
             int i = 0;
-            HashMap<String, PFeature> values = new HashMap();
+            HashMap<String, PFeature> values = new HashMap<String, PFeature>();
             String usr = "";
             PFeature ftrObj = null;
             while ( featuresRS.next() ) {
@@ -96,7 +96,7 @@ class PFeatureResultSet {
             }
             values.put( usr, ftrObj );
             this.features.add( values );
-            this.vectorPtr = 0;
+            this.ArrayListPtr = 0;
             totalPtr += this.cacheSize;
             featuresRS.close();
             stmtProfile.close();
@@ -107,14 +107,14 @@ class PFeatureResultSet {
         if ( features.size() == 0 ) {
             return null;
         }
-        if ( vectorPtr >= features.size() ) {
+        if ( ArrayListPtr >= features.size() ) {
             loadNextPackOfFeatures();
             if ( features.size() == 0 ) {
                 return null;
             }
         }
-        vectorPtr++;
-        return features.get( vectorPtr );
+        ArrayListPtr++;
+        return features.get( ArrayListPtr );
     }
 
     public void close() throws SQLException {

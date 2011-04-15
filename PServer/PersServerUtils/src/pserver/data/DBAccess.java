@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
 import pserver.domain.PDecayData;
 import pserver.domain.PAttribute;
 import pserver.domain.PFeature;
@@ -335,7 +335,7 @@ public class DBAccess {
      * returns the pserver clients that are stored in the database
      */
     public LinkedList<PServerClient> getPserverClients() throws SQLException {
-        LinkedList<PServerClient> clients = new LinkedList();
+        LinkedList<PServerClient> clients = new LinkedList<PServerClient>();
         Statement stmt = this.connection.createStatement();
         ResultSet rs = stmt.executeQuery( "SELECT * FROM pserver_clients" );
         while ( rs.next() ) {
@@ -396,11 +396,11 @@ public class DBAccess {
         return rows;
     }
 
-    public Vector<PFeature> getAllFeatures( String clientName ) throws SQLException {
+    public ArrayList<PFeature> getAllFeatures( String clientName ) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "SELECT * FROM up_features WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'";
         ResultSet rs = stmt.executeQuery( query );
-        Vector<PFeature> features = new Vector();
+        ArrayList<PFeature> features = new ArrayList<PFeature>();
         while ( rs.next() ) {
             PFeature feature = new PFeature();
 
@@ -415,7 +415,7 @@ public class DBAccess {
     }
 
     public List<PStereotype> getStereotypesOfUser( PUser user, String clientName ) throws SQLException {
-        LinkedList<PStereotype> list = new LinkedList();
+        LinkedList<PStereotype> list = new LinkedList<PStereotype>();
         Statement stmt = this.connection.createStatement();
         String query = "SELECT * FROM stereotype_users WHERE su_user ='" + user.getName() + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
         stmt.executeQuery( query );
@@ -585,7 +585,7 @@ public class DBAccess {
         Statement stmt = this.connection.createStatement();
         String sql = "SELECT up_feature, up_numvalue FROM user_profiles WHERE up_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
         ResultSet rs = stmt.executeQuery( sql );
-        LinkedList<PFeature> features = new LinkedList();
+        LinkedList<PFeature> features = new LinkedList<PFeature>();
         while ( rs.next() ) {
             PFeature feature = new PFeature();
             feature.setName( rs.getString( "up_feature" ) );
@@ -622,7 +622,7 @@ public class DBAccess {
         Statement stmt = this.connection.createStatement();
         String sql = "SELECT up_feature, up_numvalue FROM user_profiles WHERE up_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
         ResultSet rs = stmt.executeQuery( sql );
-        LinkedList<PFeature> features = new LinkedList();
+        LinkedList<PFeature> features = new LinkedList<PFeature>();
         while ( rs.next() ) {
             PFeature feature = new PFeature();
             feature.setName( rs.getString( "up_feature" ) );

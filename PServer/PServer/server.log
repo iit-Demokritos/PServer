@@ -1009,3 +1009,82 @@
 1/4/2011 8:44:0  >  Server started at dev-machine/127.0.1.1, port 1111
 1/4/2011 8:44:0  >  Messages log mode set to: on
 1/4/2011 8:44:0  >  Connected to DB: MySQL
+7/4/2011 16:49:6  >  Server started at alexm-desktop/127.0.1.1, port 1111
+7/4/2011 16:49:6  >  Messages log mode set to: on
+7/4/2011 16:49:6  >  Connected to DB: MySQL
+7/4/2011 16:49:24  >  Request from /127.0.0.1 (42661)
+7/4/2011 16:49:24  >  42661-        /
+7/4/2011 16:49:24  >  Request from /127.0.0.1 (42662)
+7/4/2011 16:49:24  >  42662-        /favicon.ico
+7/4/2011 16:49:27  >  Request from /127.0.0.1 (42663)
+7/4/2011 16:49:27  >  42663-        /favicon.ico
+7/4/2011 16:49:32  >  Request from /127.0.0.1 (42664)
+7/4/2011 16:49:32  >  42664-        /admin?com=login&login_name=root&login_password=root
+7/4/2011 16:49:46  >  Request from /127.0.0.1 (42666)
+7/4/2011 16:49:46  >  42666-        /admin?login_name=root&login_password=root&com=mkusrfrm
+7/4/2011 16:50:40  >  Request from /127.0.0.1 (42678)
+7/4/2011 16:50:41  >  42678-        /admin?com=addClnt&login_name=root&login_password=root&name=dmoz&password=1234&retyped_password=1234
+7/4/2011 16:50:49  >  Request from /127.0.0.1 (42680)
+7/4/2011 16:50:49  >  42680-        /admin?login_name=root&login_password=root&com=mkusrfrm
+7/4/2011 16:51:21  >  Request from /127.0.0.1 (42683)
+7/4/2011 16:51:21  >  42683-        /admin?login_name=root&login_password=root&com=chngpropfrm
+7/4/2011 17:39:6  >  Request from /127.0.0.1 (35977)
+7/4/2011 17:39:6  >  35977-        /csv_help/csv_mode.html
+7/4/2011 17:39:6  >  Request from /127.0.0.1 (35978)
+7/4/2011 17:39:6  >  35978-        /csv_help/menu.html
+7/4/2011 17:39:6  >  Request from /127.0.0.1 (35979)
+7/4/2011 17:39:6  >  35979-        /csv_help/csv_index.html
+7/4/2011 17:39:8  >  Request from /127.0.0.1 (35980)
+7/4/2011 17:39:8  >  35980-        /csv_help/loadusr.html
+7/4/2011 17:41:13  >  Request from /127.0.0.1 (35986)
+7/4/2011 17:41:13  >  35986-        /csv_help/loadftr.html
+7/4/2011 17:44:26  >  Request from /127.0.0.1 (56785)
+7/4/2011 17:44:26  >  56785-        /csv_help/loadcommu.html
+7/4/2011 17:44:28  >  Request from /127.0.0.1 (56786)
+7/4/2011 17:44:28  >  56786-        /csv_help/loadftrgrp.html
+7/4/2011 17:53:35  >  Request from /127.0.0.1 (50623)
+7/4/2011 17:53:35  >  50623-        /commu_help/commu_mode.html
+7/4/2011 17:53:35  >  Request from /127.0.0.1 (50624)
+7/4/2011 17:53:35  >  50624-        /commu_help/menu.html
+7/4/2011 17:53:35  >  Request from /127.0.0.1 (50625)
+7/4/2011 17:53:35  >  50625-        /commu_help/commu_index.html
+7/4/2011 17:53:38  >  Request from /127.0.0.1 (50626)
+7/4/2011 17:53:38  >  50626-        /commu_help/addftrgrp.html
+14/4/2011 13:14:0  >  Server started at alexm-desktop/127.0.1.1, port 1111
+14/4/2011 13:14:0  >  Messages log mode set to: on
+14/4/2011 13:14:1  >  Connected to DB: MySQL
+14/4/2011 13:14:8  >  Request from /127.0.0.1 (39046)
+14/4/2011 13:14:8  >  39046-        /
+14/4/2011 13:14:9  >  Request from /127.0.0.1 (39047)
+14/4/2011 13:14:9  >  39047-        /admin?com=login&login_name=root&login_password=root
+14/4/2011 13:14:11  >  Request from /127.0.0.1 (39048)
+14/4/2011 13:14:11  >  39048-        /ster_help/ster_mode.html
+14/4/2011 13:14:12  >  Request from /127.0.0.1 (39049)
+14/4/2011 13:14:12  >  39049-        /ster_help/menu.html
+14/4/2011 13:14:12  >  Request from /127.0.0.1 (39050)
+14/4/2011 13:14:12  >  39050-        /ster_help/ster_index.html
+14/4/2011 14:16:51  >  Request from /127.0.0.1 (47684)
+14/4/2011 14:16:51  >  47684-        /csv_help/csv_index.html
+14/4/2011 14:16:54  >  Request from /127.0.0.1 (47685)
+14/4/2011 14:16:54  >  47685-        /commu_help/commu_index.html
+15/4/2011 17:4:9  >  Server started at alexm-desktop/127.0.1.1, port 1111
+15/4/2011 17:4:9  >  Messages log mode set to: on
+15/4/2011 17:4:10  >  Connected to DB: MySQL
+15/4/2011 17:4:13  >  Request from /127.0.0.1 (34759)
+15/4/2011 17:4:13  >  34759-        /
+15/4/2011 17:4:14  >  Request from /127.0.0.1 (34760)
+15/4/2011 17:4:14  >  34760-        /favicon.ico
+15/4/2011 17:4:15  >  Request from /127.0.0.1 (34761)
+15/4/2011 17:4:15  >  34761-        /admin?com=login&login_name=root&login_password=root
+15/4/2011 17:4:17  >  Request from /127.0.0.1 (34762)
+15/4/2011 17:4:17  >  34762-        /favicon.ico
+15/4/2011 17:4:17  >  Request from /127.0.0.1 (34763)
+15/4/2011 17:4:17  >  34763-        /favicon.ico
+15/4/2011 17:10:56  >  Request from /127.0.0.1 (59038)
+15/4/2011 17:10:56  >  59038-        /
+15/4/2011 17:10:56  >  Request from /127.0.0.1 (59040)
+15/4/2011 17:10:56  >  59040-        /favicon.ico
+15/4/2011 17:11:4  >  Request from /127.0.0.1 (59041)
+15/4/2011 17:11:4  >  59041-        /admin?com=login&login_name=root&login_password=root
+15/4/2011 17:11:4  >  Request from /127.0.0.1 (59042)
+15/4/2011 17:11:4  >  59042-        /favicon.ico

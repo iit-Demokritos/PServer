@@ -1,9 +1,9 @@
 //===================================================================
-// VectorMap
+// ArrayListMap
 //
 // A general-purpose class.
 //
-// A Vector implementation that maps keys to values. Each key is
+// A ArrayList implementation that maps keys to values. Each key is
 // mapped to one value, and duplicate keys are allowed. In contrast
 // to hash table, this class is intented to be used for sequential
 // access of its key elements (commonly in a loop).
@@ -13,25 +13,27 @@ package pserver.data;
 import java.util.*;
 
 public class VectorMap {
-    private Vector keys;
-    private Vector vals;
+    private int capacityIncrement;
+    private int capacity;
+    private ArrayList<Object> keys;
+    private ArrayList<Object> vals;
     
     //initializers
     public VectorMap(int initialCapacity) {
         //capacity increment is zero
-        keys = new Vector(initialCapacity);
-        vals = new Vector(initialCapacity);
+        capacityIncrement = 1;
+        capacity = initialCapacity;
+        keys = new ArrayList<Object>(initialCapacity);
+        vals = new ArrayList<Object>(initialCapacity);
     }
     public VectorMap(int initialCapacity, int capacityIncrement) {
-        //capacity increment specifies step that vector grows
-        keys = new Vector(initialCapacity, capacityIncrement);
-        vals = new Vector(initialCapacity, capacityIncrement);
+        //capacity increment specifies step that ArrayList grows
+        this.capacityIncrement = capacityIncrement;
+        capacity = initialCapacity;
+        keys = new ArrayList<Object>(initialCapacity);
+        vals = new ArrayList<Object>(initialCapacity);
     }
     
-    //class info methods
-    public int capacity() {
-        return keys.capacity();
-    }
     public int size() {
         return keys.size();
     }
@@ -42,13 +44,18 @@ public class VectorMap {
     //insert, update, remove, query methods
     public void add(Object key, Object val) {
         //may fail if capacity = size and increment is 0
+        if( this.keys.size() == capacity ) {
+            keys.ensureCapacity( keys.size() + capacityIncrement );
+            vals.ensureCapacity( keys.size() + capacityIncrement );
+            capacity += capacityIncrement;
+        }
         keys.add(key);
         vals.add(val);
     }
     public boolean updateKey(Object newKey, int idx) {
         //returns false if idx out of size() bounds
         try {
-            keys.setElementAt(newKey, idx);
+            keys.set(idx , newKey );
         } catch(ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -57,7 +64,7 @@ public class VectorMap {
     public boolean updateVal(Object newVal, int idx) {
         //returns false if idx out of size() bounds
         try {
-            vals.setElementAt(newVal, idx);
+            vals.set(idx, newVal);
         } catch(ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -79,11 +86,19 @@ public class VectorMap {
     }
     public int indexOfKey(Object key, int startIdx) {
         //returns -1 if key not exist
-        return keys.indexOf(key, startIdx);
+        for( int i = startIdx ; i < keys.size() ; i ++ ) {
+            if( keys.get(i).equals(key) )
+                return i;
+        }
+        return -1;
     }
     public int indexOfVal(Object val, int startIdx) {
         //returns -1 if val not exist
-        return vals.indexOf(val, startIdx);
+        for( int i = startIdx ; i < vals.size() ; i ++ ) {
+            if( vals.get(i).equals(val) )
+                return i;
+        }
+        return -1;
     }
     public Object getKey(int idx) {
         //returns null if idx out of size() bounds

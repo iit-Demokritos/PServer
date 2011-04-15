@@ -181,6 +181,7 @@ public class Csv implements pserver.pservlets.PService {
             //rows += dbAccess.insertNewFeature( feature , clientName);
             rows += stmt.executeUpdate(sql);
         }
+        input.close();
         stmt.close();
 
         respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));

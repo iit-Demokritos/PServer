@@ -34,7 +34,7 @@ public class UserConnectivityResultSet {
         loadConnections();
         this.clientName = clientName;
 
-        connections = new HashMap();
+        connections = new HashMap<String, LinkedList<String>>();
     }
 
     public void close() throws SQLException {

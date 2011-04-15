@@ -656,9 +656,7 @@ public class Stereotypes implements pserver.pservlets.PService {
                 if (rs.getRs().wasNull()) {
                     valueVal = "";
                 }
-                respBody.append("<row><ftr>" + featureVal
-                        + "</ftr><val>" + valueVal
-                        + "</val></row>\n");
+                respBody.append("<row><ftr>").append(featureVal).append("</ftr><val>").append(valueVal).append("</val></row>\n");
                 rowsAffected += 1;  //number of result rows
             }
             respBody.append("</result>");
@@ -1389,12 +1387,7 @@ public class Stereotypes implements pserver.pservlets.PService {
                 query = "delete from stereotype_profiles where sp_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
                 rowsAffected += dbAccess.executeUpdate(query);
                 query = "delete from stereotypes where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
-                rowsAffected += dbAccess.executeUpdate(query);
-
-                /*query = "delete from stereotype_profiles where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
-                rowsAffected += dbAccess.executeUpdate( query );
-                query = "delete from stereotypes where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
-                rowsAffected += dbAccess.executeUpdate( query );*/
+                rowsAffected += dbAccess.executeUpdate(query);                
             }
             if (qpSize == 1) {  //no 'str' and 'lke' query parameters specified
                 //delete rows of all stereotypes
@@ -1407,7 +1400,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             //response will be used only in case of success            
             respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
             respBody.append("<result>\n");
-            respBody.append("<row><num_of_rows>" + rowsAffected + "</num_of_rows></row>\n");
+            respBody.append("<row><num_of_rows>").append(rowsAffected).append("</num_of_rows></row>\n");
             respBody.append("</result>");
         } catch (SQLException e) {
             success = false;

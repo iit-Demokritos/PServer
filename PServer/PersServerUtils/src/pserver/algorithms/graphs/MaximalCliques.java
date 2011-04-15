@@ -22,17 +22,17 @@ public class MaximalCliques {
 
     public MaximalCliques(double[][] adjMatrix) {
         this.adjMatrix = adjMatrix;
-        cliques = new LinkedList();
+        cliques = new LinkedList<Set<Integer>>();
         breakNumCliques = 0;
     }
 
     public Collection<Set<Integer>> getMaximalCliques() {
-        LinkedList<Integer> R = new LinkedList();
-        LinkedList<Integer> P = new LinkedList();
+        LinkedList<Integer> R = new LinkedList<Integer>();
+        LinkedList<Integer> P = new LinkedList<Integer>();
         for (int i = 0; i < this.adjMatrix.length; i++) {
             P.add(i);
         }
-        LinkedList<Integer> X = new LinkedList();
+        LinkedList<Integer> X = new LinkedList<Integer>();
         System.out.println("calling new algorithm");
         BK(R, P, X);
         R = null;
@@ -43,16 +43,9 @@ public class MaximalCliques {
         return this.cliques;
     }
 
-    private void BK(LinkedList<Integer> R, LinkedList<Integer> P, LinkedList<Integer> X) {
-        /*System.out.println("Total Memory "+Runtime.getRuntime().totalMemory() + " Free Memory "+Runtime.getRuntime().freeMemory() );
-        System.out.println("number of cliqeus " + cliques.size() );*/
-        //System.out.println("R " + R.size() + " P " + P.size() + " X " + X.size() );
-        /*int f = 0;
-        for( Set<Integer> clique : cliques ){
-            System.out.println("clique " + f + "has size " + clique.size() );
-        }*/
+    private void BK(LinkedList<Integer> R, LinkedList<Integer> P, LinkedList<Integer> X) {        
         if (P.size() == 0 && X.size() == 0) {
-            Set<Integer> clique = new HashSet(R.size());
+            Set<Integer> clique = new HashSet<Integer>(R.size());
             for (int node : R) {
                 clique.add(node);
             }
@@ -83,10 +76,10 @@ public class MaximalCliques {
                     continue;
                 }
                 it.remove();
-                LinkedList<Integer> Rnew = new LinkedList(R);
+                LinkedList<Integer> Rnew = new LinkedList<Integer>(R);
                 Rnew.add(i);
-                LinkedList<Integer> Pnew = new LinkedList();
-                LinkedList<Integer> Xnew = new LinkedList();
+                LinkedList<Integer> Pnew = new LinkedList<Integer>();
+                LinkedList<Integer> Xnew = new LinkedList<Integer>();
                 for (int j = 0; j < this.adjMatrix.length; j++) {
                     if ( j != i && this.adjMatrix[i][j] == 1 ) {
                         //System.out.println("i has neigh " + j + "becouse abj is " + this.adjMatrix[i][j] );

@@ -1,16 +1,15 @@
 package pserver.algorithms.graphs;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.Vector;
 import pserver.data.DBAccess;
 import pserver.data.GraphClusterManager;
-import pserver.data.PCommunityDBAccess;
 import pserver.data.PServerResultSet;
 
 /**
@@ -20,7 +19,7 @@ import pserver.data.PServerResultSet;
 public class BK implements GraphClustering {
 
     private DBAccess dbAccess;
-    private HashMap<String, Vector<String>> connections = null;
+    private HashMap<String, ArrayList<String>> connections = null;
     private HashMap<String, Integer> nodes = null;
     private LinkedList<Set<String>> cliques;
     private String tmpStr;
@@ -28,9 +27,9 @@ public class BK implements GraphClustering {
     private GraphClusterManager graphClusterManager;
 
     public BK() {
-        connections = new HashMap();
-        nodes = new HashMap();
-        cliques = new LinkedList();
+        connections = new HashMap<String, ArrayList<String>>();
+        nodes = new HashMap<String, Integer>();
+        cliques = new LinkedList<Set<String>>();
     }
 
     public void execute( String querySql, GraphClusterManager graphClusterManager, DBAccess dbAccess ) throws SQLException {
@@ -46,10 +45,10 @@ public class BK implements GraphClustering {
             //System.out.println( obj1 + " " + obj2 );
 
             if ( connections.get( obj1 ) == null ) {
-                this.connections.put( obj1, new Vector() );
+                this.connections.put( obj1, new ArrayList<String>() );
             }
             if ( connections.get( obj2 ) == null ) {
-                this.connections.put( obj2, new Vector() );
+                this.connections.put( obj2, new ArrayList<String>() );
             }
 
             connections.get( obj1 ).add( obj2 );
@@ -83,13 +82,13 @@ public class BK implements GraphClustering {
     }
 
     public Collection<Set<String>> getMaximalCliques() throws SQLException {
-        LinkedList<String> R = new LinkedList();
-        LinkedList<String> P = new LinkedList();
+        LinkedList<String> R = new LinkedList<String>();
+        LinkedList<String> P = new LinkedList<String>();
         Set<String> nodeNames = nodes.keySet();
         for ( String node : nodeNames ) {
             P.add( node );
         }
-        LinkedList<String> X = new LinkedList();
+        LinkedList<String> X = new LinkedList<String>();
         System.out.println( "\r\ncalling Bron-Kerbosch algorithm \r\n" );
         runBK( R, P, X );
         R = null;
@@ -103,7 +102,7 @@ public class BK implements GraphClustering {
 
     private void runBK( LinkedList<String> R, LinkedList<String> P, LinkedList<String> X ) throws SQLException {
         if ( P.size() == 0 && X.size() == 0 ) {
-            Set<String> clique = new HashSet( R.size() );
+            Set<String> clique = new HashSet<String>( R.size() );
             for ( String node : R ) {
                 clique.add( node );
             }
@@ -132,11 +131,11 @@ public class BK implements GraphClustering {
                     continue;
                 }
                 it.remove();
-                LinkedList<String> Rnew = new LinkedList( R );
+                LinkedList<String> Rnew = new LinkedList<String>( R );
                 Rnew.add( i );
-                LinkedList<String> Pnew = new LinkedList();
-                LinkedList<String> Xnew = new LinkedList();                
-                Vector<String> links = this.connections.get( i );
+                LinkedList<String> Pnew = new LinkedList<String>();
+                LinkedList<String> Xnew = new LinkedList<String>();
+                ArrayList<String> links = this.connections.get( i );
                 for ( String l : links ) {
                     if ( P.contains( l ) ) {
                         Pnew.add( l );

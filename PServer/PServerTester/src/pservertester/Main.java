@@ -107,7 +107,7 @@ public class Main {
             //System.out.println( "10" );
             //commands.add( "/commu?clnt=test1|test1&com=mkcom&algorithm=alexone&th=>1.0" );
             //commands.add( "/commu?clnt=test1|test1&com=rmftrgrp&grp=grp2" );
-            commands.add( "/commu?clnt=test1|test1&com=addftrgrp&ftrs=ftr1|ftr2|ftr3|ftr4&usrs=usr1|usr2|usr3&name=custom1" );
+            //commands.add( "/commu?clnt=test1|test1&com=addftrgrp&ftrs=ftr1|ftr2|ftr3|ftr4&usrs=usr1|usr2|usr3&name=custom1" );
 
             //commands.add( "/commu?clnt=test|test&com=calcudist&smetric=cos" );
             //commands.add( "/commu?clnt=test|test&com=mkcom&algorithm=bk&th=>0.8" );
@@ -200,6 +200,10 @@ public class Main {
             for ( String command : failedCommands ) {
                 System.out.println( command );
             }
+
+            StringBuffer a   = new StringBuffer();
+            a.append("1").append("2").append(3);
+            System.out.println( a.toString());
         } catch ( Exception ex ) {
             Logger.getLogger( Main.class.getName() ).log( Level.SEVERE, null, ex );
         }

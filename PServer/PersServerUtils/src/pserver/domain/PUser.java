@@ -16,27 +16,27 @@ public class PUser {
 
     public PUser() {
         this.name = "";
-        this.features = new Hashtable();
-        this.attributes = new Hashtable();
+        this.features = new HashMap<String, Float>();
+        this.attributes = new HashMap<String, String>();
     }
 
     public PUser( int featureNum ) {
         this.name = "";
-        this.features = new Hashtable( featureNum );
-        this.attributes = new Hashtable( featureNum );
+        this.features = new HashMap<String, Float>( featureNum );
+        this.attributes = new HashMap<String, String>( featureNum );
     }
 
     public PUser( String name ) {
         this.name = name;
-        this.features = new Hashtable();
-        this.attributes = new Hashtable();
+        this.features = new HashMap<String, Float>();
+        this.attributes = new HashMap<String, String>();
     }
 
     public PUser( String name, int featureNum ) {
         this.name = name;
         if ( featureNum > 0 ) {
-            this.features = new Hashtable( featureNum );
-            this.attributes = new Hashtable();
+            this.features = new HashMap<String, Float>( featureNum );
+            this.attributes = new HashMap<String, String>();
         }
     }
 

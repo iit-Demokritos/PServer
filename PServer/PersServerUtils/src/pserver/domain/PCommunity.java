@@ -9,21 +9,21 @@ import java.util.*;
 
 public class PCommunity {
     //sto anisma afto apothikebode i xristes pou anikoun stin kinotita
-    private Vector users=null;
-    private Hashtable features=null;
+    private ArrayList<String> users=null;
+    private HashMap<String,Float> features=null;
     //to onoma tis kinotitas
     private String name=null;
     
     public PCommunity() {
         name="";
-        users=new Vector();
-        features=new Hashtable();
+        users=new ArrayList<String>();
+        features=new HashMap<String, Float>();
     }
     
     public PCommunity(String name){
         this.name=name;
-        users=new Vector();
-        features=new Hashtable();
+        users=new ArrayList<String>();
+        features=new HashMap<String, Float>();
     }
     
     public void setName(String name){
@@ -38,7 +38,7 @@ public class PCommunity {
         users.add(user);
     }
     
-    public Vector getUsers(){
+    public ArrayList getUsers(){
         return users;
     }
     
@@ -60,20 +60,12 @@ public class PCommunity {
         
     }
     
-    public Hashtable getFeatures(){
+    public HashMap getFeatures(){
         return features;
     }
     
-    public String getFeature(int index){
-        return (String)features.get (index);
-    }
-    
-    public float getFeature_value(String feature){
-        return ((Float)features.get(feature)).floatValue();
-    }
-    
     public boolean containsFeature(String feature){
-        return features.contains(feature);
+        return features.containsKey(feature);
     }
     
     public int getNumberOfFeatures(){
@@ -81,16 +73,6 @@ public class PCommunity {
     }
     
     public String[] getFeatureNames(){
-        Enumeration e=features.keys();
-        Vector keys=new Vector();
-        while(e.hasMoreElements()){
-            keys.add((String)e.nextElement());
-        }
-        
-        String[] keyNames=new String[keys.size()];
-        for(int i=0;i<keyNames.length;i++){
-            keyNames[i]=(String)keys.get(i);
-        }
-        return keyNames;
+        return (String[])this.features.keySet().toArray();
     }
 }

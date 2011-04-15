@@ -258,7 +258,7 @@ public class Koychev implements pserver.pservlets.PService {
             }
 
             BufferedReader input = new BufferedReader(new FileReader(testFileName));
-            HashMap<String, HashMap<String, Float>> ftrValues = new HashMap();
+            HashMap<String, HashMap<String, Float>> ftrValues = new HashMap<String, HashMap<String, Float>>();
             int k = 0;
             while ((line = input.readLine()) != null) {
                 String[] tokens = line.split("::");
@@ -266,7 +266,7 @@ public class Koychev implements pserver.pservlets.PService {
                     continue;
                 }
                 if (ftrValues.get(tokens[ 0]) == null) {
-                    ftrValues.put(tokens[ 0], new HashMap());
+                    ftrValues.put(tokens[ 0], new HashMap<String, Float>());
                 }
                 ftrValues.get(tokens[ 0]).put("movie." + tokens[ 1], Float.parseFloat(tokens[ 2]));
                 k++;

@@ -63,17 +63,17 @@ public class Preferences {
     }
     public String[] getProperties(){
         Enumeration e=pref.propertyNames();
-        Vector elements=new Vector();
+        ArrayList<Object> elements=new ArrayList<Object>();
         while(e.hasMoreElements()){
-            elements.addElement(e.nextElement());
+            elements.add(e.nextElement());
         }
         return (String[])elements.toArray(new String[0]);
     }
     public String[] getDefaultProperties(){
         Enumeration e=defPref.propertyNames();
-        Vector elements=new Vector();
+        ArrayList<Object> elements=new ArrayList<Object>();
         while(e.hasMoreElements()){
-            elements.addElement(e.nextElement());
+            elements.add(e.nextElement());
         }
         return (String[])elements.toArray(new String[0]);
     }

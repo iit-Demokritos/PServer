@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
+import java.util.ArrayList;
 import pserver.domain.PUser;
 
 /**
@@ -22,8 +22,8 @@ public class PUserResultSet {
     private Connection con;
     private Statement stmt;
     private String clientName;
-    private Vector<PUser> users;
-    private int vectorPtr;
+    private ArrayList<PUser> users;
+    private int ArrayListPtr;
     private int firstTotalPtr;
     private int totalPtr;
     private int cacheSize;
@@ -31,9 +31,9 @@ public class PUserResultSet {
 
     public PUserResultSet(DBAccess dbAccess, String clientName, int cacheSize, String ftrs[]) throws SQLException {
         this.dbAccess = dbAccess;
-        vectorPtr = totalPtr = firstTotalPtr = 0;
+        ArrayListPtr = totalPtr = firstTotalPtr = 0;
         this.cacheSize = cacheSize;
-        this.users = new Vector(cacheSize);
+        this.users = new ArrayList<PUser>(cacheSize);
 
         con = dbAccess.newConnection();
         stmt = con.createStatement();
@@ -45,9 +45,9 @@ public class PUserResultSet {
 
     public PUserResultSet(DBAccess dbAccess, String clientName, int cacheSize, String firstUser, String ftrs[]) throws SQLException {
         this.dbAccess = dbAccess;
-        vectorPtr = 0;
+        ArrayListPtr = 0;
         this.cacheSize = cacheSize;
-        this.users = new Vector(cacheSize);
+        this.users = new ArrayList<PUser>(cacheSize);
 
         con = dbAccess.newConnection();
         stmt = con.createStatement();
@@ -66,10 +66,10 @@ public class PUserResultSet {
 
     PUserResultSet(DBAccess dbAccess, String clientName, int cacheSize, int limit, int offset, String ftrs[]) throws SQLException {
         this.dbAccess = dbAccess;
-        vectorPtr = 0;
+        ArrayListPtr = 0;
         totalPtr = firstTotalPtr = offset;
         this.cacheSize = cacheSize;
-        this.users = new Vector(cacheSize);
+        this.users = new ArrayList<PUser>(cacheSize);
 
         con = dbAccess.newConnection();
         stmt = con.createStatement();
@@ -83,14 +83,14 @@ public class PUserResultSet {
         if (users.size() == 0) {
             return null;
         }
-        if (vectorPtr >= users.size()) {
+        if (ArrayListPtr >= users.size()) {
             loadNextPackOfUsers();
             if (users.size() == 0) {
                 return null;
             }
         }
-        PUser user = users.get(vectorPtr);
-        vectorPtr++;
+        PUser user = users.get(ArrayListPtr);
+        ArrayListPtr++;
         return user;
 
     }
@@ -101,7 +101,7 @@ public class PUserResultSet {
     }
 
     void restart(int newOffset) throws SQLException {
-        this.vectorPtr = 0;
+        this.ArrayListPtr = 0;
         this.totalPtr = firstTotalPtr + newOffset;
         loadNextPackOfUsers();
     }
@@ -160,7 +160,7 @@ public class PUserResultSet {
             i++;
         }
         users.add(userObj);
-        this.vectorPtr = 0;
+        this.ArrayListPtr = 0;
         totalPtr += this.cacheSize;
         profiles.close();
         stmtProfile.close();
