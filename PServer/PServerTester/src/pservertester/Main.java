@@ -114,6 +114,7 @@ public class Main {
             //commands.add( "/commu?clnt=test|test&com=calcftrdist&smetric=cos" );
             //commands.add( "/commu?clnt=test|test&com=mkftrgrp&algorithm=bk&th=>0.5" );
 
+            commands.add( "/commu?clnt=test|test1&com=getftrgrps&usr=10" );
 
 
             /*
