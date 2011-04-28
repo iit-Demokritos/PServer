@@ -89,6 +89,10 @@ public class Communities implements pserver.pservlets.PService {
             respCode = addFeatureGroup(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("rmftrgrp")) {//specify conditions and select assignments
             respCode = removeFeatureGroup(queryParam, respBody, dbAccess);
+        } else if (com.equalsIgnoreCase("getftrgrps")) {//specify conditions and select assignments
+            respCode = getFeatureGroup(queryParam, respBody, dbAccess);
+        } else if (com.equalsIgnoreCase("getftrgrp")) {//specify conditions and select assignments
+            respCode = getFeatureGroupFeatures(queryParam, respBody, dbAccess);
         } else {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Request command not recognized");
@@ -848,7 +852,7 @@ public class Communities implements pserver.pservlets.PService {
             ftrGroup.addFeature(ftrs[i].trim());
         }
 
-        if ( users != null ) {
+        if (users != null) {
             if (users.trim().equals("") == false) {
                 String[] usrs = users.split("\\|");
                 for (int i = 0; i < usrs.length; i++) {
@@ -880,7 +884,7 @@ public class Communities implements pserver.pservlets.PService {
         try {
             boolean success = true;
             dbAccess.setAutoCommit(false);
-            success = removeGroup(queryParam, respBody, dbAccess);
+            success = execRemoveGroup(queryParam, respBody, dbAccess);
             //-end transaction body
             if (success) {
                 dbAccess.commit();
@@ -899,7 +903,7 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
-    private boolean removeGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
+    private boolean execRemoveGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
 
@@ -918,7 +922,172 @@ public class Communities implements pserver.pservlets.PService {
         respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
         respBody.append("</result>");
         return true;
-    }    
+    }
+
+    private int getFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        //execute the command
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            success = execGetFeatureGroup(queryParam, respBody, dbAccess);
+            //-end transaction body
+            if (success) {
+                dbAccess.commit();
+            } else {
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+            //disconnect from DB anyway
+            dbAccess.disconnect();
+        } catch (Exception e) {  //problem with transaction
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-DB Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
+    }
+
+    private boolean execGetFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int usrIdx = queryParam.qpIndexOfKeyNoCase("usr");
+        if (usrIdx == -1) {
+            WebServer.win.log.error("-The parameter usr is missing: ");
+            return false;
+        }
+        String user = (String) queryParam.getVal(usrIdx);
+
+        String nameParameter = null;
+        int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        if (usrIdx != -1) {
+            nameParameter = (String) queryParam.getVal(nameIdx);
+        }
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT " + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + ",SUM(" + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE + ") AS val FROM " + DBAccess.UPROFILE_TABLE + "," + DBAccess.FTRGROUPSFTRS_TABLE + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='").append(clientName).append("' AND " + DBAccess.FTRGROUPSFTRS_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='").append(clientName).append("'");
+        sql.append(" AND " + DBAccess.UPROFILE_TABLE_FIELD_USER + "=?");
+        sql.append(" AND " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "=" + DBAccess.FTRGROUPSFTRS_TABLE_TABLE_FIELD_FTR);
+
+        //creates the sql
+        if (nameParameter != null) {
+            String[] names = nameParameter.split("|");
+            if (names[0].contains("*")) {
+                sql.append(" AND ( " + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + " LIKE ?");
+            } else {
+                sql.append(" AND ( " + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + "=?");
+            }
+            for (int i = 1; i < names.length; i++) {
+                System.out.println(names[i]);
+                if (names[i].contains("*")) {
+                    names[i] = names[i].replace("*", "%");
+                    sql.append(" OR " + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + " LIKE ?");
+                } else {
+                    sql.append(" OR " + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + "=?");
+                }
+            }
+            sql.append(")");
+        }
+        sql.append(" GROUP BY " + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + " ORDER BY val");
+        PreparedStatement stmt = dbAccess.getConnection().prepareStatement(sql.toString());
+        stmt.setString(1, user);
+
+        //ads the parameters to prepare statement
+        if (nameParameter != null) {
+            String[] names = nameParameter.split("|");
+            for (int i = 0; i < names.length; i++) {
+                stmt.setString(2 + i, names[i]);
+            }
+        }
+        ResultSet rs = stmt.executeQuery();
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        respBody.append("<result>\n");
+        while (rs.next()) {
+            String group = rs.getString(1);
+            respBody.append("<row>"
+                    + "<group>" + group + "</group>"
+                    + "</row>\n");
+        }
+        respBody.append("</result>");
+        rs.close();
+        stmt.close();
+        return true;
+    }
+
+    private int getFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        //execute the command
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            success = execGetFeatureGroupFeatures(queryParam, respBody, dbAccess);
+            //-end transaction body
+            if (success) {
+                dbAccess.commit();
+            } else {
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+            //disconnect from DB anyway
+            dbAccess.disconnect();
+        } catch (Exception e) {  //problem with transaction
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-DB Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
+    }
+
+    private boolean execGetFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int grpIdx = queryParam.qpIndexOfKeyNoCase("ftrgrp");
+        if (grpIdx == -1) {
+            WebServer.win.log.error("-The parameter ftrgrp is missing: ");
+            return false;
+        }
+        String group = (String) queryParam.getVal(grpIdx);
+
+
+        StringBuilder sql = new StringBuilder();
+
+        PreparedStatement stmt = dbAccess.getConnection().prepareStatement(sql.toString());
+        stmt.setString(1, group);
+
+        ResultSet rs = stmt.executeQuery();
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/group_features.xsl"));
+        respBody.append("<result>\n");
+        while (rs.next()) {
+            String feature = rs.getString(1);
+            respBody.append("<row>"
+                    + "<feature>" + feature + "</feature>"
+                    + "</row>\n");
+        }
+        respBody.append("</result>");
+        rs.close();
+        stmt.close();
+        return true;
+    }
 }
 
 class CollaborativeProfileBuilderThread extends Thread {

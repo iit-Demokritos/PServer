@@ -1088,3 +1088,53 @@
 15/4/2011 17:11:4  >  59041-        /admin?com=login&login_name=root&login_password=root
 15/4/2011 17:11:4  >  Request from /127.0.0.1 (59042)
 15/4/2011 17:11:4  >  59042-        /favicon.ico
+28/4/2011 21:16:51  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:16:51  >  Messages log mode set to: on
+28/4/2011 21:16:51  >  Connected to DB: MySQL
+28/4/2011 21:18:16  >  Request from /127.0.0.1 (48304)
+28/4/2011 21:18:16  >  48304-        /
+28/4/2011 21:18:16  >  Request from /127.0.0.1 (48305)
+28/4/2011 21:18:16  >  48305-        /favicon.ico
+28/4/2011 21:18:19  >  Request from /127.0.0.1 (52033)
+28/4/2011 21:18:19  >  52033-        /favicon.ico
+28/4/2011 21:22:13  >  Request from /127.0.0.1 (52066)
+28/4/2011 21:22:13  >  52066-        /clnt=test1|test1&com=getftrgrps&usr=10
+28/4/2011 21:22:50  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:22:50  >  Messages log mode set to: on
+28/4/2011 21:22:50  >  Connected to DB: MySQL
+28/4/2011 21:22:56  >  Request from /127.0.0.1 (52069)
+28/4/2011 21:22:56  >  52069-        /clnt=test1|test1&com=getftrgrps&usr=10
+28/4/2011 21:24:4  >  Request from /127.0.1.1 (57882)
+28/4/2011 21:24:4  >  57882-        /commu?clnt=test1|test1&com=getftrgrps&usr=10
+28/4/2011 21:25:30  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:25:30  >  Messages log mode set to: on
+28/4/2011 21:25:30  >  Connected to DB: MySQL
+28/4/2011 21:25:32  >  Request from /127.0.1.1 (57893)
+28/4/2011 21:25:32  >  57893-        /commu?clnt=test1|test1&com=getftrgrps&usr=10
+28/4/2011 21:26:49  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:26:49  >  Messages log mode set to: on
+28/4/2011 21:26:49  >  Connected to DB: MySQL
+28/4/2011 21:26:53  >  Request from /127.0.1.1 (57900)
+28/4/2011 21:26:53  >  57900-        /commu?clnt=test1|test1&com=getftrgrps&usr=10
+28/4/2011 21:30:28  >  Request from /127.0.1.1 (56684)
+28/4/2011 21:30:28  >  56684-        /commu?clnt=test|test1&com=getftrgrps&usr=10
+28/4/2011 21:31:56  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:31:56  >  Messages log mode set to: on
+28/4/2011 21:31:56  >  Connected to DB: MySQL
+28/4/2011 21:31:58  >  Request from /127.0.1.1 (56691)
+28/4/2011 21:31:58  >  56691-        /commu?clnt=test|test1&com=getftrgrps&usr=10
+28/4/2011 21:32:56  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:32:56  >  Messages log mode set to: on
+28/4/2011 21:32:56  >  Connected to DB: MySQL
+28/4/2011 21:33:1  >  Request from /127.0.1.1 (56698)
+28/4/2011 21:33:1  >  56698-        /commu?clnt=test|test1&com=getftrgrps&usr=10
+28/4/2011 21:35:2  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:35:2  >  Messages log mode set to: on
+28/4/2011 21:35:2  >  Connected to DB: MySQL
+28/4/2011 21:35:31  >  Request from /127.0.1.1 (60095)
+28/4/2011 21:35:31  >  60095-        /commu?clnt=test|test1&com=getftrgrps&usr=10
+28/4/2011 21:44:41  >  Server started at dev-machine/127.0.1.1, port 1111
+28/4/2011 21:44:41  >  Messages log mode set to: on
+28/4/2011 21:44:41  >  Connected to DB: MySQL
+28/4/2011 21:44:44  >  Request from /127.0.1.1 (55764)
+28/4/2011 21:44:44  >  55764-        /commu?clnt=test|test1&com=getftrgrps&usr=10
