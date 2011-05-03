@@ -1138,3 +1138,29 @@
 28/4/2011 21:44:41  >  Connected to DB: MySQL
 28/4/2011 21:44:44  >  Request from /127.0.1.1 (55764)
 28/4/2011 21:44:44  >  55764-        /commu?clnt=test|test1&com=getftrgrps&usr=10
+3/5/2011 17:31:50  >  Server started at dev-machine/127.0.1.1, port 1111
+3/5/2011 17:31:50  >  Messages log mode set to: on
+3/5/2011 17:31:50  >  Connected to DB: MySQL
+3/5/2011 19:24:54  >  Server started at dev-machine/127.0.1.1, port 1111
+3/5/2011 19:24:54  >  Messages log mode set to: on
+3/5/2011 19:24:55  >  Connected to DB: MySQL
+3/5/2011 19:25:10  >  Server started at dev-machine/127.0.1.1, port 1111
+3/5/2011 19:25:10  >  Messages log mode set to: on
+3/5/2011 19:25:11  >  Connected to DB: MySQL
+3/5/2011 19:26:25  >  Request from /127.0.1.1 (33022)
+3/5/2011 19:26:28  >  33022-        /commu?clnt=Mydmoz%7C1234&com=getftrgrps&usr=fed
+3/5/2011 19:27:39  >  Request from /127.0.1.1 (37071)
+3/5/2011 19:27:39  >  37071-        /commu?clnt=Mydmoz|1234&com=getftrgrps&usr=fed
+3/5/2011 19:28:6  >  Request from /127.0.1.1 (37075)
+3/5/2011 19:28:6  >  37075-        /resp_xsl/user_feature_groups.xsl
+3/5/2011 19:28:6  >  Request from /127.0.1.1 (37076)
+3/5/2011 19:28:6  >  37076-        /favicon.ico
+3/5/2011 19:28:51  >  Request from /127.0.1.1 (37078)
+3/5/2011 19:28:51  >  37078-        /commu?clnt=Mydmoz|1234&com=getftrgrps&usr=fed
+3/5/2011 19:30:20  >  Problem starting server: java.net.BindException: Address already in use
+3/5/2011 19:30:20  >  Shutting down server, normal: false
+3/5/2011 19:30:24  >  Server started at dev-machine/127.0.1.1, port 1111
+3/5/2011 19:30:24  >  Messages log mode set to: on
+3/5/2011 19:30:24  >  Connected to DB: MySQL
+3/5/2011 19:30:27  >  Request from /127.0.1.1 (37092)
+3/5/2011 19:30:27  >  37092-        /commu?clnt=Mydmoz|1234&com=getftrgrps&usr=fed

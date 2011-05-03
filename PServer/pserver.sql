@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `attributes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `attributes` (
-  `attr_name` varchar(50) NOT NULL,
-  `attr_defvalue` varchar(255) DEFAULT NULL,
+  `attr_name` varchar(100) NOT NULL,
+  `attr_defvalue` varchar(100) DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`attr_name`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
@@ -39,11 +39,11 @@ DROP TABLE IF EXISTS `collaborative_feature_associations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `collaborative_feature_associations` (
-  `ftr_src` varchar(50) NOT NULL,
-  `ftr_dst` varchar(50) NOT NULL,
+  `ftr_src` varchar(100) NOT NULL,
+  `ftr_dst` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `type` int(11) NOT NULL,
-  `profile` varchar(50) NOT NULL,
+  `profile` varchar(100) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`ftr_src`,`ftr_dst`,`type`,`profile`,`FK_psclient`),
   KEY `src` (`ftr_src`,`FK_psclient`,`profile`,`type`),
@@ -61,8 +61,8 @@ DROP TABLE IF EXISTS `collaborative_feature_statistics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `collaborative_feature_statistics` (
-  `profile` varchar(50) NOT NULL,
-  `ftr` varchar(50) NOT NULL,
+  `profile` varchar(100) NOT NULL,
+  `ftr` varchar(100) NOT NULL,
   `type` int(11) NOT NULL,
   `value` float NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
@@ -81,8 +81,8 @@ DROP TABLE IF EXISTS `collaborative_profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `collaborative_profiles` (
-  `cp_user` varchar(50) NOT NULL,
-  `cp_feature` varchar(50) NOT NULL,
+  `cp_user` varchar(100) NOT NULL,
+  `cp_feature` varchar(100) NOT NULL,
   `cp_value` text,
   `cp_numvalue` double DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
@@ -100,8 +100,8 @@ DROP TABLE IF EXISTS `communities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `communities` (
-  `community` varchar(50) NOT NULL,
-  `FK_psclient` varchar(255) NOT NULL,
+  `community` varchar(100) NOT NULL,
+  `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`community`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
 /*!50100 PARTITION BY KEY (FK_psclient) */;
@@ -115,11 +115,11 @@ DROP TABLE IF EXISTS `community_associations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `community_associations` (
-  `community_src` varchar(50) NOT NULL,
-  `community_dst` varchar(50) NOT NULL,
+  `community_src` varchar(100) NOT NULL,
+  `community_dst` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `type` int(10) unsigned NOT NULL,
-  `FK_psclient` varchar(255) NOT NULL
+  `FK_psclient` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC
 /*!50100 PARTITION BY KEY (FK_psclient,`type`) */;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -132,12 +132,12 @@ DROP TABLE IF EXISTS `community_feature_associations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `community_feature_associations` (
-  `ftr_src` varchar(50) NOT NULL,
-  `ftr_dst` varchar(50) NOT NULL,
+  `ftr_src` varchar(100) NOT NULL,
+  `ftr_dst` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `type` int(10) unsigned NOT NULL,
-  `community` varchar(50) NOT NULL,
-  `FK_psclient` varchar(255) NOT NULL
+  `community` varchar(100) NOT NULL,
+  `FK_psclient` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC
 /*!50100 PARTITION BY KEY (FK_psclient,`type`,community) */;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -150,8 +150,8 @@ DROP TABLE IF EXISTS `community_profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `community_profiles` (
-  `community` varchar(50) NOT NULL,
-  `feature` varchar(50) NOT NULL,
+  `community` varchar(100) NOT NULL,
+  `feature` varchar(100) NOT NULL,
   `feature_value` double DEFAULT '0',
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`community`,`feature`,`FK_psclient`)
@@ -167,8 +167,8 @@ DROP TABLE IF EXISTS `decay_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `decay_data` (
-  `dd_user` varchar(50) NOT NULL,
-  `dd_feature` varchar(50) NOT NULL,
+  `dd_user` varchar(100) NOT NULL,
+  `dd_feature` varchar(100) NOT NULL,
   `dd_timestamp` double unsigned NOT NULL DEFAULT '0',
   `FK_psclient` varchar(50) NOT NULL,
   `FK_session` varchar(45) NOT NULL DEFAULT '',
@@ -185,7 +185,7 @@ DROP TABLE IF EXISTS `decay_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `decay_groups` (
-  `dg_group` varchar(50) NOT NULL,
+  `dg_group` varchar(100) NOT NULL,
   `dg_rate` float DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`dg_group`,`FK_psclient`)
@@ -201,8 +201,8 @@ DROP TABLE IF EXISTS `ftrgroup_features`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ftrgroup_features` (
-  `feature_group` varchar(50) NOT NULL,
-  `feature_name` varchar(50) NOT NULL,
+  `feature_group` varchar(100) NOT NULL,
+  `feature_name` varchar(100) NOT NULL,
   `value` tinyint(4) DEFAULT '0',
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`feature_group`,`feature_name`,`FK_psclient`)
@@ -218,8 +218,8 @@ DROP TABLE IF EXISTS `ftrgroup_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ftrgroup_users` (
-  `feature_group` varchar(50) NOT NULL,
-  `user_name` varchar(50) NOT NULL,
+  `feature_group` varchar(100) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`feature_group`,`user_name`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
@@ -234,7 +234,7 @@ DROP TABLE IF EXISTS `ftrgroups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ftrgroups` (
-  `ftrgroup` varchar(50) NOT NULL,
+  `ftrgroup` varchar(100) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`ftrgroup`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
@@ -249,8 +249,8 @@ DROP TABLE IF EXISTS `num_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `num_data` (
-  `nd_user` varchar(50) NOT NULL,
-  `nd_feature` varchar(50) NOT NULL,
+  `nd_user` varchar(100) NOT NULL,
+  `nd_feature` varchar(100) NOT NULL,
   `nd_value` double DEFAULT '0',
   `nd_timestamp` int(10) unsigned NOT NULL DEFAULT '0',
   `sessionId` int(10) unsigned NOT NULL DEFAULT '0',
@@ -272,8 +272,8 @@ DROP TABLE IF EXISTS `pserver_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pserver_clients` (
-  `name` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -286,8 +286,8 @@ DROP TABLE IF EXISTS `stereotype_feature_associations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stereotype_feature_associations` (
-  `ftr_src` varchar(50) NOT NULL,
-  `ftr_dst` varchar(50) NOT NULL,
+  `ftr_src` varchar(100) NOT NULL,
+  `ftr_dst` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `type` int(10) unsigned NOT NULL,
   `stereotype` varchar(50) NOT NULL,
@@ -307,8 +307,8 @@ DROP TABLE IF EXISTS `stereotype_feature_statistics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stereotype_feature_statistics` (
-  `stereotype` varchar(50) NOT NULL,
-  `ftr` varchar(50) NOT NULL,
+  `stereotype` varchar(100) NOT NULL,
+  `ftr` varchar(100) NOT NULL,
   `type` int(11) NOT NULL,
   `value` float NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
@@ -325,9 +325,9 @@ DROP TABLE IF EXISTS `stereotype_profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stereotype_profiles` (
-  `sp_stereotype` varchar(50) NOT NULL,
-  `sp_feature` varchar(50) NOT NULL DEFAULT '',
-  `sp_value` varchar(50) DEFAULT NULL,
+  `sp_stereotype` varchar(100) NOT NULL,
+  `sp_feature` varchar(100) NOT NULL DEFAULT '',
+  `sp_value` varchar(100) DEFAULT NULL,
   `sp_numvalue` double DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`sp_stereotype`,`sp_feature`,`FK_psclient`)
@@ -343,8 +343,8 @@ DROP TABLE IF EXISTS `stereotype_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stereotype_users` (
-  `su_user` varchar(50) NOT NULL,
-  `su_stereotype` varchar(50) NOT NULL,
+  `su_user` varchar(100) NOT NULL,
+  `su_stereotype` varchar(100) NOT NULL,
   `su_degree` double DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`su_user`,`su_stereotype`,`FK_psclient`)
@@ -360,7 +360,7 @@ DROP TABLE IF EXISTS `stereotypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stereotypes` (
-  `st_stereotype` varchar(50) NOT NULL,
+  `st_stereotype` varchar(100) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   `st_rule` text NOT NULL,
   PRIMARY KEY (`st_stereotype`,`FK_psclient`)
@@ -376,8 +376,8 @@ DROP TABLE IF EXISTS `up_features`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `up_features` (
-  `uf_feature` varchar(50) NOT NULL DEFAULT '',
-  `uf_defvalue` varchar(50) DEFAULT NULL,
+  `uf_feature` varchar(100) NOT NULL DEFAULT '',
+  `uf_defvalue` varchar(100) DEFAULT NULL,
   `uf_numdefvalue` double DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`uf_feature`,`FK_psclient`)
@@ -393,8 +393,8 @@ DROP TABLE IF EXISTS `user_associations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_associations` (
-  `user_src` varchar(50) NOT NULL,
-  `user_dst` varchar(50) NOT NULL,
+  `user_src` varchar(100) NOT NULL,
+  `user_dst` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `type` int(10) unsigned NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
@@ -415,9 +415,9 @@ DROP TABLE IF EXISTS `user_attributes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_attributes` (
-  `user` varchar(50) NOT NULL,
-  `attribute` varchar(50) NOT NULL,
-  `attribute_value` varchar(255) DEFAULT NULL,
+  `user` varchar(100) NOT NULL,
+  `attribute` varchar(100) NOT NULL,
+  `attribute_value` varchar(100) DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`user`,`attribute`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
@@ -432,8 +432,8 @@ DROP TABLE IF EXISTS `user_community`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_community` (
-  `user` varchar(50) NOT NULL,
-  `community` varchar(50) NOT NULL,
+  `user` varchar(100) NOT NULL,
+  `community` varchar(100) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`user`,`community`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
@@ -448,8 +448,8 @@ DROP TABLE IF EXISTS `user_feature_associations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_feature_associations` (
-  `ftr_src` varchar(50) NOT NULL,
-  `ftr_dst` varchar(50) NOT NULL,
+  `ftr_src` varchar(100) NOT NULL,
+  `ftr_dst` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `type` int(10) unsigned NOT NULL,
   `user` varchar(50) NOT NULL,
@@ -471,8 +471,8 @@ DROP TABLE IF EXISTS `user_feature_statistics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_feature_statistics` (
-  `user` varchar(50) NOT NULL,
-  `ftr` varchar(50) NOT NULL,
+  `user` varchar(100) NOT NULL,
+  `ftr` varchar(100) NOT NULL,
   `type` int(11) NOT NULL,
   `value` float NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
@@ -489,8 +489,8 @@ DROP TABLE IF EXISTS `user_interests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_interests` (
-  `up_user` varchar(50) NOT NULL,
-  `up_feature` varchar(50) NOT NULL,
+  `up_user` varchar(100) NOT NULL,
+  `up_feature` varchar(100) NOT NULL,
   `up_value` text,
   `up_numvalue` double DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
@@ -510,8 +510,8 @@ DROP TABLE IF EXISTS `user_profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_profiles` (
-  `up_user` varchar(50) NOT NULL,
-  `up_feature` varchar(50) NOT NULL,
+  `up_user` varchar(100) NOT NULL,
+  `up_feature` varchar(100) NOT NULL,
   `up_value` text,
   `up_numvalue` double DEFAULT NULL,
   `FK_psclient` varchar(50) NOT NULL,
@@ -532,7 +532,7 @@ DROP TABLE IF EXISTS `user_sessions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `FK_user` varchar(50) NOT NULL DEFAULT '',
+  `FK_user` varchar(100) NOT NULL DEFAULT '',
   `FK_psclient` varchar(50) NOT NULL,
   PRIMARY KEY (`id`,`FK_user`,`FK_psclient`)
 ) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
@@ -547,7 +547,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `user` varchar(50) NOT NULL,
+  `user` varchar(100) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
   `decay_factor` float NOT NULL,
   PRIMARY KEY (`user`,`FK_psclient`)
