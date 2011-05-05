@@ -1009,10 +1009,6 @@ public class Communities implements pserver.pservlets.PService {
                 stmt.setString(2 + i, names[i]);
             }
         }
-        System.out.println("===========================");
-        System.out.println("===========================");
-        System.out.println( stmt.toString());
-        System.out.println("===========================");
 
         ResultSet rs = stmt.executeQuery();
         respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
@@ -1072,7 +1068,6 @@ public class Communities implements pserver.pservlets.PService {
             return false;
         }
         String group = (String) queryParam.getVal(grpIdx);
-
 
         StringBuilder sql = new StringBuilder();
 
