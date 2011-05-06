@@ -25,6 +25,7 @@ import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.PFeatureGroupProfileResultSet;
 import pserver.data.PUserDBAccess;
 import pserver.data.UserCommunityManager;
+import pserver.domain.PCommunity;
 import pserver.domain.PFeatureGroup;
 import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
@@ -54,6 +55,11 @@ public class Communities implements pserver.pservlets.PService {
         queryParam = parameters;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        if( clntIdx == -1 ){
+            respCode = PSReqWorker.REQUEST_ERR;
+            WebServer.win.log.error("-Parameter clnt does not exist");
+            return respCode;  //no point in proceeding
+        }
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
         queryParam.updateVal(clientName, clntIdx);
@@ -93,6 +99,8 @@ public class Communities implements pserver.pservlets.PService {
             respCode = getFeatureGroup(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("getftrgrp")) {//specify conditions and select assignments
             respCode = getFeatureGroupFeatures(queryParam, respBody, dbAccess);
+        } else if (com.equalsIgnoreCase("addusrcom")) {//specify conditions and select assignments
+            respCode = addUserCommunity(queryParam, respBody, dbAccess);
         } else {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Request command not recognized");
@@ -1086,6 +1094,69 @@ public class Communities implements pserver.pservlets.PService {
         respBody.append("</result>");
         rs.close();
         stmt.close();
+        return true;
+    }
+
+    private int addUserCommunity(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        //execute the command
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            success = execAddUserCommunity(queryParam, respBody, dbAccess);
+            //-end transaction body
+            if (success) {
+                dbAccess.commit();
+            } else {
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+            //disconnect from DB anyway
+            dbAccess.disconnect();
+        } catch (Exception e) {  //problem with transaction
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-DB Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
+    }
+
+    private boolean execAddUserCommunity(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        if( nameIdx == -1 ) {
+            WebServer.win.log.error("-The parameter name is missing: ");
+            return false;
+        }
+        String name = (String) queryParam.getVal(nameIdx);
+        
+        int usrsIdx = queryParam.qpIndexOfKeyNoCase("usrs");
+        if( usrsIdx == -1 ) {
+            WebServer.win.log.error("-The parameter usrs is missing: ");
+            return false;
+        }
+        String[] usrs = ((String) queryParam.getVal(usrsIdx)).split( "|" );
+        
+        PCommunity community = new PCommunity(name);
+        PCommunityDBAccess comDBAccess = new PCommunityDBAccess(dbAccess);
+        int rows = comDBAccess.addNewPCommunity( community );
+        
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
+        respBody.append("</result>");
+                
         return true;
     }
 }

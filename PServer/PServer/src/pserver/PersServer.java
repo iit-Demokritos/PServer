@@ -137,8 +137,7 @@ public class PersServer extends WebServer {
         //if DB connection OK, report it (irrespectively of log mode) and continue
         win.log.forceReport("Connected to DB: " + dbType);
         win.log.forceReport("");  //en empty line for aesthetics
-        flog.forceWriteln("Connected to DB: " + dbType);
-        srv.setDaemon(true);
+        flog.forceWriteln("Connected to DB: " + dbType);        
         srv.start();
     }
     //loafs pservlets into a hachmap to access them via the defined name found from the servlet.ini file

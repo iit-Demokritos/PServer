@@ -1,87 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * AND open the template in the editor.
- */
-
-//PERS_MODE commANDs:
-//In Personal Mode, the server functions as a repository oriented
-//to store user profiles. The profile of a user is a set of tuples
-//(feature, value). Features are entities relevant to specific
-//applications, while values give an estimation about a user
-//relevence to corresponding features. All users have values for
-//all application features. Features may have default values, that
-//are assigned to new users. Also, features can be organized in a
-//tree or graph based manner, for easily managing conceptual
-//hierarchies. This organization is encoded in the name of every
-//feature as a path expression, AND is setup by applications.
-//The DB structure: up_features (uf_feature, uf_defvalue,
-//uf_numdefvalue) with key 'uf_feature', user_profiles (up_user,
-//up_feature, up_value, up_numvalue) with key 'up_user' AND
-//'up_feature'. If a field in 'up_features' is deleted, the deletion
-//is cascaded to 'user_profiles', because of a referential integrity
-//constraint. The two fields 'uf_numdefvalue' AND 'up_numvalue'
-//are "invisible": they are not part of the results of 'select'
-//queries, they contain the numeric equivalent of the string
-//value (in the other value fields), or NULL if the string cannot be
-//converted to numeric. Those duplicate fields are used mainly to
-//allow for two types of value comparisons: string AND numeric.
-//Note that the primary data type for values is always string, as
-//it is more general, AND that the numeric version always correspond
-//to the string version. Also note that values intented to be
-//numeric must use '.' for the decimal part when given as strings.
-//If ',' is used, the string will not be successfully converted to
-//numeric, AND its numeric equivalent will be NULL.
-//Personal Mode also offers a separate 'DECAY' functionality.
-//In decay, the server keeps a record of every user interaction with
-//certain features, marking the date/time the interaction occurred.
-//Then, it is possible to calculate a value, that shows how much a
-//user is interested in a feature, AND that takes into account not
-//only how many times the user visited the feature, but also if the
-//user has visited other features in the meanwhile (therefore if the
-//feature has been 'forgotten'). Most recently visited features
-//receive higher scores, therefore to forget means to loose interest.
-//The formula depends on a variable called here 'decay rate' between
-//[0,1] inclusive, that determines the rate of forgetting. If rate
-//is set to 0, the user does not forget (or loose interest) AND the
-//decay mechanism is reduced to sorting features based only on how
-//frequently a user has visited them (not when). The application
-//can define a number of feature groups AND a rate for each group.
-//Each group represents a set of features that compete for the
-//user's interest under the decay formula. The application must
-//inform the server about any user interaction with such features,
-//AND can subsequently ask for features a user is most interested
-//in. In case the rate of a feature group is 0, the decay value
-//calculated by the server for any feature of the group for a
-//specified user, is simply the total number of visits the user
-//paid to the feature.
-//The DB structure: decay_groups (dg_group, dg_rate) with key
-//dg_group, decay_data (dd_user, dd_feature, dd_timestamp) with key
-//dd_user, dd_feature AND dd_timestamp. If a field in 'up_features'
-//is deleted (or a feature name updated), the deletion (or update)
-//is cascaded to 'decay_data', because of a referential integrity
-//constraint. Note that 'decay_groups' is not connected with any
-//other table through referential integrity constraints, so data
-//from this table must be deleted explicitely when initializing the
-//Personal Mode database. The role of 'decay groups' is secondary
-// - actually the decay can function without this table, the
-//application is not oblidged to declare groups for using decay,
-//it only needs to notify PServer about user-feature interactions.
-//Another function of the Personal Mode has to do with "numeric
-//features". For some features it is not meaningful to count
-//how often a user has visited them in order to determine of how
-//much interest they are to the user. Such features have numeric
-//values AND meaninful operations are aggregates on those values.
-//For example, a user interested in laptop computers can visit
-//laptops of different weight. In this case, a number relevant
-//to the profile of the user may be the average weight of all
-//laptop descriptions the user has visited (or showed interest in).
-//A single table in the DB supports this functionality: num_data
-//(nd_user, nd_feature, nd_timestamp, nd_numvalue) with key
-//nd_user, nd_feature, nd_timestamp. The table 'num_data' is not
-//connected with any other table through referential integrity
-//constraints (not even with table 'up_features'), so data from
-//this table must be deleted explicitely when initializing the
-//Personal Mode database.
 package pserver.pservlets;
 
 import java.sql.SQLException;
@@ -118,10 +34,15 @@ public class Personal implements pserver.pservlets.PService {
         StringBuffer respBody = response;
         queryParam = parameters;
 
-        int clntIdx = queryParam.qpIndexOfKeyNoCase( "clnt" );
-        String clientName = ( String ) queryParam.getVal( clntIdx );
-        clientName = clientName.substring( 0, clientName.lastIndexOf( '|' ) );
-        queryParam.updateVal( clientName, clntIdx );
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        if( clntIdx == -1 ){
+            respCode = PSReqWorker.REQUEST_ERR;
+            WebServer.win.log.error("-Parameter clnt does not exist");
+            return respCode;  //no point in proceeding
+        }
+        String clientName = (String) queryParam.getVal(clntIdx);
+        clientName = clientName.substring(0, clientName.indexOf('|'));
+        queryParam.updateVal(clientName, clntIdx);
         //System.out.println( "client name = " + queryParam.getVal( clntIdx ) );
 
         //commANDs of PERS_MODE here!

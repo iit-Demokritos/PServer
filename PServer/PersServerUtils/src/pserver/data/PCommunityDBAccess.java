@@ -6,6 +6,7 @@
  */
 package pserver.data;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pserver.algorithms.metrics.VectorMetric;
+import pserver.domain.PCommunity;
 import pserver.domain.PUser;
 
 /**
@@ -127,6 +129,39 @@ public class PCommunityDBAccess {
      */
     public DBAccess getDbAccess() {
         return dbAccess;
+    }
+
+    public int addNewPCommunity(PCommunity community, String clientName) throws SQLException {
+        int rows = 0;
+        //sabe name
+        PreparedStatement stmtAddFtrGroup = this.dbAccess.getConnection().prepareStatement("INSERT INTO " + DBAccess.UCOMMUNITY_TABLE+ "(" + DBAccess.UCOMMUNITY_TABLE_FIELD_USER + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( ?,'" + clientName + "')");
+        stmtAddFtrGroup.setString(1, community.getName());
+        rows += stmtAddFtrGroup.executeUpdate();
+        stmtAddFtrGroup.close();
+
+        //save features
+        PreparedStatement stmtAddUsers = this.dbAccess.getConnection().prepareStatement("INSERT INTO " + DBAccess.FTRGROUPSFTRS_TABLE + "(" + DBAccess.FTRGROUPSFTRS_TABLE_FIELD_GROUP + "," + DBAccess.FTRGROUPSFTRS_TABLE_TABLE_FIELD_FTR + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( ?,?, '" + clientName + "')");
+        stmtAddFeatures.setString(1, ftrGroup.getName());
+        for( String ftr : ftrGroup.getFeatures() ) {
+            
+            stmtAddFeatures.setString(2, ftr );
+            stmtAddFeatures.addBatch();
+        }
+        
+        int[] r= stmtAddFeatures.executeBatch();
+        for ( int i = 0; i < r.length ; i ++ ) {
+            rows += r[ i];
+        }
+        stmtAddFeatures.close();
+
+        
+        r= stmtAddUsers.executeBatch();
+        for ( int i = 0; i < r.length ; i ++ ) {
+            rows += r[ i];
+        }
+        stmtAddUsers.close();
+        
+        return rows;
     }
 
     class CompareThread extends Thread {

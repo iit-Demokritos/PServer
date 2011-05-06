@@ -39,6 +39,11 @@ public class Csv implements pserver.pservlets.PService {
         queryParam = parameters;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        if (clntIdx == -1) {
+            respCode = PSReqWorker.REQUEST_ERR;
+            WebServer.win.log.error("-Parameter clnt does not exist");
+            return respCode;  //no point in proceeding
+        }
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
         queryParam.updateVal(clientName, clntIdx);
@@ -586,13 +591,13 @@ public class Csv implements pserver.pservlets.PService {
         String line;
         int rows = 0;
         Connection con = dbAccess.getConnection();
-        String sql = "";        
+        String sql = "";
         int lineNo = 0;
         PFeatureGroupDBAccess pfAccess = new PFeatureGroupDBAccess(dbAccess);
         while ((line = input.readLine()) != null) {
             lineNo++;
             String tokens[] = line.split(cs);
-            if (tokens.length <= nameCol || tokens.length <= ftrCol ) {
+            if (tokens.length <= nameCol || tokens.length <= ftrCol) {
                 WebServer.win.log.warn("Not enough fields in line " + lineNo + " Line:" + line);
                 return false;
             }
@@ -606,18 +611,18 @@ public class Csv implements pserver.pservlets.PService {
                 ftrGroup.addFeature(ftrs[i].trim());
             }
 
-            if (usrCol >= 0 && tokens.length > usrCol ) {                
+            if (usrCol >= 0 && tokens.length > usrCol) {
                 String users = tokens[usrCol];
-                if( users.trim().equals("") == false ) {
+                if (users.trim().equals("") == false) {
                     String[] usrs = users.split(fs);
-                    for (int i = 0; i < usrs.length; i++) {                        
+                    for (int i = 0; i < usrs.length; i++) {
                         ftrGroup.addUser(usrs[i].trim());
                     }
                 }
             }
 
             rows += pfAccess.addFeatureGroup(ftrGroup, clientName);
-        }        
+        }
 
         respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
         respBody.append("<result>\n");

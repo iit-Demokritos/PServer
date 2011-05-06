@@ -42,8 +42,13 @@ public class Stereotypes implements pserver.pservlets.PService {
         queryParam = parameters;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        if( clntIdx == -1 ){
+            respCode = PSReqWorker.REQUEST_ERR;
+            WebServer.win.log.error("-Parameter clnt does not exist");
+            return respCode;  //no point in proceeding
+        }
         String clientName = (String) queryParam.getVal(clntIdx);
-        clientName = clientName.substring(0, clientName.lastIndexOf('|'));
+        clientName = clientName.substring(0, clientName.indexOf('|'));
         queryParam.updateVal(clientName, clntIdx);
 
         //commands of STER_MODE here!

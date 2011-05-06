@@ -1164,3 +1164,40 @@
 3/5/2011 19:30:24  >  Connected to DB: MySQL
 3/5/2011 19:30:27  >  Request from /127.0.1.1 (37092)
 3/5/2011 19:30:27  >  37092-        /commu?clnt=Mydmoz|1234&com=getftrgrps&usr=fed
+6/5/2011 13:54:11  >  Server started at alexm-desktop/127.0.1.1, port 1111
+6/5/2011 13:54:11  >  Messages log mode set to: on
+6/5/2011 13:54:11  >  Connected to DB: MySQL
+6/5/2011 13:54:17  >  Request from /127.0.0.1 (47200)
+6/5/2011 13:54:17  >  47200-        /
+6/5/2011 13:54:17  >  Request from /127.0.0.1 (47201)
+6/5/2011 13:54:17  >  47201-        /favicon.ico
+6/5/2011 13:54:19  >  Request from /127.0.0.1 (47202)
+6/5/2011 13:54:19  >  47202-        /admin?com=login&login_name=root&login_password=root
+6/5/2011 13:54:20  >  Request from /127.0.0.1 (47203)
+6/5/2011 13:54:20  >  47203-        /favicon.ico
+6/5/2011 13:54:20  >  Request from /127.0.0.1 (47204)
+6/5/2011 13:54:20  >  47204-        /favicon.ico
+6/5/2011 13:54:25  >  Request from /127.0.0.1 (47205)
+6/5/2011 13:54:25  >  47205-        /commu_help/commu_mode.html
+6/5/2011 13:54:25  >  Request from /127.0.0.1 (47206)
+6/5/2011 13:54:25  >  47206-        /commu_help/menu.html
+6/5/2011 13:54:25  >  Request from /127.0.0.1 (47207)
+6/5/2011 13:54:25  >  47207-        /commu_help/commu_index.html
+6/5/2011 13:54:30  >  Request from /127.0.0.1 (47208)
+6/5/2011 13:54:30  >  47208-        /commu_help/getftrgrp.html
+6/5/2011 13:54:32  >  Request from /127.0.0.1 (47209)
+6/5/2011 13:54:32  >  47209-        /commu_help/getftrgrps.html
+6/5/2011 13:54:33  >  Request from /127.0.0.1 (44483)
+6/5/2011 13:54:33  >  44483-        /commu_help/addusrcom.html
+6/5/2011 14:45:10  >  Server started at alexm-desktop/127.0.1.1, port 1111
+6/5/2011 14:45:10  >  Messages log mode set to: on
+6/5/2011 14:45:11  >  Connected to DB: MySQL
+6/5/2011 16:59:7  >  Server started at alexm-desktop/127.0.1.1, port 1111
+6/5/2011 16:59:7  >  Messages log mode set to: on
+6/5/2011 16:59:7  >  Connected to DB: MySQL
+6/5/2011 17:3:1  >  Request from /127.0.0.1 (59078)
+6/5/2011 17:3:1  >  59078-        /commu_help/addusrcom.html
+6/5/2011 17:3:13  >  Request from /127.0.0.1 (59080)
+6/5/2011 17:3:13  >  59080-        /commu_help/addftrgrp.html
+6/5/2011 17:3:16  >  Request from /127.0.0.1 (59081)
+6/5/2011 17:3:16  >  59081-        /commu_help/addusrcom.html
