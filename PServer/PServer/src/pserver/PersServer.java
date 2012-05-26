@@ -65,7 +65,10 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.sql.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.data.DBAccess;
+import pserver.data.PServerClientsDBAccess;
 import pserver.userInterface.*;
 import pserver.logic.*;
 import pserver.utilities.*;
@@ -85,10 +88,7 @@ public class PersServer extends WebServer {
     public String dbDriver;         //JDBC driver
     public String dbUrl;            //JDBC connection string
     public String dbUser;           //user alias
-    public String dbPass;           //user password
-    //public boolean allowAnonymous;  //determination about restrict anonumous access or not
-    public String administrator_name;
-    public String administrator_pass;
+    public String dbPass;           //user password       
     //database product name
     public String dbType;    //eg. "ACCESS", "MySQL", etc.
     private boolean stop = false;    //variable for stop checking
@@ -102,13 +102,16 @@ public class PersServer extends WebServer {
         pObj = new PersServer();    //application object is a PersServer now
         WebServer.obj = pObj;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line;
         try {
-            while (br.readLine().equals(QuitCommand) == false) {
-                System.in.read();
-            }
+            do {
+                line = br.readLine().toLowerCase();
+            } while (line.equals(QuitCommand) == false) ;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        PersServer.terminate(true);
+        
     }
 
     //initializer
@@ -195,9 +198,7 @@ public class PersServer extends WebServer {
         dbUrl = (new StringBuilder()).append("jdbc:").append(pref.getPref("database_url")).toString();
         dbUser = pref.getPref("database_user");
         dbPass = pref.getPref("database_pass");
-        //allowAnonymous=(pref.getPref("anonymous")).equals("off")? false:true;
-        administrator_name = pref.getPref("administrator_name");
-        administrator_pass = pref.getPref("administrator_pass");
+        //allowAnonymous=(pref.getPref("anonymous")).equals("off")? false:true;        
     }
 
     //private methods
@@ -213,6 +214,10 @@ public class PersServer extends WebServer {
             dbAccess = new DBAccess(dbUrl, dbUser, dbPass);
             //conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
             dbAccess.connect();
+            try {
+                PServerClientsDBAccess.initialize(dbAccess);
+            } catch (Exception ex) {                
+            }
         } catch (ClassNotFoundException e) {  //connection failed, return null
             System.out.println("\n" + e + "\n");
             return null;

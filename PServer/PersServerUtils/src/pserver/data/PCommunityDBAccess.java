@@ -1,9 +1,20 @@
-/*
- * This class is a decorator on the top of the DBAccess class
- * MiningDBAccess provides methods to access data that are needed
- * for data mining algorithms
+/* 
+ * Copyright 2011 NCSR "Demokritos"
  * 
- */
+ * Licensed under the Apache License, Version 2.0 (the "License");   
+ * you may not use this file except in compliance with the License.   
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *    
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+*/
+
 package pserver.data;
 
 import java.sql.PreparedStatement;
@@ -133,7 +144,7 @@ public class PCommunityDBAccess {
 
     public int addNewPCommunity(PCommunity community, String clientName) throws SQLException {
         int rows = 0;
-        //sabe name
+        /* //sabe name
         PreparedStatement stmtAddFtrGroup = this.dbAccess.getConnection().prepareStatement("INSERT INTO " + DBAccess.UCOMMUNITY_TABLE+ "(" + DBAccess.UCOMMUNITY_TABLE_FIELD_USER + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( ?,'" + clientName + "')");
         stmtAddFtrGroup.setString(1, community.getName());
         rows += stmtAddFtrGroup.executeUpdate();
@@ -160,7 +171,7 @@ public class PCommunityDBAccess {
             rows += r[ i];
         }
         stmtAddUsers.close();
-        
+        */
         return rows;
     }
 

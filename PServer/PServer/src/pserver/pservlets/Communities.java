@@ -40,10 +40,11 @@ import pserver.data.DBAccess;
 import pserver.data.FeatureGroupManager;
 import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.PFeatureGroupProfileResultSet;
+import pserver.data.PServerClientsDBAccess;
 import pserver.data.PUserDBAccess;
 import pserver.data.UserCommunityManager;
-import pserver.domain.PCommunity;
 import pserver.domain.PFeatureGroup;
+import pserver.domain.PServerClient;
 import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
 
@@ -77,8 +78,17 @@ public class Communities implements pserver.pservlets.PService {
             WebServer.win.log.error("-Parameter clnt does not exist");
             return respCode;  //no point in proceeding
         }
-        String clientName = (String) queryParam.getVal(clntIdx);
-        clientName = clientName.substring(0, clientName.indexOf('|'));
+        String client = (String) queryParam.getVal(clntIdx);
+        String clientName = client.substring(0, client.indexOf('|'));
+        String clientPass = client.substring( client.indexOf('|') + 1);
+        
+        PServerClientsDBAccess cdbAccess = PServerClientsDBAccess.getInstance();
+        if ( cdbAccess.isValidClient( clientName, clientPass) == false ) {
+            respCode = PSReqWorker.REQUEST_ERR;
+            WebServer.win.log.error("-Invalid client");
+            return respCode;
+        }
+        
         queryParam.updateVal(clientName, clntIdx);
 
         int comIdx = parameters.qpIndexOfKeyNoCase("com");
@@ -1149,7 +1159,7 @@ public class Communities implements pserver.pservlets.PService {
 
     private boolean execAddUserCommunity(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        String clientName = (String) queryParam.getVal(clntIdx);
+        /*String clientName = (String) queryParam.getVal(clntIdx);
 
         int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
         if( nameIdx == -1 ) {
@@ -1173,7 +1183,7 @@ public class Communities implements pserver.pservlets.PService {
         respBody.append("<result>\n");
         respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
         respBody.append("</result>");
-                
+          */      
         return true;
     }
 }

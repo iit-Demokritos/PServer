@@ -84,11 +84,8 @@ public class PSReqWorker extends ReqWorker {
     private String pass;
     //private int perm;           //permissions for client
     private String clientName;  //the name of the client that did the request
-    private String administrator_name;//login name for administrator
-    private String administrator_pass;//login password for administrator
-    //anonymous ristriction
-    //private boolean allowAnonymous;
-    //private String db;        //eg. "ACCESS", "MySQL", etc.
+    //private String administrator_name;//login name for administrator
+    //private String administrator_pass;//login password for administrator    
     //initializers
     public PSReqWorker( Socket sock ) {
         super( sock );
@@ -96,8 +93,8 @@ public class PSReqWorker extends ReqWorker {
         user = ( ( PersServer ) PersServer.pObj ).dbUser;
         pass = ( ( PersServer ) PersServer.pObj ).dbPass;
         //allowAnonymous=((PersServer)PersServer.obj).allowAnonymous;
-        administrator_name = ( ( PersServer ) PersServer.pObj ).administrator_name;
-        administrator_pass = ( ( PersServer ) PersServer.pObj ).administrator_pass;
+        //administrator_name = ( ( PersServer ) PersServer.pObj ).administrator_name;
+        //administrator_pass = ( ( PersServer ) PersServer.pObj ).administrator_pass;
     //db = ((PersServer)PersServer.obj).dbType;
     }
 
@@ -185,7 +182,7 @@ public class PSReqWorker extends ReqWorker {
     }
 
     //check to see if the request came from a valid pserver user
-    private boolean isValidUser() {
+    /*private boolean isValidUser() {
         int clntIdx = queryParam.qpIndexOfKeyNoCase( "clnt" );
         /*if( this.allowAnonymous == true ){
         if( clntIdx != -1){
@@ -193,7 +190,7 @@ public class PSReqWorker extends ReqWorker {
         }
         clientName=null;
         return true;
-        }*/
+        }*
         if ( clntIdx == -1 ) {
             return false;
         }
@@ -203,7 +200,7 @@ public class PSReqWorker extends ReqWorker {
         return INVALID_CLIENT;
         else
         return FULL_GRANTED_CLIENT;
-        }*/
+        }*
         //client attibutes demactrate with the "|" character
         String userAndPass = ( String ) queryParam.getVal( clntIdx );
         StringTokenizer tokenizer = new StringTokenizer( userAndPass, "|" );
@@ -242,5 +239,5 @@ public class PSReqWorker extends ReqWorker {
         } catch ( SQLException e ) {
             return false;
         }
-    }
+    }*/
 }

@@ -1,7 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* 
+ * Copyright 2011 NCSR "Demokritos"
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");   
+ * you may not use this file except in compliance with the License.   
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *    
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+*/
+
 package pserver.data;
 
 import java.security.NoSuchAlgorithmException;
@@ -280,56 +293,7 @@ public class DBAccess {
 
     public void rollback() throws SQLException {
         this.connection.rollback();
-    }
-
-    public void deleteClient( String client ) throws SQLException {
-        Statement stmt = (Statement) connection.createStatement();
-        stmt.execute( "DELETE FROM ftrgroup_users WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM user_feature_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM user_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM stereotype_feature_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );        
-        stmt.execute( "DELETE FROM community_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM community_feature_associations WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM decay_data WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM num_data WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM user_sessions WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM community_profiles WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM decay_data WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM decay_groups WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM ftrgroup_features WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );        
-        stmt.execute( "DELETE FROM stereotype_profiles WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM stereotype_users WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM user_attributes WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM user_community WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM user_profiles WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM ftrgroups WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM up_features WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM stereotypes WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM communities WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM attributes WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM users WHERE " + FIELD_PSCLIENT + "=\"" + client + "\";" );
-        stmt.execute( "DELETE FROM pserver_clients WHERE name=\"" + client + "\";" );
-        stmt.close();
-    }
-
-    public boolean clientNameExists( String clientName ) throws SQLException {
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery( "SELECT * FROM pserver_clients WHERE name=\"" + clientName + "\";" );
-        if ( rs.next() ) {//if the client exists the users cant be add and return the value 1        
-            stmt.close();
-            return true;
-        } else {
-            stmt.close();
-            return false;
-        }
-    }
-
-    public void insertPServerClient( String clientName, String clientPass ) throws SQLException, NoSuchAlgorithmException {
-        Statement stmt = connection.createStatement();
-        clientPass = MD5.encrypt( clientPass );
-        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES(\"" + clientName + "\",\"" + clientPass + "\");" );
-        stmt.close();
-    }
+    }        
 
     /**
      * returns the pserver clients that are stored in the database

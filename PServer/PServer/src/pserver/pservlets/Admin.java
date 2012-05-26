@@ -24,6 +24,7 @@ import java.sql.*;
 import pserver.*;
 import pserver.domain.PServerClient;
 import pserver.data.DBAccess;
+import pserver.data.PServerClientsDBAccess;
 import pserver.logic.PSReqWorker;
 import pserver.utilities.*;
 
@@ -292,8 +293,9 @@ public class Admin implements pserver.pservlets.PService {
     private boolean execAdminDeleteClient( VectorMap queryParam, DBAccess dbAccess ) {
         int newClntNameIdx = queryParam.qpIndexOfKeyNoCase( "usr" );
         String clientName = ( String ) queryParam.getVal( newClntNameIdx );
+        PServerClientsDBAccess cdbAccess = PServerClientsDBAccess.getInstance();
         try {
-            dbAccess.deleteClient( clientName );
+            cdbAccess.deleteClient( clientName );
             return true;
         } catch ( Exception e ) {
             WebServer.win.log.debug( e.toString() );
@@ -353,15 +355,16 @@ public class Admin implements pserver.pservlets.PService {
     }
 
     private int execAdminAddClient( VectorMap queryParam, DBAccess dbAccess ) {
+        PServerClientsDBAccess cdbAccess = PServerClientsDBAccess.getInstance();
         int newClntNameIdx = queryParam.qpIndexOfKeyNoCase( "name" );
         int newClntPassIdx = queryParam.qpIndexOfKeyNoCase( "password" );
         String newClntName = ( String ) queryParam.getVal( newClntNameIdx );
         String newClntPass = ( String ) queryParam.getVal( newClntPassIdx );
         try {
-            if ( dbAccess.clientNameExists( newClntName ) == true ) {
+            if ( cdbAccess.clientNameExists( newClntName ) == true ) {
                 return 1;
             }
-            dbAccess.insertPServerClient( newClntName, newClntPass );
+            cdbAccess.insertPServerClient( dbAccess, newClntName, newClntPass );
             return 0;
         } catch ( Exception e ) {
             return -1;
@@ -470,7 +473,8 @@ public class Admin implements pserver.pservlets.PService {
                 "<table>\n";
         try {
             dbAccess.connect();
-            LinkedList<PServerClient> clients = dbAccess.getPserverClients();
+            PServerClientsDBAccess cdbAccess = PServerClientsDBAccess.getInstance();
+            ArrayList<PServerClient> clients = cdbAccess.getClients();
             for ( PServerClient client : clients ) {
                 usersPart += "<tr><td>" + client.getName() + "</td><td><a href=/admin?login_name=" + name + "&login_password=" + password + "&com=delusr&usr=" + client.getName() + ">Delete</a></td></tr>\n";
             }
