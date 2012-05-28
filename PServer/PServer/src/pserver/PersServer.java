@@ -65,8 +65,6 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.sql.*;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pserver.data.DBAccess;
 import pserver.data.PServerClientsDBAccess;
 import pserver.userInterface.*;

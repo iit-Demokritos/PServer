@@ -295,7 +295,7 @@ public class Admin implements pserver.pservlets.PService {
         String clientName = ( String ) queryParam.getVal( newClntNameIdx );
         PServerClientsDBAccess cdbAccess = PServerClientsDBAccess.getInstance();
         try {
-            cdbAccess.deleteClient( clientName );
+            cdbAccess.deleteClient( clientName, dbAccess );
             return true;
         } catch ( Exception e ) {
             WebServer.win.log.debug( e.toString() );

@@ -7,15 +7,16 @@
 
 <body bgcolor="#FFFFCC">
 
-<pre>-calcudist
-template: commu?clnt=&lt;name|pass&gt;&amp;com=calcudist&amp;smetric=&lt;metric&gt;&amp;whr=&lt;whr&gt;
-descript: Calculates the distances between users. The metric that will be used is passed as a parameter
+<pre>-calcftrdist
+template: commu?clnt=&lt;name|pass&gt;&amp;com=calcftrdist&amp;smetric=&lt;metric&gt;&amp;whr=&lt;whr>&gt;
+descript: Calculates the distances between features. The metric that will be used is passed as a parameter
 	  and must be a valid pbean name that is loaded by the PServer. The whr parameter is optional and defines the pattern
-	  of user names that you want to calculate the distances.
-example : commu?clnt=tname|pass&amp;com=calcudist&amp;smetric=cos
+	  of feature names that you want to calculate the distances.
+example : commu?clnt=tname|pass&amp;com=calcftrdist&amp;smetric=cos
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : no response body exists.</pre>
 
 </body>
 
 </html>
+

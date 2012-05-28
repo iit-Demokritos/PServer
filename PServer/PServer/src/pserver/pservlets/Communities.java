@@ -646,7 +646,7 @@ public class Communities implements pserver.pservlets.PService {
 
     public void generateDistances(DBAccess dbAccess, String clientName, VectorMetric metric, String features) throws SQLException {
         PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
-        pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_SIMILARITY);
+        pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_SIMILARITY);                
         pdbAccess.generateUserDistances(clientName, metric, DBAccess.RELATION_SIMILARITY, Integer.parseInt(PersServer.pref.getPref("thread_num")), features);
     }
 
@@ -1177,11 +1177,11 @@ public class Communities implements pserver.pservlets.PService {
         
         PCommunity community = new PCommunity(name);
         PCommunityDBAccess comDBAccess = new PCommunityDBAccess(dbAccess);
-        int rows = comDBAccess.addNewPCommunity( community );
+        //int rows = comDBAccess.addNewPCommunity( community );
         
         respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
         respBody.append("<result>\n");
-        respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
+        //respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
         respBody.append("</result>");
           */      
         return true;
@@ -1209,7 +1209,7 @@ class CollaborativeProfileBuilderThread extends Thread {
             Statement stmt;
             stmt = dbAccess.getConnection().createStatement();
 
-            PUser collaborativeProfile = pdbAccess.getUserProfile(user, null, clientName);
+            PUser collaborativeProfile = pdbAccess.getUserProfile(user, null, clientName, true);
 
             Map<String, Float> ftrFreqa = collaborativeProfile.getFtrReqs();
             Map<String, Float> ftrVals = collaborativeProfile.getProfile();
@@ -1233,7 +1233,7 @@ class CollaborativeProfileBuilderThread extends Thread {
             while (rs.next()) {
                 String otherUser = rs.getString(DBAccess.UASSOCIATIONS_TABLE_FIELD_DST);
                 float dist = rs.getFloat(DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT);
-                PUser otherUserProfile = pdbAccess.getUserProfile(otherUser, null, clientName);
+                PUser otherUserProfile = pdbAccess.getUserProfile(otherUser, null, clientName, true);
                 updateCollaborativeProfile(otherUserProfile, dist, assocFreqa, ftrFreqa, ftrVals, ftrSum, assocSum);
             }
             rs.close();
@@ -1243,7 +1243,7 @@ class CollaborativeProfileBuilderThread extends Thread {
             while (rs.next()) {
                 String otherUser = rs.getString(DBAccess.UASSOCIATIONS_TABLE_FIELD_SRC);
                 float dist = rs.getFloat(DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT);
-                PUser otherUserProfile = pdbAccess.getUserProfile(otherUser, null, clientName);
+                PUser otherUserProfile = pdbAccess.getUserProfile(otherUser, null, clientName, true);
                 updateCollaborativeProfile(otherUserProfile, dist, assocFreqa, ftrFreqa, ftrVals, ftrSum, assocSum);
             }
             rs.close();

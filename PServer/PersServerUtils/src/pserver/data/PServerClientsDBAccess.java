@@ -9,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pserver.domain.PServerClient;
 
 /**
@@ -18,14 +16,13 @@ import pserver.domain.PServerClient;
  * @author alexm
  */
 public class PServerClientsDBAccess {
-    private DBAccess dbAccess;   
+    //private DBAccess dbAccess;   
     private static PServerClientsDBAccess instance = null;
     
     private ArrayList<PServerClient> clients;
     
-    private PServerClientsDBAccess( DBAccess dbAccess ) throws SQLException{
-        this.dbAccess = dbAccess;        
-        loadPServerClients();
+    private PServerClientsDBAccess( DBAccess dbAccess ) throws SQLException{        
+        loadPServerClients(dbAccess);
     }
     
     public static void initialize( DBAccess dBAccess ) throws SQLException, Exception{
@@ -63,16 +60,17 @@ public class PServerClientsDBAccess {
     
     public void insertPServerClient( DBAccess dbAccess, String clientName, String clientPass ) throws SQLException {
         Statement stmt = dbAccess.getConnection().createStatement();
+        String mdClientPass = null;
         try {
-            clientPass = MD5.encrypt( clientPass );
+            mdClientPass = MD5.encrypt( clientPass );
         } catch (NoSuchAlgorithmException ex) {            
         }
-        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES(\"" + clientName + "\",\"" + clientPass + "\");" );
+        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES(\"" + clientName + "\",\"" + mdClientPass + "\");" );
         stmt.close();
         this.clients.add( new PServerClient(clientName, clientPass));
     }
     
-    public void deleteClient( String client ) throws SQLException {
+    public void deleteClient( String client , DBAccess dbAccess ) throws SQLException {
         Statement stmt =  dbAccess.getConnection().createStatement();
         stmt.execute( "DELETE FROM ftrgroup_users WHERE " + DBAccess.FIELD_PSCLIENT + "=\"" + client + "\";" );
         stmt.execute( "DELETE FROM user_feature_associations WHERE " + DBAccess.FIELD_PSCLIENT + "=\"" + client + "\";" );
@@ -110,7 +108,7 @@ public class PServerClientsDBAccess {
         clients.remove(pos);
     }   
     
-    private void loadPServerClients() throws SQLException {
+    private void loadPServerClients( DBAccess dbAccess) throws SQLException {
         clients = new ArrayList<PServerClient>(20);
         Statement stmt = dbAccess.getConnection().createStatement();
         ResultSet rs = stmt.executeQuery( "SELECT * FROM pserver_clients" );

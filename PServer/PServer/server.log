@@ -1326,3 +1326,345 @@
 26/5/2012 21:37:57  >  Request from /127.0.0.1 (58324)
 26/5/2012 21:37:57  >  58324-        /favicon.ico
 26/5/2012 21:39:20  >  Shutting down server, normal: true
+27/5/2012 16:50:50  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 16:50:50  >  Messages log mode set to: on
+27/5/2012 16:50:51  >  Connected to DB: MySQL
+27/5/2012 16:51:11  >  Request from /127.0.0.1 (55504)
+27/5/2012 16:51:11  >  55504-        /
+27/5/2012 16:51:12  >  Request from /127.0.0.1 (55505)
+27/5/2012 16:51:12  >  55505-        /favicon.ico
+27/5/2012 16:51:12  >  Request from /127.0.0.1 (55506)
+27/5/2012 16:51:12  >  55506-        /favicon.ico
+27/5/2012 16:51:16  >  Request from /127.0.0.1 (55507)
+27/5/2012 16:51:16  >  55507-        /admin?com=login&login_name=root&login_password=root
+27/5/2012 16:51:23  >  Request from /127.0.0.1 (55508)
+27/5/2012 16:51:23  >  55508-        /commu_help/commu_mode.html
+27/5/2012 16:51:23  >  Request from /127.0.0.1 (55509)
+27/5/2012 16:51:23  >  Request from /127.0.0.1 (55510)
+27/5/2012 16:51:23  >  55509-        /commu_help/menu.html
+27/5/2012 16:51:23  >  55510-        /commu_help/commu_index.html
+27/5/2012 16:51:28  >  Request from /127.0.0.1 (55511)
+27/5/2012 16:51:28  >  55511-        /commu_help/calcudist.html
+27/5/2012 17:21:35  >  Request from /127.0.0.1 (55852)
+27/5/2012 17:21:35  >  55852-        /admin?login_name=root&login_password=root&com=mkusrfrm
+27/5/2012 17:22:4  >  Request from /127.0.0.1 (55857)
+27/5/2012 17:22:4  >  55857-        /admin?com=addClnt&login_name=root&login_password=root&name=test&password=test&retyped_password=test
+27/5/2012 17:22:45  >  Request from /127.0.0.1 (55859)
+27/5/2012 17:22:45  >  55859-        /commu?calcftrdist=text|test&com=calcudist&smetric=cos
+27/5/2012 17:24:28  >  Request from /127.0.0.1 (55860)
+27/5/2012 17:24:28  >  55860-        /commu_help/mkftrgrp.html
+27/5/2012 17:26:23  >  Request from /127.0.0.1 (55861)
+27/5/2012 17:26:23  >  55861-        /commu_help/calcudist.html
+27/5/2012 17:26:29  >  Request from /127.0.0.1 (55862)
+27/5/2012 17:26:29  >  55862-        /commu_help/calcftrdist.html
+27/5/2012 17:26:34  >  Request from /127.0.0.1 (55863)
+27/5/2012 17:26:34  >  55863-        /commu_help/calcudist.html
+27/5/2012 17:26:36  >  Request from /127.0.0.1 (55864)
+27/5/2012 17:26:36  >  55864-        /commu_help/calcftrdist.html
+27/5/2012 17:26:38  >  Request from /127.0.0.1 (55865)
+27/5/2012 17:26:38  >  55865-        /commu_help/calcudist.html
+27/5/2012 17:26:45  >  Request from /127.0.0.1 (55866)
+27/5/2012 17:26:45  >  55866-        /commu_help/calcftrdist.html
+27/5/2012 17:26:51  >  Request from /127.0.0.1 (55867)
+27/5/2012 17:26:51  >  55867-        /commu_help/calcftrdist.html
+27/5/2012 17:26:52  >  Request from /127.0.0.1 (55868)
+27/5/2012 17:26:52  >  55868-        /commu_help/calcudist.html
+27/5/2012 17:26:55  >  Request from /127.0.0.1 (55870)
+27/5/2012 17:26:55  >  55870-        /commu_help/calcftrdist.html
+27/5/2012 17:26:57  >  Request from /127.0.0.1 (55871)
+27/5/2012 17:26:57  >  55871-        /commu_help/calcudist.html
+27/5/2012 17:26:58  >  Request from /127.0.0.1 (55872)
+27/5/2012 17:26:58  >  55872-        /commu_help/calcftrdist.html
+27/5/2012 17:26:58  >  Request from /127.0.0.1 (55873)
+27/5/2012 17:26:58  >  55873-        /commu_help/calcudist.html
+27/5/2012 17:27:9  >  Request from /127.0.0.1 (55874)
+27/5/2012 17:27:9  >  55874-        /commu_help/calcftrdist.html
+27/5/2012 17:27:11  >  Request from /127.0.0.1 (55875)
+27/5/2012 17:27:11  >  55875-        /commu_help/calcftrdist.html
+27/5/2012 17:27:13  >  Request from /127.0.0.1 (55876)
+27/5/2012 17:27:13  >  55876-        /commu_help/calcudist.html
+27/5/2012 17:28:0  >  Request from /127.0.0.1 (55877)
+27/5/2012 17:28:0  >  55877-        /commu_help/calcftrdist.html
+27/5/2012 17:28:49  >  Request from /127.0.0.1 (55878)
+27/5/2012 17:28:49  >  55878-        /commu_help/calcudist.html
+27/5/2012 17:29:26  >  Request from /127.0.0.1 (55879)
+27/5/2012 17:29:26  >  55879-        /commu?clnt=tname|pass&com=calcudist&smetric=cos
+27/5/2012 17:29:51  >  Request from /127.0.0.1 (55880)
+27/5/2012 17:29:51  >  55880-        /commu?clnt=test|test&com=calcudist&smetric=cos
+27/5/2012 17:30:0  >  Request from /127.0.0.1 (55881)
+27/5/2012 17:30:0  >  55881-        /commu?clnt=test|test&com=calcudist&smetric=cos
+27/5/2012 17:30:7  >  Request from /127.0.0.1 (55882)
+27/5/2012 17:30:7  >  55882-        /admin?login_name=root&login_password=root&com=login
+27/5/2012 17:30:8  >  Request from /127.0.0.1 (55883)
+27/5/2012 17:30:8  >  55883-        /admin?login_name=root&login_password=root&com=mkusrfrm
+27/5/2012 17:30:43  >  Request from /127.0.0.1 (55885)
+27/5/2012 17:30:43  >  55885-        /commu?clnt=test|test&com=calcudist&smetric=cos
+27/5/2012 17:31:42  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:31:42  >  Messages log mode set to: on
+27/5/2012 17:31:43  >  Database connection failed
+27/5/2012 17:31:43  >  Shutting down server, normal: false
+27/5/2012 17:31:57  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:31:57  >  Messages log mode set to: on
+27/5/2012 17:31:57  >  Database connection failed
+27/5/2012 17:31:57  >  Shutting down server, normal: false
+27/5/2012 17:32:24  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:32:24  >  Messages log mode set to: on
+27/5/2012 17:32:24  >  Database connection failed
+27/5/2012 17:32:24  >  Shutting down server, normal: false
+27/5/2012 17:33:15  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:33:15  >  Messages log mode set to: on
+27/5/2012 17:33:15  >  Database connection failed
+27/5/2012 17:33:15  >  Shutting down server, normal: false
+27/5/2012 17:33:53  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:33:53  >  Messages log mode set to: on
+27/5/2012 17:33:53  >  Connected to DB: MySQL
+27/5/2012 17:34:5  >  Request from /127.0.0.1 (55902)
+27/5/2012 17:34:5  >  55902-        /commu?clnt=test|test&com=calcudist&smetric=cos
+27/5/2012 17:44:9  >  Request from /127.0.0.1 (55910)
+27/5/2012 17:44:9  >  55910-        /admin?com=addClnt&login_name=root&login_password=root&name=t1&password=t1&retyped_password=t1
+27/5/2012 17:44:28  >  Request from /127.0.0.1 (55912)
+27/5/2012 17:44:28  >  55912-        /commu?clnt=t1|t1&com=calcudist&smetric=cos
+27/5/2012 17:44:46  >  Shutting down server, normal: true
+27/5/2012 17:46:13  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:46:13  >  Messages log mode set to: on
+27/5/2012 17:46:13  >  Connected to DB: MySQL
+27/5/2012 17:46:18  >  Request from /127.0.0.1 (55917)
+27/5/2012 17:46:18  >  55917-        /admin?login_name=root&login_password=root&com=mkusrfrm
+27/5/2012 17:46:20  >  Request from /127.0.0.1 (55919)
+27/5/2012 17:46:20  >  55919-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 17:46:50  >  Request from /127.0.0.1 (55921)
+27/5/2012 17:46:50  >  55921-        /admin?login_name=root&login_password=root&com=mkusrfrm
+27/5/2012 17:46:51  >  Request from /127.0.0.1 (55923)
+27/5/2012 17:46:51  >  55923-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 17:50:7  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:50:7  >  Messages log mode set to: on
+27/5/2012 17:50:8  >  Connected to DB: MySQL
+27/5/2012 17:50:20  >  Request from /127.0.0.1 (55929)
+27/5/2012 17:50:20  >  55929-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 17:50:37  >  Request from /127.0.0.1 (55931)
+27/5/2012 17:50:37  >  55931-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 17:52:54  >  Request from /127.0.0.1 (55934)
+27/5/2012 17:52:54  >  55934-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 17:54:17  >  Request from /127.0.0.1 (55936)
+27/5/2012 17:54:17  >  55936-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 17:55:8  >  Request from /127.0.0.1 (55938)
+27/5/2012 17:55:8  >  55938-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 17:58:6  >  Shutting down server, normal: true
+27/5/2012 17:58:10  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 17:58:10  >  Messages log mode set to: on
+27/5/2012 17:58:10  >  Connected to DB: MySQL
+27/5/2012 17:58:14  >  Request from /127.0.0.1 (55943)
+27/5/2012 17:58:14  >  55943-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:1:31  >  Request from /127.0.0.1 (55945)
+27/5/2012 18:1:31  >  55945-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:1:40  >  Request from /127.0.0.1 (55947)
+27/5/2012 18:1:40  >  55947-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:2:35  >  Request from /127.0.0.1 (55950)
+27/5/2012 18:2:35  >  55950-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:2:40  >  Request from /127.0.0.1 (55952)
+27/5/2012 18:2:40  >  55952-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:3:44  >  Request from /127.0.0.1 (55954)
+27/5/2012 18:3:44  >  55954-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:3:51  >  Request from /127.0.0.1 (55956)
+27/5/2012 18:3:51  >  55956-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:4:51  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 18:4:51  >  Messages log mode set to: on
+27/5/2012 18:4:51  >  Database connection failed
+27/5/2012 18:4:51  >  Shutting down server, normal: false
+27/5/2012 18:5:35  >  Server started at alex-desktop/127.0.1.1, port 1111
+27/5/2012 18:5:35  >  Messages log mode set to: on
+27/5/2012 18:5:35  >  Connected to DB: MySQL
+27/5/2012 18:5:43  >  Request from /127.0.0.1 (55962)
+27/5/2012 18:5:43  >  55962-        /
+27/5/2012 18:5:45  >  Request from /127.0.0.1 (55963)
+27/5/2012 18:5:45  >  55963-        /admin?com=login&login_name=root&login_password=root
+27/5/2012 18:5:46  >  Request from /127.0.0.1 (55964)
+27/5/2012 18:5:46  >  55964-        /admin?login_name=root&login_password=root&com=mkusrfrm
+27/5/2012 18:5:52  >  Request from /127.0.0.1 (55966)
+27/5/2012 18:5:52  >  55966-        /admin?com=addClnt&login_name=root&login_password=root&name=t1&password=t1&retyped_password=t1
+27/5/2012 18:5:55  >  Request from /127.0.0.1 (55968)
+27/5/2012 18:5:55  >  55968-        /admin?login_name=root&login_password=root&com=mkusrfrm
+27/5/2012 18:5:56  >  Request from /127.0.0.1 (55970)
+27/5/2012 18:5:56  >  55970-        /admin?login_name=root&login_password=root&com=delusr&usr=t1
+27/5/2012 18:6:31  >  Request from /127.0.0.1 (55972)
+27/5/2012 18:6:31  >  55972-        /admin?com=addClnt&login_name=root&login_password=root&name=t1&password=t1&retyped_password=t1
+27/5/2012 18:6:48  >  Request from /127.0.0.1 (55974)
+27/5/2012 18:6:48  >  55974-        /commu?clnt=test|test&com=calcudist&smetric=cos
+27/5/2012 18:7:13  >  Request from /127.0.0.1 (55977)
+27/5/2012 18:7:13  >  55977-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 1:57:34  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 1:57:34  >  Messages log mode set to: on
+28/5/2012 1:57:34  >  Database connection failed
+28/5/2012 1:57:34  >  Shutting down server, normal: false
+28/5/2012 1:58:15  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 1:58:15  >  Messages log mode set to: on
+28/5/2012 1:58:15  >  Connected to DB: MySQL
+28/5/2012 1:58:23  >  Request from /127.0.0.1 (34444)
+28/5/2012 1:58:23  >  34444-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:0:44  >  Shutting down server, normal: true
+28/5/2012 2:1:11  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:1:11  >  Messages log mode set to: on
+28/5/2012 2:1:15  >  Connected to DB: MySQL
+28/5/2012 2:1:20  >  Request from /127.0.0.1 (34449)
+28/5/2012 2:1:20  >  34449-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:2:10  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:2:10  >  Messages log mode set to: on
+28/5/2012 2:2:10  >  Database connection failed
+28/5/2012 2:2:10  >  Shutting down server, normal: false
+28/5/2012 2:2:43  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:2:43  >  Messages log mode set to: on
+28/5/2012 2:2:43  >  Connected to DB: MySQL
+28/5/2012 2:2:47  >  Request from /127.0.0.1 (34455)
+28/5/2012 2:2:47  >  34455-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:5:23  >  Shutting down server, normal: true
+28/5/2012 2:6:30  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:6:30  >  Messages log mode set to: on
+28/5/2012 2:6:30  >  Connected to DB: MySQL
+28/5/2012 2:6:35  >  Problem starting server: java.net.BindException: Address already in use
+28/5/2012 2:6:35  >  Shutting down server, normal: false
+28/5/2012 2:6:42  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:6:42  >  Messages log mode set to: on
+28/5/2012 2:6:42  >  Database connection failed
+28/5/2012 2:6:42  >  Shutting down server, normal: false
+28/5/2012 2:7:17  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:7:17  >  Messages log mode set to: on
+28/5/2012 2:7:17  >  Connected to DB: MySQL
+28/5/2012 2:7:31  >  Shutting down server, normal: true
+28/5/2012 2:7:34  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:7:34  >  Messages log mode set to: on
+28/5/2012 2:7:34  >  Connected to DB: MySQL
+28/5/2012 2:7:38  >  Shutting down server, normal: true
+28/5/2012 2:7:39  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:7:39  >  Messages log mode set to: on
+28/5/2012 2:7:40  >  Connected to DB: MySQL
+28/5/2012 2:7:59  >  Problem starting server: java.net.BindException: Address already in use
+28/5/2012 2:7:59  >  Shutting down server, normal: false
+28/5/2012 2:8:4  >  Shutting down server, normal: true
+28/5/2012 2:8:5  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:8:5  >  Messages log mode set to: on
+28/5/2012 2:8:5  >  Connected to DB: MySQL
+28/5/2012 2:8:8  >  Request from /127.0.0.1 (34473)
+28/5/2012 2:8:8  >  34473-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:15:47  >  Shutting down server, normal: true
+28/5/2012 2:17:21  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:17:21  >  Messages log mode set to: on
+28/5/2012 2:17:21  >  Connected to DB: MySQL
+28/5/2012 2:17:28  >  Request from /127.0.0.1 (34516)
+28/5/2012 2:17:28  >  34516-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:19:7  >  Shutting down server, normal: true
+28/5/2012 2:19:24  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:19:24  >  Messages log mode set to: on
+28/5/2012 2:19:24  >  Connected to DB: MySQL
+28/5/2012 2:19:30  >  Request from /127.0.0.1 (34550)
+28/5/2012 2:19:30  >  34550-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:19:50  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:19:50  >  Messages log mode set to: on
+28/5/2012 2:19:50  >  Database connection failed
+28/5/2012 2:19:50  >  Shutting down server, normal: false
+28/5/2012 2:20:17  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:20:17  >  Messages log mode set to: on
+28/5/2012 2:20:17  >  Connected to DB: MySQL
+28/5/2012 2:20:19  >  Request from /127.0.0.1 (34556)
+28/5/2012 2:20:19  >  34556-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:22:38  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:22:38  >  Messages log mode set to: on
+28/5/2012 2:22:38  >  Database connection failed
+28/5/2012 2:22:38  >  Shutting down server, normal: false
+28/5/2012 2:25:36  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:25:36  >  Messages log mode set to: on
+28/5/2012 2:25:36  >  Connected to DB: MySQL
+28/5/2012 2:25:39  >  Request from /127.0.0.1 (34567)
+28/5/2012 2:25:39  >  34567-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:28:16  >  Shutting down server, normal: true
+28/5/2012 2:28:36  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:28:36  >  Messages log mode set to: on
+28/5/2012 2:28:36  >  Connected to DB: MySQL
+28/5/2012 2:28:40  >  Request from /127.0.0.1 (34571)
+28/5/2012 2:28:40  >  34571-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:37:38  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:37:38  >  Messages log mode set to: on
+28/5/2012 2:37:38  >  Database connection failed
+28/5/2012 2:37:38  >  Shutting down server, normal: false
+28/5/2012 2:38:0  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:38:0  >  Messages log mode set to: on
+28/5/2012 2:38:0  >  Connected to DB: MySQL
+28/5/2012 2:38:10  >  Request from /127.0.0.1 (34603)
+28/5/2012 2:38:10  >  34603-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:46:32  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:46:32  >  Messages log mode set to: on
+28/5/2012 2:46:32  >  Database connection failed
+28/5/2012 2:46:32  >  Shutting down server, normal: false
+28/5/2012 2:46:53  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:46:53  >  Messages log mode set to: on
+28/5/2012 2:46:53  >  Connected to DB: MySQL
+28/5/2012 2:47:29  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:47:29  >  Messages log mode set to: on
+28/5/2012 2:47:29  >  Connected to DB: MySQL
+28/5/2012 2:47:32  >  Request from /127.0.0.1 (34613)
+28/5/2012 2:47:32  >  34613-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:47:54  >  Shutting down server, normal: true
+28/5/2012 2:49:54  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:49:54  >  Messages log mode set to: on
+28/5/2012 2:49:54  >  Connected to DB: MySQL
+28/5/2012 2:49:59  >  Shutting down server, normal: true
+28/5/2012 2:50:4  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:50:4  >  Messages log mode set to: on
+28/5/2012 2:50:4  >  Connected to DB: MySQL
+28/5/2012 2:50:6  >  Request from /127.0.0.1 (34621)
+28/5/2012 2:50:6  >  34621-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:53:18  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 2:53:18  >  Messages log mode set to: on
+28/5/2012 2:53:18  >  Connected to DB: MySQL
+28/5/2012 2:54:18  >  Request from /127.0.0.1 (34641)
+28/5/2012 2:54:18  >  34641-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 2:58:6  >  Shutting down server, normal: true
+28/5/2012 3:3:13  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:3:13  >  Messages log mode set to: on
+28/5/2012 3:3:13  >  Connected to DB: MySQL
+28/5/2012 3:3:21  >  Request from /127.0.0.1 (34646)
+28/5/2012 3:3:21  >  34646-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 3:9:6  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:9:6  >  Messages log mode set to: on
+28/5/2012 3:9:7  >  Connected to DB: MySQL
+28/5/2012 3:9:18  >  Request from /127.0.0.1 (34717)
+28/5/2012 3:9:18  >  34717-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 3:10:30  >  Shutting down server, normal: true
+28/5/2012 3:12:25  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:12:25  >  Messages log mode set to: on
+28/5/2012 3:12:25  >  Connected to DB: MySQL
+28/5/2012 3:12:28  >  Request from /127.0.0.1 (34726)
+28/5/2012 3:12:28  >  34726-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 3:13:23  >  Shutting down server, normal: true
+28/5/2012 3:18:1  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:18:1  >  Messages log mode set to: on
+28/5/2012 3:18:1  >  Connected to DB: MySQL
+28/5/2012 3:18:4  >  Request from /127.0.0.1 (34732)
+28/5/2012 3:18:4  >  34732-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 3:19:36  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:19:36  >  Messages log mode set to: on
+28/5/2012 3:19:36  >  Connected to DB: MySQL
+28/5/2012 3:19:43  >  Problem starting server: java.net.BindException: Address already in use
+28/5/2012 3:19:43  >  Shutting down server, normal: false
+28/5/2012 3:19:47  >  Shutting down server, normal: true
+28/5/2012 3:19:48  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:19:48  >  Messages log mode set to: on
+28/5/2012 3:19:49  >  Connected to DB: MySQL
+28/5/2012 3:19:56  >  Request from /127.0.0.1 (34739)
+28/5/2012 3:19:56  >  34739-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 3:30:56  >  Shutting down server, normal: true
+28/5/2012 3:30:58  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:30:58  >  Messages log mode set to: on
+28/5/2012 3:30:58  >  Connected to DB: MySQL
+28/5/2012 3:31:1  >  Request from /127.0.0.1 (34743)
+28/5/2012 3:31:1  >  34743-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 3:32:4  >  Shutting down server, normal: true
+28/5/2012 3:33:50  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:33:50  >  Messages log mode set to: on
+28/5/2012 3:33:50  >  Connected to DB: MySQL
+28/5/2012 3:34:17  >  Request from /127.0.0.1 (34747)
+28/5/2012 3:34:17  >  34747-        /commu?clnt=test|test&com=calcudist&smetric=cos
+28/5/2012 3:42:39  >  Server started at alex-desktop/127.0.1.1, port 1111
+28/5/2012 3:42:39  >  Messages log mode set to: on
+28/5/2012 3:42:39  >  Connected to DB: MySQL
+28/5/2012 3:42:47  >  Request from /127.0.0.1 (34826)
+28/5/2012 3:42:47  >  34826-        /commu?clnt=test|test&com=calcudist&smetric=cos
