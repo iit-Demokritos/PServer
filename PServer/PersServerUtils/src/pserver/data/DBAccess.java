@@ -27,6 +27,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 import pserver.domain.PDecayData;
 import pserver.domain.PAttribute;
 import pserver.domain.PFeature;
@@ -319,9 +320,10 @@ public class DBAccess {
         Statement stmt = this.connection.createStatement();        
         String sql = "INSERT INTO " + USER_TABLE + " ( " + USER_TABLE_FIELD_USER + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "', '" + clientName + "')";
         int rows = stmt.executeUpdate( sql );
-        String[] features = user.getFeatures();
-        for( int i = 0 ; i < features.length ; i ++ ){
-            sql = "REPLACE INTO " + UPROFILE_TABLE + " ( " + UPROFILE_TABLE_FIELD_USER + "," +UPROFILE_TABLE_FIELD_FEATURE + "," + UPROFILE_TABLE_FIELD_NUMVALUE + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "','" + features[ i ]  + "',"+ user.getFeatureValue( features[ i ]) + ",'" + clientName + "')";
+        Set<String> features = user.getFeatures();
+        
+        for( String ftr : features ){
+            sql = "REPLACE INTO " + UPROFILE_TABLE + " ( " + UPROFILE_TABLE_FIELD_USER + "," +UPROFILE_TABLE_FIELD_FEATURE + "," + UPROFILE_TABLE_FIELD_NUMVALUE + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "','" + ftr  + "',"+ user.getFeatureValue( ftr) + ",'" + clientName + "')";
             rows += stmt.executeUpdate( sql );
         }
 

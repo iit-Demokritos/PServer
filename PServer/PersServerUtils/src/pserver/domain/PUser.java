@@ -81,7 +81,8 @@ public class PUser {
         return this.features.containsKey( feature );
     }
 
-    public String[] getFeatures() {
+    public Set<String> getFeatures() {
+        return features.keySet();/*
         Set<String> keys = features.keySet();
         if( keys.size() ==0 )
             return null;
@@ -91,7 +92,7 @@ public class PUser {
             keyNames[i] = key;
             i++;
         }
-        return keyNames;
+        return keyNames;*/
     }
 
     public int getFeaturesNumber() {

@@ -52,21 +52,21 @@ public class CosineVectorMetric implements VectorMetric {
         float sum = 0.0f;
         float magnitude1 = 0.0f;
         float magnitude2 = 0.0f;
-        String[] features = user1.getFeatures();
-        for( int i = 0 ; i < features.length; i ++ ){
-            float tmp1 = user1.getFeatureValue( features[ i ] );
-            float tmp2 = user2.getFeatureValue( features[ i ] );
+        Set<String> features = user1.getFeatures();
+        for( String ftr : features ) {
+            float tmp1 = user1.getFeatureValue( ftr );
+            float tmp2 = user2.getFeatureValue( ftr );
             sum += tmp1 * tmp2;
             magnitude1 += tmp1 * tmp1;            
         }
-
+        features = null;
         magnitude2 = 0.0f;
         features = user2.getFeatures();
-        for( int i = 0 ; i < features.length; i ++ ){
-            float tmp2 = user2.getFeatureValue( features[ i ] );
+        for( String ftr : features ) {
+            float tmp2 = user2.getFeatureValue( ftr );
             magnitude2 += tmp2 * tmp2;
         }
-        
+        features = null;
         if( magnitude1 < Math.abs( 0.000001 ) || magnitude2 < Math.abs( 0.000001 )  )
             return 0;
         else

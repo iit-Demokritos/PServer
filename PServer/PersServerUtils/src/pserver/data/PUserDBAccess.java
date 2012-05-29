@@ -19,6 +19,8 @@ package pserver.data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Set;
@@ -128,5 +130,87 @@ public class PUserDBAccess {
         PServerResultSet rs = dbAccess.executeQuery(sql);
 
         return new VectorResultSet(rs);
+    }
+
+    ArrayList<PUser> getUserProfiles(String userName, String userNameTo, String[] featureTypes, String clientName, boolean loadAssociations) throws SQLException {
+        ArrayList<PUser> users = new ArrayList<PUser>();        
+        String sql = "SELECT * FROM " + DBAccess.UPROFILE_TABLE + " WHERE " + DBAccess.UPROFILE_TABLE_FIELD_USER + ">=? AND " + DBAccess.UPROFILE_TABLE_FIELD_USER + " <= ? AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+        if (featureTypes != null) {
+            for (int i = 0; i < featureTypes.length; i++) {
+                if (featureTypes[i].contains("%")) {
+                    sql += " AND " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + " LIKE ?";
+                } else {
+                    sql += " AND " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + " = ?";
+                }
+            }
+        }        
+        PreparedStatement usrStmt = dbAccess.getConnection().prepareStatement(sql);
+        usrStmt.setString(1, userName);
+        usrStmt.setString(2, userNameTo);
+        if (featureTypes != null) {
+            for (int i = 0; i < featureTypes.length; i++) {
+                usrStmt.setString(i + 3, featureTypes[i]);
+            }
+        }
+        String sq = usrStmt.toString();
+        //long t = System.currentTimeMillis();
+        ResultSet rs = usrStmt.executeQuery();
+        HashMap<String, Integer> userIndex = new HashMap<String, Integer>();
+        //System.out.println("sql " +sql + " time " + (System.currentTimeMillis() - t) );
+        while (rs.next()) {
+            String uname = rs.getString(DBAccess.UPROFILE_TABLE_FIELD_USER);
+            Integer pos = userIndex.get(uname);
+            PUser user = null;
+            if( pos == null ) {
+                pos = users.size();
+                user = new PUser(uname);
+                users.add(user);
+                userIndex.put(uname, pos);
+            } else {
+                user = users.get(pos);
+            }
+            user.setFeature(rs.getString(DBAccess.UPROFILE_TABLE_FIELD_FEATURE), rs.getFloat(DBAccess.UPROFILE_TABLE_FIELD_VALUE));
+        }
+        rs.close();
+        usrStmt.close();
+        
+        return users;
+/*
+        if (loadAssociations == false) {
+            return user;
+        }
+        
+        sql = "SELECT * FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "=? AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+        PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
+
+        Hashtable<String, Float> freqs = new Hashtable<String, Float>();
+        selectFtrFreq.setString(1, userName);        
+        rs = selectFtrFreq.executeQuery();        
+        while (rs.next()) {
+            freqs.put(rs.getString(DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE), rs.getFloat(DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE));
+        }
+        user.setFtrReqs(freqs);
+        rs.close();
+        selectFtrFreq.close();
+
+        sql = "SELECT * FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_SIMILARITY;
+        PreparedStatement assocsStmt = dbAccess.getConnection().prepareStatement(sql);
+
+        Hashtable<Set<String>, Float> assoces = new Hashtable<Set<String>, Float>();
+        assocsStmt.setString(1, userName);
+        rs = assocsStmt.executeQuery();
+        while (rs.next()) {
+            String ftr1 = rs.getString(DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST);
+            String ftr2 = rs.getString(DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC);
+            float val = rs.getFloat(DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT);
+            Set<String> ftrSet = new HashSet<String>(2);
+            ftrSet.add(ftr1);
+            ftrSet.add(ftr2);
+            assoces.put(ftrSet, val);
+        }
+        user.setFtrAssocs(assoces);
+        rs.close();
+        assocsStmt.close();
+        return user;*/
     }
 }

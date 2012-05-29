@@ -18,8 +18,10 @@
 package pserver.data;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,54 +98,19 @@ public class PFeatureGroupDBAccess {
         return result;
     }
 
-    public void generateFtrDistances( String clientName, VectorMetric metric, int dataStorageType, int numOfThreads ) throws SQLException {
+    public void generateFtrDistances( String clientName, VectorMetric metric, int dataRelationType, int numOfThreads ) throws SQLException {
+        String sql = "SELECT * FROM " + DBAccess.FEATURE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName;
+        Statement stmt = dbAccess.getConnection().createStatement();
 
-        if ( numOfThreads == 1 ) {
-            PFeatureResultSet userRs = new PFeatureResultSet( getDbAccess(),clientName, 2000 );
-
-            HashMap<String, PFeature> ftr = userRs.next();
-            HashMap<String, PFeature> ftrTmp;
-            Statement ftrStmt = getDbAccess().getConnection().createStatement();
-            while ( (ftr = userRs.next()) != null ) {
-                PFeatureResultSet ftrRsTmp = new PFeatureResultSet( getDbAccess(),clientName, 10000, ftr.values().iterator().next().getName() );
-                while ( (ftrTmp = ftrRsTmp.next()) != null ) {
-                    float weight = metric.getDistance( ftr, ftrTmp );
-                    ftrStmt.executeUpdate( "INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC +
-                            "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT +
-                            "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" +
-                            ftr.values().iterator().next() + "','" + ftrTmp.values().iterator().next() + "'," + weight + "," + dataStorageType + ",'" + clientName + "')" );
-                }
-                ftrRsTmp.close();
-                //System.out.println( "User " + user.getName() );
-            }
-            ftrStmt.close();
-            userRs.close();
-        } else {
-            PServerResultSet tmp = getDbAccess().executeQuery( "SELECT count(*) FROM " + DBAccess.USER_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'" );
-            tmp.next();
-            int numOfUserClusters = tmp.getRs().getInt( 1 ) / numOfThreads;
-            if ( tmp.getRs().getInt( 1 ) % numOfThreads != 0 ) {
-                numOfUserClusters++;
-            }
-            tmp.close();
-            barrier = new Barrier( numOfThreads + 1 );
-            CompareThread threads[] = new CompareThread[ numOfThreads ];
-            for ( int i = 0; i < numOfThreads; i++ ) {
-                threads[i] = new CompareThread( clientName, metric, dataStorageType, i * numOfUserClusters, numOfUserClusters );
-                threads[i].start();
-            }
-            try {
-                barrier.waitForRelease();
-            } catch ( InterruptedException ex ) {
-                Logger.getLogger( PCommunityDBAccess.class.getName() ).log( Level.SEVERE, null, ex );
-            }
-
-            for ( int i = 1; i < numOfThreads; i++ ) {
-                if ( threads[i].getException() != null ) {
-                    throw threads[i].getException();
-                }
-            }
+        ResultSet rs = stmt.executeQuery(sql);
+        ArrayList<String> features = new ArrayList<String>(100);
+        while (rs.next()) {
+            features.add(rs.getString(1));
         }
+        rs.close();
+        stmt.close();
+        
+        PFeatureDBAccess pfdb = new PFeatureDBAccess( dbAccess );
     }
 
     public DBAccess getDbAccess() {

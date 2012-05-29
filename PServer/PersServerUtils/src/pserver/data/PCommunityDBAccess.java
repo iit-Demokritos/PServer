@@ -16,12 +16,10 @@
  */
 package pserver.data;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -111,31 +109,42 @@ public class PCommunityDBAccess {
 
         ExecutorService threadExecutor = Executors.newFixedThreadPool(numOfThreads);
 
-        HashMap<String, PUser> userCache = new HashMap<String, PUser>();
+        long to = System.currentTimeMillis();
+        ArrayList<PUser> pusers = new ArrayList<PUser>(users.size());
+        int counter = 0;
         for (int i = 0; i < users.size(); i++) {
             String userName1 = users.get(i);
-            System.out.println("Calculatining distances for user name" + userName1 + " number " + i);
-            PUser user1 = null;//userCache.get(userName1);
-            if (user1 == null) {
-                user1 = pudb.getUserProfile(userName1, ftrs, clientName, false);
-                //userCache.put(userName1, user1);
+            long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
+            long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+            double memoryratio = (0.0 + usedMemory) / Runtime.getRuntime().maxMemory();
+            //System.out.println("Free memory " + (Runtime.getRuntime().freeMemory() / 1048576.0) + "MB used memory " + (usedMemory / 1048576.0) + "MB memory ratio " + memoryratio + " obj num " + pusers.size());
+            //if (memoryratio > 0.2) {
+            //System.out.println("total free " + totalFree + " max " +  Runtime.getRuntime().maxMemory() + " used " + usedMemory );
+            if (totalFree >= 104857600) {
+                PUser user1 = pudb.getUserProfile(userName1, ftrs, clientName, false);
+                pusers.add(user1);
+            } else {
+                makeUserDistances(pusers, users, i, threadExecutor, dataRelationType, clientName, metric, ftrs, pudb);
+                pusers.clear();
+                PUser user1 = pudb.getUserProfile(userName1, ftrs, clientName, false);
+                pusers.add(user1);
+                counter++;
             }
+            /*
             long t = System.currentTimeMillis();
-            long totalT = 0;
+            long totalT = 0;            /*
             for (int j = i + 1; j < users.size(); j++) {
-                String userName2 = users.get(j);
-                PUser user2 = null;//= userCache.get(userName2);
-                long t2 = System.currentTimeMillis();
-                if (user2 == null) {
-                    user2 = pudb.getUserProfile(userName2, ftrs, clientName, false);
-                    //userCache.put(userName2, user2);
-                }
-                totalT += System.currentTimeMillis() - t2;                
-                threadExecutor.execute(new UserCompareThread(clientName, metric, dataRelationType, user1, user2));
-            }
-            System.out.println("time for " + userName1 + " = " + (System.currentTimeMillis() - t) + " average profile loading time = " + ( totalT * 1.0/users.size() ) );
+            String userName2 = users.get(j);
+            PUser user2 = pudb.getUserProfile(userName2, ftrs, clientName, false);
+            long t2 = System.currentTimeMillis();                
+            totalT += System.currentTimeMillis() - t2;                
+            threadExecutor.execute(new UserCompareThread(clientName, metric, dataRelationType, user1, user2));
+            }/
+            System.out.println("time for " + userName1 + " = " + (System.currentTimeMillis() - t) + " average profile loading time = " + (totalT * 1.0 / users.size()));*/
         }
         threadExecutor.shutdown();
+        System.out.println("total time " + ((System.currentTimeMillis() - to) / 60000.0));
+        System.out.println("counter " + counter);
         while (threadExecutor.isTerminated() == false) {
             try {
                 Thread.sleep(5000);
@@ -189,11 +198,48 @@ public class PCommunityDBAccess {
         return 0;
     }
 
+    private void makeUserDistances(ArrayList<PUser> pusers, ArrayList<String> users, int uPos, ExecutorService threadExecutor, int dataRelationType, String clientName, VectorMetric metric, String ftrs[], PUserDBAccess pudb) throws SQLException {
+        long memoryTime;
+        long batchTime = System.currentTimeMillis();
+        for (int i = 0; i < pusers.size(); i++) {
+            //System.out.println("Calculatining distances for " + pusers.size() + " users ");
+            PUser target = pusers.get(i);
+            long t = System.currentTimeMillis();
+            for (int j = i + 1; j < pusers.size(); j++) {
+                PUser comparWith = pusers.get(j);
+                threadExecutor.execute(new UserCompareThread(clientName, metric, dataRelationType, target, comparWith));
+            }
+            memoryTime = (System.currentTimeMillis() - t);
+            //System.out.println("memory time for " + target.getName() + " = " + memoryTime);
+            //System.out.println("name 1 " + pusers.get(pusers.size() - 1).getName() + " next " + users.get(uPos));            
+        }
+
+        for (int j = uPos; j < users.size(); j++) {
+            long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
+            long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+            //System.out.println(j + " used memory " + usedMemory);
+            PUser comparWith = pudb.getUserProfile(users.get(j), ftrs, clientName, false);
+            for (int i = 0; i < pusers.size(); i++) {
+                PUser target = pusers.get(i);  
+                saveUserSimilarity(target, comparWith, metric, clientName, dataRelationType);
+            }
+        }
+        //System.out.println("Elapsed time for " + pusers.size() + " user is " + (System.currentTimeMillis() - batchTime));
+    }
+
+    private void saveUserSimilarity(PUser user1, PUser user2, VectorMetric metric, String clientName, int dataRelationType  ) throws SQLException {
+        float dist = metric.getDistance(user1, user2);
+        Statement stmt = getDbAccess().getConnection().createStatement();
+        String sql = "INSERT INTO " + DBAccess.UASSOCIATIONS_TABLE + "(" + DBAccess.UASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + user1.getName() + "','" + user2.getName() + "'," + dist + "," + dataRelationType + ",'" + clientName + "')";
+        stmt.executeUpdate(sql);
+        stmt.close();
+    }
+
     class UserCompareThread extends Thread {
 
         String clientName;
         VectorMetric metric;
-        int dataStorageType;
+        int dataRelationType;
         int offset;
         int limit;
         private SQLException exception = null;
@@ -201,11 +247,11 @@ public class PCommunityDBAccess {
         private final PUser user1;
         private final PUser user2;
 
-        public UserCompareThread(String clientName, VectorMetric metric, int dataStorageType, PUser user1, PUser user2) {
+        public UserCompareThread(String clientName, VectorMetric metric, int dataRelationType, PUser user1, PUser user2) {
             //System.out.println( "Thread and i have offset " + offset + " and limit " + limit );
             this.clientName = clientName;
             this.metric = metric;
-            this.dataStorageType = dataStorageType;
+            this.dataRelationType = dataRelationType;
             this.user1 = user1;
             this.user2 = user2;
         }
@@ -213,12 +259,7 @@ public class PCommunityDBAccess {
         @Override
         public void run() {
             try {
-                float dist = metric.getDistance(user1, user2);
-                Statement stmt = getDbAccess().getConnection().createStatement();
-                int i = 0;
-                stmt.executeUpdate("INSERT INTO " + DBAccess.UASSOCIATIONS_TABLE + "(" + DBAccess.UASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + user1.getName() + "','" + user2.getName() + "'," + dist + "," + dataStorageType + ",'" + clientName + "')");
-                stmt.close();
-
+                saveUserSimilarity(user1, user2, metric, clientName, dataRelationType);
             } catch (SQLException ex) {
                 Logger.getLogger(PCommunityDBAccess.class.getName()).log(Level.SEVERE, null, ex);
                 exception = ex;

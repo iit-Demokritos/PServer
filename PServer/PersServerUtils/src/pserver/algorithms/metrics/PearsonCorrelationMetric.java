@@ -44,20 +44,20 @@ public class PearsonCorrelationMetric implements VectorMetric {
 
         ArrayList<String> commonFeatures = new ArrayList<String>();
 
-        String[] ftrs = user1.getFeatures();
+        Set<String> ftrs = user1.getFeatures();
         int pos = 0;
 
         float common = 0;
         float united = 0;
-        for( int i = 0 ; i < ftrs.length; i ++ ){
-            if( user2.featureExist( ftrs[ i ] ) ) {
-                commonFeatures.add( ftrs[ i ] );
+        for( String ftr: ftrs ){
+            if( user2.featureExist( ftr ) ) {
+                commonFeatures.add( ftr );
                 common++;
             }
         }
         if ( commonFeatures.size() == 0 )
             return 0;
-        united = ftrs.length + user1.getFeatures().length - common;
+        united = ftrs.size() + user1.getFeatures().size() - common;
 
         mean_x= user1.getFeatureValue( commonFeatures.get(0) );
         mean_y= user2.getFeatureValue( commonFeatures.get(0) );
