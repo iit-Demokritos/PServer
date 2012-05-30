@@ -142,6 +142,7 @@ public class PCommunityDBAccess {
             }/
             System.out.println("time for " + userName1 + " = " + (System.currentTimeMillis() - t) + " average profile loading time = " + (totalT * 1.0 / users.size()));*/
         }
+        makeUserDistances(pusers, users, users.size(), threadExecutor, dataRelationType, clientName, metric, ftrs, pudb);
         threadExecutor.shutdown();
         System.out.println("total time " + ((System.currentTimeMillis() - to) / 60000.0));
         System.out.println("counter " + counter);

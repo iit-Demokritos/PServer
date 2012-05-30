@@ -636,6 +636,7 @@ public class Communities implements pserver.pservlets.PService {
             //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
         } catch (SQLException ex) {
             success = false;
+            ex.printStackTrace();
             WebServer.win.log.debug("-Problem executing query: " + ex);
         }
         //String query1 = "SELECT uf_feature AS up_feature, uf_numdefvalue AS up_numvalue FROM up_features WHERE uf_feature NOT IN " + " ( SELECT up_feature FROM user_profiles WHERE up_user = '" + userName + "' AND FK_psclient = '" + clientName + "') AND FK_psclient = '" + clientName + "'";
@@ -685,6 +686,7 @@ public class Communities implements pserver.pservlets.PService {
             dbAccess.disconnect();
         } catch (SQLException e) {  //problem with transaction
             respCode = PSReqWorker.SERVER_ERR;
+            e.printStackTrace();
             WebServer.win.log.error("-DB Transaction problem: " + e);
         }
         return respCode;
@@ -714,6 +716,7 @@ public class Communities implements pserver.pservlets.PService {
             //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
         } catch (SQLException ex) {
             success = false;
+            ex.printStackTrace();
             WebServer.win.log.debug("-Problem executing query: " + ex);
         }
         //String query1 = "SELECT uf_feature AS up_feature, uf_numdefvalue AS up_numvalue FROM up_features WHERE uf_feature NOT IN " + " ( SELECT up_feature FROM user_profiles WHERE up_user = '" + userName + "' AND FK_psclient = '" + clientName + "') AND FK_psclient = '" + clientName + "'";

@@ -19,10 +19,9 @@ package pserver.algorithms.metrics;
 
 import java.sql.SQLException;
 import pserver.data.VectorResultSet;
-import pserver.domain.PFeature;
 import pserver.domain.PUser;
-import java.util.HashMap;
 import java.util.Set;
+import pserver.domain.PServerVector;
 /**
  *
  * @author alexm
@@ -73,24 +72,24 @@ public class CosineVectorMetric implements VectorMetric {
             return sum / ( (float)Math.sqrt( magnitude1 ) * (float)Math.sqrt( magnitude2 ) );
     }
 
-    public float getDistance( HashMap<String, PFeature> ftrs1, HashMap<String, PFeature> ftrs2 ) throws SQLException {
+    public float getDistance( PServerVector ftrs1, PServerVector ftrs2 ) throws SQLException {
         float sum = 0.0f;
         float magnitude1 = 0.0f;
         float magnitude2 = 0.0f;
-        Set<String> keys = ftrs1.keySet();
+        Set<String> keys = ftrs1.getVectorValues().keySet();
         for( String k : keys ){
-            float tmp1 = ftrs1.get( k ).getValue();
-            if( ftrs2.get( k ) != null ) {
-                float tmp2 = ftrs2.get( k ).getValue();
+            float tmp1 = ftrs1.getVectorValues().get( k );
+            if( ftrs2.getVectorValues().get( k ) != null ) {
+                float tmp2 = ftrs2.getVectorValues().get( k );
                 sum += tmp1 * tmp2;
             }
             magnitude1 += tmp1 * tmp1;
         }
 
         magnitude2 = 0.0f;
-        keys = ftrs2.keySet();
+        keys = ftrs2.getVectorValues().keySet();
         for( String k : keys ){
-            float tmp1 = ftrs2.get( k ).getValue();
+            float tmp1 = ftrs2.getVectorValues().get( k );
             magnitude2 += tmp1 * tmp1;
         }
 

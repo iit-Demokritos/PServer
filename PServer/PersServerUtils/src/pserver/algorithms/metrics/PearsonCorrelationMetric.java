@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import pserver.data.VectorResultSet;
 import pserver.domain.PFeature;
+import pserver.domain.PServerVector;
 import pserver.domain.PUser;
 import java.util.HashMap;
 import java.util.Set;
@@ -110,5 +111,9 @@ public class PearsonCorrelationMetric implements VectorMetric {
             return 0.0f;
         }
         return (sumF12 - sumF1 * sumF1 / n) / (float) Math.sqrt((sumFSqr1 - sumF1 * sumF1 / n) * (sumFSqr2 - sumF2 * sumF2 / n));
+    }
+
+    public float getDistance(PServerVector ftrs1, PServerVector ftrs2) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

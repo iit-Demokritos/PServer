@@ -2039,3 +2039,104 @@
 29/5/2012 23:54:19  >  Request from /127.0.0.1 (50057)
 29/5/2012 23:54:19  >  50057-        /commu_help/calcftrdist.html
 30/5/2012 0:20:8  >  Shutting down server, normal: true
+30/5/2012 21:35:50  >  Server started at alex-desktop/127.0.1.1, port 1111
+30/5/2012 21:35:50  >  Messages log mode set to: on
+30/5/2012 21:35:50  >  Shutting down server, normal: false
+30/5/2012 21:35:56  >  Server started at alex-desktop/127.0.1.1, port 1111
+30/5/2012 21:35:56  >  Messages log mode set to: on
+30/5/2012 21:35:57  >  Connected to DB: MySQL
+30/5/2012 21:36:5  >  Request from /127.0.0.1 (48772)
+30/5/2012 21:36:5  >  48772-        /
+30/5/2012 21:36:5  >  Request from /127.0.0.1 (48773)
+30/5/2012 21:36:5  >  48773-        /favicon.ico
+30/5/2012 21:36:5  >  Request from /127.0.0.1 (48774)
+30/5/2012 21:36:5  >  48774-        /favicon.ico
+30/5/2012 21:36:9  >  Request from /127.0.0.1 (48775)
+30/5/2012 21:36:9  >  48775-        /admin?com=login&login_name=root&login_password=root
+30/5/2012 21:36:10  >  Request from /127.0.0.1 (48776)
+30/5/2012 21:36:10  >  48776-        /admin?login_name=root&login_password=root&com=login
+30/5/2012 21:36:14  >  Request from /127.0.0.1 (48777)
+30/5/2012 21:36:14  >  48777-        /commu_help/commu_mode.html
+30/5/2012 21:36:14  >  Request from /127.0.0.1 (48778)
+30/5/2012 21:36:14  >  48778-        /commu_help/menu.html
+30/5/2012 21:36:14  >  Request from /127.0.0.1 (48779)
+30/5/2012 21:36:14  >  48779-        /commu_help/commu_index.html
+30/5/2012 21:36:17  >  Request from /127.0.0.1 (48782)
+30/5/2012 21:36:17  >  48782-        /commu_help/calcftrdist.html
+30/5/2012 21:36:37  >  Request from /127.0.0.1 (48784)
+30/5/2012 21:36:37  >  48784-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+30/5/2012 21:36:43  >  Request from /127.0.0.1 (48786)
+30/5/2012 21:36:43  >  48786-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+30/5/2012 21:37:31  >  Shutting down server, normal: true
+30/5/2012 21:37:34  >  Server started at alex-desktop/127.0.1.1, port 1111
+30/5/2012 21:37:34  >  Messages log mode set to: on
+30/5/2012 21:37:34  >  Connected to DB: MySQL
+30/5/2012 21:37:37  >  Request from /127.0.0.1 (48793)
+30/5/2012 21:37:37  >  48793-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+30/5/2012 21:38:21  >  Server started at alex-desktop/127.0.1.1, port 1111
+30/5/2012 21:38:21  >  Messages log mode set to: on
+30/5/2012 21:38:22  >  Connected to DB: MySQL
+30/5/2012 21:38:26  >  Request from /127.0.0.1 (48800)
+30/5/2012 21:38:26  >  48800-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+30/5/2012 21:38:56  >  Server started at alex-desktop/127.0.1.1, port 1111
+30/5/2012 21:38:56  >  Messages log mode set to: on
+30/5/2012 21:38:57  >  Connected to DB: MySQL
+30/5/2012 21:38:59  >  Request from /127.0.0.1 (48804)
+30/5/2012 21:38:59  >  48804-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+30/5/2012 21:57:17  >  Server started at alex-desktop/127.0.1.1, port 1111
+30/5/2012 21:57:17  >  Messages log mode set to: on
+30/5/2012 21:57:17  >  Connected to DB: MySQL
+30/5/2012 21:57:22  >  Request from /127.0.0.1 (49253)
+30/5/2012 21:57:22  >  49253-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+30/5/2012 23:26:12  >  Shutting down server, normal: true
+31/5/2012 1:40:20  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:40:20  >  Messages log mode set to: on
+31/5/2012 1:40:21  >  Connected to DB: MySQL
+31/5/2012 1:41:29  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:41:29  >  Messages log mode set to: on
+31/5/2012 1:41:29  >  Connected to DB: MySQL
+31/5/2012 1:41:34  >  Request from /127.0.0.1 (51884)
+31/5/2012 1:41:34  >  51884-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 1:44:21  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:44:21  >  Messages log mode set to: on
+31/5/2012 1:44:21  >  Connected to DB: MySQL
+31/5/2012 1:44:27  >  Request from /127.0.0.1 (51935)
+31/5/2012 1:44:27  >  51935-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 1:45:10  >  Shutting down server, normal: true
+31/5/2012 1:45:43  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:45:43  >  Messages log mode set to: on
+31/5/2012 1:45:43  >  Connected to DB: MySQL
+31/5/2012 1:45:46  >  Request from /127.0.0.1 (51945)
+31/5/2012 1:45:46  >  51945-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 1:48:13  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:48:13  >  Messages log mode set to: on
+31/5/2012 1:48:13  >  Connected to DB: MySQL
+31/5/2012 1:48:22  >  Request from /127.0.0.1 (51975)
+31/5/2012 1:48:22  >  51975-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 1:49:49  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:49:49  >  Messages log mode set to: on
+31/5/2012 1:49:49  >  Connected to DB: MySQL
+31/5/2012 1:49:53  >  Request from /127.0.0.1 (52001)
+31/5/2012 1:49:53  >  52001-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 1:53:52  >  Shutting down server, normal: true
+31/5/2012 1:53:56  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:53:56  >  Messages log mode set to: on
+31/5/2012 1:53:56  >  Connected to DB: MySQL
+31/5/2012 1:53:59  >  Request from /127.0.0.1 (52039)
+31/5/2012 1:53:59  >  52039-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 1:56:57  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 1:56:57  >  Messages log mode set to: on
+31/5/2012 1:56:57  >  Connected to DB: MySQL
+31/5/2012 1:57:3  >  Request from /127.0.0.1 (52054)
+31/5/2012 1:57:3  >  52054-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 2:0:34  >  Shutting down server, normal: true
+31/5/2012 2:0:45  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 2:0:45  >  Messages log mode set to: on
+31/5/2012 2:0:45  >  Connected to DB: MySQL
+31/5/2012 2:0:51  >  Request from /127.0.0.1 (52076)
+31/5/2012 2:0:51  >  52076-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+31/5/2012 2:9:12  >  Server started at alex-desktop/127.0.1.1, port 1111
+31/5/2012 2:9:12  >  Messages log mode set to: on
+31/5/2012 2:9:13  >  Connected to DB: MySQL
+31/5/2012 2:9:19  >  Request from /127.0.0.1 (52249)
+31/5/2012 2:9:19  >  52249-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
