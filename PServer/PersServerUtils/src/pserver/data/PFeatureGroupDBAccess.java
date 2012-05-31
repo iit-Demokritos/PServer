@@ -22,16 +22,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pserver.algorithms.metrics.VectorMetric;
-import pserver.domain.PFeature;
 import pserver.domain.PFeatureGroup;
 import pserver.domain.PServerVector;
-import pserver.domain.PUser;
 
 /**
  *
@@ -102,6 +99,7 @@ public class PFeatureGroupDBAccess {
     }
 
     public void generateFtrDistances( String clientName, VectorMetric metric, int dataRelationType, int numOfThreads ) throws SQLException {
+        System.out.println("Inside Function");
         String sql = "SELECT DISTINCT " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE  + " FROM " + DBAccess.UPROFILE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
         Statement stmt = dbAccess.getConnection().createStatement();
 
@@ -119,16 +117,16 @@ public class PFeatureGroupDBAccess {
         
         long to = System.currentTimeMillis();
         ArrayList<PServerVector> ftrVectors = new ArrayList<PServerVector>(features.size());
-        
+        System.out.println("Calculations just started");
         int counter = 0;
         for (int i = 0; i < features.size(); i++) {
             String featureName = features.get(i);
             long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
-            long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-            double memoryratio = (0.0 + usedMemory) / Runtime.getRuntime().maxMemory();
-            System.out.println("Free memory " + (Runtime.getRuntime().freeMemory() / 1048576.0) + "MB used memory " + (usedMemory / 1048576.0) + "MB memory ratio " + memoryratio + " obj num " + ftrVectors.size() + " of " + features.size());
+            //long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+            //double memoryratio = (0.0 + usedMemory) / Runtime.getRuntime().maxMemory();
+            //System.out.println("Free memory " + (Runtime.getRuntime().freeMemory() / 1048576.0) + "MB used memory " + (usedMemory / 1048576.0) + "MB memory ratio " + memoryratio + " obj num " + ftrVectors.size() + " of " + features.size());
             //if (memoryratio > 0.2) {
-            System.out.println("total free " + totalFree + " max " +  Runtime.getRuntime().maxMemory() + " used " + usedMemory );
+            //System.out.println("total free " + totalFree + " max " +  Runtime.getRuntime().maxMemory() + " used " + usedMemory );
             if (totalFree >= 104857600) {
                 PServerVector fvector = pfdb.getFeatureVector(featureName, clientName, false);
                 ftrVectors.add(fvector);
@@ -229,7 +227,17 @@ public class PFeatureGroupDBAccess {
             long t = System.currentTimeMillis();
             for (int j = i + 1; j < ftrVectors.size(); j++) {
                 PServerVector comparWith = ftrVectors.get(j);
-                threadExecutor.execute(new CompareThread(clientName, metric, dataRelationType, target, comparWith));
+                /*long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
+                System.out.println( totalFree );
+                while( totalFree < 50000000 ) {
+                    System.out.println( "sleeping and memory is " + totalFree );
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {                        
+                    }
+                }*/
+                saveFeatureSimilarity(target, comparWith, metric, clientName, dataRelationType);
+                //threadExecutor.execute(new CompareThread(clientName, metric, dataRelationType, target, comparWith));
             }
             memoryTime = (System.currentTimeMillis() - t);
             System.out.println("memory time for " + target.getName() + " = " + memoryTime);            
@@ -238,7 +246,7 @@ public class PFeatureGroupDBAccess {
         for (int j = ftrPos; j < features.size(); j++) {
             long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
             long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-            System.out.println(j + " used memory " + usedMemory);            
+            //System.out.println(j + " used memory " + usedMemory);            
             PServerVector comparWith = pfdb.getFeatureVector(features.get(j), clientName, false);
             for (int i = 0; i < ftrVectors.size(); i++) {
                 PServerVector target = ftrVectors.get(i);  
@@ -250,10 +258,10 @@ public class PFeatureGroupDBAccess {
     
      private void saveFeatureSimilarity(PServerVector vec1, PServerVector vec2, VectorMetric metric, String clientName, int dataRelationType  ) throws SQLException {
         float dist = metric.getDistance(vec1, vec2);
-        Statement stmt = getDbAccess().getConnection().createStatement();
+        Statement sstmt = getDbAccess().getConnection().createStatement();
         String sql = "INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + vec1.getName() + "','" + vec2.getName() + "'," + dist + "," + dataRelationType + ",'" + clientName + "')";
-        stmt.executeUpdate(sql);
-        stmt.close();
+        sstmt.executeUpdate(sql);
+        sstmt.close();
     }
 
     class CompareThread extends Thread {
@@ -280,8 +288,7 @@ public class PFeatureGroupDBAccess {
         public void run() {
             try {
                 saveFeatureSimilarity(vector1, vector2, metric, clientName, dataRelationType);
-            } catch (SQLException ex) {
-                Logger.getLogger(PCommunityDBAccess.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {                
                 exception = ex;
             }
         }
