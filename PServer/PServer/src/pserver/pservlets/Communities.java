@@ -44,7 +44,6 @@ import pserver.data.PServerClientsDBAccess;
 import pserver.data.PUserDBAccess;
 import pserver.data.UserCommunityManager;
 import pserver.domain.PFeatureGroup;
-import pserver.domain.PServerClient;
 import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
 
@@ -615,6 +614,13 @@ public class Communities implements pserver.pservlets.PService {
             WebServer.win.log.error("-The parameter smetric is missing: ");
             return false;
         }
+        
+        int threasholdIdx = queryParam.qpIndexOfKeyNoCase("th");
+        if (threasholdIdx == -1) {
+            WebServer.win.log.error("-The parameter th is missing: ");
+            return false;
+        }        
+        
         String smetricName = (String) queryParam.getVal(smetricIdx);
 
         int ftrIdx = queryParam.qpIndexOfKeyNoCase("ftrs");
@@ -623,6 +629,7 @@ public class Communities implements pserver.pservlets.PService {
             features = (String) queryParam.getVal(ftrIdx);
         }
 
+                
         boolean success = true;
 
         VectorMetric metric = PersServer.pbeansLoadader.getVMetrics().get(smetricName);

@@ -82,42 +82,42 @@ public class CosineVectorMetric implements VectorMetric {
         float magnitude2 = 0.0f;
 
 
-        Iterator it = ftrs1.getVectorValues().entrySet().iterator();
+        Iterator<Map.Entry<String, Float>> it = ftrs1.getVectorValues().entrySet().iterator();
         while (it.hasNext()) {
-            Map.Entry<String,Float> pairs = (Map.Entry) it.next();
-            float tmp1 = pairs.getValue();       
-            Float tmp2 = ftrs2.getVectorValues().get(pairs.getKey());
-            if ( tmp2 != null) {                
-                sum += tmp1 * tmp2;
-            }            
-            magnitude1 += tmp1 * tmp1;
-        }
-        
-        magnitude2 = 0.0f;
-        
-        it = ftrs2.getVectorValues().entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String,Float> pairs = (Map.Entry) it.next();
+            Map.Entry<String, Float> pairs = it.next();
             float tmp1 = pairs.getValue();
-            magnitude2 += tmp1 * tmp1;
-        }
-/*
-        Set<String> keys = ftrs1.getVectorValues().keySet();
-        for (String k : keys) {
-            float tmp1 = ftrs1.getVectorValues().get(k);
-            if (ftrs2.getVectorValues().get(k) != null) {
-                float tmp2 = ftrs2.getVectorValues().get(k);
+            Float tmp2 = ftrs2.getVectorValues().get(pairs.getKey());
+            if (tmp2 != null) {
                 sum += tmp1 * tmp2;
             }
             magnitude1 += tmp1 * tmp1;
         }
-*                        
-        keys = ftrs2.getVectorValues().keySet();
-        for (String k : keys) {
-            float tmp1 = ftrs2.getVectorValues().get(k);
+
+        magnitude2 = 0.0f;
+
+        it = ftrs2.getVectorValues().entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, Float> pairs = it.next();
+            float tmp1 = pairs.getValue();
             magnitude2 += tmp1 * tmp1;
         }
-*/
+        /*
+        Set<String> keys = ftrs1.getVectorValues().keySet();
+        for (String k : keys) {
+        float tmp1 = ftrs1.getVectorValues().get(k);
+        if (ftrs2.getVectorValues().get(k) != null) {
+        float tmp2 = ftrs2.getVectorValues().get(k);
+        sum += tmp1 * tmp2;
+        }
+        magnitude1 += tmp1 * tmp1;
+        }
+         *                        
+        keys = ftrs2.getVectorValues().keySet();
+        for (String k : keys) {
+        float tmp1 = ftrs2.getVectorValues().get(k);
+        magnitude2 += tmp1 * tmp1;
+        }
+         */
         if (magnitude1 < Math.abs(0.000001) || magnitude2 < Math.abs(0.000001)) {
             return 0;
         } else {
