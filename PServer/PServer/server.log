@@ -2362,3 +2362,5 @@
 4/6/2012 16:25:41  >  Connected to DB: MySQL
 4/6/2012 16:25:53  >  Request from /127.0.0.1 (51462)
 4/6/2012 16:25:53  >  51462-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+3/9/2012 19:28:36  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+3/9/2012 19:28:36  >  Shutting down server, normal: false
