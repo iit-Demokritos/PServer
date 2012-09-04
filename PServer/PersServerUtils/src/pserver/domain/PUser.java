@@ -26,17 +26,22 @@ public class PUser {
     private Map<String, Float> ftrReqs = null;
     private Map<String, Float> features = null;
     private Map<String, String> attributes = null;
-
+    private PServerVector vector = new PServerVector();
+    
     public PUser() {
         this.name = "";
         this.features = new HashMap<String, Float>();
         this.attributes = new HashMap<String, String>();
+        vector.setName(name);
+        vector.setVectorValues(features);
     }
 
     public PUser( int featureNum ) {
         this.name = "";
         this.features = new HashMap<String, Float>( featureNum );
         this.attributes = new HashMap<String, String>( featureNum );
+        vector.setName(name);
+        vector.setVectorValues(features);
     }
 
     public PUser( String name ) {
@@ -157,5 +162,9 @@ public class PUser {
      */
     public void setFtrReqs(Map<String, Float> ftrReqs) {
         this.ftrReqs = ftrReqs;
+    }
+    
+    public PServerVector getVector(){        
+        return vector;
     }
 }

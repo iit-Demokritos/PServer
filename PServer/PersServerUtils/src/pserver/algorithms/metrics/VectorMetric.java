@@ -18,16 +18,29 @@
 package pserver.algorithms.metrics;
 
 import java.sql.SQLException;
-import pserver.data.VectorResultSet;
 import pserver.domain.PServerVector;
-import pserver.domain.PUser;
 
 /**
- *
+ * This interface provide all the methods that must be implemented when we want 
+ * provide a new vector metric for Pserver
+ * 
  * @author alexm
  */
-public interface VectorMetric {
-    float getDistance( VectorResultSet vectors ) throws SQLException;
-    float getDistance( PUser user1, PUser user2 ) throws SQLException;
-    float getDistance( PServerVector ftrs1, PServerVector ftrs2 ) throws SQLException;
+public interface VectorMetric {    
+    /**
+     * 
+     * @return the value that the metric returns when there is the maximum coefficient 
+     */
+    float getMaximuxmCoefficientValue();
+    /**
+     * 
+     * @return the value that the metric returns when there is the minimu coefficient 
+     */
+    float getMinimumCoefficientValue();
+    /**
+     * @param vec1 is the first Pserver Vector
+     * @param vec2 is the second Pserver Vector
+     * @return the value of the coefficient
+     */
+    float getDistance( PServerVector vec1, PServerVector vec2 ) throws SQLException;
 }

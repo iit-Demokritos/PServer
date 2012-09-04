@@ -229,7 +229,7 @@ public class PCommunityDBAccess {
     }
 
     private void saveUserSimilarity(PUser user1, PUser user2, VectorMetric metric, String clientName, int dataRelationType  ) throws SQLException {
-        float dist = metric.getDistance(user1, user2);
+        float dist = metric.getDistance(user1.getVector(), user2.getVector());
         Statement stmt = getDbAccess().getConnection().createStatement();
         String sql = "INSERT INTO " + DBAccess.UASSOCIATIONS_TABLE + "(" + DBAccess.UASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + user1.getName() + "','" + user2.getName() + "'," + dist + "," + dataRelationType + ",'" + clientName + "')";
         stmt.executeUpdate(sql);

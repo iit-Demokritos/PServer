@@ -5,6 +5,7 @@
 package pserver.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.HashMap;
  */
 public class PServerVector {
     private String name;
-    private HashMap<String, Float> vectorValues;
+    private Map<String, Float> vectorValues;
 
     public PServerVector() {
         vectorValues = new HashMap<String, Float>();
@@ -39,15 +40,16 @@ public class PServerVector {
     /**
      * @return the vectorValues
      */
-    public HashMap<String, Float> getVectorValues() {
+    public Map<String, Float> getVectorValues() {
         return vectorValues;
     }
 
     /**
      * @param vectorValues the vectorValues to set
      */
-    public void setVectorValues(HashMap<String, Float> vectorValues) {
+    public void setVectorValues(Map<String, Float> vectorValues) {
         this.vectorValues = vectorValues;
     }
+
     
 }
