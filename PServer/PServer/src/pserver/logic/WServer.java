@@ -46,12 +46,13 @@ public class WServer extends Thread {
                 srvSock =(ServerSocket)getSSLServerSocket(port, backlog);
             else
                 srvSock = new ServerSocket(port, backlog);
-            localHost = (InetAddress.getLocalHost()).toString();
             localPort = srvSock.getLocalPort();
-        } catch (Exception e) {
-            System.out.println("Problem starting server: " + e);
-            WebServer.flog.forceWriteln("Problem starting server: " + e);
-            WebServer.terminate(false);  //quit application if cannot start
+            localHost = (InetAddress.getLocalHost()).toString();            
+        } catch (Exception e) {            
+            //e.printStackTrace();
+            WebServer.flog.forceWriteln("Problem resolving localhost: " + e);
+            //WebServer.terminate(false);  //quit application if cannot start            
+            localHost = "";
         }
         //log msgs
         WebServer.win.log.markStart();

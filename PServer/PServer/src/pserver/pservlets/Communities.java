@@ -615,11 +615,11 @@ public class Communities implements pserver.pservlets.PService {
             return false;
         }
         
-        int threasholdIdx = queryParam.qpIndexOfKeyNoCase("th");
+        /*int threasholdIdx = queryParam.qpIndexOfKeyNoCase("th");
         if (threasholdIdx == -1) {
             WebServer.win.log.error("-The parameter th is missing: ");
             return false;
-        }        
+        } */       
         
         String smetricName = (String) queryParam.getVal(smetricIdx);
 

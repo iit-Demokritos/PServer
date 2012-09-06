@@ -96,7 +96,7 @@ public class PFeatureGroupDBAccess {
         return result;
     }
 
-     public DBAccess getDbAccess() {
+    public DBAccess getDbAccess() {
         return dbAccess;
     }
 
@@ -139,9 +139,9 @@ public class PFeatureGroupDBAccess {
 
         return rows;
     }
-    
+
     public void generateFtrDistances(String clientName, VectorMetric metric, int dataRelationType, int numOfThreads) throws SQLException {
-        System.out.println("Inside Function");
+        System.out.println("Generating Feature distances");
         String sql = "SELECT DISTINCT " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + " FROM " + DBAccess.UPROFILE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
         Statement stmt = dbAccess.getConnection().createStatement();
 
@@ -152,6 +152,8 @@ public class PFeatureGroupDBAccess {
         }
         rs.close();
         stmt.close();
+
+        System.out.println("Feature loaded");
 
         PFeatureDBAccess pfdb = new PFeatureDBAccess(dbAccess);
 
@@ -164,12 +166,12 @@ public class PFeatureGroupDBAccess {
         long time = System.currentTimeMillis();
         for (int i = 0; i < features.size(); i++) {
             String featureName = features.get(i);
-            long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();            
-            System.out.println( i + " vectors loaded" );
-            if (totalFree >= 104857600) {
+            long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
+            System.out.println(i + " vectors loaded");            
+            if (totalFree >= 54000000) {
                 PServerVector fvector = pfdb.getFeatureVector(featureName, clientName, false);
                 ftrVectors.add(fvector);
-            } else {                                
+            } else {
                 makeUserDistances(ftrVectors, features, i, threadExecutor, dataRelationType, clientName, metric, pfdb);
                 ftrVectors.clear();
                 PServerVector fvector = pfdb.getFeatureVector(featureName, clientName, false);
@@ -178,9 +180,11 @@ public class PFeatureGroupDBAccess {
             }
         }
         System.out.println("loading Time is " + (System.currentTimeMillis() - time + " for " + ftrVectors.size() + " vectors"));
-        makeUserDistances(ftrVectors, features, features.size(), threadExecutor, dataRelationType, clientName, metric, pfdb);
+        if (ftrVectors.size() > 0) {
+            makeUserDistances(ftrVectors, features, features.size(), threadExecutor, dataRelationType, clientName, metric, pfdb);
+        }
 
-    }  
+    }
 
     private void makeUserDistances(ArrayList<PServerVector> ftrVectors, ArrayList<String> features, int ftrPos, ExecutorService threadExecutor, int dataRelationType, String clientName, VectorMetric metric, PFeatureDBAccess pfdb) throws SQLException {
         long memoryTime;
@@ -188,29 +192,30 @@ public class PFeatureGroupDBAccess {
         System.out.println("Calculatining distances for " + ftrVectors.size() + " features ");
         String sql = "INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES (?, ?,?," + dataRelationType + ",'" + clientName + "')";
 
-        StringBuilder sqlsb = new StringBuilder();
-        sqlsb.append("INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ");
-                
-        //PreparedStatement sstmt = getDbAccess().getConnection().prepareStatement(sql);
-        Statement sstmt = getDbAccess().getConnection().createStatement();
-        int zeroes= 0;
-        int counter = 0;
+        //StringBuilder sqlsb = new StringBuilder();
+        //sqlsb.append("INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ");
+
+        final int totalBatchSize = 50000;
+
+        PreparedStatement sstmt = getDbAccess().getConnection().prepareStatement(sql);
+        //Statement sstmt = getDbAccess().getConnection().createStatement();        
+        int batchSize = 0;
         for (int i = 0; i < ftrVectors.size(); i++) {
             PServerVector target = ftrVectors.get(i);
             long t = System.currentTimeMillis();
             for (int j = i + 1; j < ftrVectors.size(); j++) {
-                PServerVector comparWith = ftrVectors.get(j);                
-                addFeatureSimilarity(sqlsb, target, comparWith, metric, clientName, dataRelationType);                
-                counter ++;
-                if (counter >= 100000 || i == ftrVectors.size() -1 ) {
-                    long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
-                    System.out.println(totalFree + " counter " + counter);                    
-                    sstmt.executeUpdate(sqlsb.toString());
-                    sqlsb  = new StringBuilder();
-                    sqlsb.append("INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ");
-                    counter = 0;                                        
-                } else {
-                    sqlsb.append(",");
+                PServerVector comparWith = ftrVectors.get(j);
+                if (addFeatureSimilarity(sstmt, target, comparWith, metric, clientName, dataRelationType)) {
+                    batchSize++;
+                }
+
+                if (batchSize == totalBatchSize) {
+                    //long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();                    
+                    //sqlsb = new StringBuilder();
+                    //sqlsb.append("INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ");
+                    sstmt.executeBatch();
+                    sstmt.clearBatch();
+                    batchSize = 0;
                 }
                 //threadExecutor.execute(new CompareThread(clientName, metric, dataRelationType, target, comparWith));
             }
@@ -225,27 +230,37 @@ public class PFeatureGroupDBAccess {
             PServerVector comparWith = pfdb.getFeatureVector(features.get(j), clientName, false);
             for (int i = 0; i < ftrVectors.size(); i++) {
                 PServerVector target = ftrVectors.get(i);
-                addFeatureSimilarity(sqlsb, target, comparWith, metric, clientName, dataRelationType);
+                if (addFeatureSimilarity(sstmt, target, comparWith, metric, clientName, dataRelationType)) {
+                    batchSize++;
+                }
+                if (batchSize == totalBatchSize) {
+                    sstmt.executeBatch();
+                    sstmt.clearBatch();
+                    batchSize = 0;
+                }
             }
         }
-        sstmt.executeBatch();
-        sstmt.clearBatch();
+        if (batchSize > 0) {
+            sstmt.executeBatch();
+            sstmt.clearBatch();
+        }
         sstmt.close();
 
         System.out.println("Elapsed time for " + ftrVectors.size() + " user is " + (System.currentTimeMillis() - batchTime));
     }
 
-    private void addFeatureSimilarity(StringBuilder sqlsb, PServerVector vec1, PServerVector vec2, VectorMetric metric, String clientName, int dataRelationType) throws SQLException {
+    private boolean addFeatureSimilarity(PreparedStatement sstmt, PServerVector vec1, PServerVector vec2, VectorMetric metric, String clientName, int dataRelationType) throws SQLException {
         float dist = metric.getDistance(vec1, vec2);
-        if( dist < 0.001) {
-            //return;
+        if (Math.abs(dist - metric.getMinimumCoefficientValue()) < 0.001) {
+            return false;
         }
         //System.out.println( vec1.getName() + "---" + vec2.getName() + " -- " + dist );        
-        sqlsb.append("('").append(vec1.getName()).append("', '").append(vec2.getName()).append("',").append(dist).append(",").append(dataRelationType).append(",'").append(clientName).append("')");
-        /*sstmt.setString(1, vec1.getName());
+        //sqlsb.append("('").append(vec1.getName()).append("', '").append(vec2.getName()).append("',").append(dist).append(",").append(dataRelationType).append(",'").append(clientName).append("')");        
+        sstmt.setString(1, vec1.getName());
         sstmt.setString(2, vec2.getName());
         sstmt.setFloat(3, dist);
-        sstmt.addBatch();*/
+        sstmt.addBatch();
+        return true;
     }
 
     /**
@@ -304,9 +319,9 @@ public class PFeatureGroupDBAccess {
         @Override
         public void run() {
             /*try {
-                //addFeatureSimilarity(sstmt, vector1, vector2, metric, clientName, dataRelationType);
+            //addFeatureSimilarity(sstmt, vector1, vector2, metric, clientName, dataRelationType);
             } catch (SQLException ex) {
-                exception = ex;
+            exception = ex;
             }*/
         }
 

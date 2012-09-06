@@ -214,13 +214,16 @@ public class PersServer extends WebServer {
             dbAccess.connect();
             try {
                 PServerClientsDBAccess.initialize(dbAccess);
-            } catch (Exception ex) {                
+            } catch (Exception ex) {      
+                ex.printStackTrace();
             }
         } catch (ClassNotFoundException e) {  //connection failed, return null
             System.out.println("\n" + e + "\n");
+            e.printStackTrace();
             return null;
         } catch (SQLException e) {
             System.out.println("\n" + e + "\n");
+            e.printStackTrace();
             return null;
         }
         //get DB metadata
@@ -230,12 +233,14 @@ public class PersServer extends WebServer {
             db = dbMeta.getDatabaseProductName();
         } catch (SQLException e) {
             db = null;
+            e.printStackTrace();
         }
         //disconnect anyway
         try {
             dbAccess.disconnect();
         } catch (SQLException e) {
-            return null;
+            e.printStackTrace();
+            return null;            
         }
         //'db' can still be null
         return db;

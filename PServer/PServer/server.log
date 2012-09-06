@@ -2364,3 +2364,158 @@
 4/6/2012 16:25:53  >  51462-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
 3/9/2012 19:28:36  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
 3/9/2012 19:28:36  >  Shutting down server, normal: false
+4/9/2012 19:16:44  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 19:16:44  >  Shutting down server, normal: false
+4/9/2012 19:20:43  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 19:20:43  >  Shutting down server, normal: false
+4/9/2012 19:51:16  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 19:51:16  >  Shutting down server, normal: false
+4/9/2012 19:51:55  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 19:51:55  >  Shutting down server, normal: false
+4/9/2012 19:52:49  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 19:52:49  >  Shutting down server, normal: false
+4/9/2012 20:0:43  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 20:0:43  >  Shutting down server, normal: false
+4/9/2012 20:2:55  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 20:2:56  >  Shutting down server, normal: false
+4/9/2012 20:3:34  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 20:3:34  >  Shutting down server, normal: false
+4/9/2012 20:12:19  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 20:12:19  >  Shutting down server, normal: false
+4/9/2012 20:17:31  >  Problem starting server: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 20:17:31  >  Shutting down server, normal: false
+4/9/2012 20:19:21  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 20:19:21  >  Server started at , port 1111
+4/9/2012 20:19:21  >  Messages log mode set to: on
+4/9/2012 20:19:22  >  Connected to DB: MySQL
+4/9/2012 20:20:4  >  Request from /127.0.0.1 (40287)
+4/9/2012 20:20:4  >  40287-        /
+4/9/2012 20:20:5  >  Request from /127.0.0.1 (40288)
+4/9/2012 20:20:5  >  40288-        /favicon.ico
+4/9/2012 20:20:5  >  Request from /127.0.0.1 (40289)
+4/9/2012 20:20:5  >  40289-        /favicon.ico
+4/9/2012 20:20:13  >  Request from /127.0.0.1 (40290)
+4/9/2012 20:20:13  >  40290-        /admin?com=login&login_name=%26%23961%3B%26%23959%3B%26%23959%3B%26%23964%3B&login_password=%26%23961%3B%26%23959%3B%26%23959%3B%26%23964%3B
+4/9/2012 20:20:38  >  Request from /127.0.0.1 (40292)
+4/9/2012 20:20:39  >  40292-        /admin?com=login&login_name=root&login_password=root
+4/9/2012 20:22:14  >  Request from /127.0.0.1 (40304)
+4/9/2012 20:22:14  >  40304-        /csv_help/csv_mode.html
+4/9/2012 20:22:14  >  Request from /127.0.0.1 (40305)
+4/9/2012 20:22:14  >  40305-        /csv_help/menu.html
+4/9/2012 20:22:14  >  Request from /127.0.0.1 (40306)
+4/9/2012 20:22:14  >  40306-        /csv_help/csv_index.html
+4/9/2012 20:22:19  >  Request from /127.0.0.1 (40307)
+4/9/2012 20:22:19  >  40307-        /csv_help/loadusr.html
+4/9/2012 20:22:19  >  Request from /127.0.0.1 (40308)
+4/9/2012 20:22:19  >  40308-        /csv_help/loadftr.html
+4/9/2012 20:22:20  >  Request from /127.0.0.1 (40309)
+4/9/2012 20:22:20  >  40309-        /csv_help/loadftrgrp.html
+4/9/2012 20:22:20  >  Request from /127.0.0.1 (40310)
+4/9/2012 20:22:20  >  40310-        /csv_help/loadlog.html
+4/9/2012 20:22:21  >  Request from /127.0.0.1 (40311)
+4/9/2012 20:22:21  >  40311-        /csv_help/loadcommu.html
+4/9/2012 20:22:21  >  Request from /127.0.0.1 (40312)
+4/9/2012 20:22:21  >  40312-        /csv_help/loadftrgrph.html
+4/9/2012 20:22:23  >  Request from /127.0.0.1 (40313)
+4/9/2012 20:22:23  >  40313-        /csv_help/loadcommu.html
+4/9/2012 20:22:24  >  Request from /127.0.0.1 (40314)
+4/9/2012 20:22:24  >  40314-        /csv_help/loadcommu.html
+4/9/2012 20:22:25  >  Request from /127.0.0.1 (40315)
+4/9/2012 20:22:25  >  40315-        /csv_help/loadftrgrph.html
+4/9/2012 20:22:26  >  Request from /127.0.0.1 (40316)
+4/9/2012 20:22:26  >  40316-        /csv_help/loadftrgrp.html
+4/9/2012 20:22:30  >  Request from /127.0.0.1 (40317)
+4/9/2012 20:22:30  >  40317-        /commu_help/commu_mode.html
+4/9/2012 20:22:30  >  Request from /127.0.0.1 (40318)
+4/9/2012 20:22:30  >  40318-        /commu_help/menu.html
+4/9/2012 20:22:31  >  Request from /127.0.0.1 (40319)
+4/9/2012 20:22:31  >  40319-        /commu_help/commu_index.html
+4/9/2012 20:22:46  >  Request from /127.0.0.1 (40320)
+4/9/2012 20:22:46  >  40320-        /commu_help/calcftrdist.html
+4/9/2012 20:22:53  >  Request from /127.0.0.1 (40321)
+4/9/2012 20:22:53  >  40321-        /commu_help/commu_mode.html%5C
+4/9/2012 20:23:2  >  Request from /127.0.0.1 (40323)
+4/9/2012 20:23:2  >  40323-        /commu_help/commu_mode.html
+4/9/2012 20:23:2  >  Request from /127.0.0.1 (40324)
+4/9/2012 20:23:2  >  40324-        /commu_help/menu.html
+4/9/2012 20:23:2  >  Request from /127.0.0.1 (40325)
+4/9/2012 20:23:2  >  40325-        /commu_help/commu_index.html
+4/9/2012 20:23:6  >  Request from /127.0.0.1 (40326)
+4/9/2012 20:23:6  >  40326-        /commu_help/calcftrdist.html
+4/9/2012 20:29:52  >  Request from /127.0.0.1 (40488)
+4/9/2012 20:29:52  >  40488-        /ommu?clnt=test|test&com=calcftrdist&smetric=cos
+4/9/2012 20:30:24  >  Request from /127.0.0.1 (40489)
+4/9/2012 20:30:24  >  40489-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+4/9/2012 20:47:31  >  Shutting down server, normal: true
+4/9/2012 20:49:47  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 20:49:47  >  Server started at , port 1111
+4/9/2012 20:49:47  >  Messages log mode set to: on
+4/9/2012 20:49:48  >  Connected to DB: MySQL
+4/9/2012 20:52:1  >  Request from /127.0.0.1 (40950)
+4/9/2012 20:52:1  >  40950-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+4/9/2012 21:19:26  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 21:19:26  >  Server started at , port 1111
+4/9/2012 21:19:26  >  Messages log mode set to: on
+4/9/2012 21:19:27  >  Connected to DB: MySQL
+4/9/2012 21:19:50  >  Request from /127.0.0.1 (41174)
+4/9/2012 21:19:50  >  41174-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+4/9/2012 21:35:48  >  Shutting down server, normal: true
+4/9/2012 21:36:44  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 21:36:44  >  Server started at , port 1111
+4/9/2012 21:36:44  >  Messages log mode set to: on
+4/9/2012 21:36:46  >  Connected to DB: MySQL
+4/9/2012 21:38:35  >  Request from /127.0.0.1 (41753)
+4/9/2012 21:38:35  >  41753-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+4/9/2012 21:52:3  >  Shutting down server, normal: true
+4/9/2012 21:52:34  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+4/9/2012 21:52:34  >  Server started at , port 1111
+4/9/2012 21:52:34  >  Messages log mode set to: on
+4/9/2012 21:52:35  >  Connected to DB: MySQL
+4/9/2012 21:53:9  >  Request from /127.0.0.1 (42106)
+4/9/2012 21:53:9  >  42106-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+6/9/2012 10:33:23  >  Shutting down server, normal: true
+6/9/2012 18:51:15  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+6/9/2012 18:51:15  >  Server started at , port 1111
+6/9/2012 18:51:15  >  Messages log mode set to: on
+6/9/2012 18:51:17  >  Connected to DB: MySQL
+6/9/2012 18:51:31  >  Request from /127.0.0.1 (54671)
+6/9/2012 18:51:31  >  54671-        /commu_help/commu_mode.html
+6/9/2012 18:51:31  >  Request from /127.0.0.1 (54672)
+6/9/2012 18:51:31  >  Request from /127.0.0.1 (54673)
+6/9/2012 18:51:31  >  54672-        /commu_help/menu.html
+6/9/2012 18:51:31  >  54673-        /commu_help/commu_index.html
+6/9/2012 18:51:31  >  Request from /127.0.0.1 (54674)
+6/9/2012 18:51:31  >  54674-        /favicon.ico
+6/9/2012 18:51:31  >  Request from /127.0.0.1 (54675)
+6/9/2012 18:51:31  >  54675-        /favicon.ico
+6/9/2012 18:51:34  >  Request from /127.0.0.1 (54676)
+6/9/2012 18:51:34  >  54676-        /commu_help/calcftrdist.html
+6/9/2012 18:51:39  >  Request from /127.0.0.1 (54677)
+6/9/2012 18:51:39  >  54677-        /commu_help/commu_mode.html
+6/9/2012 18:51:40  >  Request from /127.0.0.1 (54678)
+6/9/2012 18:51:40  >  54678-        /commu_help/menu.html
+6/9/2012 18:51:40  >  Request from /127.0.0.1 (54679)
+6/9/2012 18:51:40  >  54679-        /commu_help/commu_index.html
+6/9/2012 18:51:41  >  Request from /127.0.0.1 (54680)
+6/9/2012 18:51:41  >  54680-        /commu_help/calcftrdist.html
+6/9/2012 18:52:4  >  Request from /127.0.0.1 (54681)
+6/9/2012 18:52:4  >  54681-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+6/9/2012 19:3:36  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+6/9/2012 19:3:37  >  Server started at , port 1111
+6/9/2012 19:3:37  >  Messages log mode set to: on
+6/9/2012 19:3:37  >  Connected to DB: MySQL
+6/9/2012 19:4:10  >  Request from /127.0.0.1 (54988)
+6/9/2012 19:4:10  >  54988-        /commu?clnt=test|test&com=calcftrdist&smetric=cos
+6/9/2012 21:49:2  >  Request from /127.0.0.1 (60805)
+6/9/2012 21:49:2  >  60805-        /commu_help/calcudist.html
+6/9/2012 21:49:26  >  Request from /127.0.0.1 (60806)
+6/9/2012 21:49:26  >  60806-        /commu?clnt=test|test&com=calcudist&smetric=cos
+6/9/2012 21:50:8  >  Request from /127.0.0.1 (60809)
+6/9/2012 21:50:8  >  60809-        /commu?clnt=test|test&com=calcudist&smetric=cos&th%3E0.95
+6/9/2012 21:52:16  >  Shutting down server, normal: true
+6/9/2012 21:52:48  >  Problem resolving localhost: java.net.UnknownHostException: shadowman: shadowman
+6/9/2012 21:52:48  >  Server started at , port 1111
+6/9/2012 21:52:48  >  Messages log mode set to: on
+6/9/2012 21:52:49  >  Connected to DB: MySQL
+6/9/2012 21:52:55  >  Request from /127.0.0.1 (60823)
+6/9/2012 21:52:55  >  60823-        /commu?clnt=test|test&com=calcudist&smetric=cos&th%3E0.95
