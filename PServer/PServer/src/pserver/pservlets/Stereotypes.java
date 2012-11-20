@@ -17,13 +17,7 @@
 package pserver.pservlets;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.TreeSet;
 import pserver.WebServer;
 import pserver.data.DBAccess;
 import pserver.data.PServerResultSet;
@@ -54,7 +48,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         queryParam = parameters;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        if( clntIdx == -1 ){
+        if (clntIdx == -1) {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Parameter clnt does not exist");
             return respCode;  //no point in proceeding
@@ -76,22 +70,14 @@ public class Stereotypes implements pserver.pservlets.PService {
         String com = (String) queryParam.getVal(comIdx);
         if (com.equalsIgnoreCase("addstr")) {       //add stereotype
             respCode = comSterAddStr(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("addftr")) {
-            respCode = comSterAddFtr(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("addattr")) {
-            respCode = comSterAddAttr(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("setstr") || com.equalsIgnoreCase("setstrftr")) {  //update stereotype features
             respCode = comSterSetStr(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("incval")) {  //increment numeric values
-            respCode = comSterIncVal(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("lststr")) {  //list all stereotypes
             respCode = comSterLstStr(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("getstr")) {  //get feature values for a stereotype
             respCode = comSterGetStr(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("sqlstr")) {  //specify conditions and select stereotypes
             respCode = comSterSqlStr(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("remattr")) {  //remove stereotype attribute(s)
-            respCode = comSterRemAttr(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("remstr")) {  //remove stereotype(s)
             respCode = comSterRemStr(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("addusr")) {  //assign user to stereotype(s)
@@ -117,150 +103,6 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
-    private int comSterAddAttr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int respCode = PSReqWorker.NORMAL;
-        try {
-            //first connect to DB
-            dbAccess.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return PSReqWorker.SERVER_ERR;
-        }
-
-        //execute the command
-        try {
-            boolean success = true;
-            dbAccess.setAutoCommit(false);//transaction guarantees integrity
-            //the new (feature, def value) pairs must be inserted, and
-            //the user attributes must be expanded with the new features
-            //-start transaction body
-            success &= execSterAddAttr(queryParam, respBody, dbAccess);
-            //-end transaction body
-            if (success) {
-                dbAccess.commit();
-            } else {
-                dbAccess.rollback();
-                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
-                WebServer.win.log.warn("-DB rolled back, data not saved");
-            }
-            //disconnect from DB anyway
-            dbAccess.disconnect();
-        } catch (SQLException e) {  //problem with transaction
-            respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-DB Transaction problem: " + e);
-        }
-        return respCode;
-    }
-
-    private boolean execSterAddAttr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        //request properties
-        int qpSize = queryParam.size();
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        String clientName = (String) queryParam.getVal(clntIdx);
-        int comIdx = queryParam.qpIndexOfKeyNoCase("com");
-        int strnIdx = queryParam.qpIndexOfKeyNoCase("strn");
-        String strname;
-        if (strnIdx != -1) {
-            strname = ((String) queryParam.getVal(strnIdx)).replaceAll("\\*", "%");
-        } else {
-            strname = new String("%");
-        }
-        //execute request
-        boolean success = true;
-        String query;
-        int rowsAffected = 0;
-        try {
-            //insert new features in user profiles accordingly            
-            for (int i = 0; i < qpSize; i++) {
-                if (i != comIdx && i != strnIdx && i != clntIdx) {  //'com' query parameter excluded
-                    //'feature' cannot be empty string, 'queryParam' does not allow it
-                    String attribute = (String) queryParam.getKey(i);
-                    String defValue = (String) queryParam.getVal(i);
-                    //if (db.compareTo("ACCESS") == 0) {  //database type is MS-Access
-                    query = "insert into stereotype_attributes" + "(sp_stereotype, sp_attribute, sp_value, FK_psclient)" + " select st_stereotype, '" + attribute + "', '" + defValue + "','" + clientName + "' from stereotypes WHERE st_stereotype LIKE '" + strname + "' and FK_psclient='" + clientName + "' ";
-                    rowsAffected += dbAccess.executeUpdate(query);
-                }
-            }
-        } catch (SQLException e) {
-            success = false;
-            WebServer.win.log.debug("-Problem inserting to DB: " + e);
-        }
-        WebServer.win.log.debug("-Rows inserted in user_profiles: " + rowsAffected);
-        return success;
-    }
-
-    private int comSterAddFtr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int respCode = PSReqWorker.NORMAL;
-        try {
-            //first connect to DB
-            dbAccess.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return PSReqWorker.SERVER_ERR;
-        }
-
-        //execute the command
-        try {
-            boolean success = true;
-            dbAccess.setAutoCommit(false);//transaction guarantees integrity
-            //the new (feature, def value) pairs must be inserted, and
-            //the user attributes must be expanded with the new features
-            //-start transaction body
-            success &= execSterAddFtr(queryParam, respBody, dbAccess);
-            //-end transaction body
-            if (success) {
-                dbAccess.commit();
-            } else {
-                dbAccess.rollback();
-                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
-                WebServer.win.log.warn("-DB rolled back, data not saved");
-            }
-            //disconnect from DB anyway
-            dbAccess.disconnect();
-        } catch (SQLException e) {  //problem with transaction
-            respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-DB Transaction problem: " + e);
-        }
-        return respCode;
-    }
-
-    private boolean execSterAddFtr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        //request properties
-        int qpSize = queryParam.size();
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        String clientName = (String) queryParam.getVal(clntIdx);
-        int comIdx = queryParam.qpIndexOfKeyNoCase("com");
-        int strnIdx = queryParam.qpIndexOfKeyNoCase("strn");
-        String strname;
-        if (strnIdx != -1) {
-            strname = ((String) queryParam.getVal(strnIdx)).replaceAll("\\*", "%");
-        } else {
-            strname = new String("%");
-        }
-        //execute request
-        boolean success = true;
-        String query;
-        int rowsAffected = 0;
-        try {
-            //insert new features in user profiles accordingly            
-            for (int i = 0; i < qpSize; i++) {
-                if (i != comIdx && i != strnIdx && i != clntIdx) {  //'com' query parameter excluded
-                    //'feature' cannot be empty string, 'queryParam' does not allow it
-                    String feature = (String) queryParam.getKey(i);
-                    String defValue = (String) queryParam.getVal(i);
-                    String numDefValue = DBAccess.strToNumStr(defValue);  //numeric version of def value
-                    //if (db.compareTo("ACCESS") == 0) {  //database type is MS-Access
-                    query = "insert into stereotype_profiles " + "(sp_stereotype, sp_feature, sp_value, sp_numvalue,FK_psclient)" + " select st_stereotype, '" + feature + "', '" + defValue + "', " + numDefValue + ",'" + clientName + "' from stereotypes WHERE st_stereotype LIKE '" + strname + "' and FK_psclient='" + clientName + "' ";
-                    rowsAffected += dbAccess.executeUpdate(query);
-                }
-            }
-        } catch (SQLException e) {
-            success = false;
-            WebServer.win.log.debug("-Problem inserting to DB: " + e);
-        }
-        WebServer.win.log.debug("-Rows inserted in user_profiles: " + rowsAffected);
-        return success;
-    }
     //--------------------------------------------------------------------------------------------
     //STER_MODE commands
     //In Stereotype Mode, the server offers support for stereotypes.
@@ -296,30 +138,7 @@ public class Stereotypes implements pserver.pservlets.PService {
     //field 'su_degree' is numeric (double), and when its values are
     //exchanged as strings they follow the rules described above. This
     //field also contain NULLs for values that could not be converted to
-    //numeric.
-    //-addstr
-    //template: ster?com=addstr&str=<str>[&<ftr_1>=<val_1>&<ftr_2>=...]
-    //          Order of query params is not important. Feature
-    //          names must not end with '*' to be legal. Stereotype
-    //          names must not be '*', '-', or empty string.
-    //descript: the new stereotype is inserted in the DB. The (feature,
-    //          value) pairs for that stereotype are then inserted in
-    //          the DB. Must be used to initialize the stereotype
-    //          service (a stereotype must already exists for a user to
-    //          reference to it). Can also be used to add more features
-    //          in an existing stereotype. Note that if no (feature, value)
-    //          pairs exist in the request, the stereotype will still
-    //          be inserted, and users will be able to refer to it. If
-    //          the stereotype already exists, then it will not be inserted
-    //          (200 OK will still be returned). If one or more of the
-    //          specified features already exist for that stereotype, or if
-    //          one or more feature names are not legal names, code 401
-    //          (request error) will be returned. If the error code 401 is
-    //          returned then no change has taken place in the DB.
-    //example : ster?com=addstr&str=educated&expert.computer=yes&educ=3
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : no response body exists.
-
+    //numeric.    
     private int comSterAddStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -339,8 +158,12 @@ public class Stereotypes implements pserver.pservlets.PService {
             //-start transaction body
             if (!sterExistsStr(queryParam, dbAccess)) {
                 success = success && execSterAddStr(queryParam, dbAccess);
+            } else {
+                respCode = PSReqWorker.DUBLICATE_ERROR;  //client request data inconsistent?                
+                dbAccess.disconnect();
+                WebServer.win.log.error("-DB Stereotype already exists: ");
+                return respCode;
             }
-            success = success && execInsertAttr(queryParam, dbAccess);
             //-end transaction body
             if (success) {
                 dbAccess.commit();
@@ -401,6 +224,13 @@ public class Stereotypes implements pserver.pservlets.PService {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         String stereot = (String) queryParam.getVal(strIdx);
+        int ruleIdx = queryParam.qpIndexOfKeyNoCase("rule");
+        String rule;
+        if (ruleIdx == -1) {
+            rule = null;
+        } else {
+            rule = (String) queryParam.getVal(ruleIdx);
+        }
         //values in 'queryParam' can be empty string,
         //check if stereotype in 'str' is legal
         if (!DBAccess.legalStrName(stereot)) {
@@ -411,9 +241,21 @@ public class Stereotypes implements pserver.pservlets.PService {
         String query;
         int rowsAffected = 0;
         try {
-            //insert new stereotype            
-            query = "insert into stereotypes (st_stereotype,FK_psclient) values ('" + stereot + "','" + clientName + "')";
-            rowsAffected = dbAccess.executeUpdate(query);
+            //insert new stereotype 
+            if (ruleIdx == -1) {
+                query = "insert into stereotypes (st_stereotype,FK_psclient) values ('" + stereot + "','" + clientName + "')";
+                rowsAffected = dbAccess.executeUpdate(query);
+            } else {
+                String sqlRule = getSQLFromStereotypeRule(rule);
+                query = "insert into stereotypes (st_stereotype,st_rule, FK_psclient) values ( ?,?,'" + clientName + "')";
+                PreparedStatement prep = dbAccess.getConnection().prepareStatement(query);
+                prep.setString(1, stereot);
+                prep.setString(2, sqlRule.toString());
+                rowsAffected = prep.executeUpdate();
+                prep.close();
+                addUsersToStereotype(dbAccess, clientName, stereot, sqlRule);
+                updateStereotype(dbAccess, clientName, stereot);
+            }
         } catch (SQLException e) {
             success = false;
             WebServer.win.log.debug("-Problem inserting to DB: " + e);
@@ -422,47 +264,86 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    private boolean execInsertAttr(VectorMap queryParam, DBAccess dbAccess) {
-        //request properties
-        int qpSize = queryParam.size();
-        int comIdx = queryParam.qpIndexOfKeyNoCase("com");
-        int strIdx = queryParam.qpIndexOfKeyNoCase("str");
-        if (strIdx == -1) {
-            return false;
-        }
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        String clientName = (String) queryParam.getVal(clntIdx);
-        String stereot = (String) queryParam.getVal(strIdx);
-        //execute request
-        boolean success = true;
-        String query;
-        int rowsAffected = 0;
-        try {
-            //insert each (feature, value) in a new row in 'stereotype_profiles'.
-            //Note that the specified stereotype must already exist in 'stereotypes'
-            for (int i = 0; i < qpSize; i++) {
-                if (i != comIdx && i != strIdx && i != clntIdx) {  //'com' and 'str' query parameters excluded
-                    //'feature' cannot be empty string, 'queryParam' does not allow it
-                    String attribute = (String) queryParam.getKey(i);
-                    if (DBAccess.legalFtrOrAttrName(attribute)) {  //check if name is legal
-                        String value = (String) queryParam.getVal(i);
-                        String numValue = DBAccess.strToNumStr(value);  //numeric version of value
-                        query = "insert into stereotype_attributes " + "(sp_stereotype, sp_attribute, sp_value, FK_psclient ) values ('" + stereot + "', '" + attribute + "', '" + value + "', '" + clientName + "')";
-                        rowsAffected += dbAccess.executeUpdate(query);
-                    } else {
-                        success = false;
-                    }  //request is not valid, rollback
+    private String getSQLFromStereotypeRule(String rule) {
+        StringBuilder sqlRule = new StringBuilder();
+        //sqlRule.append("SELECT * FROM user_attributes Where FK_psclient='").append(clientName).append("' AND ");
+        String[] tokens = rule.split("\\|");
+        int idx = 0;
+        for (String token : tokens) {
+            if (idx % 2 == 0) {
+                //sqlRule.append("AND ");
+                while (token.startsWith("(")) {
+                    token = token.substring(1);
+                    sqlRule.append("(");
                 }
-                if (!success) {
-                    break;
-                }  //discontinue loop, rollback
+                int endParenthesisCounter = 0;
+                while (token.endsWith(")")) {
+                    token = token.substring(0, token.length() - 1);
+                    endParenthesisCounter++;
+                }
+
+                String first = null;
+                String operator = null;
+                String second = null;
+
+                if (token.contains("<>")) {
+                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='" + token.substring(0, token.indexOf("<>")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+                    operator = "<>";
+                    second = "'" + token.substring(token.indexOf(">") + 1) + "'";
+                } else if (token.contains(":")) {
+                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='" + token.substring(0, token.indexOf(":")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+                    operator = "=";
+                    second = "'" + token.substring(token.indexOf(":") + 1) + "'";
+                }
+
+                sqlRule.append("(");
+                sqlRule.append(first);
+                sqlRule.append(operator);
+                sqlRule.append(second);
+                sqlRule.append(")");
+
+                for (int i = 0; i < endParenthesisCounter; i++) {
+                    sqlRule.append(")");
+                }
+            } else {
+                sqlRule.append(" ").append(token.toUpperCase()).append(" ");
             }
-        } catch (SQLException e) {
-            success = false;
-            WebServer.win.log.debug("-Problem inserting to DB: " + e);
+            idx++;
         }
-        WebServer.win.log.debug("-Num of rows inserted: " + rowsAffected);
-        return success;
+        return sqlRule.toString();
+    }
+
+    private void addUsersToStereotype(DBAccess dbAccess, String clientName, String stereot, String rule) throws SQLException {
+        String insUsrSql = "INSERT INTO " + DBAccess.STEREOTYPE_USERS_TABLE
+                + "(" + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE
+                + "," + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_USER
+                + "," + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE
+                + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + stereot + "',?,1,'" + clientName + "')";
+        PreparedStatement prep = dbAccess.getConnection().prepareStatement(insUsrSql);
+        String sql = "SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM " + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName + "' AND " + rule + " GROUP BY " + DBAccess.UATTR_TABLE_FIELD_USER;
+        PServerResultSet rs = dbAccess.executeQuery(sql);
+        while (rs.next()) {
+            String user = rs.getRs().getString(1);
+            prep.setString(1, user);
+            prep.addBatch();
+        }
+        rs.close();
+        prep.executeBatch();
+        prep.close();
+    }
+
+    private void updateStereotype(DBAccess dbAccess, String clientName, String stereotype) throws SQLException {
+        String sql = "DELETE FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+        dbAccess.executeUpdate(sql);
+        String subSelect = "SELECT '" + stereotype + "',up_feature,sum(up_value),'" + clientName + "' FROM " + DBAccess.UPROFILE_TABLE
+                + " WHERE up_user IN (SELECT su_user FROM stereotype_users WHERE su_stereotype = '" + stereotype + "' AND FK_psclient='" + clientName + "' ) GROUP BY up_feature";
+
+        sql = "INSERT INTO " + DBAccess.STERETYPE_PROFILES_TABLE
+                + "(" + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE
+                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE
+                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE
+                + "," + DBAccess.FIELD_PSCLIENT + ") " + subSelect + "";
+        dbAccess.executeUpdate(sql);
     }
 
     //-addusr
@@ -541,8 +422,17 @@ public class Stereotypes implements pserver.pservlets.PService {
             for (int i = 0; i < qpSize; i++) {
                 if (i != comIdx && i != usrIdx && i != clntIdx) {  //'com' and 'usr' query parameters excluded
                     String stereot = (String) queryParam.getKey(i);
+                    if (stereotypeExists(dbAccess, stereot, clientName) == false) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " does not exists");
+                        continue;
+                    }
+                    if (stereotypeHasUser(dbAccess, stereot, user, clientName)) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " already has the user " + user);
+                        continue;
+                    }
                     String degree = (String) queryParam.getVal(i);
-                    String numDegree = DBAccess.strToNumStr(degree);  //numeric version of degree
+                    String numDegree = DBAccess.strToNumStr(degree);  //numeric version of degree                    
+                    updateStereotypeWithUser(dbAccess, clientName, stereot, user, Float.parseFloat(numDegree));
                     query = "insert into stereotype_users " + "(su_user, su_stereotype, su_degree, FK_psclient) values ('" + user + "', '" + stereot + "', " + numDegree + ",'" + clientName + "')";
                     rowsAffected += dbAccess.executeUpdate(query);
                 }
@@ -553,6 +443,51 @@ public class Stereotypes implements pserver.pservlets.PService {
         }
         WebServer.win.log.debug("-Num of rows inserted: " + rowsAffected);
         return success;
+    }
+
+    private boolean stereotypeExists(DBAccess dbAccess, String stereot, String clientName) throws SQLException {
+        String sql = "SELECT * FROM " + DBAccess.STEREOTYPE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_TABLE_FIELD_STEREOTYPE + "='" + stereot + "'";
+        PServerResultSet rs = dbAccess.executeQuery(sql);
+        boolean ret = false;
+        if (rs.next()) {
+            ret = true;
+        }
+        rs.close();
+        return ret;
+    }
+
+    private boolean stereotypeHasUser(DBAccess dbAccess, String stereotype, String user, String clientName) throws SQLException {
+        String sql = "SELECT * FROM " + DBAccess.STEREOTYPE_USERS_TABLE + " WHERE "
+                + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "'";
+        PServerResultSet rs = dbAccess.executeQuery(sql);
+        boolean ret = true;
+        if (rs.next()) {
+            ret = false;
+        }
+        rs.close();
+        return ret;
+    }
+
+    private void updateStereotypeWithUser(DBAccess dbAccess, String clientName, String stereotype, String user, float degree) throws SQLException {
+        String subSelect = "SELECT '" + stereotype + "',up_feature, 0,'" + clientName + "' FROM " + DBAccess.UPROFILE_TABLE
+                + " WHERE up_user ='" + user + "' AND FK_psclient='" + clientName + "'";
+
+        String sql = "INSERT IGNORE INTO " + DBAccess.STERETYPE_PROFILES_TABLE
+                + "(" + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE
+                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE
+                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE
+                + "," + DBAccess.FIELD_PSCLIENT + ") " + subSelect + "";
+        dbAccess.executeUpdate(sql);
+
+        sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
+                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
+                + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
+                + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
+        dbAccess.executeUpdate(sql);
     }
 
     //-getstr
@@ -818,32 +753,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-incdeg
-    //template: ster?com=incdeg&usr=<usr>&<str_1>=<step_1>&...
-    //          Order of query params is not important: updates of degrees
-    //          are performed in the order they appear in the request, however
-    //          the changes are of accummulative nature, so the final result
-    //          is the same.
-    //descript: for the specified user, the relevence degree for each specified
-    //          stereotype is increased by x (decreased if x is negative),
-    //          where x is the step corresponding to that stereotype. Rows with
-    //          NULL degrees are not affected. If no matches are found, or if
-    //          all matches have NULL degrees, no records will be updated
-    //          (200 OK will still be returned). If any <step_i> parameter
-    //          cannot be converted to numeric, 401 is returned. If the error
-    //          code 401 is returned then no updates have taken place in the DB.
-    //example : ster?com=incdeg&usr=john&visitor=-0.1&expert=1
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
-    //          <result>
-    //          <row><num_of_rows>number of relevant rows</num_of_rows></row>
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    //-incdeg   
     private int comSterIncDeg(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -897,6 +807,14 @@ public class Stereotypes implements pserver.pservlets.PService {
                 if (i != comIdx && i != usrIdx && i != clntIdx) {  //'com' and 'usr' query parameters excluded
                     //get current parameter pair
                     String stereot = (String) queryParam.getKey(i);
+                    if (stereotypeExists(dbAccess, stereot, clientName) == false) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " does not exists");
+                        continue;
+                    }
+                    if (stereotypeHasUser(dbAccess, stereot, user, clientName) == false) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " already does not have the user " + user);
+                        continue;
+                    }
                     String step = (String) queryParam.getVal(i);
                     Float numStep = DBAccess.strToNum(step);  //is it numeric?
                     if (numStep != null) {  //if null, 'step' not numeric, misspelled request
@@ -904,22 +822,16 @@ public class Stereotypes implements pserver.pservlets.PService {
                         query = "select su_degree from stereotype_users where su_user='" + user + "' and su_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
                         PServerResultSet rs = dbAccess.executeQuery(query);
                         boolean recFound = rs.next();  //expect one row or none
-                        Double degree = recFound ? new Double(rs.getRs().getDouble("su_degree")) : null;
-                        if (recFound && rs.getRs().wasNull()) {
-                            degree = null;
-                        }
+                        Double degree = recFound ? new Double(rs.getRs().getDouble("su_degree")) : 0;
                         rs.close();  //in any case
-                        if (degree != null) {  //if null, 'degree' does not exist or is NULL
-                            //update current user, stereotype record
-                            double newNumDegree = degree.doubleValue() + numStep.doubleValue();
-                            String newDegree = DBAccess.formatDouble(new Double(newNumDegree));
-                            query = "UPDATE stereotype_users set su_degree=" + newDegree + " where su_user='" + user + "' and su_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
-                            rowsAffected += dbAccess.executeUpdate(query);
-                        }
-                        //else if degree == null
-                        //ignore current user, stereotype record and continue with next
-                    } //else if numStep == null
-                    else {
+                        //update current user, stereotype record
+                        double newNumDegree = degree.doubleValue() + numStep.doubleValue();
+                        String newDegree = DBAccess.formatDouble(new Double(newNumDegree));
+                        query = "UPDATE stereotype_users set su_degree=" + newDegree + " where su_user='" + user + "' and su_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
+                        rowsAffected += dbAccess.executeUpdate(query);
+                        updateStereotypeForDegree(dbAccess, stereot, user, clientName, numStep);
+
+                    } else {
                         success = false;
                     }  //misspelled request, abort and rollback
                 }
@@ -939,6 +851,19 @@ public class Stereotypes implements pserver.pservlets.PService {
         }
         WebServer.win.log.debug("-Num of rows updated: " + rowsAffected);
         return success;
+    }
+
+    private void updateStereotypeForDegree(DBAccess dbAccess, String stereotype, String user, String clientName, float degree) throws SQLException {
+        String subSelect = "SELECT '" + stereotype + "',up_feature, 0,'" + clientName + "' FROM " + DBAccess.UPROFILE_TABLE
+                + " WHERE up_user ='" + user + "' AND FK_psclient='" + clientName + "'";
+
+        String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
+                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
+                + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
+                + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
+        dbAccess.executeUpdate(sql);
     }
 
     //-incval
@@ -1195,107 +1120,6 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-remftr
-    //template: ster?com=remftr&[str=<str>&]ftr=<ftr_pattern_1>&ftr=...
-    //          Order of query params is not important. Query param
-    //          'str' is optional.
-    //pattern : * | name[.*], where name is a path expression.
-    //descript: removes all records with features matching the
-    //          feature pattern(s), for the specified stereotype(s):
-    //          either for all stereotypes if 'str' is omitted, or
-    //          for a single stereotype. If no (stereotype, feature)
-    //          in DB matches the patterns, no record will be deleted
-    //          (200 OK will still be returned). If the error code
-    //          401 is returned then no records have been deleted.
-    //example : ster?com=remftr&str=guest&ftr=lang.*&ftr=interested
-    //          ster?com=remftr&ftr=education
-    //          ster?com=remftr&ftr=*   (deletes all rows in table)
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
-    //          <result>
-    //          <row><num_of_rows>number of relevant rows</num_of_rows></row>
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
-    private int comSterRemAttr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int respCode = PSReqWorker.NORMAL;
-        try {
-            //first connect to DB
-            dbAccess.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return PSReqWorker.SERVER_ERR;
-        }
-
-        //execute the command
-        try {
-            boolean success = true;
-            success = execSterRemAttr(queryParam, respBody, dbAccess);
-            //-end transaction body
-            if (success) {
-                dbAccess.commit();
-            } else {
-                dbAccess.rollback();
-                respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
-                WebServer.win.log.warn("-DB rolled back, data not saved");
-            }
-            //disconnect from DB anyway
-            dbAccess.disconnect();
-        } catch (SQLException e) {  //problem with transaction
-            respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-DB Transaction problem: " + e);
-        }
-        return respCode;
-    }
-
-    private boolean execSterRemAttr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        //request properties
-        int qpSize = queryParam.size();
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        String clientName = (String) queryParam.getVal(clntIdx);
-        int comIdx = queryParam.qpIndexOfKeyNoCase("com");
-        int strIdx = queryParam.qpIndexOfKeyNoCase("str");
-        String strCondition = (strIdx == -1) ? "" : "sp_stereotype='" + ((String) queryParam.getVal(strIdx)) + "' and ";
-        //execute request
-        boolean success = true;
-        String query;
-        int rowsAffected = 0;
-        try {
-            //delete rows of matching features for specified stereotype(s)            
-            for (int i = 0; i < qpSize; i++) {
-                if (i != comIdx && i != strIdx && i != clntIdx) {  //'com' and 'str' excluded, even if 'str' is -1
-                    String key = (String) queryParam.getKey(i);
-                    if (key.equalsIgnoreCase("ftr")) {
-                        String ftrCondition = DBAccess.ftrPatternCondition((String) queryParam.getVal(i));
-                        //if (db.compareTo("ACCESS") == 0) {  //database type is MS-Access
-                        query = "delete from stereotype_profiles where " + strCondition + "sp_feature in (select sp_feature from stereotype_profiles " + "where sp_feature" + ftrCondition + ") and FK_psclient='" + clientName + "' ";
-                        rowsAffected += dbAccess.executeUpdate(query);
-                    } else {
-                        success = false;
-                    }  //request is not valid, rollback
-                }
-                if (!success) {
-                    break;
-                }  //discontinue loop, rollback
-            }
-            //format response body
-            //response will be used only in case of success
-            respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
-            respBody.append("<result>\n");
-            respBody.append("<row><num_of_rows>" + rowsAffected + "</num_of_rows></row>\n");
-            respBody.append("</result>");
-        } catch (SQLException e) {
-            success = false;
-            WebServer.win.log.debug("-Problem deleting from DB: " + e);
-        }
-        WebServer.win.log.debug("-Num of rows deleted: " + rowsAffected);
-        return success;
-    }
-
     //-remstr
     //template: ster?com=remstr[&str=<str_1>&str=...][&lke=<str_like_pattern>]
     //          Order of query params is not important. The 'str'
@@ -1404,7 +1228,7 @@ public class Stereotypes implements pserver.pservlets.PService {
                 query = "delete from stereotype_profiles where sp_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
                 rowsAffected += dbAccess.executeUpdate(query);
                 query = "delete from stereotypes where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
-                rowsAffected += dbAccess.executeUpdate(query);                
+                rowsAffected += dbAccess.executeUpdate(query);
             }
             if (qpSize == 1) {  //no 'str' and 'lke' query parameters specified
                 //delete rows of all stereotypes
@@ -1951,86 +1775,86 @@ public class Stereotypes implements pserver.pservlets.PService {
         return false;
         //try {
             /*
-            boolean success = true;
-            int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-            String clientName = (String) queryParam.getVal(clntIdx);
+         boolean success = true;
+         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+         String clientName = (String) queryParam.getVal(clntIdx);
 
-            Statement stmt = dbAccess.getConnection().createStatement();
-            String sql;
-            sql = "SELECT * FROM " + DBAccess.ATTRIBUTES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
-            ResultSet rs = stmt.executeQuery(sql);
-            LinkedList<String> attributes = new LinkedList<String>();
-            while (rs.next()) {
-                attributes.add(rs.getString(1));
-            }
-            rs.close();
+         Statement stmt = dbAccess.getConnection().createStatement();
+         String sql;
+         sql = "SELECT * FROM " + DBAccess.ATTRIBUTES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+         ResultSet rs = stmt.executeQuery(sql);
+         LinkedList<String> attributes = new LinkedList<String>();
+         while (rs.next()) {
+         attributes.add(rs.getString(1));
+         }
+         rs.close();
 
-            sql = "SELECT " + DBAccess.USER_TABLE_FIELD_USER + " FROM " + DBAccess.USER_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' LIMIT ? OFFSET ?";
-            PreparedStatement userStmt = dbAccess.getConnection().prepareStatement(sql);
-            sql = "SELECT * FROM " + DBAccess.UATTR_TABLE + " WHERE " + DBAccess.UATTR_TABLE_FIELD_USER + "=? AND " + DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + " = ? AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
-            PreparedStatement getUserAttrsStmt = dbAccess.getConnection().prepareStatement(sql);
-            sql = "INSERT DELAYED INTO " + DBAccess.STEREOTYPE_TABLE + " VALUES ( ?,'" + clientName + "')";
-            PreparedStatement insertStereotype = dbAccess.getConnection().prepareStatement(sql);
-            sql = "INSERT DELAYED INTO " + DBAccess.STEREOTYPE_ATTIBUTE_TABLE + " VALUES ( ?,?,?,'" + clientName + "')";
-            PreparedStatement insertStereotypeAttrs = dbAccess.getConnection().prepareStatement(sql);
-            int i = 0;
-            int userSize = 1000;
-            int offset = 0;
-            Set<String> stereotypes = new TreeSet<String>();
-            do {
-                i = 0;
-                userStmt.setInt(1, userSize);
-                userStmt.setInt(2, offset);
-                rs = userStmt.executeQuery();
-                while (rs.next()) {
-                    StringBuffer sterName = new StringBuffer();
-                    String user = rs.getString(1);
-                    getUserAttrsStmt.setString(1, user);
-                    for (String attr : attributes) {
-                        getUserAttrsStmt.setString(2, attr);
-                        ResultSet retAttrs = getUserAttrsStmt.executeQuery();
-                        if (retAttrs.next() == false) {
-                            sterName.append("NULL_");
-                        } else {
-                            String val = retAttrs.getString(3);
-                            sterName.append(val + "_");
-                        }
-                        retAttrs.close();
-                    }
-                    stereotypes.add(sterName.toString());
-                    i++;
-                }
-                rs.close();
-                offset += userSize;
-            } while (i == userSize);
-            for (String ster : stereotypes) {
-                insertStereotype.clearParameters();
-                insertStereotype.setString(1, ster);
-                insertStereotype.addBatch();
-                String[] vals = ster.split("_");
-                i = 0;
-                for (String attr : attributes) {
-                    insertStereotypeAttrs.clearParameters();
-                    insertStereotypeAttrs.setString(1, ster);
-                    insertStereotypeAttrs.setString(2, attr);
-                    insertStereotypeAttrs.setString(3, vals[i]);
-                    insertStereotypeAttrs.addBatch();
-                    i++;
-                }
-            }
-            insertStereotype.executeBatch();
-            insertStereotypeAttrs.executeBatch();
-            userStmt.close();
-            getUserAttrsStmt.close();
-            insertStereotype.close();
-            insertStereotypeAttrs.close();
+         sql = "SELECT " + DBAccess.USER_TABLE_FIELD_USER + " FROM " + DBAccess.USER_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' LIMIT ? OFFSET ?";
+         PreparedStatement userStmt = dbAccess.getConnection().prepareStatement(sql);
+         sql = "SELECT * FROM " + DBAccess.UATTR_TABLE + " WHERE " + DBAccess.UATTR_TABLE_FIELD_USER + "=? AND " + DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + " = ? AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+         PreparedStatement getUserAttrsStmt = dbAccess.getConnection().prepareStatement(sql);
+         sql = "INSERT DELAYED INTO " + DBAccess.STEREOTYPE_TABLE + " VALUES ( ?,'" + clientName + "')";
+         PreparedStatement insertStereotype = dbAccess.getConnection().prepareStatement(sql);
+         sql = "INSERT DELAYED INTO " + DBAccess.STEREOTYPE_ATTIBUTE_TABLE + " VALUES ( ?,?,?,'" + clientName + "')";
+         PreparedStatement insertStereotypeAttrs = dbAccess.getConnection().prepareStatement(sql);
+         int i = 0;
+         int userSize = 1000;
+         int offset = 0;
+         Set<String> stereotypes = new TreeSet<String>();
+         do {
+         i = 0;
+         userStmt.setInt(1, userSize);
+         userStmt.setInt(2, offset);
+         rs = userStmt.executeQuery();
+         while (rs.next()) {
+         StringBuffer sterName = new StringBuffer();
+         String user = rs.getString(1);
+         getUserAttrsStmt.setString(1, user);
+         for (String attr : attributes) {
+         getUserAttrsStmt.setString(2, attr);
+         ResultSet retAttrs = getUserAttrsStmt.executeQuery();
+         if (retAttrs.next() == false) {
+         sterName.append("NULL_");
+         } else {
+         String val = retAttrs.getString(3);
+         sterName.append(val + "_");
+         }
+         retAttrs.close();
+         }
+         stereotypes.add(sterName.toString());
+         i++;
+         }
+         rs.close();
+         offset += userSize;
+         } while (i == userSize);
+         for (String ster : stereotypes) {
+         insertStereotype.clearParameters();
+         insertStereotype.setString(1, ster);
+         insertStereotype.addBatch();
+         String[] vals = ster.split("_");
+         i = 0;
+         for (String attr : attributes) {
+         insertStereotypeAttrs.clearParameters();
+         insertStereotypeAttrs.setString(1, ster);
+         insertStereotypeAttrs.setString(2, attr);
+         insertStereotypeAttrs.setString(3, vals[i]);
+         insertStereotypeAttrs.addBatch();
+         i++;
+         }
+         }
+         insertStereotype.executeBatch();
+         insertStereotypeAttrs.executeBatch();
+         userStmt.close();
+         getUserAttrsStmt.close();
+         insertStereotype.close();
+         insertStereotypeAttrs.close();
 
-            return success;
-        } catch (SQLException ex) {
-            WebServer.win.log.error(ex.toString());
-            ex.printStackTrace();
-            return false;
-        }*/
+         return success;
+         } catch (SQLException ex) {
+         WebServer.win.log.error(ex.toString());
+         ex.printStackTrace();
+         return false;
+         }*/
     }
 
     private int comSterUpdate(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -2039,8 +1863,8 @@ public class Stereotypes implements pserver.pservlets.PService {
             //first connect to DB
             dbAccess.connect();
             //execute the command
-            boolean success;
-            success = updateStereotypes(queryParam, respBody, dbAccess);
+            boolean success = true;
+            //success = updateStereotypes(queryParam, respBody, dbAccess);
             //check success
             if (!success) {
                 respCode = PSReqWorker.REQUEST_ERR;  //incomprehensible client request
@@ -2053,126 +1877,5 @@ public class Stereotypes implements pserver.pservlets.PService {
             return PSReqWorker.SERVER_ERR;
         }
         return respCode;
-    }
-
-    private boolean updateStereotypes(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        return false;
-        /*try {
-            boolean success = true;
-            int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-            String clientName = (String) queryParam.getVal(clntIdx);
-
-            Statement stmt = dbAccess.getConnection().createStatement();
-            String sql;
-            sql = "SELECT * FROM " + DBAccess.STEREOTYPE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
-            ResultSet rs = stmt.executeQuery(sql);
-            LinkedList<String> stereotypes = new LinkedList<String>();
-            while (rs.next()) {
-                stereotypes.add(rs.getString(1));
-            }
-            rs.close();
-
-            sql = "SELECT * FROM " + DBAccess.ATTRIBUTES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
-            rs = stmt.executeQuery(sql);
-            LinkedList<String> attributes = new LinkedList<String>();
-            while (rs.next()) {
-                attributes.add(rs.getString(1));
-            }
-            rs.close();
-
-            sql = "SELECT * FROM " + DBAccess.STEREOTYPE_ATTIBUTE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_ATTIBUTE_TABLE_FIELD_STEREOTYPE + "=? ";
-            PreparedStatement sterAttrStmt = dbAccess.getConnection().prepareStatement(sql);
-            for (String ster : stereotypes) {
-                sterAttrStmt.setString(1, ster);
-                rs = sterAttrStmt.executeQuery();
-                HashMap<String, String> attributesVals = new HashMap<String, String>();
-                sql = "SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM " + DBAccess.UATTR_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND ";
-                int i = 0;
-                while (rs.next()) {
-                    String attr = rs.getString(2);
-                    String val = rs.getString(3);
-                    attributesVals.put(attr, val);
-                    if (i == 0) {
-                        sql += " ( " + DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + " = ? and " + DBAccess.UATTR_TABLE_FIELD_VALUE + " = ? ) ";
-                    } else {
-                        sql += " OR ( " + DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + " = ? and " + DBAccess.UATTR_TABLE_FIELD_VALUE + " = ? ) ";
-                    }
-                    i++;
-                }
-                rs.close();
-                sql += " group by " + DBAccess.UATTR_TABLE_FIELD_USER + " having count(*) =" + i;
-            }
-            PreparedStatement getUserStereotypes = dbAccess.getConnection().prepareStatement(sql);
-            sql = "REPLACE INTO " + DBAccess.STEREOTYPE_USERS_TABLE + " VALUES(?,?,1,'" + clientName + "')";
-            PreparedStatement insertUserStereotypes = dbAccess.getConnection().prepareStatement(sql);
-
-            sql = "REPLACE DELAYED INTO " + DBAccess.STERETYPE_PROFILES_TABLE + " SELECT ?, " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + ",'', AVG(" + DBAccess.UPROFILE_TABLE_FIELD_VALUE + "),'" + clientName + "' FROM " + DBAccess.UPROFILE_TABLE + "," + DBAccess.STEREOTYPE_USERS_TABLE + " where "
-                    + DBAccess.UPROFILE_TABLE_FIELD_USER + "=" + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + " AND " + DBAccess.STEREOTYPE_USERS_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "= ? AND "
-                    + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' GROUP BY " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE;
-            PreparedStatement insertStereotypesProfile = dbAccess.getConnection().prepareStatement(sql);
-
-            sql = "REPLACE DELAYED INTO " + DBAccess.STERETYPE_STATISTICS_TABLE + " SELECT ?, " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE + "," + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE+ ", AVG(" + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE + "),'" + clientName + "' FROM " + DBAccess.FEATURE_STATISTICS_TABLE + "," + DBAccess.STEREOTYPE_USERS_TABLE + " where "
-                    + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "=" + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + " AND " + DBAccess.STEREOTYPE_USERS_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "= ? AND "
-                    + DBAccess.FEATURE_STATISTICS_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' GROUP BY " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE + "," + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE;
-            PreparedStatement insertStereotypesStatistics = dbAccess.getConnection().prepareStatement(sql);
-
-            sql = "REPLACE DELAYED INTO " + DBAccess.SFTRASSOCIATIONS_TABLE + " SELECT ftr_src, ftr_src, AVG(weight),type, ?, '" + clientName + "' FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + "," + DBAccess.STEREOTYPE_USERS_TABLE +
-                    " WHERE user=su_user AND stereotype_users.FK_psclient='" + clientName + "' AND user_feature_associations.FK_psclient='" + clientName + "' AND su_stereotype= ? GROUP BY ftr_src,ftr_dst,type";
-            PreparedStatement insertStereotypesAssociations = dbAccess.getConnection().prepareStatement(sql);
-
-            int k = 1;            
-            for (String ster : stereotypes) {                
-                WebServer.win.log.echo("Building profile for stereotype " + ster + " num "+ k + " of " + stereotypes.size() );                
-                k++;
-                sterAttrStmt.setString(1, ster);
-                rs = sterAttrStmt.executeQuery();
-                HashMap<String, String> attributesVals = new HashMap<String, String>();
-                int i = 1;
-                while (rs.next()) {
-                    String attr = rs.getString(2);
-                    String val = rs.getString(3);
-                    getUserStereotypes.setString(i, attr);
-                    getUserStereotypes.setString(i + 1, val);
-                    i += 2;
-                }
-                rs.close();                
-
-                rs = getUserStereotypes.executeQuery();
-                while (rs.next()) {
-                    String user = rs.getString(1);                    
-                    insertUserStereotypes.setString(1, user);
-                    insertUserStereotypes.setString(2, ster);
-                    insertUserStereotypes.addBatch();
-                }
-                insertUserStereotypes.executeBatch();
-
-                insertStereotypesProfile.setString(1, ster);
-                insertStereotypesProfile.setString(2, ster);
-                insertStereotypesProfile.execute();
-                          
-                insertStereotypesStatistics.setString(1, ster);
-                insertStereotypesStatistics.setString(2, ster);                
-                insertStereotypesStatistics.execute();                
-
-                insertStereotypesAssociations.setString(1, ster);
-                insertStereotypesAssociations.setString(2, ster);
-                insertStereotypesAssociations.execute();
-            }
-
-            insertStereotypesProfile.close();
-            insertUserStereotypes.close();
-            getUserStereotypes.close();
-            sterAttrStmt.close();
-            stmt.close();
-            insertStereotypesStatistics.close();
-            insertStereotypesAssociations.close();            
-            return success;
-        } catch (SQLException ex) {
-            WebServer.win.log.error(ex.toString());
-            ex.printStackTrace();
-            return false;
-        }
-         *
-         */
     }
 }

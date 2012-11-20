@@ -2519,3 +2519,414 @@
 6/9/2012 21:52:49  >  Connected to DB: MySQL
 6/9/2012 21:52:55  >  Request from /127.0.0.1 (60823)
 6/9/2012 21:52:55  >  60823-        /commu?clnt=test|test&com=calcudist&smetric=cos&th%3E0.95
+19/11/2012 12:39:6  >  Server started at alex-desktop/127.0.1.1, port 1111
+19/11/2012 12:39:6  >  Messages log mode set to: on
+19/11/2012 12:39:7  >  Connected to DB: MySQL
+19/11/2012 12:39:26  >  Request from /127.0.0.1 (44092)
+19/11/2012 12:39:26  >  44092-        /
+19/11/2012 12:39:26  >  Request from /127.0.0.1 (44093)
+19/11/2012 12:39:26  >  44093-        /favicon.ico
+19/11/2012 12:39:27  >  Request from /127.0.0.1 (44094)
+19/11/2012 12:39:27  >  44094-        /favicon.ico
+19/11/2012 12:39:31  >  Request from /127.0.0.1 (44095)
+19/11/2012 12:39:32  >  44095-        /admin?com=login&login_name=admin&login_password=admin
+19/11/2012 12:39:40  >  Request from /127.0.0.1 (44096)
+19/11/2012 12:39:41  >  44096-        /admin?com=login&login_name=root&login_password=root
+19/11/2012 12:39:45  >  Request from /127.0.0.1 (44097)
+19/11/2012 12:39:45  >  44097-        /admin?login_name=root&login_password=root&com=login
+19/11/2012 12:39:50  >  Request from /127.0.0.1 (44098)
+19/11/2012 12:39:50  >  44098-        /ster_help/ster_mode.html
+19/11/2012 12:39:50  >  Request from /127.0.0.1 (44099)
+19/11/2012 12:39:50  >  44099-        /ster_help/menu.html
+19/11/2012 12:39:50  >  Request from /127.0.0.1 (44100)
+19/11/2012 12:39:50  >  44100-        /ster_help/ster_index.html
+19/11/2012 12:39:53  >  Request from /127.0.0.1 (44101)
+19/11/2012 12:39:53  >  44101-        /ster_help/addstr.html
+19/11/2012 13:3:45  >  Request from /127.0.0.1 (44966)
+19/11/2012 13:3:45  >  44966-        /pers_help/pers_mode.html
+19/11/2012 13:3:46  >  Request from /127.0.0.1 (44967)
+19/11/2012 13:3:46  >  44967-        /pers_help/menu.html
+19/11/2012 13:3:46  >  Request from /127.0.0.1 (44968)
+19/11/2012 13:3:46  >  44968-        /pers_help/pers_index.html
+19/11/2012 13:4:7  >  Request from /127.0.0.1 (44978)
+19/11/2012 13:4:7  >  44978-        /pers_help/sqlusrattr.html
+19/11/2012 13:8:38  >  Request from /127.0.0.1 (45059)
+19/11/2012 13:8:38  >  45059-        /pers_help/sqlusrattr.html
+19/11/2012 13:8:54  >  Request from /127.0.0.1 (45060)
+19/11/2012 13:8:54  >  45060-        /pers_help/sqlusrftr.html
+19/11/2012 13:9:2  >  Request from /127.0.0.1 (45061)
+19/11/2012 13:9:2  >  45061-        /pers_help/sqlndt.html
+19/11/2012 13:9:10  >  Request from /127.0.0.1 (45062)
+19/11/2012 13:9:10  >  45062-        /pers_help/sqlusrftr.html
+19/11/2012 20:37:20  >  Request from /127.0.0.1 (36460)
+19/11/2012 20:37:20  >  36460-        /ster_help/ster_mode.html
+19/11/2012 20:37:21  >  Request from /127.0.0.1 (36461)
+19/11/2012 20:37:21  >  Request from /127.0.0.1 (36462)
+19/11/2012 20:37:21  >  36462-        /ster_help/ster_index.html
+19/11/2012 20:37:21  >  36461-        /ster_help/menu.html
+19/11/2012 20:37:43  >  Request from /127.0.0.1 (36471)
+19/11/2012 20:37:43  >  36471-        /ster_help/incdeg.html
+19/11/2012 22:31:43  >  Server started at alex-desktop/127.0.1.1, port 1111
+19/11/2012 22:31:43  >  Messages log mode set to: on
+19/11/2012 22:31:44  >  Connected to DB: MySQL
+19/11/2012 22:31:50  >  Request from /127.0.0.1 (43005)
+19/11/2012 22:31:50  >  43005-        /ster_help/addstr.html
+19/11/2012 22:56:10  >  Request from /127.0.0.1 (43592)
+19/11/2012 22:56:10  >  43592-        /ster_help/ster_mode.html
+19/11/2012 22:56:10  >  Request from /127.0.0.1 (43594)
+19/11/2012 22:56:10  >  Request from /127.0.0.1 (43593)
+19/11/2012 22:56:10  >  43593-        /ster_help/menu.html
+19/11/2012 22:56:10  >  43594-        /ster_help/ster_index.html
+19/11/2012 22:56:15  >  Request from /127.0.0.1 (43595)
+19/11/2012 22:56:15  >  43595-        /ster_help/addstr.html
+19/11/2012 22:56:29  >  Request from /127.0.0.1 (43606)
+19/11/2012 22:56:29  >  43606-        /ster_help/addusr.html
+19/11/2012 22:56:30  >  Request from /127.0.0.1 (43607)
+19/11/2012 22:56:30  >  43607-        /ster_help/addstr.html
+19/11/2012 23:0:19  >  Request from /127.0.0.1 (43646)
+19/11/2012 23:0:24  >  43646-Problem parsing request: java.util.NoSuchElementException
+19/11/2012 23:0:28  >  Request from /127.0.0.1 (43656)
+19/11/2012 23:0:28  >  43656-        /ster_help/addstr.html
+19/11/2012 23:0:34  >  Request from /127.0.0.1 (43657)
+19/11/2012 23:0:34  >  43657-        /ster_help/addusr.html
+19/11/2012 23:0:35  >  Request from /127.0.0.1 (43658)
+19/11/2012 23:0:35  >  43658-        /ster_help/addstr.html
+19/11/2012 23:0:36  >  Request from /127.0.0.1 (43659)
+19/11/2012 23:0:36  >  43659-        /ster_help/addusr.html
+19/11/2012 23:0:37  >  Request from /127.0.0.1 (43660)
+19/11/2012 23:0:37  >  43660-        /ster_help/addstr.html
+19/11/2012 23:11:30  >  Request from /127.0.0.1 (44674)
+19/11/2012 23:11:30  >  44674-        /ster?clnt=name|pass&com=addstr&str=educated
+19/11/2012 23:13:45  >  Request from /127.0.0.1 (44724)
+19/11/2012 23:13:45  >  44724-        /pers_help/pers_mode.html
+19/11/2012 23:13:45  >  Request from /127.0.0.1 (44725)
+19/11/2012 23:13:45  >  Request from /127.0.0.1 (44726)
+19/11/2012 23:13:45  >  44726-        /pers_help/pers_index.html
+19/11/2012 23:13:45  >  44725-        /pers_help/menu.html
+19/11/2012 23:16:0  >  Server started at alex-desktop/127.0.1.1, port 1111
+19/11/2012 23:16:0  >  Messages log mode set to: on
+19/11/2012 23:16:1  >  Connected to DB: MySQL
+20/11/2012 0:16:38  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 0:16:38  >  Messages log mode set to: on
+20/11/2012 0:16:38  >  Connected to DB: MySQL
+20/11/2012 0:16:48  >  Request from /127.0.0.1 (46253)
+20/11/2012 0:16:48  >  46253-        /ster?clnt=name|pass&com=addstr&str=educated
+20/11/2012 0:16:51  >  Request from /127.0.0.1 (46255)
+20/11/2012 0:16:51  >  46255-        /ster?clnt=name|pass&com=addstr&str=educated
+20/11/2012 2:30:40  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 2:30:40  >  Messages log mode set to: on
+20/11/2012 2:30:40  >  Connected to DB: MySQL
+20/11/2012 2:31:14  >  Request from /127.0.0.1 (51891)
+20/11/2012 2:31:14  >  51891-        /
+20/11/2012 2:31:14  >  Request from /127.0.0.1 (51892)
+20/11/2012 2:31:14  >  51892-        /favicon.ico
+20/11/2012 2:31:14  >  Request from /127.0.0.1 (51893)
+20/11/2012 2:31:14  >  51893-        /favicon.ico
+20/11/2012 2:31:20  >  Request from /127.0.0.1 (51894)
+20/11/2012 2:31:20  >  51894-        /admin?com=login&login_name=root&login_password=root
+20/11/2012 2:31:27  >  Request from /127.0.0.1 (51895)
+20/11/2012 2:31:27  >  51895-        /ster_help/ster_mode.html
+20/11/2012 2:31:27  >  Request from /127.0.0.1 (51897)
+20/11/2012 2:31:27  >  Request from /127.0.0.1 (51896)
+20/11/2012 2:31:27  >  51896-        /ster_help/ster_index.html
+20/11/2012 2:31:27  >  51897-        /ster_help/menu.html
+20/11/2012 2:31:31  >  Request from /127.0.0.1 (51898)
+20/11/2012 2:31:31  >  51898-        /ster_help/addstr.html
+20/11/2012 2:33:10  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 2:33:10  >  Messages log mode set to: on
+20/11/2012 2:33:10  >  Connected to DB: MySQL
+20/11/2012 2:34:5  >  Request from /127.0.0.1 (51938)
+20/11/2012 2:34:5  >  51938-        /ster?clnt=name|pass&com=addstr&str=educated&expert.computer:yes|and|educ:3
+20/11/2012 2:34:23  >  Request from /127.0.0.1 (51940)
+20/11/2012 2:34:23  >  51940-        /ster?clnt=name|pass&com=addstr&str=educated1&expert.computer:yes|and|educ:3
+20/11/2012 2:34:28  >  Request from /127.0.0.1 (51942)
+20/11/2012 2:34:28  >  51942-        /ster?clnt=name|pass&com=addstr&str=educated1&expert.computer:yes|and|educ:3
+20/11/2012 2:44:35  >  Shutting down server, normal: true
+20/11/2012 2:44:39  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 2:44:39  >  Messages log mode set to: on
+20/11/2012 2:44:40  >  Connected to DB: MySQL
+20/11/2012 2:44:57  >  Request from /127.0.0.1 (52534)
+20/11/2012 2:44:57  >  52534-        /ster?clnt=aname|pass&com=addstr&str=educated3&expert.computer:yes|and|educ:3
+20/11/2012 2:45:43  >  Request from /127.0.0.1 (52536)
+20/11/2012 2:45:43  >  52536-        /ster?clnt=aname|pass&com=addstr&str=educated&rule=expert.computer:yes|and|educ:3
+20/11/2012 2:48:4  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 2:48:4  >  Messages log mode set to: on
+20/11/2012 2:48:4  >  Connected to DB: MySQL
+20/11/2012 2:48:18  >  Request from /127.0.0.1 (52540)
+20/11/2012 2:48:18  >  52540-        /ster?clnt=aname|pass&com=addstr&str=educated&rule=expert.computer:yes|and|educ:3
+20/11/2012 2:48:20  >  Request from /127.0.0.1 (52542)
+20/11/2012 2:48:20  >  52542-        /ster?clnt=aname|pass&com=addstr&str=educated&rule=expert.computer:yes|and|educ:3
+20/11/2012 2:49:32  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 2:49:32  >  Messages log mode set to: on
+20/11/2012 2:49:33  >  Connected to DB: MySQL
+20/11/2012 2:49:36  >  Request from /127.0.0.1 (52547)
+20/11/2012 2:49:36  >  52547-        /ster_help/ster_mode.html
+20/11/2012 2:49:36  >  Request from /127.0.0.1 (52548)
+20/11/2012 2:49:36  >  Request from /127.0.0.1 (52549)
+20/11/2012 2:49:36  >  52548-        /ster_help/ster_index.html
+20/11/2012 2:49:36  >  52549-        /ster_help/menu.html
+20/11/2012 2:49:36  >  Request from /127.0.0.1 (52550)
+20/11/2012 2:49:36  >  52550-        /favicon.ico
+20/11/2012 2:49:41  >  Request from /127.0.0.1 (52551)
+20/11/2012 2:49:41  >  52551-        /ster_help/addstr.html
+20/11/2012 2:49:46  >  Request from /127.0.0.1 (52552)
+20/11/2012 2:49:46  >  52552-        /ster_help/addstr.html
+20/11/2012 2:49:53  >  Request from /127.0.0.1 (52553)
+20/11/2012 2:49:53  >  52553-        /ster?clnt=aname|pass&com=addstr&str=educated&rule=expert.computer:yes|and|educ:3
+20/11/2012 2:50:1  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 2:50:1  >  Messages log mode set to: on
+20/11/2012 2:50:1  >  Connected to DB: MySQL
+20/11/2012 2:50:6  >  Request from /127.0.0.1 (52558)
+20/11/2012 2:50:6  >  52558-        /ster?clnt=aname|pass&com=addstr&str=educated&rule=expert.computer:yes|and|educ:3
+20/11/2012 2:50:32  >  Shutting down server, normal: true
+20/11/2012 2:51:3  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 2:51:3  >  Messages log mode set to: on
+20/11/2012 2:51:3  >  Connected to DB: MySQL
+20/11/2012 2:51:5  >  Request from /127.0.0.1 (52563)
+20/11/2012 2:51:5  >  52563-        /ster?clnt=aname|pass&com=addstr&str=educated&rule=expert.computer:yes|and|educ:3
+20/11/2012 2:51:26  >  Request from /127.0.0.1 (52565)
+20/11/2012 2:51:26  >  52565-        /favicon.ico
+20/11/2012 2:57:14  >  Request from /127.0.0.1 (52957)
+20/11/2012 2:57:14  >  52957-        /ster?clnt=aname|pass&com=addstr&str=educateds&rule=expert.computer:yes|and|educ:3
+20/11/2012 3:20:53  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 3:20:53  >  Messages log mode set to: on
+20/11/2012 3:20:53  >  Connected to DB: MySQL
+20/11/2012 3:22:51  >  Request from /127.0.0.1 (54001)
+20/11/2012 3:22:51  >  54001-        /ster?clnt=aname|pass&com=addstr&str=aeducateds&rule=expert.computer:yes|and|educ:3|or|(((atr1:val1)|and|attr2%3C%3Eval3))
+20/11/2012 3:23:32  >  Shutting down server, normal: true
+20/11/2012 3:23:54  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 3:23:54  >  Messages log mode set to: on
+20/11/2012 3:23:54  >  Connected to DB: MySQL
+20/11/2012 3:24:0  >  Request from /127.0.0.1 (54033)
+20/11/2012 3:24:0  >  54033-        /ster?clnt=aname|pass&com=addstr&str=aeducateds&rule=expert.computer:yes|and|educ:3|or|(((atr1:val1)|and|attr2%3C%3Eval3))
+20/11/2012 3:25:55  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 3:25:55  >  Messages log mode set to: on
+20/11/2012 3:25:56  >  Connected to DB: MySQL
+20/11/2012 3:25:58  >  Request from /127.0.0.1 (54060)
+20/11/2012 3:25:58  >  54060-        /ster?clnt=aname|pass&com=addstr&str=aeducateds&rule=expert.computer:yes|and|educ:3|or|(((atr1:val1)|and|attr2%3C%3Eval3))
+20/11/2012 3:31:49  >  Request from /127.0.0.1 (54137)
+20/11/2012 3:31:49  >  54137-        /favicon.ico
+20/11/2012 3:41:13  >  Shutting down server, normal: true
+20/11/2012 4:22:11  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 4:22:11  >  Messages log mode set to: on
+20/11/2012 4:22:12  >  Connected to DB: MySQL
+20/11/2012 4:34:11  >  Request from /127.0.0.1 (55578)
+20/11/2012 4:34:11  >  55578-        /ster?clnt=test|test&com=addstr&str=test1&rule=gender:45
+20/11/2012 4:34:53  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 4:34:53  >  Messages log mode set to: on
+20/11/2012 4:34:54  >  Connected to DB: MySQL
+20/11/2012 4:35:4  >  Request from /127.0.0.1 (55591)
+20/11/2012 4:35:4  >  55591-        /ster?clnt=test|test&com=addstr&str=test1&rule=gender:45
+20/11/2012 4:35:4  >  Request from /127.0.0.1 (55593)
+20/11/2012 4:35:4  >  55593-        /favicon.ico
+20/11/2012 4:35:11  >  Request from /127.0.0.1 (55594)
+20/11/2012 4:35:11  >  55594-        /ster?clnt=test|test&com=addstr&str=test2&rule=gender:45
+20/11/2012 4:41:54  >  Shutting down server, normal: true
+20/11/2012 4:41:58  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 4:41:58  >  Messages log mode set to: on
+20/11/2012 4:41:58  >  Connected to DB: MySQL
+20/11/2012 4:42:17  >  Request from /127.0.0.1 (55879)
+20/11/2012 4:42:17  >  55879-        /ster?clnt=test|test&com=addstr&str=test5&rule=gender:45
+20/11/2012 16:41:4  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 16:41:4  >  Messages log mode set to: on
+20/11/2012 16:41:6  >  Connected to DB: MySQL
+20/11/2012 16:44:21  >  Request from /127.0.0.1 (45012)
+20/11/2012 16:44:21  >  45012-        /
+20/11/2012 16:44:21  >  Request from /127.0.0.1 (45013)
+20/11/2012 16:44:21  >  45013-        /favicon.ico
+20/11/2012 16:44:24  >  Request from /127.0.0.1 (45014)
+20/11/2012 16:44:24  >  45014-        /admin?com=login&login_name=root&login_password=root
+20/11/2012 16:44:26  >  Request from /127.0.0.1 (45015)
+20/11/2012 16:44:27  >  45015-        /ster_help/ster_mode.html
+20/11/2012 16:44:27  >  Request from /127.0.0.1 (45016)
+20/11/2012 16:44:27  >  Request from /127.0.0.1 (45017)
+20/11/2012 16:44:27  >  45017-        /ster_help/menu.html
+20/11/2012 16:44:27  >  45016-        /ster_help/ster_index.html
+20/11/2012 16:44:30  >  Request from /127.0.0.1 (45018)
+20/11/2012 16:44:30  >  45018-        /ster_help/addstr.html
+20/11/2012 16:46:16  >  Request from /127.0.1.1 (34442)
+20/11/2012 16:46:16  >  34442-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 16:47:25  >  Shutting down server, normal: true
+20/11/2012 16:47:29  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 16:47:29  >  Messages log mode set to: on
+20/11/2012 16:47:29  >  Connected to DB: MySQL
+20/11/2012 16:47:50  >  Request from /127.0.1.1 (34468)
+20/11/2012 16:47:50  >  34468-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 16:49:1  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 16:49:1  >  Messages log mode set to: on
+20/11/2012 16:49:1  >  Connected to DB: MySQL
+20/11/2012 16:49:7  >  Request from /127.0.1.1 (34495)
+20/11/2012 16:49:7  >  34495-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 16:52:10  >  Problem resolving localhost: java.net.BindException: Address already in use
+20/11/2012 16:52:10  >  Server started at , port -1
+20/11/2012 16:52:10  >  Messages log mode set to: on
+20/11/2012 16:52:11  >  Connected to DB: MySQL
+20/11/2012 16:56:26  >  Request from /127.0.1.1 (34746)
+20/11/2012 16:56:26  >  34746-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 16:56:45  >  Shutting down server, normal: true
+20/11/2012 16:56:57  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 16:56:57  >  Messages log mode set to: on
+20/11/2012 16:56:57  >  Connected to DB: MySQL
+20/11/2012 16:57:2  >  Request from /127.0.1.1 (34760)
+20/11/2012 16:57:2  >  34760-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 16:57:42  >  Request from /127.0.1.1 (34766)
+20/11/2012 16:57:42  >  34766-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 16:58:9  >  Shutting down server, normal: true
+20/11/2012 16:58:10  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 16:58:10  >  Messages log mode set to: on
+20/11/2012 16:58:10  >  Connected to DB: MySQL
+20/11/2012 16:58:13  >  Problem resolving localhost: java.net.BindException: Address already in use
+20/11/2012 16:58:13  >  Server started at , port -1
+20/11/2012 16:58:13  >  Messages log mode set to: on
+20/11/2012 16:58:13  >  Connected to DB: MySQL
+20/11/2012 16:58:27  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 16:58:27  >  Messages log mode set to: on
+20/11/2012 16:58:27  >  Connected to DB: MySQL
+20/11/2012 16:59:10  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 16:59:10  >  Messages log mode set to: on
+20/11/2012 16:59:10  >  Connected to DB: MySQL
+20/11/2012 16:59:34  >  Request from /127.0.1.1 (34810)
+20/11/2012 16:59:34  >  34810-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 17:1:58  >  Shutting down server, normal: true
+20/11/2012 17:2:34  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 17:2:34  >  Messages log mode set to: on
+20/11/2012 17:2:35  >  Connected to DB: MySQL
+20/11/2012 17:4:33  >  Request from /127.0.1.1 (34885)
+20/11/2012 17:4:33  >  34885-        /ster?clnt=name|pass&com=addstr&str=educated&rule=gender:45
+20/11/2012 17:4:52  >  Request from /127.0.0.1 (45485)
+20/11/2012 17:4:52  >  45485-        /ster_help/addusr.html
+20/11/2012 17:12:55  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 17:12:55  >  Messages log mode set to: on
+20/11/2012 17:12:55  >  Connected to DB: MySQL
+20/11/2012 17:12:58  >  Request from /127.0.0.1 (45765)
+20/11/2012 17:12:58  >  45765-        /ster_help/addusr.html
+20/11/2012 17:28:12  >  Shutting down server, normal: true
+20/11/2012 17:35:27  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 17:35:27  >  Messages log mode set to: on
+20/11/2012 17:35:27  >  Connected to DB: MySQL
+20/11/2012 17:35:44  >  Request from /127.0.1.1 (35685)
+20/11/2012 17:35:44  >  35685-        /ster?clnt=name|pass&com=addstr&str=educated2&rule=gender:45
+20/11/2012 17:47:45  >  Request from /127.0.0.1 (46607)
+20/11/2012 17:47:45  >  46607-        /ster_help/sqlstr.html
+20/11/2012 17:47:51  >  Request from /127.0.0.1 (46608)
+20/11/2012 17:47:51  >  46608-        /ster_help/setstr.html
+20/11/2012 18:5:57  >  Request from /127.0.0.1 (47237)
+20/11/2012 18:5:57  >  47237-        /ster_help/ster_mode.html
+20/11/2012 18:5:57  >  Request from /127.0.0.1 (47239)
+20/11/2012 18:5:57  >  Request from /127.0.0.1 (47238)
+20/11/2012 18:5:57  >  47239-        /ster_help/menu.html
+20/11/2012 18:5:57  >  47238-        /ster_help/ster_index.html
+20/11/2012 18:36:1  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 18:36:1  >  Messages log mode set to: on
+20/11/2012 18:36:2  >  Connected to DB: MySQL
+20/11/2012 18:36:5  >  Request from /127.0.0.1 (48056)
+20/11/2012 18:36:5  >  48056-        /ster_help/ster_mode.html
+20/11/2012 18:36:5  >  Request from /127.0.0.1 (48057)
+20/11/2012 18:36:5  >  Request from /127.0.0.1 (48058)
+20/11/2012 18:36:5  >  48058-        /ster_help/menu.html
+20/11/2012 18:36:5  >  48057-        /ster_help/ster_index.html
+20/11/2012 18:36:5  >  Request from /127.0.0.1 (48059)
+20/11/2012 18:36:5  >  48059-        /favicon.ico
+20/11/2012 18:36:8  >  Request from /127.0.0.1 (48060)
+20/11/2012 18:36:8  >  48060-        /ster_help/addusr.html
+20/11/2012 18:36:45  >  Request from /127.0.0.1 (48064)
+20/11/2012 18:36:45  >  48064-        /ster_help/addusr.html
+20/11/2012 18:37:22  >  Request from /127.0.0.1 (48075)
+20/11/2012 18:37:22  >  48075-        /ster_help/ster_mode.html
+20/11/2012 18:37:22  >  Request from /127.0.0.1 (48076)
+20/11/2012 18:37:22  >  Request from /127.0.0.1 (48077)
+20/11/2012 18:37:22  >  48076-        /ster_help/ster_index.html
+20/11/2012 18:37:22  >  48077-        /ster_help/menu.html
+20/11/2012 18:37:32  >  Request from /127.0.0.1 (48078)
+20/11/2012 18:37:32  >  48078-        /ster_help/ster_mode.html
+20/11/2012 18:37:32  >  Request from /127.0.0.1 (48079)
+20/11/2012 18:37:32  >  Request from /127.0.0.1 (48080)
+20/11/2012 18:37:32  >  48080-        /ster_help/menu.html
+20/11/2012 18:37:32  >  48079-        /ster_help/ster_index.html
+20/11/2012 18:37:36  >  Request from /127.0.0.1 (48082)
+20/11/2012 18:37:36  >  48082-        /ster_help/addusr.html
+20/11/2012 18:47:54  >  Request from /127.0.1.1 (37733)
+20/11/2012 18:47:54  >  37733-        /ster?clnt=name|pass&com=addusr&usr=10&educated2=1
+20/11/2012 18:51:1  >  Shutting down server, normal: true
+20/11/2012 18:51:33  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 18:51:33  >  Messages log mode set to: on
+20/11/2012 18:51:34  >  Connected to DB: MySQL
+20/11/2012 18:51:37  >  Request from /127.0.1.1 (37781)
+20/11/2012 18:51:37  >  37781-        /ster?clnt=name|pass&com=addusr&usr=10&educated2=1
+20/11/2012 18:52:46  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 18:52:46  >  Messages log mode set to: on
+20/11/2012 18:52:46  >  Connected to DB: MySQL
+20/11/2012 18:52:50  >  Request from /127.0.1.1 (37804)
+20/11/2012 18:52:50  >  37804-        /ster?clnt=name|pass&com=addusr&usr=10&educated2=1
+20/11/2012 18:53:30  >  Request from /127.0.1.1 (37823)
+20/11/2012 18:53:30  >  37823-        /ster?clnt=name|pass&com=addusr&usr=1001&educated2=1
+20/11/2012 19:3:4  >  Request from /127.0.0.1 (48794)
+20/11/2012 19:3:4  >  48794-        /ster_help/getstr.html
+20/11/2012 19:3:6  >  Request from /127.0.0.1 (48795)
+20/11/2012 19:3:6  >  48795-        /ster_help/getusr.html
+20/11/2012 19:3:44  >  Request from /127.0.0.1 (48800)
+20/11/2012 19:3:44  >  48800-        /ster_help/getusr.html
+20/11/2012 19:3:45  >  Request from /127.0.0.1 (48804)
+20/11/2012 19:3:45  >  48804-        /ster_help/getusr.html
+20/11/2012 19:3:45  >  Request from /127.0.0.1 (48806)
+20/11/2012 19:3:45  >  48806-        /ster_help/incdeg.html
+20/11/2012 19:10:37  >  Problem resolving localhost: java.net.BindException: Address already in use
+20/11/2012 19:10:37  >  Server started at , port -1
+20/11/2012 19:10:37  >  Messages log mode set to: on
+20/11/2012 19:10:38  >  Connected to DB: MySQL
+20/11/2012 19:10:41  >  Request from /127.0.1.1 (38327)
+20/11/2012 19:10:41  >  38327-        /ster?clnt=name|pass&com=addusr&usr=1001&educated2=1
+20/11/2012 19:11:0  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 19:11:0  >  Messages log mode set to: on
+20/11/2012 19:11:0  >  Connected to DB: MySQL
+20/11/2012 19:11:3  >  Request from /127.0.1.1 (38342)
+20/11/2012 19:11:3  >  38342-        /ster?clnt=name|pass&com=addusr&usr=1001&educated2=1
+20/11/2012 19:12:0  >  Shutting down server, normal: true
+20/11/2012 19:12:4  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 19:12:4  >  Messages log mode set to: on
+20/11/2012 19:12:4  >  Connected to DB: MySQL
+20/11/2012 19:12:11  >  Request from /127.0.1.1 (38373)
+20/11/2012 19:12:11  >  38373-        /ster?clnt=name|pass&com=addusr&usr=1001&educated2=1
+20/11/2012 20:5:44  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 20:5:44  >  Messages log mode set to: on
+20/11/2012 20:5:44  >  Connected to DB: MySQL
+20/11/2012 20:5:46  >  Request from /127.0.0.1 (51732)
+20/11/2012 20:5:46  >  51732-        /ster_help/incdeg.html
+20/11/2012 20:11:9  >  Shutting down server, normal: true
+20/11/2012 20:11:15  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 20:11:15  >  Messages log mode set to: on
+20/11/2012 20:11:15  >  Connected to DB: MySQL
+20/11/2012 20:11:22  >  Request from /127.0.1.1 (41263)
+20/11/2012 20:11:22  >  41263-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+20/11/2012 20:28:25  >  Request from /127.0.1.1 (41921)
+20/11/2012 20:28:25  >  41921-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+20/11/2012 20:28:55  >  Request from /127.0.1.1 (41941)
+20/11/2012 20:28:55  >  41941-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+20/11/2012 20:33:25  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 20:33:25  >  Messages log mode set to: on
+20/11/2012 20:33:25  >  Connected to DB: MySQL
+20/11/2012 20:33:31  >  Request from /127.0.1.1 (42038)
+20/11/2012 20:33:31  >  42038-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+20/11/2012 20:33:49  >  Shutting down server, normal: true
+20/11/2012 20:33:53  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 20:33:53  >  Messages log mode set to: on
+20/11/2012 20:33:53  >  Connected to DB: MySQL
+20/11/2012 20:34:21  >  Request from /127.0.1.1 (42061)
+20/11/2012 20:34:21  >  42061-        /ster?clnt=test|test&com=addstr&str=educated2&rule=gender:45
+20/11/2012 20:35:36  >  Request from /127.0.1.1 (42080)
+20/11/2012 20:35:36  >  42080-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+20/11/2012 21:30:1  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 21:30:1  >  Messages log mode set to: on
+20/11/2012 21:30:2  >  Connected to DB: MySQL
+20/11/2012 21:30:53  >  Request from /127.0.1.1 (44020)
+20/11/2012 21:30:53  >  44020-        /ster?clnt=test|test&com=incdeg&usr=1001&educated2=-0.1
+20/11/2012 21:33:57  >  Shutting down server, normal: true
+20/11/2012 21:34:1  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 21:34:1  >  Messages log mode set to: on
+20/11/2012 21:34:1  >  Connected to DB: MySQL
+20/11/2012 21:34:5  >  Request from /127.0.1.1 (44053)
+20/11/2012 21:34:5  >  44053-        /ster?clnt=test|test&com=incdeg&usr=1001&educated2=-0.1
+20/11/2012 21:47:54  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 21:47:54  >  Messages log mode set to: on
+20/11/2012 21:47:54  >  Database connection failed
+20/11/2012 21:47:54  >  Shutting down server, normal: false

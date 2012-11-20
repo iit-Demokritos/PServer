@@ -72,6 +72,7 @@ public class ReqWorker extends Thread {
     static public final int NO_SERVICE = -3;    //requested service not supported
     static public final int SERVER_ERR = -4;    //unexpected server error
     static public final int ACCESS_DENIED = -5;    //access denied error
+    static public final int DUBLICATE_ERROR = -6;    //access denied error
     //modes of response, specify process of responding, > 0
     static public final int FILE_MODE = 1;    //request for physical file
     static public final int UPLOAD_MODE = 2;    //request to upload file - NOT SUPPORTED yet
