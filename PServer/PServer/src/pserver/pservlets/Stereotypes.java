@@ -1095,9 +1095,9 @@ public class Stereotypes implements pserver.pservlets.PService {
         try {
             //get matching records
             if ((strCondition + modCondition).equals("") == true) {
-                query = "select st_stereotype from stereotypes where FK_psclient='" + clientName + "'";
+                query = "select st_stereotype," + DBAccess.STEREOTYPE_TABLE_FIELD_RULE + " from stereotypes where FK_psclient='" + clientName + "'";
             } else {
-                query = "select st_stereotype from stereotypes" + strCondition + modCondition + " AND FK_psclient='" + clientName + "'";
+                query = "select st_stereotype," + DBAccess.STEREOTYPE_TABLE_FIELD_RULE + " from stereotypes" + strCondition + modCondition + " AND FK_psclient='" + clientName + "'";
             }
             PServerResultSet rs = dbAccess.executeQuery(query);
             //format response body            
@@ -1105,8 +1105,9 @@ public class Stereotypes implements pserver.pservlets.PService {
             respBody.append("<result>\n");
             while (rs.next()) {
                 String stereotVal = rs.getRs().getString("st_stereotype");  //cannot be null
-                respBody.append("<row><str>" + stereotVal
-                        + "</str></row>\n");
+                String rule = rs.getRs().getString(DBAccess.STEREOTYPE_TABLE_FIELD_RULE);  //cannot be null
+                respBody.append("<row><str>" + stereotVal + "</str></row>\n");
+                respBody.append("<row><rule>" + rule + "</rule></row>\n");
                 rowsAffected += 1;  //number of result rows
             }
             respBody.append("</result>");

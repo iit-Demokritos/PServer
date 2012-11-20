@@ -2930,3 +2930,27 @@
 20/11/2012 21:47:54  >  Messages log mode set to: on
 20/11/2012 21:47:54  >  Database connection failed
 20/11/2012 21:47:54  >  Shutting down server, normal: false
+20/11/2012 21:54:24  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 21:54:24  >  Messages log mode set to: on
+20/11/2012 21:54:24  >  Database connection failed
+20/11/2012 21:54:24  >  Shutting down server, normal: false
+20/11/2012 21:56:40  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 21:56:40  >  Messages log mode set to: on
+20/11/2012 21:56:40  >  Database connection failed
+20/11/2012 21:56:40  >  Shutting down server, normal: false
+20/11/2012 21:57:48  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 21:57:48  >  Messages log mode set to: on
+20/11/2012 21:57:48  >  Connected to DB: MySQL
+20/11/2012 22:4:8  >  Request from /127.0.0.1 (56117)
+20/11/2012 22:4:8  >  56117-        /ster_help/lststr.html
+20/11/2012 22:4:22  >  Request from /127.0.0.1 (56122)
+20/11/2012 22:4:22  >  56122-        /ster_help/addstr.html
+20/11/2012 22:4:23  >  Request from /127.0.0.1 (56125)
+20/11/2012 22:4:23  >  56125-        /ster_help/addusr.html
+20/11/2012 22:4:24  >  Request from /127.0.0.1 (56128)
+20/11/2012 22:4:24  >  56128-        /ster_help/lststr.html
+20/11/2012 22:5:6  >  Request from /127.0.0.1 (56169)
+20/11/2012 22:5:6  >  56169-        /ster_help/lststr.html
+20/11/2012 22:7:0  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 22:7:0  >  Messages log mode set to: on
+20/11/2012 22:7:0  >  Connected to DB: MySQL

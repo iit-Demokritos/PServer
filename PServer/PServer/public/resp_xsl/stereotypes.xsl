@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/TR/WD-xsl">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="/">
     <html>
         <head>
@@ -18,6 +18,9 @@
                     <tr>
                         <th>
                             <xsl:value-of select="str"/>
+                        </th>
+                        <th>
+                            <xsl:value-of select="rule"/>
                         </th>
                     </tr>
                 </xsl:for-each>
