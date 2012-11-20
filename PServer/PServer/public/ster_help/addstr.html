@@ -3,31 +3,28 @@
 <head>
 <meta http-equiv="Content-Language" content="en-us">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>-addftr template</title>
+<title>-addstr template</title>
 </head>
 
 <body bgcolor="#FFFFCC">
 
 <pre>-addstr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=addstr&amp;str=&lt;str&gt;[&amp;&lt;attr_1&gt;=&lt;val_1&gt;&amp;&lt;ftr_2&gt;=...]
+template: ster?clnt=&lt;name|pass&gt;&amp;com=addstr&amp;str=&lt;str&gt;[&amp;&lt;rule&gt;=pattern...]
           Order of query params is not important. Feature
           names must not end with '*' to be legal. Stereotype
           names must not be '*', '-', or empty string.
-descript: the new stereotype is inserted in the DB. The (attribute,
-          value) pairs for that stereotype are then inserted in
-          the DB. Must be used to initialize the stereotype
-          service (a stereotype must already exists for a user to
-          reference to it). Can also be used to add more attributes
-          in an existing stereotype. Note that if no (attribute, value)
-          pairs exist in the request, the stereotype will still
-          be inserted, and users will be able to refer to it. If
-          the stereotype already exists, then it will not be inserted
-          (200 OK will still be returned). If one or more of the
-          specified attribute already exist for that stereotype, or if
-          one or more attribute names are not legal names, code 401
-          (request error) will be returned. If the error code 401 is
-          returned then no change has taken place in the DB.
-example : ster?clnt=name|pass&amp;com=addstr&amp;str=educated&amp;expert.computer=yes&amp;educ=3
+descript: A new stereotype based on the rule is inserted in the DB. The "rule" parameter is 
+          a conjuction of logical operations on the demographic attribures. The form of the
+          pattern is attr_name1[operator]val1|logial_operator|attr_name2[operator]val2...
+	  The operator for comparison can my : for equality and &gt;,&gt;:.&lt;:,&lt;,&lt;&gt; for 	  
+	  greater than, greater or equal than etc. We use the : and not the = symbol because of the
+	  url character restrictions. The logical operations are the "or" and "and". There can be 
+	  parenthesis too.
+	  If there is an existing stereotype with the same name an error will be returnsd.	  
+          Note that if no rule parameter exists then pserver will create an empty stereotype. If a rule 
+          parameter exists pserver will find all the users that satisfies the rule and will create the stereorype
+	  profile
+example : ster?clnt=name|pass&amp;com=addstr&amp;str=educated&amp;rule=expert.computer:yes|and|educ:3
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : no response body exists.</pre>
 
