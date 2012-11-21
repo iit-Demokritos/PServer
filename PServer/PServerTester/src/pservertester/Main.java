@@ -190,10 +190,14 @@ public class Main {
             //commands.add( "/nootropia?clnt=test1|test1&com=genpersweights" );
             
             //commands.add( "/ster?clnt=test|test&com=addstr&str=educated2&rule=gender:45" );
-            commands.add("/ster?clnt=test|test&com=addusr&usr=1001&educated2=1");
+            //commands.add("/ster?clnt=test|test&com=addusr&usr=1001&educated2=1");
             //commands.add("/ster?clnt=test|test&com=incdeg&usr=1001&educated2=-0.12");
             //commands.add("/ster?clnt=test|test&com=remusr&1001=educated2");
-            commands.add("/ster?clnt=test|test&com=setdeg&usr=0.34");
+            //commands.add("/ster?clnt=test|test&com=setdeg&usr=0.34");
+            //commands.add("/pers?clnt=test|test&com=addftr&lang.en=0&lang.fr=0&lang.gr=1");
+            //commands.add("/pers?clnt=test|test&com=remftr&ftr=lang.en&ftr=lang.fr&ftr=lang.gr");
+            //commands.add("/pers?clnt=test|test&com=setusr&usr=918&movie.999=4");
+            commands.add("/pers?clnt=test|test&com=incval&usr=918&movie.999=4");
             for (String command : commands) {
                 long t = System.currentTimeMillis();
                 PSClientRequest request = new PSClientRequest(InetAddress.getLocalHost(), 1111, command, true, 10000);

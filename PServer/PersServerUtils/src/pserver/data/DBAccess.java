@@ -553,46 +553,7 @@ public class DBAccess {
         stmt2.close();
         stmt.close();
         return total;
-    }
-
-    public int removeUserFromStereotype(String user, String stereotype, String clientName) throws SQLException {        
-        float degree = getUserDegree( stereotype, user, clientName );        
-        String sql = "DELETE FROM stereotype_users WHERE " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + " = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";        
-        int total = this.executeUpdate(sql);     
-        total += updateStereotypeWithRemovedUser(clientName, stereotype, user, degree);
-        return total;
-    }
-
-    /*
-     * Returns the degree of the corellation of the user for the specified stereotype
-     * 
-     * @param stereotype the stereotype
-     * @param user the user name
-     * @param clientName the pserver client
-     */
-    
-    public float getUserDegree( String stereotype, String user, String clientName) throws SQLException {
-        String sql = "SELECT " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE + " FROM "+ DBAccess.STEREOTYPE_USERS_TABLE + " WHERE " 
-                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " 
-                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "' AND " 
-                + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'" ;        
-        PServerResultSet rs = this.executeQuery(sql);
-        rs.next();
-        float val = rs.getRs().getFloat(1);
-        rs.close();
-        return val;
-    }
-    
-    private int  updateStereotypeWithRemovedUser(String clientName, String stereotype, String user, float degree) throws SQLException {
-        String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
-                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "-"
-                + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
-                + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
-                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
-        return this.executeUpdate(sql);
-    }
+    }    
     
     public int clearUserCommunities(String clientName) throws SQLException {
         int total = 0;

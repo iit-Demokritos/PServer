@@ -79,6 +79,12 @@ import pserver.pservlets.*;
 // Used mainly to convert name from 'WebServer' to 'PersServer', and
 // to add a few member variables.
 //===================================================================
+/**
+ *
+ * Main class surrogate, implemented as a subclass
+ * {@link pserver.WebServer WebServer.}
+ *
+ */
 public class PersServer extends WebServer {
     //database JDBC connection parameters\
 
@@ -95,7 +101,11 @@ public class PersServer extends WebServer {
     public static PersServer pObj;        //the single WebServer object
     public static PBeansLoader pbeansLoadader;
 
-    //application main method
+    /**
+     * This is the main method of the application.
+     *
+     * @param args Command-line arguments
+     */
     static public void main(String[] args) {
         pObj = new PersServer();    //application object is a PersServer now
         WebServer.obj = pObj;
@@ -104,19 +114,24 @@ public class PersServer extends WebServer {
         try {
             do {
                 line = br.readLine().toLowerCase();
-            } while (line.equals(QuitCommand) == false) ;
+            } while (line.equals(QuitCommand) == false);
         } catch (Exception e) {
             e.printStackTrace();
         }
         PersServer.terminate(true);
-        
+
     }
 
-    //initializer
+    /**
+     * Initializer method.
+     */
     protected PersServer() {
         start();
     }
 
+    /**
+     * This method starts the PersServer
+     */
     public void start() {
         //initialize variables
         initVars();
@@ -154,11 +169,15 @@ public class PersServer extends WebServer {
         //if DB connection OK, report it (irrespectively of log mode) and continue
         win.log.forceReport("Connected to DB: " + dbType);
         win.log.forceReport("");  //en empty line for aesthetics
-        flog.forceWriteln("Connected to DB: " + dbType);        
+        flog.forceWriteln("Connected to DB: " + dbType);
         srv.start();
     }
     //loafs pservlets into a hachmap to access them via the defined name found from the servlet.ini file
 
+    /*
+     * Load the pservlets
+     *
+     */
     private void loadPservlets() {
         win.log.forceReport("");  //en empty line for aesthetics
         win.log.forceReport("Loading PBeans");
@@ -171,6 +190,9 @@ public class PersServer extends WebServer {
         win.log.forceReport("");  //en empty line for aesthetics
     }
 
+    /**
+     * This method Stops the PersServer
+     */
     private void stop() {
         stop = true;
     }
@@ -199,7 +221,11 @@ public class PersServer extends WebServer {
         //allowAnonymous=(pref.getPref("anonymous")).equals("off")? false:true;        
     }
 
-    //private methods
+    /**
+     * Method to get the database product name
+     *
+     * @return A String with the database product name
+     */
     private String getDBType() {
         //get database product name:
         //-null if connection fails
@@ -214,7 +240,7 @@ public class PersServer extends WebServer {
             dbAccess.connect();
             try {
                 PServerClientsDBAccess.initialize(dbAccess);
-            } catch (Exception ex) {      
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } catch (ClassNotFoundException e) {  //connection failed, return null
@@ -240,12 +266,19 @@ public class PersServer extends WebServer {
             dbAccess.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;            
+            return null;
         }
         //'db' can still be null
         return db;
     }
 
+    /**
+     * Creates a new {@link pserver.data.DBAccess#DBAccess(java.lang.String, java.lang.String, java.lang.String) DBAccess}
+     * object
+     *
+     * @return A  {@link pserver.data.DBAccess#DBAccess(java.lang.String, java.lang.String, java.lang.String) DBAccess}
+     * object.
+     */
     public DBAccess getNewDBAccess() {
         return new DBAccess(dbUrl, dbUser, dbPass);
     }

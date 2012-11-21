@@ -14,7 +14,6 @@
  * limitations under the License.
  * 
  */
-
 package pserver.pservlets;
 
 import java.sql.Connection;
@@ -33,35 +32,57 @@ import pserver.PersServer;
 import pserver.WebServer;
 import pserver.algorithms.graphs.GraphClustering;
 import pserver.algorithms.metrics.VectorMetric;
-import pserver.data.PCommunityDBAccess;
-import pserver.data.PCommunityProfileResultSet;
-import pserver.data.VectorMap;
 import pserver.data.DBAccess;
 import pserver.data.FeatureGroupManager;
+import pserver.data.PCommunityDBAccess;
+import pserver.data.PCommunityProfileResultSet;
 import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.PFeatureGroupProfileResultSet;
 import pserver.data.PServerClientsDBAccess;
 import pserver.data.PUserDBAccess;
 import pserver.data.UserCommunityManager;
+import pserver.data.VectorMap;
 import pserver.domain.PFeatureGroup;
 import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
 
 /**
- *
- * @author alexm
+ * Contains all necessary methods for the management of Communities mode of
+ * PServer.
  */
 public class Communities implements pserver.pservlets.PService {
 
+    /**
+     * Overridden method of init from {@link PService} Does nothing here.
+     *
+     * @param params An array of strings containing the parameters
+     * @throws Exception Default Exception is thrown.
+     */
     @Override
     public void init(String[] params) throws Exception {
     }
 
+    /**
+     * Returns the mime type.
+     *
+     * @return Returns the XML mime type from Interface {@link PService}.
+     */
     @Override
     public String getMimeType() {
         return pserver.pservlets.PService.xml;
     }
 
+    /**
+     * Creates a service for Communities' mode when a command is sent to
+     * PServer. The command is identified from its name and proper methods for
+     * the management of this command are called. A response code is produced
+     * depending on results.
+     *
+     * @param parameters The parameters needed for this service.
+     * @param response The response string that is created.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         int respCode;
@@ -72,22 +93,22 @@ public class Communities implements pserver.pservlets.PService {
         queryParam = parameters;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        if( clntIdx == -1 ){
+        if (clntIdx == -1) {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Parameter clnt does not exist");
             return respCode;  //no point in proceeding
         }
         String client = (String) queryParam.getVal(clntIdx);
         String clientName = client.substring(0, client.indexOf('|'));
-        String clientPass = client.substring( client.indexOf('|') + 1);
-        
+        String clientPass = client.substring(client.indexOf('|') + 1);
+
         PServerClientsDBAccess cdbAccess = PServerClientsDBAccess.getInstance();
-        if ( cdbAccess.isValidClient( clientName, clientPass) == false ) {
+        if (cdbAccess.isValidClient(clientName, clientPass) == false) {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Invalid client");
             return respCode;
         }
-        
+
         queryParam.updateVal(clientName, clntIdx);
 
         int comIdx = parameters.qpIndexOfKeyNoCase("com");
@@ -136,6 +157,17 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, generates results from specified parameters and
+     * returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comCommuCompSql(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -158,6 +190,17 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Generates results from database by a given query with specific conditions
+     * taken from parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execCommuCompSql(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -201,8 +244,17 @@ public class Communities implements pserver.pservlets.PService {
         return success;
     }
 
-    //-----
-    //-----
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, generates results of erasing communities with the
+     * specified parameters and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comCommuEraseCommunities(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -252,8 +304,17 @@ public class Communities implements pserver.pservlets.PService {
         return success;
     }
 
-    //-----
-    //-----
+    /**
+     * Method referring to execution part of process.
+     *
+     * Erases communities from database by a given query with specific
+     * conditions taken from parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comCommuEraseFeatureGroups(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -286,6 +347,17 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, generates results of erasing feature groups with
+     * the specified parameters and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execEraseFeatureGroups(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         boolean success = true;
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -302,8 +374,17 @@ public class Communities implements pserver.pservlets.PService {
         return success;
     }
 
-    //-----
-    //-----
+    /**
+     * Method referring to execution part of process.
+     *
+     * Erases feature groups from database by a given query with specific
+     * conditions taken from parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comCommuFtrSql(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -326,6 +407,17 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, generates results from feature groups with the
+     * specified parameters and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execCommuFtrSql(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -365,8 +457,18 @@ public class Communities implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-    //-----    
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Generates results from communities by a given query with the specified
+     * conditions taken from parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comCommuMakeCommunities(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -399,6 +501,17 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, creates the communities and returns the response
+     * code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execMakeCommunities(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -453,6 +566,17 @@ public class Communities implements pserver.pservlets.PService {
         return success;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, creates the collaborative profiles and returns the
+     * response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comCommuMakeCollaborativeProfile(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -485,6 +609,17 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, creates the collaborative profiles and returns the
+     * response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execMakeCollaborativeProfiles(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -564,12 +699,15 @@ public class Communities implements pserver.pservlets.PService {
     }
 
     /**
-     * Calculates the user distances
-     * 
-     * @param queryParam the query parameters
-     * @param respBody the xml document
-     * @param dbAccess the object that contains information about data nace connection
-     * @return success or failed
+     * Method referring to command part of process.
+     *
+     * Connects to database, calculates user distances and returns the response
+     * code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
      */
     private int comCommuMakeUserDistances(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
@@ -603,6 +741,16 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Calculates the user distances with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execMakeUserDistances(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int rowsAffected = 0;
 
@@ -614,13 +762,13 @@ public class Communities implements pserver.pservlets.PService {
             WebServer.win.log.error("-The parameter smetric is missing: ");
             return false;
         }
-        
+
         /*int threasholdIdx = queryParam.qpIndexOfKeyNoCase("th");
-        if (threasholdIdx == -1) {
-            WebServer.win.log.error("-The parameter th is missing: ");
-            return false;
-        } */       
-        
+         if (threasholdIdx == -1) {
+         WebServer.win.log.error("-The parameter th is missing: ");
+         return false;
+         } */
+
         String smetricName = (String) queryParam.getVal(smetricIdx);
 
         int ftrIdx = queryParam.qpIndexOfKeyNoCase("ftrs");
@@ -629,7 +777,7 @@ public class Communities implements pserver.pservlets.PService {
             features = (String) queryParam.getVal(ftrIdx);
         }
 
-                
+
         boolean success = true;
 
         VectorMetric metric = PersServer.pbeansLoadader.getVMetrics().get(smetricName);
@@ -652,19 +800,34 @@ public class Communities implements pserver.pservlets.PService {
         return success;
     }
 
+    /**
+     * Deletes user associations from database and then generates the user
+     * distances.
+     *
+     * @param dbAccess The database manager.
+     * @param clientName The name of the client.
+     * @param metric The metric that will be used to generate user distances.
+     * @param features The features in which the user distances generation will
+     * be applied.
+     * @throws SQLException SQLException is throw on a database management
+     * error.
+     */
     public void generateDistances(DBAccess dbAccess, String clientName, VectorMetric metric, String features) throws SQLException {
         PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
-        pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_SIMILARITY);                
+        pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_SIMILARITY);
         pdbAccess.generateUserDistances(clientName, metric, DBAccess.RELATION_SIMILARITY, Integer.parseInt(PersServer.pref.getPref("thread_num")), features);
     }
 
     /**
-     * Calculates the feature distances
+     * Method referring to command part of process.
      *
-     * @param queryParam the query parameters
-     * @param respBody the xml document
-     * @param dbAccess the object that contains information about data nace connection
-     * @return success or failed
+     * Connects to database, calculates the feature distances and returns the
+     * response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
      */
     private int comCommuMakeFtrDistances(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
@@ -699,6 +862,16 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Calculates the feature distances with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execMakeFtrDistances(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -732,13 +905,33 @@ public class Communities implements pserver.pservlets.PService {
         return success;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, creates feature groups with the parameters
+     * specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     public void generateFtrDistances(DBAccess dbAccess, String clientName, VectorMetric metric) throws SQLException {
         PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
         pdbAccess.deleteFeatureAccociations(clientName, DBAccess.RELATION_SIMILARITY);
         pdbAccess.generateFtrDistances(clientName, metric, DBAccess.RELATION_SIMILARITY, Integer.parseInt(PersServer.pref.getPref("thread_num")));
     }
-    //-----
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Creates feature groups with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comCommuMakeGroups(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -771,6 +964,16 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Creates feature groups with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execMakeGroups(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -823,6 +1026,17 @@ public class Communities implements pserver.pservlets.PService {
         return success;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, adds a feature group to database with the
+     * parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int addFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -856,6 +1070,16 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Adds a feature group with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execAddFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -915,6 +1139,17 @@ public class Communities implements pserver.pservlets.PService {
         return true;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, removes a feature group from database with the
+     * parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int removeFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -948,6 +1183,16 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Removes a feature group with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execRemoveGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -969,6 +1214,17 @@ public class Communities implements pserver.pservlets.PService {
         return true;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, returns one or more feature groups from database
+     * with the parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int getFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1002,6 +1258,16 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Returns a feature group or groups with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execGetFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -1070,6 +1336,17 @@ public class Communities implements pserver.pservlets.PService {
         return true;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, returns the features of a feature group from
+     * database with the parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int getFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1103,6 +1380,16 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Returns the features of a feature group with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execGetFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -1134,6 +1421,17 @@ public class Communities implements pserver.pservlets.PService {
         return true;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, adds a new community to database with the
+     * parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int addUserCommunity(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1167,44 +1465,81 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Adds a new community with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execAddUserCommunity(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws SQLException {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         /*String clientName = (String) queryParam.getVal(clntIdx);
 
-        int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
-        if( nameIdx == -1 ) {
-            WebServer.win.log.error("-The parameter name is missing: ");
-            return false;
-        }
-        String name = (String) queryParam.getVal(nameIdx);
+         int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
+         if( nameIdx == -1 ) {
+         WebServer.win.log.error("-The parameter name is missing: ");
+         return false;
+         }
+         String name = (String) queryParam.getVal(nameIdx);
         
-        int usrsIdx = queryParam.qpIndexOfKeyNoCase("usrs");
-        if( usrsIdx == -1 ) {
-            WebServer.win.log.error("-The parameter usrs is missing: ");
-            return false;
-        }
-        String[] usrs = ((String) queryParam.getVal(usrsIdx)).split( "|" );
+         int usrsIdx = queryParam.qpIndexOfKeyNoCase("usrs");
+         if( usrsIdx == -1 ) {
+         WebServer.win.log.error("-The parameter usrs is missing: ");
+         return false;
+         }
+         String[] usrs = ((String) queryParam.getVal(usrsIdx)).split( "|" );
         
-        PCommunity community = new PCommunity(name);
-        PCommunityDBAccess comDBAccess = new PCommunityDBAccess(dbAccess);
-        //int rows = comDBAccess.addNewPCommunity( community );
+         PCommunity community = new PCommunity(name);
+         PCommunityDBAccess comDBAccess = new PCommunityDBAccess(dbAccess);
+         //int rows = comDBAccess.addNewPCommunity( community );
         
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
-        respBody.append("<result>\n");
-        //respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
-        respBody.append("</result>");
-          */      
+         respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+         respBody.append("<result>\n");
+         //respBody.append("<row><num_of_rows>").append(rows).append("</num_of_rows></row>\n");
+         respBody.append("</result>");
+         */
         return true;
     }
 }
 
+/**
+ *
+ * Contains methods for generating and updating the collaborative profiles using
+ * threads
+ */
 class CollaborativeProfileBuilderThread extends Thread {
 
+    /**
+     * A string containing the name of a user.
+     */
     private String user;
+    /**
+     * A string containing the name of a client.
+     */
     private String clientName;
+    /**
+     * Variable of type {@link DBAccess} for managing the database.
+     */
     private DBAccess dbAccess;
+    /**
+     * A boolean for choosing or not the actual distance of users.
+     */
     private boolean actualDist;
-
+ /**
+     * Constructor with 4 parameters.
+     *
+     * Use this constructor to initialize the values of variables user,
+     * clientName, dbAccess and actualDist.
+     *
+     * @param dbAccess
+     * @param user
+     * @param clientName
+     * @param actualDist
+     */
     public CollaborativeProfileBuilderThread(DBAccess dbAccess, String user, String clientName, boolean actualDist) {
         this.user = user;
         this.clientName = clientName;
@@ -1212,6 +1547,10 @@ class CollaborativeProfileBuilderThread extends Thread {
         this.actualDist = actualDist;
     }
 
+    /**
+     * Starts the thread that executes the algorithm which is used to generate
+     * the collaborative profiles.
+     */
     @Override
     public void run() {
         try {
@@ -1320,7 +1659,17 @@ class CollaborativeProfileBuilderThread extends Thread {
         }
         WebServer.win.log.echo("Processing for " + user + " Collaborative profile completed");
     }
-
+    /**
+     * Updates the collaborative profile specified with a given algorithm.
+     *
+     * @param otherUserProfile The collaborative profile that is updated.
+     * @param dist The distance of features from collaborative profile.
+     * @param assocFreqa The frequency of the associations.
+     * @param ftrFreqa The frequency of features.
+     * @param ftrVals The values of features.
+     * @param ftrSum The summation of values of features.
+     * @param assocSum The summation of values of associations.
+     */
     private void updateCollaborativeProfile(PUser otherUserProfile, float dist, Map<Set<String>, Float> assocFreqa,
             Map<String, Float> ftrFreqa, Map<String, Float> ftrVals, Map<String, Float> ftrSum, Map<Set<String>, Float> assocSum) {
         Map<String, Float> profile = otherUserProfile.getProfile();

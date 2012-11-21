@@ -31,20 +31,45 @@ import pserver.domain.PFeatureGroup;
 import pserver.logic.PSReqWorker;
 
 /**
+ * Contains all necessary methods for the importing of data to
+ * PServer, using Comma Separated Values (CSV) files.
+ *
  *
  * @author alexm
  */
 public class Csv implements pserver.pservlets.PService {
 
+    /**
+     * Overridden method of init from {@link PService} Does nothing here.
+     *
+     * @param params An array of strings containing the parameters
+     * @throws Exception Default Exception is thrown.
+     */
     @Override
     public void init(String[] params) throws Exception {
     }
 
+    /**
+     * Returns the mime type.
+     *
+     * @return Returns the XML mime type from Interface {@link PService}.
+     */
     @Override
     public String getMimeType() {
         return pserver.pservlets.PService.xml;
     }
 
+    /**
+     * Creates a service for CSV-based import.
+     * The command is identified from its name and proper methods for the
+     * management of this command are called. A response code is produced
+     * depending on results.
+     *
+     * @param parameters The parameters needed for this service.
+     * @param response The response string that is created.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         int respCode;
@@ -99,8 +124,15 @@ public class Csv implements pserver.pservlets.PService {
         return respCode;
     }
 
-    //-----
-    //this is the handler function that imports features
+    /**
+     * Handler function that imports features to the database, given a
+     * CSV file.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+    */
     private int loadFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -133,6 +165,14 @@ public class Csv implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Helper function performing the actual insertion of features to the database.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return True on success, otherwise false.
+     */
     private boolean execLoadFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         boolean success = true;
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -212,7 +252,15 @@ public class Csv implements pserver.pservlets.PService {
         return success;
     }
 
-    //this is the handler function that imports users
+    /**
+     * Handler function that imports users to the database, given a
+     * CSV file.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+    */
     private int loadUsers(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -245,6 +293,14 @@ public class Csv implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Helper function performing the actual insertion of users to the database.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return True on success, otherwise false.
+     */
     private boolean execLoadUsers(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         boolean success = true;
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -307,7 +363,15 @@ public class Csv implements pserver.pservlets.PService {
         return success;
     }
 
-    //loads num data logs
+    /**
+     * Handler function that imports numeric data logs (numlogs) to the database, given a
+     * CSV file.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+    */
     private int loadLog(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -340,6 +404,14 @@ public class Csv implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Helper function that performs the actual import of numeric data logs (numlogs) to the database.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return True on success, otherwise false.
+    */
     private boolean execLoadLog(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         boolean success = true;
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -508,6 +580,15 @@ public class Csv implements pserver.pservlets.PService {
         return success;
     }
 
+    /**
+     * Handler function that imports feature groups to the database,
+     * given a CSV file.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of the response code.
+    */
     private int loadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -541,7 +622,14 @@ public class Csv implements pserver.pservlets.PService {
         return respCode;
     }
 
-    private boolean execLoadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
+    /**
+     * Helper function that performs the actual import of feature groups to the database.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return True on success, otherwise false.
+    */    private boolean execLoadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         //System.out.println( "clnt = " + clientName );

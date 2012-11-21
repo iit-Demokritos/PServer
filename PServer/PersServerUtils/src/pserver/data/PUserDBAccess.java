@@ -175,42 +175,25 @@ public class PUserDBAccess {
         usrStmt.close();
         
         return users;
-/*
-        if (loadAssociations == false) {
-            return user;
-        }
-        
-        sql = "SELECT * FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "=? AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
-        PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
+    }
 
-        Hashtable<String, Float> freqs = new Hashtable<String, Float>();
-        selectFtrFreq.setString(1, userName);        
-        rs = selectFtrFreq.executeQuery();        
-        while (rs.next()) {
-            freqs.put(rs.getString(DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE), rs.getFloat(DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE));
+    /**
+     * Returns all the stereotypes that the user belongs
+     * 
+     * @param user
+     * @param clientName
+     * @return 
+     */
+    
+    public ArrayList<String> getStereotypesOfUser(String user, String clientName) throws SQLException {
+        String sql = "SELECT " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + " FROM "  + DBAccess.STEREOTYPE_USERS_TABLE + " WHERE " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+        ArrayList<String> stereotypes = new ArrayList<String>();
+        PServerResultSet rs = dbAccess.executeQuery(sql);
+        while( rs.next() ) {
+            String ster = rs.getRs().getString(1);
+            stereotypes.add(ster);
         }
-        user.setFtrReqs(freqs);
         rs.close();
-        selectFtrFreq.close();
-
-        sql = "SELECT * FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_SIMILARITY;
-        PreparedStatement assocsStmt = dbAccess.getConnection().prepareStatement(sql);
-
-        Hashtable<Set<String>, Float> assoces = new Hashtable<Set<String>, Float>();
-        assocsStmt.setString(1, userName);
-        rs = assocsStmt.executeQuery();
-        while (rs.next()) {
-            String ftr1 = rs.getString(DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST);
-            String ftr2 = rs.getString(DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC);
-            float val = rs.getFloat(DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT);
-            Set<String> ftrSet = new HashSet<String>(2);
-            ftrSet.add(ftr1);
-            ftrSet.add(ftr2);
-            assoces.put(ftrSet, val);
-        }
-        user.setFtrAssocs(assoces);
-        rs.close();
-        assocsStmt.close();
-        return user;*/
+        return stereotypes;
     }
 }

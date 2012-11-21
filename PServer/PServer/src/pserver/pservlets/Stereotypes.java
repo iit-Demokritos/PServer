@@ -21,24 +21,47 @@ import java.sql.SQLException;
 import pserver.WebServer;
 import pserver.data.DBAccess;
 import pserver.data.PServerResultSet;
+import pserver.data.PStereotypesDBAccess;
 import pserver.data.VectorMap;
 import pserver.logic.PSReqWorker;
 
 /**
- *
- * @author alexm
+ * Contains all necessary methods for the management of Stereotypes mode of
+ * PServer.
  */
 public class Stereotypes implements pserver.pservlets.PService {
 
+    /**
+     * Returns the mime type.
+     *
+     * @return Returns the XML mime type from Interface {@link PService}.
+     */
     @Override
     public String getMimeType() {
         return pserver.pservlets.PService.xml;
     }
 
+    /**
+     * Overridden method of init from {@link PService} Does nothing here.
+     *
+     * @param params An array of strings containing the parameters
+     * @throws Exception Default Exception is thrown.
+     */
     @Override
     public void init(String[] params) throws Exception {
     }
 
+    /**
+     * Creates a service for Stereotypes' mode when a command is sent to
+     * PServer. The command is identified from its name and proper methods for
+     * the management of this command are called. A response code is produced
+     * depending on results.
+     *
+     * @param parameters The parameters needed for this service.
+     * @param response The response string that is created.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         int respCode;
@@ -103,42 +126,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
-    //--------------------------------------------------------------------------------------------
-    //STER_MODE commands
-    //In Stereotype Mode, the server offers support for stereotypes.
-    //Stereotypes are categories of users with specific characteristics.
-    //Each stereotype has a profile that is defined by means of (feature,
-    //value) tupples. Features can be entities relevant to specific
-    //applications, while values give an estimation about the stereotype
-    //relevence to corresponding features. Each stereotype may have
-    //its own different features. Features can be organized in a
-    //tree or graph based manner, for easily managing conceptual
-    //hierarchies. This organization is encoded in the name of every
-    //feature as a path expression, and is setup by applications.
-    //Users can be assigned stereotypes, together with a degree of
-    //relevence, showing how relevent is a stereotype to a user.
-    //A user may be assigned several stereotypes (not the same twice).
-    //The DB structure: stereotypes (st_stereotype) with key 'st_stereotype',
-    //stereotype_profiles (sp_stereotype, sp_feature, sp_value, sp_numvalue)
-    //with key 'sp_stereotype' and 'sp_feature', stereotype_users
-    //(su_user, su_stereotype, su_degree) with key 'su_user' and
-    //'su_stereotype'. If a field in 'stereotypes' is deleted, the deletion
-    //is cascaded to 'stereotype_profiles' and 'stereotype_users', because
-    //of referential integrity constraints. The field 'sp_numvalue' is
-    //"invisible": it is not part of the results of 'select' queries,
-    //and contains the numeric equivalent of the string value in field
-    //'sp_value', or NULL if the string cannot be converted to numeric.
-    //This duplicate field is used mainly to allow for two types of value
-    //comparisons: string and numeric. Note that the primary data type for
-    //values is always string, as it is more general, and that the numeric
-    //version always correspond to the string version. Also note that
-    //values intented to be numeric must use '.' for the decimal part when
-    //given as strings. If ',' is used, the string will not be successfully
-    //converted to numeric, and its numeric equivalent will be NULL. The
-    //field 'su_degree' is numeric (double), and when its values are
-    //exchanged as strings they follow the rules described above. This
-    //field also contain NULLs for values that could not be converted to
-    //numeric.    
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, adds an attribute to database with the parameters
+     * specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterAddStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -181,6 +179,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Adds a stereotype with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean sterExistsStr(VectorMap queryParam, DBAccess dbAccess) {
         //returns true if stereotype in 'str' query parameter
         //already exists in the DB. Returns false otherwise.
@@ -215,6 +223,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success && exists;  //'success' expected true here
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Adds a stereotype with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterAddStr(VectorMap queryParam, DBAccess dbAccess) {
         //request properties
         int strIdx = queryParam.qpIndexOfKeyNoCase("str");
@@ -346,24 +364,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         dbAccess.executeUpdate(sql);
     }
 
-    //-addusr
-    //template: ster?com=addusr&usr=<usr>&<str_1>=<deg_1>&<str_2>=...
-    //          Order of query params is not important. User name
-    //          must not be empty string.
-    //descript: assigns stereotypes to a user with an associated degree.
-    //          Degree is numeric (double), and expresses relevence.
-    //          For the 'degree' parameters in query string that cannot
-    //          be converted to numeric, NULLs will be inserted in DB.
-    //          The stereotypes must already exist in the DB. If a
-    //          stereotype in the query string does not already exists
-    //          in the DB, or if a (usr, str) pair already exists, then
-    //          code 401 (request error) will be returned. If the error
-    //          code 401 is returned then no records have been inserted
-    //          in the DB.
-    //example : ster?com=addusr&usr=kostas&visitor=0.78&expert=9
-    //          ster?com=addusr&usr=034&visitor=&expert=
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : no response body exists.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, adds a user to a specific stereotype in database
+     * with the parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterAddUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -396,6 +407,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Inserts a user in table stereotype_users in database with the parameters
+     * specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterAddUsr(VectorMap queryParam, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -491,49 +512,18 @@ public class Stereotypes implements pserver.pservlets.PService {
         dbAccess.executeUpdate(sql);
     }
 
-    //-getstr
-    //template: ster?com=getstr&str=<str>&ftr=<ftr_pattern>[&num=
-    //          <num_pattern>&srt=<order_pattern>&cmp=<comp_pattern>]
-    //          Order of query params is not important. Query params
-    //          'num', 'srt', and 'cmp' are optional. If ommited, 'num'
-    //          defaults to '*', 'srt' defaults to 'desc', and 'cmp' to 'n'.
-    //pattern : for feature, * | name[.*], where name is a path expression.
-    //          For num, * | <integer>.
-    //          For srt, asc | desc. For A->Z use 'asc', for 10->1 use 'desc'.
-    //          For cmp, s | n. Values are compared as strings if cmp==s,
-    //          while they are compared as numbers (doubles) if cmp==n.
-    //          String values that cannot be converted to doubles are
-    //          represented as NULLs in numeric comparison.
-    //descript: for the specified stereotype, the features matching the pattern
-    //          are found and sorted according to value (based on 'srt' and
-    //          'cmp'), and secondarily according to feature name (asc, A->Z).
-    //          Then the first <num_pattern> rows are selected (or all, if
-    //          <num_pattern> is '*') and an XML answer is formed. If no
-    //          feature in DB matches the pattern or if <num_pattern> <=0
-    //          or if stereotype does not exist, the result will not have any
-    //          'row' elements (200 OK will still be returned).
-    //          Note that 'srt' and 'cmp' affect the sorting on value.
-    //          Note that in case a number of features matching the pattern
-    //          have the same value, some of them may be part of the
-    //          results, while others not. This depends on 'num', which
-    //          determines in absolute terms the number of result rows.
-    //          Which of the features with the same value will be part of
-    //          the result depends on the feature name, which is a secondary
-    //          field of ordering.
-    //example : ster?com=getstr&str=professionals&ftr=interest.*&num=3
-    //          ster?com=getstr&str=s106&ftr=page6.*
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/singlestereot_profile.xsl"?>
-    //          <result>
-    //              <row><ftr>feature</ftr><val>value</val></row>
-    //              ...
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, gets the features and their values of specified
+     * stereotypes fro database with the parameters specified and returns the
+     * response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterGetStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -556,6 +546,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Gets the features and their values from database with the parameters
+     * specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterGetStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -623,47 +623,18 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-getusr
-    //template: ster?com=getusr&usr=<usr>&str=<str_pattern>[&num=
-    //          <num_pattern>&srt=<order_pattern>]
-    //          Order of query params is not important. Query params 'num',
-    //          and 'srt' are optional. If ommited, 'num' defaults to '*',
-    //          and 'srt' defaults to 'desc'.
-    //pattern : for stereotypes, * | name.
-    //          For num, * | <integer>.
-    //          For srt, asc | desc. For 10->1 use 'desc'.
-    //descript: for the specified user, the stereotypes matching the pattern
-    //          are found and sorted according to degree (based on 'srt'),
-    //          and secondarily according to stereotype name (asc, A->Z).
-    //          Then the first <num_pattern> rows are selected (or all, if
-    //          <num_pattern> is '*') and an XML answer is formed. If no
-    //          stereotype in DB matches the pattern or if <num_pattern> <=0
-    //          or if the user does not exist, the result will not have any
-    //          'row' elements (200 OK will still be returned).
-    //          Note that 'srt' affects the sorting on degree. Sorting is
-    //          primarily based on numeric values (doubles) of field
-    //          'su_degree', which may also contain NULLs in some records.
-    //          Note that in case a number of stereotypes matching the pattern
-    //          have the same degree, some of them may be part of the
-    //          results, while others not. This depends on 'num', which
-    //          determines in absolute terms the number of result rows.
-    //          Which of the stereotypes with the same value will be part of
-    //          the result depends on the stereotype name, which is a
-    //          secondary field of ordering.
-    //example : ster?com=getusr&usr=eddie&str=*&num=3
-    //          ster?com=getusr&usr=w18&str=visitor
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/stereot_singleuser.xsl"?>
-    //          <result>
-    //              <row><str>stereotype</str><deg>degree</deg></row>
-    //              ...
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, gets the names of stereotypes and their degrees
+     * from database with the parameters specified and returns the response
+     * code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterGetUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -686,6 +657,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Gets stereotypes names and degree from database with the parameters
+     * specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterGetUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -754,7 +735,18 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-incdeg   
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, increases the degree of a stereotype for a specific
+     * user from database with the parameters specified and returns the response
+     * code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterIncDeg(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -787,6 +779,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Increases the degree value of a stereotype for a specific user from
+     * database with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterIncDeg(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -854,7 +856,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    private void updateStereotypeForDegree(DBAccess dbAccess, String stereotype, String user, String clientName, float degree) throws SQLException {        
+    private void updateStereotypeForDegree(DBAccess dbAccess, String stereotype, String user, String clientName, float degree) throws SQLException {
         String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
                 + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
                 + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
@@ -865,33 +867,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         dbAccess.executeUpdate(sql);
     }
 
-    //-incval
-    //template: ster?com=incval&str=<str>&<ftr_1>=<step_1>&...
-    //          Order of query params is not important: updates of feature
-    //          values are performed in the order they appear in the request,
-    //          however the changes are of accummulative nature, so the final
-    //          result is the same.
-    //descript: for the specified stereotype, the value for each specified
-    //          feature is increased by x (decreased if x is negative), where
-    //          x is the step corresponding to that feature. Rows with string
-    //          values that cannot be converted to numeric, are not affected.
-    //          If no matches are found, or if all matches have values that
-    //          cannot be converted to numeric, no records will be updated
-    //          (200 OK will still be returned). If any <step_i> parameter
-    //          cannot be converted to numeric, 401 is returned. If the error
-    //          code 401 is returned then no updates have taken place in the DB.
-    //example : ster?com=incval&str=visitor&freq.*=-0.1&interests.books=0.3
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
-    //          <result>
-    //          <row><num_of_rows>number of relevant rows</num_of_rows></row>
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, increases the value of a stereotype from database
+     * with the parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterIncVal(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -924,6 +910,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Increases the value of a stereotype for a specific user from database
+     * with the parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterIncVal(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -994,44 +990,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-lststr
-    //template: ster?com=lststr&str=<str_pattern>[&mod=<mod_pattern>]
-    //          Order of query params is not important. Query parameter
-    //          'mod' is optional, if omitted defaults to '*'.
-    //pattern : for stereotype, * | name
-    //          For mode, * | p | u
-    //descript: lists the stereotypes in the DB. From an original set of
-    //          the stereotypes that match the stereotype pattern (that
-    //          is, all stereotypes if str pattern is '*', a single
-    //          stereotype if <name> exists in table 'stereotypes', or
-    //          none if <name> does not exist or table empty) a subset
-    //          is selected and listed as follows: (a) if the mode pattern
-    //          is '*', all stereotypes in the original set are returned
-    //          without additional filtering, (b) if the mode pattern is
-    //          'p', only the stereotypes of the original set that do not
-    //          have any associated feature (do not exist in table
-    //          'stereotype_profiles') are returned, and (c) if the mode
-    //          pattern is 'u' only the stereotypes of the original set
-    //          that have not been assigned to any user (do not exist in
-    //          table 'stereotype_users') are returned. Result is ordered
-    //          by stereotype name. If the final list is empty, a result
-    //          without any row elements is returned in the XML answer.
-    //example : ster?com=lststr&str=*
-    //          ster?com=lststr&str=professionals&mod=*
-    //          ster?com=lststr&str=*&mod=p
-    //          ster?com=lststr&str=visitor&mod=u
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/stereotypes.xsl"?>
-    //          <result>
-    //              <row><str>stereotype</str></row>
-    //              ...
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, gets stereotypes from database with the parameters
+     * specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterLstStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1054,6 +1023,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Creates a list of stereotypes retrieved from database with the parameters
+     * specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterLstStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -1105,7 +1084,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             while (rs.next()) {
                 String stereotVal = rs.getRs().getString("st_stereotype");  //cannot be null
                 String rule = rs.getRs().getString(DBAccess.STEREOTYPE_TABLE_FIELD_RULE);  //cannot be null
-                respBody.append("<row><str>" + stereotVal + "</str><rule>" + rule + "</rule></row>\n");                
+                respBody.append("<row><str>" + stereotVal + "</str><rule>" + rule + "</rule></row>\n");
                 rowsAffected += 1;  //number of result rows
             }
             respBody.append("</result>");
@@ -1119,42 +1098,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-remstr
-    //template: ster?com=remstr[&str=<str_1>&str=...][&lke=<str_like_pattern>]
-    //          Order of query params is not important. The 'str'
-    //          and 'lke' query parameters are optional.
-    //pattern : an SQL 'like' pattern matching any stereotype that
-    //          starts with it.
-    //descript: removes the stereotypes specified by 'str' and / or
-    //          'lke' query parameters. If no 'str' and 'lke' query
-    //          parameters exist, all stereotype records will be
-    //          deleted. Referential integrity constraints will cause
-    //          records of tables where those stereotypes are foreign
-    //          keys to be removed as well. This means that deleted
-    //          stereotypes will cease to have any profiles (features),
-    //          and that user references to deleted stereotypes will
-    //          also be lost. Can be used to initialize the Stereotype
-    //          Mode DB, by deleting all records from all tables. In
-    //          order to delete the profile (features) of a stereotype
-    //          without affecting the user references to that stereotype,
-    //          the 'remftr' command can be used. If the specified
-    //          stereotypes are not found, no records will be deleted
-    //          (200 OK will still be returned). If the error code 401
-    //          is returned then no record has been deleted.
-    //example : ster?com=remstr&str=visitor&str=experienced
-    //          ster?com=remstr&str=visitor&lke=exper
-    //          ster?com=remstr   (deletes all records from all tables)
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
-    //          <result>
-    //          <row><num_of_rows>number of relevant rows</num_of_rows></row>
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, removes an attribute for a specific stereotype from
+     * database with the parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterRemStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1187,6 +1141,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Removes an attribute for a specific stereotype from database with the
+     * parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterRemStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -1250,36 +1214,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-remusr
-    //template: ster?com=remusr[&<usr_1>=<str_pattern_1>&<usr_2>=...]
-    //          Order of query params is not important. The user
-    //          query parameters are optional.
-    //pattern : * | name
-    //descript: removes all records with stereotypes matching the
-    //          stereotype pattern, for the specified user: either
-    //          all stereotypes if pattern is '*', or a single
-    //          stereotype, for the corresponding user. This is
-    //          repeated for all parameters in the query string.
-    //          The same user can de specified more than once in a
-    //          query string. If no user query parameters exist, all
-    //          the records in the table will be deleted (all user
-    //          references to stereotypes). If no (user, stereotype)
-    //          in DB matches the patterns, no record will be deleted
-    //          (200 OK will still be returned). If the error code 401
-    //          is returned then no records have been deleted.
-    //example : ster?com=remusr&john=*&george=visitor&george=expert
-    //          ster?com=remusr     (deletes all records in table)
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
-    //          <result>
-    //          <row><num_of_rows>number of relevant rows</num_of_rows></row>
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, removes all data stored in database for a
+     * stereotype with the parameters specified and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterRemUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1312,6 +1257,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Removes all data for a specific stereotype from database with the
+     * parameters specified.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterRemUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -1327,7 +1282,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             for (int i = 0; i < qpSize; i++) {
                 if (i != comIdx && i != clntIdx) {  //'com' query parameter excluded
                     String user = (String) queryParam.getKey(i);
-                    String stereot = (String) queryParam.getVal(i);                    
+                    String stereot = (String) queryParam.getVal(i);
                     if (stereotypeExists(dbAccess, stereot, clientName) == false) {
                         WebServer.win.log.debug("-Stereotype " + stereot + " does not exists");
                         continue;
@@ -1335,10 +1290,11 @@ public class Stereotypes implements pserver.pservlets.PService {
                     if (stereotypeHasUser(dbAccess, stereot, user, clientName) == false) {
                         WebServer.win.log.debug("-Stereotype " + stereot + " already does not have the user " + user);
                         continue;
-                    }                    
-                    rowsAffected += dbAccess.removeUserFromStereotype(user, stereot, clientName);                                        
+                    }
+                    PStereotypesDBAccess sdbAccess = new PStereotypesDBAccess(dbAccess);
+                    rowsAffected += sdbAccess.removeUserFromStereotype(user, stereot, clientName);
                 }
-            }            
+            }
             respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
             respBody.append("<result>\n");
             respBody.append("<row><num_of_rows>" + rowsAffected + "</num_of_rows></row>\n");
@@ -1351,18 +1307,39 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, removes all records with stereotypes matching the
+     * stereotype pattern, for the specified user and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private float getUserDegree(DBAccess dbAccess, String stereotype, String user, String clientName) throws SQLException {
-        String sql = "SELECT " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE + " FROM "+ DBAccess.STEREOTYPE_USERS_TABLE + " WHERE " 
-                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " 
-                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "' AND " 
-                + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'" ;
+        String sql = "SELECT " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE + " FROM " + DBAccess.STEREOTYPE_USERS_TABLE + " WHERE "
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "' AND "
+                + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
         PServerResultSet rs = dbAccess.executeQuery(sql);
         rs.next();
         float val = rs.getRs().getFloat(1);
         rs.close();
         return val;
     }
-    
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * Removes all records with stereotypes matching the stereotype pattern, for
+     * the specified user.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int updateStereotypeWithUpdatededUser(DBAccess dbAccess, String clientName, String stereotype, String user, float degree) throws SQLException {
         String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
                 + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
@@ -1373,8 +1350,18 @@ public class Stereotypes implements pserver.pservlets.PService {
                 + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
         return dbAccess.executeUpdate(sql);
     }
-    
-    //-setdeg    
+
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, changes the degree of specific stereotypes and
+     * returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterSetDeg(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1407,6 +1394,15 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Changes the degree of specific stereotypes.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterSetDeg(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -1434,14 +1430,14 @@ public class Stereotypes implements pserver.pservlets.PService {
                     if (stereotypeHasUser(dbAccess, stereot, user, clientName) == false) {
                         WebServer.win.log.debug("-Stereotype " + stereot + " already does not have the user " + user);
                         continue;
-                    }   
+                    }
                     float oldDegree = getUserDegree(dbAccess, stereot, user, clientName);
                     String newDegree = (String) queryParam.getVal(i);
                     float difDegree = oldDegree - Float.parseFloat(newDegree);
                     String numNewDegree = DBAccess.strToNumStr(newDegree);  //numeric version of degree
                     query = "UPDATE stereotype_users set su_degree=" + numNewDegree + " where su_user='" + user + "' and su_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
                     rowsAffected += dbAccess.executeUpdate(query);
-                    rowsAffected +=updateStereotypeWithUpdatededUser(dbAccess, clientName, stereot, user, difDegree);
+                    rowsAffected += updateStereotypeWithUpdatededUser(dbAccess, clientName, stereot, user, difDegree);
                 }
             }
             //format response body
@@ -1458,31 +1454,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-setstrftr or setstr
-    //template: ster?com=setstr&str=<str>&<ftr_pattern_1>=<new_val_1>&...
-    //          Order of query params is important: position of 'com'
-    //          and 'str' is not important, however updates of values
-    //          are performed in the order they appear in the request.
-    //pattern : * | name[.*], where name is a path expression
-    //descript: updates the values for the specified stereotype of all
-    //          features matching the feature pattern(s) to the new
-    //          value(s). If the stereotype does not exist, or if no
-    //          feature in DB matches a pattern, no value will be
-    //          updated (200 OK will still be returned). If the error
-    //          code 401 is returned then none of the features matching
-    //          the request pattern(s) has been updated to the new value(s).
-    //example : ster?com=setstr&str=expert&special.*=0&special.comput=1
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
-    //          <result>
-    //          <row><num_of_rows>number of relevant rows</num_of_rows></row>
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, changes the value of specific features of
+     * stereotypes and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterSetStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1515,6 +1497,15 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Changes the value of specific features of stereotypes.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterSetStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -1562,36 +1553,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-sqlstr
-    //template: ster?com=sqlstr&whr=<where_pattern>
-    //          Order of query params is not important.
-    //pattern : * | <SQL part following WHERE>. The '*' means all.
-    //          A special syntax must be used: ':' for = and '|' for <space>.
-    //          This is because spaces and '=' are replaced in WWW requests.
-    //          Note that string values must be enclosed in single quotes.
-    //          Note that there exist two choices for comparisons on values:
-    //          string comparisons for field 'sp_value', and numeric (double)
-    //          comparisons for field 'sp_numvalue'. String values that cannot
-    //          be converted to doubles are represented as NULLs in 'sp_numvalue'.
-    //descript: returns part of the table 'stereotype_profiles' as specified
-    //          by the condition in the 'whr' query parameter. If no
-    //          row in DB satisfies the conditions, the result will
-    //          not have any 'row' elements (200 OK will still be returned).
-    //example : ster?com=sqlstr&whr=sp_stereotype:'visitor'|and|sp_numvalue<:2|order|by|sp_feature
-    //          ster?com=sqlstr&whr=*
-    //          ster?com=sqlstr&whr=isnull(sp_numvalue)
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/stereot_profiles.xsl"?>
-    //          <result>
-    //              <row><str>stereotype</str><ftr>feature</ftr><val>value</val></row>
-    //              ...
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, gets the features of stereotypes with specific
+     * condition parameters and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterSqlStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1614,6 +1586,15 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Gets the features of stereotypes with specific condition parameters
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterSqlStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -1661,33 +1642,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-
-    //-sqlusr
-    //template: ster?com=sqlusr&whr=<where_pattern>
-    //          Order of query params is not important.
-    //pattern : * | <SQL part following WHERE>. The '*' means all.
-    //          A special syntax must be used: ':' for = and '|' for <space>.
-    //          This is because spaces and '=' are replaced in WWW requests.
-    //          Note that string values must be enclosed in single quotes.
-    //descript: returns part of the table 'stereotype_users' as specified
-    //          by the condition in the 'whr' query parameter. If no
-    //          row in DB satisfies the conditions, the result will
-    //          not have any 'row' elements (200 OK will still be returned).
-    //example : ster?com=sqlusr&whr=su_stereotype:'visitor'|and|su_degree<:2
-    //          ster?com=sqlusr&whr=*
-    //          ster?com=sqlusr&whr=isnull(su_degree)
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/stereot_users.xsl"?>
-    //          <result>
-    //              <row><usr>user</usr><str>stereotype</str><deg>degree</deg></row>
-    //              ...
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.    
+ /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, gets the users belonging on stereotypes with
+     * specific condition parameters and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterSqlUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1710,6 +1675,16 @@ public class Stereotypes implements pserver.pservlets.PService {
         return respCode;
     }
 
+    /**
+     * Method referring to execution part of process.
+     *
+     * Gets the users belonging on stereotypes with specific condition
+     * parameters.
+     *
+     * @param queryParam The parameters of the query.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private boolean execSterSqlUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
@@ -1755,6 +1730,17 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
+    /**
+     * Method referring to command part of process.
+     *
+     * Connects to database, creates stereotypes with
+     * specific condition parameters and returns the response code.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
     private int comSterMake(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1883,7 +1869,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             return PSReqWorker.SERVER_ERR;
         }
         return respCode;
-    }    
+    }
 
     private void updateStereotypeWithRemovedUser(DBAccess dbAccess, String clientName, String stereot, String user, int qpSize) {
         throw new UnsupportedOperationException("Not yet implemented");

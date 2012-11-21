@@ -14,7 +14,6 @@
  * limitations under the License.
  * 
  */
-
 //===================================================================
 // WServer
 //
@@ -33,22 +32,43 @@ import javax.net.*;
 
 import pserver.*;
 
+/**
+ * The actual web server. Waits for requests at the specified port and creates a
+ * new ReqWorker class to handle each request at another port.
+ *
+ */
 public class WServer extends Thread {
+
     private ServerSocket srvSock = null;
-    
-    public WServer(int port, int backlog,boolean sslOn) {
+
+    /**
+     * The actual web server.
+     *
+     * @param port A int variable with the port that the server listen.
+     * @param backlog A int variable a backlog.
+     * @param sslOn A boolean variable which show if ssl is on or not.
+     */
+    public WServer(int port, int backlog, boolean sslOn) {
         super();
         String localHost = null;
         int localPort = -1;
         try {
             // create SSLServerSocket on specified port
-            if(sslOn==true)
-                srvSock =(ServerSocket)getSSLServerSocket(port, backlog);
-            else
+            if (sslOn == true) {
+                srvSock = (ServerSocket) getSSLServerSocket(port, backlog);
+            } else {
                 srvSock = new ServerSocket(port, backlog);
+            }
             localPort = srvSock.getLocalPort();
-            localHost = (InetAddress.getLocalHost()).toString();            
-        } catch (Exception e) {            
+        } catch (Exception e) {
+            //e.printStackTrace();
+            WebServer.flog.forceWriteln("Problem binding socket: " + e);
+            WebServer.terminate(false);  //quit application if cannot start            
+            localHost = "";
+        }
+        try {
+            localHost = (InetAddress.getLocalHost()).toString();
+        } catch (Exception e) {
             //e.printStackTrace();
             WebServer.flog.forceWriteln("Problem resolving localhost: " + e);
             //WebServer.terminate(false);  //quit application if cannot start            
@@ -60,19 +80,22 @@ public class WServer extends Thread {
         WebServer.win.log.report("Server local port is: " + localPort);
         WebServer.win.log.report("======== SERVER UP ========");
         WebServer.win.log.report("");  //empty line
-        WebServer.flog.writeln("Server started at " + localHost +
-                ", port " + localPort);
+        WebServer.flog.writeln("Server started at " + localHost
+                + ", port " + localPort);
     }
+
     @Override
     public void run() {
-        if (srvSock == null) return;
+        if (srvSock == null) {
+            return;
+        }
         //SSLSocket sock;
         Socket sock;
         ReqWorker worker;
         while (true) {
             try {
                 //sock =(SSLSocket) srvSock.accept();  //waits until request arrives
-                sock =srvSock.accept();  //waits until request arrives
+                sock = srvSock.accept();  //waits until request arrives
                 //in case the 'ReqWorker' class is overriden, the following
                 //line must be adapted to create an object of the subclass
                 worker = new PSReqWorker(sock);  //the subclass here!
@@ -83,9 +106,10 @@ public class WServer extends Thread {
             System.gc();
         }
     }
+
     @Override
-    protected void finalize(){
-        if (srvSock != null){
+    protected void finalize() {
+        if (srvSock != null) {
             try {
                 srvSock.close();
             } catch (IOException e) {
@@ -94,7 +118,16 @@ public class WServer extends Thread {
             srvSock = null;
         }
     }
-    ServerSocket getSSLServerSocket(int port,int backlog) throws Exception {
+
+    /**
+     * This method create a SSLServerSocket.
+     *
+     * @param port A int with the port number.
+     * @param backlog A int with the backlog number.
+     * @return The serverSocket.
+     *
+     */
+    ServerSocket getSSLServerSocket(int port, int backlog) throws Exception {
         // Make sure that JSSE is available
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         // A keystore is where keys and certificates are kept
@@ -120,10 +153,9 @@ public class WServer extends Thread {
         // Return a ServerSocket on the desired port (443)
         return serverSocket;
     }
-    
     String KEYSTORE = "certs";
     char[] KEYSTOREPW = "serverkspw".toCharArray();
     char[] KEYPW = "serverpw".toCharArray();
-    boolean requireClientAuthentication=false;;
-    
+    boolean requireClientAuthentication = false;
+;
 }

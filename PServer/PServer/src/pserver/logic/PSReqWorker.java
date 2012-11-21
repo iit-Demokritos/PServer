@@ -14,7 +14,6 @@
  * limitations under the License.
  * 
  */
-
 //===================================================================
 // PSReqWorker
 //
@@ -71,6 +70,7 @@ public class PSReqWorker extends ReqWorker {
     //modes of response specify process of responding.
     //declare additional (regarding base class) response modes
     //static public final int ADMIN_MODE = 2;  //personal mode
+
     static public final int SERVICE_MODE = 2;  //personal mode
     //static public final int PERS_MODE = 3;  //personal mode
     //static public final int STER_MODE = 4;  //stereotype mode
@@ -87,15 +87,21 @@ public class PSReqWorker extends ReqWorker {
     //private String administrator_name;//login name for administrator
     //private String administrator_pass;//login password for administrator    
     //initializers
-    public PSReqWorker( Socket sock ) {
-        super( sock );
-        url = ( ( PersServer ) PersServer.pObj ).dbUrl;  //casting to subclass necessary
-        user = ( ( PersServer ) PersServer.pObj ).dbUser;
-        pass = ( ( PersServer ) PersServer.pObj ).dbPass;
+    HashMap<String,String> clientsHash = new HashMap<String, String>();
+    /**
+     * Initializer method for the Request.
+     *
+     * @param sock Socket for particular client request.
+     */
+    public PSReqWorker(Socket sock) {
+        super(sock);
+        url = ((PersServer) PersServer.pObj).dbUrl;  //casting to subclass necessary
+        user = ((PersServer) PersServer.pObj).dbUser;
+        pass = ((PersServer) PersServer.pObj).dbPass;
         //allowAnonymous=((PersServer)PersServer.obj).allowAnonymous;
         //administrator_name = ( ( PersServer ) PersServer.pObj ).administrator_name;
         //administrator_pass = ( ( PersServer ) PersServer.pObj ).administrator_pass;
-    //db = ((PersServer)PersServer.obj).dbType;
+        //db = ((PersServer)PersServer.obj).dbType;
     }
 
     //overriden base class methods
@@ -105,9 +111,9 @@ public class PSReqWorker extends ReqWorker {
         //appropriate to client request are performed and the
         //body of the response (if any) is decided.
         //if an error occurs, the 'respCode' can be set accordingly
-        if ( PersServer.pObj.pservlets.containsKey( resURI.toLowerCase().substring( 1 ) ) ) {
+        if (PersServer.pObj.pservlets.containsKey(resURI.toLowerCase().substring(1))) {
             respMode = SERVICE_MODE;
-            analyzeServiceMode( PersServer.pObj.pservlets.get( resURI.toLowerCase().substring( 1 ) ) );
+            analyzeServiceMode(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)));
             return;
         }
         //if the following line is removed, the server
@@ -122,15 +128,15 @@ public class PSReqWorker extends ReqWorker {
         //and MIME type, depending on the mode of operation (respMode).
         //this method is called only if no error has occured ('respCode'
         //is 'NORMAL', which corresponds to HTTP '200 OK').
-        switch ( respMode ) {
+        switch (respMode) {
             case SERVICE_MODE:
-                if ( response != null ) {
-                    rbString = response.substring( 0 );
+                if (response != null) {
+                    rbString = response.substring(0);
                     //rbLength = rbString.length();
                     try {
                         //rbLength = rbString.length();
-                        rbLength = rbString.getBytes( "UTF-8" ).length;
-                    } catch ( UnsupportedEncodingException ex ) {
+                        rbLength = rbString.getBytes("UTF-8").length;
+                    } catch (UnsupportedEncodingException ex) {
                         ex.printStackTrace();
                     }
                 }
@@ -143,101 +149,129 @@ public class PSReqWorker extends ReqWorker {
         }
     }
 
-    //method for manipulate pservices
-    private void analyzeServiceMode( PService servlet ) {
+    /**
+     * Method for manipulate the pservices
+     *
+     * @param servlet a {@link pserver.pservlets.PService PService} interface.
+     */
+    private void analyzeServiceMode(PService servlet) {
         //Connection conn = connDB(url, user, pass);
-        DBAccess dbAccess = new DBAccess( url, user, pass );
+        DBAccess dbAccess = new DBAccess(url, user, pass);
 
         mimeType = servlet.getMimeType();
         response = new StringBuffer();
-        respCode = servlet.service( queryParam, response, dbAccess );
-    }    
-
+        respCode = servlet.service(queryParam, response, dbAccess);
+    }
     
-
-    //database connection methods
-    private Connection connDB( String DBUrl, String DBUser, String DBPass ) {
+    /**
+     * Database connection method
+     *
+     * @param DBUrl JDBC connection string
+     * @param DBUser user alias
+     * @param DBPass user password
+     * @return A {@link java.sql.Connection Connection} interface.
+     */
+    private Connection connDB(String DBUrl, String DBUser, String DBPass) {
         //connect to database, return null if unable
         Connection conn = null;
         try {
             //Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            conn = DriverManager.getConnection( DBUrl, DBUser, DBPass );
-        //} catch(ClassNotFoundException e) {  //no connection established, stop
-        //  WebServer.win.log.error(port + "-Problem connecting to DB: " + e);
-        //return null;
-        } catch ( SQLException e ) {
-            WebServer.win.log.error( "-Problem connecting to DB: " + e );
+            conn = DriverManager.getConnection(DBUrl, DBUser, DBPass);
+            //} catch(ClassNotFoundException e) {  //no connection established, stop
+            //  WebServer.win.log.error(port + "-Problem connecting to DB: " + e);
+            //return null;
+        } catch (SQLException e) {
+            WebServer.win.log.error("-Problem connecting to DB: " + e);
             return null;
         }
         return conn;
     }
-
-    private void disconnDB( Connection conn ) {
+    /**
+     * Database disconnect method
+     *
+     * @param conn A {@link java.sql.Connection Connection} interface.
+     */
+    private void disconnDB(Connection conn) {
         //disconnect from database
         try {
             conn.close();
-        } catch ( SQLException e ) {
-            WebServer.win.log.error( "-Problem disconnecting from DB: " + e );
+        } catch (SQLException e) {
+            WebServer.win.log.error("-Problem disconnecting from DB: " + e);
         }
     }
-
-    //check to see if the request came from a valid pserver user
-    /*private boolean isValidUser() {
-        int clntIdx = queryParam.qpIndexOfKeyNoCase( "clnt" );
-        /*if( this.allowAnonymous == true ){
-        if( clntIdx != -1){
-        queryParam.remove( clntIdx );
+    /**
+     * Method to check if the request came from a valid pserver user
+     *
+     * @return
+     */
+    private boolean isValidUser() {
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        /*
+         * if( this.allowAnonymous == true ){ if( clntIdx != -1){
+         * queryParam.remove( clntIdx ); } clientName=null; return true;
         }
-        clientName=null;
-        return true;
-        }*
-        if ( clntIdx == -1 ) {
+         */
+        if (clntIdx == -1) {
             return false;
         }
         //the query must start with the name/password
-        /*if(((String)queryParam.getKey(0)).compareToIgnoreCase("clnt")!=0){
-        if(this.allowAnonymous==false)
-        return INVALID_CLIENT;
-        else
-        return FULL_GRANTED_CLIENT;
-        }*
+        /*
+         * if(((String)queryParam.getKey(0)).compareToIgnoreCase("clnt")!=0){
+         * if(this.allowAnonymous==false) return INVALID_CLIENT; else return
+         * FULL_GRANTED_CLIENT;
+        }
+         */
         //client attibutes demactrate with the "|" character
-        String userAndPass = ( String ) queryParam.getVal( clntIdx );
-        StringTokenizer tokenizer = new StringTokenizer( userAndPass, "|" );
+        String userAndPass = (String) queryParam.getVal(clntIdx);
+        StringTokenizer tokenizer = new StringTokenizer(userAndPass, "|");
         String client = tokenizer.nextToken();//first comes the client name
         String password = "";
+
         try {
-            password = tokenizer.nextToken();//second comes the unencrypted password
-        } catch ( NoSuchElementException e ) {
+            password = tokenizer.nextToken();//second comes the unencrypted password                        
+        } catch (NoSuchElementException e) {
             return false;
+        }        
+        /*
+         * if (client.equals(administrator_name) == true &&
+         * password.equals(administrator_pass) == true) {
+         * queryParam.remove(clntIdx);//removes client attrributes from the
+         * query return true;
         }
-        if ( client.equals( administrator_name ) == true && password.equals( administrator_pass ) == true ) {
-            queryParam.remove( clntIdx );//removes client attrributes from the query
-            return true;
+         */
+        String cachedPass = clientsHash.get(client);
+        if( cachedPass != null ){
+            if( cachedPass.equals(password) ){
+                return true;
+            }
         }
-        try {
-            Connection conn = connDB( url, user, pass );
+        try {            
+            Connection conn = connDB(url, user, pass);
             Statement stmt = conn.createStatement();
             //check pserver_user existence in the data base
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM pserver_clients WHERE name='" + client + "';" );
-            if ( rs.next() == false ) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients WHERE name='" + client + "';");
+            if (rs.next() == false) {
                 return false;
             }
-            String storedPass = rs.getString( "password" );//gets the encrypted password
+            String storedPass = rs.getString("password");//gets the encrypted password
             try {
-                String encodedPass = MD5.encrypt( password );
-                if ( encodedPass.equals( storedPass ) == false )//compares given password with the storedpassword for validation
+                String encodedPass = MD5.encrypt(password);
+                if (encodedPass.equals(storedPass) == false)//compares given password with the storedpassword for validation
                 {
                     return false;
                 }
-            } catch ( NoSuchAlgorithmException e ) {
+            } catch (NoSuchAlgorithmException e) {
                 return false;
             }
-            clientName = client;
-            queryParam.remove( clntIdx );//removes client attrributes from the query
+
+            /*
+             * clientName = client; queryParam.remove(clntIdx);//removes client
+             * attrributes from the query
+             */
+            clientsHash.put(client, password);
             return true;
-        } catch ( SQLException e ) {
+        } catch (SQLException e) {
             return false;
         }
-    }*/
+     }
 }
