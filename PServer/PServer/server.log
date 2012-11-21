@@ -2954,3 +2954,235 @@
 20/11/2012 22:7:0  >  Server started at alex-desktop/127.0.1.1, port 1111
 20/11/2012 22:7:0  >  Messages log mode set to: on
 20/11/2012 22:7:0  >  Connected to DB: MySQL
+20/11/2012 22:39:41  >  Request from /127.0.0.1 (58052)
+20/11/2012 22:39:41  >  58052-        /ster?clnt=test|test&com=lststr&str=*
+20/11/2012 22:39:41  >  Request from /127.0.0.1 (58054)
+20/11/2012 22:39:41  >  58054-        /resp_xsl/stereotypes.xsl
+20/11/2012 22:41:43  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 22:41:43  >  Messages log mode set to: on
+20/11/2012 22:41:43  >  Connected to DB: MySQL
+20/11/2012 22:41:47  >  Request from /127.0.0.1 (58151)
+20/11/2012 22:41:47  >  58151-        /ster?clnt=test|test&com=lststr&str=*
+20/11/2012 22:41:47  >  Request from /127.0.0.1 (58153)
+20/11/2012 22:41:47  >  58153-        /resp_xsl/stereotypes.xsl
+20/11/2012 22:41:47  >  Request from /127.0.0.1 (58154)
+20/11/2012 22:41:47  >  58154-        /favicon.ico
+20/11/2012 22:44:0  >  Request from /127.0.0.1 (58237)
+20/11/2012 22:44:0  >  58237-        /ster_help/remstr.html
+20/11/2012 22:44:1  >  Request from /127.0.0.1 (58238)
+20/11/2012 22:44:1  >  58238-        /ster_help/remusr.html
+20/11/2012 23:27:35  >  Server started at alex-desktop/127.0.1.1, port 1111
+20/11/2012 23:27:35  >  Messages log mode set to: on
+20/11/2012 23:27:35  >  Connected to DB: MySQL
+20/11/2012 23:42:0  >  Request from /127.0.0.1 (33567)
+20/11/2012 23:42:0  >  33567-        /ster_help/remusr.html
+20/11/2012 23:49:42  >  Request from /127.0.1.1 (51530)
+20/11/2012 23:49:42  >  51530-        /ster?clnt=test|test&com=incdeg&usr=1001&educated2=-0.12
+20/11/2012 23:49:43  >  Request from /127.0.1.1 (51532)
+20/11/2012 23:49:43  >  51532-        /ster?clnt=test|test&com=remusr&1001=educated2
+20/11/2012 23:50:32  >  Request from /127.0.1.1 (51559)
+20/11/2012 23:50:32  >  51559-        /ster?clnt=test|test&com=incdeg&usr=1001&educated2=-0.12
+20/11/2012 23:51:2  >  Request from /127.0.1.1 (51586)
+20/11/2012 23:51:2  >  51586-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:1:4  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:1:4  >  Messages log mode set to: on
+21/11/2012 0:1:4  >  Connected to DB: MySQL
+21/11/2012 0:1:29  >  Request from /127.0.1.1 (52054)
+21/11/2012 0:1:29  >  52054-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:1:55  >  Request from /127.0.1.1 (52079)
+21/11/2012 0:1:55  >  52079-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:2:43  >  Request from /127.0.1.1 (52086)
+21/11/2012 0:2:43  >  52086-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:3:7  >  Shutting down server, normal: true
+21/11/2012 0:3:41  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:3:41  >  Messages log mode set to: on
+21/11/2012 0:3:41  >  Connected to DB: MySQL
+21/11/2012 0:4:3  >  Request from /127.0.1.1 (52128)
+21/11/2012 0:4:3  >  52128-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:4:23  >  Request from /127.0.1.1 (52132)
+21/11/2012 0:4:23  >  52132-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:6:6  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:6:6  >  Messages log mode set to: on
+21/11/2012 0:6:6  >  Connected to DB: MySQL
+21/11/2012 0:6:27  >  Request from /127.0.1.1 (52186)
+21/11/2012 0:6:27  >  52186-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:6:57  >  Request from /127.0.1.1 (52210)
+21/11/2012 0:6:57  >  52210-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:8:48  >  Request from /127.0.1.1 (52244)
+21/11/2012 0:8:48  >  52244-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:9:21  >  Request from /127.0.1.1 (52271)
+21/11/2012 0:9:21  >  52271-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:11:54  >  Shutting down server, normal: true
+21/11/2012 0:12:1  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:12:1  >  Messages log mode set to: on
+21/11/2012 0:12:1  >  Connected to DB: MySQL
+21/11/2012 0:12:11  >  Request from /127.0.1.1 (52327)
+21/11/2012 0:12:11  >  52327-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:12:32  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:12:32  >  Messages log mode set to: on
+21/11/2012 0:12:32  >  Connected to DB: MySQL
+21/11/2012 0:12:37  >  Request from /127.0.1.1 (52335)
+21/11/2012 0:12:37  >  52335-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:14:29  >  Request from /127.0.1.1 (52388)
+21/11/2012 0:14:29  >  52388-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:26:40  >  Shutting down server, normal: true
+21/11/2012 0:26:49  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:26:49  >  Messages log mode set to: on
+21/11/2012 0:26:49  >  Connected to DB: MySQL
+21/11/2012 0:26:52  >  Request from /127.0.1.1 (52652)
+21/11/2012 0:26:52  >  52652-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:26:52  >  Request from /127.0.1.1 (52654)
+21/11/2012 0:26:52  >  52654-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:28:29  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:28:29  >  Messages log mode set to: on
+21/11/2012 0:28:29  >  Connected to DB: MySQL
+21/11/2012 0:28:35  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 0:28:35  >  Messages log mode set to: on
+21/11/2012 0:28:35  >  Connected to DB: MySQL
+21/11/2012 0:28:42  >  Request from /127.0.1.1 (52712)
+21/11/2012 0:28:42  >  52712-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:28:42  >  Request from /127.0.1.1 (52714)
+21/11/2012 0:28:42  >  52714-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:29:8  >  Request from /127.0.1.1 (52728)
+21/11/2012 0:29:8  >  52728-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:29:8  >  Request from /127.0.1.1 (52730)
+21/11/2012 0:29:8  >  52730-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:30:14  >  Request from /127.0.1.1 (52747)
+21/11/2012 0:30:14  >  52747-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:30:14  >  Request from /127.0.1.1 (52749)
+21/11/2012 0:30:14  >  52749-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:31:12  >  Problem resolving localhost: java.net.BindException: Address already in use
+21/11/2012 0:31:12  >  Server started at , port -1
+21/11/2012 0:31:12  >  Messages log mode set to: on
+21/11/2012 0:31:12  >  Connected to DB: MySQL
+21/11/2012 0:31:16  >  Request from /127.0.1.1 (52770)
+21/11/2012 0:31:16  >  52770-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:31:16  >  Request from /127.0.1.1 (52772)
+21/11/2012 0:31:16  >  52772-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:31:29  >  Request from /127.0.1.1 (52777)
+21/11/2012 0:31:29  >  52777-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:31:29  >  Request from /127.0.1.1 (52779)
+21/11/2012 0:31:29  >  52779-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:31:53  >  Problem resolving localhost: java.net.BindException: Address already in use
+21/11/2012 0:31:53  >  Server started at , port -1
+21/11/2012 0:31:53  >  Messages log mode set to: on
+21/11/2012 0:31:53  >  Connected to DB: MySQL
+21/11/2012 0:54:36  >  Request from /127.0.1.1 (54501)
+21/11/2012 0:54:36  >  54501-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:54:36  >  Request from /127.0.1.1 (54503)
+21/11/2012 0:54:36  >  54503-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:54:45  >  Request from /127.0.1.1 (54506)
+21/11/2012 0:54:45  >  54506-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:54:45  >  Request from /127.0.1.1 (54508)
+21/11/2012 0:54:45  >  54508-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:55:12  >  Shutting down server, normal: true
+21/11/2012 0:55:21  >  Problem resolving localhost: java.net.BindException: Address already in use
+21/11/2012 0:55:21  >  Server started at , port -1
+21/11/2012 0:55:21  >  Messages log mode set to: on
+21/11/2012 0:55:21  >  Connected to DB: MySQL
+21/11/2012 0:55:26  >  Request from /127.0.1.1 (54529)
+21/11/2012 0:55:26  >  54529-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:55:26  >  Request from /127.0.1.1 (54531)
+21/11/2012 0:55:26  >  54531-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:56:45  >  Problem resolving localhost: java.net.BindException: Address already in use
+21/11/2012 0:56:45  >  Server started at , port -1
+21/11/2012 0:56:45  >  Messages log mode set to: on
+21/11/2012 0:56:46  >  Connected to DB: MySQL
+21/11/2012 0:56:49  >  Request from /127.0.1.1 (54567)
+21/11/2012 0:56:49  >  54567-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 0:56:49  >  Request from /127.0.1.1 (54569)
+21/11/2012 0:56:49  >  54569-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 0:59:47  >  Shutting down server, normal: true
+21/11/2012 1:1:9  >  Problem resolving localhost: java.net.BindException: Address already in use
+21/11/2012 1:1:9  >  Server started at , port -1
+21/11/2012 1:1:9  >  Messages log mode set to: on
+21/11/2012 1:1:9  >  Connected to DB: MySQL
+21/11/2012 1:1:13  >  Request from /127.0.1.1 (54683)
+21/11/2012 1:1:13  >  54683-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 1:1:13  >  Request from /127.0.1.1 (54685)
+21/11/2012 1:1:13  >  54685-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 1:2:2  >  Request from /127.0.1.1 (54710)
+21/11/2012 1:2:2  >  54710-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 1:2:2  >  Request from /127.0.1.1 (54712)
+21/11/2012 1:2:2  >  54712-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 1:2:55  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 1:2:55  >  Messages log mode set to: on
+21/11/2012 1:2:55  >  Connected to DB: MySQL
+21/11/2012 1:3:1  >  Request from /127.0.1.1 (54748)
+21/11/2012 1:3:1  >  54748-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 1:3:1  >  Request from /127.0.1.1 (54750)
+21/11/2012 1:3:1  >  54750-        /ster?clnt=test|test&com=remusr&1001=educated2
+21/11/2012 1:4:39  >  Shutting down server, normal: true
+21/11/2012 1:7:26  >  Server started at alex-desktop/127.0.1.1, port 1111
+21/11/2012 1:7:26  >  Messages log mode set to: on
+21/11/2012 1:7:27  >  Connected to DB: MySQL
+21/11/2012 1:7:30  >  Request from /127.0.0.1 (37225)
+21/11/2012 1:7:30  >  37225-        /ster_help/ster_mode.html
+21/11/2012 1:7:30  >  Request from /127.0.0.1 (37227)
+21/11/2012 1:7:30  >  Request from /127.0.0.1 (37226)
+21/11/2012 1:7:30  >  37227-        /ster_help/menu.html
+21/11/2012 1:7:30  >  37226-        /ster_help/ster_index.html
+21/11/2012 1:7:30  >  Request from /127.0.0.1 (37228)
+21/11/2012 1:7:30  >  37228-        /favicon.ico
+21/11/2012 1:7:32  >  Request from /127.0.0.1 (37230)
+21/11/2012 1:7:32  >  37230-        /ster_help/remusr.html
+21/11/2012 1:7:32  >  Request from /127.0.0.1 (37231)
+21/11/2012 1:7:32  >  37231-        /ster_help/remusr.html
+21/11/2012 1:8:9  >  Request from /127.0.0.1 (37241)
+21/11/2012 1:8:9  >  37241-        /ster_help/ster_mode.html
+21/11/2012 1:8:9  >  Request from /127.0.0.1 (37242)
+21/11/2012 1:8:9  >  37242-        /ster_help/ster_index.html
+21/11/2012 1:8:9  >  Request from /127.0.0.1 (37243)
+21/11/2012 1:8:9  >  37243-        /ster_help/menu.html
+21/11/2012 1:8:9  >  Request from /127.0.0.1 (37244)
+21/11/2012 1:8:9  >  37244-        /favicon.ico
+21/11/2012 1:8:11  >  Request from /127.0.0.1 (37245)
+21/11/2012 1:8:11  >  37245-        /ster_help/remusr.html
+21/11/2012 1:10:24  >  Request from /127.0.0.1 (37315)
+21/11/2012 1:10:24  >  37315-        /ster_help/setdeg.html
+21/11/2012 1:25:8  >  Request from /127.0.0.1 (37935)
+21/11/2012 1:25:8  >  37935-        /ster_help/setdeg.html
+21/11/2012 2:24:5  >  Request from /127.0.1.1 (58178)
+21/11/2012 2:24:5  >  58178-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 2:24:6  >  Request from /127.0.1.1 (58180)
+21/11/2012 2:24:6  >  58180-        /ster?clnt=test|test&setdeg&usr=0.34
+21/11/2012 2:24:29  >  Request from /127.0.1.1 (58184)
+21/11/2012 2:24:29  >  58184-        /ster?clnt=test|test&com=addusr&usr=1001&educated2=1
+21/11/2012 2:24:29  >  Request from /127.0.1.1 (58186)
+21/11/2012 2:24:29  >  58186-        /ster?clnt=test|test&com=setdeg&usr=0.34
+21/11/2012 2:40:2  >  Request from /127.0.0.1 (41506)
+21/11/2012 2:40:2  >  41506-        /ster_help/setdeg.html
+21/11/2012 2:40:3  >  Request from /127.0.0.1 (41507)
+21/11/2012 2:40:3  >  41507-        /ster_help/sqlstr.html
+21/11/2012 2:40:4  >  Request from /127.0.0.1 (41508)
+21/11/2012 2:40:4  >  41508-        /ster_help/sqlusr.html
+21/11/2012 2:40:8  >  Request from /127.0.0.1 (41518)
+21/11/2012 2:40:8  >  41518-        /ster_help/sqlusr.html
+21/11/2012 2:40:9  >  Request from /127.0.0.1 (41519)
+21/11/2012 2:40:9  >  41519-        /ster_help/sqlstr.html
+21/11/2012 2:40:38  >  Request from /127.0.0.1 (41521)
+21/11/2012 2:40:38  >  41521-        /pers_help/pers_mode.html
+21/11/2012 2:40:38  >  Request from /127.0.0.1 (41522)
+21/11/2012 2:40:38  >  41522-        /pers_help/pers_index.html
+21/11/2012 2:40:38  >  Request from /127.0.0.1 (41523)
+21/11/2012 2:40:38  >  41523-        /pers_help/menu.html
+21/11/2012 2:40:42  >  Request from /127.0.0.1 (41524)
+21/11/2012 2:40:42  >  41524-        /pers_help/pers_mode.html
+21/11/2012 2:40:42  >  Request from /127.0.0.1 (41525)
+21/11/2012 2:40:42  >  41525-        /pers_help/pers_index.html
+21/11/2012 2:40:42  >  Request from /127.0.0.1 (41526)
+21/11/2012 2:40:42  >  41526-        /pers_help/menu.html
+21/11/2012 2:40:59  >  Request from /127.0.0.1 (41528)
+21/11/2012 2:40:59  >  41528-        /
+21/11/2012 2:40:59  >  Request from /127.0.0.1 (41529)
+21/11/2012 2:40:59  >  41529-        /favicon.ico
+21/11/2012 2:41:1  >  Request from /127.0.0.1 (41530)
+21/11/2012 2:41:1  >  41530-        /admin?com=login&login_name=root&login_password=root
+21/11/2012 2:41:5  >  Request from /127.0.0.1 (41537)
+21/11/2012 2:41:5  >  41537-        /pers_help/pers_mode.html
+21/11/2012 2:41:5  >  Request from /127.0.0.1 (41540)
+21/11/2012 2:41:5  >  Request from /127.0.0.1 (41539)
+21/11/2012 2:41:5  >  41539-        /pers_help/pers_index.html
+21/11/2012 2:41:5  >  41540-        /pers_help/menu.html
+21/11/2012 2:41:23  >  Request from /127.0.0.1 (41542)
+21/11/2012 2:41:23  >  41542-        /pers_help/assocftr.html

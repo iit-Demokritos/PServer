@@ -9,24 +9,11 @@
 <body bgcolor="#FFFFCC">
 
 <pre>-remusr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=remusr[&amp;&lt;usr_1&gt;=&lt;str_pattern_1&gt;&amp;&lt;usr_2&gt;=...]
+template: ster?clnt=&lt;name|pass&gt;&amp;com=remusr[&amp;&lt;usr_1&gt;=&lt;str_1&gt;&amp;&lt;usr_2&gt;=...]
           Order of query params is not important. The user
           query parameters are optional.
-pattern : * | name
-descript: removes all records with stereotypes matching the 
-          stereotype pattern, for the specified user: either
-          all stereotypes if pattern is '*', or a single
-          stereotype, for the corresponding user. This is
-          repeated for all parameters in the query string.
-          The same user can de specified more than once in a
-          query string. If no user query parameters exist, all
-          the records in the table will be deleted (all user
-          references to stereotypes). If no (user, stereotype)
-          in DB matches the patterns, no record will be deleted
-          (200 OK will still be returned). If the error code 401
-          is returned then no records have been deleted.
-example : ster?clnt=name|pass&amp;com=remusr&amp;john=*&amp;george=visitor&amp;george=expert
-          ster?clnt=name|pass&amp;com=remusr     (deletes all records in table)
+descript: removes all records with stereotypes matching the pairs user-stereotype
+example : ster?clnt=name|pass&amp;com=remusr&amp;john=experts&amp;george=visitor&amp;george=english
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : in this case the response body is as follows
           &lt;?xml version=&quot;1.0&quot;?&gt;

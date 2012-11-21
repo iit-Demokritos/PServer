@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
-*/
-
+ */
 package pserver.data;
 
 import java.security.NoSuchAlgorithmException;
@@ -40,147 +39,121 @@ public class DBAccess {
 
     public static final int RELATION_TEMPORARY = 0;
     public static final int RELATION_SIMILARITY = 1;
-    public static final int RELATION_BINARY_SIMILARITY= 2;
+    public static final int RELATION_BINARY_SIMILARITY = 2;
     public static final int RELATION_PHYSICAL = 3;
     public static final int RELATION_PHYSICAL_NORMALIZED = 4;
     public static final int RELATION_FEATURE_SIMILARITY = 5;
-
     public static final int STATISTICS_FREQUENCY = 0;
     public static final int STATISTICS_FREQUENCY_NORMALIZED = 1;
-
     public static final String FIELD_PSCLIENT = "FK_psclient";
-
     public static final String ATTRIBUTES_TABLE = "attributes";
     public static final String ATTRIBUTES_TABLE_FIELD_ATTRIBUTE_NAME = "attr_name";
     public static final String ATTRIBUTES_TABLE_FIELD_DEF_VALUE = "attr_defvalue";
-
     public static final String COMMUNITIES_TABLE = "communities";
     public static final String COMMUNITIES_TABLE_FIELD_COMMUNITY = "community";
     public static final String COMMUNITY_PROFILES_TABLE = "community_profiles";
     public static final String COMMUNITY_PROFILES_TABLE_FIELD_COMMUNITY = "community";
     public static final String COMMUNITY_PROFILES_TABLE_FIELD_FEATURE = "feature";
     public static final String COMMUNITY_PROFILES_TABLE_FIELD_FEATURE_VALUE = "feature_value";
-
     public static final String FTRGROUPS_TABLE = "ftrgroups";
     public static final String FTRGROUPS_TABLE_FIELD_FTRGROUP = "ftrgroup";
     public static final String FTRGROUP_FEATURES_TABLE = "ftrgroup_features";
     public static final String FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP = "feature_group";
-    public static final String FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME = "feature_name";    
-
+    public static final String FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME = "feature_name";
     public static final String FTRGROUPSUSERS_TABLE = "ftrgroup_users";
     public static final String FTRGROUPSUSERS_TABLE_FIELD_GROUP = "feature_group";
     public static final String FTRGROUPSUSERS_TABLE_FIELD_USER = "user_name";
-
     public static final String FTRGROUPSFTRS_TABLE = "ftrgroup_features";
     public static final String FTRGROUPSFTRS_TABLE_FIELD_GROUP = "feature_group";
     public static final String FTRGROUPSFTRS_TABLE_TABLE_FIELD_FTR = "feature_name";
-
     public static final String DECAY_DATA_TABLE = "decay_data";
     public static final String DECAY_DATA_TABLE_FIELD_USER = "dd_user";
     public static final String DECAY_DATA_TABLE_FIELD_FEATURE = "dd_feature";
     public static final String DECAY_DATA_TABLE_FIELD_TIMESTAMP = "dd_timestamp";
     public static final String DECAY_DATA_TABLE_FIELD_SESSION = "FK_session";
-
     public static final String NUM_DATA_TABLE = "num_data";
     public static final String NUM_DATA_TABLE_FIELD_USER = "nd_user";
     public static final String NUM_DATA_TABLE_FIELD_FEATURE = "nd_feature";
     public static final String NUM_DATA_TABLE_FIELD_VALUE = "nd_value";
     public static final String NUM_DATA_TABLE_FIELD_TIMESTAMP = "nd_timestamp";
     public static final String NUM_DATA_TABLE_FIELD_SESSION = "sessionId";
-
     public static final String USER_TABLE = "users";
     public static final String USER_TABLE_FIELD_USER = "user";
     public static final String USER_TABLE_FIELD_DECAY_FACTOR = "decay_factor";
-    
     public static final String FEATURE_TABLE = "up_features";
     public static final String FEATURE_TABLE_FIELD_FEATURE = "uf_feature";
     public static final String FEATURE_TABLE_FIELD_DEFVALUE = "uf_defvalue";
     public static final String FEATURE_TABLE_FIELD_VALUE_NUMDEFVALUE = "uf_numdefvalue";
-
     public static final String UPROFILE_TABLE = "user_profiles";
     public static final String UPROFILE_TABLE_FIELD_USER = "up_user";
     public static final String UPROFILE_TABLE_FIELD_FEATURE = "up_feature";
-    public static final String UPROFILE_TABLE_FIELD_VALUE = "up_value";
+    public static final String UPROFILE_TABLE_FIELD_VALUE = "up_numvalue";
     public static final String UPROFILE_TABLE_FIELD_NUMVALUE = "up_numvalue";
-
     public static final String CFPROFILE_TABLE = "collaborative_profiles";
     public static final String CFPROFILE_TABLE_FIELD_USER = "cp_user";
     public static final String CFPROFILE_TABLE_FIELD_FEATURE = "cp_feature";
     public static final String CFPROFILE_TABLE_FIELD_VALUE = "cp_value";
     public static final String CFPROFILE_TABLE_FIELD_NUMVALUE = "cp_numvalue";
-
     public static final String SESSIONS_TABLE = "user_sessions";
     public static final String SESSIONS_TABLE_FIELD_ID = "id";
     public static final String SESSIONS_TABLE_FIELD_USER = "FK_user";
-
     public static final String UASSOCIATIONS_TABLE = "user_associations";
     public static final String UASSOCIATIONS_TABLE_FIELD_SRC = "user_src";
     public static final String UASSOCIATIONS_TABLE_FIELD_DST = "user_dst";
     public static final String UASSOCIATIONS_TABLE_FIELD_WEIGHT = "weight";
     public static final String UASSOCIATIONS_TABLE_FIELD_TYPE = "type";
-
     public static final String UFTRASSOCIATIONS_TABLE = "user_feature_associations";
     public static final String UFTRASSOCIATIONS_TABLE_FIELD_SRC = "ftr_src";
     public static final String UFTRASSOCIATIONS_TABLE_FIELD_DST = "ftr_dst";
     public static final String UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT = "weight";
     public static final String UFTRASSOCIATIONS_TABLE_FIELD_TYPE = "type";
     public static final String UFTRASSOCIATIONS_TABLE_FIELD_USR = "user";
-
     public static final String CFFTRASSOCIATIONS_TABLE = "collaborative_feature_associations";
     public static final String CFFTRASSOCIATIONS_TABLE_FIELD_SRC = "ftr_src";
     public static final String CFFTRASSOCIATIONS_TABLE_FIELD_DST = "ftr_dst";
     public static final String CFFTRASSOCIATIONS_TABLE_FIELD_WEIGHT = "weight";
     public static final String CFFTRASSOCIATIONS_TABLE_FIELD_TYPE = "type";
     public static final String CFFTRASSOCIATIONS_TABLE_FIELD_USR = "profile";
-
     public static final String UATTR_TABLE = "user_attributes";
     public static final String UATTR_TABLE_FIELD_USER = "user";
     public static final String UATTR_TABLE_FIELD_ATTRIBUTE = "attribute";
     public static final String UATTR_TABLE_FIELD_VALUE = "attribute_value";
-
     public static final String UCOMMUNITY_TABLE = "user_community";
     public static final String UCOMMUNITY_TABLE_FIELD_USER = "user";
     public static final String UCOMMUNITY_TABLE_FIELD_COMMUNITY = "community";
-
     public static final String STEREOTYPE_TABLE = "stereotypes";
     public static final String STEREOTYPE_TABLE_FIELD_STEREOTYPE = "st_stereotype";
-
+    public static final String STEREOTYPE_TABLE_FIELD_RULE = "st_rule";
     public static final String FEATURE_STATISTICS_TABLE = "user_feature_statistics";
     public static final String FEATURE_STATISTICS_TABLE_FIELD_USER = "user";
     public static final String FEATURE_STATISTICS_TABLE_FIELD_FEATURE = "ftr";
     public static final String FEATURE_STATISTICS_TABLE_FIELD_VALUE = "value";
     public static final String FEATURE_STATISTICS_TABLE_FIELD_TYPE = "type";
-
     public static final String CFFEATURE_STATISTICS_TABLE = "collaborative_feature_statistics";
     public static final String CFFEATURE_STATISTICS_TABLE_FIELD_USER = "profile";
     public static final String CFFEATURE_STATISTICS_TABLE_FIELD_FEATURE = "ftr";
     public static final String CFFEATURE_STATISTICS_TABLE_FIELD_VALUE = "value";
     public static final String CFFEATURE_STATISTICS_TABLE_FIELD_TYPE = "type";
-
     public static final String STEREOTYPE_USERS_TABLE = "stereotype_users";
     public static final String STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE = "su_stereotype";
     public static final String STEREOTYPE_USERS_TABLE_FIELD_USER = "su_user";
     public static final String STEREOTYPE_USERS_TABLE_FIELD_DEGREE = "su_degree";
-
     public static final String STERETYPE_PROFILES_TABLE = "stereotype_profiles";
     public static final String STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE = "sp_stereotype";
     public static final String STERETYPE_PROFILES_TABLE_FIELD_FEATURE = "sp_feature";
-    public static final String STERETYPE_PROFILES_TABLE_FIELD_VALUE = "sp_value";
+    public static final String STERETYPE_PROFILES_TABLE_FIELD_VALUE = "sp_numvalue";
     public static final String STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE = "sp_numvalue";
-
     public static final String STERETYPE_STATISTICS_TABLE = "stereotype_feature_statistics";
     public static final String STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE = "stereotype";
     public static final String STERETYPE_STATISTICS_TABLE_FIELD_FEATURE = "ftr";
     public static final String STERETYPE_STATISTICS_TABLE_FIELD_TYPE = "type";
     public static final String STERETYPE_STATISTICS_TABLE_FIELD_VALUE = "value";
-
     public static final String SFTRASSOCIATIONS_TABLE = "stereotype_feature_associations";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_SRC = "ftr_src";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_DST = "ftr_dst";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_WEIGHT = "weight";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_TYPE = "type";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_STEREOTYPE = "stereotype";
-
     private Connection connection = null;
     private Statement statement = null;
     private boolean connected;
@@ -192,48 +165,48 @@ public class DBAccess {
         this.connected = false;
     }
 
-    public DBAccess( String url, String user, String pass ) {
+    public DBAccess(String url, String user, String pass) {
         this.connected = false;
         this.url = url;
         this.user = user;
         this.pass = pass;
     }
 
-    public DBAccess( Connection con ) {
+    public DBAccess(Connection con) {
         this.connected = true;
         this.connection = con;
     }
 
-    public Connection newConnection() throws SQLException{
-        Connection con = DriverManager.getConnection( this.url, this.user, this.pass );
+    public Connection newConnection() throws SQLException {
+        Connection con = DriverManager.getConnection(this.url, this.user, this.pass);
         return con;
     }
 
-    public void setAutoCommit( boolean state ) throws SQLException {
-        this.getConnection().setAutoCommit( (state) );
+    public void setAutoCommit(boolean state) throws SQLException {
+        this.getConnection().setAutoCommit((state));
     }
 
     public void connect() throws SQLException {
-        if ( this.connected == true ) {
+        if (this.connected == true) {
             return;
         }
-        this.connection = DriverManager.getConnection( this.url, this.user, this.pass );
+        this.connection = DriverManager.getConnection(this.url, this.user, this.pass);
         this.connected = true;
     }
 
     public void reconnect() throws SQLException {
-        this.connection = DriverManager.getConnection( this.url, this.user, this.pass );
+        this.connection = DriverManager.getConnection(this.url, this.user, this.pass);
         this.connected = true;
     }
 
     public void disconnect() throws SQLException {
-        if ( this.connected == true ) {
+        if (this.connected == true) {
             connection.close();
         }
     }
 
     public DatabaseMetaData getMetadata() throws SQLException {
-        if ( this.connected ) {
+        if (this.connected) {
             return this.connection.getMetaData();
         } else {
             return null;
@@ -244,7 +217,7 @@ public class DBAccess {
         return connection;
     }
 
-    public void setConnection( Connection connection ) {
+    public void setConnection(Connection connection) {
         this.connection = connection;
     }
 
@@ -252,7 +225,7 @@ public class DBAccess {
         return statement;
     }
 
-    public void setStatement( Statement statement ) {
+    public void setStatement(Statement statement) {
         this.statement = statement;
     }
 
@@ -260,7 +233,7 @@ public class DBAccess {
         return connected;
     }
 
-    public void setConnected( boolean connected ) {
+    public void setConnected(boolean connected) {
         this.connected = connected;
     }
 
@@ -268,7 +241,7 @@ public class DBAccess {
         return url;
     }
 
-    public void setUrl( String url ) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -276,7 +249,7 @@ public class DBAccess {
         return user;
     }
 
-    public void setUser( String user ) {
+    public void setUser(String user) {
         this.user = user;
     }
 
@@ -284,7 +257,7 @@ public class DBAccess {
         return pass;
     }
 
-    public void setPass( String pass ) {
+    public void setPass(String pass) {
         this.pass = pass;
     }
 
@@ -294,7 +267,7 @@ public class DBAccess {
 
     public void rollback() throws SQLException {
         this.connection.rollback();
-    }        
+    }
 
     /**
      * returns the pserver clients that are stored in the database
@@ -302,12 +275,12 @@ public class DBAccess {
     public LinkedList<PServerClient> getPserverClients() throws SQLException {
         LinkedList<PServerClient> clients = new LinkedList<PServerClient>();
         Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery( "SELECT * FROM pserver_clients" );
-        while ( rs.next() ) {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients");
+        while (rs.next()) {
             PServerClient client = new PServerClient();
-            client.setName( rs.getString( "name" ) );
-            client.setMd5pass( rs.getString( "password" ) );
-            clients.add( client );
+            client.setName(rs.getString("name"));
+            client.setMd5pass(rs.getString("password"));
+            clients.add(client);
         }
         rs.close();
         return clients;
@@ -316,21 +289,21 @@ public class DBAccess {
     /**
      * INSERT new user in the database
      */
-    public int insertNewUser( PUser user, String clientName ) throws SQLException {
-        Statement stmt = this.connection.createStatement();        
+    public int insertNewUser(PUser user, String clientName) throws SQLException {
+        Statement stmt = this.connection.createStatement();
         String sql = "INSERT INTO " + USER_TABLE + " ( " + USER_TABLE_FIELD_USER + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "', '" + clientName + "')";
-        int rows = stmt.executeUpdate( sql );
+        int rows = stmt.executeUpdate(sql);
         Set<String> features = user.getFeatures();
-        
-        for( String ftr : features ){
-            sql = "REPLACE INTO " + UPROFILE_TABLE + " ( " + UPROFILE_TABLE_FIELD_USER + "," +UPROFILE_TABLE_FIELD_FEATURE + "," + UPROFILE_TABLE_FIELD_NUMVALUE + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "','" + ftr  + "',"+ user.getFeatureValue( ftr) + ",'" + clientName + "')";
-            rows += stmt.executeUpdate( sql );
+
+        for (String ftr : features) {
+            sql = "REPLACE INTO " + UPROFILE_TABLE + " ( " + UPROFILE_TABLE_FIELD_USER + "," + UPROFILE_TABLE_FIELD_FEATURE + "," + UPROFILE_TABLE_FIELD_NUMVALUE + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "','" + ftr + "'," + user.getFeatureValue(ftr) + ",'" + clientName + "')";
+            rows += stmt.executeUpdate(sql);
         }
 
         String[] attributes = user.getAttributes();
-        for( int i = 0 ; i < attributes.length ; i ++ ){
-            sql = "REPLACE INTO " + UATTR_TABLE + " ( " + UATTR_TABLE_FIELD_USER + "," + UATTR_TABLE_FIELD_ATTRIBUTE + "," + UATTR_TABLE_FIELD_VALUE + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "','" + attributes[ i ]  + "','"+ user.getAttributeValue( attributes[ i ]) + "','" + clientName + "')";
-            rows += stmt.executeUpdate( sql );
+        for (int i = 0; i < attributes.length; i++) {
+            sql = "REPLACE INTO " + UATTR_TABLE + " ( " + UATTR_TABLE_FIELD_USER + "," + UATTR_TABLE_FIELD_ATTRIBUTE + "," + UATTR_TABLE_FIELD_VALUE + "," + FIELD_PSCLIENT + " ) VALUES ('" + user.getName() + "','" + attributes[ i] + "','" + user.getAttributeValue(attributes[ i]) + "','" + clientName + "')";
+            rows += stmt.executeUpdate(sql);
         }
 
         stmt.close();
@@ -340,12 +313,12 @@ public class DBAccess {
     /**
      * INSERT new attributes in the database
      */
-    public int insertNewAttribute( PAttribute attribute, String clientName ) throws SQLException {
+    public int insertNewAttribute(PAttribute attribute, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "INSERT INTO attributes ( attr_name, attr_defvalue, " + FIELD_PSCLIENT + " ) VALUES ('" + attribute.getName() + "', '" + attribute.getDefValue() + "', '" + clientName + "')";
         //System.out.println( "Executing SQL " + query );
 
-        int rows = stmt.executeUpdate( query );
+        int rows = stmt.executeUpdate(query);
         stmt.close();
         return rows;
     }
@@ -353,112 +326,112 @@ public class DBAccess {
     /**
      * INSERT new features in the database
      */
-    public int insertNewFeature( PFeature feature, String clientName ) throws SQLException {
+    public int insertNewFeature(PFeature feature, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "INSERT INTO up_features " + "(uf_feature, uf_defvalue, uf_numdefvalue, " + FIELD_PSCLIENT + " ) VALUES ('" + feature.getName() + "', '" + feature.getStrDefValue() + "', " + feature.getDefValue() + ",'" + clientName + "')";
         //System.out.println( "query = " + query );
-        int rows = stmt.executeUpdate( query );
+        int rows = stmt.executeUpdate(query);
         stmt.close();
         return rows;
     }
 
-    public ArrayList<PFeature> getAllFeatures( String clientName ) throws SQLException {
+    public ArrayList<PFeature> getAllFeatures(String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "SELECT * FROM up_features WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( query );
+        ResultSet rs = stmt.executeQuery(query);
         ArrayList<PFeature> features = new ArrayList<PFeature>();
-        while ( rs.next() ) {
+        while (rs.next()) {
             PFeature feature = new PFeature();
 
-            feature.setName( rs.getString( "uf_feature" ) );
-            feature.setDefValue( rs.getFloat( "uf_defvalue" ) );
-            feature.setValue( feature.getDefValue() );
+            feature.setName(rs.getString("uf_feature"));
+            feature.setDefValue(rs.getFloat("uf_defvalue"));
+            feature.setValue(feature.getDefValue());
 
-            features.add( feature );
+            features.add(feature);
         }
         stmt.close();
         return features;
     }
 
-    public List<PStereotype> getStereotypesOfUser( PUser user, String clientName ) throws SQLException {
+    public List<PStereotype> getStereotypesOfUser(PUser user, String clientName) throws SQLException {
         LinkedList<PStereotype> list = new LinkedList<PStereotype>();
         Statement stmt = this.connection.createStatement();
         String query = "SELECT * FROM stereotype_users WHERE su_user ='" + user.getName() + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        stmt.executeQuery( query );
+        stmt.executeQuery(query);
         return list;
     }
 
     /**
      * INSERTs data INTO decay_data table
      */
-    public int insertNewDecayData( PDecayData data, String clientName ) throws SQLException {
+    public int insertNewDecayData(PDecayData data, String clientName) throws SQLException {
         int rowsAffected = 0;
         Statement stmt = this.connection.createStatement();
         //INSERT all (user, feature, timestamp) tuple
         String query = "INSERT INTO decay_data (dd_user, dd_feature, dd_timestamp, " + FIELD_PSCLIENT + ", FK_session ) VALUES ('" + data.getUserName() + "', '" + data.getFeature() + "', '" + data.getTimestamp() + "' ,'" + clientName + "'," + data.getSessionId() + ")";
         //System.out.println( query );
 
-        rowsAffected = stmt.executeUpdate( query );
+        rowsAffected = stmt.executeUpdate(query);
         stmt.close();
         return rowsAffected;
     }
 
-
-    public int insertDelayedNewDecayData( PDecayData data, String clientName ) throws SQLException {
+    public int insertDelayedNewDecayData(PDecayData data, String clientName) throws SQLException {
         int rowsAffected = 0;
         Statement stmt = this.connection.createStatement();
         //INSERT all (user, feature, timestamp) tuple
         String query = "INSERT DELAYED INTO decay_data (dd_user, dd_feature, dd_timestamp, " + FIELD_PSCLIENT + ", FK_session ) VALUES ('" + data.getUserName() + "', '" + data.getFeature() + "', '" + data.getTimestamp() + "' ,'" + clientName + "'," + data.getSessionId() + ")";
         //System.out.println( query );
 
-        rowsAffected = stmt.executeUpdate( query );
+        rowsAffected = stmt.executeUpdate(query);
         stmt.close();
         return rowsAffected;
     }
+
     /**
      * @param sqlQuery
      * @return
      * @throws java.sql.SQLException
      */
-    public int insertNewNumData( PNumData numData, String clientName ) throws SQLException {
+    public int insertNewNumData(PNumData numData, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "INSERT INTO num_data (nd_user, nd_feature, nd_timestamp, nd_value, sessionId, " + FIELD_PSCLIENT + " ) VALUES ('" + numData.getUser() + "', '" + numData.getFeature() + "', " + numData.getTimeStamp() + ", " + numData.getFeatureValue() + "," + numData.getSessionId() + ",'" + clientName + "')";
-        int rows = stmt.executeUpdate( query );
+        int rows = stmt.executeUpdate(query);
         stmt.close();
         return rows;
     }
 
-    public int insertDelayedNewNumData( PNumData numData, String clientName ) throws SQLException {
+    public int insertDelayedNewNumData(PNumData numData, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "INSERT DELAYED INTO num_data (nd_user, nd_feature, nd_timestamp, nd_value, sessionId, " + FIELD_PSCLIENT + " ) VALUES ('" + numData.getUser() + "', '" + numData.getFeature() + "', " + numData.getTimeStamp() + ", " + numData.getFeatureValue() + "," + numData.getSessionId() + ",'" + clientName + "')";
-        int rows = stmt.executeUpdate( query );
+        int rows = stmt.executeUpdate(query);
         stmt.close();
         return rows;
     }
 
-    public PNumDataResultSet getNumDataFromSession( Statement stmt, int minSessionId, String clientName ) throws SQLException{
+    public PNumDataResultSet getNumDataFromSession(Statement stmt, int minSessionId, String clientName) throws SQLException {
         String sql = "SELECT * FROM " + DBAccess.NUM_DATA_TABLE + " WHERE " + DBAccess.NUM_DATA_TABLE_FIELD_SESSION + " >= " + minSessionId + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( sql );
-        return new PNumDataResultSet( stmt, rs );
+        ResultSet rs = stmt.executeQuery(sql);
+        return new PNumDataResultSet(stmt, rs);
     }
 
-    public PNumDataResultSet getNumDataFromTime( Statement stmt, long minTimeStamp, String clientName ) throws SQLException{
+    public PNumDataResultSet getNumDataFromTime(Statement stmt, long minTimeStamp, String clientName) throws SQLException {
         String sql = "SELECT * FROM " + DBAccess.NUM_DATA_TABLE + " WHERE " + DBAccess.NUM_DATA_TABLE_FIELD_TIMESTAMP + " >= " + minTimeStamp + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( sql );
-        return new PNumDataResultSet( stmt, rs );
+        ResultSet rs = stmt.executeQuery(sql);
+        return new PNumDataResultSet(stmt, rs);
     }
 
     /**
      * @return the new session id
      * @throws java.sql.SQLException
      */
-    public int newSessionId( String user, String clientName ) throws SQLException {
+    public int newSessionId(String user, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "INSERT INTO " + SESSIONS_TABLE + " ( " + SESSIONS_TABLE_FIELD_USER + ", " + FIELD_PSCLIENT + " ) VALUES ( '" + user + "', '" + clientName + "')";
-        stmt.executeUpdate( query );
-        ResultSet rs =  stmt.getGeneratedKeys();
+        stmt.executeUpdate(query);
+        ResultSet rs = stmt.getGeneratedKeys();
         rs.next();
-        int newId = rs.getInt( 1 );
+        int newId = rs.getInt(1);
         rs.close();
         stmt.close();
         return newId;
@@ -468,11 +441,11 @@ public class DBAccess {
      * @return the new session id
      * @throws java.sql.SQLException
      */
-    public int addSessionId( String user, int sid, String clientName ) throws SQLException {
+    public int addSessionId(String user, int sid, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "INSERT INTO user_sessions ( nd_user, id, " + FIELD_PSCLIENT + " ) VALUES ( '" + user + "'," + sid + ", '" + clientName + "')";
-        stmt.executeUpdate( query );
-        int newId = stmt.getGeneratedKeys().getInt( "id" );
+        stmt.executeUpdate(query);
+        int newId = stmt.getGeneratedKeys().getInt("id");
         stmt.close();
         return newId;
     }
@@ -481,63 +454,63 @@ public class DBAccess {
      * @return the new session id
      * @throws java.sql.SQLException
      */
-    public int getLastSessionId( String user, String clientName ) throws SQLException {
+    public int getLastSessionId(String user, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         String query = "SELECT MAX(id) AS id FROM user_sessions WHERE FK_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( query );
+        ResultSet rs = stmt.executeQuery(query);
         int lastId = 0;
-        if ( rs.next() ) {
-            lastId = rs.getInt( "id" );
+        if (rs.next()) {
+            lastId = rs.getInt("id");
         } else {
-            lastId = newSessionId( user, clientName );
+            lastId = newSessionId(user, clientName);
         }
         rs.close();
         stmt.close();
         return lastId;
     }
 
-    
     /**
      * @return the maximum timestamp from decay and num data session id
      * @throws java.sql.SQLException
      */
-    public long getLastDecayTimeStamp( String usr, String clientName ) throws SQLException {
+    public long getLastDecayTimeStamp(String usr, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
-        
+
         String query = "SELECT MAX(" + DECAY_DATA_TABLE_FIELD_TIMESTAMP + ") FROM " + DECAY_DATA_TABLE + " WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( query );
+        ResultSet rs = stmt.executeQuery(query);
         long maxTimeStamp = 0;
-        if( rs.next() )
-            maxTimeStamp = rs.getLong( 1 );
+        if (rs.next()) {
+            maxTimeStamp = rs.getLong(1);
+        }
 
         rs.close();
-        
+
         query = "SELECT MAX(" + NUM_DATA_TABLE_FIELD_TIMESTAMP + ") FROM " + NUM_DATA_TABLE + " WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        rs = stmt.executeQuery( query );
-        if( rs.next() )
-            maxTimeStamp = Math.max( maxTimeStamp, rs.getLong( 1 ) );
+        rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            maxTimeStamp = Math.max(maxTimeStamp, rs.getLong(1));
+        }
 
         return maxTimeStamp;
     }
 
-
-    public int updateStereotypesFromUserAction( String user, String feature, float val, String clientName ) throws SQLException {
+    public int updateStereotypesFromUserAction(String user, String feature, float val, String clientName) throws SQLException {
         Statement stmt = this.connection.createStatement();
         Statement stmt2 = this.connection.createStatement();
         String query = "SELECT su_stereotype, su_degree FROM stereotype_users WHERE su_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( query );
+        ResultSet rs = stmt.executeQuery(query);
         int total = 0;
-        while ( rs.next() ) {
-            float degree = rs.getFloat( "su_degree" );
-            String stereotype = rs.getString( "su_stereotype" );
+        while (rs.next()) {
+            float degree = rs.getFloat("su_degree");
+            String stereotype = rs.getString("su_stereotype");
             float incVal = val * degree;
             String sql = "UPDATE stereotype_profiles SET sp_numvalue = sp_numvalue + " + incVal + " WHERE sp_feature = '" + feature + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "' AND sp_stereotype = '" + stereotype + "'";
-            int upNum = stmt2.executeUpdate( sql );
-            if ( upNum == 0 ) {
+            int upNum = stmt2.executeUpdate(sql);
+            if (upNum == 0) {
                 sql = "INSERT INTO stereotype_profiles ( sp_stereotype, sp_feature, sp_value, sp_numvalue, " + FIELD_PSCLIENT + " ) " + " SELECT '" + stereotype + "', uf_feature, uf_defvalue, uf_numdefvalue, FK_psclient FROM up_features WHERE uf_feature = '" + feature + "' AND FK_psclient = '" + clientName + "'";
-                stmt2.executeUpdate( sql );
+                stmt2.executeUpdate(sql);
                 sql = "UPDATE stereotype_profiles SET sp_numvalue = sp_numvalue + " + incVal + " WHERE sp_feature = '" + feature + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "' AND sp_stereotype = '" + stereotype + "'";
-                upNum = stmt2.executeUpdate( sql );
+                upNum = stmt2.executeUpdate(sql);
             }
             total += upNum;
         }
@@ -546,33 +519,33 @@ public class DBAccess {
         return total;
     }
 
-    public int removeUserFromStereotypes( String user, String clientName ) throws SQLException {
+    public int removeUserFromStereotypes(String user, String clientName) throws SQLException {
         int total = 0;
         Statement stmt = this.connection.createStatement();
         String sql = "SELECT up_feature, up_numvalue FROM user_profiles WHERE up_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( sql );
+        ResultSet rs = stmt.executeQuery(sql);
         LinkedList<PFeature> features = new LinkedList<PFeature>();
-        while ( rs.next() ) {
+        while (rs.next()) {
             PFeature feature = new PFeature();
-            feature.setName( rs.getString( "up_feature" ) );
-            feature.setValue( rs.getFloat( "up_numvalue" ) );
-            features.add( feature );
+            feature.setName(rs.getString("up_feature"));
+            feature.setValue(rs.getFloat("up_numvalue"));
+            features.add(feature);
         }
         rs.close();
-        if ( features.size() == 0 ) {
+        if (features.size() == 0) {
             stmt.close();
             return 0;
         }
         Statement stmt2 = this.connection.createStatement();
-        for ( PFeature feature : features ) {
+        for (PFeature feature : features) {
             sql = "SELECT su_stereotype, su_degree FROM stereotype_users WHERE su_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-            rs = stmt.executeQuery( sql );
-            while ( rs.next() ) {
-                float degree = rs.getFloat( "su_degree" );
-                String stereotype = rs.getString( "su_stereotype" );
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                float degree = rs.getFloat("su_degree");
+                String stereotype = rs.getString("su_stereotype");
                 float incVal = feature.getValue() * degree;
                 sql = "UPDATE stereotype_profiles SET sp_numvalue = sp_numvalue - " + incVal + " WHERE sp_feature = '" + feature.getName() + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "' AND sp_stereotype = '" + stereotype + "'";
-                total += stmt2.executeUpdate( sql );
+                total += stmt2.executeUpdate(sql);
             }
             rs.close();
         }
@@ -582,59 +555,60 @@ public class DBAccess {
         return total;
     }
 
-    public int removeUserFromStereotype( String user, String stereotype, String clientName ) throws SQLException {
-        int total = 0;
-        String strCondition = stereotype.equals( "*" ) ? "" : "su_stereotype='" + stereotype + "' AND ";
-        Statement stmt = this.connection.createStatement();
-        String sql = "SELECT up_feature, up_numvalue FROM user_profiles WHERE up_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        ResultSet rs = stmt.executeQuery( sql );
-        LinkedList<PFeature> features = new LinkedList<PFeature>();
-        while ( rs.next() ) {
-            PFeature feature = new PFeature();
-            feature.setName( rs.getString( "up_feature" ) );
-            feature.setValue( rs.getFloat( "up_numvalue" ) );
-            features.add( feature );
-        }
+    public int removeUserFromStereotype(String user, String stereotype, String clientName) throws SQLException {        
+        float degree = getUserDegree( stereotype, user, clientName );        
+        String sql = "DELETE FROM stereotype_users WHERE " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + " = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";        
+        int total = this.executeUpdate(sql);     
+        total += updateStereotypeWithRemovedUser(clientName, stereotype, user, degree);
+        return total;
+    }
+
+    /*
+     * Returns the degree of the corellation of the user for the specified stereotype
+     * 
+     * @param stereotype the stereotype
+     * @param user the user name
+     * @param clientName the pserver client
+     */
+    
+    public float getUserDegree( String stereotype, String user, String clientName) throws SQLException {
+        String sql = "SELECT " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE + " FROM "+ DBAccess.STEREOTYPE_USERS_TABLE + " WHERE " 
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " 
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "' AND " 
+                + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'" ;        
+        PServerResultSet rs = this.executeQuery(sql);
+        rs.next();
+        float val = rs.getRs().getFloat(1);
         rs.close();
-        if ( features.size() == 0 ) {
-            stmt.close();
-            return 0;
-        }
-        Statement stmt2 = this.connection.createStatement();
-        for ( PFeature feature : features ) {
-            sql = "SELECT su_degree FROM stereotype_users WHERE " + strCondition + user + "' su_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-            rs = stmt.executeQuery( sql );
-            while ( rs.next() ) {
-                float degree = rs.getFloat( "su_degree" );
-                float incVal = feature.getValue() * degree;
-                sql = "UPDATE stereotype_profiles SET sp_numvalue = sp_numvalue - " + incVal + " WHERE " + strCondition + " " + FIELD_PSCLIENT + " = '" + clientName + "' AND sp_feature = '" + feature.getName() + "'";
-                total += stmt2.executeUpdate( sql );
-            }
-            rs.close();
-        }
-        sql = "DELETE FROM stereotype_users WHERE " + strCondition + " su_user = '" + user + "' AND " + FIELD_PSCLIENT + " = '" + clientName + "'";
-        total += stmt2.executeUpdate( sql );
-        //rs.close();
-        stmt2.close();
+        return val;
+    }
+    
+    private int  updateStereotypeWithRemovedUser(String clientName, String stereotype, String user, float degree) throws SQLException {
+        String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
+                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "-"
+                + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
+                + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
+                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
+        return this.executeUpdate(sql);
+    }
+    
+    public int clearUserCommunities(String clientName) throws SQLException {
+        int total = 0;
+        Statement stmt = this.connection.createStatement();
+        total += stmt.executeUpdate("DELETE FROM user_community where " + FIELD_PSCLIENT + "='" + clientName + "' ");
+        total += stmt.executeUpdate("DELETE FROM community_profiles where " + FIELD_PSCLIENT + "='" + clientName + "' ");
+        total += stmt.executeUpdate("DELETE FROM communities where " + FIELD_PSCLIENT + "='" + clientName + "' ");
         stmt.close();
         return total;
     }
 
-    public int clearUserCommunities( String clientName ) throws SQLException {
+    public int clearFeatureGroups(String clientName) throws SQLException {
         int total = 0;
         Statement stmt = this.connection.createStatement();
-        total += stmt.executeUpdate( "DELETE FROM user_community where " + FIELD_PSCLIENT + "='" + clientName + "' " );
-        total += stmt.executeUpdate( "DELETE FROM community_profiles where " + FIELD_PSCLIENT + "='" + clientName + "' " );
-        total += stmt.executeUpdate( "DELETE FROM communities where " + FIELD_PSCLIENT + "='" + clientName + "' " );
-        stmt.close();
-        return total;
-    }
-
-    public int clearFeatureGroups( String clientName ) throws SQLException {
-        int total = 0;
-        Statement stmt = this.connection.createStatement();
-        total += stmt.executeUpdate( "DELETE FROM ftrgroup_features WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'" );
-        total += stmt.executeUpdate( "DELETE FROM ftrgroups WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'" );
+        total += stmt.executeUpdate("DELETE FROM ftrgroup_features WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'");
+        total += stmt.executeUpdate("DELETE FROM ftrgroups WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'");
         stmt.close();
         return total;
     }
@@ -644,38 +618,38 @@ public class DBAccess {
      * @return
      * @throws java.sql.SQLException
      */
-    public PServerResultSet executeQuery( String sqlQuery ) throws SQLException {
+    public PServerResultSet executeQuery(String sqlQuery) throws SQLException {
         Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery( sqlQuery );
-        return new PServerResultSet( stmt, rs );
+        ResultSet rs = stmt.executeQuery(sqlQuery);
+        return new PServerResultSet(stmt, rs);
     }
 
-    public int executeUpdate( String sqlQuery ) throws SQLException {
+    public int executeUpdate(String sqlQuery) throws SQLException {
         Statement stmt = this.connection.createStatement();
-        int rows = stmt.executeUpdate( sqlQuery );
+        int rows = stmt.executeUpdate(sqlQuery);
         stmt.close();
         return rows;
     }
 
-    public int executeUpdate( LinkedList<String> sqlQueries ) throws SQLException {
+    public int executeUpdate(LinkedList<String> sqlQueries) throws SQLException {
         Statement stmt = this.connection.createStatement();
         int rows = 0;
-        for ( String sqlQuery : sqlQueries ) {
-            rows += stmt.executeUpdate( sqlQuery );
+        for (String sqlQuery : sqlQueries) {
+            rows += stmt.executeUpdate(sqlQuery);
         }
         stmt.close();
         return rows;
     }
 
-    public boolean execute( String sql ) throws SQLException {
+    public boolean execute(String sql) throws SQLException {
         Statement stmt = this.connection.createStatement();
-        boolean ret = stmt.execute( sql );
+        boolean ret = stmt.execute(sql);
         stmt.close();
         return ret;
     }
 
     //general utility methods
-    public static boolean legalFtrOrAttrName( String ftrName ) {
+    public static boolean legalFtrOrAttrName(String ftrName) {
         //which names are legal for features depends
         //on the syntax of feature patterns. Patterns
         //and names must not introduce ambiguity.
@@ -683,37 +657,37 @@ public class DBAccess {
         //cannot be specified individually anymore.
         //Therefore, this function depends on the
         //'ftrPatternCondition' that defines pattern.
-        if ( ftrName == null ) {
+        if (ftrName == null) {
             return false;
         }
-        if ( ftrName.length() == 0 ) {
+        if (ftrName.length() == 0) {
             return false;
         }
-        if ( ftrName.endsWith( "*" ) ) {
+        if (ftrName.endsWith("*")) {
             return false;
         }
-        if ( ftrName.startsWith( "*" ) ) {
+        if (ftrName.startsWith("*")) {
             return false;
         }
         return true;
     }
 
-    public static String xmlHeader( String xslPath ) {
+    public static String xmlHeader(String xslPath) {
         //returns the header of an XML response,
         //including the XSL reference, if any.
         //If 'xslPath' is null, no reference to
         //an XSL file will be included
         StringBuffer header = new StringBuffer();
-        header.append( "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" );
-        if ( xslPath != null ) {
-            header.append( "<?xml-stylesheet type=\"text/xsl\" href=\"" );
-            header.append( xslPath );
-            header.append( "\"?>\n" );
+        header.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+        if (xslPath != null) {
+            header.append("<?xml-stylesheet type=\"text/xsl\" href=\"");
+            header.append(xslPath);
+            header.append("\"?>\n");
         }
-        return header.substring( 0 );
+        return header.substring(0);
     }
 
-    public static Long timestampPattern( String strTimestamp ) {
+    public static Long timestampPattern(String strTimestamp) {
         //The pattern is: - | <date/time>, where '-' means
         //that the PServer asks the system for current
         //date/time which is used as a timestamp, otherwise
@@ -723,79 +697,79 @@ public class DBAccess {
         //format is used for the returned Long. If the
         //<date/time> provided in 'strTimestamp' could not
         //be converted to numeric, null is returned.
-        if ( strTimestamp == null ) {
+        if (strTimestamp == null) {
             return null;
         }
         Long timestamp;
-        if ( strTimestamp.equals( "-" ) ) //get timestamp from system
+        if (strTimestamp.equals("-")) //get timestamp from system
         {
-            timestamp = new Long( System.currentTimeMillis() );
+            timestamp = new Long(System.currentTimeMillis());
         } else {  //try to convert to numeric, if failed null is returned
             long num;
             try {
-                num = Long.parseLong( strTimestamp );
-            } catch ( NumberFormatException e ) {
+                num = Long.parseLong(strTimestamp);
+            } catch (NumberFormatException e) {
                 return null;
             }
-            timestamp = new Long( num );
+            timestamp = new Long(num);
         }
         return timestamp;
     }
 
-    public static Float strToNum( String str ) {
+    public static Float strToNum(String str) {
         //converts a string to a numeric value of a
         //double. Returns null if unable to convert.
-        if ( str == null ) {
-            return new Float( 0.0 );
+        if (str == null) {
+            return new Float(0.0);
         }
         double num;
         try {
-            num = Double.parseDouble( str );
-        } catch ( NumberFormatException e ) {
+            num = Double.parseDouble(str);
+        } catch (NumberFormatException e) {
             return null;
         }
-        return new Float( num );
+        return new Float(num);
     }
 
-    public static String strToNumStr( String str ) {
+    public static String strToNumStr(String str) {
         //converts a string to a numeric value of
         //a double. Returns the double as a string,
         //or the string "null" if unable to convert.
-        Float num = strToNum( str );
-        if ( num == null ) {
-            return new String( "null" );
+        Float num = strToNum(str);
+        if (num == null) {
+            return new String("null");
         }
         return num.toString();
     }
 
-    public static String ftrGroupCondition( String group ) {
+    public static String ftrGroupCondition(String group) {
         //A feature group represents all features
         //whose pathname starts with the group name.
         //Transforms 'group' INTO a string to be used
         //after SQL: "...where <field>" + condition
-        if ( group == null ) {
+        if (group == null) {
             return null;
         }
         String condition = " like '" + group + ".%'";
         return condition;
     }
 
-    public static int numPatternCondition( String pattern ) {
+    public static int numPatternCondition(String pattern) {
         //The pattern is: * | <integer>, where '*' means all.
         //Transforms 'pattern' INTO an integer that
         //will decide the number of results to be retrieved.
         //Returns -1 if cannot parse integer.
-        if ( pattern == null ) {
+        if (pattern == null) {
             return -1;
         }
         int num;
-        if ( pattern.equals( "*" ) ) {
+        if (pattern.equals("*")) {
             num = Integer.MAX_VALUE;
         } //retrieve all
         else {
             try {
-                num = Integer.parseInt( pattern );
-            } catch ( NumberFormatException e ) {
+                num = Integer.parseInt(pattern);
+            } catch (NumberFormatException e) {
                 num = -1;
             }
         }
@@ -803,69 +777,69 @@ public class DBAccess {
     }
 
     //pattern to condition / pattern resolution methods
-    public static String ftrPatternCondition( String pattern ) {
+    public static String ftrPatternCondition(String pattern) {
         //The pattern is: * | name[.*], where * matches all.
         //Transforms 'pattern' INTO a string to be used
         //after SQL: "...where <field>" + condition
-        if ( pattern == null ) {
+        if (pattern == null) {
             return null;
         }
         String condition;
         //if (pattern.endsWith("*"))
         //    condition = " like '" + pattern.substring(0, pattern.length()-1) + "%'";
-        if ( pattern.contains( "*" ) ) {
-            condition = " like '" + pattern.replaceAll( "\\*", "%" ) + "'";
+        if (pattern.contains("*")) {
+            condition = " like '" + pattern.replaceAll("\\*", "%") + "'";
         } else {
             condition = "='" + pattern + "'";
         }
         return condition;
     }
 
-    public static String formatDouble( Double num ) {
+    public static String formatDouble(Double num) {
         //format a double by removing trailing
         //zeros, and return it as a string
-        if ( num == null ) {
+        if (num == null) {
             return null;
         }
-        StringBuffer strNum = new StringBuffer( num.toString() );
-        if ( strNum.length() == 0 ) {
+        StringBuffer strNum = new StringBuffer(num.toString());
+        if (strNum.length() == 0) {
             return null;
         }  //length should not be 0
         //check if decimal part exists
-        int comma = (num.toString()).indexOf( '.' );
-        if ( comma == -1 ) {
-            comma = (num.toString()).indexOf( ',' );
+        int comma = (num.toString()).indexOf('.');
+        if (comma == -1) {
+            comma = (num.toString()).indexOf(',');
         }
-        if ( comma == -1 ) {
-            return strNum.substring( 0 );
+        if (comma == -1) {
+            return strNum.substring(0);
         }  //no decimal part, return all of it
         //remove trailing zeros
         int i = strNum.length() - 1;  //last char, min 0
-        while ( i > 0 && strNum.charAt( i ) == '0' ) {
+        while (i > 0 && strNum.charAt(i) == '0') {
             i--;
         }  //last nonzero other than first
-        strNum.delete( i + 1, strNum.length() );
+        strNum.delete(i + 1, strNum.length());
         //remove comma if followed by zeros only
-        if ( strNum.charAt( i ) == '.' || strNum.charAt( i ) == ',' ) {
-            strNum.deleteCharAt( i );
+        if (strNum.charAt(i) == '.' || strNum.charAt(i) == ',') {
+            strNum.deleteCharAt(i);
         }
         //if no chars left, assume zero
-        if ( strNum.length() == 0 ) {
-            strNum.append( "0" );
+        if (strNum.length() == 0) {
+            strNum.append("0");
         }
         //return string
-        return strNum.substring( 0 );
+        return strNum.substring(0);
     }
 
-    public static String srtPatternCondition( String pattern ) {
+    public static String srtPatternCondition(String pattern) {
         //The pattern is: asc | desc.
         //Transforms 'pattern' INTO a string to be used
         //after SQL: "...order by <field>" + condition
-        if ( pattern == null ) {
+        if (pattern == null) {
             return null;
         }
         String condition;
-        if ( pattern.equals( "asc" ) ) {
+        if (pattern.equals("asc")) {
             condition = "";
         } //asc is default in SQL
         else //any other case - desc is default here
@@ -875,41 +849,41 @@ public class DBAccess {
         return condition;
     }
 
-    public static String whrPatternCondition( String pattern, String clientName ) {
+    public static String whrPatternCondition(String pattern, String clientName) {
         //The pattern is: * | <SQL part following WHERE>,
         //('where' is excluded), with '*' meaning ALL.
         //A special syntax is used: : for = and | for <space>.
         //Transforms 'pattern' INTO a string to be used
         //in the place of SQL WHERE clause (including 'where')
-        if ( pattern == null ) {
+        if (pattern == null) {
             return " WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'";
         }
         ;
         String condition;
-        if ( pattern.equals( "*" ) || pattern.equals( "" ) ) {
+        if (pattern.equals("*") || pattern.equals("")) {
             condition = " WHERE " + FIELD_PSCLIENT + "='" + clientName + "'";
         } //no WHERE clause
         else {   //convert to normal syntax
-            String step1 = pattern.replace( ':', '=' );
-            String step2 = step1.replace( '|', ' ' );
-            step2 = step2.replace( '*', '%' );
+            String step1 = pattern.replace(':', '=');
+            String step2 = step1.replace('|', ' ');
+            step2 = step2.replace('*', '%');
             condition = " WHERE " + step2 + " AND " + FIELD_PSCLIENT + "='" + clientName + "'";
         }
         return condition;
     }
 
-    public static boolean legalUsrName( String usrName ) {
+    public static boolean legalUsrName(String usrName) {
         //legal names for users cannot be empty string
-        if ( usrName == null ) {
+        if (usrName == null) {
             return false;
         }
-        if ( usrName.length() == 0 ) {
+        if (usrName.length() == 0) {
             return false;
         }
         return true;
     }
 
-    public static boolean legalStrName( String strName ) {
+    public static boolean legalStrName(String strName) {
         //which names are legal for stereotypes depends
         //on the syntax of stereotype patterns. Patterns
         //and names must not introduce ambiguity.
@@ -918,17 +892,15 @@ public class DBAccess {
         //The stereotype pattern depends on the operation,
         //so there is not a single function defining the
         //pattern (as is the case of 'ftrPatternCondition').
-        if ( strName == null ) {
+        if (strName == null) {
             return false;
         }
-        if ( strName.length() == 0 ) {
+        if (strName.length() == 0) {
             return false;
         }
-        if ( strName.equals( "*" ) ) {
+        if (strName.equals("*")) {
             return false;
         }
         return true;
     }
-
-    
 }

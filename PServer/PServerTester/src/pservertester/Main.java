@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
-*/
-
+ */
 package pservertester;
 
 import java.net.InetAddress;
@@ -31,7 +30,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         try {
             LinkedList<String> commands = new LinkedList();
             LinkedList<String> failedCommands = new LinkedList();
@@ -128,7 +127,7 @@ public class Main {
             //commands.add( "/commu?clnt=test|test&com=mkftrgrp&algorithm=bk&th=>0.5" );
 
             //commands.add( "/commu?clnt=test|test1&com=getftrgrps&usr=10" );
-            commands.add("/commu?clnt=Mydmoz|1234&com=getftrgrps&usr=fed");
+            //commands.add("/commu?clnt=Mydmoz|1234&com=getftrgrps&usr=fed");
 
             /*
              * csv commands
@@ -159,7 +158,7 @@ public class Main {
             //commands.add( "/csv?clnt=test1|test1&com=loadlog&path=/home/alexm/PServer/TestSets/small/ml-data/u.data&cs=\t&usrcol=0&ftrcol=1&numcol=2&timecol=3&sesgen=1" );            
             //commands.add( "/csv?clnt=test1|test1&com=loadlog&path=/home/alexm/workspacePServer/test/repository/TestSets/small/ml-data/u.data75&cs=\\t&usrcol=0&ftrcol=1&numcol=2&timecol=3&sesgen=" + time + "&ren=movie." );
 
-            
+
             //real test
             //commands.add( "/movies?clnt=test|test&com=loadusr&path=/home/alexm/workspacePServer/PServer/TestSets/medium/users.dat" );
             int time = 24 * 3600 * 7;
@@ -189,37 +188,42 @@ public class Main {
             //commands.add( "/madgik?clnt=madgik|madgik&com=recquery&user=&query=work" );
             //commands.add( "/nootropia?clnt=test1|test1&com=genweights" );
             //commands.add( "/nootropia?clnt=test1|test1&com=genpersweights" );
-
-            for ( String command : commands ) {
+            
+            //commands.add( "/ster?clnt=test|test&com=addstr&str=educated2&rule=gender:45" );
+            commands.add("/ster?clnt=test|test&com=addusr&usr=1001&educated2=1");
+            //commands.add("/ster?clnt=test|test&com=incdeg&usr=1001&educated2=-0.12");
+            //commands.add("/ster?clnt=test|test&com=remusr&1001=educated2");
+            commands.add("/ster?clnt=test|test&com=setdeg&usr=0.34");
+            for (String command : commands) {
                 long t = System.currentTimeMillis();
-                PSClientRequest request = new PSClientRequest( InetAddress.getLocalHost(), 1111, command, true, 10000 );
-                for( int i = 0 ; i < request.getRows() ; i ++ ) {
-                    System.out.println( request.getValue( i, 0 ));
+                PSClientRequest request = new PSClientRequest(InetAddress.getLocalHost(), 1111, command, true, 10000);
+                for (int i = 0; i < request.getRows(); i++) {
+                    System.out.println(request.getValue(i, 0));
                 }
                 //System.out.println( "content = " + request.getResponse() );
-                System.out.println( " time passed " + ( System.currentTimeMillis() - t ) / ( 1000 * 60.0 ) );
-                if ( request.isError() == true ) {
-                    failedCommands.add( command + " \n ======= \n " + request.getErrorMessage() + " \n ======= \n " + request.getResponse() );
+                System.out.println(" time passed " + (System.currentTimeMillis() - t) / (1000 * 60.0));
+                if (request.isError() == true) {
+                    failedCommands.add(command + " \n ======= \n " + request.getErrorMessage() + " \n ======= \n " + request.getResponse());
                 } else {
-                    correctCommands.add( command );
+                    correctCommands.add(command);
                 }
             }
 
-            System.out.println( "Successfull commands" );
-            for ( String command : correctCommands ) {
-                System.out.println( command );
+            System.out.println("Successfull commands");
+            for (String command : correctCommands) {
+                System.out.println(command);
             }
 
-            System.out.println( "Failed commands" );
-            for ( String command : failedCommands ) {
-                System.out.println( command );
+            System.out.println("Failed commands");
+            for (String command : failedCommands) {
+                System.out.println(command);
             }
 
-            StringBuffer a   = new StringBuffer();
+            StringBuffer a = new StringBuffer();
             a.append("1").append("2").append(3);
-            System.out.println( a.toString());
-        } catch ( Exception ex ) {
-            Logger.getLogger( Main.class.getName() ).log( Level.SEVERE, null, ex );
+            System.out.println(a.toString());
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

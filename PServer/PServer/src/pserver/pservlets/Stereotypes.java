@@ -462,9 +462,9 @@ public class Stereotypes implements pserver.pservlets.PService {
                 + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
                 + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "'";
         PServerResultSet rs = dbAccess.executeQuery(sql);
-        boolean ret = true;
+        boolean ret = false;
         if (rs.next()) {
-            ret = false;
+            ret = true;
         }
         rs.close();
         return ret;
@@ -485,6 +485,7 @@ public class Stereotypes implements pserver.pservlets.PService {
                 + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
                 + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
                 + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
+                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
                 + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
                 + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
         dbAccess.executeUpdate(sql);
@@ -853,14 +854,12 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    private void updateStereotypeForDegree(DBAccess dbAccess, String stereotype, String user, String clientName, float degree) throws SQLException {
-        String subSelect = "SELECT '" + stereotype + "',up_feature, 0,'" + clientName + "' FROM " + DBAccess.UPROFILE_TABLE
-                + " WHERE up_user ='" + user + "' AND FK_psclient='" + clientName + "'";
-
+    private void updateStereotypeForDegree(DBAccess dbAccess, String stereotype, String user, String clientName, float degree) throws SQLException {        
         String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
                 + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
                 + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
                 + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
+                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
                 + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
                 + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
         dbAccess.executeUpdate(sql);
@@ -1106,8 +1105,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             while (rs.next()) {
                 String stereotVal = rs.getRs().getString("st_stereotype");  //cannot be null
                 String rule = rs.getRs().getString(DBAccess.STEREOTYPE_TABLE_FIELD_RULE);  //cannot be null
-                respBody.append("<row><str>" + stereotVal + "</str></row>\n");
-                respBody.append("<row><rule>" + rule + "</rule></row>\n");
+                respBody.append("<row><str>" + stereotVal + "</str><rule>" + rule + "</rule></row>\n");                
                 rowsAffected += 1;  //number of result rows
             }
             respBody.append("</result>");
@@ -1329,20 +1327,18 @@ public class Stereotypes implements pserver.pservlets.PService {
             for (int i = 0; i < qpSize; i++) {
                 if (i != comIdx && i != clntIdx) {  //'com' query parameter excluded
                     String user = (String) queryParam.getKey(i);
-                    String stereot = (String) queryParam.getVal(i);
-                    //String strCondition = stereot.equals( "*" ) ? "" : "su_stereotype='" + stereot + "' and ";
-                    //query = "delete from stereotype_users where " + strCondition + "su_user='" + user + "' and FK_psclient='" + clientName + "' ";
-                    //rowsAffected += dbAccess.executeUpdate( query );
-                    rowsAffected += dbAccess.removeUserFromStereotype(user, stereot, clientName);
+                    String stereot = (String) queryParam.getVal(i);                    
+                    if (stereotypeExists(dbAccess, stereot, clientName) == false) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " does not exists");
+                        continue;
+                    }
+                    if (stereotypeHasUser(dbAccess, stereot, user, clientName) == false) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " already does not have the user " + user);
+                        continue;
+                    }                    
+                    rowsAffected += dbAccess.removeUserFromStereotype(user, stereot, clientName);                                        
                 }
-            }
-            //if ( qpSize == 1 ) {  //no user query parameters specified
-            //delete all (user, stereotype) records
-//                query = "delete from stereotype_users+ where FK_psclient='" + clientName + "' ";
-            //              rowsAffected = dbAccess.executeUpdate( query );
-            //        }
-            //format response body
-            //response will be used only in case of success
+            }            
             respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
             respBody.append("<result>\n");
             respBody.append("<row><num_of_rows>" + rowsAffected + "</num_of_rows></row>\n");
@@ -1355,32 +1351,30 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    //-setdeg
-    //template: ster?com=setdeg&usr=<usr>&<str_1>=<new_deg_1>&<str_2>=...
-    //          Order of query params is important: position of 'com'
-    //          and 'usr' is not important, however updates of degrees
-    //          are performed in the order they appear in the request.
-    //descript: for the specified user, updates the degrees of the
-    //          stereotypes in the query string, to the new degrees.
-    //          Degrees in the query string that cannot be converted
-    //          to numeric (double) will be considered as NULLs when
-    //          updating the DB. If the specified user does not exist,
-    //          or if some stereotypes in the query string are not
-    //          assigned to that user, corresponding degrees will not
-    //          be updated (200 OK will still be returned). If the error
-    //          code 401 is returned then no changes have taken place.
-    //example : ster?com=setdeg&usr=034&visitor=0.85&expert=
-    //returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-    //200 OK  : in this case the response body is as follows
-    //          <?xml version="1.0"?>
-    //          <?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
-    //          <result>
-    //          <row><num_of_rows>number of relevant rows</num_of_rows></row>
-    //          </result>
-    //comments: the reference to the xsl file allows to view results
-    //          in a web browser. In case the response body is handled
-    //          directly by an application and not by a browser, this
-    //          reference to xsl can be ignored.
+    private float getUserDegree(DBAccess dbAccess, String stereotype, String user, String clientName) throws SQLException {
+        String sql = "SELECT " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE + " FROM "+ DBAccess.STEREOTYPE_USERS_TABLE + " WHERE " 
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " 
+                + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + "='" + user + "' AND " 
+                + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'" ;
+        PServerResultSet rs = dbAccess.executeQuery(sql);
+        rs.next();
+        float val = rs.getRs().getFloat(1);
+        rs.close();
+        return val;
+    }
+    
+    private int updateStereotypeWithUpdatededUser(DBAccess dbAccess, String clientName, String stereotype, String user, float degree) throws SQLException {
+        String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
+                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
+                + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
+                + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
+                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
+        return dbAccess.executeUpdate(sql);
+    }
+    
+    //-setdeg    
     private int comSterSetDeg(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -1431,12 +1425,23 @@ public class Stereotypes implements pserver.pservlets.PService {
         try {
             //update degrees of specified stereotypes assigned to a user            
             for (int i = 0; i < qpSize; i++) {
-                if (i != comIdx && i != usrIdx && i != clntIdx) {  //'com' and 'usr' query parameters excluded
+                if (i != comIdx && i != usrIdx && i != clntIdx) {  //'com' and 'usr' query parameters excluded                    
                     String stereot = (String) queryParam.getKey(i);
+                    if (stereotypeExists(dbAccess, stereot, clientName) == false) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " does not exists");
+                        continue;
+                    }
+                    if (stereotypeHasUser(dbAccess, stereot, user, clientName) == false) {
+                        WebServer.win.log.debug("-Stereotype " + stereot + " already does not have the user " + user);
+                        continue;
+                    }   
+                    float oldDegree = getUserDegree(dbAccess, stereot, user, clientName);
                     String newDegree = (String) queryParam.getVal(i);
+                    float difDegree = oldDegree - Float.parseFloat(newDegree);
                     String numNewDegree = DBAccess.strToNumStr(newDegree);  //numeric version of degree
                     query = "UPDATE stereotype_users set su_degree=" + numNewDegree + " where su_user='" + user + "' and su_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
                     rowsAffected += dbAccess.executeUpdate(query);
+                    rowsAffected +=updateStereotypeWithUpdatededUser(dbAccess, clientName, stereot, user, difDegree);
                 }
             }
             //format response body
@@ -1878,5 +1883,9 @@ public class Stereotypes implements pserver.pservlets.PService {
             return PSReqWorker.SERVER_ERR;
         }
         return respCode;
+    }    
+
+    private void updateStereotypeWithRemovedUser(DBAccess dbAccess, String clientName, String stereot, String user, int qpSize) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
