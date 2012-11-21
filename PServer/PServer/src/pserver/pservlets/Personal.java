@@ -1293,7 +1293,7 @@ public class Personal implements pserver.pservlets.PService {
         if (qpSize != 3) {
             return false;
         }
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("ftr");
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         int ftrIdx = queryParam.qpIndexOfKeyNoCase("ftr");
         if (ftrIdx == -1) {
             return false;
