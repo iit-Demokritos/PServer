@@ -3265,3 +3265,990 @@
 21/11/2012 5:15:8  >  Request from /127.0.1.1 (32970)
 21/11/2012 5:15:8  >  32970-        /pers?clnt=test|test&com=incval&usr=918&movie.999=4
 21/11/2012 5:23:15  >  Shutting down server, normal: true
+29/4/2013 15:7:24  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:7:24  >  Messages log mode set to: on
+29/4/2013 15:7:24  >  Connected to DB: MySQL
+29/4/2013 15:8:16  >  Request from /127.0.0.1 (37384)
+29/4/2013 15:8:16  >  37384-        /
+29/4/2013 15:8:16  >  Request from /127.0.0.1 (37385)
+29/4/2013 15:8:22  >  37385-Problem parsing request: java.util.NoSuchElementException
+29/4/2013 15:17:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:17:3  >  Messages log mode set to: on
+29/4/2013 15:17:3  >  Database connection failed
+29/4/2013 15:17:3  >  Shutting down server, normal: false
+29/4/2013 15:17:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:17:47  >  Messages log mode set to: on
+29/4/2013 15:17:48  >  Database connection failed
+29/4/2013 15:17:48  >  Shutting down server, normal: false
+29/4/2013 15:18:18  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:18:18  >  Messages log mode set to: on
+29/4/2013 15:18:18  >  Database connection failed
+29/4/2013 15:18:18  >  Shutting down server, normal: false
+29/4/2013 15:18:33  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:18:33  >  Messages log mode set to: on
+29/4/2013 15:18:33  >  Database connection failed
+29/4/2013 15:18:33  >  Shutting down server, normal: false
+29/4/2013 15:19:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:19:47  >  Messages log mode set to: on
+29/4/2013 15:19:48  >  Database connection failed
+29/4/2013 15:19:48  >  Shutting down server, normal: false
+29/4/2013 15:21:38  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:21:38  >  Messages log mode set to: on
+29/4/2013 15:21:39  >  Connected to DB: MySQL
+29/4/2013 15:22:0  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:22:0  >  Messages log mode set to: on
+29/4/2013 15:22:0  >  Database connection failed
+29/4/2013 15:22:0  >  Shutting down server, normal: false
+29/4/2013 15:22:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:22:14  >  Messages log mode set to: on
+29/4/2013 15:22:14  >  Connected to DB: MySQL
+29/4/2013 15:22:17  >  Shutting down server, normal: true
+29/4/2013 15:22:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:22:19  >  Messages log mode set to: on
+29/4/2013 15:22:19  >  Connected to DB: MySQL
+29/4/2013 15:23:1  >  Shutting down server, normal: true
+29/4/2013 15:23:4  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:23:4  >  Messages log mode set to: on
+29/4/2013 15:23:4  >  Connected to DB: MySQL
+29/4/2013 15:23:54  >  Shutting down server, normal: true
+29/4/2013 15:25:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:25:57  >  Messages log mode set to: on
+29/4/2013 15:25:57  >  Connected to DB: MySQL
+29/4/2013 15:26:15  >  Shutting down server, normal: true
+29/4/2013 15:26:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:26:30  >  Messages log mode set to: on
+29/4/2013 15:26:31  >  Connected to DB: MySQL
+29/4/2013 15:27:17  >  Shutting down server, normal: true
+29/4/2013 15:38:32  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:38:32  >  Messages log mode set to: on
+29/4/2013 15:38:32  >  Connected to DB: MySQL
+29/4/2013 15:38:48  >  Shutting down server, normal: true
+29/4/2013 15:39:22  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:39:22  >  Messages log mode set to: on
+29/4/2013 15:39:23  >  Connected to DB: MySQL
+29/4/2013 15:39:36  >  Request from /127.0.0.1 (37438)
+29/4/2013 15:39:36  >  37438-        /
+29/4/2013 15:40:25  >  Request from /127.0.0.1 (37441)
+29/4/2013 15:40:25  >  37441-        /admin?com=login&login_name=root&login_password=root
+29/4/2013 15:41:0  >  Request from /127.0.0.1 (37449)
+29/4/2013 15:41:0  >  37449-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 15:41:55  >  Request from /127.0.0.1 (37453)
+29/4/2013 15:41:56  >  37453-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 15:42:5  >  Request from /127.0.0.1 (37455)
+29/4/2013 15:42:5  >  37455-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 15:42:6  >  Request from /127.0.0.1 (37457)
+29/4/2013 15:42:6  >  37457-        /admin?login_name=root&login_password=root&com=login
+29/4/2013 15:42:7  >  Request from /127.0.0.1 (37458)
+29/4/2013 15:42:7  >  37458-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 15:42:17  >  Request from /127.0.0.1 (37460)
+29/4/2013 15:42:17  >  37460-        /pers_help/pers_mode.html
+29/4/2013 15:42:18  >  Request from /127.0.0.1 (37461)
+29/4/2013 15:42:18  >  37461-        /pers_help/menu.html
+29/4/2013 15:42:18  >  Request from /127.0.0.1 (37462)
+29/4/2013 15:42:18  >  37462-        /pers_help/pers_index.html
+29/4/2013 15:42:23  >  Request from /127.0.0.1 (37463)
+29/4/2013 15:42:23  >  37463-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 15:45:28  >  Shutting down server, normal: true
+29/4/2013 15:53:28  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 15:53:28  >  Messages log mode set to: on
+29/4/2013 15:53:28  >  Connected to DB: MySQL
+29/4/2013 15:53:42  >  Request from /127.0.0.1 (37570)
+29/4/2013 15:53:42  >  37570-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 15:55:22  >  Request from /127.0.0.1 (37578)
+29/4/2013 15:55:22  >  37578-        /admin?login_name=root&login_password=root&com=chngpropfrm
+29/4/2013 15:56:5  >  Shutting down server, normal: true
+29/4/2013 16:8:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 16:8:19  >  Messages log mode set to: on
+29/4/2013 16:8:19  >  Connected to DB: MySQL
+29/4/2013 16:8:25  >  Request from /127.0.0.1 (37640)
+29/4/2013 16:8:25  >  37640-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 16:9:2  >  Shutting down server, normal: true
+29/4/2013 16:9:20  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+29/4/2013 16:9:20  >  Messages log mode set to: on
+29/4/2013 16:9:20  >  Connected to DB: MySQL
+29/4/2013 16:9:25  >  Request from /127.0.0.1 (37643)
+29/4/2013 16:9:25  >  37643-        /admin?login_name=root&login_password=root&com=mkusrfrm
+29/4/2013 16:35:47  >  Shutting down server, normal: true
+30/4/2013 11:30:0  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 11:30:0  >  Messages log mode set to: on
+30/4/2013 11:30:0  >  Shutting down server, normal: false
+30/4/2013 11:31:11  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 11:31:11  >  Messages log mode set to: on
+30/4/2013 11:31:11  >  Connected to DB: MySQL
+30/4/2013 11:31:45  >  Request from /127.0.0.1 (35702)
+30/4/2013 11:31:45  >  35702-        /
+30/4/2013 11:31:45  >  Request from /127.0.0.1 (35703)
+30/4/2013 11:31:45  >  35703-        /favicon.ico
+30/4/2013 11:31:45  >  Request from /127.0.0.1 (35704)
+30/4/2013 11:31:45  >  35704-        /favicon.ico
+30/4/2013 11:31:47  >  Request from /127.0.0.1 (35705)
+30/4/2013 11:31:47  >  35705-        /admin?com=login&login_name=root&login_password=root
+30/4/2013 11:31:53  >  Request from /127.0.0.1 (35706)
+30/4/2013 11:31:53  >  35706-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 11:44:53  >  Shutting down server, normal: true
+30/4/2013 11:58:42  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 11:58:42  >  Messages log mode set to: on
+30/4/2013 11:58:43  >  Connected to DB: MySQL
+30/4/2013 11:59:37  >  Shutting down server, normal: true
+30/4/2013 12:0:42  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 12:0:42  >  Messages log mode set to: on
+30/4/2013 12:0:42  >  Connected to DB: MySQL
+30/4/2013 12:1:58  >  Shutting down server, normal: true
+30/4/2013 12:2:6  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 12:2:6  >  Messages log mode set to: on
+30/4/2013 12:2:6  >  Connected to DB: MySQL
+30/4/2013 12:2:27  >  Shutting down server, normal: true
+30/4/2013 12:2:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 12:2:35  >  Messages log mode set to: on
+30/4/2013 12:2:36  >  Connected to DB: MySQL
+30/4/2013 12:4:14  >  Shutting down server, normal: true
+30/4/2013 12:5:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 12:5:3  >  Messages log mode set to: on
+30/4/2013 12:5:3  >  Connected to DB: MySQL
+30/4/2013 12:6:25  >  Shutting down server, normal: true
+30/4/2013 12:7:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 12:7:35  >  Messages log mode set to: on
+30/4/2013 12:7:35  >  Connected to DB: MySQL
+30/4/2013 12:8:2  >  Shutting down server, normal: true
+30/4/2013 13:11:45  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 13:11:45  >  Messages log mode set to: on
+30/4/2013 13:11:46  >  Connected to DB: MySQL
+30/4/2013 13:11:51  >  Request from /127.0.0.1 (36016)
+30/4/2013 13:11:51  >  36016-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 13:12:38  >  Shutting down server, normal: true
+30/4/2013 13:12:43  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 13:12:43  >  Messages log mode set to: on
+30/4/2013 13:12:43  >  Connected to DB: MySQL
+30/4/2013 13:12:47  >  Request from /127.0.0.1 (36019)
+30/4/2013 13:12:47  >  36019-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 13:13:2  >  Request from /127.0.0.1 (36021)
+30/4/2013 13:13:2  >  36021-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 13:13:16  >  Request from /127.0.0.1 (36023)
+30/4/2013 13:13:16  >  36023-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 13:20:43  >  Request from /127.0.0.1 (36035)
+30/4/2013 13:20:43  >  36035-        /pers?clnt=demoSite|123&com=addattr&mail=null&age=null&country=null&sex=null
+30/4/2013 13:35:39  >  Request from /127.0.0.1 (36071)
+30/4/2013 13:35:39  >  36071-        /
+30/4/2013 13:35:40  >  Request from /127.0.0.1 (36072)
+30/4/2013 13:35:40  >  36072-        /admin?com=login&login_name=root&login_password=root
+30/4/2013 13:35:48  >  Request from /127.0.0.1 (36073)
+30/4/2013 13:35:48  >  36073-        /pers_help/pers_mode.html
+30/4/2013 13:35:48  >  Request from /127.0.0.1 (36074)
+30/4/2013 13:35:48  >  Request from /127.0.0.1 (36075)
+30/4/2013 13:35:48  >  36075-        /pers_help/pers_index.html
+30/4/2013 13:35:48  >  36074-        /pers_help/menu.html
+30/4/2013 13:35:50  >  Request from /127.0.0.1 (36076)
+30/4/2013 13:35:50  >  36076-        /pers_help/addattr.html
+30/4/2013 14:37:18  >  Request from /127.0.0.1 (36430)
+30/4/2013 14:37:18  >  36430-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 14:39:3  >  Problem binding socket: java.net.BindException: Address already in use
+30/4/2013 14:39:3  >  Shutting down server, normal: false
+30/4/2013 14:39:14  >  Shutting down server, normal: true
+30/4/2013 14:39:17  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 14:39:17  >  Messages log mode set to: on
+30/4/2013 14:39:17  >  Connected to DB: MySQL
+30/4/2013 14:39:22  >  Request from /127.0.0.1 (36436)
+30/4/2013 14:39:22  >  36436-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 14:39:41  >  Request from /127.0.0.1 (36438)
+30/4/2013 14:39:41  >  36438-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 14:39:44  >  Request from /127.0.0.1 (36440)
+30/4/2013 14:39:44  >  36440-        /admin?login_name=root&login_password=root&com=login
+30/4/2013 14:39:55  >  Request from /127.0.0.1 (36441)
+30/4/2013 14:39:55  >  36441-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 14:40:26  >  Request from /127.0.0.1 (36443)
+30/4/2013 14:40:26  >  36443-        /admin?login_name=root&login_password=root&com=chngpropfrm
+30/4/2013 14:41:11  >  Request from /127.0.0.1 (36444)
+30/4/2013 14:41:11  >  36444-        /admin?login_name=root&login_password=root&com=login
+30/4/2013 14:43:42  >  Request from /127.0.0.1 (36450)
+30/4/2013 14:43:42  >  36450-        /admin?login_name=root&login_password=root&com=mkusrfrm
+30/4/2013 14:44:3  >  Request from /127.0.0.1 (36452)
+30/4/2013 14:44:3  >  36452-        /
+30/4/2013 14:44:5  >  Request from /127.0.0.1 (36453)
+30/4/2013 14:44:5  >  36453-        /admin?com=login&login_name=root&login_password=root
+30/4/2013 14:46:31  >  Shutting down server, normal: true
+30/4/2013 14:46:33  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+30/4/2013 14:46:33  >  Messages log mode set to: on
+30/4/2013 14:46:34  >  Connected to DB: MySQL
+30/4/2013 14:46:40  >  Request from /127.0.0.1 (36455)
+30/4/2013 14:46:40  >  36455-        /
+30/4/2013 14:46:41  >  Request from /127.0.0.1 (36456)
+30/4/2013 14:46:41  >  36456-        /admin?com=login&login_name=root&login_password=root
+30/4/2013 15:26:8  >  Request from /127.0.0.1 (36512)
+30/4/2013 15:26:8  >  36512-        /pers_help/setusr.html
+30/4/2013 16:4:26  >  Shutting down server, normal: true
+8/5/2013 12:35:26  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 12:35:26  >  Messages log mode set to: on
+8/5/2013 12:35:26  >  Shutting down server, normal: false
+8/5/2013 12:39:6  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 12:39:6  >  Messages log mode set to: on
+8/5/2013 12:39:6  >  Shutting down server, normal: false
+8/5/2013 12:39:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 12:39:30  >  Messages log mode set to: on
+8/5/2013 12:39:30  >  Shutting down server, normal: false
+8/5/2013 12:45:17  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 12:45:17  >  Messages log mode set to: on
+8/5/2013 12:45:17  >  Shutting down server, normal: false
+8/5/2013 12:49:12  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 12:49:12  >  Messages log mode set to: on
+8/5/2013 12:49:12  >  Shutting down server, normal: false
+8/5/2013 13:28:42  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 13:28:42  >  Messages log mode set to: on
+8/5/2013 13:28:42  >  Shutting down server, normal: false
+8/5/2013 13:43:45  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 13:43:45  >  Messages log mode set to: on
+8/5/2013 13:43:45  >  Shutting down server, normal: false
+8/5/2013 13:45:40  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 13:45:40  >  Messages log mode set to: on
+8/5/2013 13:46:6  >  Shutting down server, normal: false
+8/5/2013 13:46:20  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 13:46:20  >  Messages log mode set to: on
+8/5/2013 13:51:22  >  Shutting down server, normal: false
+8/5/2013 13:52:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 13:52:35  >  Messages log mode set to: on
+8/5/2013 13:57:14  >  Shutting down server, normal: false
+8/5/2013 14:1:6  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:1:6  >  Messages log mode set to: on
+8/5/2013 14:1:6  >  Shutting down server, normal: false
+8/5/2013 14:1:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:1:19  >  Messages log mode set to: on
+8/5/2013 14:1:58  >  Shutting down server, normal: false
+8/5/2013 14:5:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:5:55  >  Messages log mode set to: on
+8/5/2013 14:7:46  >  Shutting down server, normal: false
+8/5/2013 14:8:24  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:8:24  >  Messages log mode set to: on
+8/5/2013 14:9:25  >  Shutting down server, normal: false
+8/5/2013 14:9:28  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:9:28  >  Messages log mode set to: on
+8/5/2013 14:9:28  >  Shutting down server, normal: false
+8/5/2013 14:10:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:10:30  >  Messages log mode set to: on
+8/5/2013 14:10:31  >  Connected to DB: MySQL
+8/5/2013 14:50:58  >  Shutting down server, normal: true
+8/5/2013 14:54:9  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:54:9  >  Messages log mode set to: on
+8/5/2013 14:54:10  >  Connected to DB: MySQL
+8/5/2013 14:54:23  >  Shutting down server, normal: true
+8/5/2013 14:54:49  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/5/2013 14:54:49  >  Messages log mode set to: on
+8/5/2013 14:54:49  >  Connected to DB: MySQL
+8/5/2013 14:56:20  >  Shutting down server, normal: true
+9/5/2013 15:58:11  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+9/5/2013 15:58:11  >  Messages log mode set to: on
+9/5/2013 15:58:11  >  Connected to DB: MySQL
+9/5/2013 15:58:34  >  Shutting down server, normal: true
+9/5/2013 16:4:27  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+9/5/2013 16:4:27  >  Messages log mode set to: on
+9/5/2013 16:4:27  >  Connected to DB: MySQL
+9/5/2013 16:6:3  >  Shutting down server, normal: true
+13/5/2013 13:43:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 13:43:47  >  Messages log mode set to: on
+13/5/2013 13:43:48  >  Connected to DB: MySQL
+13/5/2013 13:44:1  >  Request from /127.0.0.1 (55888)
+13/5/2013 13:47:53  >  Problem binding socket: java.net.BindException: Address already in use
+13/5/2013 13:47:53  >  Shutting down server, normal: false
+13/5/2013 13:48:0  >  Shutting down server, normal: true
+13/5/2013 13:48:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 13:48:3  >  Messages log mode set to: on
+13/5/2013 13:48:3  >  Connected to DB: MySQL
+13/5/2013 13:48:7  >  Request from /127.0.0.1 (55890)
+13/5/2013 13:48:7  >  55890-        /
+13/5/2013 13:48:8  >  Request from /127.0.0.1 (55892)
+13/5/2013 13:48:8  >  Request from /127.0.0.1 (55891)
+13/5/2013 13:48:8  >  55891-        /favicon.ico
+13/5/2013 13:48:8  >  55892-        /favicon.ico
+13/5/2013 13:48:9  >  Request from /127.0.0.1 (55893)
+13/5/2013 13:48:9  >  55893-        /admin?com=login&login_name=root&login_password=root
+13/5/2013 13:49:3  >  Request from /127.0.0.1 (55895)
+13/5/2013 13:49:3  >  55895-        /admin?login_name=root&login_password=root&com=mkusrfrm
+13/5/2013 13:49:24  >  Request from /127.0.0.1 (55897)
+13/5/2013 13:49:24  >  55897-        /admin?login_name=root&login_password=root&com=mkusrfrm
+13/5/2013 13:51:22  >  Shutting down server, normal: true
+13/5/2013 13:56:50  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 13:56:50  >  Messages log mode set to: on
+13/5/2013 13:56:51  >  Connected to DB: MySQL
+13/5/2013 13:56:53  >  Request from /127.0.0.1 (55932)
+13/5/2013 13:56:53  >  55932-        /admin?login_name=root&login_password=root&com=login
+13/5/2013 13:58:1  >  Request from /127.0.0.1 (55933)
+13/5/2013 13:58:1  >  55933-        /admin?login_name=root&login_password=root&com=mkusrfrm
+13/5/2013 14:1:42  >  Shutting down server, normal: true
+13/5/2013 14:3:20  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 14:3:20  >  Messages log mode set to: on
+13/5/2013 14:3:21  >  Connected to DB: MySQL
+13/5/2013 14:3:24  >  Request from /127.0.0.1 (55936)
+13/5/2013 14:3:24  >  55936-        /admin?login_name=root&login_password=root&com=mkusrfrm
+13/5/2013 14:3:45  >  Shutting down server, normal: true
+13/5/2013 15:13:48  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:13:48  >  Messages log mode set to: on
+13/5/2013 15:13:48  >  Connected to DB: MySQL
+13/5/2013 15:14:0  >  Request from /127.0.0.1 (55975)
+13/5/2013 15:14:0  >  55975-        /admin?login_name=root&login_password=root&com=mkusrfrm
+13/5/2013 15:14:11  >  Request from /127.0.0.1 (55977)
+13/5/2013 15:14:11  >  55977-        /admin?login_name=root&login_password=root&com=mkusrfrm
+13/5/2013 15:14:12  >  Request from /127.0.0.1 (55979)
+13/5/2013 15:14:12  >  55979-        /admin?login_name=root&login_password=root&com=chngpropfrm
+13/5/2013 15:14:13  >  Request from /127.0.0.1 (55980)
+13/5/2013 15:14:13  >  55980-        /pers_help/pers_mode.html
+13/5/2013 15:14:25  >  Request from /127.0.0.1 (55981)
+13/5/2013 15:14:25  >  55981-        /pers_help/pers_mode.html
+13/5/2013 15:14:49  >  Request from /127.0.0.1 (55982)
+13/5/2013 15:14:49  >  55982-        /ster_help/ster_mode.html
+13/5/2013 15:14:53  >  Request from /127.0.0.1 (55983)
+13/5/2013 15:14:53  >  55983-        /pers_help/pers_mode.html
+13/5/2013 15:14:59  >  Request from /127.0.0.1 (55984)
+13/5/2013 15:14:59  >  55984-        /pers_help/pers_mode.html
+13/5/2013 15:15:4  >  Request from /127.0.0.1 (55985)
+13/5/2013 15:15:4  >  55985-        /pers_help/pers_mode.html
+13/5/2013 15:15:14  >  Request from /127.0.0.1 (55986)
+13/5/2013 15:15:14  >  55986-        /pers_help/pers_mode.html
+13/5/2013 15:15:33  >  Request from /127.0.0.1 (55989)
+13/5/2013 15:15:33  >  55989-        /pers_help/pers_mode.html
+13/5/2013 15:15:48  >  Request from /127.0.0.1 (55990)
+13/5/2013 15:15:48  >  55990-        /pers_help/pers_mode.html
+13/5/2013 15:17:35  >  Shutting down server, normal: true
+13/5/2013 15:19:32  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:19:32  >  Messages log mode set to: on
+13/5/2013 15:19:32  >  Connected to DB: MySQL
+13/5/2013 15:19:36  >  Request from /127.0.0.1 (56001)
+13/5/2013 15:19:36  >  56001-        /admin?login_name=root&login_password=root&com=mkusrfrm
+13/5/2013 15:19:38  >  Request from /127.0.0.1 (56003)
+13/5/2013 15:19:38  >  56003-        /pers_help/pers_mode.html
+13/5/2013 15:20:47  >  Request from /127.0.0.1 (56004)
+13/5/2013 15:20:47  >  56004-        /ster_help/ster_mode.html
+13/5/2013 15:25:8  >  Shutting down server, normal: true
+13/5/2013 15:27:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:27:3  >  Messages log mode set to: on
+13/5/2013 15:27:4  >  Connected to DB: MySQL
+13/5/2013 15:27:9  >  Request from /127.0.0.1 (56009)
+13/5/2013 15:27:9  >  56009-        /ster_help/ster_mode.html
+13/5/2013 15:27:13  >  Request from /127.0.0.1 (56010)
+13/5/2013 15:27:13  >  56010-        /admin?login_name=root&login_password=root&com=chngpropfrm
+13/5/2013 15:27:15  >  Request from /127.0.0.1 (56011)
+13/5/2013 15:27:15  >  56011-        /pers_help/pers_mode.html
+13/5/2013 15:27:24  >  Shutting down server, normal: true
+13/5/2013 15:28:25  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:28:25  >  Messages log mode set to: on
+13/5/2013 15:28:25  >  Connected to DB: MySQL
+13/5/2013 15:28:28  >  Request from /127.0.0.1 (56013)
+13/5/2013 15:28:28  >  56013-        /ster_help/ster_mode.html
+13/5/2013 15:29:5  >  Request from /127.0.0.1 (56014)
+13/5/2013 15:29:5  >  56014-        /
+13/5/2013 15:29:7  >  Request from /127.0.0.1 (56015)
+13/5/2013 15:29:7  >  56015-        /admin?com=login&login_name=root&login_password=root
+13/5/2013 15:29:10  >  Request from /127.0.0.1 (56016)
+13/5/2013 15:29:10  >  56016-        /pers_help/pers_mode.html
+13/5/2013 15:29:32  >  Request from /127.0.0.1 (56017)
+13/5/2013 15:29:32  >  56017-        /ster_help/ster_mode.html
+13/5/2013 15:29:50  >  Request from /127.0.0.1 (56018)
+13/5/2013 15:29:50  >  56018-        /pers_help/pers_mode.html
+13/5/2013 15:31:47  >  Shutting down server, normal: true
+13/5/2013 15:35:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:35:35  >  Messages log mode set to: on
+13/5/2013 15:35:36  >  Connected to DB: MySQL
+13/5/2013 15:35:40  >  Request from /127.0.0.1 (56049)
+13/5/2013 15:35:40  >  56049-        /admin?com=login&login_name=root&login_password=root
+13/5/2013 15:35:57  >  Request from /127.0.0.1 (56050)
+13/5/2013 15:35:57  >  56050-        /ster_help/ster_mode.html
+13/5/2013 15:37:37  >  Request from /127.0.0.1 (56053)
+13/5/2013 15:37:37  >  56053-        /admin?login_name=root&login_password=root&com=login
+13/5/2013 15:37:39  >  Request from /127.0.0.1 (56054)
+13/5/2013 15:37:39  >  56054-        /pers_help/pers_mode.html
+13/5/2013 15:38:56  >  Shutting down server, normal: true
+13/5/2013 15:45:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:45:30  >  Messages log mode set to: on
+13/5/2013 15:45:30  >  Connected to DB: MySQL
+13/5/2013 15:45:36  >  Request from /127.0.0.1 (56064)
+13/5/2013 15:45:36  >  56064-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+13/5/2013 15:48:17  >  Shutting down server, normal: true
+13/5/2013 15:48:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:48:47  >  Messages log mode set to: on
+13/5/2013 15:48:47  >  Connected to DB: MySQL
+13/5/2013 15:48:51  >  Request from /127.0.0.1 (56067)
+13/5/2013 15:48:51  >  56067-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+13/5/2013 15:49:11  >  Shutting down server, normal: true
+13/5/2013 15:50:15  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:50:15  >  Messages log mode set to: on
+13/5/2013 15:50:15  >  Connected to DB: MySQL
+13/5/2013 15:50:18  >  Request from /127.0.0.1 (56069)
+13/5/2013 15:50:18  >  56069-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+13/5/2013 15:50:27  >  Shutting down server, normal: true
+13/5/2013 15:50:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:50:47  >  Messages log mode set to: on
+13/5/2013 15:50:48  >  Connected to DB: MySQL
+13/5/2013 15:50:50  >  Request from /127.0.0.1 (56071)
+13/5/2013 15:50:50  >  56071-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+13/5/2013 15:50:57  >  Shutting down server, normal: true
+13/5/2013 15:52:26  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:52:26  >  Messages log mode set to: on
+13/5/2013 15:52:27  >  Connected to DB: MySQL
+13/5/2013 15:52:29  >  Request from /127.0.0.1 (56073)
+13/5/2013 15:52:29  >  56073-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+13/5/2013 15:53:4  >  Request from /127.0.0.1 (56074)
+13/5/2013 15:53:4  >  56074-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+13/5/2013 15:53:12  >  Shutting down server, normal: true
+13/5/2013 15:53:27  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:53:27  >  Messages log mode set to: on
+13/5/2013 15:53:27  >  Connected to DB: MySQL
+13/5/2013 15:53:34  >  Shutting down server, normal: true
+13/5/2013 15:53:37  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:53:37  >  Messages log mode set to: on
+13/5/2013 15:53:38  >  Connected to DB: MySQL
+13/5/2013 15:53:41  >  Request from /127.0.0.1 (56077)
+13/5/2013 15:53:41  >  56077-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+13/5/2013 15:54:5  >  Request from /127.0.0.1 (56078)
+13/5/2013 15:54:5  >  56078-        /1.0/personal/test|123/users.xml
+13/5/2013 15:54:40  >  Request from /127.0.0.1 (56079)
+13/5/2013 15:54:40  >  56079-        /1.0/personal/test|123/users.xml
+13/5/2013 15:54:49  >  Shutting down server, normal: true
+13/5/2013 15:54:52  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:54:52  >  Messages log mode set to: on
+13/5/2013 15:54:52  >  Connected to DB: MySQL
+13/5/2013 15:54:55  >  Request from /127.0.0.1 (56081)
+13/5/2013 15:54:55  >  56081-        /1.0/personal/test|123/users.xml
+13/5/2013 15:55:0  >  Shutting down server, normal: true
+13/5/2013 15:56:37  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 15:56:37  >  Messages log mode set to: on
+13/5/2013 15:56:37  >  Connected to DB: MySQL
+13/5/2013 15:56:49  >  Request from /127.0.0.1 (56083)
+13/5/2013 15:56:49  >  56083-        /1.0/personal/test|123/users.xml
+13/5/2013 15:57:6  >  Shutting down server, normal: true
+13/5/2013 16:2:46  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:2:46  >  Messages log mode set to: on
+13/5/2013 16:2:46  >  Connected to DB: MySQL
+13/5/2013 16:2:50  >  Request from /127.0.0.1 (56085)
+13/5/2013 16:2:50  >  56085-        /1.0/personal/test|123/users.xml
+13/5/2013 16:4:37  >  Shutting down server, normal: true
+13/5/2013 16:4:44  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:4:44  >  Messages log mode set to: on
+13/5/2013 16:4:44  >  Connected to DB: MySQL
+13/5/2013 16:4:48  >  Request from /127.0.0.1 (56088)
+13/5/2013 16:4:48  >  56088-        /1.0/personal/test|123/users.xml
+13/5/2013 16:4:55  >  Shutting down server, normal: true
+13/5/2013 16:6:23  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:6:23  >  Messages log mode set to: on
+13/5/2013 16:6:23  >  Connected to DB: MySQL
+13/5/2013 16:6:26  >  Request from /127.0.0.1 (56091)
+13/5/2013 16:6:26  >  56091-        /1.0/personal/test|123/users.xml
+13/5/2013 16:10:32  >  Problem binding socket: java.net.BindException: Address already in use
+13/5/2013 16:10:32  >  Shutting down server, normal: false
+13/5/2013 16:10:53  >  Shutting down server, normal: true
+13/5/2013 16:10:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:10:55  >  Messages log mode set to: on
+13/5/2013 16:10:55  >  Connected to DB: MySQL
+13/5/2013 16:11:24  >  Shutting down server, normal: true
+13/5/2013 16:11:50  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:11:50  >  Messages log mode set to: on
+13/5/2013 16:11:50  >  Connected to DB: MySQL
+13/5/2013 16:12:31  >  Shutting down server, normal: true
+13/5/2013 16:12:34  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:12:34  >  Messages log mode set to: on
+13/5/2013 16:12:35  >  Connected to DB: MySQL
+13/5/2013 16:13:13  >  Shutting down server, normal: true
+13/5/2013 16:13:36  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:13:36  >  Messages log mode set to: on
+13/5/2013 16:13:37  >  Connected to DB: MySQL
+13/5/2013 16:13:56  >  Shutting down server, normal: true
+13/5/2013 16:15:32  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:15:32  >  Messages log mode set to: on
+13/5/2013 16:15:32  >  Connected to DB: MySQL
+13/5/2013 16:15:37  >  Request from /127.0.0.1 (56099)
+13/5/2013 16:15:37  >  56099-        /1.0/personal/test|123/users.xml
+13/5/2013 16:19:26  >  Shutting down server, normal: true
+13/5/2013 16:20:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:20:35  >  Messages log mode set to: on
+13/5/2013 16:20:36  >  Connected to DB: MySQL
+13/5/2013 16:20:43  >  Request from /127.0.0.1 (56101)
+13/5/2013 16:20:43  >  56101-        /1.0/personal/test|123/users.xml
+13/5/2013 16:21:2  >  Shutting down server, normal: true
+13/5/2013 16:21:56  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:21:56  >  Messages log mode set to: on
+13/5/2013 16:21:56  >  Connected to DB: MySQL
+13/5/2013 16:22:0  >  Request from /127.0.0.1 (56103)
+13/5/2013 16:22:0  >  56103-        /1.0/personal/test|123/users.xml
+13/5/2013 16:22:13  >  Shutting down server, normal: true
+13/5/2013 16:23:2  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:23:2  >  Messages log mode set to: on
+13/5/2013 16:23:2  >  Connected to DB: MySQL
+13/5/2013 16:23:5  >  Request from /127.0.0.1 (56105)
+13/5/2013 16:23:5  >  56105-        /1.0/personal/test|123/users.xml
+13/5/2013 16:23:54  >  Request from /127.0.0.1 (56109)
+13/5/2013 16:23:54  >  56109-        /admin?login_name=root&login_password=root&com=login
+13/5/2013 16:24:17  >  Request from /127.0.0.1 (56110)
+13/5/2013 16:24:17  >  56110-        /1.0/personal/test|123/users/Delete.xml?users={%22john%22,%22kostas%22}
+13/5/2013 16:27:12  >  Shutting down server, normal: true
+13/5/2013 16:27:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:27:14  >  Messages log mode set to: on
+13/5/2013 16:27:15  >  Connected to DB: MySQL
+13/5/2013 16:27:50  >  Shutting down server, normal: true
+13/5/2013 16:29:11  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:29:11  >  Messages log mode set to: on
+13/5/2013 16:29:12  >  Connected to DB: MySQL
+13/5/2013 16:29:36  >  Shutting down server, normal: true
+13/5/2013 16:29:53  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:29:53  >  Messages log mode set to: on
+13/5/2013 16:29:54  >  Connected to DB: MySQL
+13/5/2013 16:30:1  >  Shutting down server, normal: true
+13/5/2013 16:30:54  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:30:55  >  Messages log mode set to: on
+13/5/2013 16:30:55  >  Connected to DB: MySQL
+13/5/2013 16:31:16  >  Shutting down server, normal: true
+13/5/2013 16:32:26  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:32:26  >  Messages log mode set to: on
+13/5/2013 16:32:27  >  Connected to DB: MySQL
+13/5/2013 16:32:52  >  Shutting down server, normal: true
+13/5/2013 16:34:49  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:34:49  >  Messages log mode set to: on
+13/5/2013 16:34:49  >  Connected to DB: MySQL
+13/5/2013 16:34:59  >  Shutting down server, normal: true
+13/5/2013 16:35:46  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:35:46  >  Messages log mode set to: on
+13/5/2013 16:35:46  >  Connected to DB: MySQL
+13/5/2013 16:35:51  >  Request from /127.0.0.1 (56119)
+13/5/2013 16:35:51  >  56119-        /1.0/personal/test|123/users/Delete.xml?users={%22john%22,%22kostas%22}
+13/5/2013 16:36:39  >  Shutting down server, normal: true
+13/5/2013 16:37:32  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:37:32  >  Messages log mode set to: on
+13/5/2013 16:37:32  >  Connected to DB: MySQL
+13/5/2013 16:38:6  >  Shutting down server, normal: true
+13/5/2013 16:39:5  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:39:6  >  Messages log mode set to: on
+13/5/2013 16:39:6  >  Connected to DB: MySQL
+13/5/2013 16:40:38  >  Shutting down server, normal: true
+13/5/2013 16:41:54  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:41:54  >  Messages log mode set to: on
+13/5/2013 16:41:54  >  Connected to DB: MySQL
+13/5/2013 16:41:59  >  Request from /127.0.0.1 (56123)
+13/5/2013 16:41:59  >  56123-        /1.0/personal/test|123/users/Delete.xml?users={%22john%22,%22kostas%22}
+13/5/2013 16:42:38  >  Shutting down server, normal: true
+13/5/2013 16:45:28  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+13/5/2013 16:45:28  >  Messages log mode set to: on
+13/5/2013 16:45:28  >  Connected to DB: MySQL
+13/5/2013 16:45:32  >  Request from /127.0.0.1 (56127)
+13/5/2013 16:45:32  >  56127-        /1.0/personal/test|123/users/Delete.xml?users={%22john%22,%22kostas%22}
+13/5/2013 16:46:25  >  Shutting down server, normal: true
+15/5/2013 13:8:22  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:8:22  >  Messages log mode set to: on
+15/5/2013 13:8:22  >  Connected to DB: MySQL
+15/5/2013 13:8:29  >  Request from /127.0.0.1 (44433)
+15/5/2013 13:8:29  >  44433-        /
+15/5/2013 13:8:31  >  Request from /127.0.0.1 (44434)
+15/5/2013 13:8:31  >  44434-        /admin?com=login&login_name=root&login_password=root
+15/5/2013 13:8:40  >  Request from /127.0.0.1 (44435)
+15/5/2013 13:8:40  >  44435-        /pers_help/pers_mode.html
+15/5/2013 13:8:40  >  Request from /127.0.0.1 (44436)
+15/5/2013 13:8:40  >  Request from /127.0.0.1 (44437)
+15/5/2013 13:8:40  >  44437-        /pers_help/pers_index.html
+15/5/2013 13:8:40  >  44436-        /pers_help/menu.html
+15/5/2013 13:9:50  >  Request from /127.0.0.1 (44440)
+15/5/2013 13:9:50  >  44440-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 13:11:57  >  Shutting down server, normal: true
+15/5/2013 13:12:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:12:30  >  Messages log mode set to: on
+15/5/2013 13:12:30  >  Connected to DB: MySQL
+15/5/2013 13:12:33  >  Request from /127.0.0.1 (44442)
+15/5/2013 13:12:33  >  44442-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 13:13:50  >  Shutting down server, normal: true
+15/5/2013 13:23:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:23:14  >  Messages log mode set to: on
+15/5/2013 13:23:15  >  Connected to DB: MySQL
+15/5/2013 13:23:19  >  Request from /127.0.0.1 (44486)
+15/5/2013 13:23:19  >  44486-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 13:23:45  >  Shutting down server, normal: true
+15/5/2013 13:25:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:25:47  >  Messages log mode set to: on
+15/5/2013 13:25:48  >  Connected to DB: MySQL
+15/5/2013 13:25:52  >  Request from /127.0.0.1 (44495)
+15/5/2013 13:25:52  >  44495-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 13:26:4  >  Request from /127.0.0.1 (44496)
+15/5/2013 13:26:4  >  44496-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 13:26:7  >  Request from /127.0.0.1 (44497)
+15/5/2013 13:26:7  >  44497-        /admin?login_name=root&login_password=root&com=login
+15/5/2013 13:26:26  >  Request from /127.0.0.1 (44498)
+15/5/2013 13:26:26  >  44498-        /
+15/5/2013 13:26:27  >  Request from /127.0.0.1 (44499)
+15/5/2013 13:26:27  >  44499-        /admin?com=login&login_name=root&login_password=root
+15/5/2013 13:26:43  >  Shutting down server, normal: true
+15/5/2013 13:27:36  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:27:36  >  Messages log mode set to: on
+15/5/2013 13:27:36  >  Connected to DB: MySQL
+15/5/2013 13:27:40  >  Request from /127.0.0.1 (44501)
+15/5/2013 13:27:40  >  44501-        /admin?com=login&login_name=root&login_password=root
+15/5/2013 13:27:56  >  Shutting down server, normal: true
+15/5/2013 13:29:58  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:29:58  >  Messages log mode set to: on
+15/5/2013 13:29:59  >  Connected to DB: MySQL
+15/5/2013 13:30:5  >  Request from /127.0.0.1 (44503)
+15/5/2013 13:30:5  >  44503-        /
+15/5/2013 13:30:6  >  Request from /127.0.0.1 (44504)
+15/5/2013 13:30:6  >  44504-        /admin?com=login&login_name=root&login_password=root
+15/5/2013 13:30:8  >  Request from /127.0.0.1 (44505)
+15/5/2013 13:30:9  >  44505-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 13:31:0  >  Request from /127.0.0.1 (44517)
+15/5/2013 13:31:0  >  44517-        /pers_help/pers_mode.html
+15/5/2013 13:32:35  >  Shutting down server, normal: true
+15/5/2013 13:33:10  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:33:10  >  Messages log mode set to: on
+15/5/2013 13:33:11  >  Connected to DB: MySQL
+15/5/2013 13:33:15  >  Request from /127.0.0.1 (44519)
+15/5/2013 13:33:15  >  44519-        /pers_help/pers_mode.html
+15/5/2013 13:33:15  >  Request from /127.0.0.1 (44520)
+15/5/2013 13:33:15  >  Request from /127.0.0.1 (44521)
+15/5/2013 13:33:15  >  44520-        /pers_help/menu.html
+15/5/2013 13:33:15  >  44521-        /pers_help/pers_index.html
+15/5/2013 13:33:18  >  Request from /127.0.0.1 (44522)
+15/5/2013 13:33:18  >  44522-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 13:33:18  >  Request from /127.0.0.1 (44524)
+15/5/2013 13:33:18  >  44524-        /admin?login_name=root&login_password=root&com=chngpropfrm
+15/5/2013 13:33:20  >  Request from /127.0.0.1 (44525)
+15/5/2013 13:33:20  >  44525-        /pers_help/pers_mode.html
+15/5/2013 13:33:20  >  Request from /127.0.0.1 (44527)
+15/5/2013 13:33:20  >  Request from /127.0.0.1 (44526)
+15/5/2013 13:33:20  >  44526-        /pers_help/menu.html
+15/5/2013 13:33:20  >  44527-        /pers_help/pers_index.html
+15/5/2013 13:33:24  >  Request from /127.0.0.1 (44528)
+15/5/2013 13:33:24  >  44528-        /ster_help/ster_mode.html
+15/5/2013 13:33:24  >  Request from /127.0.0.1 (44529)
+15/5/2013 13:33:24  >  Request from /127.0.0.1 (44530)
+15/5/2013 13:33:24  >  44529-        /ster_help/menu.html
+15/5/2013 13:33:24  >  44530-        /ster_help/ster_index.html
+15/5/2013 13:33:27  >  Request from /127.0.0.1 (44531)
+15/5/2013 13:33:27  >  44531-        /admin?login_name=root&login_password=root&com=login
+15/5/2013 13:33:27  >  Request from /127.0.0.1 (44532)
+15/5/2013 13:33:27  >  44532-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 13:34:8  >  Request from /127.0.0.1 (44534)
+15/5/2013 13:34:8  >  44534-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 13:34:27  >  Shutting down server, normal: true
+15/5/2013 13:35:29  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:35:29  >  Messages log mode set to: on
+15/5/2013 13:35:29  >  Connected to DB: MySQL
+15/5/2013 13:35:37  >  Shutting down server, normal: true
+15/5/2013 13:35:54  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 13:35:54  >  Messages log mode set to: on
+15/5/2013 13:35:54  >  Connected to DB: MySQL
+15/5/2013 13:35:58  >  Request from /127.0.0.1 (44537)
+15/5/2013 13:35:58  >  44537-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 13:36:5  >  Request from /127.0.0.1 (44539)
+15/5/2013 13:36:5  >  44539-        /pers_help/pers_mode.html
+15/5/2013 13:36:5  >  Request from /127.0.0.1 (44540)
+15/5/2013 13:36:5  >  Request from /127.0.0.1 (44541)
+15/5/2013 13:36:5  >  44541-        /pers_help/pers_index.html
+15/5/2013 13:36:5  >  44540-        /pers_help/menu.html
+15/5/2013 13:36:27  >  Request from /127.0.0.1 (44543)
+15/5/2013 13:36:27  >  44543-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 13:37:8  >  Request from /127.0.0.1 (44544)
+15/5/2013 13:37:8  >  44544-        /1.0/personal/test|123/users.json?where=Pa*&PageNumber=2
+15/5/2013 13:37:51  >  Shutting down server, normal: true
+15/5/2013 15:20:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:20:47  >  Messages log mode set to: on
+15/5/2013 15:20:47  >  Connected to DB: MySQL
+15/5/2013 15:23:1  >  Request from /127.0.0.1 (45403)
+15/5/2013 15:23:1  >  45403-        /admin?login_name=root&login_password=root&com=login
+15/5/2013 15:23:3  >  Request from /127.0.0.1 (45404)
+15/5/2013 15:23:3  >  45404-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 15:23:4  >  Request from /127.0.0.1 (45406)
+15/5/2013 15:23:4  >  45406-        /admin?login_name=root&login_password=root&com=login
+15/5/2013 15:23:54  >  Request from /127.0.0.1 (45407)
+15/5/2013 15:23:54  >  45407-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:24:38  >  Shutting down server, normal: true
+15/5/2013 15:30:18  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:30:18  >  Messages log mode set to: on
+15/5/2013 15:30:19  >  Connected to DB: MySQL
+15/5/2013 15:30:24  >  Request from /127.0.0.1 (45413)
+15/5/2013 15:30:24  >  45413-        /admin?login_name=root&login_password=root&com=login
+15/5/2013 15:30:25  >  Request from /127.0.0.1 (45414)
+15/5/2013 15:30:25  >  45414-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 15:30:26  >  Request from /127.0.0.1 (45416)
+15/5/2013 15:30:26  >  45416-        /admin?login_name=root&login_password=root&com=chngpropfrm
+15/5/2013 15:30:33  >  Request from /127.0.0.1 (45417)
+15/5/2013 15:30:33  >  45417-        /pers_help/pers_mode.html
+15/5/2013 15:30:33  >  Request from /127.0.0.1 (45419)
+15/5/2013 15:30:33  >  Request from /127.0.0.1 (45418)
+15/5/2013 15:30:33  >  45418-        /pers_help/menu.html
+15/5/2013 15:30:33  >  45419-        /pers_help/pers_index.html
+15/5/2013 15:30:38  >  Request from /127.0.0.1 (45420)
+15/5/2013 15:30:38  >  45420-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:34:41  >  Shutting down server, normal: true
+15/5/2013 15:37:44  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:37:44  >  Messages log mode set to: on
+15/5/2013 15:37:44  >  Connected to DB: MySQL
+15/5/2013 15:37:48  >  Request from /127.0.0.1 (45430)
+15/5/2013 15:37:48  >  45430-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:38:3  >  Shutting down server, normal: true
+15/5/2013 15:38:54  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:38:54  >  Messages log mode set to: on
+15/5/2013 15:38:54  >  Connected to DB: MySQL
+15/5/2013 15:38:57  >  Request from /127.0.0.1 (45434)
+15/5/2013 15:38:57  >  45434-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 15:38:57  >  Request from /127.0.0.1 (45436)
+15/5/2013 15:38:57  >  45436-        /admin?login_name=root&login_password=root&com=login
+15/5/2013 15:38:58  >  Request from /127.0.0.1 (45437)
+15/5/2013 15:38:58  >  45437-        /admin?login_name=root&login_password=root&com=chngpropfrm
+15/5/2013 15:38:59  >  Request from /127.0.0.1 (45438)
+15/5/2013 15:38:59  >  45438-        /pers_help/pers_mode.html
+15/5/2013 15:38:59  >  Request from /127.0.0.1 (45439)
+15/5/2013 15:38:59  >  Request from /127.0.0.1 (45440)
+15/5/2013 15:38:59  >  45439-        /pers_help/menu.html
+15/5/2013 15:38:59  >  45440-        /pers_help/pers_index.html
+15/5/2013 15:39:1  >  Request from /127.0.0.1 (45441)
+15/5/2013 15:39:1  >  45441-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:40:17  >  Shutting down server, normal: true
+15/5/2013 15:40:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:40:19  >  Messages log mode set to: on
+15/5/2013 15:40:19  >  Connected to DB: MySQL
+15/5/2013 15:40:22  >  Request from /127.0.0.1 (45443)
+15/5/2013 15:40:22  >  45443-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:42:4  >  Shutting down server, normal: true
+15/5/2013 15:42:6  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:42:6  >  Messages log mode set to: on
+15/5/2013 15:42:6  >  Connected to DB: MySQL
+15/5/2013 15:42:9  >  Request from /127.0.0.1 (45446)
+15/5/2013 15:42:9  >  45446-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:43:20  >  Shutting down server, normal: true
+15/5/2013 15:43:26  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:43:26  >  Messages log mode set to: on
+15/5/2013 15:43:26  >  Connected to DB: MySQL
+15/5/2013 15:43:33  >  Request from /127.0.0.1 (45449)
+15/5/2013 15:43:33  >  45449-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:46:37  >  Shutting down server, normal: true
+15/5/2013 15:50:50  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:50:50  >  Messages log mode set to: on
+15/5/2013 15:50:51  >  Connected to DB: MySQL
+15/5/2013 15:50:53  >  Request from /127.0.0.1 (45455)
+15/5/2013 15:50:53  >  45455-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:51:21  >  Shutting down server, normal: true
+15/5/2013 15:52:6  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:52:6  >  Messages log mode set to: on
+15/5/2013 15:52:6  >  Connected to DB: MySQL
+15/5/2013 15:52:8  >  Request from /127.0.0.1 (45459)
+15/5/2013 15:52:8  >  45459-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:52:38  >  Shutting down server, normal: true
+15/5/2013 15:53:31  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:53:31  >  Messages log mode set to: on
+15/5/2013 15:53:32  >  Connected to DB: MySQL
+15/5/2013 15:53:34  >  Request from /127.0.0.1 (45463)
+15/5/2013 15:53:34  >  45463-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:54:1  >  Shutting down server, normal: true
+15/5/2013 15:54:27  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:54:27  >  Messages log mode set to: on
+15/5/2013 15:54:27  >  Connected to DB: MySQL
+15/5/2013 15:54:29  >  Request from /127.0.0.1 (45467)
+15/5/2013 15:54:29  >  45467-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 15:55:19  >  Request from /127.0.0.1 (45470)
+15/5/2013 15:55:19  >  45470-        /admin?login_name=root&login_password=root&com=mkusrfrm
+15/5/2013 15:55:20  >  Request from /127.0.0.1 (45472)
+15/5/2013 15:55:20  >  45472-        /admin?login_name=root&login_password=root&com=login
+15/5/2013 15:55:21  >  Request from /127.0.0.1 (45473)
+15/5/2013 15:55:21  >  45473-        /admin?login_name=root&login_password=root&com=chngpropfrm
+15/5/2013 15:55:22  >  Request from /127.0.0.1 (45474)
+15/5/2013 15:55:22  >  45474-        /pers_help/pers_mode.html
+15/5/2013 15:55:22  >  Request from /127.0.0.1 (45475)
+15/5/2013 15:55:22  >  45475-        /pers_help/menu.html
+15/5/2013 15:55:22  >  Request from /127.0.0.1 (45476)
+15/5/2013 15:55:22  >  45476-        /pers_help/pers_index.html
+15/5/2013 15:55:35  >  Shutting down server, normal: true
+15/5/2013 15:58:50  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 15:58:50  >  Messages log mode set to: on
+15/5/2013 15:58:50  >  Connected to DB: MySQL
+15/5/2013 15:58:54  >  Request from /127.0.0.1 (45478)
+15/5/2013 15:58:54  >  45478-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:0:20  >  Shutting down server, normal: true
+15/5/2013 16:0:25  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:0:25  >  Messages log mode set to: on
+15/5/2013 16:0:25  >  Connected to DB: MySQL
+15/5/2013 16:0:28  >  Request from /127.0.0.1 (45480)
+15/5/2013 16:0:28  >  45480-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:0:37  >  Shutting down server, normal: true
+15/5/2013 16:1:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:1:3  >  Messages log mode set to: on
+15/5/2013 16:1:3  >  Connected to DB: MySQL
+15/5/2013 16:1:6  >  Shutting down server, normal: true
+15/5/2013 16:9:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:9:47  >  Messages log mode set to: on
+15/5/2013 16:9:47  >  Connected to DB: MySQL
+15/5/2013 16:9:52  >  Request from /127.0.0.1 (45571)
+15/5/2013 16:9:52  >  45571-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:10:13  >  Shutting down server, normal: true
+15/5/2013 16:10:28  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:10:28  >  Messages log mode set to: on
+15/5/2013 16:10:28  >  Connected to DB: MySQL
+15/5/2013 16:10:30  >  Request from /127.0.0.1 (45573)
+15/5/2013 16:10:30  >  45573-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:10:54  >  Shutting down server, normal: true
+15/5/2013 16:10:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:10:57  >  Messages log mode set to: on
+15/5/2013 16:10:57  >  Connected to DB: MySQL
+15/5/2013 16:11:2  >  Request from /127.0.0.1 (45575)
+15/5/2013 16:11:2  >  45575-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:11:16  >  Shutting down server, normal: true
+15/5/2013 16:11:31  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:11:31  >  Messages log mode set to: on
+15/5/2013 16:11:32  >  Connected to DB: MySQL
+15/5/2013 16:11:34  >  Request from /127.0.0.1 (45577)
+15/5/2013 16:11:34  >  45577-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:12:47  >  Shutting down server, normal: true
+15/5/2013 16:12:49  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:12:49  >  Messages log mode set to: on
+15/5/2013 16:12:49  >  Connected to DB: MySQL
+15/5/2013 16:12:52  >  Request from /127.0.0.1 (45579)
+15/5/2013 16:12:52  >  45579-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:13:31  >  Shutting down server, normal: true
+15/5/2013 16:13:33  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:13:33  >  Messages log mode set to: on
+15/5/2013 16:13:33  >  Connected to DB: MySQL
+15/5/2013 16:13:35  >  Request from /127.0.0.1 (45581)
+15/5/2013 16:13:35  >  45581-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:13:41  >  Shutting down server, normal: true
+15/5/2013 16:13:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:13:55  >  Messages log mode set to: on
+15/5/2013 16:13:55  >  Connected to DB: MySQL
+15/5/2013 16:13:57  >  Request from /127.0.0.1 (45583)
+15/5/2013 16:13:57  >  45583-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:14:32  >  Shutting down server, normal: true
+15/5/2013 16:14:34  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:14:34  >  Messages log mode set to: on
+15/5/2013 16:14:35  >  Connected to DB: MySQL
+15/5/2013 16:14:37  >  Request from /127.0.0.1 (45585)
+15/5/2013 16:14:37  >  45585-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:15:5  >  Shutting down server, normal: true
+15/5/2013 16:15:7  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:15:7  >  Messages log mode set to: on
+15/5/2013 16:15:8  >  Connected to DB: MySQL
+15/5/2013 16:15:10  >  Request from /127.0.0.1 (45589)
+15/5/2013 16:15:10  >  45589-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:15:45  >  Shutting down server, normal: true
+15/5/2013 16:15:48  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:15:48  >  Messages log mode set to: on
+15/5/2013 16:15:48  >  Connected to DB: MySQL
+15/5/2013 16:15:50  >  Request from /127.0.0.1 (45591)
+15/5/2013 16:15:50  >  45591-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+15/5/2013 16:16:0  >  Shutting down server, normal: true
+15/5/2013 16:16:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+15/5/2013 16:16:14  >  Messages log mode set to: on
+15/5/2013 16:16:14  >  Connected to DB: MySQL
+15/5/2013 16:16:16  >  Request from /127.0.0.1 (45593)
+15/5/2013 16:16:16  >  45593-        /1.0/personal/test|123/users.xml?where=Pa*&PageNumber=2
+20/5/2013 11:9:10  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 11:9:10  >  Messages log mode set to: on
+20/5/2013 11:9:10  >  Database connection failed
+20/5/2013 11:9:10  >  Shutting down server, normal: false
+20/5/2013 11:10:43  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 11:10:43  >  Messages log mode set to: on
+20/5/2013 11:10:44  >  Connected to DB: MySQL
+20/5/2013 11:10:57  >  Request from /127.0.0.1 (50945)
+20/5/2013 11:10:57  >  50945-        /
+20/5/2013 11:10:58  >  Request from /127.0.0.1 (50946)
+20/5/2013 11:10:59  >  50946-        /admin?com=login&login_name=root&login_password=root
+20/5/2013 11:11:6  >  Request from /127.0.0.1 (50947)
+20/5/2013 11:11:6  >  50947-        /pers_help/pers_mode.html
+20/5/2013 11:11:6  >  Request from /127.0.0.1 (50948)
+20/5/2013 11:11:6  >  Request from /127.0.0.1 (50949)
+20/5/2013 11:11:6  >  50948-        /pers_help/menu.html
+20/5/2013 11:11:6  >  50949-        /pers_help/pers_index.html
+20/5/2013 11:11:11  >  Request from /127.0.0.1 (50950)
+20/5/2013 11:11:11  >  50950-        /pers_help/getusrs.html
+20/5/2013 11:12:16  >  Shutting down server, normal: true
+20/5/2013 11:14:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 11:14:57  >  Messages log mode set to: on
+20/5/2013 11:14:57  >  Connected to DB: MySQL
+20/5/2013 11:15:1  >  Request from /127.0.0.1 (50954)
+20/5/2013 11:15:1  >  50954-        /pers_help/pers_mode.html
+20/5/2013 11:15:1  >  Request from /127.0.0.1 (50955)
+20/5/2013 11:15:1  >  Request from /127.0.0.1 (50956)
+20/5/2013 11:15:1  >  50955-        /pers_help/menu.html
+20/5/2013 11:15:1  >  50956-        /pers_help/pers_index.html
+20/5/2013 11:15:9  >  Request from /127.0.0.1 (50957)
+20/5/2013 11:15:9  >  50957-        /pers?clnt=demoSite|123&com=addattr&mail=null&age=null&country=null&sex=null
+20/5/2013 11:28:13  >  Shutting down server, normal: true
+20/5/2013 12:0:8  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 12:0:8  >  Messages log mode set to: on
+20/5/2013 12:0:8  >  Connected to DB: MySQL
+20/5/2013 12:0:10  >  Request from /127.0.0.1 (51423)
+20/5/2013 12:0:11  >  51423-        /pers_help/remusr.html
+20/5/2013 12:16:16  >  Request from /127.0.0.1 (51863)
+20/5/2013 12:16:16  >  51863-        /pers_help/getusrs.html
+20/5/2013 12:16:34  >  Request from /127.0.0.1 (51864)
+20/5/2013 12:16:34  >  51864-        /pers?clnt=demoSite|123&com=getusrs&whr=*
+20/5/2013 12:16:34  >  Request from /127.0.0.1 (51866)
+20/5/2013 12:16:34  >  51866-        /resp_xsl/user.xsl
+20/5/2013 12:16:46  >  Request from /127.0.0.1 (51867)
+20/5/2013 12:16:46  >  51867-        /
+20/5/2013 12:16:48  >  Request from /127.0.0.1 (51868)
+20/5/2013 12:16:48  >  51868-        /admin?com=login&login_name=root&login_password=root
+20/5/2013 12:17:9  >  Request from /127.0.0.1 (51869)
+20/5/2013 12:17:9  >  51869-        /pers?clnt=demoSite|123&com=getusrs&whr=*
+20/5/2013 12:17:9  >  Request from /127.0.0.1 (51871)
+20/5/2013 12:17:9  >  51871-        /resp_xsl/user.xsl
+20/5/2013 12:19:20  >  Request from /127.0.0.1 (51876)
+20/5/2013 12:19:20  >  51876-Problem parsing request: java.util.NoSuchElementException
+20/5/2013 12:19:27  >  Request from /127.0.0.1 (51877)
+20/5/2013 12:19:27  >  51877-        /1.0/personal/demoSite|123/users.xml?where=*
+20/5/2013 12:19:30  >  Request from /127.0.0.1 (51878)
+20/5/2013 12:19:30  >  51878-Problem parsing request: java.util.NoSuchElementException
+20/5/2013 12:19:37  >  Request from /127.0.0.1 (51879)
+20/5/2013 12:19:37  >  51879-        /1.0/personal/demoSite|123/users.xml?where=*
+20/5/2013 12:20:27  >  Shutting down server, normal: true
+20/5/2013 12:20:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 12:20:30  >  Messages log mode set to: on
+20/5/2013 12:20:30  >  Connected to DB: MySQL
+20/5/2013 12:20:34  >  Request from /127.0.0.1 (51883)
+20/5/2013 12:20:34  >  51883-        /pers?clnt=demoSite|123&com=getusrs&whr=*
+20/5/2013 12:20:34  >  Request from /127.0.0.1 (51885)
+20/5/2013 12:20:34  >  51885-        /resp_xsl/user.xsl
+20/5/2013 12:23:50  >  Request from /127.0.0.1 (51929)
+20/5/2013 12:23:50  >  51929-        /1.0/personal/demoSite|123/users.xml?where=*
+20/5/2013 12:25:16  >  Shutting down server, normal: true
+20/5/2013 12:25:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 12:25:19  >  Messages log mode set to: on
+20/5/2013 12:25:19  >  Connected to DB: MySQL
+20/5/2013 12:25:22  >  Request from /127.0.0.1 (51933)
+20/5/2013 12:25:22  >  51933-        /1.0/personal/demoSite|123/users.xml?where=*
+20/5/2013 12:25:55  >  Shutting down server, normal: true
+20/5/2013 12:27:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 12:27:3  >  Messages log mode set to: on
+20/5/2013 12:27:3  >  Connected to DB: MySQL
+20/5/2013 12:27:5  >  Request from /127.0.0.1 (51937)
+20/5/2013 12:27:5  >  51937-        /1.0/personal/demoSite|123/users.xml?where=*
+20/5/2013 12:27:41  >  Shutting down server, normal: true
+20/5/2013 12:28:8  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 12:28:8  >  Messages log mode set to: on
+20/5/2013 12:28:8  >  Connected to DB: MySQL
+20/5/2013 12:28:11  >  Request from /127.0.0.1 (51941)
+20/5/2013 12:28:11  >  51941-        /1.0/personal/demoSite|123/users.xml?where=*
+20/5/2013 12:28:18  >  Shutting down server, normal: true
+20/5/2013 12:29:23  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+20/5/2013 12:29:23  >  Messages log mode set to: on
+20/5/2013 12:29:23  >  Connected to DB: MySQL
+20/5/2013 12:29:27  >  Request from /127.0.0.1 (51948)
+20/5/2013 12:29:27  >  51948-        /1.0/personal/demoSite|123/users.xml?where=*
+20/5/2013 12:29:27  >  Request from /127.0.0.1 (51950)
+20/5/2013 12:29:27  >  51950-        /resp_xsl/user.xsl
+20/5/2013 12:29:38  >  Request from /127.0.0.1 (51951)
+20/5/2013 12:29:38  >  51951-        /pers?clnt=demoSite|123&com=getusrs&whr=*
+20/5/2013 12:29:39  >  Request from /127.0.0.1 (51953)
+20/5/2013 12:29:39  >  51953-        /resp_xsl/user.xsl
+20/5/2013 12:45:23  >  Request from /127.0.0.1 (51979)
+20/5/2013 12:45:23  >  51979-        /pers_help/remusr.html
+20/5/2013 13:21:24  >  Request from /127.0.0.1 (52040)
+20/5/2013 13:21:24  >  52040-        /pers_help/setusr.html
+20/5/2013 13:21:33  >  Request from /127.0.0.1 (52041)
+20/5/2013 13:21:39  >  52041-Problem parsing request: java.util.NoSuchElementException
+20/5/2013 18:43:24  >  Shutting down server, normal: true
+22/5/2013 9:46:33  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 9:46:33  >  Messages log mode set to: on
+22/5/2013 9:46:33  >  Connected to DB: MySQL
+22/5/2013 9:46:38  >  Request from /127.0.0.1 (38409)
+22/5/2013 9:46:38  >  38409-        /
+22/5/2013 9:46:38  >  Request from /127.0.0.1 (38410)
+22/5/2013 9:46:40  >  38410-        /admin?com=login&login_name=root&login_password=root
+22/5/2013 9:46:47  >  Request from /127.0.0.1 (38411)
+22/5/2013 9:46:47  >  38411-        /pers_help/pers_mode.html
+22/5/2013 9:46:47  >  Request from /127.0.0.1 (38412)
+22/5/2013 9:46:47  >  Request from /127.0.0.1 (38413)
+22/5/2013 9:46:47  >  38412-        /pers_help/menu.html
+22/5/2013 9:46:47  >  38413-        /pers_help/pers_index.html
+22/5/2013 9:49:29  >  Shutting down server, normal: true
+22/5/2013 9:51:53  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 9:51:53  >  Messages log mode set to: on
+22/5/2013 9:51:53  >  Connected to DB: MySQL
+22/5/2013 9:51:58  >  Request from /127.0.0.1 (58418)
+22/5/2013 9:52:3  >  58418-Problem parsing request: java.util.NoSuchElementException

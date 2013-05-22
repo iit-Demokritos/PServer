@@ -61,6 +61,8 @@ import java.util.*;
 //import javax.swing.*;
 import java.security.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import pserver.*;
 import pserver.data.DBAccess;
@@ -87,7 +89,8 @@ public class PSReqWorker extends ReqWorker {
     //private String administrator_name;//login name for administrator
     //private String administrator_pass;//login password for administrator    
     //initializers
-    HashMap<String,String> clientsHash = new HashMap<String, String>();
+    HashMap<String, String> clientsHash = new HashMap<String, String>();
+
     /**
      * Initializer method for the Request.
      *
@@ -105,14 +108,18 @@ public class PSReqWorker extends ReqWorker {
     }
 
     //overriden base class methods
+    @Override
     public void switchRespMode() {
         //overriden method, extends modes of operation (respMode).
         //initiates a sequence of methods in which the actions
         //appropriate to client request are performed and the
         //body of the response (if any) is decided.
         //if an error occurs, the 'respCode' can be set accordingly
+
+        //TODO: Check if contains resURI
         if (PersServer.pObj.pservlets.containsKey(resURI.toLowerCase().substring(1))) {
             respMode = SERVICE_MODE;
+//            System.out.println(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)).toString()+"%%%%%%%%%%%%%%%%%%%%%%%");
             analyzeServiceMode(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)));
             return;
         }
@@ -157,12 +164,19 @@ public class PSReqWorker extends ReqWorker {
     private void analyzeServiceMode(PService servlet) {
         //Connection conn = connDB(url, user, pass);
         DBAccess dbAccess = new DBAccess(url, user, pass);
-
+        if (resURI.substring(1).endsWith(".xml")||resURI.substring(1).endsWith(".json")) {
+            try {
+               
+               servlet.init(initParam);
+            } catch (Exception ex) {
+                Logger.getLogger(PSReqWorker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         mimeType = servlet.getMimeType();
         response = new StringBuffer();
         respCode = servlet.service(queryParam, response, dbAccess);
     }
-    
+
     /**
      * Database connection method
      *
@@ -186,6 +200,7 @@ public class PSReqWorker extends ReqWorker {
         }
         return conn;
     }
+
     /**
      * Database disconnect method
      *
@@ -199,6 +214,7 @@ public class PSReqWorker extends ReqWorker {
             WebServer.win.log.error("-Problem disconnecting from DB: " + e);
         }
     }
+
     /**
      * Method to check if the request came from a valid pserver user
      *
@@ -209,7 +225,7 @@ public class PSReqWorker extends ReqWorker {
         /*
          * if( this.allowAnonymous == true ){ if( clntIdx != -1){
          * queryParam.remove( clntIdx ); } clientName=null; return true;
-        }
+         }
          */
         if (clntIdx == -1) {
             return false;
@@ -219,7 +235,7 @@ public class PSReqWorker extends ReqWorker {
          * if(((String)queryParam.getKey(0)).compareToIgnoreCase("clnt")!=0){
          * if(this.allowAnonymous==false) return INVALID_CLIENT; else return
          * FULL_GRANTED_CLIENT;
-        }
+         }
          */
         //client attibutes demactrate with the "|" character
         String userAndPass = (String) queryParam.getVal(clntIdx);
@@ -231,21 +247,21 @@ public class PSReqWorker extends ReqWorker {
             password = tokenizer.nextToken();//second comes the unencrypted password                        
         } catch (NoSuchElementException e) {
             return false;
-        }        
+        }
         /*
          * if (client.equals(administrator_name) == true &&
          * password.equals(administrator_pass) == true) {
          * queryParam.remove(clntIdx);//removes client attrributes from the
          * query return true;
-        }
+         }
          */
         String cachedPass = clientsHash.get(client);
-        if( cachedPass != null ){
-            if( cachedPass.equals(password) ){
+        if (cachedPass != null) {
+            if (cachedPass.equals(password)) {
                 return true;
             }
         }
-        try {            
+        try {
             Connection conn = connDB(url, user, pass);
             Statement stmt = conn.createStatement();
             //check pserver_user existence in the data base
@@ -273,5 +289,5 @@ public class PSReqWorker extends ReqWorker {
         } catch (SQLException e) {
             return false;
         }
-     }
+    }
 }

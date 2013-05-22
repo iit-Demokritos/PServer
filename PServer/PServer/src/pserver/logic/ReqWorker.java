@@ -41,7 +41,6 @@ import java.io.*;
 import java.text.*;
 
 import pserver.*;
-import pserver.utilities.*;
 
 public class ReqWorker extends Thread {
 
@@ -54,6 +53,7 @@ public class ReqWorker extends Thread {
     public String resURI = null;           //requested resource URI (no query string)
     public String queryStr = null;         //query string
     public VectorMap queryParam = null;    //query parameter name-value pairs
+    public String[] initParam = new String[1];
     //control variables
     public int respCode;            //code of response (error-handling)
     public int respMode;            //mode of response (response process)
@@ -101,6 +101,7 @@ public class ReqWorker extends Thread {
      * This method analyzes a request.
      */
     public void analyseRequest() {
+
         respCode = NORMAL;
         if (!getRequest()) {
             respCode = SERVER_ERR;
@@ -114,14 +115,27 @@ public class ReqWorker extends Thread {
             respCode = NO_SERVICE;
             return;  //no point in proceeding
         }
-        parseQueryParam();  //actually, 'queryParam' is not used
+
+        //add rest decoder here???
+        // restDecoder();
+        //////////////////////////
+        parseQueryParam();
+        //call rest url parser to take extra vars
+        parseRestParams();
 
         switchRespMode();
     }
 
     /**
-     * Accepts the incoming HTTP message. 
-     * @return True if a successful HTTP message was received, False otherwise. 
+     * If request is restfully then convert ti to
+     */
+    public void restDecoder() {
+    }
+
+    /**
+     * Accepts the incoming HTTP message.
+     *
+     * @return True if a successful HTTP message was received, False otherwise.
      */
     public boolean getRequest() {
         //fill 'request' variable
@@ -160,8 +174,10 @@ public class ReqWorker extends Thread {
         WebServer.win.log.debug(port + "-Request body below:\n" + request);
         return true;
     }
+
     /**
      * Fills all request Parameters, except {@link #queryParam}
+     *
      * @return True on success, False if {@link #request} is null.
      */
     public boolean parseRequest() {
@@ -173,14 +189,17 @@ public class ReqWorker extends Thread {
         try {
             String delim;
             //get first line of request
-            String reqLine = request.substring(0, request.indexOf('\n') + 1);  //include '\n'
+            String reqLine = request.substring(0, request.indexOf('\n') + 1);  //include '\n' 
+            //e.g GET /admin?login_name=root&login_password=root&com=mkusrfrm HTTP/1.1
+
             StringTokenizer parser = new StringTokenizer(reqLine, " ", true);
             //consume HTTP request method (GET, POST)
-            method = parser.nextToken();
-            delim = parser.nextToken();
+            method = parser.nextToken(); //e.g GET
+            delim = parser.nextToken();  // e.g " "
             //get the requested resource URI (without the query string)
-            resURI = parser.nextToken(" ?");  //delim is ? or space
-            delim = parser.nextToken(" ?");
+            resURI = parser.nextToken(" ?");  //delim is ? or space // e.g /admin
+//            TypeParam[0] = resURI;
+            delim = parser.nextToken(" ?");   // e.g ?
             //get the query string (if there exists)
             queryStr = "";
             //GET - query string in first line after '?'
@@ -226,8 +245,10 @@ public class ReqWorker extends Thread {
         WebServer.flog.writeln(port + "-        " + resURI + (queryStr == "" ? "" : "?" + queryStr));  //..continued from logRequest()
         return true;
     }
+
     /**
-     * Checks if the HTTP request method is supported. 
+     * Checks if the HTTP request method is supported.
+     *
      * @return True if the HTTP request method is supported, False otherwise.
      */
     public boolean methodSupported() {
@@ -243,6 +264,23 @@ public class ReqWorker extends Thread {
         }
         return false;
     }
+
+    public void parseRestParams() {
+
+        if (resURI.substring(1).endsWith(".xml") || resURI.substring(1).endsWith(".json")) {
+
+            HashMap<String, String> var = PersServer.pObj.pservlets.getRestVariables(resURI.substring(1));
+            int count = 1;
+            for (String temp : var.keySet()) {
+                queryParam.add(temp, var.get(temp));
+            }
+           
+            initParam[0] = resURI.substring(1);
+           
+
+        }
+    }
+
     /**
      * Fills the {@link #queryParam} parameter.
      */
@@ -340,9 +378,11 @@ public class ReqWorker extends Thread {
         }
         return physPath.substring(0);
     }
+
     /**
-     * Checks if the file specified by the physical path is accessible. 
-     * @param physPath The path to the file. 
+     * Checks if the file specified by the physical path is accessible.
+     *
+     * @param physPath The path to the file.
      * @return True if the file is accessible, False otherwise.
      */
     public boolean accessibleFile(String physPath) {
@@ -388,13 +428,12 @@ public class ReqWorker extends Thread {
         httpHeader();
         sendResponse();
     }
+
     /**
-     * Checks the the response Code.
-     * The response Body must be attached to the {@link #rbFile}if from 
-     * a file, or to the {@link #rbString} if a string. Body, length and 
-     * MIME type must be determined. 
-     * First, consider response according to possible errors while 
-     * analyzing the request.
+     * Checks the the response Code. The response Body must be attached to the
+     * {@link #rbFile}if from a file, or to the {@link #rbString} if a string.
+     * Body, length and MIME type must be determined. First, consider response
+     * according to possible errors while analyzing the request.
      */
     public void respBody() {
         //response body must be attached to stream 'rbFile'

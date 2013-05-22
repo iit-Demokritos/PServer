@@ -67,6 +67,7 @@ import java.sql.*;
 
 import pserver.data.DBAccess;
 import pserver.data.PServerClientsDBAccess;
+import pserver.data.PShashMap;
 import pserver.userInterface.*;
 import pserver.logic.*;
 import pserver.utilities.*;
@@ -97,7 +98,8 @@ public class PersServer extends WebServer {
     public String dbType;    //eg. "ACCESS", "MySQL", etc.
     private boolean stop = false;    //variable for stop checking
     private static final String PBEANS_FILE_NAME = "./pbeans.ini";//the file that contains psrvlet name
-    public HashMap<String, PService> pservlets; //the pservlets
+//    public HashMap<String, PService> pservlets; //the pservlets
+    public PShashMap<String, PService> pservlets;
     public static PersServer pObj;        //the single WebServer object
     public static PBeansLoader pbeansLoadader;
 
