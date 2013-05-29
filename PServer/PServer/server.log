@@ -4252,3 +4252,259 @@
 22/5/2013 9:51:53  >  Connected to DB: MySQL
 22/5/2013 9:51:58  >  Request from /127.0.0.1 (58418)
 22/5/2013 9:52:3  >  58418-Problem parsing request: java.util.NoSuchElementException
+22/5/2013 10:45:7  >  Shutting down server, normal: true
+22/5/2013 10:45:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:45:19  >  Messages log mode set to: on
+22/5/2013 10:45:20  >  Connected to DB: MySQL
+22/5/2013 10:45:33  >  Shutting down server, normal: true
+22/5/2013 10:47:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:47:14  >  Messages log mode set to: on
+22/5/2013 10:47:14  >  Connected to DB: MySQL
+22/5/2013 10:47:17  >  Request from /127.0.0.1 (59379)
+22/5/2013 10:47:17  >  59379-        /pers_help/getusrattr.html
+22/5/2013 10:47:22  >  Request from /127.0.0.1 (59380)
+22/5/2013 10:47:24  >  59380-        /pers_help/addattr.html
+22/5/2013 10:47:25  >  Request from /127.0.0.1 (59381)
+22/5/2013 10:47:25  >  59381-        /pers_help/caldcy.html
+22/5/2013 10:47:25  >  Request from /127.0.0.1 (59382)
+22/5/2013 10:47:25  >  59382-        /pers_help/getusrftr.html
+22/5/2013 10:47:26  >  Request from /127.0.0.1 (59383)
+22/5/2013 10:47:26  >  59383-        /pers_help/remftr.html
+22/5/2013 10:47:27  >  Request from /127.0.0.1 (59384)
+22/5/2013 10:47:27  >  59384-        /pers_help/setftrdef.html
+22/5/2013 10:47:27  >  Request from /127.0.0.1 (59385)
+22/5/2013 10:47:27  >  59385-        /pers_help/setattrdef.html
+22/5/2013 10:47:28  >  Request from /127.0.0.1 (59386)
+22/5/2013 10:47:28  >  59386-        /pers_help/setattrdef.html
+22/5/2013 10:47:31  >  Request from /127.0.0.1 (59387)
+22/5/2013 10:47:31  >  59387-        /pers_help/setattr.html
+22/5/2013 10:47:32  >  Request from /127.0.0.1 (59388)
+22/5/2013 10:47:32  >  59388-        /pers_help/remddt.html
+22/5/2013 10:47:32  >  Request from /127.0.0.1 (59389)
+22/5/2013 10:47:32  >  59389-        /pers_help/getftrdef.html
+22/5/2013 10:47:50  >  Request from /127.0.0.1 (59390)
+22/5/2013 10:47:50  >  59390-        /pers_help/getattrdef.html
+22/5/2013 10:47:53  >  Request from /127.0.0.1 (59391)
+22/5/2013 10:47:53  >  59391-        /admin?login_name=root&login_password=root&com=chngpropfrm
+22/5/2013 10:47:54  >  Request from /127.0.0.1 (59392)
+22/5/2013 10:47:54  >  59392-        /pers_help/pers_mode.html
+22/5/2013 10:48:45  >  Shutting down server, normal: true
+22/5/2013 10:49:0  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:49:0  >  Messages log mode set to: on
+22/5/2013 10:49:1  >  Connected to DB: MySQL
+22/5/2013 10:49:3  >  Request from /127.0.0.1 (59399)
+22/5/2013 10:49:3  >  59399-        /pers_help/pers_mode.html
+22/5/2013 10:49:19  >  Shutting down server, normal: true
+22/5/2013 10:51:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:51:55  >  Messages log mode set to: on
+22/5/2013 10:51:55  >  Connected to DB: MySQL
+22/5/2013 10:51:58  >  Request from /127.0.0.1 (59437)
+22/5/2013 10:51:58  >  59437-        /pers_help/pers_mode.html
+22/5/2013 10:52:0  >  Request from /127.0.0.1 (59438)
+22/5/2013 10:52:0  >  59438-        /pers_help/pers_mode.html
+22/5/2013 10:52:8  >  Shutting down server, normal: true
+22/5/2013 10:52:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:52:57  >  Messages log mode set to: on
+22/5/2013 10:52:58  >  Connected to DB: MySQL
+22/5/2013 10:53:7  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:53:7  >  Messages log mode set to: on
+22/5/2013 10:53:7  >  Database connection failed
+22/5/2013 10:53:7  >  Shutting down server, normal: false
+22/5/2013 10:54:22  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:54:22  >  Messages log mode set to: on
+22/5/2013 10:54:23  >  Connected to DB: MySQL
+22/5/2013 10:54:25  >  Request from /127.0.0.1 (59460)
+22/5/2013 10:54:25  >  59460-        /pers_help/pers_mode.html
+22/5/2013 10:54:30  >  Request from /127.0.0.1 (59461)
+22/5/2013 10:54:30  >  59461-        /ster_help/ster_mode.html
+22/5/2013 10:56:14  >  Shutting down server, normal: true
+22/5/2013 10:56:16  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:56:16  >  Messages log mode set to: on
+22/5/2013 10:56:17  >  Connected to DB: MySQL
+22/5/2013 10:56:21  >  Shutting down server, normal: true
+22/5/2013 10:56:27  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 10:56:27  >  Messages log mode set to: on
+22/5/2013 10:56:28  >  Connected to DB: MySQL
+22/5/2013 10:56:30  >  Request from /127.0.0.1 (59468)
+22/5/2013 10:56:30  >  59468-        /ster_help/ster_mode.html
+22/5/2013 10:56:31  >  Request from /127.0.0.1 (59469)
+22/5/2013 10:56:31  >  Request from /127.0.0.1 (59470)
+22/5/2013 10:56:31  >  59470-        /ster_help/ster_index.html
+22/5/2013 10:56:31  >  59469-        /ster_help/menu.html
+22/5/2013 10:56:36  >  Request from /127.0.0.1 (59471)
+22/5/2013 10:56:36  >  59471-        /pers_help/pers_mode.html
+22/5/2013 10:56:36  >  Request from /127.0.0.1 (59472)
+22/5/2013 10:56:36  >  Request from /127.0.0.1 (59473)
+22/5/2013 10:56:36  >  59472-        /pers_help/menu.html
+22/5/2013 10:56:36  >  59473-        /pers_help/pers_index.html
+22/5/2013 10:58:41  >  Request from /127.0.0.1 (59480)
+22/5/2013 10:58:41  >  59480-        /admin?login_name=root&login_password=root&com=login
+22/5/2013 10:58:42  >  Request from /127.0.0.1 (59481)
+22/5/2013 10:58:42  >  59481-        /admin?login_name=root&login_password=root&com=mkusrfrm
+22/5/2013 10:58:49  >  Request from /127.0.0.1 (59483)
+22/5/2013 10:58:49  >  59483-        /pers_help/getusrattr.html
+22/5/2013 11:4:32  >  Request from /127.0.0.1 (59500)
+22/5/2013 11:4:32  >  59500-        /pers_help/getusrftr.html
+22/5/2013 11:6:46  >  Request from /127.0.0.1 (59512)
+22/5/2013 11:6:46  >  59512-        /pers_help/setattr.html
+22/5/2013 11:7:8  >  Request from /127.0.0.1 (59517)
+22/5/2013 11:7:8  >  59517-        /pers_help/setattrdef.html
+22/5/2013 11:7:13  >  Request from /127.0.0.1 (59518)
+22/5/2013 11:7:13  >  59518-        /pers_help/setattr.html
+22/5/2013 11:33:8  >  Request from /127.0.0.1 (59672)
+22/5/2013 11:33:8  >  59672-        /pers_help/setusr.html
+22/5/2013 12:8:58  >  Request from /127.0.0.1 (60434)
+22/5/2013 12:8:58  >  60434-        /pers?clnt=name|pass&com=setusr&usr=kostas&attr_lang.*=0&attr_lang.gr=1&attr_gender=male;ftr_bank=1
+22/5/2013 12:11:59  >  Request from /127.0.0.1 (60450)
+22/5/2013 12:11:59  >  60450-        /pers_help/incval.html
+22/5/2013 12:13:37  >  Request from /127.0.0.1 (60462)
+22/5/2013 12:13:37  >  60462-        /pers_help/addattr.html
+22/5/2013 12:16:57  >  Request from /127.0.0.1 (60472)
+22/5/2013 12:16:57  >  60472-        /pers_help/remddt.html
+22/5/2013 12:17:25  >  Request from /127.0.0.1 (60478)
+22/5/2013 12:17:25  >  60478-        /pers_help/remattr.html
+22/5/2013 12:20:46  >  Request from /127.0.0.1 (60489)
+22/5/2013 12:20:46  >  60489-        /pers_help/getattrdef.html
+22/5/2013 12:26:6  >  Request from /127.0.0.1 (60512)
+22/5/2013 12:26:6  >  60512-        /pers_help/setattr.html
+22/5/2013 12:26:10  >  Request from /127.0.0.1 (60513)
+22/5/2013 12:26:10  >  60513-        /pers_help/setattrdef.html
+22/5/2013 12:29:16  >  Request from /127.0.0.1 (60529)
+22/5/2013 12:29:16  >  60529-        /pers_help/addftr.html
+22/5/2013 12:31:21  >  Request from /127.0.0.1 (60539)
+22/5/2013 12:31:21  >  60539-        /pers_help/remftr.html
+22/5/2013 12:34:49  >  Request from /127.0.0.1 (60645)
+22/5/2013 12:34:49  >  60645-        /pers_help/getftrdef.html
+22/5/2013 12:37:12  >  Request from /127.0.0.1 (60662)
+22/5/2013 12:37:12  >  60662-        /pers_help/setftrdef.html
+22/5/2013 12:41:29  >  Request from /127.0.0.1 (60682)
+22/5/2013 12:41:29  >  60682-        /pers_help/getusrs.html
+22/5/2013 12:42:44  >  Request from /127.0.0.1 (60689)
+22/5/2013 12:42:44  >  60689-        /pers_help/remusr.html
+22/5/2013 12:44:27  >  Request from /127.0.0.1 (60697)
+22/5/2013 12:44:27  >  60697-        /pers_help/getusrattr.html
+22/5/2013 12:46:36  >  Request from /127.0.0.1 (60708)
+22/5/2013 12:46:36  >  60708-        /pers_help/getusrftr.html
+22/5/2013 12:48:34  >  Request from /127.0.0.1 (60722)
+22/5/2013 12:48:34  >  60722-        /pers_help/setattr.html
+22/5/2013 12:54:26  >  Request from /127.0.0.1 (60766)
+22/5/2013 12:54:26  >  60766-        /pers_help/setusr.html
+22/5/2013 12:56:22  >  Request from /127.0.0.1 (60774)
+22/5/2013 12:56:22  >  60774-        /pers_help/incval.html
+22/5/2013 13:1:24  >  Request from /127.0.0.1 (60804)
+22/5/2013 13:1:24  >  60804-        /pers_help/addattr.html
+22/5/2013 13:2:20  >  Request from /127.0.0.1 (60807)
+22/5/2013 13:2:20  >  60807-        /pers_help/remattr.html
+22/5/2013 13:4:24  >  Request from /127.0.0.1 (60844)
+22/5/2013 13:4:24  >  60844-        /pers_help/getattrdef.html
+22/5/2013 13:6:55  >  Request from /127.0.0.1 (60864)
+22/5/2013 13:6:55  >  60864-        /pers_help/setattrdef.html
+22/5/2013 13:9:18  >  Request from /127.0.0.1 (60877)
+22/5/2013 13:9:18  >  60877-        /pers_help/addftr.html
+22/5/2013 13:12:38  >  Request from /127.0.0.1 (60895)
+22/5/2013 13:12:38  >  60895-        /pers_help/remftr.html
+22/5/2013 13:15:36  >  Request from /127.0.0.1 (60913)
+22/5/2013 13:15:36  >  60913-        /pers_help/getftrdef.html
+22/5/2013 13:19:8  >  Request from /127.0.0.1 (32777)
+22/5/2013 13:19:8  >  32777-        /pers_help/setftrdef.html
+22/5/2013 13:55:14  >  Request from /127.0.0.1 (32959)
+22/5/2013 13:55:14  >  32959-        /ster_help/ster_mode.html
+22/5/2013 13:55:14  >  Request from /127.0.0.1 (32960)
+22/5/2013 13:55:14  >  32960-        /ster_help/menu.html
+22/5/2013 13:55:14  >  Request from /127.0.0.1 (32961)
+22/5/2013 13:55:14  >  32961-        /ster_help/ster_index.html
+22/5/2013 13:55:47  >  Request from /127.0.0.1 (32966)
+22/5/2013 13:55:47  >  32966-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+22/5/2013 13:55:53  >  Request from /127.0.0.1 (32968)
+22/5/2013 13:55:53  >  32968-        /admin?login_name=root&login_password=root&com=mkusrfrm
+22/5/2013 13:58:16  >  Request from /127.0.0.1 (32974)
+22/5/2013 13:58:16  >  32974-        /admin?login_name=root&login_password=root&com=delusr&usr=rest
+22/5/2013 13:59:2  >  Shutting down server, normal: true
+22/5/2013 14:9:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:9:3  >  Messages log mode set to: on
+22/5/2013 14:9:4  >  Connected to DB: MySQL
+22/5/2013 14:9:13  >  Request from /127.0.0.1 (33163)
+22/5/2013 14:9:13  >  33163-        /
+22/5/2013 14:9:21  >  Request from /127.0.0.1 (33168)
+22/5/2013 14:9:21  >  33168-        /admin?com=login&login_name=root&login_password=root
+22/5/2013 14:9:23  >  Request from /127.0.0.1 (33169)
+22/5/2013 14:9:23  >  33169-        /admin?login_name=root&login_password=root&com=mkusrfrm
+22/5/2013 14:9:33  >  Request from /127.0.0.1 (33171)
+22/5/2013 14:9:33  >  33171-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+22/5/2013 14:9:35  >  Request from /127.0.0.1 (33173)
+22/5/2013 14:9:35  >  33173-        /admin?login_name=root&login_password=root&com=login
+22/5/2013 14:11:40  >  Request from /127.0.0.1 (33192)
+22/5/2013 14:11:40  >  33192-Problem parsing request: java.util.NoSuchElementException
+22/5/2013 14:11:40  >  Request from /127.0.0.1 (33193)
+22/5/2013 14:11:40  >  33193-Problem parsing request: java.util.NoSuchElementException
+22/5/2013 14:12:10  >  Request from /127.0.0.1 (33194)
+22/5/2013 14:12:10  >  33194-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22,%22lang.2%22:%22GREEK%22}
+22/5/2013 14:15:11  >  Request from /127.0.0.1 (33201)
+22/5/2013 14:15:11  >  Request from /127.0.0.1 (33202)
+22/5/2013 14:15:11  >  33201-        /pers_help/pers_mode.html
+22/5/2013 14:15:11  >  33202-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22,%22lang.2%22:%22GREEK%22}
+22/5/2013 14:15:11  >  Request from /127.0.0.1 (33203)
+22/5/2013 14:15:11  >  Request from /127.0.0.1 (33204)
+22/5/2013 14:15:11  >  33204-        /pers_help/pers_index.html
+22/5/2013 14:15:11  >  33203-        /pers_help/menu.html
+22/5/2013 14:15:14  >  Request from /127.0.0.1 (33205)
+22/5/2013 14:15:14  >  33205-        /pers_help/addattr.html
+22/5/2013 14:18:12  >  Shutting down server, normal: true
+22/5/2013 14:18:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:18:14  >  Messages log mode set to: on
+22/5/2013 14:18:14  >  Connected to DB: MySQL
+22/5/2013 14:18:19  >  Request from /127.0.0.1 (33215)
+22/5/2013 14:18:19  >  33215-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22,%22lang.2%22:%22GREEK%22}
+22/5/2013 14:18:38  >  Shutting down server, normal: true
+22/5/2013 14:20:29  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:20:29  >  Messages log mode set to: on
+22/5/2013 14:20:29  >  Connected to DB: MySQL
+22/5/2013 14:20:31  >  Request from /127.0.0.1 (33228)
+22/5/2013 14:20:31  >  33228-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22,%22lang.2%22:%22GREEK%22}
+22/5/2013 14:23:17  >  Problem binding socket: java.net.BindException: Address already in use
+22/5/2013 14:23:17  >  Shutting down server, normal: false
+22/5/2013 14:23:26  >  Shutting down server, normal: true
+22/5/2013 14:23:27  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:23:27  >  Messages log mode set to: on
+22/5/2013 14:23:28  >  Connected to DB: MySQL
+22/5/2013 14:23:30  >  Request from /127.0.0.1 (33249)
+22/5/2013 14:23:30  >  33249-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22,%22lang.2%22:%22GREEK%22}
+22/5/2013 14:26:34  >  Shutting down server, normal: true
+22/5/2013 14:26:37  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:26:37  >  Messages log mode set to: on
+22/5/2013 14:26:38  >  Connected to DB: MySQL
+22/5/2013 14:26:39  >  Request from /127.0.0.1 (33258)
+22/5/2013 14:26:39  >  33258-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22,%22lang.2%22:%22GREEK%22}
+22/5/2013 14:27:5  >  Request from /127.0.0.1 (33259)
+22/5/2013 14:27:5  >  33259-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+22/5/2013 14:27:32  >  Shutting down server, normal: true
+22/5/2013 14:28:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:28:3  >  Messages log mode set to: on
+22/5/2013 14:28:3  >  Connected to DB: MySQL
+22/5/2013 14:28:5  >  Request from /127.0.0.1 (33268)
+22/5/2013 14:28:5  >  33268-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+22/5/2013 14:28:19  >  Shutting down server, normal: true
+22/5/2013 14:29:58  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:29:58  >  Messages log mode set to: on
+22/5/2013 14:29:58  >  Connected to DB: MySQL
+22/5/2013 14:30:0  >  Request from /127.0.0.1 (33277)
+22/5/2013 14:30:0  >  33277-        /1.0/personal/rest|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+22/5/2013 14:33:34  >  Shutting down server, normal: true
+22/5/2013 14:33:36  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:33:36  >  Messages log mode set to: on
+22/5/2013 14:33:37  >  Connected to DB: MySQL
+22/5/2013 14:33:50  >  Request from /127.0.0.1 (33374)
+22/5/2013 14:33:50  >  33374-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+22/5/2013 14:38:27  >  Shutting down server, normal: true
+22/5/2013 14:38:31  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:38:31  >  Messages log mode set to: on
+22/5/2013 14:38:31  >  Connected to DB: MySQL
+22/5/2013 14:38:34  >  Request from /127.0.0.1 (33407)
+22/5/2013 14:38:34  >  33407-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+22/5/2013 14:40:11  >  Shutting down server, normal: true
+22/5/2013 14:40:15  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+22/5/2013 14:40:15  >  Messages log mode set to: on
+22/5/2013 14:40:15  >  Connected to DB: MySQL
+22/5/2013 14:40:18  >  Request from /127.0.0.1 (33416)
+22/5/2013 14:40:18  >  33416-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+22/5/2013 14:49:1  >  Shutting down server, normal: true

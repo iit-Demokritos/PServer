@@ -7,6 +7,7 @@ package pserver.restPServlets;
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
 import pserver.pservlets.PService;
+import pserver.utilities.ResponseConverter;
 
 /**
  *
@@ -34,14 +35,35 @@ public class PgetUsersFeatures implements pserver.pservlets.PService {
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         PService servlet = new pserver.pservlets.Personal();
-        VectorMap PSparameters = parameters;
+        VectorMap PSparameters = new VectorMap(parameters.size() + 1);
         VectorMap tempMap = null;
+        ResponseConverter converter = new ResponseConverter();
+
         // fix the VectorMap
+
+        PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
+
+
+        PSparameters.add("com", "getusrftr");
+
+
+        PSparameters.add("usr", parameters.getVal(parameters.indexOfKey("username", 0)));
+        
+         if (parameters.qpIndexOfKeyNoCase("features") != -1) {
+              PSparameters.add("ftr", parameters.getVal(parameters.indexOfKey("features", 0)));
+             
+         }else{
+              PSparameters.add("ftr", "*");
+         }
 
 
 
         //call the right service
-        return servlet.service(PSparameters, response, dbAccess);
+        int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
+        response = converter.RConverter(response.toString(), responseType);
+
+
+        return ResponseCode;
     }
 }
