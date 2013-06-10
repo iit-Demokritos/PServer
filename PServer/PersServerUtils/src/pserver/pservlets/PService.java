@@ -69,6 +69,7 @@ public interface PService {
     public static final String tgz = "application/x-gzip";
     public static final String tr =  "application/x-troff";
     public static final String zip = "application/zip";
+    public static final String json = "application/json";
     
     public abstract String getMimeType();
     //this method will be called when the PServlet will be loaded

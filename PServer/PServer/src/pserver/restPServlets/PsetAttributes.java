@@ -30,7 +30,7 @@ public class PsetAttributes implements pserver.pservlets.PService {
         if (params[0].endsWith("xml")) {
             responseType = pserver.pservlets.PService.xml;
         } else {
-            responseType = pserver.pservlets.PService.txt;
+            responseType = pserver.pservlets.PService.json;
         }
     }
 
@@ -47,7 +47,7 @@ public class PsetAttributes implements pserver.pservlets.PService {
 
 
         PSparameters.add("com", "setattrdef");
-       
+
 
         if (parameters.qpIndexOfKeyNoCase("attributes") != -1) {
             String attributes = (String) parameters.getVal(parameters.indexOfKey("attributes", 0));
@@ -68,17 +68,22 @@ public class PsetAttributes implements pserver.pservlets.PService {
 
         }
 
-        
+
 //        //        DebugLines
 //        for(int i=0; i<PSparameters.size();i++){
 //            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
 //            
 //        }
-        
+
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
-        response = converter.RConverter(response.toString(), responseType);
+        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer);
+
+        //DebugLine
+        //        System.out.println("=====> " +response.toString() );
 
 
         return ResponseCode;

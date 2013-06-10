@@ -5353,3 +5353,127 @@
 6/6/2013 17:8:5  >  Request from /127.0.0.1 (48832)
 6/6/2013 17:8:5  >  48832-        /resp_xsl/rows.xsl
 6/6/2013 17:9:18  >  Shutting down server, normal: true
+10/6/2013 13:48:23  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 13:48:23  >  Messages log mode set to: on
+10/6/2013 13:48:23  >  Connected to DB: MySQL
+10/6/2013 13:49:36  >  Request from /127.0.0.1 (34148)
+10/6/2013 13:49:36  >  34148-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 13:49:37  >  Request from /127.0.0.1 (34150)
+10/6/2013 13:49:37  >  34150-        /resp_xsl/user.xsl
+10/6/2013 13:49:37  >  Request from /127.0.0.1 (34151)
+10/6/2013 13:49:37  >  34151-        /favicon.ico
+10/6/2013 13:49:37  >  Request from /127.0.0.1 (34152)
+10/6/2013 13:49:37  >  34152-        /favicon.ico
+10/6/2013 13:49:44  >  Request from /127.0.0.1 (34153)
+10/6/2013 13:49:44  >  34153-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 13:50:54  >  Shutting down server, normal: true
+10/6/2013 13:51:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 13:51:55  >  Messages log mode set to: on
+10/6/2013 13:51:56  >  Connected to DB: MySQL
+10/6/2013 13:52:12  >  Shutting down server, normal: true
+10/6/2013 13:52:20  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 13:52:20  >  Messages log mode set to: on
+10/6/2013 13:52:21  >  Connected to DB: MySQL
+10/6/2013 13:52:33  >  Request from /127.0.0.1 (34158)
+10/6/2013 13:52:33  >  34158-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 13:52:33  >  Request from /127.0.0.1 (34160)
+10/6/2013 13:52:33  >  34160-        /resp_xsl/user.xsl
+10/6/2013 13:52:42  >  Request from /127.0.0.1 (34161)
+10/6/2013 13:52:42  >  34161-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 13:53:58  >  Shutting down server, normal: true
+10/6/2013 13:53:59  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 13:53:59  >  Messages log mode set to: on
+10/6/2013 13:54:0  >  Connected to DB: MySQL
+10/6/2013 13:54:4  >  Request from /127.0.0.1 (34166)
+10/6/2013 13:54:4  >  34166-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 13:54:53  >  Shutting down server, normal: true
+10/6/2013 13:54:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 13:54:55  >  Messages log mode set to: on
+10/6/2013 13:54:55  >  Connected to DB: MySQL
+10/6/2013 13:54:57  >  Request from /127.0.0.1 (34169)
+10/6/2013 13:54:57  >  34169-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 13:55:16  >  Shutting down server, normal: true
+10/6/2013 14:51:25  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 14:51:25  >  Messages log mode set to: on
+10/6/2013 14:51:26  >  Connected to DB: MySQL
+10/6/2013 14:51:48  >  Shutting down server, normal: true
+10/6/2013 14:52:16  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 14:52:16  >  Messages log mode set to: on
+10/6/2013 14:52:17  >  Connected to DB: MySQL
+10/6/2013 14:52:20  >  Request from /127.0.0.1 (34353)
+10/6/2013 14:52:20  >  34353-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 14:54:33  >  Shutting down server, normal: true
+10/6/2013 14:54:39  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 14:54:39  >  Messages log mode set to: on
+10/6/2013 14:54:39  >  Connected to DB: MySQL
+10/6/2013 14:54:42  >  Request from /127.0.0.1 (34356)
+10/6/2013 14:54:42  >  34356-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 14:55:19  >  Request from /127.0.0.1 (34360)
+10/6/2013 14:55:19  >  34360-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 14:55:54  >  Shutting down server, normal: true
+10/6/2013 14:56:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 14:56:57  >  Messages log mode set to: on
+10/6/2013 14:56:58  >  Connected to DB: MySQL
+10/6/2013 14:57:2  >  Request from /127.0.0.1 (34363)
+10/6/2013 14:57:2  >  34363-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 14:57:31  >  Shutting down server, normal: true
+10/6/2013 15:2:37  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:2:37  >  Messages log mode set to: on
+10/6/2013 15:2:38  >  Connected to DB: MySQL
+10/6/2013 15:2:40  >  Request from /127.0.0.1 (34366)
+10/6/2013 15:2:40  >  34366-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:2:54  >  Shutting down server, normal: true
+10/6/2013 15:4:52  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:4:52  >  Messages log mode set to: on
+10/6/2013 15:4:53  >  Connected to DB: MySQL
+10/6/2013 15:4:59  >  Request from /127.0.0.1 (34401)
+10/6/2013 15:4:59  >  34401-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:6:15  >  Shutting down server, normal: true
+10/6/2013 15:6:17  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:6:17  >  Messages log mode set to: on
+10/6/2013 15:6:17  >  Connected to DB: MySQL
+10/6/2013 15:6:20  >  Request from /127.0.0.1 (34406)
+10/6/2013 15:6:20  >  34406-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:6:58  >  Request from /127.0.0.1 (34408)
+10/6/2013 15:6:58  >  34408-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:7:39  >  Shutting down server, normal: true
+10/6/2013 15:9:7  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:9:7  >  Messages log mode set to: on
+10/6/2013 15:9:7  >  Connected to DB: MySQL
+10/6/2013 15:9:9  >  Request from /127.0.0.1 (34413)
+10/6/2013 15:9:9  >  34413-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:9:18  >  Request from /127.0.0.1 (34417)
+10/6/2013 15:9:18  >  34417-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 15:10:12  >  Shutting down server, normal: true
+10/6/2013 15:10:15  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:10:15  >  Messages log mode set to: on
+10/6/2013 15:10:15  >  Connected to DB: MySQL
+10/6/2013 15:10:17  >  Request from /127.0.0.1 (34420)
+10/6/2013 15:10:17  >  34420-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 15:10:17  >  Request from /127.0.0.1 (34422)
+10/6/2013 15:10:17  >  34422-        /resp_xsl/user.xsl
+10/6/2013 15:10:41  >  Request from /127.0.0.1 (34423)
+10/6/2013 15:10:41  >  34423-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:10:54  >  Request from /127.0.0.1 (34425)
+10/6/2013 15:10:54  >  34425-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 15:10:54  >  Request from /127.0.0.1 (34427)
+10/6/2013 15:10:54  >  34427-        /resp_xsl/user.xsl
+10/6/2013 15:11:23  >  Request from /127.0.0.1 (34428)
+10/6/2013 15:11:23  >  34428-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:11:58  >  Shutting down server, normal: true
+10/6/2013 15:12:29  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:12:29  >  Messages log mode set to: on
+10/6/2013 15:12:29  >  Connected to DB: MySQL
+10/6/2013 15:12:32  >  Request from /127.0.0.1 (34435)
+10/6/2013 15:12:32  >  34435-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:15:38  >  Shutting down server, normal: true
+10/6/2013 15:18:2  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:18:2  >  Messages log mode set to: on
+10/6/2013 15:18:2  >  Connected to DB: MySQL
+10/6/2013 15:18:17  >  Request from /127.0.0.1 (34443)
+10/6/2013 15:18:17  >  34443-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 15:18:17  >  Request from /127.0.0.1 (34445)
+10/6/2013 15:18:17  >  34445-        /resp_xsl/user.xsl
+10/6/2013 15:18:27  >  Request from /127.0.0.1 (34446)
+10/6/2013 15:18:27  >  34446-        /1.0/personal/rest|123/users.json?where=*
+10/6/2013 15:18:43  >  Shutting down server, normal: true

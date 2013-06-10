@@ -30,7 +30,7 @@ public class PsetFeatures implements pserver.pservlets.PService {
         if (params[0].endsWith("xml")) {
             responseType = pserver.pservlets.PService.xml;
         } else {
-            responseType = pserver.pservlets.PService.txt;
+            responseType = pserver.pservlets.PService.json;
         }
     }
 
@@ -67,7 +67,7 @@ public class PsetFeatures implements pserver.pservlets.PService {
             }
 
         }
-        
+
 //        //        DebugLines
 //        for (int i = 0; i < PSparameters.size(); i++) {
 //            System.out.println("===>  " + PSparameters.getKey(i) + " == " + PSparameters.getVal(i));
@@ -77,8 +77,12 @@ public class PsetFeatures implements pserver.pservlets.PService {
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
-        response = converter.RConverter(response.toString(), responseType);
+        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer);
 
+        //DebugLine
+        //        System.out.println("=====> " +response.toString() );
 
         return ResponseCode;
 

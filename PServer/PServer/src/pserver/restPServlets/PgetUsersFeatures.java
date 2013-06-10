@@ -24,11 +24,13 @@ public class PgetUsersFeatures implements pserver.pservlets.PService {
 
     @Override
     public void init(String[] params) throws Exception {
-        if(params.length<1)return;
+        if (params.length < 1) {
+            return;
+        }
         if (params[0].endsWith("xml")) {
             responseType = pserver.pservlets.PService.xml;
         } else {
-            responseType = pserver.pservlets.PService.txt;
+            responseType = pserver.pservlets.PService.json;
         }
     }
 
@@ -48,20 +50,25 @@ public class PgetUsersFeatures implements pserver.pservlets.PService {
 
 
         PSparameters.add("usr", parameters.getVal(parameters.indexOfKey("username", 0)));
-        
-         if (parameters.qpIndexOfKeyNoCase("features") != -1) {
-              PSparameters.add("ftr", parameters.getVal(parameters.indexOfKey("features", 0)));
-             
-         }else{
-              PSparameters.add("ftr", "*");
-         }
+
+        if (parameters.qpIndexOfKeyNoCase("features") != -1) {
+            PSparameters.add("ftr", parameters.getVal(parameters.indexOfKey("features", 0)));
+
+        } else {
+            PSparameters.add("ftr", "*");
+        }
 
 
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
-        response = converter.RConverter(response.toString(), responseType);
+        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer);
+
+        //DebugLine
+        //        System.out.println("=====> " +response.toString() );
 
 
         return ResponseCode;

@@ -4,6 +4,15 @@
  */
 package pserver.utilities;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.wink.json4j.utils.XML;
+import org.xml.sax.SAXException;
+
 /**
  * This class converts the xml response to any given type
  *
@@ -17,10 +26,11 @@ public class ResponseConverter {
     public StringBuffer RConverter(String RString, String RType) {
         ConvertedBuffer = new StringBuffer();
         ConvertedResponse = RString;
+        CreateXml(RString);
 
-        if (RType.equals("xml")) {
+        if (RType.equals("text/xml")) {
             ConvertXML();
-        } else if (RType.equals("json")) {
+        } else {
             ConvertJson();
         }
 
@@ -34,11 +44,65 @@ public class ResponseConverter {
     private void ConvertJson() {
 
         //TODO: convert xml to json
-        
-        
-        
-        
-        ConvertedBuffer.append(ConvertedResponse);
+
+        String jsonObj = null;
+
+        try {
+            jsonObj = XML.toJson(new File("./convert.xml"));
+
+        } catch (SAXException ex) {
+            Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String json = jsonObj.toString();
+        CreateJson(json);
+
+        ConvertedBuffer.append(json);
+
+    }
+
+    private void CreateXml(String xmlInput) {
+
+        PrintWriter pw = null;
+
+        try {
+            pw = new PrintWriter(new FileWriter("./convert.xml"));  //If the file already exists, start writing at the end of it.
+
+            pw.println(xmlInput);                                  // write to convert.xml
+            pw.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //Close the PrintWriter
+            if (pw != null) {
+                pw.close();
+            }
+
+        }
+
+    }
+    private void CreateJson(String jsonInput) {
+
+        PrintWriter pw = null;
+
+        try {
+            pw = new PrintWriter(new FileWriter("./convert.json"));  //If the file already exists, start writing at the end of it.
+
+            pw.println(jsonInput);                                  // write to convert.xml
+            pw.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //Close the PrintWriter
+            if (pw != null) {
+                pw.close();
+            }
+
+        }
 
     }
 }

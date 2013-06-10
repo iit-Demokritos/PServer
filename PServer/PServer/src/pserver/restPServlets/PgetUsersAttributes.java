@@ -30,7 +30,7 @@ public class PgetUsersAttributes implements pserver.pservlets.PService {
         if (params[0].endsWith("xml")) {
             responseType = pserver.pservlets.PService.xml;
         } else {
-            responseType = pserver.pservlets.PService.txt;
+            responseType = pserver.pservlets.PService.json;
         }
     }
 
@@ -50,21 +50,25 @@ public class PgetUsersAttributes implements pserver.pservlets.PService {
 
 
         PSparameters.add("usr", parameters.getVal(parameters.indexOfKey("username", 0)));
-        
-         if (parameters.qpIndexOfKeyNoCase("attributes") != -1) {
-              PSparameters.add("attr", parameters.getVal(parameters.indexOfKey("attributes", 0)));
-             
-         }else{
-              PSparameters.add("attr", "*");
-         }
+
+        if (parameters.qpIndexOfKeyNoCase("attributes") != -1) {
+            PSparameters.add("attr", parameters.getVal(parameters.indexOfKey("attributes", 0)));
+
+        } else {
+            PSparameters.add("attr", "*");
+        }
 
 
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
-        response = converter.RConverter(response.toString(), responseType);
+        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer);
 
+        //DebugLine
+        //        System.out.println("=====> " +response.toString() );
 
         return ResponseCode;
 
