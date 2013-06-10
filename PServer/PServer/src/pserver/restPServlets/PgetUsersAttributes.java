@@ -7,6 +7,7 @@ package pserver.restPServlets;
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
 import pserver.pservlets.PService;
+import pserver.utilities.PageConverter;
 import pserver.utilities.ResponseConverter;
 
 /**
@@ -41,6 +42,13 @@ public class PgetUsersAttributes implements pserver.pservlets.PService {
         VectorMap tempMap = null;
         ResponseConverter converter = new ResponseConverter();
 
+        int PageIndex;
+        if (parameters.qpIndexOfKeyNoCase("pageindex") == -1) {
+            PageIndex = 1;
+        } else {
+            PageIndex = Integer.parseInt(parameters.getVal(parameters.indexOfKey("pageindex", 0)).toString());
+        }
+
         // fix the VectorMap
 
         PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
@@ -63,10 +71,15 @@ public class PgetUsersAttributes implements pserver.pservlets.PService {
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
-        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
+        PageConverter Pconverter = new PageConverter();
+        StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
         response.delete(0, response.length());
         response.append(tempBuffer);
 
+
+        StringBuffer tempBuffer2 = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer2);
         //DebugLine
         //        System.out.println("=====> " +response.toString() );
 

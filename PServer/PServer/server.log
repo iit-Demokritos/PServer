@@ -5477,3 +5477,61 @@
 10/6/2013 15:18:27  >  Request from /127.0.0.1 (34446)
 10/6/2013 15:18:27  >  34446-        /1.0/personal/rest|123/users.json?where=*
 10/6/2013 15:18:43  >  Shutting down server, normal: true
+10/6/2013 15:29:33  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:29:33  >  Messages log mode set to: on
+10/6/2013 15:29:34  >  Connected to DB: MySQL
+10/6/2013 15:30:6  >  Request from /127.0.0.1 (34729)
+10/6/2013 15:30:6  >  34729-        /1.0/personal/rest|123/users_features.xml?username=john
+10/6/2013 15:30:6  >  Request from /127.0.0.1 (34731)
+10/6/2013 15:30:6  >  34731-        /resp_xsl/singleuser_profile.xsl
+10/6/2013 15:30:6  >  Request from /127.0.0.1 (34732)
+10/6/2013 15:30:12  >  34732-Problem parsing request: java.util.NoSuchElementException
+10/6/2013 15:30:13  >  Request from /127.0.0.1 (34733)
+10/6/2013 15:30:13  >  34733-        /1.0/personal/rest|123/users_features.json?username=john
+10/6/2013 15:30:24  >  Request from /127.0.0.1 (34735)
+10/6/2013 15:30:24  >  34735-        /1.0/personal/rest|123/users_features.xml?username=john
+10/6/2013 15:30:24  >  Request from /127.0.0.1 (34737)
+10/6/2013 15:30:24  >  34737-        /resp_xsl/singleuser_profile.xsl
+10/6/2013 15:31:52  >  Request from /127.0.0.1 (34817)
+10/6/2013 15:31:52  >  34817-        /1.0/personal/rest|123/users_features.json?username=john
+10/6/2013 15:34:0  >  Shutting down server, normal: true
+10/6/2013 15:40:54  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:40:54  >  Messages log mode set to: on
+10/6/2013 15:40:55  >  Connected to DB: MySQL
+10/6/2013 15:40:59  >  Shutting down server, normal: true
+10/6/2013 15:41:34  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:41:34  >  Messages log mode set to: on
+10/6/2013 15:41:34  >  Connected to DB: MySQL
+10/6/2013 15:41:55  >  Request from /127.0.0.1 (34836)
+10/6/2013 15:41:55  >  34836-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 15:41:55  >  Request from /127.0.0.1 (34838)
+10/6/2013 15:41:55  >  34838-        /resp_xsl/user.xsl
+10/6/2013 15:44:27  >  Shutting down server, normal: true
+10/6/2013 15:45:56  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 15:45:56  >  Messages log mode set to: on
+10/6/2013 15:45:56  >  Connected to DB: MySQL
+10/6/2013 15:46:4  >  Request from /127.0.0.1 (34849)
+10/6/2013 15:46:4  >  34849-        /1.0/personal/rest|123/users_attributes.xml?username=john
+10/6/2013 15:46:4  >  Request from /127.0.0.1 (34851)
+10/6/2013 15:46:4  >  34851-        /resp_xsl/singleuser_attributes.xsl
+10/6/2013 16:6:20  >  Shutting down server, normal: true
+10/6/2013 16:43:24  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 16:43:24  >  Messages log mode set to: on
+10/6/2013 16:43:24  >  Connected to DB: MySQL
+10/6/2013 16:43:36  >  Request from /127.0.0.1 (34927)
+10/6/2013 16:43:36  >  34927-        /1.0/personal/rest|123/users.xml?where=*
+10/6/2013 16:43:36  >  Request from /127.0.0.1 (34929)
+10/6/2013 16:43:36  >  34929-        /resp_xsl/user.xsl
+10/6/2013 16:44:44  >  Request from /127.0.0.1 (34930)
+10/6/2013 16:44:44  >  34930-        /1.0/personal/rest|123/users.xml?where=*&pageindex=1
+10/6/2013 16:44:44  >  Request from /127.0.0.1 (34932)
+10/6/2013 16:44:44  >  34932-        /resp_xsl/user.xsl
+10/6/2013 16:44:59  >  Shutting down server, normal: true
+10/6/2013 16:45:31  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/6/2013 16:45:31  >  Messages log mode set to: on
+10/6/2013 16:45:31  >  Connected to DB: MySQL
+10/6/2013 16:45:34  >  Request from /127.0.0.1 (34934)
+10/6/2013 16:45:34  >  34934-        /1.0/personal/rest|123/users.xml?where=*&pageindex=0
+10/6/2013 16:45:34  >  Request from /127.0.0.1 (34936)
+10/6/2013 16:45:34  >  34936-        /resp_xsl/user.xsl
+10/6/2013 16:45:52  >  Shutting down server, normal: true
