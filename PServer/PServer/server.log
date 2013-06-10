@@ -4508,3 +4508,848 @@
 22/5/2013 14:40:18  >  Request from /127.0.0.1 (33416)
 22/5/2013 14:40:18  >  33416-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
 22/5/2013 14:49:1  >  Shutting down server, normal: true
+6/6/2013 10:54:54  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 10:54:54  >  Messages log mode set to: on
+6/6/2013 10:54:54  >  Connected to DB: MySQL
+6/6/2013 10:55:47  >  Request from /127.0.0.1 (46732)
+6/6/2013 10:55:47  >  46732-        /1.0/personal/test|123/Delete_Attributes.xml
+6/6/2013 10:56:42  >  Request from /127.0.0.1 (46733)
+6/6/2013 10:56:42  >  46733-        /1.0/personal/rest|123/Delete_Attributes.xml
+6/6/2013 10:57:20  >  Request from /127.0.0.1 (46734)
+6/6/2013 10:57:20  >  46734-        /
+6/6/2013 10:57:20  >  Request from /127.0.0.1 (46735)
+6/6/2013 10:57:20  >  46735-        /favicon.ico
+6/6/2013 10:57:20  >  Request from /127.0.0.1 (46736)
+6/6/2013 10:57:20  >  46736-        /favicon.ico
+6/6/2013 10:57:23  >  Request from /127.0.0.1 (46737)
+6/6/2013 10:57:23  >  46737-        /admin?com=login&login_name=root&login_password=root
+6/6/2013 10:57:26  >  Request from /127.0.0.1 (46738)
+6/6/2013 10:57:26  >  46738-        /admin?login_name=root&login_password=root&com=mkusrfrm
+6/6/2013 10:57:27  >  Request from /127.0.0.1 (46740)
+6/6/2013 10:57:27  >  46740-        /admin?login_name=root&login_password=root&com=delusr&usr=rest
+6/6/2013 10:57:38  >  Shutting down server, normal: true
+6/6/2013 10:57:41  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 10:57:41  >  Messages log mode set to: on
+6/6/2013 10:57:42  >  Connected to DB: MySQL
+6/6/2013 10:57:59  >  Request from /127.0.0.1 (46743)
+6/6/2013 10:57:59  >  46743-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+6/6/2013 10:58:2  >  Request from /127.0.0.1 (46745)
+6/6/2013 10:58:2  >  46745-        /admin?login_name=root&login_password=root&com=login
+6/6/2013 10:59:46  >  Request from /127.0.0.1 (46749)
+6/6/2013 10:59:46  >  46749-        /1.0/personal/test|123/Add_Attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+6/6/2013 11:1:18  >  Request from /127.0.0.1 (46753)
+6/6/2013 11:1:18  >  46753-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+6/6/2013 11:2:7  >  Request from /127.0.0.1 (46755)
+6/6/2013 11:2:7  >  46755-        /1.0/personal/rest|123/delete_attributes.xml
+6/6/2013 11:2:7  >  Request from /127.0.0.1 (46757)
+6/6/2013 11:2:7  >  46757-        /resp_xsl/rows.xsl
+6/6/2013 11:2:45  >  Request from /127.0.0.1 (46758)
+6/6/2013 11:2:45  >  46758-        /
+6/6/2013 11:3:24  >  Request from /127.0.0.1 (46759)
+6/6/2013 11:3:24  >  46759-        /1.0/personal/rest|123/Delete_Attributes.xml
+6/6/2013 11:14:15  >  Request from /127.0.0.1 (46763)
+6/6/2013 11:14:15  >  46763-        /1.0/personal/rest|123/delete_attributes.xml
+6/6/2013 11:14:15  >  Request from /127.0.0.1 (46765)
+6/6/2013 11:14:15  >  46765-        /resp_xsl/rows.xsl
+6/6/2013 11:14:52  >  Request from /127.0.0.1 (46766)
+6/6/2013 11:14:52  >  46766-        /1.0/personal/rest|123/delete_attributes.xml?attributes={%22sex%22}
+6/6/2013 11:14:52  >  Request from /127.0.0.1 (46768)
+6/6/2013 11:14:52  >  46768-        /resp_xsl/rows.xsl
+6/6/2013 11:16:56  >  Request from /127.0.0.1 (46772)
+6/6/2013 11:16:56  >  46772-        /1.0/personal/rest|123/attributes.xml?attributesPattern=%22*%22
+6/6/2013 11:16:56  >  Request from /127.0.0.1 (46774)
+6/6/2013 11:16:56  >  46774-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:17:12  >  Request from /127.0.0.1 (46775)
+6/6/2013 11:17:12  >  46775-        /1.0/personal/rest|123/attributes.xml?attributesPattern=%22.*%22
+6/6/2013 11:17:12  >  Request from /127.0.0.1 (46777)
+6/6/2013 11:17:12  >  46777-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:17:45  >  Request from /127.0.0.1 (46778)
+6/6/2013 11:17:45  >  46778-        /pers_help/pers_mode.html
+6/6/2013 11:17:45  >  Request from /127.0.0.1 (46779)
+6/6/2013 11:17:45  >  Request from /127.0.0.1 (46780)
+6/6/2013 11:17:45  >  46780-        /pers_help/pers_index.html
+6/6/2013 11:17:45  >  46779-        /pers_help/menu.html
+6/6/2013 11:17:53  >  Request from /127.0.0.1 (46781)
+6/6/2013 11:17:53  >  46781-        /pers_help/getattrdef.html
+6/6/2013 11:18:22  >  Request from /127.0.0.1 (46782)
+6/6/2013 11:18:22  >  46782-        /1.0/personal/rest|123/attributes.xml?attributesPattern=%22age%22
+6/6/2013 11:18:22  >  Request from /127.0.0.1 (46784)
+6/6/2013 11:18:22  >  46784-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:19:58  >  Shutting down server, normal: true
+6/6/2013 11:20:1  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:20:1  >  Messages log mode set to: on
+6/6/2013 11:20:1  >  Connected to DB: MySQL
+6/6/2013 11:20:5  >  Request from /127.0.0.1 (46786)
+6/6/2013 11:20:5  >  46786-        /1.0/personal/rest|123/attributes.xml?attributesPattern=%22age%22
+6/6/2013 11:20:5  >  Request from /127.0.0.1 (46788)
+6/6/2013 11:20:5  >  46788-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:21:23  >  Shutting down server, normal: true
+6/6/2013 11:21:25  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:21:25  >  Messages log mode set to: on
+6/6/2013 11:21:25  >  Connected to DB: MySQL
+6/6/2013 11:21:29  >  Request from /127.0.0.1 (46792)
+6/6/2013 11:21:29  >  46792-        /1.0/personal/rest|123/attributes.xml?attributesPattern=%22age%22
+6/6/2013 11:21:29  >  Request from /127.0.0.1 (46794)
+6/6/2013 11:21:29  >  46794-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:24:10  >  Shutting down server, normal: true
+6/6/2013 11:24:17  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:24:17  >  Messages log mode set to: on
+6/6/2013 11:24:17  >  Connected to DB: MySQL
+6/6/2013 11:24:21  >  Request from /127.0.0.1 (46796)
+6/6/2013 11:24:21  >  46796-        /1.0/personal/rest|123/attributes.xml?attributesPattern=%22age%22
+6/6/2013 11:24:21  >  Request from /127.0.0.1 (46798)
+6/6/2013 11:24:21  >  46798-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:25:45  >  Request from /127.0.0.1 (46799)
+6/6/2013 11:25:45  >  46799-        /pers?clnt=rest123&com=getattrdef&attr=age
+6/6/2013 11:27:7  >  Request from /127.0.0.1 (46803)
+6/6/2013 11:27:7  >  46803-        /pers?clnt=rest|123&com=getattrdef&attr=age
+6/6/2013 11:27:7  >  Request from /127.0.0.1 (46805)
+6/6/2013 11:27:7  >  46805-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:27:19  >  Request from /127.0.0.1 (46806)
+6/6/2013 11:27:19  >  46806-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:27:19  >  Request from /127.0.0.1 (46808)
+6/6/2013 11:27:19  >  46808-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:27:36  >  Request from /127.0.0.1 (46809)
+6/6/2013 11:27:36  >  46809-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22male%22}
+6/6/2013 11:27:44  >  Request from /127.0.0.1 (46811)
+6/6/2013 11:27:44  >  46811-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:27:45  >  Request from /127.0.0.1 (46813)
+6/6/2013 11:27:45  >  46813-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:27:51  >  Request from /127.0.0.1 (46819)
+6/6/2013 11:27:51  >  46819-        /pers?clnt=rest|123&com=getattrdef&attr=age
+6/6/2013 11:27:51  >  Request from /127.0.0.1 (46821)
+6/6/2013 11:27:51  >  46821-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:27:58  >  Request from /127.0.0.1 (46834)
+6/6/2013 11:27:58  >  46834-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:27:58  >  Request from /127.0.0.1 (46836)
+6/6/2013 11:27:58  >  46836-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:30:7  >  Request from /127.0.0.1 (46837)
+6/6/2013 11:30:7  >  46837-        /1.0/personal/rest|123/attributes.xml?attributesPattern=%22age%22
+6/6/2013 11:30:7  >  Request from /127.0.0.1 (46839)
+6/6/2013 11:30:7  >  46839-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:30:59  >  Request from /127.0.0.1 (46840)
+6/6/2013 11:30:59  >  46840-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:30:59  >  Request from /127.0.0.1 (46842)
+6/6/2013 11:30:59  >  46842-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:31:52  >  Request from /127.0.0.1 (46843)
+6/6/2013 11:31:52  >  46843-        /1.0/personal/rest|123/attributes.xml?attributesPattern=age
+6/6/2013 11:31:53  >  Request from /127.0.0.1 (46845)
+6/6/2013 11:31:53  >  46845-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:31:59  >  Request from /127.0.0.1 (46846)
+6/6/2013 11:31:59  >  46846-        /1.0/personal/rest|123/attributes.xml?attributesPattern=*
+6/6/2013 11:31:59  >  Request from /127.0.0.1 (46848)
+6/6/2013 11:31:59  >  46848-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:34:20  >  Request from /127.0.0.1 (46853)
+6/6/2013 11:34:20  >  46853-        /1.0/personal/test|123/update_attributes.xml?Attributes={%22sex%22:%22fmale%22,%22age%22:%2225%22}
+6/6/2013 11:34:20  >  Request from /127.0.0.1 (46855)
+6/6/2013 11:34:20  >  46855-        /resp_xsl/rows.xsl
+6/6/2013 11:34:24  >  Request from /127.0.0.1 (46856)
+6/6/2013 11:34:24  >  46856-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:34:24  >  Request from /127.0.0.1 (46858)
+6/6/2013 11:34:24  >  46858-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:34:25  >  Request from /127.0.0.1 (46859)
+6/6/2013 11:34:25  >  46859-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:34:25  >  Request from /127.0.0.1 (46861)
+6/6/2013 11:34:25  >  46861-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:34:26  >  Request from /127.0.0.1 (46862)
+6/6/2013 11:34:26  >  46862-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:34:26  >  Request from /127.0.0.1 (46864)
+6/6/2013 11:34:26  >  46864-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:34:26  >  Request from /127.0.0.1 (46865)
+6/6/2013 11:34:26  >  46865-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:34:26  >  Request from /127.0.0.1 (46867)
+6/6/2013 11:34:26  >  46867-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:34:27  >  Request from /127.0.0.1 (46868)
+6/6/2013 11:34:27  >  46868-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:34:27  >  Request from /127.0.0.1 (46870)
+6/6/2013 11:34:27  >  46870-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:34:27  >  Request from /127.0.0.1 (46871)
+6/6/2013 11:34:27  >  46871-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:34:27  >  Request from /127.0.0.1 (46873)
+6/6/2013 11:34:27  >  46873-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:34:27  >  Request from /127.0.0.1 (46874)
+6/6/2013 11:34:27  >  46874-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:34:27  >  Request from /127.0.0.1 (46876)
+6/6/2013 11:34:27  >  46876-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:35:46  >  Request from /127.0.0.1 (46877)
+6/6/2013 11:35:46  >  46877-        /1.0/personal/test|123/update_attributes.xml?attributes={%22sex%22:%22fmale%22,%22age%22:%2225%22}
+6/6/2013 11:36:7  >  Request from /127.0.0.1 (46878)
+6/6/2013 11:36:7  >  46878-        /1.0/personal/rest|123/update_attributes.xml?Attributes={%22sex%22:%22fmale%22,%22age%22:%2225%22}
+6/6/2013 11:36:7  >  Request from /127.0.0.1 (46880)
+6/6/2013 11:36:7  >  46880-        /resp_xsl/rows.xsl
+6/6/2013 11:36:10  >  Request from /127.0.0.1 (46881)
+6/6/2013 11:36:10  >  46881-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:36:10  >  Request from /127.0.0.1 (46883)
+6/6/2013 11:36:10  >  46883-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:36:11  >  Request from /127.0.0.1 (46884)
+6/6/2013 11:36:11  >  46884-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:36:11  >  Request from /127.0.0.1 (46886)
+6/6/2013 11:36:11  >  46886-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:36:27  >  Shutting down server, normal: true
+6/6/2013 11:37:2  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:37:2  >  Messages log mode set to: on
+6/6/2013 11:37:3  >  Connected to DB: MySQL
+6/6/2013 11:37:11  >  Request from /127.0.0.1 (46888)
+6/6/2013 11:37:11  >  46888-        /1.0/personal/rest|123/update_attributes.xml?Attributes={%22sex%22:%22fmale%22,%22age%22:%2225%22}
+6/6/2013 11:37:11  >  Request from /127.0.0.1 (46890)
+6/6/2013 11:37:11  >  46890-        /resp_xsl/rows.xsl
+6/6/2013 11:38:57  >  Shutting down server, normal: true
+6/6/2013 11:39:0  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:39:0  >  Messages log mode set to: on
+6/6/2013 11:39:0  >  Connected to DB: MySQL
+6/6/2013 11:39:2  >  Request from /127.0.0.1 (46892)
+6/6/2013 11:39:2  >  46892-        /1.0/personal/rest|123/update_attributes.xml?Attributes={%22sex%22:%22fmale%22,%22age%22:%2225%22}
+6/6/2013 11:39:2  >  Request from /127.0.0.1 (46894)
+6/6/2013 11:39:2  >  46894-        /resp_xsl/rows.xsl
+6/6/2013 11:39:32  >  Shutting down server, normal: true
+6/6/2013 11:40:5  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:40:5  >  Messages log mode set to: on
+6/6/2013 11:40:5  >  Connected to DB: MySQL
+6/6/2013 11:40:19  >  Request from /127.0.0.1 (46897)
+6/6/2013 11:40:19  >  46897-        /1.0/personal/rest|123/update_attributes.xml?attributes={%22sex%22:%22fmale%22,%22age%22:%2225%22}
+6/6/2013 11:40:19  >  Request from /127.0.0.1 (46899)
+6/6/2013 11:40:19  >  46899-        /resp_xsl/rows.xsl
+6/6/2013 11:40:42  >  Request from /127.0.0.1 (46900)
+6/6/2013 11:40:42  >  46900-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:40:42  >  Request from /127.0.0.1 (46902)
+6/6/2013 11:40:42  >  46902-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:40:42  >  Request from /127.0.0.1 (46903)
+6/6/2013 11:40:42  >  46903-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:40:43  >  Request from /127.0.0.1 (46905)
+6/6/2013 11:40:43  >  46905-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:43:44  >  Request from /127.0.0.1 (46925)
+6/6/2013 11:43:44  >  46925-        /1.0/personal/rest|123/attributes.xml?attributesPattern=*
+6/6/2013 11:43:44  >  Request from /127.0.0.1 (46927)
+6/6/2013 11:43:44  >  46927-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:43:51  >  Request from /127.0.0.1 (46928)
+6/6/2013 11:43:51  >  46928-Problem parsing request: java.util.NoSuchElementException
+6/6/2013 11:47:0  >  Request from /127.0.0.1 (46957)
+6/6/2013 11:47:0  >  46957-        /1.0/personal/rest|123/delete_attributes.xml
+6/6/2013 11:47:0  >  Request from /127.0.0.1 (46959)
+6/6/2013 11:47:0  >  46959-        /resp_xsl/rows.xsl
+6/6/2013 11:48:1  >  Shutting down server, normal: true
+6/6/2013 11:48:4  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:48:4  >  Messages log mode set to: on
+6/6/2013 11:48:4  >  Connected to DB: MySQL
+6/6/2013 11:48:6  >  Request from /127.0.0.1 (46961)
+6/6/2013 11:48:6  >  46961-        /1.0/personal/rest|123/delete_attributes.xml
+6/6/2013 11:48:6  >  Request from /127.0.0.1 (46963)
+6/6/2013 11:48:6  >  46963-        /resp_xsl/rows.xsl
+6/6/2013 11:49:24  >  Shutting down server, normal: true
+6/6/2013 11:49:26  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 11:49:26  >  Messages log mode set to: on
+6/6/2013 11:49:27  >  Connected to DB: MySQL
+6/6/2013 11:49:30  >  Request from /127.0.0.1 (46965)
+6/6/2013 11:49:30  >  46965-        /1.0/personal/rest|123/delete_attributes.xml
+6/6/2013 11:49:30  >  Request from /127.0.0.1 (46967)
+6/6/2013 11:49:30  >  46967-        /resp_xsl/rows.xsl
+6/6/2013 11:49:32  >  Request from /127.0.0.1 (46968)
+6/6/2013 11:49:32  >  46968-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:49:32  >  Request from /127.0.0.1 (46970)
+6/6/2013 11:49:32  >  46970-        /resp_xsl/up_attributes.xsl
+6/6/2013 11:49:44  >  Request from /127.0.0.1 (46971)
+6/6/2013 11:49:44  >  46971-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22male%22,%22age%22:%2218%22}
+6/6/2013 11:49:49  >  Request from /127.0.0.1 (46973)
+6/6/2013 11:49:49  >  46973-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 11:49:49  >  Request from /127.0.0.1 (46975)
+6/6/2013 11:49:49  >  46975-        /resp_xsl/up_attributes.xsl
+6/6/2013 12:8:27  >  Request from /127.0.0.1 (47320)
+6/6/2013 12:8:27  >  47320-        /pers_help/getftrdef.html
+6/6/2013 12:8:40  >  Request from /127.0.0.1 (47321)
+6/6/2013 12:8:40  >  47321-        /pers?clnt=rest|123&com=getftrdef&attr=*
+6/6/2013 12:8:53  >  Request from /127.0.0.1 (47323)
+6/6/2013 12:8:53  >  47323-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:8:53  >  Request from /127.0.0.1 (47325)
+6/6/2013 12:8:53  >  47325-        /resp_xsl/up_features.xsl
+6/6/2013 12:15:40  >  Request from /127.0.0.1 (47331)
+6/6/2013 12:15:40  >  47331-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 12:15:44  >  Request from /127.0.0.1 (47333)
+6/6/2013 12:15:44  >  47333-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:15:44  >  Request from /127.0.0.1 (47335)
+6/6/2013 12:15:44  >  47335-        /resp_xsl/up_features.xsl
+6/6/2013 12:19:5  >  Request from /127.0.0.1 (47357)
+6/6/2013 12:19:5  >  47357-        /1.0/personal/rest|123/Features.xml
+6/6/2013 12:19:10  >  Request from /127.0.0.1 (47358)
+6/6/2013 12:19:10  >  47358-        /1.0/personal/rest|123/features.xml
+6/6/2013 12:20:46  >  Shutting down server, normal: true
+6/6/2013 12:20:49  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 12:20:49  >  Messages log mode set to: on
+6/6/2013 12:20:49  >  Connected to DB: MySQL
+6/6/2013 12:20:53  >  Request from /127.0.0.1 (47361)
+6/6/2013 12:20:53  >  47361-        /1.0/personal/rest|123/features.xml
+6/6/2013 12:21:43  >  Request from /127.0.0.1 (47363)
+6/6/2013 12:21:43  >  47363-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+6/6/2013 12:21:43  >  Request from /127.0.0.1 (47365)
+6/6/2013 12:21:43  >  47365-        /resp_xsl/up_features.xsl
+6/6/2013 12:24:47  >  Request from /127.0.0.1 (47385)
+6/6/2013 12:24:47  >  47385-        /1.0/personal/rest|123/delete_features.xml?featuresPattern={%22ki.*%22}
+6/6/2013 12:24:47  >  Request from /127.0.0.1 (47387)
+6/6/2013 12:24:47  >  47387-        /resp_xsl/rows.xsl
+6/6/2013 12:24:51  >  Request from /127.0.0.1 (47388)
+6/6/2013 12:24:51  >  47388-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:24:51  >  Request from /127.0.0.1 (47390)
+6/6/2013 12:24:51  >  47390-        /resp_xsl/up_features.xsl
+6/6/2013 12:24:51  >  Request from /127.0.0.1 (47391)
+6/6/2013 12:24:51  >  47391-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:24:51  >  Request from /127.0.0.1 (47393)
+6/6/2013 12:24:51  >  47393-        /resp_xsl/up_features.xsl
+6/6/2013 12:25:1  >  Shutting down server, normal: true
+6/6/2013 12:25:56  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 12:25:56  >  Messages log mode set to: on
+6/6/2013 12:25:56  >  Connected to DB: MySQL
+6/6/2013 12:26:27  >  Request from /127.0.0.1 (47397)
+6/6/2013 12:26:27  >  47397-        /1.0/personal/rest|123/delete_features.xml
+6/6/2013 12:26:49  >  Shutting down server, normal: true
+6/6/2013 12:26:51  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 12:26:51  >  Messages log mode set to: on
+6/6/2013 12:26:52  >  Connected to DB: MySQL
+6/6/2013 12:26:54  >  Request from /127.0.0.1 (47400)
+6/6/2013 12:26:54  >  47400-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:26:55  >  Request from /127.0.0.1 (47402)
+6/6/2013 12:26:55  >  47402-        /resp_xsl/up_features.xsl
+6/6/2013 12:26:55  >  Request from /127.0.0.1 (47403)
+6/6/2013 12:26:55  >  47403-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:26:55  >  Request from /127.0.0.1 (47405)
+6/6/2013 12:26:55  >  47405-        /resp_xsl/up_features.xsl
+6/6/2013 12:26:59  >  Request from /127.0.0.1 (47406)
+6/6/2013 12:26:59  >  47406-        /1.0/personal/rest|123/delete_features.xml
+6/6/2013 12:26:59  >  Request from /127.0.0.1 (47408)
+6/6/2013 12:26:59  >  47408-        /resp_xsl/rows.xsl
+6/6/2013 12:27:4  >  Request from /127.0.0.1 (47409)
+6/6/2013 12:27:4  >  47409-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:27:4  >  Request from /127.0.0.1 (47411)
+6/6/2013 12:27:4  >  47411-        /resp_xsl/up_features.xsl
+6/6/2013 12:27:17  >  Request from /127.0.0.1 (47412)
+6/6/2013 12:27:17  >  47412-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 12:27:20  >  Request from /127.0.0.1 (47414)
+6/6/2013 12:27:20  >  47414-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:27:20  >  Request from /127.0.0.1 (47416)
+6/6/2013 12:27:20  >  47416-        /resp_xsl/up_features.xsl
+6/6/2013 12:27:43  >  Request from /127.0.0.1 (47417)
+6/6/2013 12:27:43  >  47417-        /1.0/personal/rest|123/delete_features.xml?featuresPattern={%22ki.*%22}
+6/6/2013 12:27:43  >  Request from /127.0.0.1 (47419)
+6/6/2013 12:27:43  >  47419-        /resp_xsl/rows.xsl
+6/6/2013 12:27:52  >  Request from /127.0.0.1 (47420)
+6/6/2013 12:27:52  >  47420-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:27:52  >  Request from /127.0.0.1 (47422)
+6/6/2013 12:27:52  >  47422-        /resp_xsl/up_features.xsl
+6/6/2013 12:28:21  >  Request from /127.0.0.1 (47423)
+6/6/2013 12:28:21  >  47423-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:28:21  >  Request from /127.0.0.1 (47425)
+6/6/2013 12:28:21  >  47425-        /resp_xsl/up_features.xsl
+6/6/2013 12:28:37  >  Request from /127.0.0.1 (47426)
+6/6/2013 12:28:37  >  47426-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 12:28:39  >  Request from /127.0.0.1 (47428)
+6/6/2013 12:28:39  >  47428-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:28:40  >  Request from /127.0.0.1 (47430)
+6/6/2013 12:28:40  >  47430-        /resp_xsl/up_features.xsl
+6/6/2013 12:31:11  >  Request from /127.0.0.1 (47434)
+6/6/2013 12:31:11  >  47434-        /1.0/personal/rest|123/delete_features.xml?featuresPattern={%22kinect%22}
+6/6/2013 12:31:11  >  Request from /127.0.0.1 (47436)
+6/6/2013 12:31:11  >  47436-        /resp_xsl/rows.xsl
+6/6/2013 12:31:22  >  Request from /127.0.0.1 (47437)
+6/6/2013 12:31:22  >  47437-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:31:22  >  Request from /127.0.0.1 (47439)
+6/6/2013 12:31:22  >  47439-        /resp_xsl/up_features.xsl
+6/6/2013 12:32:55  >  Shutting down server, normal: true
+6/6/2013 12:32:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 12:32:57  >  Messages log mode set to: on
+6/6/2013 12:32:58  >  Connected to DB: MySQL
+6/6/2013 12:33:22  >  Request from /127.0.0.1 (47441)
+6/6/2013 12:33:22  >  47441-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 12:33:30  >  Request from /127.0.0.1 (47443)
+6/6/2013 12:33:30  >  47443-        /1.0/personal/rest|123/features.xml
+6/6/2013 12:33:36  >  Request from /127.0.0.1 (47445)
+6/6/2013 12:33:36  >  47445-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+6/6/2013 12:33:36  >  Request from /127.0.0.1 (47447)
+6/6/2013 12:33:36  >  47447-        /resp_xsl/up_features.xsl
+6/6/2013 12:33:56  >  Request from /127.0.0.1 (47448)
+6/6/2013 12:33:56  >  47448-        /1.0/personal/rest|123/delete_features.xml?features={%22ki.*%22}
+6/6/2013 12:33:56  >  Request from /127.0.0.1 (47450)
+6/6/2013 12:33:56  >  47450-        /resp_xsl/rows.xsl
+6/6/2013 12:34:29  >  Request from /127.0.0.1 (47451)
+6/6/2013 12:34:29  >  47451-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:34:29  >  Request from /127.0.0.1 (47453)
+6/6/2013 12:34:29  >  47453-        /resp_xsl/up_features.xsl
+6/6/2013 12:34:43  >  Request from /127.0.0.1 (47454)
+6/6/2013 12:34:43  >  47454-        /pers_help/remftr.html
+6/6/2013 12:35:4  >  Request from /127.0.0.1 (47455)
+6/6/2013 12:35:4  >  47455-        /1.0/personal/rest|123/delete_features.xml?features={%22kinect%22}
+6/6/2013 12:35:4  >  Request from /127.0.0.1 (47457)
+6/6/2013 12:35:4  >  47457-        /resp_xsl/rows.xsl
+6/6/2013 12:35:7  >  Request from /127.0.0.1 (47458)
+6/6/2013 12:35:7  >  47458-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:35:7  >  Request from /127.0.0.1 (47460)
+6/6/2013 12:35:7  >  47460-        /resp_xsl/up_features.xsl
+6/6/2013 12:35:18  >  Request from /127.0.0.1 (47461)
+6/6/2013 12:35:18  >  47461-        /1.0/personal/rest|123/delete_features.xml
+6/6/2013 12:35:18  >  Request from /127.0.0.1 (47463)
+6/6/2013 12:35:18  >  47463-        /resp_xsl/rows.xsl
+6/6/2013 12:35:20  >  Request from /127.0.0.1 (47464)
+6/6/2013 12:35:20  >  47464-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:35:21  >  Request from /127.0.0.1 (47466)
+6/6/2013 12:35:21  >  47466-        /resp_xsl/up_features.xsl
+6/6/2013 12:35:28  >  Request from /127.0.0.1 (47467)
+6/6/2013 12:35:28  >  47467-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 12:35:31  >  Request from /127.0.0.1 (47469)
+6/6/2013 12:35:31  >  47469-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:35:31  >  Request from /127.0.0.1 (47471)
+6/6/2013 12:35:31  >  47471-        /resp_xsl/up_features.xsl
+6/6/2013 12:38:10  >  Request from /127.0.0.1 (47493)
+6/6/2013 12:38:10  >  47493-        /1.0/personal/rest|123/update_features.xml?features={%22kinect%22:%2210%22,%22webcam%22:%22450%22}
+6/6/2013 12:38:25  >  Request from /127.0.0.1 (47495)
+6/6/2013 12:38:25  >  47495-        /1.0/personal/rest|123/update_features.xml?Features={%22kinect%22:%2210%22,%22webcam%22:%22450%22}
+6/6/2013 12:38:25  >  Request from /127.0.0.1 (47499)
+6/6/2013 12:38:25  >  47499-        /resp_xsl/rows.xsl
+6/6/2013 12:39:21  >  Shutting down server, normal: true
+6/6/2013 12:39:23  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 12:39:23  >  Messages log mode set to: on
+6/6/2013 12:39:23  >  Connected to DB: MySQL
+6/6/2013 12:39:29  >  Request from /127.0.0.1 (47501)
+6/6/2013 12:39:29  >  47501-        /1.0/personal/rest|123/update_features.xml?features={%22kinect%22:%2210%22,%22webcam%22:%22450%22}
+6/6/2013 12:39:29  >  Request from /127.0.0.1 (47503)
+6/6/2013 12:39:29  >  47503-        /resp_xsl/rows.xsl
+6/6/2013 12:39:32  >  Request from /127.0.0.1 (47504)
+6/6/2013 12:39:32  >  47504-        /pers?clnt=rest|123&com=getftrdef&ftr=*
+6/6/2013 12:39:32  >  Request from /127.0.0.1 (47506)
+6/6/2013 12:39:32  >  47506-        /resp_xsl/up_features.xsl
+6/6/2013 12:45:5  >  Request from /127.0.0.1 (47591)
+6/6/2013 12:45:5  >  47591-        /pers_help/getusrs.html
+6/6/2013 12:45:18  >  Request from /127.0.0.1 (47592)
+6/6/2013 12:45:18  >  47592-        /pers?com=getusrs&whr=*
+6/6/2013 12:46:1  >  Request from /127.0.0.1 (47593)
+6/6/2013 12:46:1  >  47593-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 12:46:1  >  Request from /127.0.0.1 (47595)
+6/6/2013 12:46:1  >  47595-        /resp_xsl/user.xsl
+6/6/2013 12:46:58  >  Request from /127.0.0.1 (47596)
+6/6/2013 12:46:58  >  47596-        /pers_help/setusr.html
+6/6/2013 12:47:59  >  Request from /127.0.0.1 (47597)
+6/6/2013 12:47:59  >  47597-        /pers?clnt=rest|123&com=setusr&usr=kostas
+6/6/2013 12:48:49  >  Request from /127.0.0.1 (47599)
+6/6/2013 12:48:49  >  47599-        /pers?clnt=rest|123&com=setusr&usr=kostas&attr_sex=male&attr_age=1
+6/6/2013 12:49:58  >  Request from /127.0.0.1 (47601)
+6/6/2013 12:49:58  >  47601-        /pers?clnt=rest|123&com=setusr&usr=kostas&attr_age=1&attr_sex=male
+6/6/2013 12:56:40  >  Request from /127.0.0.1 (47612)
+6/6/2013 12:56:40  >  47612-        /pers?clnt=rest|123&com=setusr&usr=kostas&attr_sex=male&attr_age=19;
+6/6/2013 12:58:27  >  Shutting down server, normal: true
+6/6/2013 12:58:32  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 12:58:32  >  Messages log mode set to: on
+6/6/2013 12:58:33  >  Connected to DB: MySQL
+6/6/2013 12:58:37  >  Request from /127.0.0.1 (47615)
+6/6/2013 12:58:37  >  47615-        /pers?clnt=rest|123&com=setusr&usr=kostas&attr_sex=male&attr_age=19
+6/6/2013 12:58:52  >  Shutting down server, normal: true
+6/6/2013 12:59:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 12:59:55  >  Messages log mode set to: on
+6/6/2013 12:59:56  >  Connected to DB: MySQL
+6/6/2013 12:59:59  >  Request from /127.0.0.1 (47618)
+6/6/2013 12:59:59  >  47618-        /pers?clnt=rest|123&com=setusr&usr=kostas&attr_sex=male&attr_age=19
+6/6/2013 13:1:51  >  Shutting down server, normal: true
+6/6/2013 13:3:8  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 13:3:8  >  Messages log mode set to: on
+6/6/2013 13:3:8  >  Connected to DB: MySQL
+6/6/2013 13:3:14  >  Request from /127.0.0.1 (47622)
+6/6/2013 13:3:14  >  47622-        /pers?clnt=rest|123&com=setusr&usr=kostas&attr_sex=male&attr_age=19
+6/6/2013 13:15:39  >  Request from /127.0.0.1 (47637)
+6/6/2013 13:15:39  >  47637-        /pers?clnt=rest|123&com=setusr&usr=kostas&attr_sex=male&attr_age=19
+6/6/2013 13:25:33  >  Shutting down server, normal: true
+6/6/2013 13:34:53  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 13:34:53  >  Messages log mode set to: on
+6/6/2013 13:34:53  >  Connected to DB: MySQL
+6/6/2013 13:36:21  >  Shutting down server, normal: true
+6/6/2013 13:36:23  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 13:36:23  >  Messages log mode set to: on
+6/6/2013 13:36:24  >  Connected to DB: MySQL
+6/6/2013 13:36:29  >  Request from /127.0.0.1 (47740)
+6/6/2013 13:36:29  >  47740-        /pers?clnt=rest|123&com=setusr&usr=petros
+6/6/2013 13:38:42  >  Request from /127.0.0.1 (47744)
+6/6/2013 13:38:42  >  47744-        /pers?clnt=rest|123&com=setusr&usr=petros
+6/6/2013 13:39:1  >  Request from /127.0.0.1 (47746)
+6/6/2013 13:39:1  >  47746-        /pers?clnt=rest|123&com=setusr&usr=petros
+6/6/2013 13:41:8  >  Shutting down server, normal: true
+6/6/2013 13:48:0  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 13:48:0  >  Messages log mode set to: on
+6/6/2013 13:48:0  >  Connected to DB: MySQL
+6/6/2013 13:48:5  >  Request from /127.0.0.1 (47756)
+6/6/2013 13:48:5  >  47756-        /pers?clnt=rest|123&com=setusr&usr=petros
+6/6/2013 13:48:34  >  Request from /127.0.0.1 (47758)
+6/6/2013 13:48:34  >  47758-        /pers?clnt=rest|123&com=getattrdef&attr=*
+6/6/2013 13:48:34  >  Request from /127.0.0.1 (47760)
+6/6/2013 13:48:34  >  47760-        /resp_xsl/up_attributes.xsl
+6/6/2013 13:48:46  >  Request from /127.0.0.1 (47761)
+6/6/2013 13:48:46  >  47761-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 13:48:46  >  Request from /127.0.0.1 (47763)
+6/6/2013 13:48:46  >  47763-        /resp_xsl/user.xsl
+6/6/2013 13:49:42  >  Request from /127.0.0.1 (47764)
+6/6/2013 13:49:42  >  47764-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 13:49:42  >  Request from /127.0.0.1 (47766)
+6/6/2013 13:49:42  >  47766-        /resp_xsl/user.xsl
+6/6/2013 13:50:8  >  Request from /127.0.0.1 (47767)
+6/6/2013 13:50:8  >  47767-        /1.0/personal/rest|123/post_user.xml?username=john
+6/6/2013 13:50:12  >  Request from /127.0.0.1 (47769)
+6/6/2013 13:50:12  >  47769-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 13:50:12  >  Request from /127.0.0.1 (47771)
+6/6/2013 13:50:12  >  47771-        /resp_xsl/user.xsl
+6/6/2013 14:45:56  >  Request from /127.0.0.1 (48110)
+6/6/2013 14:45:56  >  48110-        /1.0/personal/rest|123/delete_users.xml?users={%22panos%22,%22kostas%22}
+6/6/2013 14:45:57  >  Request from /127.0.0.1 (48112)
+6/6/2013 14:45:57  >  48112-        /resp_xsl/rows.xsl
+6/6/2013 14:46:3  >  Request from /127.0.0.1 (48113)
+6/6/2013 14:46:3  >  48113-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 14:46:3  >  Request from /127.0.0.1 (48115)
+6/6/2013 14:46:3  >  48115-        /resp_xsl/user.xsl
+6/6/2013 14:46:32  >  Request from /127.0.0.1 (48116)
+6/6/2013 14:46:32  >  48116-        /1.0/personal/rest|123/delete_users.xml
+6/6/2013 14:46:32  >  Request from /127.0.0.1 (48118)
+6/6/2013 14:46:32  >  48118-        /resp_xsl/rows.xsl
+6/6/2013 14:46:35  >  Request from /127.0.0.1 (48119)
+6/6/2013 14:46:35  >  48119-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 14:46:35  >  Request from /127.0.0.1 (48121)
+6/6/2013 14:46:35  >  48121-        /resp_xsl/user.xsl
+6/6/2013 14:46:40  >  Shutting down server, normal: true
+6/6/2013 14:48:17  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 14:48:17  >  Messages log mode set to: on
+6/6/2013 14:48:18  >  Connected to DB: MySQL
+6/6/2013 14:48:20  >  Request from /127.0.0.1 (48127)
+6/6/2013 14:48:20  >  48127-        /1.0/personal/rest|123/delete_users.xml
+6/6/2013 14:48:20  >  Request from /127.0.0.1 (48129)
+6/6/2013 14:48:20  >  48129-        /resp_xsl/rows.xsl
+6/6/2013 14:48:22  >  Request from /127.0.0.1 (48130)
+6/6/2013 14:48:22  >  48130-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 14:48:23  >  Request from /127.0.0.1 (48132)
+6/6/2013 14:48:23  >  48132-        /resp_xsl/user.xsl
+6/6/2013 14:49:2  >  Request from /127.0.0.1 (48133)
+6/6/2013 14:49:2  >  48133-        /1.0/personal/rest|123/post_user.xml?username=john
+6/6/2013 14:49:9  >  Request from /127.0.0.1 (48135)
+6/6/2013 14:49:9  >  48135-        /pers?clnt=rest|123&com=getusrs&whr=*
+6/6/2013 14:49:9  >  Request from /127.0.0.1 (48137)
+6/6/2013 14:49:9  >  48137-        /resp_xsl/user.xsl
+6/6/2013 14:51:17  >  Request from /127.0.0.1 (48157)
+6/6/2013 14:51:17  >  48157-        /1.0/personal/rest|123/users.xml?where=*
+6/6/2013 14:51:17  >  Request from /127.0.0.1 (48159)
+6/6/2013 14:51:17  >  48159-        /resp_xsl/user.xsl
+6/6/2013 14:58:31  >  Request from /127.0.0.1 (48188)
+6/6/2013 14:58:31  >  48188-        /1.0/personal/rest|123/users_attributes.xml?username=john
+6/6/2013 14:58:31  >  Request from /127.0.0.1 (48190)
+6/6/2013 14:58:31  >  48190-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:1:28  >  Request from /127.0.0.1 (48210)
+6/6/2013 15:1:28  >  48210-        /1.0/personal/rest|123/users_attributes.xml?username=john&attributes=age
+6/6/2013 15:1:29  >  Request from /127.0.0.1 (48212)
+6/6/2013 15:1:29  >  48212-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:1:34  >  Request from /127.0.0.1 (48213)
+6/6/2013 15:1:34  >  48213-        /1.0/personal/rest|123/users_attributes.xml?username=john&attributes=ag*
+6/6/2013 15:1:34  >  Request from /127.0.0.1 (48215)
+6/6/2013 15:1:34  >  48215-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:1:40  >  Request from /127.0.0.1 (48216)
+6/6/2013 15:1:40  >  48216-        /1.0/personal/rest|123/users_attributes.xml?username=john&attributes=s*
+6/6/2013 15:1:40  >  Request from /127.0.0.1 (48218)
+6/6/2013 15:1:40  >  48218-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:1:44  >  Request from /127.0.0.1 (48219)
+6/6/2013 15:1:44  >  48219-        /1.0/personal/rest|123/users_attributes.xml?username=john&attributes=s.*
+6/6/2013 15:1:44  >  Request from /127.0.0.1 (48221)
+6/6/2013 15:1:44  >  48221-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:1:51  >  Request from /127.0.0.1 (48222)
+6/6/2013 15:1:51  >  48222-        /1.0/personal/rest|123/users_attributes.xml?username=john&attributes=age
+6/6/2013 15:1:51  >  Request from /127.0.0.1 (48224)
+6/6/2013 15:1:51  >  48224-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:1:56  >  Request from /127.0.0.1 (48225)
+6/6/2013 15:1:56  >  48225-        /1.0/personal/rest|123/users_attributes.xml?username=john&attributes=age
+6/6/2013 15:1:56  >  Request from /127.0.0.1 (48227)
+6/6/2013 15:1:56  >  48227-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:2:0  >  Request from /127.0.0.1 (48228)
+6/6/2013 15:2:0  >  48228-        /1.0/personal/rest|123/users_attributes.xml?username=john
+6/6/2013 15:2:0  >  Request from /127.0.0.1 (48230)
+6/6/2013 15:2:0  >  48230-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:2:57  >  Request from /127.0.0.1 (48231)
+6/6/2013 15:2:57  >  48231-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:2:57  >  Request from /127.0.0.1 (48233)
+6/6/2013 15:2:57  >  48233-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:4:34  >  Request from /127.0.0.1 (48235)
+6/6/2013 15:4:34  >  48235-        /1.0/personal/rest|123/update_features.xml?features={%22kinect%22:%2210%22,%22webcam%22:%22450%22}
+6/6/2013 15:4:34  >  Request from /127.0.0.1 (48237)
+6/6/2013 15:4:34  >  48237-        /resp_xsl/rows.xsl
+6/6/2013 15:4:41  >  Request from /127.0.0.1 (48238)
+6/6/2013 15:4:41  >  48238-        /1.0/personal/rest|123/update_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 15:4:41  >  Request from /127.0.0.1 (48240)
+6/6/2013 15:4:41  >  48240-        /resp_xsl/rows.xsl
+6/6/2013 15:4:43  >  Request from /127.0.0.1 (48241)
+6/6/2013 15:4:43  >  48241-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:4:43  >  Request from /127.0.0.1 (48243)
+6/6/2013 15:4:43  >  48243-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:9:6  >  Request from /127.0.0.1 (48274)
+6/6/2013 15:9:6  >  48274-        /1.0/personal/rest|123/users_attributes.xml?username=john
+6/6/2013 15:9:6  >  Request from /127.0.0.1 (48276)
+6/6/2013 15:9:6  >  48276-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:9:10  >  Request from /127.0.0.1 (48277)
+6/6/2013 15:9:10  >  48277-        /1.0/personal/rest|123/update_users_attributes.xml?username=john&attributes={%22age%22:%2225%22,%22sex%22:%22male%22}
+6/6/2013 15:9:10  >  Request from /127.0.0.1 (48279)
+6/6/2013 15:9:10  >  48279-        /resp_xsl/rows.xsl
+6/6/2013 15:9:12  >  Request from /127.0.0.1 (48280)
+6/6/2013 15:9:12  >  48280-        /1.0/personal/rest|123/users_attributes.xml?username=john
+6/6/2013 15:9:12  >  Request from /127.0.0.1 (48282)
+6/6/2013 15:9:12  >  48282-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 15:11:54  >  Request from /127.0.0.1 (48306)
+6/6/2013 15:11:54  >  48306-        /1.0/personal/rest|123/increase_users_values.xml?username=john&FeatureList={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:11:55  >  Request from /127.0.0.1 (48308)
+6/6/2013 15:11:55  >  48308-        /resp_xsl/rows.xsl
+6/6/2013 15:12:0  >  Request from /127.0.0.1 (48309)
+6/6/2013 15:12:0  >  48309-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:12:0  >  Request from /127.0.0.1 (48311)
+6/6/2013 15:12:0  >  48311-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:12:31  >  Shutting down server, normal: true
+6/6/2013 15:12:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 15:12:36  >  Messages log mode set to: on
+6/6/2013 15:12:36  >  Connected to DB: MySQL
+6/6/2013 15:12:40  >  Request from /127.0.0.1 (48313)
+6/6/2013 15:12:40  >  48313-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featureList={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:12:40  >  Request from /127.0.0.1 (48315)
+6/6/2013 15:12:40  >  48315-        /resp_xsl/rows.xsl
+6/6/2013 15:12:45  >  Shutting down server, normal: true
+6/6/2013 15:12:54  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 15:12:54  >  Messages log mode set to: on
+6/6/2013 15:12:55  >  Connected to DB: MySQL
+6/6/2013 15:12:57  >  Request from /127.0.0.1 (48317)
+6/6/2013 15:12:57  >  48317-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featureList={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:12:57  >  Request from /127.0.0.1 (48319)
+6/6/2013 15:12:57  >  48319-        /resp_xsl/rows.xsl
+6/6/2013 15:12:59  >  Request from /127.0.0.1 (48320)
+6/6/2013 15:12:59  >  48320-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featureList={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:12:59  >  Request from /127.0.0.1 (48322)
+6/6/2013 15:12:59  >  48322-        /resp_xsl/rows.xsl
+6/6/2013 15:13:5  >  Request from /127.0.0.1 (48323)
+6/6/2013 15:13:5  >  48323-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featureList={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:13:5  >  Request from /127.0.0.1 (48325)
+6/6/2013 15:13:5  >  48325-        /resp_xsl/rows.xsl
+6/6/2013 15:13:6  >  Request from /127.0.0.1 (48326)
+6/6/2013 15:13:6  >  48326-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:13:7  >  Request from /127.0.0.1 (48328)
+6/6/2013 15:13:7  >  48328-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:13:7  >  Request from /127.0.0.1 (48329)
+6/6/2013 15:13:7  >  48329-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:13:8  >  Request from /127.0.0.1 (48331)
+6/6/2013 15:13:8  >  48331-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:13:44  >  Shutting down server, normal: true
+6/6/2013 15:14:7  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 15:14:7  >  Messages log mode set to: on
+6/6/2013 15:14:7  >  Connected to DB: MySQL
+6/6/2013 15:14:11  >  Request from /127.0.0.1 (48333)
+6/6/2013 15:14:11  >  48333-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featureList={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:14:11  >  Request from /127.0.0.1 (48335)
+6/6/2013 15:14:11  >  48335-        /resp_xsl/rows.xsl
+6/6/2013 15:14:43  >  Request from /127.0.0.1 (48336)
+6/6/2013 15:14:43  >  48336-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:14:46  >  Request from /127.0.0.1 (48338)
+6/6/2013 15:14:46  >  48338-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:14:46  >  Request from /127.0.0.1 (48340)
+6/6/2013 15:14:46  >  48340-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:15:20  >  Request from /127.0.0.1 (48341)
+6/6/2013 15:15:20  >  48341-        /pers_help/incval.html
+6/6/2013 15:16:24  >  Request from /127.0.0.1 (48342)
+6/6/2013 15:16:24  >  48342-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%222%22}
+6/6/2013 15:16:27  >  Request from /127.0.0.1 (48344)
+6/6/2013 15:16:27  >  48344-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:16:27  >  Request from /127.0.0.1 (48346)
+6/6/2013 15:16:27  >  48346-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:17:5  >  Request from /127.0.0.1 (48347)
+6/6/2013 15:17:5  >  48347-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%221%22}
+6/6/2013 15:17:8  >  Request from /127.0.0.1 (48349)
+6/6/2013 15:17:8  >  48349-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:17:8  >  Request from /127.0.0.1 (48351)
+6/6/2013 15:17:8  >  48351-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:18:49  >  Request from /127.0.0.1 (48352)
+6/6/2013 15:18:49  >  48352-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22webcam%22:%221%22}
+6/6/2013 15:18:52  >  Request from /127.0.0.1 (48354)
+6/6/2013 15:18:52  >  48354-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:18:52  >  Request from /127.0.0.1 (48356)
+6/6/2013 15:18:52  >  48356-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:20:0  >  Request from /127.0.0.1 (48357)
+6/6/2013 15:20:0  >  48357-        /pers?clnt=rest|123&com=incval&usr=kostas&kinect=1&webcam=1
+6/6/2013 15:20:11  >  Request from /127.0.0.1 (48359)
+6/6/2013 15:20:11  >  48359-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:20:11  >  Request from /127.0.0.1 (48361)
+6/6/2013 15:20:11  >  48361-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:20:12  >  Request from /127.0.0.1 (48362)
+6/6/2013 15:20:12  >  48362-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:20:12  >  Request from /127.0.0.1 (48364)
+6/6/2013 15:20:12  >  48364-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:21:7  >  Request from /127.0.0.1 (48365)
+6/6/2013 15:21:7  >  48365-        /pers?clnt=rest|123&com=incval&usr=kostas&kinect=1&webcam=1
+6/6/2013 15:21:50  >  Request from /127.0.0.1 (48367)
+6/6/2013 15:21:50  >  48367-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1&webcam=1
+6/6/2013 15:22:49  >  Request from /127.0.0.1 (48369)
+6/6/2013 15:22:49  >  48369-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 15:22:49  >  Request from /127.0.0.1 (48371)
+6/6/2013 15:22:49  >  48371-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 15:24:27  >  Shutting down server, normal: true
+6/6/2013 15:24:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 15:24:30  >  Messages log mode set to: on
+6/6/2013 15:24:30  >  Connected to DB: MySQL
+6/6/2013 15:24:38  >  Request from /127.0.0.1 (48374)
+6/6/2013 15:24:38  >  48374-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1&webcam=1
+6/6/2013 15:25:53  >  Request from /127.0.0.1 (48376)
+6/6/2013 15:25:53  >  48376-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1&webcam=1
+6/6/2013 15:31:45  >  Shutting down server, normal: true
+6/6/2013 15:56:15  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 15:56:15  >  Messages log mode set to: on
+6/6/2013 15:56:16  >  Connected to DB: MySQL
+6/6/2013 15:56:25  >  Request from /127.0.0.1 (48627)
+6/6/2013 15:56:25  >  48627-        /ster_help/ster_mode.html
+6/6/2013 15:56:26  >  Request from /127.0.0.1 (48629)
+6/6/2013 15:56:26  >  Request from /127.0.0.1 (48628)
+6/6/2013 15:56:26  >  48628-        /ster_help/menu.html
+6/6/2013 15:56:26  >  48629-        /ster_help/ster_index.html
+6/6/2013 15:56:31  >  Request from /127.0.0.1 (48630)
+6/6/2013 15:56:31  >  48630-        /ster_help/addstr.html
+6/6/2013 16:9:7  >  Shutting down server, normal: true
+6/6/2013 16:9:10  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:9:10  >  Messages log mode set to: on
+6/6/2013 16:9:11  >  Connected to DB: MySQL
+6/6/2013 16:9:20  >  Request from /127.0.0.1 (48659)
+6/6/2013 16:9:20  >  48659-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1&webcam=1
+6/6/2013 16:17:33  >  Request from /127.0.0.1 (48662)
+6/6/2013 16:17:33  >  48662-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:17:38  >  Problem binding socket: java.net.BindException: Address already in use
+6/6/2013 16:17:38  >  Shutting down server, normal: false
+6/6/2013 16:17:40  >  Problem binding socket: java.net.BindException: Address already in use
+6/6/2013 16:17:40  >  Shutting down server, normal: false
+6/6/2013 16:17:41  >  Problem binding socket: java.net.BindException: Address already in use
+6/6/2013 16:17:41  >  Shutting down server, normal: false
+6/6/2013 16:17:50  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:17:50  >  Messages log mode set to: on
+6/6/2013 16:17:51  >  Connected to DB: MySQL
+6/6/2013 16:17:53  >  Request from /127.0.0.1 (48667)
+6/6/2013 16:17:53  >  48667-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:20:34  >  Shutting down server, normal: true
+6/6/2013 16:21:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:21:30  >  Messages log mode set to: on
+6/6/2013 16:21:31  >  Connected to DB: MySQL
+6/6/2013 16:21:35  >  Request from /127.0.0.1 (48670)
+6/6/2013 16:21:35  >  48670-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:21:48  >  Shutting down server, normal: true
+6/6/2013 16:22:48  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:22:48  >  Messages log mode set to: on
+6/6/2013 16:22:49  >  Connected to DB: MySQL
+6/6/2013 16:22:51  >  Request from /127.0.0.1 (48673)
+6/6/2013 16:22:51  >  48673-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:25:43  >  Shutting down server, normal: true
+6/6/2013 16:25:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:25:55  >  Messages log mode set to: on
+6/6/2013 16:25:56  >  Connected to DB: MySQL
+6/6/2013 16:26:2  >  Request from /127.0.0.1 (48677)
+6/6/2013 16:26:2  >  48677-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:27:38  >  Request from /127.0.0.1 (48679)
+6/6/2013 16:27:38  >  48679-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:29:1  >  Shutting down server, normal: true
+6/6/2013 16:29:6  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:29:6  >  Messages log mode set to: on
+6/6/2013 16:29:7  >  Connected to DB: MySQL
+6/6/2013 16:29:12  >  Request from /127.0.0.1 (48682)
+6/6/2013 16:29:12  >  48682-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:29:29  >  Shutting down server, normal: true
+6/6/2013 16:29:43  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:29:43  >  Messages log mode set to: on
+6/6/2013 16:29:43  >  Connected to DB: MySQL
+6/6/2013 16:29:45  >  Request from /127.0.0.1 (48685)
+6/6/2013 16:29:45  >  48685-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:30:1  >  Request from /127.0.0.1 (48687)
+6/6/2013 16:30:1  >  48687-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:30:31  >  Shutting down server, normal: true
+6/6/2013 16:30:33  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:30:33  >  Messages log mode set to: on
+6/6/2013 16:30:33  >  Connected to DB: MySQL
+6/6/2013 16:30:35  >  Request from /127.0.0.1 (48690)
+6/6/2013 16:30:35  >  48690-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:33:53  >  Shutting down server, normal: true
+6/6/2013 16:34:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:34:19  >  Messages log mode set to: on
+6/6/2013 16:34:19  >  Connected to DB: MySQL
+6/6/2013 16:34:23  >  Request from /127.0.0.1 (48695)
+6/6/2013 16:34:23  >  48695-        /pers?clnt=rest|123&com=incval&usr=john&kinect=1
+6/6/2013 16:37:57  >  Shutting down server, normal: true
+6/6/2013 16:40:39  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:40:39  >  Messages log mode set to: on
+6/6/2013 16:40:39  >  Connected to DB: MySQL
+6/6/2013 16:40:49  >  Request from /127.0.0.1 (48701)
+6/6/2013 16:40:49  >  48701-        /admin?login_name=root&login_password=root&com=mkusrfrm
+6/6/2013 16:40:57  >  Request from /127.0.0.1 (48703)
+6/6/2013 16:40:57  >  48703-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+6/6/2013 16:40:59  >  Request from /127.0.0.1 (48705)
+6/6/2013 16:40:59  >  48705-        /admin?login_name=root&login_password=root&com=login
+6/6/2013 16:44:0  >  Request from /127.0.0.1 (48710)
+6/6/2013 16:44:0  >  48710-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22null%22,%22age%22:%22null%22}
+6/6/2013 16:44:14  >  Request from /127.0.0.1 (48712)
+6/6/2013 16:44:14  >  48712-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 16:45:26  >  Request from /127.0.0.1 (48714)
+6/6/2013 16:45:26  >  48714-        /1.0/personal/rest|123/post_user.xml?username=john
+6/6/2013 16:47:32  >  Request from /127.0.0.1 (48716)
+6/6/2013 16:47:32  >  48716-        /1.0/personal/rest|123/users_attributes.xml?username=john
+6/6/2013 16:47:32  >  Request from /127.0.0.1 (48718)
+6/6/2013 16:47:32  >  48718-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 16:47:41  >  Request from /127.0.0.1 (48719)
+6/6/2013 16:47:41  >  48719-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 16:47:41  >  Request from /127.0.0.1 (48721)
+6/6/2013 16:47:41  >  48721-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 16:48:7  >  Request from /127.0.0.1 (48722)
+6/6/2013 16:48:7  >  48722-        /1.0/personal/rest|123/update_users_attributes.xml?username=john&attributes={%22age%22:%2225%22,%22sex%22:%22male%22}
+6/6/2013 16:48:7  >  Request from /127.0.0.1 (48724)
+6/6/2013 16:48:7  >  48724-        /resp_xsl/rows.xsl
+6/6/2013 16:48:18  >  Request from /127.0.0.1 (48725)
+6/6/2013 16:48:18  >  48725-        /1.0/personal/rest|123/users_attributes.xml
+6/6/2013 16:48:23  >  Request from /127.0.0.1 (48727)
+6/6/2013 16:48:23  >  48727-        /1.0/personal/rest|123/users_attributes.xml?username=john
+6/6/2013 16:48:23  >  Request from /127.0.0.1 (48729)
+6/6/2013 16:48:23  >  48729-        /resp_xsl/singleuser_attributes.xsl
+6/6/2013 16:48:36  >  Request from /127.0.0.1 (48730)
+6/6/2013 16:48:36  >  48730-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%221%22}
+6/6/2013 16:49:13  >  Request from /127.0.0.1 (48732)
+6/6/2013 16:49:13  >  48732-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 16:49:13  >  Request from /127.0.0.1 (48734)
+6/6/2013 16:49:13  >  48734-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 16:54:5  >  Shutting down server, normal: true
+6/6/2013 16:54:9  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 16:54:9  >  Messages log mode set to: on
+6/6/2013 16:54:9  >  Connected to DB: MySQL
+6/6/2013 16:54:18  >  Request from /127.0.0.1 (48738)
+6/6/2013 16:54:19  >  48738-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%221%22}
+6/6/2013 17:2:42  >  Shutting down server, normal: true
+6/6/2013 17:5:48  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+6/6/2013 17:5:48  >  Messages log mode set to: on
+6/6/2013 17:5:48  >  Connected to DB: MySQL
+6/6/2013 17:5:53  >  Request from /127.0.0.1 (48800)
+6/6/2013 17:5:53  >  48800-        /admin?login_name=root&login_password=root&com=mkusrfrm
+6/6/2013 17:5:59  >  Request from /127.0.0.1 (48802)
+6/6/2013 17:5:59  >  48802-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+6/6/2013 17:6:21  >  Request from /127.0.0.1 (48804)
+6/6/2013 17:6:21  >  48804-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22null%22,%22age%22:%22null%22}
+6/6/2013 17:6:28  >  Request from /127.0.0.1 (48806)
+6/6/2013 17:6:28  >  48806-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+6/6/2013 17:6:44  >  Request from /127.0.0.1 (48808)
+6/6/2013 17:6:44  >  48808-        /1.0/personal/rest|123/post_user.xml?username=john
+6/6/2013 17:7:7  >  Request from /127.0.0.1 (48810)
+6/6/2013 17:7:7  >  48810-        /1.0/personal/rest|123/update_users_attributes.xml?username=john&attributes={%22age%22:%2225%22,%22sex%22:%22male%22}
+6/6/2013 17:7:7  >  Request from /127.0.0.1 (48812)
+6/6/2013 17:7:7  >  48812-        /resp_xsl/rows.xsl
+6/6/2013 17:7:34  >  Request from /127.0.0.1 (48813)
+6/6/2013 17:7:34  >  48813-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 17:7:35  >  Request from /127.0.0.1 (48815)
+6/6/2013 17:7:35  >  48815-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 17:7:39  >  Request from /127.0.0.1 (48816)
+6/6/2013 17:7:39  >  48816-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%221%22}
+6/6/2013 17:7:39  >  Request from /127.0.0.1 (48818)
+6/6/2013 17:7:39  >  48818-        /resp_xsl/rows.xsl
+6/6/2013 17:7:46  >  Request from /127.0.0.1 (48819)
+6/6/2013 17:7:46  >  48819-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 17:7:46  >  Request from /127.0.0.1 (48821)
+6/6/2013 17:7:46  >  48821-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 17:7:52  >  Request from /127.0.0.1 (48822)
+6/6/2013 17:7:52  >  48822-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%2215%22}
+6/6/2013 17:7:52  >  Request from /127.0.0.1 (48824)
+6/6/2013 17:7:52  >  48824-        /resp_xsl/rows.xsl
+6/6/2013 17:7:54  >  Request from /127.0.0.1 (48825)
+6/6/2013 17:7:54  >  48825-        /1.0/personal/rest|123/users_features.xml?username=john
+6/6/2013 17:7:54  >  Request from /127.0.0.1 (48827)
+6/6/2013 17:7:55  >  48827-        /resp_xsl/singleuser_profile.xsl
+6/6/2013 17:8:5  >  Request from /127.0.0.1 (48830)
+6/6/2013 17:8:5  >  48830-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%2215%22}
+6/6/2013 17:8:5  >  Request from /127.0.0.1 (48832)
+6/6/2013 17:8:5  >  48832-        /resp_xsl/rows.xsl
+6/6/2013 17:9:18  >  Shutting down server, normal: true

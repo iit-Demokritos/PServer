@@ -98,6 +98,7 @@ public class Personal implements pserver.pservlets.PService {
         }
         //recognize commAND encoded in request
         String com = (String) queryParam.getVal(comIdx);
+        System.out.println("================  "+com+"  ===========");
         //operations of features
         if (com.equalsIgnoreCase("addftr")) {       //add new feature(s)
             respCode = comPersAddFtr(queryParam, respBody, dbAccess);
@@ -1782,6 +1783,7 @@ public class Personal implements pserver.pservlets.PService {
                         sqlString = "UPDATE user_profiles SET up_value='" + newValue + "', up_numvalue=" + newValue + " WHERE up_user='" + user + "' AND FK_psclient='" + clientName + "' AND up_feature='" + feature + "'";
                         rowsAffected += dbAccess.executeUpdate(sqlString);
                         int sid = dbAccess.getLastSessionId(user, clientName);
+                        System.out.println(System.currentTimeMillis());
                         PNumData data = new PNumData(user, feature, newNumValue, System.currentTimeMillis(), sid);
                         rowsAffected += dbAccess.insertNewNumData(data, clientName);
                         rowsAffected += dbAccess.updateStereotypesFromUserAction(user, feature, numStep.floatValue(), clientName);
@@ -2991,7 +2993,7 @@ public class Personal implements pserver.pservlets.PService {
         int rowsAffected = 0;
         try {
             //insert all features in profile of new user, with def value
-            query = "INSERT INTO users (user,FK_psclient) VALUES('" + user + "','" + clientName + "')";
+            query = "INSERT INTO users (user,FK_psclient,decay_factor) VALUES('" + user + "','" + clientName + "','0')";
             rowsAffected += dbAccess.executeUpdate(query);
             //WebServer.win.log.debug("=============================================");
             //WebServer.win.log.debug(query);

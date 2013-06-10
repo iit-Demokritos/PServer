@@ -49,8 +49,8 @@ public class PsetFeatures implements pserver.pservlets.PService {
         PSparameters.add("com", "setftrdef");
 
 
-        if (parameters.qpIndexOfKeyNoCase("Features") != -1) {
-            String features = (String) parameters.getVal(parameters.indexOfKey("Features", 0));
+        if (parameters.qpIndexOfKeyNoCase("features") != -1) {
+            String features = (String) parameters.getVal(parameters.indexOfKey("features", 0));
 
             //        {"john","kostas"}
             features = features.replace("{", "");
@@ -67,6 +67,12 @@ public class PsetFeatures implements pserver.pservlets.PService {
             }
 
         }
+        
+//        //        DebugLines
+//        for (int i = 0; i < PSparameters.size(); i++) {
+//            System.out.println("===>  " + PSparameters.getKey(i) + " == " + PSparameters.getVal(i));
+//
+//        }
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);

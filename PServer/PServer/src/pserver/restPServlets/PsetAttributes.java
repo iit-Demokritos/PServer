@@ -49,8 +49,8 @@ public class PsetAttributes implements pserver.pservlets.PService {
         PSparameters.add("com", "setattrdef");
        
 
-        if (parameters.qpIndexOfKeyNoCase("Attributes") != -1) {
-            String attributes = (String) parameters.getVal(parameters.indexOfKey("Attributes", 0));
+        if (parameters.qpIndexOfKeyNoCase("attributes") != -1) {
+            String attributes = (String) parameters.getVal(parameters.indexOfKey("attributes", 0));
 
             //        {"john","kostas"}
             attributes = attributes.replace("{", "");
@@ -61,13 +61,20 @@ public class PsetAttributes implements pserver.pservlets.PService {
             for (String tempatr : AttributesTable) {
                 tempatr = tempatr.replace("\"", "");
                 String[] AttributesValues = tempatr.trim().split(":");
-
+                System.out.println("in");
                 PSparameters.add(AttributesValues[0], AttributesValues[1]);
 
             }
 
         }
 
+        
+//        //        DebugLines
+//        for(int i=0; i<PSparameters.size();i++){
+//            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
+//            
+//        }
+        
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 

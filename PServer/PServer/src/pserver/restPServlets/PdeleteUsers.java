@@ -51,7 +51,7 @@ public class PdeleteUsers implements pserver.pservlets.PService {
         if (parameters.qpIndexOfKeyNoCase("users") != -1) {
             String users = (String) parameters.getVal(parameters.indexOfKey("users", 0));
 
-        //        {"john","kostas"}
+            //        {"john","kostas"}
             users = users.replace("{", "");
             users = users.replace("}", "");
             users.trim();
@@ -61,7 +61,16 @@ public class PdeleteUsers implements pserver.pservlets.PService {
                 PSparameters.add("usr", tempusr.trim());
             }
 
+        } else {
+            PSparameters.add("usr", "*");
         }
+
+
+//        //        DebugLines
+//        for (int i = 0; i < PSparameters.size(); i++) {
+//            System.out.println("===>  " + PSparameters.getKey(i) + " == " + PSparameters.getVal(i));
+//
+//        }
 
 
         //call the right service

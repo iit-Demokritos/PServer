@@ -48,8 +48,8 @@ public class PdeleteFeatures implements pserver.pservlets.PService {
 
         PSparameters.add("com", "remftr");
 
-        if (parameters.qpIndexOfKeyNoCase("featuresPattern") != -1) {
-            String features = (String) parameters.getVal(parameters.indexOfKey("featuresPattern", 0));
+        if (parameters.qpIndexOfKeyNoCase("features") != -1) {
+            String features = (String) parameters.getVal(parameters.indexOfKey("features", 0));
 
             //        {"john","kostas"}
             features = features.replace("{", "");
@@ -61,9 +61,16 @@ public class PdeleteFeatures implements pserver.pservlets.PService {
                 PSparameters.add("ftr", tempftr.trim());
             }
 
+        } else {
+            PSparameters.add("ftr", "*");
         }
 
 
+//        //        DebugLines
+//        for (int i = 0; i < PSparameters.size(); i++) {
+//            System.out.println("===>  " + PSparameters.getKey(i) + " == " + PSparameters.getVal(i));
+//
+//        }
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 

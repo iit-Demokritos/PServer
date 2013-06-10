@@ -67,11 +67,11 @@ public class PaddAttributes implements pserver.pservlets.PService {
 
         }
        
-//        DebugLines
-        for(int i=0; i<PSparameters.size();i++){
-            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
-            
-        }
+////        DebugLines
+//        for(int i=0; i<PSparameters.size();i++){
+//            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
+//            
+//        }
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);

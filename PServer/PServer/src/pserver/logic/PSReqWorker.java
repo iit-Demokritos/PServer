@@ -119,7 +119,7 @@ public class PSReqWorker extends ReqWorker {
         //TODO: Check if contains resURI
         if (PersServer.pObj.pservlets.containsKey(resURI.toLowerCase().substring(1))) {
             respMode = SERVICE_MODE;
-//            System.out.println(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)).toString()+"%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)).toString()+"%%%%%%%%%%%%%%%%%%%%%%%");
             analyzeServiceMode(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)));
             return;
         }

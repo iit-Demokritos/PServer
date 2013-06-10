@@ -61,7 +61,16 @@ public class PdeleteAttributes implements pserver.pservlets.PService {
                 PSparameters.add("attr", tempatr.trim());
             }
 
+        }else{
+        PSparameters.add("attr", "*");
         }
+        
+        
+//          //        DebugLines
+//        for(int i=0; i<PSparameters.size();i++){
+//            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
+//            
+//        }
 
 
         //call the right service

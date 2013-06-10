@@ -50,8 +50,8 @@ public class PincreaseValue implements pserver.pservlets.PService {
         PSparameters.add("usr", parameters.getVal(parameters.indexOfKey("username", 0)));
 
 
-        if (parameters.qpIndexOfKeyNoCase("FeatureList") != -1) {
-            String features = (String) parameters.getVal(parameters.indexOfKey("FeatureList", 0));
+        if (parameters.qpIndexOfKeyNoCase("featurelist") != -1) {
+            String features = (String) parameters.getVal(parameters.indexOfKey("featurelist", 0));
 
             //        {"john","kostas"}
             features = features.replace("{", "");
@@ -66,6 +66,13 @@ public class PincreaseValue implements pserver.pservlets.PService {
                 PSparameters.add(FeaturesValues[0], FeaturesValues[1]);
 
             }
+
+        }
+        
+        
+                //        DebugLines
+        for (int i = 0; i < PSparameters.size(); i++) {
+            System.out.println("===>  " + PSparameters.getKey(i) + " == " + PSparameters.getVal(i));
 
         }
 

@@ -42,7 +42,7 @@ public class PgetAttributes implements pserver.pservlets.PService {
         ResponseConverter converter = new ResponseConverter();
 
         // fix the VectorMap
-
+       
         PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
 
 
@@ -51,7 +51,11 @@ public class PgetAttributes implements pserver.pservlets.PService {
 
         PSparameters.add("attr", parameters.getVal(parameters.indexOfKey("attributesPattern", 0)));
 
-
+////        DebugLines
+//        for(int i=0; i<PSparameters.size();i++){
+//            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
+//            
+//        }
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);

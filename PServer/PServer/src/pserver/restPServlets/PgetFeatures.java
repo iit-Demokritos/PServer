@@ -51,7 +51,11 @@ public class PgetFeatures implements pserver.pservlets.PService {
 
         PSparameters.add("ftr", parameters.getVal(parameters.indexOfKey("featuresPattern", 0)));
 
-
+////        DebugLines
+//        for(int i=0; i<PSparameters.size();i++){
+//            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
+//            
+//        }
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
