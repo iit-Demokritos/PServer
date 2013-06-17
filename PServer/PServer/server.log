@@ -5535,3 +5535,140 @@
 10/6/2013 16:45:34  >  Request from /127.0.0.1 (34936)
 10/6/2013 16:45:34  >  34936-        /resp_xsl/user.xsl
 10/6/2013 16:45:52  >  Shutting down server, normal: true
+12/6/2013 10:7:11  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+12/6/2013 10:7:11  >  Messages log mode set to: on
+12/6/2013 10:7:12  >  Connected to DB: MySQL
+12/6/2013 10:7:27  >  Request from /127.0.0.1 (55277)
+12/6/2013 10:7:27  >  55277-        /
+12/6/2013 10:7:27  >  Request from /127.0.0.1 (55278)
+12/6/2013 10:7:30  >  55278-        /admin?com=login&login_name=root&login_password=root
+12/6/2013 10:7:32  >  Request from /127.0.0.1 (55279)
+12/6/2013 10:7:32  >  55279-        /ster_help/ster_mode.html
+12/6/2013 10:7:32  >  Request from /127.0.0.1 (55280)
+12/6/2013 10:7:32  >  Request from /127.0.0.1 (55281)
+12/6/2013 10:7:32  >  55281-        /ster_help/ster_index.html
+12/6/2013 10:7:32  >  55280-        /ster_help/menu.html
+12/6/2013 10:7:37  >  Request from /127.0.0.1 (55282)
+12/6/2013 10:7:37  >  55282-        /ster_help/addstr.html
+12/6/2013 10:7:44  >  Request from /127.0.0.1 (55285)
+12/6/2013 10:7:44  >  55285-        /ster_help/getusr.html
+12/6/2013 10:7:52  >  Request from /127.0.0.1 (55286)
+12/6/2013 10:7:52  >  55286-        /ster_help/incdeg.html
+12/6/2013 10:8:1  >  Request from /127.0.0.1 (55287)
+12/6/2013 10:8:1  >  55287-        /ster_help/sqlstr.html
+12/6/2013 10:8:3  >  Request from /127.0.0.1 (55288)
+12/6/2013 10:8:3  >  55288-        /ster_help/sqlusr.html
+12/6/2013 10:8:9  >  Request from /127.0.0.1 (55289)
+12/6/2013 10:8:9  >  55289-        /ster_help/addstr.html
+12/6/2013 11:6:13  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+12/6/2013 11:6:13  >  Messages log mode set to: on
+12/6/2013 11:6:13  >  Connected to DB: MySQL
+12/6/2013 11:6:16  >  Shutting down server, normal: true
+12/6/2013 13:13:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+12/6/2013 13:13:35  >  Messages log mode set to: on
+12/6/2013 13:13:35  >  Connected to DB: MySQL
+12/6/2013 13:13:38  >  Request from /127.0.0.1 (56195)
+12/6/2013 13:13:38  >  56195-        /ster_help/addstr.html
+12/6/2013 13:13:47  >  Request from /127.0.0.1 (56196)
+12/6/2013 13:13:47  >  56196-        /commu_help/commu_mode.html
+12/6/2013 13:13:47  >  Request from /127.0.0.1 (56197)
+12/6/2013 13:13:47  >  Request from /127.0.0.1 (56198)
+12/6/2013 13:13:47  >  56197-        /commu_help/menu.html
+12/6/2013 13:13:47  >  56198-        /commu_help/commu_index.html
+12/6/2013 13:20:28  >  Request from /127.0.0.1 (56211)
+12/6/2013 13:20:28  >  56211-        /ster_help/incdeg.html
+12/6/2013 13:21:36  >  Request from /127.0.0.1 (56217)
+12/6/2013 13:21:36  >  56217-        /admin?login_name=root&login_password=root&com=mkusrfrm
+12/6/2013 13:21:38  >  Request from /127.0.0.1 (56219)
+12/6/2013 13:21:38  >  56219-        /pers_help/pers_mode.html
+12/6/2013 13:21:38  >  Request from /127.0.0.1 (56220)
+12/6/2013 13:21:38  >  56220-        /pers_help/menu.html
+12/6/2013 13:21:38  >  Request from /127.0.0.1 (56221)
+12/6/2013 13:21:38  >  56221-        /pers_help/pers_index.html
+12/6/2013 13:21:41  >  Request from /127.0.0.1 (56222)
+12/6/2013 13:21:41  >  56222-        /pers_help/incval.html
+12/6/2013 13:22:7  >  Request from /127.0.0.1 (56223)
+12/6/2013 13:22:7  >  56223-        /ster_help/lststr.html
+12/6/2013 13:22:21  >  Request from /127.0.0.1 (56224)
+12/6/2013 13:22:21  >  56224-        /ster_help/setdeg.html
+12/6/2013 13:22:33  >  Request from /127.0.0.1 (56225)
+12/6/2013 13:22:33  >  56225-        /ster_help/addstr.html
+12/6/2013 13:29:17  >  Request from /127.0.0.1 (56230)
+12/6/2013 13:29:17  >  56230-        /ster_help/addusr.html
+12/6/2013 13:36:7  >  Request from /127.0.0.1 (56235)
+12/6/2013 13:36:7  >  56235-        /ster_help/getstr.html
+12/6/2013 13:36:55  >  Request from /127.0.0.1 (56236)
+12/6/2013 13:36:55  >  56236-        /ster_help/lststr.html
+12/6/2013 13:37:5  >  Request from /127.0.0.1 (56237)
+12/6/2013 13:37:5  >  56237-        /ster_help/getstr.html
+12/6/2013 14:26:38  >  Shutting down server, normal: true
+17/6/2013 11:29:25  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 11:29:25  >  Messages log mode set to: on
+17/6/2013 11:29:26  >  Connected to DB: MySQL
+17/6/2013 11:29:39  >  Request from /127.0.0.1 (54548)
+17/6/2013 11:29:39  >  54548-        /
+17/6/2013 11:29:40  >  Request from /127.0.0.1 (54549)
+17/6/2013 11:29:43  >  54549-        /admin?com=login&login_name=root&login_password=root
+17/6/2013 11:29:47  >  Request from /127.0.0.1 (54550)
+17/6/2013 11:29:47  >  54550-        /ster_help/ster_mode.html
+17/6/2013 11:29:47  >  Request from /127.0.0.1 (54551)
+17/6/2013 11:29:48  >  Request from /127.0.0.1 (54552)
+17/6/2013 11:29:48  >  54551-        /ster_help/menu.html
+17/6/2013 11:29:48  >  54552-        /ster_help/ster_index.html
+17/6/2013 11:29:49  >  Request from /127.0.0.1 (54553)
+17/6/2013 11:29:49  >  54553-        /ster_help/addstr.html
+17/6/2013 11:30:17  >  Shutting down server, normal: true
+17/6/2013 11:33:15  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 11:33:15  >  Messages log mode set to: on
+17/6/2013 11:33:16  >  Connected to DB: MySQL
+17/6/2013 11:33:17  >  Request from /127.0.0.1 (54559)
+17/6/2013 11:33:17  >  54559-        /
+17/6/2013 11:33:18  >  Request from /127.0.0.1 (54560)
+17/6/2013 11:33:20  >  54560-        /admin?com=login&login_name=root&login_password=root
+17/6/2013 11:33:23  >  Request from /127.0.0.1 (54561)
+17/6/2013 11:33:23  >  54561-        /ster_help/ster_mode.html
+17/6/2013 11:33:23  >  Request from /127.0.0.1 (54563)
+17/6/2013 11:33:23  >  Request from /127.0.0.1 (54562)
+17/6/2013 11:33:23  >  54563-        /ster_help/ster_index.html
+17/6/2013 11:33:23  >  54562-        /ster_help/menu.html
+17/6/2013 11:33:24  >  Request from /127.0.0.1 (54564)
+17/6/2013 11:33:24  >  54564-        /ster_help/addstr.html
+17/6/2013 11:34:27  >  Request from /127.0.0.1 (54565)
+17/6/2013 11:34:27  >  54565-        /ster_help/ster_index.html
+17/6/2013 11:34:30  >  Request from /127.0.0.1 (54566)
+17/6/2013 11:34:30  >  54566-        /ster_help/addusr.html
+17/6/2013 11:34:41  >  Request from /127.0.0.1 (54569)
+17/6/2013 11:34:41  >  54569-        /ster_help/getstr.html
+17/6/2013 11:35:53  >  Shutting down server, normal: true
+17/6/2013 16:16:45  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:16:45  >  Messages log mode set to: on
+17/6/2013 16:16:45  >  Connected to DB: MySQL
+17/6/2013 16:17:12  >  Shutting down server, normal: true
+17/6/2013 16:17:37  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:17:37  >  Messages log mode set to: on
+17/6/2013 16:17:37  >  Connected to DB: MySQL
+17/6/2013 16:17:44  >  Shutting down server, normal: true
+17/6/2013 16:17:56  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:17:56  >  Messages log mode set to: on
+17/6/2013 16:17:56  >  Connected to DB: MySQL
+17/6/2013 16:18:47  >  Shutting down server, normal: true
+17/6/2013 16:23:20  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:23:20  >  Messages log mode set to: on
+17/6/2013 16:23:20  >  Shutting down server, normal: false
+17/6/2013 16:23:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:23:35  >  Messages log mode set to: on
+17/6/2013 16:23:35  >  Shutting down server, normal: false
+17/6/2013 16:24:59  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:24:59  >  Messages log mode set to: on
+17/6/2013 16:24:59  >  Shutting down server, normal: false
+17/6/2013 16:25:20  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:25:20  >  Messages log mode set to: on
+17/6/2013 16:25:20  >  Connected to DB: MySQL
+17/6/2013 16:25:30  >  Shutting down server, normal: true
+17/6/2013 16:26:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:26:14  >  Messages log mode set to: on
+17/6/2013 16:26:14  >  Shutting down server, normal: false
+17/6/2013 16:32:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+17/6/2013 16:32:3  >  Messages log mode set to: on
+17/6/2013 16:32:3  >  Connected to DB: MySQL
+17/6/2013 16:32:41  >  Shutting down server, normal: true
