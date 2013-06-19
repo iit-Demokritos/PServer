@@ -378,7 +378,7 @@ DROP TABLE IF EXISTS `stereotypes`;
 CREATE TABLE `stereotypes` (
   `st_stereotype` varchar(50) NOT NULL,
   `FK_psclient` varchar(50) NOT NULL,
-  `st_condition` text NOT NULL,
+  `st_rule` text DEFAULT NULL,
   PRIMARY KEY (`st_stereotype`,`FK_psclient`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
 /*!50100 PARTITION BY KEY (FK_psclient) */;

@@ -5672,3 +5672,777 @@
 17/6/2013 16:32:3  >  Messages log mode set to: on
 17/6/2013 16:32:3  >  Connected to DB: MySQL
 17/6/2013 16:32:41  >  Shutting down server, normal: true
+19/6/2013 10:55:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 10:55:3  >  Messages log mode set to: on
+19/6/2013 10:55:3  >  Connected to DB: MySQL
+19/6/2013 10:56:30  >  Request from /127.0.0.1 (55534)
+19/6/2013 10:56:30  >  55534-        /1.0/stereotype/test|123/add_stereotype.xml?stereotype=educated
+19/6/2013 10:56:30  >  Request from /127.0.0.1 (55535)
+19/6/2013 10:56:36  >  55535-Problem parsing request: java.util.NoSuchElementException
+19/6/2013 10:57:10  >  Shutting down server, normal: true
+19/6/2013 10:58:38  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 10:58:38  >  Messages log mode set to: on
+19/6/2013 10:58:38  >  Connected to DB: MySQL
+19/6/2013 10:58:41  >  Request from /127.0.0.1 (55541)
+19/6/2013 10:58:41  >  55541-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated
+19/6/2013 10:59:2  >  Shutting down server, normal: true
+19/6/2013 10:59:14  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 10:59:14  >  Messages log mode set to: on
+19/6/2013 10:59:15  >  Connected to DB: MySQL
+19/6/2013 10:59:17  >  Request from /127.0.0.1 (55543)
+19/6/2013 10:59:17  >  55543-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated
+19/6/2013 10:59:41  >  Shutting down server, normal: true
+19/6/2013 11:0:16  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 11:0:16  >  Messages log mode set to: on
+19/6/2013 11:0:17  >  Connected to DB: MySQL
+19/6/2013 11:0:19  >  Request from /127.0.0.1 (55545)
+19/6/2013 11:0:19  >  55545-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated
+19/6/2013 12:1:55  >  Request from /127.0.0.1 (55753)
+19/6/2013 12:1:55  >  55753-        /1.0/personal/rest|123/features.xml
+19/6/2013 12:2:1  >  Request from /127.0.0.1 (55755)
+19/6/2013 12:2:1  >  55755-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 12:2:1  >  Request from /127.0.0.1 (55757)
+19/6/2013 12:2:1  >  55757-        /resp_xsl/up_features.xsl
+19/6/2013 12:2:10  >  Shutting down server, normal: true
+19/6/2013 12:2:12  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 12:2:12  >  Messages log mode set to: on
+19/6/2013 12:2:13  >  Connected to DB: MySQL
+19/6/2013 12:2:16  >  Request from /127.0.0.1 (55759)
+19/6/2013 12:2:16  >  55759-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 12:2:16  >  Request from /127.0.0.1 (55761)
+19/6/2013 12:2:16  >  55761-        /resp_xsl/up_features.xsl
+19/6/2013 12:3:15  >  Request from /127.0.0.1 (55765)
+19/6/2013 12:3:15  >  55765-        /1.0/personal/rest|123/users.xml?where=*
+19/6/2013 12:3:16  >  Request from /127.0.0.1 (55767)
+19/6/2013 12:3:16  >  55767-        /resp_xsl/user.xsl
+19/6/2013 12:5:21  >  Request from /127.0.0.1 (55768)
+19/6/2013 12:5:21  >  55768-        /1.0/personal/rest|123/add_features.xml?features={%22computer%22:%220%22,%22edu%22:%220%22}
+19/6/2013 12:5:42  >  Request from /127.0.0.1 (55770)
+19/6/2013 12:5:42  >  55770-        /1.0/personal/rest|123/post_user.xml?username=john
+19/6/2013 12:6:27  >  Request from /127.0.0.1 (55772)
+19/6/2013 12:6:27  >  55772-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 12:6:27  >  Request from /127.0.0.1 (55774)
+19/6/2013 12:6:27  >  55774-        /resp_xsl/up_features.xsl
+19/6/2013 12:6:30  >  Request from /127.0.0.1 (55775)
+19/6/2013 12:6:30  >  55775-        /1.0/personal/rest|123/users.xml?where=*
+19/6/2013 12:6:30  >  Request from /127.0.0.1 (55777)
+19/6/2013 12:6:30  >  55777-        /resp_xsl/user.xsl
+19/6/2013 12:6:37  >  Request from /127.0.0.1 (55778)
+19/6/2013 12:6:37  >  55778-        /1.0/personal/rest|123/post_user.xml?username=kostas
+19/6/2013 12:6:41  >  Request from /127.0.0.1 (55780)
+19/6/2013 12:6:41  >  55780-        /1.0/personal/rest|123/users.xml?where=*
+19/6/2013 12:6:41  >  Request from /127.0.0.1 (55782)
+19/6/2013 12:6:41  >  55782-        /resp_xsl/user.xsl
+19/6/2013 12:6:44  >  Request from /127.0.0.1 (55783)
+19/6/2013 12:6:44  >  55783-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 12:6:44  >  Request from /127.0.0.1 (55785)
+19/6/2013 12:6:44  >  55785-        /resp_xsl/up_features.xsl
+19/6/2013 12:8:31  >  Request from /127.0.0.1 (55789)
+19/6/2013 12:8:31  >  55789-        /1.0/personal/rest|123/users_features.xml?username=john
+19/6/2013 12:8:31  >  Request from /127.0.0.1 (55791)
+19/6/2013 12:8:31  >  55791-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 12:8:41  >  Request from /127.0.0.1 (55792)
+19/6/2013 12:8:41  >  55792-        /1.0/personal/rest|123/users_features.xml?username=kostas
+19/6/2013 12:8:42  >  Request from /127.0.0.1 (55794)
+19/6/2013 12:8:42  >  55794-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 12:9:55  >  Request from /127.0.0.1 (55795)
+19/6/2013 12:9:55  >  55795-        /1.0/personal/rest|123/increase_users_values.xml?username=kostas&featurelist={%22computer%22:%221%22,%22edu:%229%22}
+19/6/2013 12:9:55  >  Request from /127.0.0.1 (55797)
+19/6/2013 12:9:55  >  55797-        /resp_xsl/rows.xsl
+19/6/2013 12:9:59  >  Request from /127.0.0.1 (55798)
+19/6/2013 12:9:59  >  55798-        /1.0/personal/rest|123/users_features.xml?username=kostas
+19/6/2013 12:9:59  >  Request from /127.0.0.1 (55800)
+19/6/2013 12:10:0  >  55800-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 12:12:21  >  Request from /127.0.0.1 (55804)
+19/6/2013 12:12:21  >  55804-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|educ%3E:3
+19/6/2013 12:14:54  >  Request from /127.0.0.1 (55806)
+19/6/2013 12:14:54  >  55806-        /ster?clnt=rest|123&com=addstr&str=educated
+19/6/2013 12:16:14  >  Request from /127.0.0.1 (55808)
+19/6/2013 12:16:14  >  55808-        /ster?clnt=rest|123&com=addstr&str=educated&rule=computer:0|and|educ%3E:3
+19/6/2013 12:19:44  >  Shutting down server, normal: true
+19/6/2013 12:19:47  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 12:19:47  >  Messages log mode set to: on
+19/6/2013 12:19:47  >  Connected to DB: MySQL
+19/6/2013 12:19:56  >  Shutting down server, normal: true
+19/6/2013 12:20:22  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 12:20:22  >  Messages log mode set to: on
+19/6/2013 12:20:22  >  Connected to DB: MySQL
+19/6/2013 12:20:29  >  Request from /127.0.0.1 (55813)
+19/6/2013 12:20:29  >  55813-        /ster?clnt=rest|123&com=addstr&str=educated&rule=computer:0|and|educ%3E:3
+19/6/2013 12:21:52  >  Request from /127.0.0.1 (55815)
+19/6/2013 12:21:52  >  55815-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Neducated&rule=computer:0|and|educ%3C:3
+19/6/2013 12:25:35  >  Request from /127.0.0.1 (55825)
+19/6/2013 12:25:35  >  55825-        /
+19/6/2013 12:25:38  >  Request from /127.0.0.1 (55826)
+19/6/2013 12:25:38  >  55826-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 12:25:38  >  Request from /127.0.0.1 (55828)
+19/6/2013 12:25:38  >  55828-        /resp_xsl/up_features.xsl
+19/6/2013 12:30:27  >  Shutting down server, normal: true
+19/6/2013 12:32:46  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 12:32:46  >  Messages log mode set to: on
+19/6/2013 12:32:46  >  Connected to DB: MySQL
+19/6/2013 12:32:51  >  Request from /127.0.0.1 (55834)
+19/6/2013 12:32:51  >  55834-        /
+19/6/2013 12:32:53  >  Request from /127.0.0.1 (55835)
+19/6/2013 12:32:53  >  55835-        /
+19/6/2013 12:32:56  >  Request from /127.0.0.1 (55836)
+19/6/2013 12:32:56  >  55836-        /admin?com=login&login_name=root&login_password=root
+19/6/2013 12:32:59  >  Request from /127.0.0.1 (55837)
+19/6/2013 12:32:59  >  55837-        /admin?login_name=root&login_password=root&com=mkusrfrm
+19/6/2013 12:33:6  >  Request from /127.0.0.1 (55839)
+19/6/2013 12:33:6  >  55839-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+19/6/2013 12:33:9  >  Request from /127.0.0.1 (55841)
+19/6/2013 12:33:9  >  55841-        /admin?login_name=root&login_password=root&com=login
+19/6/2013 12:33:16  >  Request from /127.0.0.1 (55842)
+19/6/2013 12:33:16  >  55842-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 12:33:16  >  Request from /127.0.0.1 (55844)
+19/6/2013 12:33:16  >  55844-        /resp_xsl/up_features.xsl
+19/6/2013 12:33:19  >  Request from /127.0.0.1 (55845)
+19/6/2013 12:33:19  >  55845-        /1.0/personal/rest|123/users.xml?where=*
+19/6/2013 12:33:19  >  Request from /127.0.0.1 (55847)
+19/6/2013 12:33:19  >  55847-        /resp_xsl/user.xsl
+19/6/2013 12:35:44  >  Request from /127.0.0.1 (55857)
+19/6/2013 12:35:44  >  55857-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22,%22computer%22:%220%22,%22edu%22:%220%22}
+19/6/2013 12:35:49  >  Request from /127.0.0.1 (55859)
+19/6/2013 12:35:49  >  55859-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 12:35:49  >  Request from /127.0.0.1 (55861)
+19/6/2013 12:35:49  >  55861-        /resp_xsl/up_features.xsl
+19/6/2013 12:36:29  >  Request from /127.0.0.1 (55862)
+19/6/2013 12:36:29  >  55862-        /1.0/personal/rest|123/post_user.xml?username=john
+19/6/2013 12:36:34  >  Request from /127.0.0.1 (55864)
+19/6/2013 12:36:34  >  55864-        /1.0/personal/rest|123/post_user.xml?username=kostas
+19/6/2013 12:36:42  >  Request from /127.0.0.1 (55866)
+19/6/2013 12:36:42  >  55866-        /1.0/personal/rest|123/users.xml?where=*
+19/6/2013 12:36:42  >  Request from /127.0.0.1 (55868)
+19/6/2013 12:36:42  >  55868-        /resp_xsl/user.xsl
+19/6/2013 12:36:44  >  Request from /127.0.0.1 (55869)
+19/6/2013 12:36:44  >  55869-        /1.0/personal/rest|123/users_features.xml?username=kostas
+19/6/2013 12:36:44  >  Request from /127.0.0.1 (55871)
+19/6/2013 12:36:44  >  55871-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 12:36:48  >  Request from /127.0.0.1 (55872)
+19/6/2013 12:36:48  >  55872-        /1.0/personal/rest|123/increase_users_values.xml?username=kostas&featurelist={%22computer%22:%221%22,%22edu:%229%22}
+19/6/2013 12:36:48  >  Request from /127.0.0.1 (55874)
+19/6/2013 12:36:48  >  55874-        /resp_xsl/rows.xsl
+19/6/2013 12:36:50  >  Request from /127.0.0.1 (55875)
+19/6/2013 12:36:50  >  55875-        /1.0/personal/rest|123/users_features.xml?username=kostas
+19/6/2013 12:36:50  >  Request from /127.0.0.1 (55877)
+19/6/2013 12:36:50  >  55877-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 12:37:41  >  Request from /127.0.0.1 (55878)
+19/6/2013 12:37:41  >  55878-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22edu:%222%22}
+19/6/2013 12:37:41  >  Request from /127.0.0.1 (55880)
+19/6/2013 12:37:41  >  55880-        /resp_xsl/rows.xsl
+19/6/2013 12:37:52  >  Request from /127.0.0.1 (55881)
+19/6/2013 12:37:52  >  55881-        /1.0/personal/rest|123/users_features.xml?username=john
+19/6/2013 12:37:52  >  Request from /127.0.0.1 (55883)
+19/6/2013 12:37:52  >  55883-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 12:46:37  >  Request from /127.0.0.1 (55896)
+19/6/2013 12:46:37  >  55896-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|educ%3E:3
+19/6/2013 12:47:18  >  Request from /127.0.0.1 (55898)
+19/6/2013 12:47:18  >  55898-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Neducated
+19/6/2013 12:50:47  >  Request from /127.0.0.1 (55904)
+19/6/2013 12:50:47  >  55904-        /ster?clnt=rest|123&com=addstr&str=mans
+19/6/2013 12:56:11  >  Request from /127.0.0.1 (55934)
+19/6/2013 12:56:11  >  55934-        /1.0/personal/rest|123/users_attributes.xml?username=john
+19/6/2013 12:56:11  >  Request from /127.0.0.1 (55936)
+19/6/2013 12:56:11  >  55936-        /resp_xsl/singleuser_attributes.xsl
+19/6/2013 12:57:13  >  Shutting down server, normal: true
+19/6/2013 12:57:31  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 12:57:31  >  Messages log mode set to: on
+19/6/2013 12:57:32  >  Connected to DB: MySQL
+19/6/2013 12:57:41  >  Request from /127.0.0.1 (55938)
+19/6/2013 12:57:41  >  55938-        /
+19/6/2013 12:57:43  >  Request from /127.0.0.1 (55939)
+19/6/2013 12:57:43  >  55939-        /admin?com=login&login_name=&login_password=
+19/6/2013 12:57:47  >  Request from /127.0.0.1 (55940)
+19/6/2013 12:57:47  >  55940-        /admin?com=login&login_name=root&login_password=root
+19/6/2013 12:57:50  >  Request from /127.0.0.1 (55941)
+19/6/2013 12:57:50  >  55941-        /admin?login_name=root&login_password=root&com=mkusrfrm
+19/6/2013 12:57:59  >  Request from /127.0.0.1 (55943)
+19/6/2013 12:57:59  >  55943-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+19/6/2013 12:58:1  >  Request from /127.0.0.1 (55945)
+19/6/2013 12:58:1  >  55945-        /admin?login_name=root&login_password=root&com=login
+19/6/2013 13:1:4  >  Request from /127.0.0.1 (55951)
+19/6/2013 13:1:4  >  55951-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22null%22,%22age%22:%22null%22,%22edu%22:%220%22,%22computer%22:%220%22}
+19/6/2013 13:3:19  >  Request from /127.0.0.1 (55953)
+19/6/2013 13:3:19  >  55953-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 13:3:19  >  Request from /127.0.0.1 (55955)
+19/6/2013 13:3:19  >  55955-        /resp_xsl/up_features.xsl
+19/6/2013 13:3:20  >  Request from /127.0.0.1 (55956)
+19/6/2013 13:3:20  >  55956-        /1.0/personal/rest|123/users.xml?where=*
+19/6/2013 13:3:20  >  Request from /127.0.0.1 (55958)
+19/6/2013 13:3:20  >  55958-        /resp_xsl/user.xsl
+19/6/2013 13:3:24  >  Request from /127.0.0.1 (55959)
+19/6/2013 13:3:24  >  55959-        /1.0/personal/rest|123/users_attributes.xml?username=john
+19/6/2013 13:3:24  >  Request from /127.0.0.1 (55961)
+19/6/2013 13:3:24  >  55961-        /resp_xsl/singleuser_attributes.xsl
+19/6/2013 13:3:50  >  Request from /127.0.0.1 (55962)
+19/6/2013 13:3:50  >  55962-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+19/6/2013 13:4:34  >  Request from /127.0.0.1 (55964)
+19/6/2013 13:4:34  >  55964-        /1.0/personal/rest|123/features.xml?featuresPattern=*
+19/6/2013 13:4:34  >  Request from /127.0.0.1 (55966)
+19/6/2013 13:4:34  >  55966-        /resp_xsl/up_features.xsl
+19/6/2013 13:4:56  >  Request from /127.0.0.1 (55967)
+19/6/2013 13:4:56  >  55967-        /1.0/personal/rest|123/attributes.xml?attributesPattern=*
+19/6/2013 13:4:56  >  Request from /127.0.0.1 (55969)
+19/6/2013 13:4:56  >  55969-        /resp_xsl/up_attributes.xsl
+19/6/2013 13:6:45  >  Request from /127.0.0.1 (55971)
+19/6/2013 13:6:45  >  55971-        /1.0/personal/rest|123/post_user.xml?username=john&attr={%22sex%22:%22male%22,%22age%22:%2225%22,%22edu%22:%222%22,%22computer%22:%220%22}
+19/6/2013 13:6:58  >  Request from /127.0.0.1 (55973)
+19/6/2013 13:6:58  >  55973-        /1.0/personal/rest|123/users_attributes.xml?username=john
+19/6/2013 13:6:58  >  Request from /127.0.0.1 (55975)
+19/6/2013 13:6:58  >  55975-        /resp_xsl/singleuser_attributes.xsl
+19/6/2013 13:8:52  >  Request from /127.0.0.1 (55976)
+19/6/2013 13:8:52  >  55976-        /1.0/personal/rest|123/post_user.xml?username=kosts&attr={%22sex%22:%22male%22,%22age%22:%2210%22,%22edu%22:%221%22,%22computer%22:%221%22}
+19/6/2013 13:9:5  >  Request from /127.0.0.1 (55978)
+19/6/2013 13:9:5  >  55978-        /1.0/personal/rest|123/post_user.xml?username=panos&attr={%22sex%22:%22male%22,%22age%22:%2230%22,%22edu%22:%2210%22,%22computer%22:%221%22}
+19/6/2013 13:9:10  >  Request from /127.0.0.1 (55980)
+19/6/2013 13:9:10  >  55980-        /1.0/personal/rest|123/users.xml?where=*
+19/6/2013 13:9:10  >  Request from /127.0.0.1 (55982)
+19/6/2013 13:9:10  >  55982-        /resp_xsl/user.xsl
+19/6/2013 13:9:17  >  Request from /127.0.0.1 (55983)
+19/6/2013 13:9:17  >  55983-        /1.0/personal/rest|123/users_attributes.xml?username=kostas
+19/6/2013 13:9:17  >  Request from /127.0.0.1 (55985)
+19/6/2013 13:9:17  >  55985-        /resp_xsl/singleuser_attributes.xsl
+19/6/2013 13:9:30  >  Request from /127.0.0.1 (55986)
+19/6/2013 13:9:30  >  55986-        /1.0/personal/rest|123/users_attributes.xml?username=kosts
+19/6/2013 13:9:30  >  Request from /127.0.0.1 (55988)
+19/6/2013 13:9:30  >  55988-        /resp_xsl/singleuser_attributes.xsl
+19/6/2013 13:9:36  >  Request from /127.0.0.1 (55989)
+19/6/2013 13:9:36  >  55989-        /1.0/personal/rest|123/users_attributes.xml?username=panos
+19/6/2013 13:9:36  >  Request from /127.0.0.1 (55991)
+19/6/2013 13:9:36  >  55991-        /resp_xsl/singleuser_attributes.xsl
+19/6/2013 13:10:17  >  Request from /127.0.0.1 (55992)
+19/6/2013 13:10:17  >  55992-        /1.0/personal/rest|123/users_features.xml?username=john
+19/6/2013 13:10:17  >  Request from /127.0.0.1 (55994)
+19/6/2013 13:10:17  >  55994-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:10:24  >  Request from /127.0.0.1 (55995)
+19/6/2013 13:10:24  >  55995-        /1.0/personal/rest|123/users_features.xml?username=kosts
+19/6/2013 13:10:24  >  Request from /127.0.0.1 (55997)
+19/6/2013 13:10:24  >  55997-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:10:29  >  Request from /127.0.0.1 (55998)
+19/6/2013 13:10:29  >  55998-        /1.0/personal/rest|123/users_features.xml?username=panos
+19/6/2013 13:10:29  >  Request from /127.0.0.1 (56000)
+19/6/2013 13:10:29  >  56000-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:10:47  >  Request from /127.0.0.1 (56001)
+19/6/2013 13:10:47  >  56001-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featureList={%22kinect%22:%221%22,%22webcam%22:%222%22}
+19/6/2013 13:10:47  >  Request from /127.0.0.1 (56003)
+19/6/2013 13:10:47  >  56003-        /resp_xsl/rows.xsl
+19/6/2013 13:10:53  >  Request from /127.0.0.1 (56004)
+19/6/2013 13:10:53  >  56004-        /1.0/personal/rest|123/users_features.xml?username=john
+19/6/2013 13:10:53  >  Request from /127.0.0.1 (56006)
+19/6/2013 13:10:53  >  56006-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:12:15  >  Request from /127.0.0.1 (56007)
+19/6/2013 13:12:15  >  56007-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%221%22}
+19/6/2013 13:12:15  >  Request from /127.0.0.1 (56009)
+19/6/2013 13:12:15  >  56009-        /resp_xsl/rows.xsl
+19/6/2013 13:12:24  >  Request from /127.0.0.1 (56010)
+19/6/2013 13:12:24  >  56010-        /1.0/personal/rest|123/users_features.xml?username=john
+19/6/2013 13:12:24  >  Request from /127.0.0.1 (56012)
+19/6/2013 13:12:24  >  56012-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:12:33  >  Request from /127.0.0.1 (56013)
+19/6/2013 13:12:33  >  56013-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%222%22}
+19/6/2013 13:12:33  >  Request from /127.0.0.1 (56015)
+19/6/2013 13:12:33  >  56015-        /resp_xsl/rows.xsl
+19/6/2013 13:12:36  >  Request from /127.0.0.1 (56016)
+19/6/2013 13:12:36  >  56016-        /1.0/personal/rest|123/users_features.xml?username=john
+19/6/2013 13:12:36  >  Request from /127.0.0.1 (56018)
+19/6/2013 13:12:36  >  56018-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:12:43  >  Request from /127.0.0.1 (56019)
+19/6/2013 13:12:43  >  56019-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%222%22}
+19/6/2013 13:12:43  >  Request from /127.0.0.1 (56021)
+19/6/2013 13:12:43  >  56021-        /resp_xsl/rows.xsl
+19/6/2013 13:12:57  >  Request from /127.0.0.1 (56022)
+19/6/2013 13:12:57  >  56022-        /1.0/personal/rest|123/increase_users_values.xml?username=kosts&featurelist={%22kinect%22:%225%22,%22webcam%22:%221%22}
+19/6/2013 13:12:57  >  Request from /127.0.0.1 (56024)
+19/6/2013 13:12:57  >  56024-        /resp_xsl/rows.xsl
+19/6/2013 13:13:5  >  Request from /127.0.0.1 (56025)
+19/6/2013 13:13:5  >  56025-        /1.0/personal/rest|123/users_features.xml?username=kosts
+19/6/2013 13:13:5  >  Request from /127.0.0.1 (56027)
+19/6/2013 13:13:5  >  56027-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:13:58  >  Request from /127.0.0.1 (56028)
+19/6/2013 13:13:58  >  56028-        /1.0/personal/rest|123/increase_users_values.xml?username=panos&featurelist={%22kinect%22:%228%22,%22webcam%22:%226%22}
+19/6/2013 13:13:59  >  Request from /127.0.0.1 (56030)
+19/6/2013 13:13:59  >  56030-        /resp_xsl/rows.xsl
+19/6/2013 13:14:3  >  Request from /127.0.0.1 (56031)
+19/6/2013 13:14:3  >  56031-        /1.0/personal/rest|123/users_features.xml?username=panos
+19/6/2013 13:14:3  >  Request from /127.0.0.1 (56033)
+19/6/2013 13:14:3  >  56033-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 13:15:34  >  Request from /127.0.0.1 (56039)
+19/6/2013 13:15:34  >  56039-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|educ%3E:3
+19/6/2013 13:17:45  >  Request from /127.0.0.1 (56041)
+19/6/2013 13:17:45  >  56041-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Noeducated&rule=computer:0|and|educ%3C3
+19/6/2013 13:19:43  >  Request from /127.0.0.1 (56043)
+19/6/2013 13:19:43  >  56043-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Noeducated&rule=computer:0|and|edu%3C3
+19/6/2013 13:20:33  >  Shutting down server, normal: true
+19/6/2013 13:29:40  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 13:29:40  >  Messages log mode set to: on
+19/6/2013 13:29:40  >  Connected to DB: MySQL
+19/6/2013 13:29:44  >  Request from /127.0.0.1 (56058)
+19/6/2013 13:29:44  >  56058-        /1.0/stereotype/rest|123/delete_stereotype.xml?stereotype={%22Noeducated%22}
+19/6/2013 13:29:44  >  Request from /127.0.0.1 (56060)
+19/6/2013 13:29:44  >  56060-        /resp_xsl/rows.xsl
+19/6/2013 13:30:25  >  Request from /127.0.0.1 (56061)
+19/6/2013 13:30:25  >  56061-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Neducated&rule=computer:0|and|edu%3C3
+19/6/2013 13:31:25  >  Request from /127.0.0.1 (56063)
+19/6/2013 13:31:25  >  56063-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Neducated&rule=computer:0|and|edu%3C:2
+19/6/2013 13:31:49  >  Request from /127.0.0.1 (56065)
+19/6/2013 13:31:49  >  56065-        /1.0/stereotype/rest|123/delete_stereotype.xml?stereotype={%22Noeducated%22}
+19/6/2013 13:31:49  >  Request from /127.0.0.1 (56067)
+19/6/2013 13:31:49  >  56067-        /resp_xsl/rows.xsl
+19/6/2013 13:32:17  >  Request from /127.0.0.1 (56068)
+19/6/2013 13:32:18  >  56068-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22Ned%22}
+19/6/2013 13:32:18  >  Request from /127.0.0.1 (56070)
+19/6/2013 13:32:18  >  56070-        /resp_xsl/rows.xsl
+19/6/2013 13:32:44  >  Request from /127.0.0.1 (56071)
+19/6/2013 13:32:44  >  56071-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Noeducated&rule=computer:0|and|edu%3C:2
+19/6/2013 13:34:30  >  Request from /127.0.0.1 (56077)
+19/6/2013 13:34:30  >  56077-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 13:34:30  >  Request from /127.0.0.1 (56079)
+19/6/2013 13:34:30  >  56079-        /resp_xsl/rows.xsl
+19/6/2013 13:36:1  >  Shutting down server, normal: true
+19/6/2013 13:36:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 13:36:3  >  Messages log mode set to: on
+19/6/2013 13:36:3  >  Connected to DB: MySQL
+19/6/2013 13:36:7  >  Request from /127.0.0.1 (56081)
+19/6/2013 13:36:7  >  56081-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 13:36:7  >  Request from /127.0.0.1 (56083)
+19/6/2013 13:36:7  >  56083-        /resp_xsl/rows.xsl
+19/6/2013 13:36:36  >  Shutting down server, normal: true
+19/6/2013 13:36:37  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 13:36:37  >  Messages log mode set to: on
+19/6/2013 13:36:38  >  Connected to DB: MySQL
+19/6/2013 13:36:40  >  Request from /127.0.0.1 (56085)
+19/6/2013 13:36:40  >  56085-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 13:36:40  >  Request from /127.0.0.1 (56087)
+19/6/2013 13:36:40  >  56087-        /resp_xsl/rows.xsl
+19/6/2013 13:37:16  >  Request from /127.0.0.1 (56089)
+19/6/2013 13:37:16  >  56089-        /ster?clnt=rest|123&com=remstr
+19/6/2013 13:37:16  >  Request from /127.0.0.1 (56091)
+19/6/2013 13:37:16  >  56091-        /resp_xsl/rows.xsl
+19/6/2013 13:38:10  >  Shutting down server, normal: true
+19/6/2013 13:38:12  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 13:38:12  >  Messages log mode set to: on
+19/6/2013 13:38:12  >  Connected to DB: MySQL
+19/6/2013 13:38:26  >  Request from /127.0.0.1 (56093)
+19/6/2013 13:38:26  >  56093-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 13:38:26  >  Request from /127.0.0.1 (56095)
+19/6/2013 13:38:26  >  56095-        /resp_xsl/rows.xsl
+19/6/2013 14:1:16  >  Shutting down server, normal: true
+19/6/2013 14:1:21  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:1:21  >  Messages log mode set to: on
+19/6/2013 14:1:21  >  Connected to DB: MySQL
+19/6/2013 14:1:27  >  Request from /127.0.0.1 (56249)
+19/6/2013 14:1:27  >  56249-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:1:27  >  Request from /127.0.0.1 (56251)
+19/6/2013 14:1:27  >  56251-        /resp_xsl/rows.xsl
+19/6/2013 14:34:5  >  Shutting down server, normal: true
+19/6/2013 14:34:15  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:34:15  >  Messages log mode set to: on
+19/6/2013 14:34:16  >  Connected to DB: MySQL
+19/6/2013 14:34:20  >  Request from /127.0.0.1 (56353)
+19/6/2013 14:34:20  >  56353-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:34:20  >  Request from /127.0.0.1 (56355)
+19/6/2013 14:34:20  >  56355-        /resp_xsl/rows.xsl
+19/6/2013 14:35:2  >  Shutting down server, normal: true
+19/6/2013 14:35:4  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:35:4  >  Messages log mode set to: on
+19/6/2013 14:35:4  >  Connected to DB: MySQL
+19/6/2013 14:35:5  >  Request from /127.0.0.1 (56357)
+19/6/2013 14:35:5  >  56357-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:35:5  >  Request from /127.0.0.1 (56359)
+19/6/2013 14:35:5  >  56359-        /resp_xsl/rows.xsl
+19/6/2013 14:35:56  >  Shutting down server, normal: true
+19/6/2013 14:36:38  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:36:38  >  Messages log mode set to: on
+19/6/2013 14:36:38  >  Connected to DB: MySQL
+19/6/2013 14:37:1  >  Request from /127.0.0.1 (56361)
+19/6/2013 14:37:1  >  56361-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:37:1  >  Request from /127.0.0.1 (56363)
+19/6/2013 14:37:2  >  56363-        /resp_xsl/rows.xsl
+19/6/2013 14:37:25  >  Request from /127.0.0.1 (56364)
+19/6/2013 14:37:25  >  56364-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22Ned%22}
+19/6/2013 14:37:26  >  Request from /127.0.0.1 (56366)
+19/6/2013 14:37:26  >  56366-        /resp_xsl/rows.xsl
+19/6/2013 14:37:41  >  Shutting down server, normal: true
+19/6/2013 14:37:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:37:57  >  Messages log mode set to: on
+19/6/2013 14:37:58  >  Connected to DB: MySQL
+19/6/2013 14:38:0  >  Request from /127.0.0.1 (56368)
+19/6/2013 14:38:0  >  56368-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22Ned%22}
+19/6/2013 14:38:0  >  Request from /127.0.0.1 (56370)
+19/6/2013 14:38:0  >  56370-        /resp_xsl/rows.xsl
+19/6/2013 14:38:53  >  Shutting down server, normal: true
+19/6/2013 14:38:55  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:38:55  >  Messages log mode set to: on
+19/6/2013 14:38:56  >  Connected to DB: MySQL
+19/6/2013 14:38:58  >  Request from /127.0.0.1 (56372)
+19/6/2013 14:38:58  >  56372-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22Ned%22}
+19/6/2013 14:38:58  >  Request from /127.0.0.1 (56374)
+19/6/2013 14:38:58  >  56374-        /resp_xsl/rows.xsl
+19/6/2013 14:39:19  >  Request from /127.0.0.1 (56375)
+19/6/2013 14:39:19  >  56375-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:39:19  >  Request from /127.0.0.1 (56377)
+19/6/2013 14:39:19  >  56377-        /resp_xsl/rows.xsl
+19/6/2013 14:39:39  >  Shutting down server, normal: true
+19/6/2013 14:43:27  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:43:27  >  Messages log mode set to: on
+19/6/2013 14:43:28  >  Connected to DB: MySQL
+19/6/2013 14:43:30  >  Request from /127.0.0.1 (56389)
+19/6/2013 14:43:30  >  56389-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|edu%3E3
+19/6/2013 14:44:8  >  Request from /127.0.0.1 (56391)
+19/6/2013 14:44:8  >  56391-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:44:9  >  Request from /127.0.0.1 (56393)
+19/6/2013 14:44:9  >  56393-        /resp_xsl/rows.xsl
+19/6/2013 14:48:35  >  Request from /127.0.0.1 (56396)
+19/6/2013 14:48:35  >  56396-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|edu:3
+19/6/2013 14:49:3  >  Request from /127.0.0.1 (56398)
+19/6/2013 14:49:3  >  56398-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Neducated&rule=computer:0|and|edu:%3C3
+19/6/2013 14:49:32  >  Request from /127.0.0.1 (56400)
+19/6/2013 14:49:32  >  56400-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Naeducated&rule=computer:0|and|edu%3C3
+19/6/2013 14:49:49  >  Request from /127.0.0.1 (56402)
+19/6/2013 14:49:49  >  56402-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:49:49  >  Request from /127.0.0.1 (56404)
+19/6/2013 14:49:49  >  56404-        /resp_xsl/rows.xsl
+19/6/2013 14:53:10  >  Shutting down server, normal: true
+19/6/2013 14:53:26  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:53:26  >  Messages log mode set to: on
+19/6/2013 14:53:27  >  Connected to DB: MySQL
+19/6/2013 14:53:35  >  Request from /127.0.0.1 (56444)
+19/6/2013 14:53:35  >  56444-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=Naeducated&rule=computer:0|and|edu%3C:3
+19/6/2013 14:54:2  >  Request from /127.0.0.1 (56446)
+19/6/2013 14:54:2  >  56446-        /1.0/stereotype/rest|123/delete_stereotype.xml
+19/6/2013 14:54:2  >  Request from /127.0.0.1 (56448)
+19/6/2013 14:54:2  >  56448-        /resp_xsl/rows.xsl
+19/6/2013 14:54:10  >  Shutting down server, normal: true
+19/6/2013 14:54:34  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 14:54:34  >  Messages log mode set to: on
+19/6/2013 14:54:34  >  Connected to DB: MySQL
+19/6/2013 14:54:36  >  Request from /127.0.0.1 (56454)
+19/6/2013 14:54:36  >  56454-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1
+19/6/2013 15:15:51  >  Shutting down server, normal: true
+19/6/2013 15:15:53  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 15:15:53  >  Messages log mode set to: on
+19/6/2013 15:15:54  >  Connected to DB: MySQL
+19/6/2013 15:16:16  >  Request from /127.0.0.1 (56509)
+19/6/2013 15:16:16  >  56509-        /1.0/stereotype/rest|123/stereotypes.xml?where=visitor
+19/6/2013 15:17:20  >  Request from /127.0.0.1 (56513)
+19/6/2013 15:17:20  >  Request from /127.0.0.1 (56512)
+19/6/2013 15:17:20  >  56512-        /1.0/stereotype/rest|123/ster?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:17:20  >  56513-        /1.0/stereotype/rest|123/stereotypes.xml?where=visitor
+19/6/2013 15:22:37  >  Shutting down server, normal: true
+19/6/2013 15:22:39  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 15:22:39  >  Messages log mode set to: on
+19/6/2013 15:22:39  >  Connected to DB: MySQL
+19/6/2013 15:22:41  >  Request from /127.0.0.1 (56520)
+19/6/2013 15:22:41  >  56520-        /1.0/stereotype/rest|123/ster?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:23:37  >  Request from /127.0.0.1 (56521)
+19/6/2013 15:23:37  >  56521-        /1.0/stereotype/rest|123/ster?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:25:2  >  Shutting down server, normal: true
+19/6/2013 15:25:5  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 15:25:5  >  Messages log mode set to: on
+19/6/2013 15:25:5  >  Connected to DB: MySQL
+19/6/2013 15:25:7  >  Request from /127.0.0.1 (56531)
+19/6/2013 15:25:8  >  56531-        /1.0/stereotype/rest|123/ster?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:26:12  >  Shutting down server, normal: true
+19/6/2013 15:26:19  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 15:26:19  >  Messages log mode set to: on
+19/6/2013 15:26:19  >  Connected to DB: MySQL
+19/6/2013 15:26:21  >  Request from /127.0.0.1 (56533)
+19/6/2013 15:26:21  >  56533-        /1.0/stereotype/rest|123/ster?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:27:3  >  Request from /127.0.0.1 (56534)
+19/6/2013 15:27:3  >  56534-        /ter?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:27:7  >  Request from /127.0.0.1 (56535)
+19/6/2013 15:27:7  >  56535-        /ster?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:28:18  >  Shutting down server, normal: true
+19/6/2013 15:28:46  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 15:28:46  >  Messages log mode set to: on
+19/6/2013 15:28:46  >  Connected to DB: MySQL
+19/6/2013 15:28:49  >  Request from /127.0.0.1 (56542)
+19/6/2013 15:28:49  >  56542-        /1.0/personal/rest|123/add_attributes.xml?attributes={%22sex%22:%22null%22,%22age%22:%22null%22,%22edu%22:%220%22,%22computer%22:%220%22}
+19/6/2013 15:29:0  >  Request from /127.0.0.1 (56544)
+19/6/2013 15:29:0  >  56544-        /1.0/personal/rest|123/add_features.xml?features={%22kinect%22:%220%22,%22webcam%22:%220%22}
+19/6/2013 15:29:10  >  Request from /127.0.0.1 (56546)
+19/6/2013 15:29:10  >  56546-        /1.0/personal/rest|123/post_user.xml?username=john&attr={%22sex%22:%22male%22,%22age%22:%2225%22,%22edu%22:%222%22,%22computer%22:%220%22}
+19/6/2013 15:29:19  >  Request from /127.0.0.1 (56548)
+19/6/2013 15:29:19  >  56548-        /1.0/personal/rest|123/post_user.xml?username=kosts&attr={%22sex%22:%22male%22,%22age%22:%2210%22,%22edu%22:%221%22,%22computer%22:%221%22}
+19/6/2013 15:29:32  >  Request from /127.0.0.1 (56550)
+19/6/2013 15:29:32  >  56550-        /1.0/personal/rest|123/post_user.xml?username=panos&attr={%22sex%22:%22male%22,%22age%22:%2230%22,%22edu%22:%2210%22,%22computer%22:%221%22}
+19/6/2013 15:29:41  >  Request from /127.0.0.1 (56552)
+19/6/2013 15:29:41  >  56552-        /1.0/personal/rest|123/increase_users_values.xml?username=john&featurelist={%22kinect%22:%221%22,%22webcam%22:%222%22}
+19/6/2013 15:29:42  >  Request from /127.0.0.1 (56554)
+19/6/2013 15:29:42  >  56554-        /resp_xsl/rows.xsl
+19/6/2013 15:29:55  >  Request from /127.0.0.1 (56555)
+19/6/2013 15:29:55  >  56555-        /1.0/personal/rest|123/increase_users_values.xml?username=kosts&featurelist={%22kinect%22:%225%22,%22webcam%22:%221%22}
+19/6/2013 15:29:55  >  Request from /127.0.0.1 (56557)
+19/6/2013 15:29:55  >  56557-        /resp_xsl/rows.xsl
+19/6/2013 15:30:13  >  Request from /127.0.0.1 (56558)
+19/6/2013 15:30:13  >  56558-        /1.0/personal/rest|123/increase_users_values.xml?username=panos&featurelist={%22kinect%22:%228%22,%22webcam%22:%226%22}
+19/6/2013 15:30:13  >  Request from /127.0.0.1 (56560)
+19/6/2013 15:30:13  >  56560-        /resp_xsl/rows.xsl
+19/6/2013 15:30:36  >  Request from /127.0.0.1 (56561)
+19/6/2013 15:30:36  >  56561-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1
+19/6/2013 15:30:41  >  Request from /127.0.0.1 (56563)
+19/6/2013 15:30:41  >  56563-        /ster?clnt=name|pass&com=lststr&str=*
+19/6/2013 15:30:41  >  Request from /127.0.0.1 (56565)
+19/6/2013 15:30:41  >  56565-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:31:44  >  Request from /127.0.0.1 (56566)
+19/6/2013 15:31:44  >  56566-        /ster?clnt=name|pass&com=lststr&str=educated
+19/6/2013 15:31:44  >  Request from /127.0.0.1 (56568)
+19/6/2013 15:31:44  >  56568-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:31:50  >  Request from /127.0.0.1 (56569)
+19/6/2013 15:31:50  >  56569-        /ster?clnt=name|pass&com=lststr
+19/6/2013 15:32:50  >  Request from /127.0.0.1 (56571)
+19/6/2013 15:32:50  >  56571-        /ster?clnt=rest|123&com=lststr
+19/6/2013 15:33:24  >  Request from /127.0.0.1 (56573)
+19/6/2013 15:33:24  >  56573-        /ster?clnt=rest|123&com=lststr&str=*
+19/6/2013 15:33:24  >  Request from /127.0.0.1 (56575)
+19/6/2013 15:33:24  >  56575-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:34:2  >  Request from /127.0.0.1 (56582)
+19/6/2013 15:34:2  >  56582-        /1.0/stereotype/rest|123/stereotypes.xml
+19/6/2013 15:34:2  >  Request from /127.0.0.1 (56584)
+19/6/2013 15:34:2  >  56584-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:34:45  >  Request from /127.0.0.1 (56585)
+19/6/2013 15:34:45  >  56585-        /1.0/stereotype/rest|123/stereotypes.xml?where=visitor
+19/6/2013 15:34:45  >  Request from /127.0.0.1 (56587)
+19/6/2013 15:34:45  >  56587-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:34:53  >  Request from /127.0.0.1 (56588)
+19/6/2013 15:34:53  >  56588-        /1.0/stereotype/rest|123/stereotypes.xml?where=edu*
+19/6/2013 15:34:53  >  Request from /127.0.0.1 (56590)
+19/6/2013 15:34:53  >  56590-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:34:58  >  Request from /127.0.0.1 (56591)
+19/6/2013 15:34:58  >  56591-        /1.0/stereotype/rest|123/stereotypes.xml?where=edu.*
+19/6/2013 15:34:58  >  Request from /127.0.0.1 (56593)
+19/6/2013 15:34:58  >  56593-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:35:7  >  Request from /127.0.0.1 (56594)
+19/6/2013 15:35:7  >  56594-        /1.0/stereotype/rest|123/stereotypes.xml?where=education
+19/6/2013 15:35:8  >  Request from /127.0.0.1 (56596)
+19/6/2013 15:35:8  >  56596-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:35:29  >  Request from /127.0.0.1 (56597)
+19/6/2013 15:35:29  >  56597-        /1.0/stereotype/rest|123/stereotypes.xml?where=educated
+19/6/2013 15:35:29  >  Request from /127.0.0.1 (56599)
+19/6/2013 15:35:29  >  56599-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:35:33  >  Request from /127.0.0.1 (56600)
+19/6/2013 15:35:33  >  56600-        /1.0/stereotype/rest|123/stereotypes.xml?where=edaucated
+19/6/2013 15:35:33  >  Request from /127.0.0.1 (56602)
+19/6/2013 15:35:33  >  56602-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:35:36  >  Request from /127.0.0.1 (56603)
+19/6/2013 15:35:36  >  56603-        /1.0/stereotype/rest|123/stereotypes.xml?where=educated
+19/6/2013 15:35:36  >  Request from /127.0.0.1 (56605)
+19/6/2013 15:35:36  >  56605-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:37:20  >  Shutting down server, normal: true
+19/6/2013 15:46:21  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 15:46:21  >  Messages log mode set to: on
+19/6/2013 15:46:22  >  Connected to DB: MySQL
+19/6/2013 15:47:21  >  Request from /127.0.0.1 (56628)
+19/6/2013 15:47:21  >  56628-        /ster?clnt=rest|123&com=getstr&str=educated&ftr=*
+19/6/2013 15:47:21  >  Request from /127.0.0.1 (56630)
+19/6/2013 15:47:21  >  56630-        /resp_xsl/singlestereot_profile.xsl
+19/6/2013 15:48:19  >  Request from /127.0.0.1 (56631)
+19/6/2013 15:48:19  >  56631-        /1.0/stereotype/rest|123/stereotypes.xml
+19/6/2013 15:48:19  >  Request from /127.0.0.1 (56633)
+19/6/2013 15:48:19  >  56633-        /resp_xsl/stereotypes.xsl
+19/6/2013 15:48:26  >  Request from /127.0.0.1 (56634)
+19/6/2013 15:48:26  >  56634-        /1.0/stereotype/rest|123/stereotype_features.xml?stereotype=educated
+19/6/2013 15:48:26  >  Request from /127.0.0.1 (56636)
+19/6/2013 15:48:26  >  56636-        /resp_xsl/singlestereot_profile.xsl
+19/6/2013 15:48:45  >  Request from /127.0.0.1 (56637)
+19/6/2013 15:48:45  >  56637-        /1.0/stereotype/rest|123/stereotype_features.xml?stereotype=educated&where=ki*
+19/6/2013 15:48:45  >  Request from /127.0.0.1 (56639)
+19/6/2013 15:48:45  >  56639-        /resp_xsl/singlestereot_profile.xsl
+19/6/2013 15:49:7  >  Request from /127.0.0.1 (56640)
+19/6/2013 15:49:7  >  56640-        /1.0/personal/rest|123/attributes.xml?attributesPattern=*
+19/6/2013 15:49:7  >  Request from /127.0.0.1 (56642)
+19/6/2013 15:49:7  >  56642-        /resp_xsl/up_attributes.xsl
+19/6/2013 15:49:13  >  Request from /127.0.0.1 (56643)
+19/6/2013 15:49:13  >  56643-        /1.0/personal/rest|123/users_features.xml?username=panos
+19/6/2013 15:49:13  >  Request from /127.0.0.1 (56645)
+19/6/2013 15:49:13  >  56645-        /resp_xsl/singleuser_profile.xsl
+19/6/2013 15:54:30  >  Request from /127.0.0.1 (56659)
+19/6/2013 15:54:30  >  56659-        /ster?clnt=rest|123&com=addusr&usr=john&educated=0.2
+19/6/2013 15:55:9  >  Request from /127.0.0.1 (56661)
+19/6/2013 15:55:9  >  56661-        /ster?clnt=rest|123&com=addusr&usr=john&educated=0.5
+19/6/2013 15:55:51  >  Request from /127.0.0.1 (56664)
+19/6/2013 15:55:51  >  56664-        /ster?clnt=rest|123&com=remusr&john=educated
+19/6/2013 15:55:51  >  Request from /127.0.0.1 (56666)
+19/6/2013 15:55:51  >  56666-        /resp_xsl/rows.xsl
+19/6/2013 15:57:24  >  Shutting down server, normal: true
+19/6/2013 16:3:11  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:3:11  >  Messages log mode set to: on
+19/6/2013 16:3:12  >  Connected to DB: MySQL
+19/6/2013 16:3:26  >  Request from /127.0.0.1 (56673)
+19/6/2013 16:3:26  >  56673-        /1.0/stereotype/rest|123/add_user.xml?username=john&stereotypes={%22educated%22:%220.78%22}
+19/6/2013 16:7:10  >  Shutting down server, normal: true
+19/6/2013 16:7:12  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:7:12  >  Messages log mode set to: on
+19/6/2013 16:7:13  >  Connected to DB: MySQL
+19/6/2013 16:7:46  >  Request from /127.0.0.1 (56680)
+19/6/2013 16:7:46  >  56680-        /1.0/stereotype/rest|123/delete_user.xml?deletepairs={%22john%22:%22educated%22}
+19/6/2013 16:7:46  >  Request from /127.0.0.1 (56682)
+19/6/2013 16:7:46  >  56682-        /resp_xsl/rows.xsl
+19/6/2013 16:7:59  >  Request from /127.0.0.1 (56683)
+19/6/2013 16:7:59  >  56683-        /1.0/stereotype/rest|123/add_user.xml?username=john&stereotypes={%22educated%22:%220.78%22}
+19/6/2013 16:8:30  >  Request from /127.0.0.1 (56685)
+19/6/2013 16:8:30  >  56685-        /1.0/stereotype/rest|123/delete_user.xml?deletepairs={%22kosts%22:%22educated%22,%22john%22:%22educated%22}
+19/6/2013 16:8:30  >  Request from /127.0.0.1 (56687)
+19/6/2013 16:8:30  >  56687-        /resp_xsl/rows.xsl
+19/6/2013 16:12:51  >  Shutting down server, normal: true
+19/6/2013 16:12:53  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:12:53  >  Messages log mode set to: on
+19/6/2013 16:12:54  >  Connected to DB: MySQL
+19/6/2013 16:13:24  >  Request from /127.0.0.1 (56693)
+19/6/2013 16:13:24  >  56693-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos
+19/6/2013 16:13:24  >  Request from /127.0.0.1 (56695)
+19/6/2013 16:13:24  >  56695-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:13:41  >  Request from /127.0.0.1 (56696)
+19/6/2013 16:13:41  >  56696-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=d
+19/6/2013 16:14:50  >  Request from /127.0.0.1 (56698)
+19/6/2013 16:14:50  >  56698-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=str
+19/6/2013 16:14:52  >  Request from /127.0.0.1 (56700)
+19/6/2013 16:14:52  >  56700-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos
+19/6/2013 16:14:52  >  Request from /127.0.0.1 (56702)
+19/6/2013 16:14:52  >  56702-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:14:56  >  Request from /127.0.0.1 (56703)
+19/6/2013 16:14:56  >  56703-        /
+19/6/2013 16:15:4  >  Request from /127.0.0.1 (56704)
+19/6/2013 16:15:4  >  56704-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=kosts
+19/6/2013 16:15:4  >  Request from /127.0.0.1 (56706)
+19/6/2013 16:15:4  >  56706-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:15:11  >  Request from /127.0.0.1 (56707)
+19/6/2013 16:15:11  >  56707-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos
+19/6/2013 16:15:11  >  Request from /127.0.0.1 (56709)
+19/6/2013 16:15:11  >  56709-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:15:44  >  Request from /127.0.0.1 (56710)
+19/6/2013 16:15:44  >  56710-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=*
+19/6/2013 16:15:44  >  Request from /127.0.0.1 (56712)
+19/6/2013 16:15:44  >  56712-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:15:54  >  Request from /127.0.0.1 (56713)
+19/6/2013 16:15:54  >  56713-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:17:23  >  Shutting down server, normal: true
+19/6/2013 16:17:25  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:17:25  >  Messages log mode set to: on
+19/6/2013 16:17:25  >  Connected to DB: MySQL
+19/6/2013 16:17:27  >  Request from /127.0.0.1 (56718)
+19/6/2013 16:17:27  >  56718-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:17:45  >  Shutting down server, normal: true
+19/6/2013 16:18:9  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:18:9  >  Messages log mode set to: on
+19/6/2013 16:18:9  >  Connected to DB: MySQL
+19/6/2013 16:18:12  >  Request from /127.0.0.1 (56723)
+19/6/2013 16:18:12  >  56723-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:18:21  >  Shutting down server, normal: true
+19/6/2013 16:26:8  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:26:8  >  Messages log mode set to: on
+19/6/2013 16:26:8  >  Connected to DB: MySQL
+19/6/2013 16:26:11  >  Request from /127.0.0.1 (56732)
+19/6/2013 16:26:11  >  56732-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:26:30  >  Shutting down server, normal: true
+19/6/2013 16:29:41  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:29:41  >  Messages log mode set to: on
+19/6/2013 16:29:41  >  Connected to DB: MySQL
+19/6/2013 16:29:44  >  Request from /127.0.0.1 (56737)
+19/6/2013 16:29:44  >  56737-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:30:30  >  Shutting down server, normal: true
+19/6/2013 16:30:31  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:30:31  >  Messages log mode set to: on
+19/6/2013 16:30:32  >  Connected to DB: MySQL
+19/6/2013 16:30:33  >  Request from /127.0.0.1 (56742)
+19/6/2013 16:30:33  >  56742-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:30:57  >  Shutting down server, normal: true
+19/6/2013 16:31:9  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:31:9  >  Messages log mode set to: on
+19/6/2013 16:31:9  >  Connected to DB: MySQL
+19/6/2013 16:31:11  >  Request from /127.0.0.1 (56747)
+19/6/2013 16:31:11  >  56747-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:31:49  >  Shutting down server, normal: true
+19/6/2013 16:31:51  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:31:51  >  Messages log mode set to: on
+19/6/2013 16:31:51  >  Connected to DB: MySQL
+19/6/2013 16:31:54  >  Request from /127.0.0.1 (56752)
+19/6/2013 16:31:54  >  56752-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:32:59  >  Shutting down server, normal: true
+19/6/2013 16:33:4  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:33:4  >  Messages log mode set to: on
+19/6/2013 16:33:5  >  Connected to DB: MySQL
+19/6/2013 16:33:7  >  Request from /127.0.0.1 (56757)
+19/6/2013 16:33:7  >  56757-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:33:56  >  Shutting down server, normal: true
+19/6/2013 16:33:58  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:33:58  >  Messages log mode set to: on
+19/6/2013 16:33:59  >  Connected to DB: MySQL
+19/6/2013 16:34:1  >  Request from /127.0.0.1 (56762)
+19/6/2013 16:34:1  >  56762-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:34:24  >  Shutting down server, normal: true
+19/6/2013 16:34:30  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:34:30  >  Messages log mode set to: on
+19/6/2013 16:34:31  >  Connected to DB: MySQL
+19/6/2013 16:34:33  >  Request from /127.0.0.1 (56767)
+19/6/2013 16:34:33  >  56767-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:34:33  >  Request from /127.0.0.1 (56769)
+19/6/2013 16:34:33  >  56769-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:34:57  >  Shutting down server, normal: true
+19/6/2013 16:34:59  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:34:59  >  Messages log mode set to: on
+19/6/2013 16:34:59  >  Connected to DB: MySQL
+19/6/2013 16:35:5  >  Request from /127.0.0.1 (56771)
+19/6/2013 16:35:5  >  56771-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=edu
+19/6/2013 16:35:5  >  Request from /127.0.0.1 (56773)
+19/6/2013 16:35:5  >  56773-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:35:11  >  Request from /127.0.0.1 (56774)
+19/6/2013 16:35:11  >  56774-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos&where=educated
+19/6/2013 16:35:11  >  Request from /127.0.0.1 (56776)
+19/6/2013 16:35:11  >  56776-        /resp_xsl/stereot_singleuser.xsl
+19/6/2013 16:36:44  >  Shutting down server, normal: true
+19/6/2013 16:38:35  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:38:35  >  Messages log mode set to: on
+19/6/2013 16:38:35  >  Connected to DB: MySQL
+19/6/2013 16:39:9  >  Request from /127.0.0.1 (56782)
+19/6/2013 16:39:9  >  56782-        /1.0/stereotype/rest|123/add_user.xml?username=john&stereotypes={%22educated%22:%220.78%22}
+19/6/2013 16:39:57  >  Request from /127.0.0.1 (56784)
+19/6/2013 16:39:57  >  56784-        /1.0/stereotype/rest|123/increase_degree.xml?username=john&stereotypeList={%22educated%22:%221%22}
+19/6/2013 16:39:57  >  Request from /127.0.0.1 (56786)
+19/6/2013 16:39:57  >  56786-        /resp_xsl/rows.xsl
+19/6/2013 16:41:22  >  Shutting down server, normal: true
+19/6/2013 16:41:28  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:41:28  >  Messages log mode set to: on
+19/6/2013 16:41:28  >  Connected to DB: MySQL
+19/6/2013 16:41:34  >  Request from /127.0.0.1 (56810)
+19/6/2013 16:41:34  >  56810-        /1.0/stereotype/rest|123/increase_degree.xml?username=john&stereotypeList={%22educated%22:%221%22}
+19/6/2013 16:41:34  >  Request from /127.0.0.1 (56812)
+19/6/2013 16:41:34  >  56812-        /resp_xsl/rows.xsl
+19/6/2013 16:42:28  >  Shutting down server, normal: true
+19/6/2013 16:42:31  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:42:31  >  Messages log mode set to: on
+19/6/2013 16:42:32  >  Connected to DB: MySQL
+19/6/2013 16:42:34  >  Request from /127.0.0.1 (56814)
+19/6/2013 16:42:34  >  56814-        /1.0/stereotype/rest|123/increase_degree.xml?username=john&stereotypeList={%22educated%22:%221%22}
+19/6/2013 16:42:34  >  Request from /127.0.0.1 (56816)
+19/6/2013 16:42:34  >  56816-        /resp_xsl/rows.xsl
+19/6/2013 16:44:29  >  Shutting down server, normal: true
+19/6/2013 16:44:32  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:44:32  >  Messages log mode set to: on
+19/6/2013 16:44:32  >  Connected to DB: MySQL
+19/6/2013 16:44:36  >  Request from /127.0.0.1 (56818)
+19/6/2013 16:44:36  >  56818-        /1.0/stereotype/rest|123/increase_degree.xml?username=john&stereotypeList={%22educated%22:%221%22}
+19/6/2013 16:44:36  >  Request from /127.0.0.1 (56820)
+19/6/2013 16:44:36  >  56820-        /resp_xsl/rows.xsl
+19/6/2013 16:45:4  >  Shutting down server, normal: true
+19/6/2013 16:45:9  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:45:9  >  Messages log mode set to: on
+19/6/2013 16:45:9  >  Connected to DB: MySQL
+19/6/2013 16:45:11  >  Request from /127.0.0.1 (56822)
+19/6/2013 16:45:11  >  56822-        /1.0/stereotype/rest|123/increase_degree.xml?username=john&stereotypeList={%22educated%22:%221%22}
+19/6/2013 16:45:11  >  Request from /127.0.0.1 (56824)
+19/6/2013 16:45:11  >  56824-        /resp_xsl/rows.xsl
+19/6/2013 16:45:20  >  Request from /127.0.0.1 (56825)
+19/6/2013 16:45:20  >  56825-        /1.0/stereotype/rest|123/increase_degree.xml?username=john&stereotypelist={%22educated%22:%221%22}
+19/6/2013 16:45:20  >  Request from /127.0.0.1 (56827)
+19/6/2013 16:45:20  >  56827-        /resp_xsl/rows.xsl
+19/6/2013 16:51:55  >  Shutting down server, normal: true
+19/6/2013 16:52:48  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+19/6/2013 16:52:48  >  Messages log mode set to: on
+19/6/2013 16:52:48  >  Connected to DB: MySQL
+19/6/2013 16:53:13  >  Request from /127.0.0.1 (56847)
+19/6/2013 16:53:13  >  56847-        /1.0/stereotype/rest|123/set_degree.xml?username=john&stereotypelist={%22educated%22:%221%22}
+19/6/2013 16:53:13  >  Request from /127.0.0.1 (56849)
+19/6/2013 16:53:13  >  56849-        /resp_xsl/rows.xsl
+19/6/2013 16:55:31  >  Shutting down server, normal: true

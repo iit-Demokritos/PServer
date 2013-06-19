@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<?xml-stylesheet type="text/xsl" href="/resp_xsl/user.xsl"?>
+<?xml-stylesheet type="text/xsl" href="/resp_xsl/rows.xsl"?>
 <result>
-<row><usr>john</usr></row>
-<page>1/1</page>
+<row><num_of_rows>3</num_of_rows></row>
 </result>
-

@@ -249,6 +249,8 @@ public class Stereotypes implements pserver.pservlets.PService {
         } else {
             rule = (String) queryParam.getVal(ruleIdx);
         }
+        
+       
         //values in 'queryParam' can be empty string,
         //check if stereotype in 'str' is legal
         if (!DBAccess.legalStrName(stereot)) {
@@ -701,13 +703,13 @@ public class Stereotypes implements pserver.pservlets.PService {
         try {
             //get matching records
             if (strCondition.equals("") == false) {
-                query = "select su_stereotype, su_degree from stereotype_users where " + strCondition + "and su_user='" + user + "' and FK_psclient='" + clientName + "'  order by su_degree" + srtCondition + ", su_stereotype";
+                query = "select su_stereotype, su_degree from stereotype_users where " + strCondition + " su_user='" + user + "' and FK_psclient='" + clientName + "'  order by su_degree" + srtCondition + ", su_stereotype";
             } else {
                 query = "select su_stereotype, su_degree from stereotype_users where su_user='" + user + "' and FK_psclient='" + clientName + "'  order by su_degree" + srtCondition + ", su_stereotype";
             }
-            //System.out.println( "=======================================" );
-            //System.out.println( query );
-            //System.out.println( "=======================================" );
+//            System.out.println( "=======================================" );
+//            System.out.println( query );
+//            System.out.println( "=======================================" );
             PServerResultSet rs = dbAccess.executeQuery(query);
             //format response body            
             respBody.append(DBAccess.xmlHeader("/resp_xsl/stereot_singleuser.xsl"));
@@ -1193,8 +1195,11 @@ public class Stereotypes implements pserver.pservlets.PService {
                 query = "delete from stereotypes where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
                 rowsAffected += dbAccess.executeUpdate(query);
             }
-            if (qpSize == 1) {  //no 'str' and 'lke' query parameters specified
+            
+          
+            if (qpSize == 2) {  //no 'str' and 'lke' query parameters specified
                 //delete rows of all stereotypes
+               
                 query = "delete from stereotype_profiles WHERE FK_psclient='" + clientName + "' ";
                 rowsAffected = dbAccess.executeUpdate(query);
                 query = "delete from stereotypes WHERE FK_psclient='" + clientName + "' ";

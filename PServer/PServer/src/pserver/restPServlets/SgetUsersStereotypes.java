@@ -6,12 +6,15 @@ package pserver.restPServlets;
 
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
+import pserver.pservlets.PService;
+import pserver.utilities.PageConverter;
+import pserver.utilities.ResponseConverter;
 
 /**
  *
  * @author Panagiotis Giotis <giotis.p@gmail.com>
  */
-public class SgetUsersStereotypes  implements pserver.pservlets.PService{
+public class SgetUsersStereotypes implements pserver.pservlets.PService {
 
     private String responseType = pserver.pservlets.PService.xml;
 
@@ -39,7 +42,55 @@ public class SgetUsersStereotypes  implements pserver.pservlets.PService{
 
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        PService servlet = new pserver.pservlets.Stereotypes();
+        VectorMap PSparameters = new VectorMap(parameters.size() + 1);
+        VectorMap tempMap = null;
+        ResponseConverter converter = new ResponseConverter();
+
+
+        int PageIndex;
+        if (parameters.qpIndexOfKeyNoCase("pageindex") == -1) {
+            PageIndex = 1;
+        } else {
+            PageIndex = Integer.parseInt(parameters.getVal(parameters.indexOfKey("pageindex", 0)).toString());
+        }
+
+
+        // fix the VectorMap
+
+        PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
+
+        PSparameters.add("com", "getusr");
+
+        PSparameters.add("usr", parameters.getVal(parameters.indexOfKey("username", 0)));
+
+        if (parameters.qpIndexOfKeyNoCase("where") == -1) {
+            PSparameters.add("str", "*");
+        } else {
+            PSparameters.add("str", parameters.getVal(parameters.indexOfKey("where", 0)));
+        }
+
+
+        //call the right service
+        int ResponseCode = servlet.service(PSparameters, response, dbAccess);
+
+
+        PageConverter Pconverter = new PageConverter();
+        StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
+        response.delete(0, response.length());
+        response.append(tempBuffer);
+
+
+        StringBuffer tempBuffer2 = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer2);
+
+        //DebugLine
+        //        System.out.println("=====> " +response.toString() );
+
+        return ResponseCode;
+
+
     }
-    
 }
