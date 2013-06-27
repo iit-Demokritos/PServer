@@ -249,8 +249,8 @@ public class Stereotypes implements pserver.pservlets.PService {
         } else {
             rule = (String) queryParam.getVal(ruleIdx);
         }
-        
-       
+
+
         //values in 'queryParam' can be empty string,
         //check if stereotype in 'str' is legal
         if (!DBAccess.legalStrName(stereot)) {
@@ -307,15 +307,32 @@ public class Stereotypes implements pserver.pservlets.PService {
                 String second = null;
 
                 if (token.contains("<>")) {
-                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='" + token.substring(0, token.indexOf("<>")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
+                            + token.substring(0, token.indexOf("<>"))
+                            + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
                     operator = "<>";
                     second = "'" + token.substring(token.indexOf(">") + 1) + "'";
                 } else if (token.contains(":")) {
-                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='" + token.substring(0, token.indexOf(":")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-                    operator = "=";
+
+
+                    // If first ends with < or > 
+                    if (token.contains("<") || token.contains(">")) {
+                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
+                                + token.substring(0, token.indexOf(":")-1) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+                        operator = token.substring(token.indexOf(":")-1,
+                                token.indexOf(":"));
+                        operator += "=";
+                    } else {
+                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
+                                + token.substring(0, token.indexOf(":")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+                        operator = "=";
+                    }
+
+                    //then move it to the operator
+
                     second = "'" + token.substring(token.indexOf(":") + 1) + "'";
                 }
-
+             
                 sqlRule.append("(");
                 sqlRule.append(first);
                 sqlRule.append(operator);
@@ -1195,11 +1212,11 @@ public class Stereotypes implements pserver.pservlets.PService {
                 query = "delete from stereotypes where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
                 rowsAffected += dbAccess.executeUpdate(query);
             }
-            
-          
+
+
             if (qpSize == 2) {  //no 'str' and 'lke' query parameters specified
                 //delete rows of all stereotypes
-               
+
                 query = "delete from stereotype_profiles WHERE FK_psclient='" + clientName + "' ";
                 rowsAffected = dbAccess.executeUpdate(query);
                 query = "delete from stereotypes WHERE FK_psclient='" + clientName + "' ";
@@ -1647,7 +1664,8 @@ public class Stereotypes implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
- /**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the users belonging on stereotypes with
@@ -1738,8 +1756,8 @@ public class Stereotypes implements pserver.pservlets.PService {
     /**
      * Method referring to command part of process.
      *
-     * Connects to database, creates stereotypes with
-     * specific condition parameters and returns the response code.
+     * Connects to database, creates stereotypes with specific condition
+     * parameters and returns the response code.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
