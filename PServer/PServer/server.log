@@ -6504,3 +6504,23 @@
 27/6/2013 12:53:3  >  Messages log mode set to: on
 27/6/2013 12:53:3  >  Connected to DB: MySQL
 27/6/2013 15:58:24  >  Shutting down server, normal: true
+28/6/2013 14:30:56  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+28/6/2013 14:30:56  >  Messages log mode set to: on
+28/6/2013 14:30:57  >  Connected to DB: MySQL
+28/6/2013 14:31:11  >  Request from /127.0.0.1 (34680)
+28/6/2013 14:31:11  >  34680-        /
+28/6/2013 14:31:11  >  Request from /127.0.0.1 (34681)
+28/6/2013 14:31:11  >  34681-        /favicon.ico
+28/6/2013 14:31:11  >  Request from /127.0.0.1 (34682)
+28/6/2013 14:31:11  >  34682-        /favicon.ico
+28/6/2013 14:31:18  >  Request from /127.0.0.1 (34685)
+28/6/2013 14:31:18  >  34685-        /admin?com=login&login_name=root&login_password=root
+28/6/2013 14:31:21  >  Request from /127.0.0.1 (34686)
+28/6/2013 14:31:21  >  34686-        /ster_help/ster_mode.html
+28/6/2013 14:31:21  >  Request from /127.0.0.1 (34687)
+28/6/2013 14:31:21  >  Request from /127.0.0.1 (34688)
+28/6/2013 14:31:21  >  34687-        /ster_help/menu.html
+28/6/2013 14:31:21  >  34688-        /ster_help/ster_index.html
+28/6/2013 14:31:22  >  Request from /127.0.0.1 (34689)
+28/6/2013 14:31:22  >  34689-        /ster_help/addstr.html
+28/6/2013 14:32:2  >  Shutting down server, normal: true
