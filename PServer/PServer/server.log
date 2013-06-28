@@ -6500,3 +6500,7 @@
 27/6/2013 12:5:22  >  Messages log mode set to: on
 27/6/2013 12:5:22  >  Connected to DB: MySQL
 27/6/2013 12:5:25  >  Shutting down server, normal: true
+27/6/2013 12:53:3  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+27/6/2013 12:53:3  >  Messages log mode set to: on
+27/6/2013 12:53:3  >  Connected to DB: MySQL
+27/6/2013 15:58:24  >  Shutting down server, normal: true

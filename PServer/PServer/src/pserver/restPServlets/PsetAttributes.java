@@ -61,7 +61,7 @@ public class PsetAttributes implements pserver.pservlets.PService {
             for (String tempatr : AttributesTable) {
                 tempatr = tempatr.replace("\"", "");
                 String[] AttributesValues = tempatr.trim().split(":");
-                System.out.println("in");
+//                System.out.println("in");
                 PSparameters.add(AttributesValues[0], AttributesValues[1]);
 
             }

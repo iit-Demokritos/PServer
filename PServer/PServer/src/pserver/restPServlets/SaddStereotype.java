@@ -62,11 +62,11 @@ public class SaddStereotype implements pserver.pservlets.PService {
                 PSparameters.add("rule", parameters.getVal(parameters.indexOfKey("rule", 0)));
         }
 
-//        DebugLines
-        for(int i=0; i<PSparameters.size();i++){
-            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
-            
-        }
+////        DebugLines
+//        for(int i=0; i<PSparameters.size();i++){
+//            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
+//            
+//        }
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
