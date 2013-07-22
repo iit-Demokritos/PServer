@@ -83,7 +83,12 @@ public class Personal implements pserver.pservlets.PService {
             return respCode;  //no point in proceeding
         }
         String clientName = (String) queryParam.getVal(clntIdx);
-        clientName = clientName.substring(0, clientName.indexOf('|'));
+        if (clientName.indexOf('|')<=0&&clientName.indexOf("%7C")<=0){
+            respCode = PSReqWorker.REQUEST_ERR;
+            WebServer.win.log.error("-Malformed client credentials \""+clientName+"\"");
+            return respCode;  //no point in proceeding
+        }
+        clientName = clientName.substring(0, Math.max(clientName.indexOf('|'),clientName.indexOf("%7C")));
         queryParam.updateVal(clientName, clntIdx);
         //System.out.println( "client name = " + queryParam.getVal( clntIdx ) );
 
