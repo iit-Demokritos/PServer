@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-sqlstr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-sqlstr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=sqlstr&amp;whr=&lt;where_pattern&gt;
+          Order of query params is not important.
+pattern : * | &lt;SQL part following WHERE&gt;. The '*' means all.
+          A special syntax must be used: ':' for = and '|' for &lt;space&gt;.
+          This is because spaces and '=' are replaced in WWW requests.
+          Note that string values must be enclosed in single quotes.
+          Note that there exist two choices for comparisons on values:
+          string comparisons for field 'sp_value', and numeric (double)
+          comparisons for field 'sp_numvalue'. String values that cannot
+          be converted to doubles are represented as NULLs in 'sp_numvalue'.
+descript: returns part of the table 'stereotype_profiles' as specified
+          by the condition in the 'whr' query parameter. If no
+          row in DB satisfies the conditions, the result will
+          not have any 'row' elements (200 OK will still be returned).
+example : ster?clnt=name|pass&amp;com=sqlstr&amp;whr=sp_stereotype:'visitor'|and|sp_numvalue&lt;:2|order|by|sp_feature
+          ster?clnt=name|pass&amp;com=sqlstr&amp;whr=*
+          ster?clnt=name|pass&amp;com=sqlstr&amp;whr=isnull(sp_numvalue)
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/stereot_profiles.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;str&gt;stereotype&lt;/str&gt;&lt;ftr&gt;feature&lt;/ftr&gt;&lt;val&gt;value&lt;/val&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

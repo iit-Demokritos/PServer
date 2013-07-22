@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<title>PServer help</title>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Stereotype Mode</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<h1>Stereotype Mode</h1>
+<p>&nbsp;</p>
+<pre>In Stereotype Mode, the server offers support for stereotypes.
+Stereotypes are categories of users with specific characteristics.
+Each stereotype has a profile that is defined by means of (feature,
+value) tupples. Features can be entities relevant to specific
+applications, while values give an estimation about the stereotype
+relevence to corresponding features. Each stereotype may have
+its own different features. Features can be organized in a
+tree or graph based manner, for easily managing conceptual
+hierarchies. This organization is encoded in the name of every
+feature as a path expression, and is setup by applications.
+Users can be assigned stereotypes, together with a degree of
+relevence, showing how relevent is a stereotype to a user.
+A user may be assigned several stereotypes (not the same twice).
+The DB structure: stereotypes (st_stereotype) with key 'st_stereotype',
+stereotype_profiles (sp_stereotype, sp_feature, sp_value, sp_numvalue)
+with key 'sp_stereotype' and 'sp_feature', stereotype_users
+(su_user, su_stereotype, su_degree) with key 'su_user' and
+'su_stereotype'. If a field in 'stereotypes' is deleted, the deletion
+is cascaded to 'stereotype_profiles' and 'stereotype_users', because
+of referential integrity constraints. The field 'sp_numvalue' is
+&quot;invisible&quot;: it is not part of the results of 'select' queries,
+and contains the numeric equivalent of the string value in field
+'sp_value', or NULL if the string cannot be converted to numeric.
+This duplicate field is used mainly to allow for two types of value
+comparisons: string and numeric. Note that the primary data type for
+values is always string, as it is more general, and that the numeric
+version always correspond to the string version. Also note that
+values intented to be numeric must use '.' for the decimal part when
+given as strings. If ',' is used, the string will not be successfully
+converted to numeric, and its numeric equivalent will be NULL. The
+field 'su_degree' is numeric (double), and when its values are
+exchanged as strings they follow the rules described above. This
+field also contain NULLs for values that could not be converted to
+numeric.
+</pre>
+
+</body>
+
+</html>

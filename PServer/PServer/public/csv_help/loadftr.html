@@ -1,0 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>-addftr template</title>
+
+  
+</head><body style="background-color: rgb(255, 255, 204);">
+<pre>-loadftr<br><br>template: csv?clnt=&lt;name|pass&gt;&amp;com=loadftr&amp;path=&lt;path&gt;&amp;cs=&lt;character_seperator&gt;&amp;ftrcol=&lt;column_number&gt;&amp;defvalue=&lt;real_value&gt;&amp;pref=&lt;string_value&gt;<br>descript: Reads features and set default feature values from a csv file and inserts them into the PServer database.<br>          The parameter path specifies the path that the csv file exists, the cs parameter is the charaster(s) that<br>          seperate(s) the file columns, the parameter ftrcol is the column number that feature names exist, is optional and if is missed then <br>	  PServer assumes that has the value 0. The parameter defvalue specifies the default value that these features will take, this parameter <br>	  is optional and if is missed then PServer assumes that has the value 0.0. The parameter pref spesifies a string that will be put in<br>	  front of the strings that will be read from the file. If this parameter does not exist then NULL is assumed.<br>example : commu?clnt=tname|pass&amp;com=loadftr&amp;path=/home/user/csv_file.txt&amp;cs=,&amp;ftrcol=0&amp;defvalue=1.0&amp;pref=ftr_<br>returns : 200 OK, 401 (fail, request error), 501 (fail, server error)<br>200 OK  : no response body exists.</pre>
+
+</body></html>

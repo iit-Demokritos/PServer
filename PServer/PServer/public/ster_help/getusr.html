@@ -1,0 +1,55 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-getusr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-getusr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=getusr&amp;usr=&lt;usr&gt;&amp;str=&lt;str_pattern&gt;[&amp;num=
+          &lt;num_pattern&gt;&amp;srt=&lt;order_pattern&gt;]
+          Order of query params is not important. Query params 'num',
+          and 'srt' are optional. If ommited, 'num' defaults to '*',
+          and 'srt' defaults to 'desc'.
+pattern : for stereotypes, * | name.
+          For num, * | &lt;integer&gt;.
+          For srt, asc | desc. For 10-&gt;1 use 'desc'.
+descript: for the specified user, the stereotypes matching the pattern
+          are found and sorted according to degree (based on 'srt'),
+          and secondarily according to stereotype name (asc, A-&gt;Z).
+          Then the first &lt;num_pattern&gt; rows are selected (or all, if
+          &lt;num_pattern&gt; is '*') and an XML answer is formed. If no
+          stereotype in DB matches the pattern or if &lt;num_pattern&gt; &lt;=0
+          or if the user does not exist, the result will not have any
+          'row' elements (200 OK will still be returned).
+          Note that 'srt' affects the sorting on degree. Sorting is
+          primarily based on numeric values (doubles) of field
+          'su_degree', which may also contain NULLs in some records.
+          Note that in case a number of stereotypes matching the pattern
+          have the same degree, some of them may be part of the
+          results, while others not. This depends on 'num', which
+          determines in absolute terms the number of result rows.
+          Which of the stereotypes with the same value will be part of
+          the result depends on the stereotype name, which is a
+          secondary field of ordering.
+example : ster?clnt=name|pass&amp;com=getusr&amp;usr=eddie&amp;str=*&amp;num=3
+          ster?clnt=name|pass&amp;com=getusr&amp;usr=w18&amp;str=visitor
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/stereot_singleuser.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;str&gt;stereotype&lt;/str&gt;&lt;deg&gt;degree&lt;/deg&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

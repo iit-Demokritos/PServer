@@ -1,0 +1,8 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>-getusrcomu template</title></head><body style="background-color: rgb(255, 255, 204);">
+<pre>-getusrcomu<br>template: commu?clnt=&lt;name|pass&gt;&amp;com=getusrcomu&amp;ucom=&lt;name&gt;<br>descript: Returns the users of a specific user community. <br>example : commu?clnt=test1|test1&amp;com=rmfusrcom&amp;ucom=mycommunity<br>returns : 200 OK, 401 (fail, request error), 501 (fail, server error)<br>200 OK  : in this case the response body is as follows<br>	&lt;?xml version="1.0"?&gt;<br>	&lt;?xml-stylesheet type="text/xsl" href="/resp_xsl/community_users.xsl"?&gt;<br>	&lt;result&gt;<br>	&lt;row&gt;&lt;user&gt;feature&lt;/user&gt;&lt;/row&gt;<br>	...<br>	&lt;/result&gt; </pre>
+
+</body></html>

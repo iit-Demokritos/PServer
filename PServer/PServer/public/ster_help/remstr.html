@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-remstr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-remstr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=remstr[&amp;str=&lt;str_1&gt;&amp;str=...][&amp;lke=&lt;str_like_pattern&gt;]
+          Order of query params is not important. The 'str'
+          and 'lke' query parameters are optional.
+pattern : an SQL 'like' pattern matching any stereotype that
+          starts with it.
+descript: removes the stereotypes specified by 'str' and / or
+          'lke' query parameters. If no 'str' and 'lke' query
+          parameters exist, all stereotype records will be
+          deleted. Referential integrity constraints will cause
+          records of tables where those stereotypes are foreign
+          keys to be removed as well. This means that deleted
+          stereotypes will cease to have any profiles (features),
+          and that user references to deleted stereotypes will
+          also be lost. Can be used to initialize the Stereotype
+          Mode DB, by deleting all records from all tables. In
+          order to delete the profile (features) of a stereotype
+          without affecting the user references to that stereotype,
+          the 'remftr' command can be used. If the specified
+          stereotypes are not found, no records will be deleted
+          (200 OK will still be returned). If the error code 401
+          is returned then no record has been deleted.
+example : ster?clnt=name|pass&amp;com=remstr&amp;str=visitor&amp;str=experienced
+          ster?clnt=name|pass&amp;com=remstr&amp;str=visitor&amp;lke=exper
+          ster?clnt=name|pass&amp;com=remstr   (deletes all records from all tables)
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

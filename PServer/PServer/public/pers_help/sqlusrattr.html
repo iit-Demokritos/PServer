@@ -1,0 +1,39 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-sqlusrattr
+template: pers?clnt=&lt;name|pass&gt;&amp;com=sqlattrusr&amp;whr=&lt;where_pattern&gt;
+          Order of query params is not important.
+pattern : * | &lt;SQL part following WHERE&gt;. The '*' means all.
+          A special syntax must be used: ':' for = and '|' for &lt;space&gt;.
+          This is because spaces and '=' are replaced in WWW requests.
+          Note that string values must be enclosed in single quotes.
+descript: returns part of the table 'user_attributes' as specified
+          by the condition in the 'whr' query parameter. If no
+          row in DB satisfies the conditions, the result will
+          not have any 'row' elements (200 OK will still be returned).
+example : pers?clnt=name|pass&amp;com=sqlattrusr&amp;whr=user:'john'|order|by|user
+          pers?clnt=name|pass&amp;com=sqlattrusr&amp;whr=*
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/user_attributes.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;usr&gt;user&lt;/usr&gt;&lt;attr&gt;feature&lt;/attr&gt;&lt;val&gt;value&lt;/val&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

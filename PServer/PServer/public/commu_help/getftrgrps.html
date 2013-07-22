@@ -1,0 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>-getftrgrp template</title>
+
+  
+</head><body style="background-color: rgb(255, 255, 204);">
+<pre>-getftrgrps<br>template: commu?clnt=&lt;name|pass&gt;&amp;com=getftrgrps&amp;usr=&lt;user_name&gt;&amp;name=&lt;name1|name2|...&gt;<br>descript: Returns the feature groups that exists in the database. The parameter usr contains the name of<br>	  a user, PServer will sort the feature groups according to how important are for the this user. The<br>	  parameter name is optional and specifies the names of ther features groups. The names can contain the<br>          special character * and must be seperated by the character '|'. If the parameter names does not exists<br>	  pserver will return all the availiable feature groups.  <br>returns : 200 OK, 401 (fail, request error), 501 (fail, server error)<br>200 OK  : in this case the response body is as follows<br>	&lt;?xml version="1.0"?&gt;<br>	&lt;?xml-stylesheet type="text/xsl" href="/resp_xsl/user_feature_groups.xsl"?&gt;<br>	&lt;result&gt;<br>	&lt;row&gt;&lt;group&gt;feature group&lt;/group&gt;&lt;/row&gt;<br>	...<br>	&lt;/result&gt; </pre>
+
+</body></html>

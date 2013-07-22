@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-setdcy
+template: pers?clnt=&lt;name|pass&gt;&amp;com=setdcy&amp;&lt;ftr_group_1&gt;=&lt;decay_rate_1&gt;&amp;...
+          Order of query params is important: position of 'com'
+          is not important, however updates of feature group decay
+          rates are performed in the order they appear in the request.
+          Decay rate must exist and be a number from 0 to 1, both
+          inclusive (eg: 0.5). Feature group is a template path
+          expression 'pathname', representing all features with name
+          starting with 'pathname'. Feature group cannot be &quot;*&quot;.
+descript: if the feature group already exists in the DB, the
+          corresponding decay rate is updated to the new value. If the
+          feature group is a new group, the new (group, rate) pair is
+          inserted in the DB. If the error code 401 is returned, (eg. in
+          case some decay rate was not numeric or was not in the proper
+          range, or in case the feature group was illegal, eg. &quot;*&quot;) then
+          no changes at all have taken place in the DB. Note however
+          that in case a feature group is the empty string, the
+          corresponding (group, rate) pair will just be ignored.
+example : pers?clnt=name|pass&amp;com=setdcy&amp;page10.banners=0.5&amp;the_times.politics=1
+          pers?clnt=name|pass&amp;com=setdcy&amp;frequency.allfeatures=0  (see comments)
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : no response body exists.
+comments: - Note that if rate is set to 0, the decay calculated for
+          a feature is reduced to the total number of visits the
+          user paid to the feature.
+          - Note that the same feature may be organized as part of
+          two different hierarchies, eg. page10.banners.banner2,
+          frequency.allfeatures.banner2, with possibly different
+          rates. In this case, when the feature is selected by a
+          user, the application must notify the server about the
+          interaction for both (or more) names of the feature.
+          - Note that it is possible to define overlapping sets of
+          features, or sets who are subsets of other sets, giving
+          possibly different rates for each, as in:
+            pers?clnt=name|pass&amp;com=setdcy&amp;page10=0.3&amp;page10.banners=0.6
+          This will not result in more user-feature interactions
+          recorded in the database (as is the case in the previous
+          situation). The interactions are recorded strictly as the
+          application dictates. However, this makes it posible for
+          the application to query the same interaction data in
+          different ways. By defining various overlapping and
+          competing feature groups and assigning them different
+          decay rates, the application may get different decay
+          values for a (feature, user) pair.
+          - Note that it is not necessary to register a feature
+          group in 'decay_groups' in order to use the decay
+          functionality. The decay service is based only on
+          'decay_data' table, and populating this table has
+          nothing to do with defining feature groups. It is
+          possible to define s group and a corresponding decay
+          rate on the fly, in the request that calculates the
+          decay values. The table 'decay_groups' is just a
+          convenient place to store groups and rates in order
+          not to repeat them in every 'caldcy' request.</pre>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-incval template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-incval
+template: pers?clnt=&lt;name|pass&gt;&amp;com=incval&amp;usr=&lt;usr&gt;&amp;&lt;ftr_1&gt;=&lt;step_1&gt;&amp;...&lt;log&gt;
+          Order of query params is not important: updates of feature
+          values are performed in the order they appear in the request,
+          however the changes are of accummulative nature, so the final
+          result is the same.
+descript: for the specified user, the value for each specified feature
+          is increased by x (decreased if x is negative), where x is
+          the step corresponding to that feature. Rows with string
+          values that cannot be converted to numeric, are not affected.
+          If no matches are found, or if all matches have values that
+          cannot be converted to numeric, no records will be updated
+          (200 OK will still be returned). If any &lt;step_i&gt; parameter
+          cannot be converted to numeric, 401 is returned. If the error
+          code 401 is returned then no updates have taken place in the DB.
+          If the log parameter is been used then the transaction will be loged 
+          into the num data table
+example : pers?clnt=name|pass&amp;com=incval&amp;usr=kostas&amp;lang.gr=1&amp;expert=-0.34
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

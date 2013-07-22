@@ -311,15 +311,14 @@ public class Stereotypes implements pserver.pservlets.PService {
                             + token.substring(0, token.indexOf("<>"))
                             + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
                     operator = "<>";
-                    second = "'" + token.substring(token.indexOf(">") + 1) + "'";
+                    second = "" + token.substring(token.indexOf(">") + 1) + "";
                 } else if (token.contains(":")) {
-
 
                     // If first ends with < or > 
                     if (token.contains("<") || token.contains(">")) {
                         first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
-                                + token.substring(0, token.indexOf(":")-1) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-                        operator = token.substring(token.indexOf(":")-1,
+                                + token.substring(0, token.indexOf(":") - 1) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+                        operator = token.substring(token.indexOf(":") - 1,
                                 token.indexOf(":"));
                         operator += "=";
                     } else {
@@ -330,9 +329,13 @@ public class Stereotypes implements pserver.pservlets.PService {
 
                     //then move it to the operator
 
-                    second = "'" + token.substring(token.indexOf(":") + 1) + "'";
+                    second = "" + token.substring(token.indexOf(":") + 1) + "";
                 }
-             
+////                debug lines
+//                System.out.println("first==> "+first);
+//                System.out.println("operator==> "+operator);
+// 
+
                 sqlRule.append("(");
                 sqlRule.append(first);
                 sqlRule.append(operator);
@@ -344,6 +347,15 @@ public class Stereotypes implements pserver.pservlets.PService {
                 }
             } else {
                 sqlRule.append(" ").append(token.toUpperCase()).append(" ");
+
+//                if (token.toUpperCase().equals("OR")) {
+//                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
+//                } else {
+//
+//                    //TODO: change it for the AND to Work properly
+//                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
+//
+//                }
             }
             idx++;
         }
@@ -357,7 +369,33 @@ public class Stereotypes implements pserver.pservlets.PService {
                 + "," + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE
                 + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + stereot + "',?,1,'" + clientName + "')";
         PreparedStatement prep = dbAccess.getConnection().prepareStatement(insUsrSql);
-        String sql = "SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM " + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName + "' AND " + rule + " GROUP BY " + DBAccess.UATTR_TABLE_FIELD_USER;
+
+        //if rule has or 
+        String sql = "SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM "
+                + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName
+                + "' AND " + rule + " GROUP BY " + DBAccess.UATTR_TABLE_FIELD_USER;
+        System.out.println("====> " + sql + " <======");
+        //else 
+        //create sql query with join like
+        
+        //select temp1.user 
+        //from (select user from user_attributes where FK_psclient='rest' AND (attribute='computer' AND attribute_value=1))temp1 
+        //join (select user from user_attributes where FK_psclient='rest' AND (attribute='edu' AND attribute_value>=3))temp2 
+        //join (select user from user_attributes where FK_psclient='rest' AND (attribute='sex' AND attribute_value='male'))temp3 
+        //on temp1.user=temp2.user and temp1.user=temp3.user;
+
+
+        //rule=  (attribute='computer' AND attribute_value=1) AND (attribute='edu' AND attribute_value>=3)
+
+        //rule=  (attribute='computer' AND attribute_value=1) OR (attribute='edu' AND attribute_value>=3)
+
+        //rule=  (attribute='computer' AND attribute_value=1) AND (attribute='edu' AND attribute_value>=3) OR (attribute='edu' AND attribute_value>=3)
+
+
+        sql = "SELECT  temp1.user FROM (SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM "
+                + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName
+                + "' AND " + rule + ")";
+
         PServerResultSet rs = dbAccess.executeQuery(sql);
         while (rs.next()) {
             String user = rs.getRs().getString(1);
@@ -1192,6 +1230,8 @@ public class Stereotypes implements pserver.pservlets.PService {
                         rowsAffected += dbAccess.executeUpdate(query);
                         query = "delete from stereotype_profiles where sp_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
                         rowsAffected += dbAccess.executeUpdate(query);
+                        query = "delete from stereotype_users where su_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
+                        rowsAffected += dbAccess.executeUpdate(query);
                         query = "delete from stereotypes where st_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
                         rowsAffected += dbAccess.executeUpdate(query);
                     } else {
@@ -1208,6 +1248,8 @@ public class Stereotypes implements pserver.pservlets.PService {
                 query = "delete from stereotype_attributes where sp_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
                 rowsAffected += dbAccess.executeUpdate(query);
                 query = "delete from stereotype_profiles where sp_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
+                query = "delete from stereotype_users where su_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
                 rowsAffected += dbAccess.executeUpdate(query);
                 query = "delete from stereotypes where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
                 rowsAffected += dbAccess.executeUpdate(query);

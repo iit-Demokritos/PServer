@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-lststr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-lststr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=lststr&amp;str=&lt;str_pattern&gt;[&amp;mod=&lt;mod_pattern&gt;]
+          Order of query params is not important. Query parameter
+          'mod' is optional, if omitted defaults to '*'.
+pattern : for stereotype, * | name
+          For mode, * | p | u
+descript: lists the stereotypes in the DB. From an original set of
+          the stereotypes that match the stereotype pattern (that
+          is, all stereotypes if str pattern is '*', a single
+          stereotype if &lt;name&gt; exists in table 'stereotypes', or
+          none if &lt;name&gt; does not exist or table is empty. A subset
+          is selected and listed as follows: (a) if the mode pattern
+          is '*', all stereotypes in the original set are returned
+          without additional filtering, (b) if the mode pattern is
+          'p', only the stereotypes of the original set that do not
+          have any associated feature (do not exist in table
+          'stereotype_profiles') are returned, and (c) if the mode
+          pattern is 'u' only the stereotypes of the original set
+          that have not been assigned to any user (do not exist in
+          table 'stereotype_users') are returned. Result is ordered
+          by stereotype name. If the final list is empty, a result
+          without any row elements is returned in the XML answer.
+example : ster?clnt=name|pass&amp;com=lststr&amp;str=*
+          ster?clnt=name|pass&amp;com=lststr&amp;str=professionals&amp;mod=*
+          ster?clnt=name|pass&amp;com=lststr&amp;str=*&amp;mod=p
+          ster?clnt=name|pass&amp;com=lststr&amp;str=visitor&amp;mod=u
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/stereotypes.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;str&gt;stereotype&lt;/str&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

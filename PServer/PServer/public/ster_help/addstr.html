@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addstr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-addstr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=addstr&amp;str=&lt;str&gt;[&amp;&lt;rule&gt;=pattern...]
+          Order of query params is not important. Feature
+          names must not end with '*' to be legal. Stereotype
+          names must not be '*', '-', or empty string.
+descript: A new stereotype based on the rule is inserted in the DB. The "rule" parameter is 
+          a conjuction of logical operations on the demographic attribures. The form of the
+          pattern is attr_name1[operator]val1|logial_operator|attr_name2[operator]val2...
+	  The operator for comparison can my : for equality and &gt;,&gt;:.&lt;:,&lt;,&lt;&gt; for 	  
+	  greater than, greater or equal than etc. We use the : and not the = symbol because of the
+	  url character restrictions. The logical operations are the "or" and "and". There can be 
+	  parenthesis too.
+	  If there is an existing stereotype with the same name an error will be returnsd.	  
+          Note that if no rule parameter exists then pserver will create an empty stereotype. If a rule 
+          parameter exists pserver will find all the users that satisfies the rule and will create the stereorype
+	  profile
+example : ster?clnt=name|pass&amp;com=addstr&amp;str=educated&amp;rule=expert.computer:yes|and|educ:3
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : no response body exists.</pre>
+
+</body>
+
+</html>

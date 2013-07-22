@@ -1,0 +1,40 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-setdeg template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-setdeg
+template: ster?clnt=&lt;name|pass&gt;&amp;com=setdeg&amp;usr=&lt;usr&gt;&amp;&lt;str_1&gt;=&lt;new_deg_1&gt;&amp;&lt;str_2&gt;=...
+          Order of query params is important: position of 'com'
+          and 'usr' is not important, however updates of degrees
+          are performed in the order they appear in the request.
+descript: for the specified user, updates the degrees of the
+          stereotypes in the query string, to the new degrees.
+          Degrees in the query string that cannot be converted
+          to numeric (double) will be considered as NULLs when
+          updating the DB. If the specified user does not exist,
+          or if some stereotypes in the query string are not
+          assigned to that user, corresponding degrees will not
+          be updated (200 OK will still be returned). If the error
+          code 401 is returned then no changes have taken place.
+example : ster?clnt=name|pass&amp;com=setdeg&amp;usr=0.34&amp;visitor=0.85&amp;expert=1.0
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

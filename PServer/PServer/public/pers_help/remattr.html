@@ -1,0 +1,41 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-remattr
+template: pers?clnt=&lt;name|pass&gt;&amp;com=remattr&amp;attr=&lt;attr_pattern_1&gt;&amp;ftr=...
+          Order of query params is not important.
+pattern : * | name[.*], where name is a path expression
+descript: removes all records with attributes matching the
+          attribute pattern(s). Referential integrity constraints
+          will cause records of tables where those attributes are
+          foreign keys to be removed as well. If no feature
+          in DB matches a pattern, no record will be deleted
+          (200 OK will still be returned). If the error code
+          401 is returned then none of the attributes matching
+          the request pattern(s) has been deleted. Can be used
+          to initialize the Personal Mode DB, by deleting all
+          data in tables (note that table'num_data' are not affected, however).
+example : pers?clnt=name|pass&amp;com=remattr&amp;attr=lang.*&amp;attr=gender
+          pers?clnt=name|pass&amp;com=remattr&amp;attr=*  (deletes everything from DB tables)
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>loadlog</title>
+
+
+</head><body style="background-color: rgb(255, 255, 204);">
+<pre>-loadftrgrp<br><br>template: csv?clnt=&lt;name|pass&gt;&amp;com=loadftrgrp&amp;path=&lt;path&gt;&amp;cs=&lt;character_seperator&gt;&amp;nmcol=&lt;column_number&gt;&amp;ftrcol=&lt;column_number&gt;&amp;usrcol=&lt;column_number&gt;&amp;fs=&lt;character_seperator&gt;<br>descript: Reads a csv file with feature groups and inserts them into the database. The parameter path contains the path that the csv exists. The parameter cs contain the character(s)<br>          that separate(s) the csv file. The csv must contain one column with the name of the feature groups. The parameter nmcol <br>	  specifies the column number of the names. The parameter is optional and if it is ommited the PServer assumes it has the value 0 (1st column). The parameter ftrcol<br>	  specifies the column number of the features of the group. The features must be separated by some character or charactes that is the value of parameter fs. The parameter<br>          ftrcol is optional and if is ommited PServer assumes that has the value 1 (2nd column). The parameter usrcol specifies the column with the users that are the owners of <br>	  the feature group. The users must be separated by some character or charactes that is the value of parameter fs. The parameter is optional and if is ommited PServer assumes<br>	  that it has the NULL value and the feature group belongs to everyone.<br> examples: csv?clnt=tname|passcom=loadftrgrp&amp;path=/home/user/csv_file.txt&amp;fs=\\|&amp;cs=\\,&amp;nmcol=0&amp;ftrcol=1&amp;usrcol=2<br>returns : 200 OK, 401 (fail, request error), 501 (fail, server error)<br>200 OK : no response body exists.</pre>
+
+
+</body></html>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:template match="/">
+    <html>
+        <head>
+            <title>View from Table: community_feature</title>
+        </head>
+        <body>
+            <br></br>
+            <h2>communities: community, feature, value</h2>
+            <p></p>
+            <b>Tables:</b> communities
+            <br></br>
+            <b>Description:</b> A selection of community,feature,feature_value from community_feature
+            <p></p>
+            <table border="1" cellpadding="4">
+                <xsl:for-each select="result/row">
+                    <tr>
+                        <td>
+                            <xsl:value-of select="community"/>
+                        </td>
+                        <td>
+                            <xsl:value-of select="ftr"/>
+                        </td>
+                        <td>
+                            <xsl:value-of select="ftr_value"/>
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </table>
+            <br></br>
+            <a href="/">Back to home</a>
+            <p></p>
+        </body>
+    </html>
+</xsl:template>
+</xsl:stylesheet>

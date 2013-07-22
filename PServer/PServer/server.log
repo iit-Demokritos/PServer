@@ -6524,3 +6524,209 @@
 28/6/2013 14:31:22  >  Request from /127.0.0.1 (34689)
 28/6/2013 14:31:22  >  34689-        /ster_help/addstr.html
 28/6/2013 14:32:2  >  Shutting down server, normal: true
+28/6/2013 15:12:35  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 15:12:35  >  Messages log mode set to: on
+28/6/2013 15:12:36  >  Connected to DB: MySQL
+28/6/2013 15:13:22  >  Request from /127.0.0.1 (56168)
+28/6/2013 15:13:22  >  56168-        /commu_help/commu_mode.html
+28/6/2013 15:13:22  >  Request from /127.0.0.1 (56169)
+28/6/2013 15:13:22  >  Request from /127.0.0.1 (56170)
+28/6/2013 15:13:22  >  56170-        /commu_help/commu_index.html
+28/6/2013 15:13:22  >  56169-        /commu_help/menu.html
+28/6/2013 15:13:29  >  Request from /127.0.0.1 (56171)
+28/6/2013 15:13:29  >  56171-        /ster_help/ster_mode.html
+28/6/2013 15:13:29  >  Request from /127.0.0.1 (56172)
+28/6/2013 15:13:29  >  56172-        /ster_help/menu.html
+28/6/2013 15:13:29  >  Request from /127.0.0.1 (56173)
+28/6/2013 15:13:29  >  56173-        /ster_help/ster_index.html
+28/6/2013 15:13:31  >  Request from /127.0.0.1 (56174)
+28/6/2013 15:13:31  >  56174-        /ster_help/addstr.html
+28/6/2013 15:13:45  >  Request from /127.0.0.1 (56175)
+28/6/2013 15:13:45  >  56175-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22Ned%22}
+28/6/2013 15:13:45  >  Request from /127.0.0.1 (56177)
+28/6/2013 15:13:45  >  56177-        /resp_xsl/rows.xsl
+28/6/2013 15:14:29  >  Request from /127.0.0.1 (56178)
+28/6/2013 15:14:29  >  56178-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 15:14:29  >  Request from /127.0.0.1 (56180)
+28/6/2013 15:14:29  >  56180-        /resp_xsl/rows.xsl
+28/6/2013 15:14:42  >  Shutting down server, normal: true
+28/6/2013 15:21:20  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 15:21:20  >  Messages log mode set to: on
+28/6/2013 15:21:21  >  Connected to DB: MySQL
+28/6/2013 15:21:27  >  Request from /127.0.0.1 (56182)
+28/6/2013 15:21:27  >  56182-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 15:21:27  >  Request from /127.0.0.1 (56184)
+28/6/2013 15:21:27  >  56184-        /resp_xsl/rows.xsl
+28/6/2013 15:22:23  >  Request from /127.0.0.1 (56185)
+28/6/2013 15:22:23  >  56185-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1
+28/6/2013 15:24:58  >  Request from /127.0.0.1 (56192)
+28/6/2013 15:24:58  >  56192-        /1.0/stereotype/rest|123/increase_degree.xml?username=panos&stereotypeList={%22educated%22:%222%22}
+28/6/2013 15:24:59  >  Request from /127.0.0.1 (56194)
+28/6/2013 15:24:59  >  56194-        /resp_xsl/rows.xsl
+28/6/2013 15:26:16  >  Request from /127.0.0.1 (56196)
+28/6/2013 15:26:16  >  56196-        /1.0/stereotype/rest|123/stereotypes.xml
+28/6/2013 15:26:16  >  Request from /127.0.0.1 (56198)
+28/6/2013 15:26:16  >  56198-        /resp_xsl/stereotypes.xsl
+28/6/2013 15:27:7  >  Request from /127.0.0.1 (56208)
+28/6/2013 15:27:7  >  56208-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos
+28/6/2013 15:27:7  >  Request from /127.0.0.1 (56210)
+28/6/2013 15:27:7  >  56210-        /resp_xsl/stereot_singleuser.xsl
+28/6/2013 15:28:19  >  Request from /127.0.0.1 (56211)
+28/6/2013 15:28:19  >  56211-        /1.0/stereotype/rest|123/increase_degree.xml?username=panos&stereotypelist={%22educated%22:%221%22}
+28/6/2013 15:28:20  >  Request from /127.0.0.1 (56213)
+28/6/2013 15:28:20  >  56213-        /resp_xsl/rows.xsl
+28/6/2013 15:28:27  >  Request from /127.0.0.1 (56214)
+28/6/2013 15:28:27  >  56214-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos
+28/6/2013 15:28:27  >  Request from /127.0.0.1 (56216)
+28/6/2013 15:28:27  >  56216-        /resp_xsl/stereot_singleuser.xsl
+28/6/2013 15:28:36  >  Request from /127.0.0.1 (56218)
+28/6/2013 15:28:36  >  56218-        /1.0/stereotype/rest|123/set_degree.xml?username=panos&stereotypelist={%22educated%22:%221%22}
+28/6/2013 15:28:36  >  Request from /127.0.0.1 (56220)
+28/6/2013 15:28:36  >  56220-        /resp_xsl/rows.xsl
+28/6/2013 15:28:40  >  Request from /127.0.0.1 (56221)
+28/6/2013 15:28:40  >  56221-        /1.0/stereotype/rest|123/user_stereotypes.xml?username=panos
+28/6/2013 15:28:40  >  Request from /127.0.0.1 (56223)
+28/6/2013 15:28:40  >  56223-        /resp_xsl/stereot_singleuser.xsl
+28/6/2013 15:45:54  >  Shutting down server, normal: true
+28/6/2013 15:52:1  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 15:52:1  >  Messages log mode set to: on
+28/6/2013 15:52:2  >  Connected to DB: MySQL
+28/6/2013 15:52:4  >  Request from /127.0.0.1 (56447)
+28/6/2013 15:52:4  >  56447-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 15:52:5  >  Request from /127.0.0.1 (56449)
+28/6/2013 15:52:5  >  56449-        /resp_xsl/rows.xsl
+28/6/2013 15:53:1  >  Request from /127.0.0.1 (56450)
+28/6/2013 15:53:1  >  56450-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:0|or|educ%3C:2
+28/6/2013 15:53:19  >  Request from /127.0.0.1 (56455)
+28/6/2013 15:53:19  >  56455-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 15:53:19  >  Request from /127.0.0.1 (56457)
+28/6/2013 15:53:19  >  56457-        /resp_xsl/rows.xsl
+28/6/2013 15:53:27  >  Request from /127.0.0.1 (56458)
+28/6/2013 15:53:27  >  56458-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:0|or|edu%3C:2
+28/6/2013 16:25:19  >  Shutting down server, normal: true
+28/6/2013 16:54:56  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 16:54:56  >  Messages log mode set to: on
+28/6/2013 16:54:57  >  Connected to DB: MySQL
+28/6/2013 17:20:34  >  Shutting down server, normal: true
+28/6/2013 17:20:39  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 17:20:39  >  Messages log mode set to: on
+28/6/2013 17:20:40  >  Connected to DB: MySQL
+28/6/2013 17:20:54  >  Request from /127.0.0.1 (57072)
+28/6/2013 17:20:54  >  57072-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 17:20:54  >  Request from /127.0.0.1 (57074)
+28/6/2013 17:20:54  >  57074-        /resp_xsl/rows.xsl
+28/6/2013 17:21:9  >  Request from /127.0.0.1 (57075)
+28/6/2013 17:21:9  >  57075-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:0||edu%3C:2
+28/6/2013 17:39:40  >  Shutting down server, normal: true
+28/6/2013 17:39:45  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 17:39:45  >  Messages log mode set to: on
+28/6/2013 17:39:47  >  Connected to DB: MySQL
+28/6/2013 17:39:49  >  Shutting down server, normal: true
+28/6/2013 17:41:9  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 17:41:9  >  Messages log mode set to: on
+28/6/2013 17:41:11  >  Connected to DB: MySQL
+28/6/2013 17:41:15  >  Request from /127.0.0.1 (57212)
+28/6/2013 17:41:15  >  57212-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 17:41:15  >  Request from /127.0.0.1 (57214)
+28/6/2013 17:41:16  >  57214-        /resp_xsl/rows.xsl
+28/6/2013 17:42:28  >  Request from /127.0.0.1 (57282)
+28/6/2013 17:42:28  >  57282-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:0||edu%3C:2
+28/6/2013 17:43:11  >  Shutting down server, normal: true
+28/6/2013 17:43:45  >  Server started at panagiotis-Home/127.0.1.1, port 1111
+28/6/2013 17:43:45  >  Messages log mode set to: on
+28/6/2013 17:43:48  >  Connected to DB: MySQL
+28/6/2013 17:43:53  >  Request from /127.0.0.1 (57285)
+28/6/2013 17:43:53  >  57285-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 17:43:53  >  Request from /127.0.0.1 (57287)
+28/6/2013 17:43:53  >  57287-        /resp_xsl/rows.xsl
+28/6/2013 17:43:57  >  Request from /127.0.0.1 (57288)
+28/6/2013 17:43:58  >  57288-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:0||edu%3C:2
+28/6/2013 17:45:7  >  Request from /127.0.0.1 (57292)
+28/6/2013 17:45:7  >  57292-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+28/6/2013 17:45:7  >  Request from /127.0.0.1 (57294)
+28/6/2013 17:45:7  >  57294-        /resp_xsl/rows.xsl
+28/6/2013 17:55:20  >  Shutting down server, normal: true
+1/7/2013 12:22:43  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+1/7/2013 12:22:43  >  Messages log mode set to: on
+1/7/2013 12:22:44  >  Connected to DB: MySQL
+1/7/2013 12:24:2  >  Request from /127.0.0.1 (51487)
+1/7/2013 12:24:2  >  51487-        /1.0/personal/rest|123/add_stereotype.xml
+1/7/2013 12:24:2  >  Request from /127.0.0.1 (51488)
+1/7/2013 12:24:8  >  51488-Problem parsing request: java.util.NoSuchElementException
+1/7/2013 12:25:4  >  Request from /127.0.0.1 (51489)
+1/7/2013 12:25:4  >  51489-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|educ%3E:3
+1/7/2013 12:26:2  >  Request from /127.0.0.1 (51491)
+1/7/2013 12:26:2  >  51491-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+1/7/2013 12:26:2  >  Request from /127.0.0.1 (51493)
+1/7/2013 12:26:2  >  51493-        /resp_xsl/rows.xsl
+1/7/2013 12:26:30  >  Request from /127.0.0.1 (51494)
+1/7/2013 12:26:30  >  51494-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|educ%3E:3
+1/7/2013 12:28:41  >  Request from /127.0.0.1 (51497)
+1/7/2013 12:28:41  >  51497-        /1.0/stereotype/rest|123/delete_stereotype.xml?like={%22ed%22}
+1/7/2013 12:28:41  >  Request from /127.0.0.1 (51499)
+1/7/2013 12:28:41  >  51499-        /resp_xsl/rows.xsl
+1/7/2013 12:28:45  >  Request from /127.0.0.1 (51500)
+1/7/2013 12:28:45  >  51500-        /1.0/stereotype/rest|123/add_stereotype.xml?stereotype=educated&rule=computer:1|and|edu%3E:3
+1/7/2013 14:19:14  >  Shutting down server, normal: true
+8/7/2013 10:25:11  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/7/2013 10:25:11  >  Messages log mode set to: on
+8/7/2013 10:25:11  >  Connected to DB: MySQL
+8/7/2013 10:25:21  >  Request from /127.0.0.1 (41528)
+8/7/2013 10:25:21  >  41528-        /
+8/7/2013 10:25:21  >  Request from /127.0.0.1 (41529)
+8/7/2013 10:25:25  >  41529-        /admin?com=login&login_name=root&login_password=root
+8/7/2013 10:25:26  >  Request from /127.0.0.1 (41530)
+8/7/2013 10:25:26  >  41530-        /pers_help/pers_mode.html
+8/7/2013 10:25:26  >  Request from /127.0.0.1 (41531)
+8/7/2013 10:25:26  >  Request from /127.0.0.1 (41532)
+8/7/2013 10:25:26  >  41531-        /pers_help/menu.html
+8/7/2013 10:25:26  >  41532-        /pers_help/pers_index.html
+8/7/2013 10:25:31  >  Request from /127.0.0.1 (41533)
+8/7/2013 10:25:31  >  41533-        /commu_help/commu_mode.html
+8/7/2013 10:25:31  >  Request from /127.0.0.1 (41535)
+8/7/2013 10:25:31  >  Request from /127.0.0.1 (41534)
+8/7/2013 10:25:31  >  41535-        /commu_help/commu_index.html
+8/7/2013 10:25:31  >  41534-        /commu_help/menu.html
+8/7/2013 10:25:34  >  Request from /127.0.0.1 (41536)
+8/7/2013 10:25:35  >  41536-        /ster_help/ster_mode.html
+8/7/2013 10:25:35  >  Request from /127.0.0.1 (41537)
+8/7/2013 10:25:35  >  Request from /127.0.0.1 (41538)
+8/7/2013 10:25:35  >  41537-        /ster_help/menu.html
+8/7/2013 10:25:35  >  41538-        /ster_help/ster_index.html
+8/7/2013 10:25:36  >  Request from /127.0.0.1 (41539)
+8/7/2013 10:25:36  >  41539-        /ster_help/addstr.html
+8/7/2013 10:26:22  >  Request from /127.0.0.1 (41551)
+8/7/2013 10:26:28  >  41551-Problem parsing request: java.util.NoSuchElementException
+8/7/2013 10:31:56  >  Shutting down server, normal: true
+8/7/2013 10:31:59  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/7/2013 10:31:59  >  Messages log mode set to: on
+8/7/2013 10:32:0  >  Connected to DB: MySQL
+8/7/2013 11:6:35  >  Shutting down server, normal: true
+8/7/2013 13:24:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+8/7/2013 13:24:57  >  Messages log mode set to: on
+8/7/2013 13:24:57  >  Connected to DB: MySQL
+8/7/2013 13:25:21  >  Shutting down server, normal: true
+10/7/2013 10:50:36  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/7/2013 10:50:36  >  Messages log mode set to: on
+10/7/2013 10:50:37  >  Connected to DB: MySQL
+10/7/2013 10:51:5  >  Shutting down server, normal: true
+10/7/2013 12:19:48  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+10/7/2013 12:19:48  >  Messages log mode set to: on
+10/7/2013 12:19:48  >  Connected to DB: MySQL
+10/7/2013 12:52:46  >  Shutting down server, normal: true
+11/7/2013 20:47:1  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+11/7/2013 20:47:1  >  Messages log mode set to: on
+11/7/2013 20:47:1  >  Connected to DB: MySQL
+11/7/2013 20:47:40  >  Request from /127.0.0.1 (39060)
+11/7/2013 20:47:40  >  39060-        /
+11/7/2013 20:47:40  >  Request from /127.0.0.1 (39061)
+11/7/2013 20:47:46  >  39061-Problem parsing request: java.util.NoSuchElementException
+11/7/2013 20:48:0  >  Request from /127.0.0.1 (39062)
+11/7/2013 20:48:0  >  39062-        /1.0/personal/rest|123/users.xml
+11/7/2013 20:48:0  >  Request from /127.0.0.1 (39064)
+11/7/2013 20:48:0  >  39064-        /resp_xsl/user.xsl
+11/7/2013 20:48:11  >  Request from /127.0.0.1 (39065)
+11/7/2013 20:48:11  >  39065-        /1.0/personal/rest|123/users.xml?where=*
+11/7/2013 20:48:11  >  Request from /127.0.0.1 (39067)
+11/7/2013 20:48:11  >  39067-        /resp_xsl/user.xsl
+11/7/2013 20:51:39  >  Shutting down server, normal: true

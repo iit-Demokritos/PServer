@@ -1,0 +1,45 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-remusr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-remusr
+template: pers?clnt=&lt;name|pass&gt;&amp;com=remusr[&amp;usr=&lt;usr_1&gt;&amp;usr=...]
+          Order of query params is not important. The 'usr'
+          query parameters are optional.
+descript: removes all records specified by 'usr' query
+          parameters. If no matching records are found
+          no records will be deleted (200 OK will still
+          be returned). If no 'usr' query parameters exist,
+          the records for all users will be deleted. If the
+          error code 401 is returned then no record has
+          been deleted.
+example : pers?clnt=name|pass&amp;com=remusr&amp;usr=john&amp;usr=kostas
+          pers?clnt=name|pass&amp;com=remusr   (deletes everything in table)
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+          Note that the 'number of relevant rows' is not the
+          number of removed users. The removed users are given
+          by : (deleted rows / number of features).
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.
+          Note that if a user is to be removed from the personal mode,
+          the requests 'remddt' and 'remndt' should be called to remove
+          decay data and numeric data respectively, together with the
+          request 'remusr' to remove user features.</pre>
+
+</body>
+
+</html>

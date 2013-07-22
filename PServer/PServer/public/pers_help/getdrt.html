@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-getdrt
+template: pers?clnt=&lt;name|pass&gt;&amp;com=getdrt[&amp;grp=&lt;ftr_group_1&gt;&amp;grp=...]
+          Order of query params is not important. Feature group
+          is a template path expression 'pathname', representing
+          all features with name starting with 'pathname'. The
+          'grp' query parameters are optional.
+descript: selects the corresponding decay rates for the specified
+          feature groups and formats an XML answer with the group
+          names and rates. If the specified groups do not exist
+          in DB, the result will not have any row elements (200
+          OK will still be returned). If no 'grp' query parameters
+          exist in the request, all the feature groups and decay
+          rates in the DB are selected. The results are sorted
+          according to descenting decay rate (1-&gt;0).
+example : pers?clnt=name|pass&amp;com=getdrt&amp;grp=page10.banners&amp;grp=frequency.allfeatures
+          pers?clnt=name|pass&amp;com=getdrt   (selects all group, rate pairs in DB)
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/decay_groups.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;grp&gt;feature group&lt;/grp&gt;&lt;rate&gt;decay rate&lt;/rate&gt;&lt;/row&gt;
+              ...
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

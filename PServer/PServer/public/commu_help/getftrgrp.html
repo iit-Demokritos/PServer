@@ -1,0 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>-getftrgrp template</title>
+
+  
+</head><body style="background-color: rgb(255, 255, 204);">
+<pre>-getftrgrp<br>template: commu?clnt=&lt;name|pass&gt;&amp;com=getftrgrp&amp;ftrgrp=&lt;name1&gt;<br>descript: Returns the features of a feature group. The parameter ftrgrp contains the name of the feature group. <br>returns : 200 OK, 401 (fail, request error), 501 (fail, server error)<br>200 OK  : in this case the response body is as follows<br>	&lt;?xml version="1.0"?&gt;<br>	&lt;?xml-stylesheet type="text/xsl" href="/resp_xsl/group_features.xsl"?&gt;<br>	&lt;result&gt;<br>	&lt;row&gt;&lt;feature&gt;feature&lt;/feature&gt;&lt;/row&gt;<br>	...<br>	&lt;/result&gt; </pre>
+
+</body></html>

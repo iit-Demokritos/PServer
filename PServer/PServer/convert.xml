@@ -1,1 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="/resp_xsl/user.xsl"?>
+<result>
+<row><usr>john</usr></row>
+<row><usr>kosts</usr></row>
+<row><usr>panos</usr></row>
+<page>1/1</page>
+</result>
 

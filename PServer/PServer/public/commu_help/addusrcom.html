@@ -1,0 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>-getftrgrp template</title>
+
+  
+</head><body style="background-color: rgb(255, 255, 204);">
+<pre>-addusrcom<br>template: commu?clnt=&lt;name|pass&gt;&amp;com=addusrcom&amp;name=&lt;name&gt;&amp;usrs=&lt;name1|name2|...&gt;<br>descript: Adds a new user community that defined by the user. The parameter name contains the name of <br>	  the user community. The parameter name contains the name of the new community. The parameter usrs contains<br>	  the names of the users of the community. The names must be separated by the character '|'. The profile of the<br>	  new user community will be calculated from the average value of the profiles of the users.<br>returns : 200 OK, 401 (fail, request error), 501 (fail, server error)<br>example : com=addusrcom&amp;usrs=usr1|usr2|usr3&amp;name=user_comm1<br>returns : 200 OK, 401 (fail, request error), 501 (fail, server error)<br>200 OK  : no response body exists.</pre>
+
+</body></html>

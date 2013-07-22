@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addftr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-remusr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=remusr[&amp;&lt;usr_1&gt;=&lt;str_1&gt;&amp;&lt;usr_2&gt;=...]
+          Order of query params is not important. The user
+          query parameters are optional.
+descript: removes all records with stereotypes matching the pairs user-stereotype
+example : ster?clnt=name|pass&amp;com=remusr&amp;john=experts&amp;george=visitor&amp;george=english
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : in this case the response body is as follows
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+comments: the reference to the xsl file allows to view results
+          in a web browser. In case the response body is handled
+          directly by an application and not by a browser, this
+          reference to xsl can be ignored.</pre>
+
+</body>
+
+</html>

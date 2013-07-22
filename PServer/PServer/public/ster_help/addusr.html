@@ -1,0 +1,32 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>-addusr template</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<pre>-addusr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=addusr&amp;usr=&lt;usr&gt;&amp;&lt;str_1&gt;=&lt;deg_1&gt;&amp;&lt;str_2&gt;=...
+          Order of query params is not important. User name
+          must not be empty string.
+descript: assigns stereotypes to a user with an associated degree.
+          Degree is numeric (double), and expresses relevence.
+          For the 'degree' parameters in query string that cannot
+          be converted to numeric, NULLs will be inserted in DB.
+          The stereotypes must already exist in the DB. If a
+          stereotype in the query string does not already exists
+          in the DB, or if a (usr, str) pair already exists, then
+          code 401 (request error) will be returned. If the error
+          code 401 is returned then no records have been inserted
+          in the DB.
+example : ster?clnt=name|pass&amp;com=addusr&amp;usr=kostas&amp;visitor=0.78&amp;expert=0.9
+          ster?clnt=name|pass&amp;com=addusr&amp;usr=0.34&amp;visitor=&amp;expert=0.5
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : no response body exists.</pre>
+
+</body>
+
+</html>
