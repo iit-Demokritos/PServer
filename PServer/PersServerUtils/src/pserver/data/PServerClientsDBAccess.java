@@ -60,12 +60,7 @@ public class PServerClientsDBAccess {
     
     public void insertPServerClient( DBAccess dbAccess, String clientName, String clientPass ) throws SQLException {
         Statement stmt = dbAccess.getConnection().createStatement();
-        String mdClientPass = null;
-        try {
-            mdClientPass = MD5.encrypt( clientPass );
-        } catch (NoSuchAlgorithmException ex) {            
-        }
-        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES(\"" + clientName + "\",\"" + mdClientPass + "\");" );
+        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES('" + clientName + "',MD5('" + clientPass + "'));" );
         stmt.close();
         this.clients.add( new PServerClient(clientName, clientPass));
     }
