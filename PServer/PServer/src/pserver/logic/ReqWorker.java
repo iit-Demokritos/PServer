@@ -122,10 +122,10 @@ public class ReqWorker extends Thread {
         parseQueryParam();
         //call rest url parser to take extra vars
         parseRestParams();
-
+        
         switchRespMode();
     }
-
+    
     /**
      * If request is restfully then convert ti to
      */
@@ -272,13 +272,18 @@ public class ReqWorker extends Thread {
             HashMap<String, String> var = PersServer.pObj.pservlets.getRestVariables(resURI.substring(1));
             int count = 1;
             for (String temp : var.keySet()) {
-                queryParam.add(temp, var.get(temp));
+                queryParam.add(decode(temp), var.get(temp));
             }
            
             initParam[0] = resURI.substring(1);
            
 
         }
+    }
+    
+    public String decode(String s){
+        //TODO decode parameters
+        return s;
     }
 
     /**
