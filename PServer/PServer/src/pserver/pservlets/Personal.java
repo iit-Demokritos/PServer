@@ -18,7 +18,6 @@ package pserver.pservlets;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -3100,6 +3099,10 @@ public class Personal implements pserver.pservlets.PService {
                 float degree = degrees.get(ster);
                 sdbAccess.addUserToStereotype(user, ster, degree, clientName);
             }
+            respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+            respBody.append("<result>\n");
+            respBody.append("<row><num_of_rows>" + rowsAffected + "</num_of_rows></row>\n");
+            respBody.append("</result>");
         } catch (SQLException e) {
             success = false;
             WebServer.win.log.debug("-Problem updating DB: " + e);
