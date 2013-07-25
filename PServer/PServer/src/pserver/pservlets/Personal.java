@@ -1532,6 +1532,7 @@ public class Personal implements pserver.pservlets.PService {
         }
         String ftrCondition = DBAccess.ftrPatternCondition(feature);
         String srtCondition = DBAccess.srtPatternCondition(sortOrder);
+        String usrCondition = DBAccess.ftrPatternCondition(user);
         //comparison style decides on which field to perform SQL order by.
         //Since both fields contain the same values as strings AND as doubles,
         //this actually decides whether to treat values as strings or doubles.
@@ -1544,20 +1545,24 @@ public class Personal implements pserver.pservlets.PService {
         try {
             //get matching records
 
-            String query1;
-            String query2;
-            if (user.contains("*")) {
-                query1 = "SELECT uf_feature AS up_feature, uf_numdefvalue AS up_numvalue FROM up_features WHERE uf_feature NOT IN " + " ( SELECT up_feature FROM user_profiles WHERE up_user LIKE '" + user.replaceAll("\\*", "%") + "' AND FK_psclient = '" + clientName + "') AND FK_psclient = '" + clientName + "'";
-                query2 = "SELECT up_feature, up_numvalue AS up_numvalue FROM user_profiles WHERE up_user LIKE '" + user.replaceAll("\\*", "%") + "' AND up_feature in " + "(SELECT up_feature FROM user_profiles WHERE up_feature " + ftrCondition + " AND FK_psclient='" + clientName + "' ) AND FK_psclient='" + clientName + "'";
-            } else {
-                query1 = "SELECT uf_feature AS up_feature, uf_numdefvalue AS up_numvalue FROM up_features WHERE uf_feature NOT IN " + " ( SELECT up_feature FROM user_profiles WHERE up_user = '" + user + "' AND FK_psclient = '" + clientName + "') AND FK_psclient = '" + clientName + "'";
-                query2 = "SELECT up_feature, up_numvalue AS up_numvalue FROM user_profiles WHERE up_user = '" + user + "' AND up_feature in " + "(SELECT up_feature FROM user_profiles WHERE up_feature " + ftrCondition + " AND FK_psclient='" + clientName + "' ) AND FK_psclient='" + clientName + "'";
-            }
-            query = " ( " + query1 + " ) UNION ( " + query2 + " ) order by " + comparField + srtCondition + ", up_feature;";
+            String sUserProfile = "SELECT up_feature FROM user_profiles "
+                    + "WHERE up_user "+usrCondition+" "
+                    + "AND FK_psclient = '" + clientName + "'";
+            String query1 = "SELECT uf_feature AS up_feature,"
+                    + " uf_numdefvalue AS up_numvalue FROM up_features "
+                    + "WHERE uf_feature NOT IN  ("+sUserProfile+") "
+                    + "AND  uf_feature "+ftrCondition+" "
+                    + "AND FK_psclient = '" + clientName + "'";
+            String query2 = "SELECT up_feature, up_numvalue FROM user_profiles "
+                    + "WHERE up_user "+usrCondition+" "
+                    + "AND up_feature "+ftrCondition+" "
+                    + "AND FK_psclient='" + clientName + "'";
 
-            //WebServer.win.log.debug( "=============================================" );
-            //WebServer.win.log.debug( query );
-            //WebServer.win.log.debug( "=============================================" );
+            query = " ( " + query1 + " ) UNION ( " + query2 + " ) order by " + comparField + srtCondition + ";";
+
+//            System.out.println( "\n\n=============================================\n" );
+//            System.out.println(query);
+//            System.out.println( "\n=============================================\n\n" );
 
             PServerResultSet rs = dbAccess.executeQuery(query);
             //format response body            
@@ -1756,17 +1761,18 @@ public class Personal implements pserver.pservlets.PService {
                 if (i != comIdx && i != usrIdx && i != clntIdx && i != logIdx) {  //'com' AND 'usr' query parameters excluded
                     //get current parameter pair
                     String feature = (String) queryParam.getKey(i);
+                    String ftrCondition = DBAccess.ftrPatternCondition(feature);
                     String step = (String) queryParam.getVal(i);
                     Float numStep = DBAccess.strToNum(step);  //is it numeric?
                     if (numStep != null) {  //if null, 'step' not numeric, misspelled request
                         //get value for current user, feature record
-                        sqlString = "select up_value from user_profiles WHERE up_user='" + user + "' AND up_feature='" + feature + "' AND FK_psclient='" + clientName + "'";
+                        sqlString = "select up_feature, up_value from user_profiles WHERE up_user='" + user + "' AND up_feature " + ftrCondition + " AND FK_psclient='" + clientName + "'";
                         PServerResultSet rs = dbAccess.executeQuery(sqlString);
                         if (rs.next() == false) {
                             rs.close();
-                            sqlString = "insert into user_profiles (up_user, up_feature, up_value, up_numvalue, FK_psclient )" + " select '" + user + "', uf_feature, uf_defvalue, uf_numdefvalue, FK_psclient FROM up_features WHERE uf_feature = '" + feature + "' AND FK_psclient = '" + clientName + "'";
+                            sqlString = "insert into user_profiles (up_user, up_feature, up_value, up_numvalue, FK_psclient )" + " select '" + user + "', uf_feature, uf_defvalue, uf_numdefvalue, FK_psclient FROM up_features WHERE uf_feature " + ftrCondition + " AND FK_psclient = '" + clientName + "'";
                             dbAccess.executeUpdate(sqlString);
-                            sqlString = "select up_value from user_profiles WHERE up_user='" + user + "' AND up_feature='" + feature + "' AND FK_psclient='" + clientName + "'";
+                            sqlString = "select up_feature, up_value from user_profiles WHERE up_user='" + user + "' AND up_feature " + ftrCondition + " AND FK_psclient='" + clientName + "'";
                             rs = dbAccess.executeQuery(sqlString);
                             if (rs.next() == false) {
                                 WebServer.win.log.debug("-Problem updating DB: Feature name does not exists");
@@ -1774,24 +1780,26 @@ public class Personal implements pserver.pservlets.PService {
                                 break;
                             }
                         }
+                        do {
+                            //boolean recFound = rs.next();  //expect one row or none
+                            //String value = recFound ? rs.getRs().getString( "up_value" ) : null;
+                            String sCurFeature = rs.getRs().getString("up_feature");
+                            String value = rs.getRs().getString("up_value");
+                            Float numValue = DBAccess.strToNum(value);  //is it numeric?
+                            float newNumValue = numValue.floatValue() + numStep.floatValue();
+                            String newValue = DBAccess.formatDouble(new Double(newNumValue));
 
-                        //boolean recFound = rs.next();  //expect one row or none
-                        //String value = recFound ? rs.getRs().getString( "up_value" ) : null;
-                        String value = rs.getRs().getString("up_value");
-                        Float numValue = DBAccess.strToNum(value);  //is it numeric?
-                        float newNumValue = numValue.floatValue() + numStep.floatValue();
-                        String newValue = DBAccess.formatDouble(new Double(newNumValue));
-                        rs.close();  //in any case
-
-                        //if ( numValue != null ) {  //if null, 'value' does not exist or not numeric
-                        //update current user, feature record                        
-                        sqlString = "UPDATE user_profiles SET up_value='" + newValue + "', up_numvalue=" + newValue + " WHERE up_user='" + user + "' AND FK_psclient='" + clientName + "' AND up_feature='" + feature + "'";
-                        rowsAffected += dbAccess.executeUpdate(sqlString);
-                        int sid = dbAccess.getLastSessionId(user, clientName);
-                        System.out.println(System.currentTimeMillis());
-                        PNumData data = new PNumData(user, feature, newNumValue, System.currentTimeMillis(), sid);
-                        rowsAffected += dbAccess.insertNewNumData(data, clientName);
-                        rowsAffected += dbAccess.updateStereotypesFromUserAction(user, feature, numStep.floatValue(), clientName);
+                            //if ( numValue != null ) {  //if null, 'value' does not exist or not numeric
+                            //update current user, feature record                        
+                            sqlString = "UPDATE user_profiles SET up_value='" + newValue + "', up_numvalue=" + newValue + " WHERE up_user='" + user + "' AND FK_psclient='" + clientName + "' AND up_feature='" + sCurFeature + "'";
+                            rowsAffected += dbAccess.executeUpdate(sqlString);
+                            int sid = dbAccess.getLastSessionId(user, clientName);
+                            System.out.println(System.currentTimeMillis());
+                            PNumData data = new PNumData(user, feature, newNumValue, System.currentTimeMillis(), sid);
+                            rowsAffected += dbAccess.insertNewNumData(data, clientName);
+                            rowsAffected += dbAccess.updateStereotypesFromUserAction(user, feature, numStep.floatValue(), clientName);
+                        }while (rs.next());
+                        rs.close();
                         //ignore current user, feature record AND continue with next
                     } //else if numStep == null
                     else {
@@ -2177,7 +2185,7 @@ public class Personal implements pserver.pservlets.PService {
         try {
             //delete rows of matching features
             for (int i = 0; i < qpSize; i++) {
-                if (i != comIdx && i != clntIdx) {  //'com' query parameter excluded
+                if (i != comIdx && i != clntIdx) {  //'com' and 'clnt' query parameters excluded
                     String key = (String) queryParam.getKey(i);
                     if (key.equalsIgnoreCase("ftr")) {
                         String ftrCondition = DBAccess.ftrPatternCondition((String) queryParam.getVal(i));
@@ -2584,10 +2592,11 @@ public class Personal implements pserver.pservlets.PService {
                 if (i != comIdx && i != usrIdx && i != clntIdx) {  //'com' AND 'usr' query parameters excluded
                     //get current parameter pair
                     String attribute = (String) queryParam.getKey(i);
+                    String sAttrCondition = DBAccess.ftrPatternCondition(attribute);
                     String newVal = (String) queryParam.getVal(i);
                     //get value for current user, feature record
                     //update current user, attribute record
-                    query = "UPDATE user_attributes set attribute_value ='" + newVal + "' WHERE user = '" + user + "' AND FK_psclient='" + clientName + "' AND attribute ='" + attribute + "'";
+                    query = "UPDATE user_attributes set attribute_value ='" + newVal + "' WHERE user = '" + user + "' AND FK_psclient='" + clientName + "' AND attribute " + sAttrCondition ;
                     //System.out.println("============================="+query);
                     rowsAffected += dbAccess.executeUpdate(query);
                 }
