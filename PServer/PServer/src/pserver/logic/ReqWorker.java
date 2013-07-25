@@ -38,6 +38,7 @@ import pserver.data.VectorMap;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.text.*;
 
 import pserver.*;
@@ -142,7 +143,7 @@ public class ReqWorker extends Thread {
         try {
             sock.setSoTimeout(WebServer.obj.reqTimeout);  //maximum blocking time in millisecs
             //open input stream to read from client
-            BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream(),Charset.forName("UTF-8")));
             //read client request
             StringBuilder sBuilder = new StringBuilder(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
             while (in.ready()) {  //until end of input stream
