@@ -110,6 +110,11 @@ public class PSReqWorker extends ReqWorker {
     //overriden base class methods
     @Override
     public void switchRespMode() {
+        
+        if (!checkClientCredentials()) {
+            respCode = REQUEST_ERR;
+            return;  //no point in proceeding
+        }
         //overriden method, extends modes of operation (respMode).
         //initiates a sequence of methods in which the actions
         //appropriate to client request are performed and the
@@ -127,6 +132,35 @@ public class PSReqWorker extends ReqWorker {
         //will not return requested files in FILE_MODE.
         //the response will consist only of http header
         super.switchRespMode();  //mode set by base class
+    }
+    
+    
+
+    /**
+     * Check whether the client is registered
+     */
+    public boolean checkClientCredentials(){
+        DBAccess dbAccess = new DBAccess(url, user, pass);
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        if (clntIdx == -1) {
+            return true; //allow nameless access in this level
+        }
+        String clientCredentials = (String) queryParam.getVal(clntIdx);
+        if (clientCredentials.indexOf('|')<=0&&clientCredentials.indexOf("%7C")<=0){
+            WebServer.win.log.error("-Malformed client credentials \""+clientCredentials+"\"");
+            return false;
+        }
+        String clientName=clientCredentials.substring(0, Math.max(clientCredentials.indexOf('|'),clientCredentials.indexOf("%7C")));
+        String clientPass=clientCredentials.replace(clientName, "").replace("|","").replace("%7C","");
+        try {
+            dbAccess.connect();
+            boolean res = dbAccess.checkClientCredentials(clientName, clientPass);
+            dbAccess.disconnect();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

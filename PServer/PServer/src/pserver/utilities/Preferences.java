@@ -56,9 +56,9 @@ public class Preferences {
         defPref.put("port","1111");
         defPref.put("ssl","off");
         defPref.put("database_driver","org.gjt.mm.mysql.Driver");
-        defPref.put("database_url","mysql://localhost/pserver3?rewriteBatchedStatements=true");
-        defPref.put("database_user","root");
-        defPref.put("database_pass","123");        
+        defPref.put("database_url","mysql://localhost/pserver?rewriteBatchedStatements=true");
+        defPref.put("database_user","pserver");
+        defPref.put("database_pass","pserver");        
         defPref.put("read_request_timeout","5000000");
         defPref.put("def_html_file","index.html");
         defPref.put("log_file_path","./server.log");

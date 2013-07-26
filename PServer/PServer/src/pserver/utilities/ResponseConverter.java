@@ -4,10 +4,14 @@
  */
 package pserver.utilities;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.wink.json4j.utils.XML;
@@ -65,12 +69,12 @@ public class ResponseConverter {
 
     private void CreateXml(String xmlInput) {
 
-        PrintWriter pw = null;
+        BufferedWriter pw = null;
 
         try {
-            pw = new PrintWriter(new FileWriter("./convert.xml"));  //If the file already exists, start writing at the end of it.
+            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./convert.xml"),Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
 
-            pw.println(xmlInput);                                  // write to convert.xml
+            pw.append(xmlInput);                                  // write to convert.xml
             pw.flush();
 
         } catch (IOException e) {
@@ -78,7 +82,11 @@ public class ResponseConverter {
         } finally {
             //Close the PrintWriter
             if (pw != null) {
-                pw.close();
+                try {
+                    pw.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }

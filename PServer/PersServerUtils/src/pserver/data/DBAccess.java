@@ -270,6 +270,16 @@ public class DBAccess {
     }
 
     /**
+     * checks if the client credentials are valid
+     */
+    public boolean checkClientCredentials(String name, String pass) throws SQLException {
+        Statement stmt = this.connection.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=MD5('"+pass+"');");
+        return rs.first()?true:false;
+    }
+    
+    
+    /**
      * returns the pserver clients that are stored in the database
      */
     public LinkedList<PServerClient> getPserverClients() throws SQLException {

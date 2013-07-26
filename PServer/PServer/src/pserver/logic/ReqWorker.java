@@ -122,10 +122,10 @@ public class ReqWorker extends Thread {
         parseQueryParam();
         //call rest url parser to take extra vars
         parseRestParams();
-
+        
         switchRespMode();
     }
-
+    
     /**
      * If request is restfully then convert ti to
      */
@@ -144,21 +144,11 @@ public class ReqWorker extends Thread {
             //open input stream to read from client
             BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             //read client request
-            int charRead;
-            StringBuffer buf = new StringBuffer();
-            while ((charRead = in.read()) != -1) {  //until end of input stream
-
-                char ch = (char) charRead;
-                System.out.print(ch);
-                buf.append(ch);
-                //HTTP requests from browsers are not always followed by -1.
-                //If no more chars to read, assume end of stream is reached!
-                if (!in.ready()) {
-                    break;
-                }
+            StringBuilder sBuilder = new StringBuilder(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
+            while (in.ready()) {  //until end of input stream
+                sBuilder.append("\n").append(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
             }
-            //System.out.println(buf.toString());
-            request = buf.substring(0);
+            request = sBuilder.toString();
         } catch (InterruptedIOException e) {  //'reqTimeout' expired
             WebServer.win.log.error(port + "-Timeout reading request: " + e);
             WebServer.flog.writeln(port + "-Timeout reading request: " + e);
@@ -168,6 +158,10 @@ public class ReqWorker extends Thread {
             WebServer.win.log.error(port + "-Problem receiving: " + e);
             WebServer.flog.writeln(port + "-Problem receiving: " + e);
             // System.out.println(e);
+            return false;
+        } catch (NullPointerException e){
+            WebServer.win.log.error(port + "-Empty request " + e);
+            WebServer.flog.writeln(port + "-Empty request " + e);
             return false;
         }
         //log info
@@ -272,13 +266,18 @@ public class ReqWorker extends Thread {
             HashMap<String, String> var = PersServer.pObj.pservlets.getRestVariables(resURI.substring(1));
             int count = 1;
             for (String temp : var.keySet()) {
-                queryParam.add(temp, var.get(temp));
+                queryParam.add(decode(temp), var.get(temp));
             }
            
             initParam[0] = resURI.substring(1);
            
 
         }
+    }
+    
+    public String decode(String s){
+        //TODO decode parameters
+        return s;
     }
 
     /**
