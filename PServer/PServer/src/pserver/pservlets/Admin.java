@@ -72,9 +72,27 @@ public class Admin implements pserver.pservlets.PService {
      *
      * @return Returns the HTML mime type from Interface {@link PService}.
      */
+    @Override
     public String getMimeType() {
-        return this.html;
+        return Admin.html;
     }
+
+    /**
+     * A number containing the current response code.
+     */
+    private int respCode;
+    /**
+     * A vectorMap containing the current parameters.
+     */
+    private VectorMap queryParam;
+    /**
+     * The String containing the server response.
+     */
+    private StringBuffer respBody;
+    /**
+     * A DBAccess.
+     */
+    private DBAccess dbAccess;
 
     /**
      * Creates a service for Administrator mode when a command is sent to
@@ -87,47 +105,88 @@ public class Admin implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
+    @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-        int respCode = PSReqWorker.NORMAL;
-        VectorMap queryParam;
-        StringBuffer respBody;
+        synchronized(this){
+            respCode = PSReqWorker.NORMAL;
+            queryParam = parameters;
+            respBody = new StringBuffer();
+            this.dbAccess = dbAccess;
 
-        queryParam = parameters;
-        respBody = new StringBuffer();
+            //commands of ADMIN_MODE here!
+            //find 'com' query param (case independent)
+            int comIdx = queryParam.qpIndexOfKeyNoCase("com");
+            //if 'com' param not present, request is invalid
+            if (comIdx == -1 ) {
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.error("-Request command does not exist");
+                return respCode;  //no point in proceeding
+            }
+            //recognize command encoded in request
+            String com = (String) queryParam.getVal(comIdx);
+            queryParam.remove(comIdx);
 
-        //commands of ADMIN_MODE here!
-        //find 'com' query param (case independent)
-        int comIdx = parameters.qpIndexOfKeyNoCase("com");
-        //if 'com' param not present, request is invalid
-        if (comIdx == -1) {
-            respCode = PSReqWorker.REQUEST_ERR;
-            WebServer.win.log.error("-Request command does not exist");
-            return respCode;  //no point in proceeding
-        }
-        //recognize command encoded in request
-        String com = (String) parameters.getVal(comIdx);
-        //commands about pserver administration
-        if (com.equalsIgnoreCase("login")) {
-            respCode = comAdmiinLogin(queryParam, response);
-        } else if (com.equalsIgnoreCase("mkusrfrm")) {
-            respCode = comAdmiinMkUsrFrm(queryParam, response, dbAccess);
-        } else if (com.equalsIgnoreCase("addClnt")) {
-            respCode = comAdmiinAddClnt(queryParam, response, dbAccess);
-        } else if (com.equalsIgnoreCase("checkdb")) {
-            respCode = comAdmiincheckdb(queryParam, response, dbAccess);
-        } else if (com.equalsIgnoreCase("chngpropfrm")) {
-            respCode = comAdmiinChngPropFrm(queryParam, response);
-        } else if (com.equalsIgnoreCase("updateProperties")) {
-            respCode = comAdmiinUpdateProperties(queryParam, response);
-        } else if (com.equalsIgnoreCase("delusr")) {
-            respCode = comAdmiinDeleteUser(queryParam, response, dbAccess);
-        } else {
-            respCode = PSReqWorker.REQUEST_ERR;
-            WebServer.win.log.error("-Request command not recognized");
+            if (!checkClientCredentials()) {
+                return respCode;  //no point in proceeding
+            }
+
+            //commands about pserver administration
+            if (com.equalsIgnoreCase("login")) {
+                comAdmiinLogin();
+            } else if (com.equalsIgnoreCase("mkusrfrm")) {
+                comAdmiinMkUsrFrm();
+            } else if (com.equalsIgnoreCase("addClnt")) {
+                comAdmiinAddClnt();
+            } else if (com.equalsIgnoreCase("checkdb")) {
+                comAdmiincheckdb();
+            } else if (com.equalsIgnoreCase("chngpropfrm")) {
+                comAdmiinChngPropFrm();
+            } else if (com.equalsIgnoreCase("updateProperties")) {
+                comAdmiinUpdateProperties();
+            } else if (com.equalsIgnoreCase("delusr")) {
+                comAdmiinDeleteUser();
+            } else {
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.error("-Request command not recognized");
+                return respCode;
+            }
+            response.append(respBody.toString());
             return respCode;
         }
-        response.append(respBody.toString());
-        return respCode;
+    }
+    
+     /**
+     * Check whether the client is registered
+     */
+    public boolean checkClientCredentials() {
+        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
+        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
+
+        if (lnIdx == -1 || lpIdx == -1) {
+            WebServer.win.log.error("-Request administration access with wrong attributes");
+            respCode = PSReqWorker.ACCESS_DENIED;
+            return false;
+        }
+        
+        String login_name = (String) queryParam.getVal(lnIdx);
+        String login_pass = (String) queryParam.getVal(lpIdx);
+
+        if (login_name == null || login_pass == null) {
+            WebServer.win.log.error("-Request administration access with wrong attributes");
+            respCode = PSReqWorker.ACCESS_DENIED;
+            return false;
+        }
+
+        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
+            respCode = PSReqWorker.ACCESS_DENIED;
+            WebServer.win.log.error("-Request administration access with wrong attributes");
+            return false;
+        }
+
+        queryParam.remove(lnIdx);
+        queryParam.remove(lnIdx);
+        
+        return true;
     }
 
     /**
@@ -141,27 +200,8 @@ public class Admin implements pserver.pservlets.PService {
      * @param respBody The response message that is produced.
      * @return The value of response code.
      */
-    private int comAdmiinUpdateProperties(VectorMap queryParam, StringBuffer respBody) {
-        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
-        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
-
-        String login_name = (String) queryParam.getVal(lnIdx);
-        String login_pass = (String) queryParam.getVal(lpIdx);
-
-        if (login_name == null || login_pass == null) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-
-        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-
-        queryParam.remove(lnIdx);
-        queryParam.remove(lpIdx);
-        queryParam.remove(queryParam.qpIndexOfKeyNoCase("com"));
-
+    private void comAdmiinUpdateProperties() {
+        
         Preferences pref = PersServer.pref;
 
         for (int i = 0; i < queryParam.size(); i++) {
@@ -171,8 +211,6 @@ public class Admin implements pserver.pservlets.PService {
         }
 
         String htmlCode;
-        int respCode = PSReqWorker.NORMAL;
-
         if (pref.silentStore()) {
             htmlCode = propertiesSaved(administrator_name, administrator_pass);
         } else {
@@ -180,11 +218,8 @@ public class Admin implements pserver.pservlets.PService {
             respCode = PSReqWorker.SERVER_ERR;
             WebServer.win.log.error("Request properties update but it was impossible to write on server properties file");
         }
-
         respBody.append(htmlCode);
         respBody.append("\n");
-
-        return respCode;
     }
 
     /**
@@ -198,7 +233,7 @@ public class Admin implements pserver.pservlets.PService {
      * @param respBody The response message that is produced.
      * @return The value of response code.
      */
-    private int comAdmiinChngPropFrm(VectorMap queryParam, StringBuffer respBody) {
+    private void comAdmiinChngPropFrm() {
         Preferences pref = PersServer.pref;
         String[] properties = pref.getProperties();
         String[] pValues = new String[properties.length];
@@ -207,22 +242,10 @@ public class Admin implements pserver.pservlets.PService {
             pValues[i] = pref.getPref(properties[i]);
         }
 
-        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
-        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
-        String login_name = (String) queryParam.getVal(lnIdx);
-        String login_pass = (String) queryParam.getVal(lpIdx);
-        if (login_name == null || login_pass == null) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
         String htmlContent = changePropertiesForm(administrator_name, administrator_pass, properties, pValues);
         respBody.append(htmlContent);
         respBody.append("\n");
-        return PSReqWorker.NORMAL;
+        respCode = PSReqWorker.NORMAL;
     }
 
     /**
@@ -237,19 +260,7 @@ public class Admin implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private int comAdmiincheckdb(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
-        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
-        String login_name = (String) queryParam.getVal(lnIdx);
-        String login_pass = (String) queryParam.getVal(lpIdx);
-        if (login_name == null || login_pass == null) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
+    private int comAdmiincheckdb() {
         String htmlContent = showDbContent(administrator_name, administrator_pass);
         respBody.append(htmlContent);
         respBody.append("\n");
@@ -267,27 +278,10 @@ public class Admin implements pserver.pservlets.PService {
      * @param respBody The response message that is produced.
      * @return The value of response code.
      */
-    private int comAdmiinLogin(VectorMap queryParam, StringBuffer respBody) {
-        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
-        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
-
-        String login_name = (String) queryParam.getVal(lnIdx);
-        String login_pass = (String) queryParam.getVal(lpIdx);
-
-        if (login_name == null || login_pass == null) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-
-        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-
+    private void comAdmiinLogin() {
         String htmlContent = loginForm(administrator_name, administrator_pass);
         respBody.append(htmlContent);
         respBody.append("\n");
-        return PSReqWorker.NORMAL;
     }
 
     /**
@@ -302,29 +296,10 @@ public class Admin implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private int comAdmiinMkUsrFrm(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
-        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
-
-        String login_name = (String) queryParam.getVal(lnIdx);
-        String login_pass = (String) queryParam.getVal(lpIdx);
-
-        if (login_name == null || login_pass == null) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-
-        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-
+    private void comAdmiinMkUsrFrm() {
         String htmlContent = manageUsersForm(administrator_name, administrator_pass, dbAccess);
-
         respBody.append(htmlContent);
         respBody.append("\n");
-
-        return PSReqWorker.NORMAL;
     }
 
     /**
@@ -340,22 +315,7 @@ public class Admin implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private int comAdmiinDeleteUser(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
-        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
-
-        String login_name = (String) queryParam.getVal(lnIdx);
-        String login_pass = (String) queryParam.getVal(lpIdx);
-
-        if (login_name == null || login_pass == null) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-
-        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
+    private int comAdmiinDeleteUser() {
 
         try {
             //first connect to DB        
@@ -366,13 +326,13 @@ public class Admin implements pserver.pservlets.PService {
         }
 
         boolean success;
-        int respCode = PSReqWorker.NORMAL;
+        respCode = PSReqWorker.NORMAL;
         try {
             dbAccess.setAutoCommit(false);
             success = execAdminDeleteClient(queryParam, dbAccess);
             if (success == true) {
                 dbAccess.commit();
-                respCode = comAdmiinMkUsrFrm(queryParam, respBody, dbAccess);
+                comAdmiinMkUsrFrm();
             } else {
                 dbAccess.rollback();
                 respCode = PSReqWorker.REQUEST_ERR;  //client request data inconsistent?
@@ -424,33 +384,12 @@ public class Admin implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private int comAdmiinAddClnt(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
-        int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
-        String login_name = (String) queryParam.getVal(lnIdx);
-        String login_pass = (String) queryParam.getVal(lpIdx);
-        if (login_name == null || login_pass == null) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
-        if (login_name.equals(administrator_name) == false || login_pass.equals(administrator_pass) == false) {
-            WebServer.win.log.error("-Request administration access with wrong attributes");
-            return PSReqWorker.ACCESS_DENIED;
-        }
+    private void comAdmiinAddClnt() {
         //first connect to DB
         try {
             dbAccess.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return PSReqWorker.SERVER_ERR;
-        }
-
-        int respCode = PSReqWorker.NORMAL;
-        int success;
-
-        try {
             dbAccess.setAutoCommit(false);
-            success = execAdminAddClient(queryParam, dbAccess);
+            int success = execAdminAddClient(queryParam, dbAccess);
             if (success == 0) {
                 dbAccess.commit();
                 String htmlContent = userInserted(administrator_name, administrator_pass);
@@ -471,8 +410,6 @@ public class Admin implements pserver.pservlets.PService {
             respCode = PSReqWorker.SERVER_ERR;
             WebServer.win.log.error("-DB Transaction problem: " + e);
         }
-
-        return respCode;
     }
 
     /**
@@ -655,7 +592,7 @@ public class Admin implements pserver.pservlets.PService {
         form = upperTemplate(name, password)
                 + "<br><p>Fill the fields with the attributes for the new user</p>\n"
                 + "<TABLE>\n"
-                + "<form name=\"user_creation\" method=\"post\" action=\"admin\">\n"
+                + "<form name=\"user_creation\" method=\"GET\" action=\"./admin\">\n"
                 + "<input type=\"hidden\" name=\"com\" value=\"addClnt\">\n"
                 + "<input type=\"hidden\" name=\"login_name\" value=\"" + name + "\">\n"
                 + "<input type=\"hidden\" name=\"login_password\" value=\"" + password + "\">\n"

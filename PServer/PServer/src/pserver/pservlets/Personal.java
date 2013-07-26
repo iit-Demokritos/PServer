@@ -32,6 +32,7 @@ import pserver.domain.PDecayData;
 import pserver.domain.PFeature;
 import pserver.domain.PNumData;
 import pserver.logic.PSReqWorker;
+import pserver.utilities.ClientCredentialsChecker;
 
 /**
  * Contains all necessary methods for the management of Personal mode of
@@ -75,21 +76,9 @@ public class Personal implements pserver.pservlets.PService {
         StringBuffer respBody = response;
         queryParam = parameters;
 
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        if (clntIdx == -1) {
-            respCode = PSReqWorker.REQUEST_ERR;
-            WebServer.win.log.error("-Parameter clnt does not exist");
-            return respCode;  //no point in proceeding
+        if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
+            return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        String clientName = (String) queryParam.getVal(clntIdx);
-        if (clientName.indexOf('|')<=0&&clientName.indexOf("%7C")<=0){
-            respCode = PSReqWorker.REQUEST_ERR;
-            WebServer.win.log.error("-Malformed client credentials \""+clientName+"\"");
-            return respCode;  //no point in proceeding
-        }
-        clientName = clientName.substring(0, Math.max(clientName.indexOf('|'),clientName.indexOf("%7C")));
-        queryParam.updateVal(clientName, clntIdx);
-        //System.out.println( "client name = " + queryParam.getVal( clntIdx ) );
 
         //commANDs of PERS_MODE here!
         //find 'com' query param (case independent)

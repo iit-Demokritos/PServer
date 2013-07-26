@@ -267,18 +267,13 @@ public class ReqWorker extends Thread {
             HashMap<String, String> var = PersServer.pObj.pservlets.getRestVariables(resURI.substring(1));
             int count = 1;
             for (String temp : var.keySet()) {
-                queryParam.add(decode(temp), var.get(temp));
+                queryParam.add(temp, var.get(temp));
             }
            
             initParam[0] = resURI.substring(1);
            
 
         }
-    }
-    
-    public String decode(String s){
-        //TODO decode parameters
-        return s;
     }
 
     /**
@@ -309,13 +304,10 @@ public class ReqWorker extends Thread {
                     default:         //'pair' normal case: name=value (added)
                         String name = pair.substring(0, idx);
                         String value = pair.substring(idx + 1);
-                        value = URLDecoder.decode(value, "UTF-8");
                         queryParam.add(name, value);
                         break;
                 }
             }
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(ReqWorker.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchElementException ee) {
         }  //not possible
         //log info

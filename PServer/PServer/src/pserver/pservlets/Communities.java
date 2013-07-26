@@ -45,6 +45,7 @@ import pserver.data.VectorMap;
 import pserver.domain.PFeatureGroup;
 import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
+import pserver.utilities.ClientCredentialsChecker;
 
 /**
  * Contains all necessary methods for the management of Communities mode of
@@ -92,12 +93,11 @@ public class Communities implements pserver.pservlets.PService {
         respBody = new StringBuffer();
         queryParam = parameters;
 
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        if (clntIdx == -1) {
-            respCode = PSReqWorker.REQUEST_ERR;
-            WebServer.win.log.error("-Parameter clnt does not exist");
-            return respCode;  //no point in proceeding
+        if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
+            return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
+        
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String client = (String) queryParam.getVal(clntIdx);
         String clientName = client.substring(0, client.indexOf('|'));
         String clientPass = client.substring(client.indexOf('|') + 1);
