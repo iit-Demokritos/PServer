@@ -183,7 +183,7 @@ public class DBAccess {
     }
 
     public void setAutoCommit(boolean state) throws SQLException {
-        this.getConnection().setAutoCommit((state));
+        this.connection.setAutoCommit(state);
     }
 
     public void connect() throws SQLException {
