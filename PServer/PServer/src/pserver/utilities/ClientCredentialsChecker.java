@@ -24,7 +24,7 @@ public abstract class ClientCredentialsChecker {
             return false;
         }
         String clientCredentials = (String) queryParam.getVal(clntIdx);
-        if (clientCredentials.indexOf('|')<=0&&clientCredentials.indexOf("%7C")<=0){
+        if (clientCredentials.indexOf('|')<=0){
             WebServer.win.log.error("-Malformed client credentials \""+clientCredentials+"\"");
             return false;
         }

@@ -79,6 +79,11 @@ public class Personal implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
+        
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        clientName = clientName.substring(0, clientName.indexOf('|'));
+        queryParam.updateVal(clientName, clntIdx);
 
         //commANDs of PERS_MODE here!
         //find 'com' query param (case independent)
