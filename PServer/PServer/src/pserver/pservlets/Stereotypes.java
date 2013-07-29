@@ -155,7 +155,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             //the user attributes must be expanded with the new features
             //-start transaction body
             if (!sterExistsStr(queryParam, dbAccess)) {
-                success = success && execSterAddStr(queryParam, dbAccess);
+                success = success && execSterAddStr(queryParam, respBody, dbAccess);
             } else {
                 respCode = PSReqWorker.DUBLICATE_ERROR;  //client request data inconsistent?                
                 dbAccess.disconnect();
@@ -233,7 +233,7 @@ public class Stereotypes implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execSterAddStr(VectorMap queryParam, DBAccess dbAccess) {
+    private boolean execSterAddStr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int strIdx = queryParam.qpIndexOfKeyNoCase("str");
         if (strIdx == -1) {
@@ -280,6 +280,11 @@ public class Stereotypes implements pserver.pservlets.PService {
             success = false;
             WebServer.win.log.debug("-Problem inserting to DB: " + e);
         }
+        respBody.append("<?xml version=\"1.0\"?>\n");
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>").append(rowsAffected);
+        respBody.append("</num_of_rows></row>\n");
+        respBody.append("</result>");
         WebServer.win.log.debug("-Num of rows inserted: " + rowsAffected);
         return success;
     }
@@ -749,7 +754,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         if (limit == -1) {
             return false;
         }
-        String strCondition = (stereot.equals("*")) ? "" : "su_stereotype='" + stereot + "' and ";
+        String strCondition = (stereot.equals("*")) ? "" : "su_stereotype like('" + stereot + "%') and ";
         String srtCondition = DBAccess.srtPatternCondition(sortOrder);
         //execute request
         boolean success = true;
@@ -1110,7 +1115,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         if (stereot.equals("*")) {
             strCondition = "";
         } else {
-            strCondition = " where st_stereotype='" + stereot + "'";
+            strCondition = " where st_stereotype like('" + stereot + "%')";
         }
         String link = strCondition.equals("") ? " where" : " and";
         String modCondition;
