@@ -451,7 +451,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         try {
             boolean success = true;
             dbAccess.setAutoCommit(false);//transaction guarantees integrity
-            success = execSterAddUsr(queryParam, dbAccess);
+            success = execSterAddUsr(queryParam, respBody, dbAccess);
             //-end transaction body
             if (success) {
                 dbAccess.commit();
@@ -479,7 +479,7 @@ public class Stereotypes implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execSterAddUsr(VectorMap queryParam, DBAccess dbAccess) {
+    private boolean execSterAddUsr(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int qpSize = queryParam.size();
         int comIdx = queryParam.qpIndexOfKeyNoCase("com");
@@ -524,6 +524,11 @@ public class Stereotypes implements pserver.pservlets.PService {
             success = false;
             WebServer.win.log.debug("-Problem inserting to DB: " + e);
         }
+        respBody.append("<?xml version=\"1.0\"?>\n");
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>").append(rowsAffected);
+        respBody.append("</num_of_rows></row>\n");
+        respBody.append("</result>");
         WebServer.win.log.debug("-Num of rows inserted: " + rowsAffected);
         return success;
     }
