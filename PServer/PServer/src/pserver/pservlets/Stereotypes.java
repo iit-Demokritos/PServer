@@ -379,7 +379,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         String sql = "SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM "
                 + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName
                 + "' AND " + rule + " GROUP BY " + DBAccess.UATTR_TABLE_FIELD_USER;
-        System.out.println("====> " + sql + " <======");
+        //System.out.println("====> " + sql + " <======");
         //else 
         //create sql query with join like
         
@@ -397,9 +397,9 @@ public class Stereotypes implements pserver.pservlets.PService {
         //rule=  (attribute='computer' AND attribute_value=1) AND (attribute='edu' AND attribute_value>=3) OR (attribute='edu' AND attribute_value>=3)
 
 
-        sql = "SELECT  temp1.user FROM (SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM "
+        sql = "SELECT  temp.user FROM (SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " as user FROM "
                 + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName
-                + "' AND " + rule + ")";
+                + "' AND " + rule + ") as temp";
 
         PServerResultSet rs = dbAccess.executeQuery(sql);
         while (rs.next()) {
@@ -1268,6 +1268,10 @@ public class Stereotypes implements pserver.pservlets.PService {
                 rowsAffected = dbAccess.executeUpdate(query);
                 query = "delete from stereotypes WHERE FK_psclient='" + clientName + "' ";
                 rowsAffected = dbAccess.executeUpdate(query);
+                query = "delete from stereotype_attributes where FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
+                query = "delete from stereotype_users where FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
             }
             //format response body
             //response will be used only in case of success            
