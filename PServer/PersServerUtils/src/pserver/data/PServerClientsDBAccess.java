@@ -4,7 +4,7 @@
  */
 package pserver.data;
 
-import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +16,11 @@ import pserver.domain.PServerClient;
  * @author alexm
  */
 public class PServerClientsDBAccess {
+    
+    private static char[] SALT_CHARS = new char[62];
+    
+    private static int SALT_LENGTH = 64;
+    
     //private DBAccess dbAccess;   
     private static PServerClientsDBAccess instance = null;
     
@@ -29,6 +34,19 @@ public class PServerClientsDBAccess {
         if ( instance != null ) {
             throw new Exception( PServerClientsDBAccess.class.getName() + " is singenton and can only be initialize once");            
         }
+        int index = 0;
+        for (int i = 'a'; i <= 'z'; i++) {
+            SALT_CHARS[index] = (char)i;
+            index++;
+        }
+        for (int i = 'A'; i <= 'Z'; i++) {
+            SALT_CHARS[index] = (char)i;
+            index++;
+        }
+        for (int i = '0'; i <= '9'; i++) {
+            SALT_CHARS[index] = (char)i;
+            index++;
+        }
         instance = new PServerClientsDBAccess(dBAccess);
     }
     
@@ -37,15 +55,6 @@ public class PServerClientsDBAccess {
     }
     
     public boolean clientNameExists( String clientName ) throws SQLException {
-        /*Statement stmt = dbAccess.getConnection().createStatement();
-        ResultSet rs = stmt.executeQuery( "SELECT * FROM pserver_clients WHERE name=\"" + clientName + "\";" );
-        if ( rs.next() ) {//if the client exists the users cant be add and return the value 1        
-            stmt.close();
-            return true;
-        } else {
-            stmt.close();
-            return false;
-        }*/
         for( PServerClient clnt : clients ){
             if( clnt.getName().equals(clientName)) {
                 return true;
@@ -58,11 +67,16 @@ public class PServerClientsDBAccess {
         return this.clients;
     }
     
-    public void insertPServerClient( DBAccess dbAccess, String clientName, String clientPass ) throws SQLException {
+    public void insertPServerClient( DBAccess dbAccess, String clientName, String clientPass ) throws SQLException{
         Statement stmt = dbAccess.getConnection().createStatement();
-        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES('" + clientName + "',SHA2('" + clientPass + "',256));" );
+        SecureRandom random = new SecureRandom();
+        StringBuilder salt = new StringBuilder();
+        for (int i = 0;i < SALT_LENGTH; i++) {
+            salt.append(SALT_CHARS[Math.abs(random.nextInt()%62)]);
+        }
+        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password,salt) VALUES('" + clientName + "',SHA2('" + salt.toString()+clientPass + "',256), '" + salt.toString() + "');" );
         stmt.close();
-        this.clients.add( new PServerClient(clientName, clientPass));
+        this.clients.add( new PServerClient(clientName, clientPass, salt.toString()));
     }
     
     public void deleteClient( String client , DBAccess dbAccess ) throws SQLException {
@@ -111,6 +125,7 @@ public class PServerClientsDBAccess {
             PServerClient client = new PServerClient();
             client.setName(rs.getString("name"));
             client.setSHA2pass(rs.getString("password"));
+            client.setSalt(rs.getString("salt"));
             clients.add(client);
         }        
     }

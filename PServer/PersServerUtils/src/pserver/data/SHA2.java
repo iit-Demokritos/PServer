@@ -27,7 +27,7 @@ public class SHA2 {
     static public String encrypt(String input) throws NoSuchAlgorithmException{
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(input.getBytes());//transforms password into SHA2 hash
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         BigInteger hash=new BigInteger(1,md.digest());
         sb.append(hash.toString(16));//transform bytes into hexadeciman integer string
         return sb.toString();

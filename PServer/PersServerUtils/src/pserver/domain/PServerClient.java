@@ -29,19 +29,22 @@ public class PServerClient {
     
     private String name; //Pserver client has a name
     private String pass; // a password
-    private String sha2pass = null; //and the password is stored as an SHA2 hash value
+    private String sha2pass; //and the password is stored as an SHA2 hash value
+    private String salt;    //with some salt
     
     public PServerClient() {
         name = null;
         pass = null;
         sha2pass = null;
+        salt = null;
     }
     
-    public PServerClient( String name, String pass ) {
+    public PServerClient( String name, String pass, String salt ) {
         this.name = name;
         this.pass = pass;
+        this.salt = salt;
         try {
-            this.sha2pass = SHA2.encrypt( pass );
+            this.sha2pass = SHA2.encrypt( salt + pass );
         } catch (NoSuchAlgorithmException ex) {   
             ex.printStackTrace();         
         }
@@ -60,9 +63,9 @@ public class PServerClient {
     }
 
     public void setPass(String pass) {
+        this.pass = pass;
         try {
-            this.pass = pass;
-            this.sha2pass = SHA2.encrypt(pass);
+            this.sha2pass = SHA2.encrypt( salt + pass );
         } catch (NoSuchAlgorithmException ex) {
             ex.printStackTrace();
         }
@@ -74,6 +77,19 @@ public class PServerClient {
 
     public void setSHA2pass(String sha2pass) {
         this.sha2pass = sha2pass;
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+    
+    public void setSalt(String salt) {
+        this.salt = salt;
+        try {
+            this.sha2pass = SHA2.encrypt( salt + pass );
+        } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

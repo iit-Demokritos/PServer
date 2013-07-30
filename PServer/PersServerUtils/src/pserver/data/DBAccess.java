@@ -274,28 +274,16 @@ public class DBAccess {
      */
     public boolean checkClientCredentials(String name, String pass) throws SQLException {
         Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=SHA2('"+pass+"',256);");
+        ResultSet rs = stmt.executeQuery("SELECT salt FROM pserver_clients where name='" + name + "'");
+        if (!rs.first()) {
+            return false;
+        }
+        String salt = rs.getString("salt");
+        rs.close();
+        rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=SHA2('" + salt + pass + "',256);");
         return rs.first()?true:false;
     }
     
-    
-    /**
-     * returns the pserver clients that are stored in the database
-     */
-    public LinkedList<PServerClient> getPserverClients() throws SQLException {
-        LinkedList<PServerClient> clients = new LinkedList<PServerClient>();
-        Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients");
-        while (rs.next()) {
-            PServerClient client = new PServerClient();
-            client.setName(rs.getString("name"));
-            client.setSHA2pass(rs.getString("password"));
-            clients.add(client);
-        }
-        rs.close();
-        return clients;
-    }
-
     /**
      * INSERT new user in the database
      */
