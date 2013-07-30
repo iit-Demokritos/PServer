@@ -38,7 +38,6 @@ import pserver.data.PCommunityDBAccess;
 import pserver.data.PCommunityProfileResultSet;
 import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.PFeatureGroupProfileResultSet;
-import pserver.data.PServerClientsDBAccess;
 import pserver.data.PUserDBAccess;
 import pserver.data.UserCommunityManager;
 import pserver.data.VectorMap;

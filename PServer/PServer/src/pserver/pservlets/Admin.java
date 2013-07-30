@@ -428,7 +428,6 @@ public class Admin implements pserver.pservlets.PService {
         int newClntPassIdx = queryParam.qpIndexOfKeyNoCase("password");
         String newClntName = (String) queryParam.getVal(newClntNameIdx);
         String newClntPass = (String) queryParam.getVal(newClntPassIdx);
-        System.out.println(queryParam.getVal(newClntPassIdx));
         try {
             if (cdbAccess.clientNameExists(newClntName) == true) {
                 return 1;
@@ -436,6 +435,7 @@ public class Admin implements pserver.pservlets.PService {
             cdbAccess.insertPServerClient(dbAccess, newClntName, newClntPass);
             return 0;
         } catch (Exception e) {
+            e.printStackTrace();
             return -1;
         }
     }

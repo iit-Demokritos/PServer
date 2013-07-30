@@ -119,7 +119,9 @@ public class Stereotypes implements pserver.pservlets.PService {
             respCode = comSterMake(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("update")) {  //remove user assignments to stereotypes
             respCode = comSterUpdate(queryParam, respBody, dbAccess);
-        } else {
+        } else if (com.equalsIgnoreCase("incval")){
+            respCode = comSterIncVal(queryParam, respBody, dbAccess);
+        }else {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Request command not recognized");
         }
@@ -1012,28 +1014,30 @@ public class Stereotypes implements pserver.pservlets.PService {
                     Float numStep = DBAccess.strToNum(step);  //is it numeric?
                     if (numStep != null) {  //if null, 'step' not numeric, misspelled request
                         //get value for current stereotype, feature record
-                        query = "select sp_value from stereotype_profiles where sp_stereotype='" + stereot + "' and sp_feature ='" + feature + "' and FK_psclient='" + clientName + "' ";
+                        query = "select sp_numvalue from stereotype_profiles where sp_stereotype='" + stereot + "' and sp_feature ='" + feature + "' and FK_psclient='" + clientName + "' ";
                         PServerResultSet rs = dbAccess.executeQuery(query);
                         boolean recFound = rs.next();  //expect one row or none
-                        String value = recFound ? rs.getRs().getString("sp_value") : null;
+                        String value = recFound ? rs.getRs().getString("sp_numvalue") : null;
                         rs.close();  //in any case
                         Float numValue = DBAccess.strToNum(value);  //is it numeric?
-                        if (numValue != null) {  //if null, 'value' does not exist or not numeric
+                        double newNumValue;
+                        int tmpRows = 0;
+                         //TODO Maybe initialize all values in stereotype creation
+                        if (recFound == false) { //if recFound == false we assume that it was uninitialized and treat it as 0
+                            newNumValue = numStep.doubleValue();
+                            //insert new feature record
+                            String newValue = DBAccess.formatDouble(new Double(newNumValue));
+                            query = "INSERT into stereotype_profiles values ('" + stereot + "', '" + feature + "', '" + newNumValue + "', '" + newNumValue + "', '" + clientName + "')";
+                            tmpRows = dbAccess.executeUpdate(query);
+                        }
+                        else if (numValue != null) {  //if null, 'value' does not exist or not numeric
+                            newNumValue = numValue.doubleValue() + numStep.doubleValue();
                             //update current stereotype, feature record
-                            double newNumValue = numValue.doubleValue() + numStep.doubleValue();
                             String newValue = DBAccess.formatDouble(new Double(newNumValue));
                             query = "UPDATE stereotype_profiles set sp_value='" + newValue + "', sp_numvalue=" + newValue + " where sp_stereotype='" + stereot + "' and sp_feature='" + feature + "' and FK_psclient='" + clientName + "' ";
-                            int tmpRows = dbAccess.executeUpdate(query);
-                            if (tmpRows == 0) {
-                                query = "INSERT stereotype_profiles ( sp_stereotype, sp_feature, sp_value, sp_numvalue, FK_psclient ) SELECT '" + stereot + "', uf_feature, uf_defvalue, uf_numdefvalue, FK_psclient FROM up_features WHERE uf_feature ='" + feature + "' AND FK_psclient='" + clientName + "'";
-                                dbAccess.executeUpdate(query);
-                                query = "UPDATE stereotype_profiles SET sp_value='" + newValue + "', sp_numvalue=" + newValue + " where sp_stereotype='" + stereot + "' and sp_feature='" + feature + "' and FK_psclient='" + clientName + "' ";
-                                tmpRows = dbAccess.executeUpdate(query);
-                            }
-                            rowsAffected += tmpRows;
+                            tmpRows = dbAccess.executeUpdate(query);
                         }
-                        //else if numValue == null
-                        //ignore current stereotype, feature record and continue with next
+                        rowsAffected += tmpRows;
                     } //else if numStep == null
                     else {
                         success = false;
