@@ -1,7 +1,7 @@
 #PServer settings
-#Tue Jul 30 10:09:46 EEST 2013
+#Mon Jul 22 11:43:01 EEST 2013
 database_user=pserver
-database_driver=org.gjt.mm.mysql.Driver
+database_driver=com.mysql.jdbc.Driver
 port=1111
 ssl=off
 read_request_timeout=5000000
