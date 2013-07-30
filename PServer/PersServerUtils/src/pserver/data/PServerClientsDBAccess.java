@@ -60,7 +60,7 @@ public class PServerClientsDBAccess {
     
     public void insertPServerClient( DBAccess dbAccess, String clientName, String clientPass ) throws SQLException {
         Statement stmt = dbAccess.getConnection().createStatement();
-        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES('" + clientName + "',MD5('" + clientPass + "'));" );
+        stmt.executeUpdate( "INSERT INTO pserver_clients(name,password) VALUES('" + clientName + "',SHA2('" + clientPass + "',256));" );
         stmt.close();
         this.clients.add( new PServerClient(clientName, clientPass));
     }
@@ -110,25 +110,8 @@ public class PServerClientsDBAccess {
         while( rs.next() ) {
             PServerClient client = new PServerClient();
             client.setName(rs.getString("name"));
-            client.setMd5pass(rs.getString("password"));
+            client.setSHA2pass(rs.getString("password"));
             clients.add(client);
         }        
     }
-
-    public boolean isValidClient(String clientName, String clientPass) {
-        for( PServerClient clnt : clients ){
-            if( clnt.getName().equals(clientName)) {
-                try {
-                    if( clnt.getMd5pass().equals( MD5.encrypt(clientPass))){
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } catch (NoSuchAlgorithmException ex) {                    
-                }
-            }            
-        }
-        return false;
-    }
-    
 }

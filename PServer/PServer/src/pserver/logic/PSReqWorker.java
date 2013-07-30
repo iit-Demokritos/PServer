@@ -54,7 +54,6 @@
 //===================================================================
 package pserver.logic;
 
-import pserver.data.MD5;
 import java.net.*;
 import java.sql.*;
 import java.util.*;
@@ -213,82 +212,6 @@ public class PSReqWorker extends ReqWorker {
             conn.close();
         } catch (SQLException e) {
             WebServer.win.log.error("-Problem disconnecting from DB: " + e);
-        }
-    }
-
-    /**
-     * Method to check if the request came from a valid pserver user
-     *
-     * @return
-     */
-    private boolean isValidUser() {
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        /*
-         * if( this.allowAnonymous == true ){ if( clntIdx != -1){
-         * queryParam.remove( clntIdx ); } clientName=null; return true;
-         }
-         */
-        if (clntIdx == -1) {
-            return false;
-        }
-        //the query must start with the name/password
-        /*
-         * if(((String)queryParam.getKey(0)).compareToIgnoreCase("clnt")!=0){
-         * if(this.allowAnonymous==false) return INVALID_CLIENT; else return
-         * FULL_GRANTED_CLIENT;
-         }
-         */
-        //client attibutes demactrate with the "|" character
-        String userAndPass = (String) queryParam.getVal(clntIdx);
-        StringTokenizer tokenizer = new StringTokenizer(userAndPass, "|");
-        String client = tokenizer.nextToken();//first comes the client name
-        String password = "";
-
-        try {
-            password = tokenizer.nextToken();//second comes the unencrypted password                        
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-        /*
-         * if (client.equals(administrator_name) == true &&
-         * password.equals(administrator_pass) == true) {
-         * queryParam.remove(clntIdx);//removes client attrributes from the
-         * query return true;
-         }
-         */
-        String cachedPass = clientsHash.get(client);
-        if (cachedPass != null) {
-            if (cachedPass.equals(password)) {
-                return true;
-            }
-        }
-        try {
-            Connection conn = connDB(url, user, pass);
-            Statement stmt = conn.createStatement();
-            //check pserver_user existence in the data base
-            ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients WHERE name='" + client + "';");
-            if (rs.next() == false) {
-                return false;
-            }
-            String storedPass = rs.getString("password");//gets the encrypted password
-            try {
-                String encodedPass = MD5.encrypt(password);
-                if (encodedPass.equals(storedPass) == false)//compares given password with the storedpassword for validation
-                {
-                    return false;
-                }
-            } catch (NoSuchAlgorithmException e) {
-                return false;
-            }
-
-            /*
-             * clientName = client; queryParam.remove(clntIdx);//removes client
-             * attrributes from the query
-             */
-            clientsHash.put(client, password);
-            return true;
-        } catch (SQLException e) {
-            return false;
         }
     }
 }

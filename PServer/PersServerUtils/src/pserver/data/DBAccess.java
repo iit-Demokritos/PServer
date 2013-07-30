@@ -274,7 +274,7 @@ public class DBAccess {
      */
     public boolean checkClientCredentials(String name, String pass) throws SQLException {
         Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=MD5('"+pass+"');");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=SHA2('"+pass+"',256);");
         return rs.first()?true:false;
     }
     
@@ -289,7 +289,7 @@ public class DBAccess {
         while (rs.next()) {
             PServerClient client = new PServerClient();
             client.setName(rs.getString("name"));
-            client.setMd5pass(rs.getString("password"));
+            client.setSHA2pass(rs.getString("password"));
             clients.add(client);
         }
         rs.close();

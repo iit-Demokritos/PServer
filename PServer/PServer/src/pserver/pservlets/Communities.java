@@ -102,13 +102,6 @@ public class Communities implements pserver.pservlets.PService {
         String clientName = client.substring(0, client.indexOf('|'));
         String clientPass = client.substring(client.indexOf('|') + 1);
 
-        PServerClientsDBAccess cdbAccess = PServerClientsDBAccess.getInstance();
-        if (cdbAccess.isValidClient(clientName, clientPass) == false) {
-            respCode = PSReqWorker.REQUEST_ERR;
-            WebServer.win.log.error("-Invalid client");
-            return respCode;
-        }
-
         queryParam.updateVal(clientName, clntIdx);
 
         int comIdx = parameters.qpIndexOfKeyNoCase("com");
