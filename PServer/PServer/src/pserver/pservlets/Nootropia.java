@@ -35,6 +35,7 @@ import pserver.data.DBAccess;
 import pserver.data.PServerResultSet;
 import pserver.data.VectorMap;
 import pserver.logic.PSReqWorker;
+import pserver.utilities.ClientCredentialsChecker;
 
 /**
  *
@@ -60,6 +61,10 @@ public class Nootropia implements pserver.pservlets.PService {
         respBody = new StringBuffer();
         queryParam = parameters;
 
+        if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
+            return PSReqWorker.REQUEST_ERR;  //no point in proceeding
+        }
+        
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));

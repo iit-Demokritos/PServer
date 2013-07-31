@@ -217,7 +217,9 @@ public class PersServer extends WebServer {
         super.loadSettings();
         //load additional settings of this class
         dbDriver = pref.getPref("database_driver");
-        dbUrl = (new StringBuilder()).append("jdbc:").append(pref.getPref("database_url")).toString();
+        dbUrl = new StringBuilder().append("jdbc:").append(pref.getPref("database_url")).toString();
+        dbUrl+=dbUrl.contains("?")?"&":"?";
+        dbUrl+="useUnicode=true&characterEncoding=utf-8";
         dbUser = pref.getPref("database_user");
         dbPass = pref.getPref("database_pass");
         //allowAnonymous=(pref.getPref("anonymous")).equals("off")? false:true;        

@@ -38,6 +38,7 @@ import pserver.data.VectorMap;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.text.*;
 
 import pserver.*;
@@ -122,10 +123,10 @@ public class ReqWorker extends Thread {
         parseQueryParam();
         //call rest url parser to take extra vars
         parseRestParams();
-
+        
         switchRespMode();
     }
-
+    
     /**
      * If request is restfully then convert ti to
      */
@@ -142,23 +143,13 @@ public class ReqWorker extends Thread {
         try {
             sock.setSoTimeout(WebServer.obj.reqTimeout);  //maximum blocking time in millisecs
             //open input stream to read from client
-            BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream(),Charset.forName("UTF-8")));
             //read client request
-            int charRead;
-            StringBuffer buf = new StringBuffer();
-            while ((charRead = in.read()) != -1) {  //until end of input stream
-
-                char ch = (char) charRead;
-                System.out.print(ch);
-                buf.append(ch);
-                //HTTP requests from browsers are not always followed by -1.
-                //If no more chars to read, assume end of stream is reached!
-                if (!in.ready()) {
-                    break;
-                }
+            StringBuilder sBuilder = new StringBuilder(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
+            while (in.ready()) {  //until end of input stream
+                sBuilder.append("\n").append(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
             }
-            //System.out.println(buf.toString());
-            request = buf.substring(0);
+            request = sBuilder.toString();
         } catch (InterruptedIOException e) {  //'reqTimeout' expired
             WebServer.win.log.error(port + "-Timeout reading request: " + e);
             WebServer.flog.writeln(port + "-Timeout reading request: " + e);
@@ -168,6 +159,10 @@ public class ReqWorker extends Thread {
             WebServer.win.log.error(port + "-Problem receiving: " + e);
             WebServer.flog.writeln(port + "-Problem receiving: " + e);
             // System.out.println(e);
+            return false;
+        } catch (NullPointerException e){
+            WebServer.win.log.error(port + "-Empty request " + e);
+            WebServer.flog.writeln(port + "-Empty request " + e);
             return false;
         }
         //log info
@@ -309,13 +304,10 @@ public class ReqWorker extends Thread {
                     default:         //'pair' normal case: name=value (added)
                         String name = pair.substring(0, idx);
                         String value = pair.substring(idx + 1);
-                        value = URLDecoder.decode(value, "UTF-8");
                         queryParam.add(name, value);
                         break;
                 }
             }
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(ReqWorker.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchElementException ee) {
         }  //not possible
         //log info

@@ -183,7 +183,7 @@ public class DBAccess {
     }
 
     public void setAutoCommit(boolean state) throws SQLException {
-        this.getConnection().setAutoCommit((state));
+        this.connection.setAutoCommit(state);
     }
 
     public void connect() throws SQLException {
@@ -270,22 +270,20 @@ public class DBAccess {
     }
 
     /**
-     * returns the pserver clients that are stored in the database
+     * checks if the client credentials are valid
      */
-    public LinkedList<PServerClient> getPserverClients() throws SQLException {
-        LinkedList<PServerClient> clients = new LinkedList<PServerClient>();
+    public boolean checkClientCredentials(String name, String pass) throws SQLException {
         Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM pserver_clients");
-        while (rs.next()) {
-            PServerClient client = new PServerClient();
-            client.setName(rs.getString("name"));
-            client.setMd5pass(rs.getString("password"));
-            clients.add(client);
+        ResultSet rs = stmt.executeQuery("SELECT salt FROM pserver_clients where name='" + name + "'");
+        if (!rs.first()) {
+            return false;
         }
+        String salt = rs.getString("salt");
         rs.close();
-        return clients;
+        rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=SHA2('" + salt + pass + "',256);");
+        return rs.first()?true:false;
     }
-
+    
     /**
      * INSERT new user in the database
      */

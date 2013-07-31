@@ -29,6 +29,7 @@ import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.VectorMap;
 import pserver.domain.PFeatureGroup;
 import pserver.logic.PSReqWorker;
+import pserver.utilities.ClientCredentialsChecker;
 
 /**
  * Contains all necessary methods for the importing of data to
@@ -79,12 +80,11 @@ public class Csv implements pserver.pservlets.PService {
         respBody = new StringBuffer();
         queryParam = parameters;
 
-        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
-        if (clntIdx == -1) {
-            respCode = PSReqWorker.REQUEST_ERR;
-            WebServer.win.log.error("-Parameter clnt does not exist");
-            return respCode;  //no point in proceeding
+        if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
+            return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
+        
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
         queryParam.updateVal(clientName, clntIdx);
