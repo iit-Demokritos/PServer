@@ -53,18 +53,16 @@ public class ResponseConverter {
 
         try {
             jsonObj = XML.toJson(new File("./convert.xml"));
-
+            String json = jsonObj.toString();
+            CreateJson(json);
+            ConvertedBuffer.append(json);
         } catch (SAXException ex) {
             Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, e);
         }
-
-        String json = jsonObj.toString();
-        CreateJson(json);
-
-        ConvertedBuffer.append(json);
-
     }
 
     private void CreateXml(String xmlInput) {
@@ -73,8 +71,12 @@ public class ResponseConverter {
 
         try {
             pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./convert.xml"),Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
-
-            pw.append(xmlInput);                                  // write to convert.xml
+                               // write to convert.xml
+            if (xmlInput.equals("null")){
+                pw.append("<result></result>");
+            } else {
+                pw.append(xmlInput);   
+            }
             pw.flush();
 
         } catch (IOException e) {
