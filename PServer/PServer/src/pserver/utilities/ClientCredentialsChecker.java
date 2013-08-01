@@ -28,7 +28,7 @@ public abstract class ClientCredentialsChecker {
             WebServer.win.log.error("-Malformed client credentials \""+clientCredentials+"\"");
             return false;
         }
-        String clientName=clientCredentials.substring(0, Math.max(clientCredentials.indexOf('|'),clientCredentials.indexOf("%7C")));
+        String clientName=clientCredentials.substring(0, clientCredentials.indexOf('|'));
         String clientPass=clientCredentials.replace(clientName, "").replace("|","");
         try {
             dbAccess.connect();
