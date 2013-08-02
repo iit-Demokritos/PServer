@@ -14869,3 +14869,75 @@
 30/7/2013 10:1:8  >  Messages log mode set to: on
 30/7/2013 10:1:8  >  Connected to DB: MySQL
 30/7/2013 10:9:46  >  Shutting down server, normal: true
+1/8/2013 14:26:8  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+1/8/2013 14:26:8  >  Messages log mode set to: on
+1/8/2013 14:26:8  >  Database connection failed
+1/8/2013 14:26:8  >  Shutting down server, normal: false
+1/8/2013 14:28:51  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+1/8/2013 14:28:51  >  Messages log mode set to: on
+1/8/2013 14:28:51  >  Connected to DB: MySQL
+1/8/2013 14:29:25  >  Request from /127.0.0.1 (60984)
+1/8/2013 14:29:25  >  60984-        /1.0/personal/rest|123/users.json?where=*
+1/8/2013 14:33:57  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+1/8/2013 14:33:57  >  Messages log mode set to: on
+1/8/2013 14:33:57  >  Connected to DB: MySQL
+1/8/2013 14:34:7  >  Request from /127.0.0.1 (60997)
+1/8/2013 14:34:7  >  60997-        /1.0/personal/rest|123/users.json?where=*
+1/8/2013 14:35:25  >  Request from /127.0.0.1 (60999)
+1/8/2013 14:35:25  >  60999-        /1.0/personal/rest|123/users.xml?where=*
+1/8/2013 14:35:25  >  Request from /127.0.0.1 (32768)
+1/8/2013 14:35:25  >  32768-        /favicon.ico
+1/8/2013 14:35:25  >  Request from /127.0.0.1 (32769)
+1/8/2013 14:35:25  >  32769-        /favicon.ico
+1/8/2013 14:35:45  >  Request from /127.0.0.1 (32770)
+1/8/2013 14:35:45  >  32770-        /
+1/8/2013 14:35:49  >  Request from /127.0.0.1 (32771)
+1/8/2013 14:35:49  >  32771-        /admin?com=login&login_name=root&login_password=root
+1/8/2013 14:36:38  >  Request from /127.0.0.1 (32772)
+1/8/2013 14:36:38  >  32772-        /admin?login_name=root&login_password=root&com=mkusrfrm
+1/8/2013 14:37:22  >  Request from /127.0.0.1 (32774)
+1/8/2013 14:37:22  >  32774-        /admin?com=addClnt&login_name=root&login_password=root&name=rest&password=123&retyped_password=123
+1/8/2013 14:37:30  >  Request from /127.0.0.1 (32776)
+1/8/2013 14:37:30  >  32776-        /1.0/personal/rest|123/users.xml?where=*
+1/8/2013 14:37:30  >  Request from /127.0.0.1 (32778)
+1/8/2013 14:37:30  >  32778-        /resp_xsl/user.xsl
+1/8/2013 14:37:46  >  Request from /127.0.0.1 (32779)
+1/8/2013 14:37:46  >  32779-        /1.0/personal/rest|123/user.json?where=*
+1/8/2013 14:41:10  >  Request from /127.0.0.1 (32796)
+1/8/2013 14:41:10  >  32796-        /1.0/personal/rest|32123/user.json?where=*
+1/8/2013 14:41:35  >  Request from /127.0.0.1 (32797)
+1/8/2013 14:41:35  >  32797-        /1.0/personal/rest|32123/user.json?where=*
+1/8/2013 14:41:49  >  Request from /127.0.0.1 (32798)
+1/8/2013 14:41:49  >  32798-        /1.0/personal/rdddest|32123/user.json?where=*
+1/8/2013 14:42:1  >  Request from /127.0.0.1 (32799)
+1/8/2013 14:42:1  >  32799-        /1.0/personal/rdddest|32123/user.json?where=*
+1/8/2013 14:42:41  >  Request from /127.0.0.1 (32800)
+1/8/2013 14:42:41  >  32800-        /1.0/personal/rest|123/users.json?where=*
+1/8/2013 14:42:52  >  Request from /127.0.0.1 (32802)
+1/8/2013 14:42:52  >  32802-        /1.0/personal/rest|123333fe/users.json?where=*
+1/8/2013 14:43:3  >  Request from /127.0.0.1 (32804)
+1/8/2013 14:43:3  >  32804-        /1.0/personal/rest|123333fe/users.xml?where=*
+1/8/2013 14:55:16  >  Request from /127.0.0.1 (32846)
+1/8/2013 14:55:16  >  32846-        /1.0/personal/rest|123/users.xml?where=*
+1/8/2013 14:55:16  >  Request from /127.0.0.1 (32848)
+1/8/2013 14:55:16  >  32848-        /resp_xsl/user.xsl
+1/8/2013 15:8:28  >  Shutting down server, normal: true
+1/8/2013 15:13:38  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+1/8/2013 15:13:38  >  Messages log mode set to: on
+1/8/2013 15:13:38  >  Connected to DB: MySQL
+1/8/2013 15:13:44  >  Request from /127.0.0.1 (33008)
+1/8/2013 15:13:44  >  33008-        /1.0/personal/rest|123/users.xml?where=*
+1/8/2013 15:13:44  >  Request from /127.0.0.1 (33010)
+1/8/2013 15:13:44  >  33010-        /resp_xsl/user.xsl
+1/8/2013 15:14:7  >  Request from /127.0.0.1 (33011)
+1/8/2013 15:14:7  >  33011-        /1.0/personal/rest|123/users.json?where=*
+1/8/2013 15:14:18  >  Request from /127.0.0.1 (33013)
+1/8/2013 15:14:18  >  33013-        /1.0/personal/rest|12ddd3/users.json?where=*
+1/8/2013 15:14:23  >  Shutting down server, normal: true
+1/8/2013 16:24:0  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+1/8/2013 16:24:0  >  Messages log mode set to: on
+1/8/2013 16:24:1  >  Connected to DB: MySQL
+1/8/2013 16:24:37  >  Server started at panagiotis-laptop/127.0.1.1, port 1111
+1/8/2013 16:24:37  >  Messages log mode set to: on
+1/8/2013 16:24:38  >  Connected to DB: MySQL
+1/8/2013 16:24:41  >  Shutting down server, normal: true
