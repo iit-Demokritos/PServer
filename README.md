@@ -17,7 +17,7 @@ You can find more information about PServer in our [community](http://forum.scif
 
 * [PServer Site](http://www.scify.gr/site/en/pserver-en)
 * [FAQ](http://www.scify.gr/site/en/pserver-faq-en)
-* User's Guide
+* [User's Guide](http://pserver-project.org/sites/default/files/PServerUsersGuide.pdf)
 * [wiki](http://scify.iit.demokritos.gr/SciFYwiki/doku.php?id=pserver) 
 
 See PServer in action in our [DemoSite](http://scify.iit.demokritos.gr/DemoSite/indexne.html).
