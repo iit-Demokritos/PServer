@@ -183,8 +183,12 @@ public class ReqWorker extends Thread {
             String reqLine = request.split("\n")[0];
             method = reqLine.substring(0, reqLine.indexOf(" "));
             reqLine = reqLine.substring(reqLine.indexOf("/"), reqLine.lastIndexOf(" "));
-            resURI = reqLine.substring(0,reqLine.indexOf("?"));
-            queryStr = reqLine.substring(reqLine.indexOf("?")+1, reqLine.length());
+            if (reqLine.indexOf("?")==-1) {
+                resURI = reqLine.substring(0,reqLine.length());
+            } else {
+                resURI = reqLine.substring(0,reqLine.indexOf("?"));
+                queryStr = reqLine.substring(reqLine.indexOf("?")+1, reqLine.length());
+            }
         } catch (Exception e) {
             WebServer.win.log.error(port + "-Problem parsing request: " + e);
             WebServer.flog.writeln(port + "-Problem parsing request: " + e);
