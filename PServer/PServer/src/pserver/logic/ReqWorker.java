@@ -176,59 +176,16 @@ public class ReqWorker extends Thread {
      * @return True on success, False if {@link #request} is null.
      */
     public boolean parseRequest() {
-        //fill all request parameters, except 'queryParam'
-        //'request' must not be null
         if (request == null) {
             return false;
         }
         try {
-            String delim;
-            //get first line of request
-            String reqLine = request.substring(0, request.indexOf('\n') + 1);  //include '\n' 
-            //e.g GET /admin?login_name=root&login_password=root&com=mkusrfrm HTTP/1.1
-
-            StringTokenizer parser = new StringTokenizer(reqLine, " ", true);
-            //consume HTTP request method (GET, POST)
-            method = parser.nextToken(); //e.g GET
-            delim = parser.nextToken();  // e.g " "
-            //get the requested resource URI (without the query string)
-            resURI = parser.nextToken(" ?");  //delim is ? or space // e.g /admin
-//            TypeParam[0] = resURI;
-            delim = parser.nextToken(" ?");   // e.g ?
-            //get the query string (if there exists)
-            queryStr = "";
-            //GET - query string in first line after '?'
-            if (method.equalsIgnoreCase("GET")) {
-                if (delim.compareTo("?") == 0) {
-                    queryStr = parser.nextToken();  //returns space, if ? alone
-                    if (queryStr.equals(" ")) {
-                        queryStr = "";
-                    }
-                }
-                //else no query string exists
-            } //POST - query string at the end, after one empty line
-            else if (method.equalsIgnoreCase("POST")) {
-                boolean emptyLine = false;
-                boolean justSpaces = false;  //true if only spaces in line so far
-                int i = 0;
-                while (i < request.length() && !emptyLine) {
-                    char ch = request.charAt(i);
-                    if (ch == '\n' && !justSpaces) {
-                        justSpaces = true;
-                    } else if (!Character.isWhitespace(ch) && justSpaces) {
-                        justSpaces = false;
-                    } else if (ch == '\n' && justSpaces) {
-                        emptyLine = true;
-                    }
-                    i += 1;
-                }  //'i' now points to end, or to first char after empty line
-                int j = i;
-                while (j < request.length() && !Character.isWhitespace(request.charAt(j))) {
-                    j += 1;
-                }
-                queryStr = request.substring(i, j);
-            }
-        } catch (NoSuchElementException e) {
+            String reqLine = request.split("\n")[0];
+            method = reqLine.substring(0, reqLine.indexOf(" "));
+            reqLine = reqLine.substring(reqLine.indexOf("/"), reqLine.lastIndexOf(" "));
+            resURI = reqLine.substring(0,reqLine.indexOf("?"));
+            queryStr = reqLine.substring(reqLine.indexOf("?")+1, reqLine.length());
+        } catch (Exception e) {
             WebServer.win.log.error(port + "-Problem parsing request: " + e);
             WebServer.flog.writeln(port + "-Problem parsing request: " + e);
             return false;
@@ -237,9 +194,75 @@ public class ReqWorker extends Thread {
         WebServer.win.log.debug(port + "-Request method:" + method);
         WebServer.win.log.debug(port + "-Requested resource URI:" + resURI);
         WebServer.win.log.debug(port + "-Request query str:" + queryStr);
-        WebServer.flog.writeln(port + "-        " + resURI + (queryStr == "" ? "" : "?" + queryStr));  //..continued from logRequest()
+        WebServer.flog.writeln(port + "-        " + resURI + ("".equals(queryStr) ? "" : "?" + queryStr));  //..continued from logRequest()
         return true;
     }
+//OLD PARSER //TODO remove if new parser works
+//    public boolean parseRequest() {
+//        //fill all request parameters, except 'queryParam'
+//        //'request' must not be null
+//        if (request == null) {
+//            return false;
+//        }
+//        try {
+//            String delim;
+//            //get first line of request
+//            String reqLine = request.substring(0, request.indexOf('\n') + 1);  //include '\n' 
+//            //e.g GET /admin?login_name=root&login_password=root&com=mkusrfrm HTTP/1.1
+//
+//            StringTokenizer parser = new StringTokenizer(reqLine, " ", true);
+//            //consume HTTP request method (GET, POST)
+//            method = parser.nextToken(); //e.g GET
+//            delim = parser.nextToken();  // e.g " "
+//            //get the requested resource URI (without the query string)
+//            resURI = parser.nextToken(" ?");  //delim is ? or space // e.g /admin
+////            TypeParam[0] = resURI;
+//            delim = parser.nextToken(" ?");   // e.g ?
+//            //get the query string (if there exists)
+//            queryStr = "";
+//            //GET - query string in first line after '?'
+//            if (method.equalsIgnoreCase("GET")) {
+//                if (delim.compareTo("?") == 0) {
+//                    queryStr = parser.nextToken();  //returns space, if ? alone
+//                    if (queryStr.equals(" ")) {
+//                        queryStr = "";
+//                    }
+//                }
+//                //else no query string exists
+//            } //POST - query string at the end, after one empty line
+//            else if (method.equalsIgnoreCase("POST")) {
+//                boolean emptyLine = false;
+//                boolean justSpaces = false;  //true if only spaces in line so far
+//                int i = 0;
+//                while (i < request.length() && !emptyLine) {
+//                    char ch = request.charAt(i);
+//                    if (ch == '\n' && !justSpaces) {
+//                        justSpaces = true;
+//                    } else if (!Character.isWhitespace(ch) && justSpaces) {
+//                        justSpaces = false;
+//                    } else if (ch == '\n' && justSpaces) {
+//                        emptyLine = true;
+//                    }
+//                    i += 1;
+//                }  //'i' now points to end, or to first char after empty line
+//                int j = i;
+//                while (j < request.length() && !Character.isWhitespace(request.charAt(j))) {
+//                    j += 1;
+//                }
+//                queryStr = request.substring(i, j);
+//            }
+//        } catch (NoSuchElementException e) {
+//            WebServer.win.log.error(port + "-Problem parsing request: " + e);
+//            WebServer.flog.writeln(port + "-Problem parsing request: " + e);
+//            return false;
+//        }
+//        //log info
+//        WebServer.win.log.debug(port + "-Request method:" + method);
+//        WebServer.win.log.debug(port + "-Requested resource URI:" + resURI);
+//        WebServer.win.log.debug(port + "-Request query str:" + queryStr);
+//        WebServer.flog.writeln(port + "-        " + resURI + (queryStr == "" ? "" : "?" + queryStr));  //..continued from logRequest()
+//        return true;
+//    }
 
     /**
      * Checks if the HTTP request method is supported.
