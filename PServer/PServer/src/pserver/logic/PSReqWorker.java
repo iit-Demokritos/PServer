@@ -67,11 +67,18 @@ import pserver.*;
 import pserver.data.DBAccess;
 import pserver.pservlets.*;
 
+/**
+ *
+ * @author scify
+ */
 public class PSReqWorker extends ReqWorker {
     //modes of response specify process of responding.
     //declare additional (regarding base class) response modes
     //static public final int ADMIN_MODE = 2;  //personal mode
 
+    /**
+     *
+     */
     static public final int SERVICE_MODE = 2;  //personal mode
     //static public final int PERS_MODE = 3;  //personal mode
     //static public final int STER_MODE = 4;  //stereotype mode
@@ -107,6 +114,9 @@ public class PSReqWorker extends ReqWorker {
     }
 
     //overriden base class methods
+    /**
+     *
+     */
     @Override
     public void switchRespMode() {
         //overriden method, extends modes of operation (respMode).
@@ -129,6 +139,9 @@ public class PSReqWorker extends ReqWorker {
     }
     
 
+    /**
+     *
+     */
     @Override
     public void switchRespBody() {
         //overriden method, "plugs-in" response body (if any), length,

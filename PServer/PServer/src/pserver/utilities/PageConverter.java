@@ -12,6 +12,12 @@ public class PageConverter {
 
     private StringBuffer ConvertedBuffer;
 
+    /**
+     *
+     * @param RString
+     * @param PageIndex
+     * @return
+     */
     public StringBuffer PConverter(String RString, int PageIndex) {
         ConvertedBuffer = new StringBuffer();
         int totalPage = 2;

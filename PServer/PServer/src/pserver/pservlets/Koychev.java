@@ -35,17 +35,38 @@ import pserver.data.VectorMap;
 import pserver.logic.PSReqWorker;
 import pserver.utilities.ClientCredentialsChecker;
 
+
+/**
+ *
+ * @author scify
+ */
 public class Koychev implements pserver.pservlets.PService {
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getMimeType() {
         return pserver.pservlets.PService.xml;
     }
 
+    /**
+     *
+     * @param params
+     * @throws Exception
+     */
     @Override
     public void init(String[] params) throws Exception {
     }
 
+    /**
+     *
+     * @param parameters
+     * @param response
+     * @param dbAccess
+     * @return
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         int respCode;
@@ -321,7 +342,6 @@ public class Koychev implements pserver.pservlets.PService {
         }
     }
 }
-
 class KoychevUserLikeThread extends Thread {
 
     String user;

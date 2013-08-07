@@ -17,11 +17,20 @@ public class PdeleteUsers implements pserver.pservlets.PService {
 
     private String responseType = pserver.pservlets.PService.xml;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getMimeType() {
         return responseType;
     }
 
+    /**
+     *
+     * @param params
+     * @throws Exception
+     */
     @Override
     public void init(String[] params) throws Exception {
         if (params.length < 1) {
@@ -34,6 +43,13 @@ public class PdeleteUsers implements pserver.pservlets.PService {
         }
     }
 
+    /**
+     *
+     * @param parameters
+     * @param response
+     * @param dbAccess
+     * @return
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         PService servlet = new pserver.pservlets.Personal();

@@ -126,7 +126,7 @@ public class Admin implements pserver.pservlets.PService {
             String com = (String) queryParam.getVal(comIdx);
             queryParam.remove(comIdx);
 
-            if (!checkClientCredentials()) {
+            if (!checkAdminCredentials()) {
                 return respCode;  //no point in proceeding
             }
 
@@ -155,10 +155,15 @@ public class Admin implements pserver.pservlets.PService {
         }
     }
     
-     /**
-     * Check whether the client is registered
+    /**
+     * Check whether the admin credentials where correct
+     * 
+     * @see #queryParam
+     * @see #administrator_name
+     * @see #administrator_pass
+     * @return whether the credentials are correct (true) or not (false)
      */
-    public boolean checkClientCredentials() {
+    public boolean checkAdminCredentials() {
         int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
         int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
 

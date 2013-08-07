@@ -9,13 +9,21 @@ import pserver.data.DBAccess;
 import pserver.data.VectorMap;
 
 /**
- *
- * @author scify
+ *This is a simple class that checks the client credentials of a
+ * request
+ * 
+ * @author Nick Zorbas <nickzorb@gmail.com>
+ * 
+ * @since 1.1
  */
 public abstract class ClientCredentialsChecker {
     
-        /**
-     * Check whether the client is registered
+     /**
+     * Check whether there are valid clinet credentials in the query parameters
+     * 
+     * @param dbAccess the pserver's database connection handler
+     * @param queryParam the current request's query parameters
+     * @return returnes whether the check was successful or not (true or false)
      */
     public static boolean check(DBAccess dbAccess, VectorMap queryParam){
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");

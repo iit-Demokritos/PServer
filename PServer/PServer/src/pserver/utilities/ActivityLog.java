@@ -28,37 +28,73 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
+/**
+ *
+ * @author scify
+ */
 public class ActivityLog {
     private boolean logOn = true;    //if false, no msgs at all are displayed
     private boolean debugOn = true;  //if false, debug msgs are not displayed
     
+    /**
+     *
+     */
     public ActivityLog() {
     }
     
     //activity reporting methods - they all change line afterwards
+    /**
+     *
+     * @param msg
+     */
     public void report(String msg) {
         echo("-- " + msg);
     }
+    /**
+     *
+     * @param msg
+     */
     public void warn(String msg) {
         echo(" ! " + msg);
     }
+    /**
+     *
+     * @param msg
+     */
     public void error(String msg) {
         echo(" # " + msg);
     }
+    /**
+     *
+     * @param msg
+     */
     public void debug(String msg) {
         if (debugOn) echo("*>" + msg + "<*");
     }
+    /**
+     *
+     */
     public void markStart() {
         echo("*** STARTED at " + now() + " ***");
     }
+    /**
+     *
+     */
     public void markSuccess() {
         echo("*** COMPLETED at " + now() + " ***");
         echo("");  //another new line
     }
+    /**
+     *
+     */
     public void markFailure() {
         echo("### ABORDED at " + now() + " ###");
         echo("");  //another new line
     }
+    /**
+     *
+     * @param msg
+     */
     public void echo(String msg) {  //displays msg exactly as it is, plus newline
         //System.out.print('\r');
         for(int i=0;i<"Type quit to terminate the server".length();i++)
@@ -73,6 +109,10 @@ public class ActivityLog {
         System.out.print("Type quit to terminate the server");
     }
 
+    /**
+     *
+     * @param msg
+     */
     public void forceReport(String msg) {  //report irrespective of 'logOn' value
         boolean old = logOn;
         logOn = true;
@@ -80,9 +120,17 @@ public class ActivityLog {
         logOn = old;
     }
     
+    /**
+     *
+     * @param mode
+     */
     public void setLog(boolean mode) {
         logOn = mode;
     }
+    /**
+     *
+     * @param mode
+     */
     public void setDebug(boolean mode) {
         debugOn = mode;
     }

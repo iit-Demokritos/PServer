@@ -903,10 +903,10 @@ public class Communities implements pserver.pservlets.PService {
      * Connects to database, creates feature groups with the parameters
      * specified and returns the response code.
      *
-     * @param queryParam The parameters of the query.
-     * @param respBody The response message that is produced.
+     * @param clientName 
      * @param dbAccess The database manager.
-     * @return The value of response code.
+     * @param metric 
+     * @throws SQLException  
      */
     public void generateFtrDistances(DBAccess dbAccess, String clientName, VectorMetric metric) throws SQLException {
         PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);

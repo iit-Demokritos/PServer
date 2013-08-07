@@ -27,6 +27,12 @@ public class ResponseConverter {
     private String ConvertedResponse;
     private StringBuffer ConvertedBuffer;
 
+    /**
+     *
+     * @param RString
+     * @param RType
+     * @return
+     */
     public StringBuffer RConverter(String RString, String RType) {
         ConvertedBuffer = new StringBuffer();
         ConvertedResponse = RString;
