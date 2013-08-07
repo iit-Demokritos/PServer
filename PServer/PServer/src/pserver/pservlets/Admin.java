@@ -592,7 +592,7 @@ public class Admin implements pserver.pservlets.PService {
         form = upperTemplate(name, password)
                 + "<br><p>Fill the fields with the attributes for the new user</p>\n"
                 + "<TABLE>\n"
-                + "<form name=\"user_creation\" method=\"GET\" action=\"./admin\">\n"
+                + "<form name=\"user_creation\" method=\"POST\" action=\"./admin\">\n"
                 + "<input type=\"hidden\" name=\"com\" value=\"addClnt\">\n"
                 + "<input type=\"hidden\" name=\"login_name\" value=\"" + name + "\">\n"
                 + "<input type=\"hidden\" name=\"login_password\" value=\"" + password + "\">\n"
@@ -761,7 +761,7 @@ public class Admin implements pserver.pservlets.PService {
                 + "<br>\n"
                 + "<p>Make the desirable changes to any field that you want and then press the button that lies in  bottom</p>\n"
                 + "<table>\n"
-                + "<form name=\"change_properties\" method=\"get\" action=\"admin\">\n"
+                + "<form name=\"change_properties\" method=\"POST\" action=\"admin\">\n"
                 + "<input type=\"hidden\" name=\"com\" value=\"updateProperties\">\n"
                 + "<input type=\"hidden\" name=\"login_name\" value=\"" + name + "\">\n"
                 + "<input type=\"hidden\" name=\"login_password\" value=\"" + password + "\">\n"

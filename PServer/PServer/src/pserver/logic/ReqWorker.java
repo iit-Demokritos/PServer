@@ -145,11 +145,19 @@ public class ReqWorker extends Thread {
             //open input stream to read from client
             BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream(),Charset.forName("UTF-8")));
             //read client request
-            StringBuilder sBuilder = new StringBuilder(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
-            while (in.ready()) {  //until end of input stream
-                sBuilder.append("\n").append(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
+            int charRead;
+            StringBuilder sBuilder = new StringBuilder();
+            while ((charRead = in.read()) != -1) {  //until end of input stream
+                char ch = (char) charRead;
+                sBuilder.append(ch);
+                //HTTP requests from browsers are not always followed by -1.
+                //If no more chars to read, assume end of stream is reached!
+                if (!in.ready()) {
+                    break;
+                }
             }
-            request = sBuilder.toString();
+            request = java.net.URLDecoder.decode(sBuilder.toString(),"UTF-8");
+            System.out.println(request);
         } catch (InterruptedIOException e) {  //'reqTimeout' expired
             WebServer.win.log.error(port + "-Timeout reading request: " + e);
             WebServer.flog.writeln(port + "-Timeout reading request: " + e);
@@ -180,14 +188,28 @@ public class ReqWorker extends Thread {
             return false;
         }
         try {
-            String reqLine = request.split("\n")[0];
+            String reqLines[] = request.split("\n");
+            String reqLine = reqLines[0];
             method = reqLine.substring(0, reqLine.indexOf(" "));
             reqLine = reqLine.substring(reqLine.indexOf("/"), reqLine.lastIndexOf(" "));
             if (reqLine.indexOf("?")==-1) {
                 resURI = reqLine.substring(0,reqLine.length());
+                queryStr = "";
             } else {
                 resURI = reqLine.substring(0,reqLine.indexOf("?"));
-                queryStr = reqLine.substring(reqLine.indexOf("?")+1, reqLine.length());
+                queryStr = reqLine.substring(reqLine.indexOf("?")+1, reqLine.length()).trim();
+            }
+            if (method.equalsIgnoreCase("POST")) {
+                queryStr = "";
+                boolean foundEmptyLine = false;
+                for (String sCurLine : reqLines) {
+                    if (foundEmptyLine) {
+                        queryStr += "&" + sCurLine;
+                    }
+                    if (sCurLine.matches("[ \t\n\r]*")) {
+                        foundEmptyLine = true;
+                    }
+                }
             }
         } catch (Exception e) {
             WebServer.win.log.error(port + "-Problem parsing request: " + e);
