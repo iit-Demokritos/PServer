@@ -126,7 +126,7 @@ public class Admin implements pserver.pservlets.PService {
             String com = (String) queryParam.getVal(comIdx);
             queryParam.remove(comIdx);
 
-            if (!checkClientCredentials()) {
+            if (!checkAdminCredentials()) {
                 return respCode;  //no point in proceeding
             }
 
@@ -155,10 +155,15 @@ public class Admin implements pserver.pservlets.PService {
         }
     }
     
-     /**
-     * Check whether the client is registered
+    /**
+     * Check whether the admin credentials where correct
+     * 
+     * @see #queryParam
+     * @see #administrator_name
+     * @see #administrator_pass
+     * @return whether the credentials are correct (true) or not (false)
      */
-    public boolean checkClientCredentials() {
+    public boolean checkAdminCredentials() {
         int lnIdx = queryParam.qpIndexOfKeyNoCase("login_name");
         int lpIdx = queryParam.qpIndexOfKeyNoCase("login_password");
 
@@ -592,7 +597,7 @@ public class Admin implements pserver.pservlets.PService {
         form = upperTemplate(name, password)
                 + "<br><p>Fill the fields with the attributes for the new user</p>\n"
                 + "<TABLE>\n"
-                + "<form name=\"user_creation\" method=\"GET\" action=\"./admin\">\n"
+                + "<form name=\"user_creation\" method=\"POST\" action=\"./admin\">\n"
                 + "<input type=\"hidden\" name=\"com\" value=\"addClnt\">\n"
                 + "<input type=\"hidden\" name=\"login_name\" value=\"" + name + "\">\n"
                 + "<input type=\"hidden\" name=\"login_password\" value=\"" + password + "\">\n"
@@ -761,7 +766,7 @@ public class Admin implements pserver.pservlets.PService {
                 + "<br>\n"
                 + "<p>Make the desirable changes to any field that you want and then press the button that lies in  bottom</p>\n"
                 + "<table>\n"
-                + "<form name=\"change_properties\" method=\"get\" action=\"admin\">\n"
+                + "<form name=\"change_properties\" method=\"POST\" action=\"admin\">\n"
                 + "<input type=\"hidden\" name=\"com\" value=\"updateProperties\">\n"
                 + "<input type=\"hidden\" name=\"login_name\" value=\"" + name + "\">\n"
                 + "<input type=\"hidden\" name=\"login_password\" value=\"" + password + "\">\n"

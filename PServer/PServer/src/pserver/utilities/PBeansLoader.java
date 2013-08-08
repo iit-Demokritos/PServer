@@ -32,6 +32,10 @@ import pserver.data.PShashMap;
 import pserver.data.PSproperties;
 import pserver.pservlets.*;
 
+/**
+ *
+ * @author scify
+ */
 public class PBeansLoader {
 
     private String file;  //the full pathname of file
@@ -43,6 +47,11 @@ public class PBeansLoader {
     private HashMap<String, VectorMetric> vMetrics = null;
     private HashMap<String, GraphClustering> gClustering = null;
 
+    /**
+     *
+     * @param file
+     * @param header
+     */
     public PBeansLoader(String file, String header) {
         this.file = (new File(file)).getAbsolutePath();  //convert to absolute path
         this.header = header;
@@ -111,14 +120,27 @@ public class PBeansLoader {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public PShashMap<String, PService> getPServlets() {
         return this.pservlets;
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public String getPref(String name) {
         return pref.getProperty(name);  //null if not there
     }
 
+    /**
+     *
+     * @return
+     */
     public String[] getProperties() {
         Enumeration e = pref.propertyNames();
         Vector<String> elements = new Vector<String>();
@@ -129,6 +151,9 @@ public class PBeansLoader {
     }
 
     //load and save
+    /**
+     *
+     */
     public void load() {
         try {
             FileInputStream in = new FileInputStream(file);

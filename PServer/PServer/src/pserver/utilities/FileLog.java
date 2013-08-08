@@ -29,40 +29,77 @@ import java.util.*;
 
 import pserver.*;
 
+/**
+ *
+ * @author scify
+ */
 public class FileLog {
     private String logPath;   //path of log file
     private long maxSize;     //log max size in bytes
     private boolean logOn = true;  //if false, no msgs at all are written
     
     //initializers
+    /**
+     *
+     * @param logPath
+     * @param maxSize
+     */
     public FileLog(String logPath, long maxSize) {
         this.logPath = logPath;
         this.maxSize = maxSize;
     }
     
     //misc methods
+    /**
+     *
+     * @return
+     */
     public String getLogPath() {
         return logPath;
     }
+    /**
+     *
+     * @return
+     */
     public long getMaxSize() {
         return maxSize;
     }
+    /**
+     *
+     * @param maxSize
+     */
     public void setMaxSize(long maxSize) {
         this.maxSize = maxSize;
     }
+    /**
+     *
+     * @return
+     */
     public long getSize() {
         File log = new File(logPath);
         return log.length();
     }
+    /**
+     *
+     * @param mode
+     */
     public void setLog(boolean mode) {
         logOn = mode;
     }
     
     //write to log methods
+    /**
+     *
+     * @param line
+     */
     public void writeln(String line) {  //write line preceded by date / time
         if ( ! logOn) return;
         write(now() + "  >  " + line + "\n");
     }
+    /**
+     *
+     * @param msg
+     */
     public void write(String msg) {  //plain write
         if ( ! logOn) return;
         boolean append = true;
@@ -77,6 +114,9 @@ public class FileLog {
             WebServer.win.log.warn("Problem writing file " + logPath + ": " + e);
         }
     }
+    /**
+     *
+     */
     public void emptyLog() {
         try {
             FileOutputStream out = new FileOutputStream(logPath, false);  //truncate!!!
@@ -85,6 +125,10 @@ public class FileLog {
             WebServer.win.log.warn("Problem truncating file " + logPath + ": " + e);
         }
     }
+    /**
+     *
+     * @param line
+     */
     public void forceWriteln(String line) {  //writeln irrespective of 'logOn' value
         boolean old = logOn;
         logOn = true;

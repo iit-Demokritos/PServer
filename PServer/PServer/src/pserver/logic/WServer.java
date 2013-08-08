@@ -84,6 +84,9 @@ public class WServer extends Thread {
                 + ", port " + localPort);
     }
 
+    /**
+     *
+     */
     @Override
     public void run() {
         if (srvSock == null) {
@@ -107,6 +110,9 @@ public class WServer extends Thread {
         }
     }
 
+    /**
+     *
+     */
     @Override
     protected void finalize() {
         if (srvSock != null) {

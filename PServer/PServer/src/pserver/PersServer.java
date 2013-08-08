@@ -89,18 +89,45 @@ import pserver.pservlets.*;
 public class PersServer extends WebServer {
     //database JDBC connection parameters\
 
+    /**
+     *
+     */
     public static final String QuitCommand = "quit";
+    /**
+     *
+     */
     public String dbDriver;         //JDBC driver
+    /**
+     *
+     */
     public String dbUrl;            //JDBC connection string
+    /**
+     *
+     */
     public String dbUser;           //user alias
+    /**
+     *
+     */
     public String dbPass;           //user password       
     //database product name
+    /**
+     *
+     */
     public String dbType;    //eg. "ACCESS", "MySQL", etc.
     private boolean stop = false;    //variable for stop checking
     private static final String PBEANS_FILE_NAME = "./pbeans.ini";//the file that contains psrvlet name
 //    public HashMap<String, PService> pservlets; //the pservlets
+    /**
+     *
+     */
     public PShashMap<String, PService> pservlets;
+    /**
+     *
+     */
     public static PersServer pObj;        //the single WebServer object
+    /**
+     *
+     */
     public static PBeansLoader pbeansLoadader;
 
     /**
@@ -211,6 +238,9 @@ public class PersServer extends WebServer {
         prefHeader = appName + " settings";
     }
 
+    /**
+     *
+     */
     @Override
     protected void loadSettings() {
         //load all settings of super class

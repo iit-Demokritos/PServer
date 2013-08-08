@@ -26,9 +26,21 @@ package pserver.utilities;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *
+ * @author scify
+ */
 public class Border extends Panel {
     int top, left, bottom, right;  //no of pixels for border
     
+    /**
+     *
+     * @param borderMe
+     * @param top
+     * @param left
+     * @param bottom
+     * @param right
+     */
     public Border(Component borderMe, int top, int left, int bottom, int right) {
         this.top    = top;
         this.left   = left;
@@ -37,6 +49,10 @@ public class Border extends Panel {
         setLayout(new BorderLayout());
         add(borderMe, "Center");
     }
+    /**
+     *
+     * @return
+     */
     public Insets getInsets() {  //overriding the insets
         return new Insets(top, left, bottom, right);
     }

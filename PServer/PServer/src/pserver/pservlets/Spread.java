@@ -56,17 +56,33 @@ public class Spread implements pserver.pservlets.PService {
     private TreeMap<String, TreeMap<String, TreeMap<String, Float>>> profiles;
     private TreeMap<String, TreeMap<String, LinkedList<String>>> accocs;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getMimeType() {
         return pserver.pservlets.PService.xml;
     }
 
+    /**
+     *
+     * @param params
+     * @throws Exception
+     */
     @Override
     public void init(String[] params) throws Exception {
         profiles = new TreeMap<String, TreeMap<String, TreeMap<String, Float>>>();
         accocs = new TreeMap<String, TreeMap<String, LinkedList<String>>>();
     }
 
+    /**
+     *
+     * @param parameters
+     * @param response
+     * @param dbAccess
+     * @return
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         int respCode;

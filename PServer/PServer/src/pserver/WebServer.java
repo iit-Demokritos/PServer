@@ -35,33 +35,106 @@ import pserver.userInterface.*;
 import pserver.logic.*;
 import pserver.utilities.*;
 
+/**
+ *
+ * @author scify
+ */
 public class WebServer {
     //private variables
 
+    /**
+     *
+     */
     protected int port;            //port server is running, free: > 1024
+    /**
+     *
+     */
     protected int maxReq;          //max concurrent client requests
+    /**
+     *
+     */
     protected String logMode;      //on: screen & file, screen: screen only, file: file only, off: no msgs
+    /**
+     *
+     */
     protected boolean debugMode;   //if true (and logMode allowed), debug msgs displayed on screen
+    /**
+     *
+     */
     protected String prefFile;     //application settings ini file
+    /**
+     *
+     */
     protected String prefHeader;   //header in ini file
+    /**
+     *
+     */
     protected String mimeFile;     //path to mime file
+    /**
+     *
+     */
     protected String logPath;      //log file path
+    /**
+     *
+     */
     protected long maxFLSize;      //max FileLog size in bytes
+    /**
+     *
+     */
     protected int maxALLines;      //max ActivityLog (display msg) lines
+    /**
+     *
+     */
     protected boolean sslOn;        //enables https 
     //public variables
+    /**
+     *
+     */
     public int reqTimeout;       //timeout for reading requests in millisecs, 0 for infinite
+    /**
+     *
+     */
     public String mainDir;       //main HTML directory
+    /**
+     *
+     */
     public String defHTML;       //default HTML page
+    /**
+     *
+     */
     public String appName;       //application name
+    /**
+     *
+     */
     public String appVers;       //application version
+    /**
+     *
+     */
     public String appCapt;       //application window caption
     //one object for each of the main classes
+    /**
+     *
+     */
     static public WebServer obj;        //the single WebServer object
+    /**
+     *
+     */
     static public WServer srv;          //the actual web server
+    /**
+     *
+     */
     static public ControlWin win;       //the UI window
+    /**
+     *
+     */
     static public Preferences pref;     //application settings
+    /**
+     *
+     */
     static public Properties mime;      //mime types correspondence
+    /**
+     *
+     */
     static public FileLog flog;         //log file
 
     /**
@@ -81,6 +154,9 @@ public class WebServer {
     }
 
     //initializer
+    /**
+     *
+     */
     protected WebServer() {
         //all is done by the overriding subclass
     }
@@ -93,6 +169,9 @@ public class WebServer {
         mimeFile = "./mime.ini";
     }
 
+    /**
+     *
+     */
     protected void loadSettings() {
         port = Integer.parseInt(pref.getPref("port"));
         maxReq = Integer.parseInt(pref.getPref("max_requests"));
@@ -106,6 +185,9 @@ public class WebServer {
         sslOn = (pref.getPref("ssl")).equals("on") ? true : false;  //on - off
     }
 
+    /**
+     *
+     */
     protected void setMessageMode() {
         //set if msgs are displayed on screen and/or written in log file
         if (logMode.equals("on")) {  //both screen and file
@@ -125,6 +207,9 @@ public class WebServer {
         win.log.setDebug(debugMode);
     }
 
+    /**
+     *
+     */
     protected void loadMime() {
         try {
             FileInputStream in = new FileInputStream(mimeFile);
