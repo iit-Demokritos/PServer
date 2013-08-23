@@ -43,15 +43,31 @@ import pserver.utilities.ClientCredentialsChecker;
  */
 public class Nootropia implements pserver.pservlets.PService {
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getMimeType() {
         return pserver.pservlets.PService.xml;
     }
 
+    /**
+     *
+     * @param params
+     * @throws Exception
+     */
     @Override
     public void init(String[] params) throws Exception {
     }
 
+    /**
+     *
+     * @param parameters
+     * @param response
+     * @param dbAccess
+     * @return
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
         int respCode;

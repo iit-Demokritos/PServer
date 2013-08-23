@@ -30,6 +30,10 @@ import java.util.*;
 
 import pserver.*;
 
+/**
+ *
+ * @author scify
+ */
 public class Preferences {
     private String file;  //the full pathname of file
     private String header;  //header in file
@@ -37,6 +41,11 @@ public class Preferences {
     private Properties defPref = new Properties();      //default values
     private Properties pref = new Properties();  //user defined values
     
+    /**
+     *
+     * @param file
+     * @param header
+     */
     public Preferences(String file,String header) {
         this.file = (new File(file)).getAbsolutePath();  //convert to absolute path
         this.header = header;
@@ -71,12 +80,26 @@ public class Preferences {
 //    }
     
     //get and set
+    /**
+     *
+     * @param name
+     * @param val
+     */
     public void setPref(String name, String val) {
         pref.put(name, val);
     }
+    /**
+     *
+     * @param name
+     * @return
+     */
     public String getPref(String name) {
         return pref.getProperty(name);  //null if not there
     }
+    /**
+     *
+     * @return
+     */
     public String[] getProperties(){
         Enumeration e=pref.propertyNames();
         ArrayList<Object> elements=new ArrayList<Object>();
@@ -85,6 +108,10 @@ public class Preferences {
         }
         return (String[])elements.toArray(new String[0]);
     }
+    /**
+     *
+     * @return
+     */
     public String[] getDefaultProperties(){
         Enumeration e=defPref.propertyNames();
         ArrayList<Object> elements=new ArrayList<Object>();
@@ -94,6 +121,9 @@ public class Preferences {
         return (String[])elements.toArray(new String[0]);
     }
     //load and save
+    /**
+     *
+     */
     public void load() {        
         try {
             FileInputStream in = new FileInputStream(file);
@@ -121,6 +151,9 @@ public class Preferences {
             store();
         }
     }
+    /**
+     *
+     */
     public void store() {
         try {
             FileOutputStream out = new FileOutputStream(file);
@@ -130,6 +163,10 @@ public class Preferences {
         }
     }
     //it does the same thing as the previous but it does not show a message dialog
+    /**
+     *
+     * @return
+     */
     public boolean silentStore(){
         try {
             FileOutputStream out = new FileOutputStream(file);

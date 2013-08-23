@@ -32,8 +32,6 @@
 //===================================================================
 package pserver.logic;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pserver.data.VectorMap;
 import java.util.*;
 import java.net.*;
@@ -43,45 +41,140 @@ import java.text.*;
 
 import pserver.*;
 
+/**
+ *
+ * @author scify
+ */
 public class ReqWorker extends Thread {
 
+    /**
+     *
+     */
     public Socket sock;                //socket for particular client request
+    /**
+     *
+     */
     public InetAddress clientAddr;     //client address
+    /**
+     *
+     */
     public int port;                   //socket port (dynamically allocated)
     //request parameters
+    /**
+     *
+     */
     public String request = null;          //the incoming HTTP message
+    /**
+     *
+     */
     public String method = null;           //HTTP method
+    /**
+     *
+     */
     public String resURI = null;           //requested resource URI (no query string)
+    /**
+     *
+     */
     public String queryStr = null;         //query string
+    /**
+     *
+     */
     public VectorMap queryParam = null;    //query parameter name-value pairs
+    /**
+     *
+     */
     public String[] initParam = new String[1];
     //control variables
+    /**
+     *
+     */
     public int respCode;            //code of response (error-handling)
+    /**
+     *
+     */
     public int respMode;            //mode of response (response process)
     //response variables
+    /**
+     *
+     */
     public StringBuffer httpMsg;           //HTTP message
+    /**
+     *
+     */
     public String status;                  //HTTP status code
+    /**
+     *
+     */
     public String mimeType;                //MIME type
+    /**
+     *
+     */
     public FileInputStream rbFile;         //response body comes from a file
+    /**
+     *
+     */
     public String rbString;                //response body is a string (alternatively)
+    /**
+     *
+     */
     public long rbLength;                  //no of bytes of response body
     //codes of response handle errors, <= 0
+    /**
+     *
+     */
     static public final int NORMAL = 0;    //request OK, normal response
+    /**
+     *
+     */
     static public final int NO_RESOURCE = -1;    //requested resource not found
+    /**
+     *
+     */
     static public final int REQUEST_ERR = -2;    //client request not understood
+    /**
+     *
+     */
     static public final int NO_SERVICE = -3;    //requested service not supported
+    /**
+     *
+     */
     static public final int SERVER_ERR = -4;    //unexpected server error
+    /**
+     *
+     */
     static public final int ACCESS_DENIED = -5;    //access denied error
+    /**
+     *
+     */
     static public final int DUBLICATE_ERROR = -6;    //access denied error
     //modes of response, specify process of responding, > 0
+    /**
+     *
+     */
     static public final int FILE_MODE = 1;    //request for physical file
+    /**
+     *
+     */
     static public final int UPLOAD_MODE = 2;    //request to upload file - NOT SUPPORTED yet
     //variables relevant to response body
+    /**
+     *
+     */
     public String resPath = null;          //requested file physical path
+    /**
+     *
+     */
     public boolean resAccessible = false;  //true if resource is accessible
+    /**
+     *
+     */
     public String resFileExt = null;       //file extension of resource
 
     //initializers
+    /**
+     *
+     * @param sock
+     */
     public ReqWorker(Socket sock) {
         super();
         this.sock = sock;
@@ -90,6 +183,10 @@ public class ReqWorker extends Thread {
     }
 
     //run method
+    /**
+     *
+     */
+    @Override
     public void run() {
         //log the request
         logRequest();
@@ -145,11 +242,19 @@ public class ReqWorker extends Thread {
             //open input stream to read from client
             BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream(),Charset.forName("UTF-8")));
             //read client request
-            StringBuilder sBuilder = new StringBuilder(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
-            while (in.ready()) {  //until end of input stream
-                sBuilder.append("\n").append(java.net.URLDecoder.decode(in.readLine(),"UTF-8"));
-            }
-            request = sBuilder.toString();
+            int charRead;
+            StringBuilder sBuilder = new StringBuilder();
+            while ((charRead = in.read()) != -1) {  //until end of input stream
+                char ch = (char) charRead;
+                sBuilder.append(ch);
+                //HTTP requests from browsers are not always followed by -1.
+                //If no more chars to read, assume end of stream is reached!
+                if (!in.ready()) {
+                    break;
+                }
+            }          
+            request = java.net.URLDecoder.decode(sBuilder.toString(),"UTF-8");
+            System.out.println(request);
         } catch (InterruptedIOException e) {  //'reqTimeout' expired
             WebServer.win.log.error(port + "-Timeout reading request: " + e);
             WebServer.flog.writeln(port + "-Timeout reading request: " + e);
@@ -176,59 +281,34 @@ public class ReqWorker extends Thread {
      * @return True on success, False if {@link #request} is null.
      */
     public boolean parseRequest() {
-        //fill all request parameters, except 'queryParam'
-        //'request' must not be null
         if (request == null) {
             return false;
         }
         try {
-            String delim;
-            //get first line of request
-            String reqLine = request.substring(0, request.indexOf('\n') + 1);  //include '\n' 
-            //e.g GET /admin?login_name=root&login_password=root&com=mkusrfrm HTTP/1.1
-
-            StringTokenizer parser = new StringTokenizer(reqLine, " ", true);
-            //consume HTTP request method (GET, POST)
-            method = parser.nextToken(); //e.g GET
-            delim = parser.nextToken();  // e.g " "
-            //get the requested resource URI (without the query string)
-            resURI = parser.nextToken(" ?");  //delim is ? or space // e.g /admin
-//            TypeParam[0] = resURI;
-            delim = parser.nextToken(" ?");   // e.g ?
-            //get the query string (if there exists)
-            queryStr = "";
-            //GET - query string in first line after '?'
-            if (method.equalsIgnoreCase("GET")) {
-                if (delim.compareTo("?") == 0) {
-                    queryStr = parser.nextToken();  //returns space, if ? alone
-                    if (queryStr.equals(" ")) {
-                        queryStr = "";
-                    }
-                }
-                //else no query string exists
-            } //POST - query string at the end, after one empty line
-            else if (method.equalsIgnoreCase("POST")) {
-                boolean emptyLine = false;
-                boolean justSpaces = false;  //true if only spaces in line so far
-                int i = 0;
-                while (i < request.length() && !emptyLine) {
-                    char ch = request.charAt(i);
-                    if (ch == '\n' && !justSpaces) {
-                        justSpaces = true;
-                    } else if (!Character.isWhitespace(ch) && justSpaces) {
-                        justSpaces = false;
-                    } else if (ch == '\n' && justSpaces) {
-                        emptyLine = true;
-                    }
-                    i += 1;
-                }  //'i' now points to end, or to first char after empty line
-                int j = i;
-                while (j < request.length() && !Character.isWhitespace(request.charAt(j))) {
-                    j += 1;
-                }
-                queryStr = request.substring(i, j);
+            String []reqLines = request.split("\n"); //Split request to lines
+            String reqLine = reqLines[0];   //main request content in first line
+            method = reqLine.substring(0, reqLine.indexOf(" "));
+            reqLine = reqLine.substring(reqLine.indexOf("/"), reqLine.lastIndexOf(" "));
+            if (reqLine.indexOf("?")==-1) {//no query parameters or POST request
+                resURI = reqLine.substring(0,reqLine.length());
+                queryStr = "";
+            } else {   //GET request with parameters
+                resURI = reqLine.substring(0,reqLine.indexOf("?"));
+                queryStr = reqLine.substring(reqLine.indexOf("?")+1, reqLine.length()).trim();
             }
-        } catch (NoSuchElementException e) {
+            if (method.equalsIgnoreCase("POST")) {
+                queryStr = "";
+                boolean foundEmptyLine = false;  //search for an empty line
+                for (String sCurLine : reqLines) {
+                    if (foundEmptyLine) {   //the rest of the lines are 
+                        queryStr += "&" + sCurLine;  //query parameters
+                    }
+                    if (sCurLine.matches("[ \t\n\r]*")) { //find empty line
+                        foundEmptyLine = true;
+                    }
+                }
+            }
+        } catch (Exception e) {
             WebServer.win.log.error(port + "-Problem parsing request: " + e);
             WebServer.flog.writeln(port + "-Problem parsing request: " + e);
             return false;
@@ -237,10 +317,10 @@ public class ReqWorker extends Thread {
         WebServer.win.log.debug(port + "-Request method:" + method);
         WebServer.win.log.debug(port + "-Requested resource URI:" + resURI);
         WebServer.win.log.debug(port + "-Request query str:" + queryStr);
-        WebServer.flog.writeln(port + "-        " + resURI + (queryStr == "" ? "" : "?" + queryStr));  //..continued from logRequest()
+        WebServer.flog.writeln(port + "-        " + resURI + ("".equals(queryStr) ? "" : "?" + queryStr));  //..continued from logRequest()
         return true;
     }
-
+    
     /**
      * Checks if the HTTP request method is supported.
      *
@@ -259,7 +339,10 @@ public class ReqWorker extends Thread {
         }
         return false;
     }
-
+    
+    /**
+     * Fills the {@link #queryParam} parameter.
+     */
     public void parseRestParams() {
 
         if (resURI.substring(1).endsWith(".xml") || resURI.substring(1).endsWith(".json")) {
@@ -317,6 +400,9 @@ public class ReqWorker extends Thread {
     }
     //-----------------------------------------------------------------------
 
+    /**
+     *
+     */
     public void switchRespMode() {
         //this method is intented to be overidden by subclasses.
         //At this moment, request parameters are set and the application
@@ -334,12 +420,18 @@ public class ReqWorker extends Thread {
     }
     //-----------------------------------------------------------------------
 
+    /**
+     *
+     */
     public void analyzeUploadMode() {
         //UPLOAD_MODE not supported yet
         //log info
         WebServer.win.log.debug(port + "-Upload mode not supported yet");
     }
 
+    /**
+     *
+     */
     public void analyzeFileMode() {
         //fill physical file variables
         resPath = resPhysPath(resURI);
@@ -356,6 +448,11 @@ public class ReqWorker extends Thread {
     }
 
     //request methods: utility methods
+    /**
+     *
+     * @param resLogURI
+     * @return
+     */
     public String resPhysPath(String resLogURI) {
         //given the resource logical path,
         //returns the corresponding physical path.
@@ -393,6 +490,11 @@ public class ReqWorker extends Thread {
         return accessible;
     }
 
+    /**
+     *
+     * @param filename
+     * @return
+     */
     public String getFileExt(String filename) {
         //returns the file extension of 'filename'
         if (filename == null) {
@@ -415,6 +517,9 @@ public class ReqWorker extends Thread {
     }
 
     //response methods: composing response
+    /**
+     *
+     */
     public void respond() {
         respBody();
         httpHeader();
@@ -452,6 +557,9 @@ public class ReqWorker extends Thread {
     }
     //-----------------------------------------------------------------------
 
+    /**
+     *
+     */
     public void switchRespBody() {
         //this method is intented to be overidden by subclasses.
         //determines response body, length, and MIME type.
@@ -472,6 +580,9 @@ public class ReqWorker extends Thread {
     }
     //-----------------------------------------------------------------------
 
+    /**
+     *
+     */
     public void httpHeader() {
         //sets 'status' and 'httpMsg' response variables.
         //map response codes to HTTP codes
@@ -517,6 +628,9 @@ public class ReqWorker extends Thread {
         httpMsg.append("\n");  //a blank line needed anyway
     }
 
+    /**
+     *
+     */
     public void sendResponse() {
         //response is 'httpMsg' + contents of 'rbFile' or 'rbString' (if any =! null).
         //'httpMsg' assumed to be not null
@@ -572,6 +686,11 @@ public class ReqWorker extends Thread {
     }
 
     //response methods: utility methods
+    /**
+     *
+     * @param path
+     * @return
+     */
     public FileInputStream streamResponseFile(String path) {
         //response body from a file, attaches stream to 'path'
         FileInputStream in;
@@ -585,6 +704,11 @@ public class ReqWorker extends Thread {
         return in;
     }
 
+    /**
+     *
+     * @param fileExt
+     * @return
+     */
     public String getMIMEType(String fileExt) {
         //set MIME with regard to file extension 'fileExt'.
         //'fileExt' must not be null
@@ -605,6 +729,9 @@ public class ReqWorker extends Thread {
     }
 
     //various helper methods
+    /**
+     *
+     */
     public void logRequest() {
         //log the client request
         String dateTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.UK).format(new Date());

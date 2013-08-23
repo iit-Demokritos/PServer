@@ -27,10 +27,21 @@ import java.awt.*;
 import pserver.*;
 import pserver.utilities.*;
 
+/**
+ *
+ * @author scify
+ */
 public class ControlWin {
+    /**
+     *
+     */
     public ActivityLog log;   //displays application messages
     
     //initializer
+    /**
+     *
+     * @param appTitle
+     */
     public ControlWin(String appTitle) {
         log=new ActivityLog();
     }

@@ -27,6 +27,11 @@ public class SaddStereotype implements pserver.pservlets.PService {
         return responseType;
     }
 
+    /**
+     *
+     * @param params
+     * @throws Exception
+     */
     @Override
     public void init(String[] params) throws Exception {
         if (params.length < 1) {
@@ -39,6 +44,13 @@ public class SaddStereotype implements pserver.pservlets.PService {
         }
     }
 
+    /**
+     *
+     * @param parameters
+     * @param response
+     * @param dbAccess
+     * @return
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
 
