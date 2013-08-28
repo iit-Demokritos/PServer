@@ -18,6 +18,8 @@ package pserver.pservlets;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import pserver.WebServer;
 import pserver.data.DBAccess;
 import pserver.data.PServerResultSet;
@@ -74,7 +76,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -119,9 +121,9 @@ public class Stereotypes implements pserver.pservlets.PService {
             respCode = comSterMake(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("update")) {  //remove user assignments to stereotypes
             respCode = comSterUpdate(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("incval")){
+        } else if (com.equalsIgnoreCase("incval")) {
             respCode = comSterIncVal(queryParam, respBody, dbAccess);
-        }else {
+        } else {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Request command not recognized");
         }
@@ -268,14 +270,15 @@ public class Stereotypes implements pserver.pservlets.PService {
                 query = "insert into stereotypes (st_stereotype,FK_psclient) values ('" + stereot + "','" + clientName + "')";
                 rowsAffected = dbAccess.executeUpdate(query);
             } else {
-                String sqlRule = getSQLFromStereotypeRule(rule);
-                query = "insert into stereotypes (st_stereotype,st_rule, FK_psclient) values ( ?,?,'" + clientName + "')";
-                PreparedStatement prep = dbAccess.getConnection().prepareStatement(query);
-                prep.setString(1, stereot);
-                prep.setString(2, sqlRule.toString());
-                rowsAffected = prep.executeUpdate();
-                prep.close();
-                addUsersToStereotype(dbAccess, clientName, stereot, sqlRule);
+//                String sqlRule = rule;
+                query = "insert into stereotypes (st_stereotype,st_rule, FK_psclient) values ( '" + stereot + "','" + rule + "','" + clientName + "')";
+                rowsAffected = dbAccess.executeUpdate(query);
+//                PreparedStatement prep = dbAccess.getConnection().prepareStatement(query);
+//                prep.setString(1, stereot);
+//                prep.setString(2, sqlRule);
+//                rowsAffected = prep.executeUpdate();
+//                prep.close();
+                addUsersToStereotype(dbAccess, clientName, stereot, rule);
                 updateStereotype(dbAccess, clientName, stereot);
             }
         } catch (SQLException e) {
@@ -291,85 +294,253 @@ public class Stereotypes implements pserver.pservlets.PService {
         return success;
     }
 
-    private String getSQLFromStereotypeRule(String rule) {
-        StringBuilder sqlRule = new StringBuilder();
-        //sqlRule.append("SELECT * FROM user_attributes Where FK_psclient='").append(clientName).append("' AND ");
-        String[] tokens = rule.split("\\|");
-        int idx = 0;
-        for (String token : tokens) {
-            if (idx % 2 == 0) {
-                //sqlRule.append("AND ");
-                while (token.startsWith("(")) {
-                    token = token.substring(1);
-                    sqlRule.append("(");
-                }
-                int endParenthesisCounter = 0;
-                while (token.endsWith(")")) {
-                    token = token.substring(0, token.length() - 1);
-                    endParenthesisCounter++;
-                }
-
-                String first = null;
-                String operator = null;
-                String second = null;
-
-                if (token.contains("<>")) {
-                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
-                            + token.substring(0, token.indexOf("<>"))
-                            + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-                    operator = "<>";
-                    second = "" + token.substring(token.indexOf(">") + 1) + "";
-                } else if (token.contains(":")) {
-
-                    // If first ends with < or > 
-                    if (token.contains("<") || token.contains(">")) {
-                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
-                                + token.substring(0, token.indexOf(":") - 1) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-                        operator = token.substring(token.indexOf(":") - 1,
-                                token.indexOf(":"));
-                        operator += "=";
-                    } else {
-                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
-                                + token.substring(0, token.indexOf(":")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-                        operator = "=";
-                    }
-
-                    //then move it to the operator
-
-                    second = "" + token.substring(token.indexOf(":") + 1) + "";
-                }
-////                debug lines
-//                System.out.println("first==> "+first);
-//                System.out.println("operator==> "+operator);
-// 
-
-                sqlRule.append("(");
-                sqlRule.append(first);
-                sqlRule.append(operator);
-                sqlRule.append(second);
-                sqlRule.append(")");
-
-                for (int i = 0; i < endParenthesisCounter; i++) {
-                    sqlRule.append(")");
-                }
-            } else {
-                sqlRule.append(" ").append(token.toUpperCase()).append(" ");
-
-//                if (token.toUpperCase().equals("OR")) {
-//                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
-//                } else {
-//
-//                    //TODO: change it for the AND to Work properly
-//                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
-//
+//    private String getSQLFromStereotypeRule(String rule) {
+//        StringBuilder sqlRule = new StringBuilder();
+//        //sqlRule.append("SELECT * FROM user_attributes Where FK_psclient='").append(clientName).append("' AND ");
+//        String[] tokens = rule.split("\\|");
+//        int idx = 0;
+//        for (String token : tokens) {
+//            if (idx % 2 == 0) {
+//                //sqlRule.append("AND ");
+//                while (token.startsWith("(")) {
+//                    token = token.substring(1);
+//                    sqlRule.append("(");
 //                }
-            }
-            idx++;
-        }
-        return sqlRule.toString();
-    }
+//                int endParenthesisCounter = 0;
+//                while (token.endsWith(")")) {
+//                    token = token.substring(0, token.length() - 1);
+//                    endParenthesisCounter++;
+//                }
+//
+//                String first = null;
+//                String operator = null;
+//                String second = null;
+//
+//                if (token.contains("<>")) {
+//                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
+//                            + token.substring(0, token.indexOf("<>"))
+//                            + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+//                    operator = "<>";
+//                    second = "" + token.substring(token.indexOf(">") + 1) + "";
+//                } else if (token.contains(":")) {
+//
+//                    // If first ends with < or > 
+//                    if (token.contains("<") || token.contains(">")) {
+//                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
+//                                + token.substring(0, token.indexOf(":") - 1) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+//                        operator = token.substring(token.indexOf(":") - 1,
+//                                token.indexOf(":"));
+//                        operator += "=";
+//                    } else {
+//                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
+//                                + token.substring(0, token.indexOf(":")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
+//                        operator = "=";
+//                    }
+//
+//                    //then move it to the operator
+//
+//                    second = "" + token.substring(token.indexOf(":") + 1) + "";
+//                }
+//////                debug lines
+////                System.out.println("first==> "+first);
+////                System.out.println("operator==> "+operator);
+//// 
+//
+//                sqlRule.append("(");
+//                sqlRule.append(first);
+//                sqlRule.append(operator);
+//                sqlRule.append(second);
+//                sqlRule.append(")");
+//
+//                for (int i = 0; i < endParenthesisCounter; i++) {
+//                    sqlRule.append(")");
+//                }
+//            } else {
+//                sqlRule.append(" ").append(token.toUpperCase()).append(" ");
+//
+////                if (token.toUpperCase().equals("OR")) {
+////                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
+////                } else {
+////
+////                    //TODO: change it for the AND to Work properly
+////                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
+////
+////                }
+//            }
+//            idx++;
+//        }
+//        return sqlRule.toString();
+//    }
 
+    private class SqlNode {
+
+        private String statement;
+        private SqlNode leftChild;
+        private SqlNode rightChild;
+
+        public SqlNode(String statement) {
+            this.statement = statement;
+        }
+
+        public String getStatement() {
+            return statement;
+        }
+
+        public void setStatement(String statement) {
+            this.statement = statement;
+        }
+
+        public SqlNode getLeftChild() {
+            return leftChild;
+        }
+
+        public void addChild(SqlNode child) {
+            if (leftChild == null) {
+                leftChild = child;
+            } else if (rightChild == null) {
+                rightChild = child;
+            } else {
+                throw new RuntimeException();
+            }
+        }
+
+        public SqlNode getRightChild() {
+            return rightChild;
+        }
+
+        public boolean isLeaf() {
+            return leftChild == null;
+        }
+
+        private int evaluateString(String str) {
+            int openPar = 0;
+            for (int i = 0; i < str.length(); i++) {
+                char c = str.charAt(i);
+                if (c == '(') {
+                    openPar++;
+                } else if (c == ')') {
+                    openPar--;
+                }
+            }
+            return openPar;
+        }
+
+        private int breakStatement() {
+            int openPar = 0;
+            int index = 0;
+            do {
+                char c = statement.charAt(index);
+                if (c == '(') {
+                    openPar++;
+                } else if (c == ')') {
+                    openPar--;
+                }
+                index++;
+            } while (openPar != 0 && index != statement.length());
+            if (index == statement.length()) {
+                if (openPar != 0) {
+                    throw new RuntimeException();
+                }
+                statement = statement.substring(1, statement.length() - 1);
+                return breakStatement();
+            }
+            if (index == 1) {
+                return statement.indexOf("|");
+            }
+            return index;
+        }
+
+        public void propagate() {
+            int firstPar = statement.indexOf("(");
+            int lastPar = statement.lastIndexOf(")");
+            int firstBreak;
+            int secondBreak;
+            if (firstPar != 0) {
+                firstBreak = statement.indexOf("|");
+            } else if (lastPar != statement.length() - 1) {
+                firstBreak = statement.indexOf("|", lastPar + 1);
+            } else {
+                firstBreak = breakStatement();
+            }
+            if (firstBreak == -1) {
+                return;
+            }
+            secondBreak = statement.indexOf("|", firstBreak + 1);
+            String left = statement.substring(0, firstBreak);
+            String mid = statement.substring(firstBreak + 1, secondBreak);
+            String right = statement.substring(secondBreak + 1);
+            if (evaluateString(left) == 0 && evaluateString(right) == 0 && evaluateString(mid) == 0) {
+                statement = mid;
+                addChild(new SqlNode(left));
+                addChild(new SqlNode(right));
+                leftChild.propagate();
+                rightChild.propagate();
+            } else {
+                throw new RuntimeException();
+            }
+        }
+        
+        public String print(int n) {
+            StringBuilder res = new StringBuilder();
+            if (isLeaf()) {
+                return statement;
+            }
+            res.append(statement).append("\t").append(leftChild.print(n+1));
+            res.append("\n");
+            for (int i = 0; i <= n; i++) {
+                res.append("\t");
+            }
+            res.append(rightChild.print(n+1));
+            return res.toString();
+        }
+        
+        public String toSql() {
+            StringBuilder res = new StringBuilder();
+            if (isLeaf()) {
+                String[] tokens = statement.split("[:<>]+");
+                Pattern pat = Pattern.compile("[:<>]+");
+                Matcher m = pat.matcher(statement);
+                m.find();
+                String comparison = m.group();
+                comparison = comparison.replace(':', '=');
+                if (comparison.equals("<>")) {
+                    comparison = "!=";
+                }
+                if (tokens.length != 2) {
+                    throw new RuntimeException(statement);
+                }
+                res.append("select u.user from users u join user_attributes ");
+                res.append("at on u.user=at.user where at.attribute='");
+                res.append(tokens[0]).append("' AND at.attribute_value");
+                res.append(comparison).append("'").append(tokens[1]);
+                res.append("'");
+            } else {
+                if (statement.equalsIgnoreCase("AND")) {
+                   res.append("select a1.user from((").append(leftChild.toSql());
+                   res.append(") a1 join (").append(rightChild.toSql());
+                   res.append(") a2 on a1.user=a2.user)");
+                } else if (statement.equalsIgnoreCase("OR")) {
+                   res.append("select a1.user from(").append(leftChild.toSql());
+                   res.append(") a1 left join (").append(rightChild.toSql());
+                   res.append(") a2 on a1.user=a2.user UNION ALL ");
+                   res.append("select a2.user from(").append(leftChild.toSql());
+                   res.append(") a1 right join (").append(rightChild.toSql());
+                   res.append(") a2 on a1.user=a2.user");
+                } else {
+                    throw new RuntimeException();
+                }
+            }
+            return res.toString();
+        }
+    }
+    
     private void addUsersToStereotype(DBAccess dbAccess, String clientName, String stereot, String rule) throws SQLException {
+        SqlNode parent = new SqlNode(rule);
+        parent.propagate();
+        System.out.println("\n" + parent.print(0));
+        System.out.println(parent.toSql());
+        System.out.println("===========================");
+        
         String insUsrSql = "INSERT INTO " + DBAccess.STEREOTYPE_USERS_TABLE
                 + "(" + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE
                 + "," + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_USER
@@ -384,7 +555,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         //System.out.println("====> " + sql + " <======");
         //else 
         //create sql query with join like
-        
+
         //select temp1.user 
         //from (select user from user_attributes where FK_psclient='rest' AND (attribute='computer' AND attribute_value=1))temp1 
         //join (select user from user_attributes where FK_psclient='rest' AND (attribute='edu' AND attribute_value>=3))temp2 
@@ -1022,15 +1193,14 @@ public class Stereotypes implements pserver.pservlets.PService {
                         Float numValue = DBAccess.strToNum(value);  //is it numeric?
                         double newNumValue;
                         int tmpRows = 0;
-                         //TODO Maybe initialize all values in stereotype creation
+                        //TODO Maybe initialize all values in stereotype creation
                         if (recFound == false) { //if recFound == false we assume that it was uninitialized and treat it as 0
                             newNumValue = numStep.doubleValue();
                             //insert new feature record
                             String newValue = DBAccess.formatDouble(new Double(newNumValue));
                             query = "INSERT into stereotype_profiles values ('" + stereot + "', '" + feature + "', '" + newNumValue + "', '" + newNumValue + "', '" + clientName + "')";
                             tmpRows = dbAccess.executeUpdate(query);
-                        }
-                        else if (numValue != null) {  //if null, 'value' does not exist or not numeric
+                        } else if (numValue != null) {  //if null, 'value' does not exist or not numeric
                             newNumValue = numValue.doubleValue() + numStep.doubleValue();
                             //update current stereotype, feature record
                             String newValue = DBAccess.formatDouble(new Double(newNumValue));
