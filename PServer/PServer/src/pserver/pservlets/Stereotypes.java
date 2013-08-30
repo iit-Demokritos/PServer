@@ -119,7 +119,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             respCode = comSterRemUsr(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("mkster")) {  //remove user assignments to stereotypes
             respCode = comSterMake(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("update")) {  //remove user assignments to stereotypes
+        } else if (com.equalsIgnoreCase("update")) {  //check for new users that need to be added to stereotypes
             respCode = comSterUpdate(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("incval")) {
             respCode = comSterIncVal(queryParam, respBody, dbAccess);
@@ -278,8 +278,8 @@ public class Stereotypes implements pserver.pservlets.PService {
 //                prep.setString(2, sqlRule);
 //                rowsAffected = prep.executeUpdate();
 //                prep.close();
-                addUsersToStereotype(dbAccess, clientName, stereot, rule);
-                updateStereotype(dbAccess, clientName, stereot);
+                rowsAffected += addUsersToStereotype(dbAccess, clientName, stereot, rule);
+                rowsAffected += updateStereotype(dbAccess, clientName, stereot);
             }
         } catch (SQLException e) {
             success = false;
@@ -293,84 +293,6 @@ public class Stereotypes implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows inserted: " + rowsAffected);
         return success;
     }
-
-//    private String getSQLFromStereotypeRule(String rule) {
-//        StringBuilder sqlRule = new StringBuilder();
-//        //sqlRule.append("SELECT * FROM user_attributes Where FK_psclient='").append(clientName).append("' AND ");
-//        String[] tokens = rule.split("\\|");
-//        int idx = 0;
-//        for (String token : tokens) {
-//            if (idx % 2 == 0) {
-//                //sqlRule.append("AND ");
-//                while (token.startsWith("(")) {
-//                    token = token.substring(1);
-//                    sqlRule.append("(");
-//                }
-//                int endParenthesisCounter = 0;
-//                while (token.endsWith(")")) {
-//                    token = token.substring(0, token.length() - 1);
-//                    endParenthesisCounter++;
-//                }
-//
-//                String first = null;
-//                String operator = null;
-//                String second = null;
-//
-//                if (token.contains("<>")) {
-//                    first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
-//                            + token.substring(0, token.indexOf("<>"))
-//                            + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-//                    operator = "<>";
-//                    second = "" + token.substring(token.indexOf(">") + 1) + "";
-//                } else if (token.contains(":")) {
-//
-//                    // If first ends with < or > 
-//                    if (token.contains("<") || token.contains(">")) {
-//                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
-//                                + token.substring(0, token.indexOf(":") - 1) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-//                        operator = token.substring(token.indexOf(":") - 1,
-//                                token.indexOf(":"));
-//                        operator += "=";
-//                    } else {
-//                        first = DBAccess.UATTR_TABLE_FIELD_ATTRIBUTE + "='"
-//                                + token.substring(0, token.indexOf(":")) + "' AND " + DBAccess.UATTR_TABLE_FIELD_VALUE;
-//                        operator = "=";
-//                    }
-//
-//                    //then move it to the operator
-//
-//                    second = "" + token.substring(token.indexOf(":") + 1) + "";
-//                }
-//////                debug lines
-////                System.out.println("first==> "+first);
-////                System.out.println("operator==> "+operator);
-//// 
-//
-//                sqlRule.append("(");
-//                sqlRule.append(first);
-//                sqlRule.append(operator);
-//                sqlRule.append(second);
-//                sqlRule.append(")");
-//
-//                for (int i = 0; i < endParenthesisCounter; i++) {
-//                    sqlRule.append(")");
-//                }
-//            } else {
-//                sqlRule.append(" ").append(token.toUpperCase()).append(" ");
-//
-////                if (token.toUpperCase().equals("OR")) {
-////                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
-////                } else {
-////
-////                    //TODO: change it for the AND to Work properly
-////                    sqlRule.append(" ").append(token.toUpperCase()).append(" ");
-////
-////                }
-//            }
-//            idx++;
-//        }
-//        return sqlRule.toString();
-//    }
 
     private class SqlNode {
 
@@ -479,21 +401,21 @@ public class Stereotypes implements pserver.pservlets.PService {
                 throw new RuntimeException();
             }
         }
-        
+
         public String print(int n) {
             StringBuilder res = new StringBuilder();
             if (isLeaf()) {
                 return statement;
             }
-            res.append(statement).append("\t").append(leftChild.print(n+1));
+            res.append(statement).append("\t").append(leftChild.print(n + 1));
             res.append("\n");
             for (int i = 0; i <= n; i++) {
                 res.append("\t");
             }
-            res.append(rightChild.print(n+1));
+            res.append(rightChild.print(n + 1));
             return res.toString();
         }
-        
+
         public String toSql() {
             StringBuilder res = new StringBuilder();
             if (isLeaf()) {
@@ -516,16 +438,16 @@ public class Stereotypes implements pserver.pservlets.PService {
                 res.append("'");
             } else {
                 if (statement.equalsIgnoreCase("AND")) {
-                   res.append("select a1.user from((").append(leftChild.toSql());
-                   res.append(") a1 join (").append(rightChild.toSql());
-                   res.append(") a2 on a1.user=a2.user)");
+                    res.append("select a1.user from((").append(leftChild.toSql());
+                    res.append(") a1 join (").append(rightChild.toSql());
+                    res.append(") a2 on a1.user=a2.user)");
                 } else if (statement.equalsIgnoreCase("OR")) {
-                   res.append("select a1.user from(").append(leftChild.toSql());
-                   res.append(") a1 left join (").append(rightChild.toSql());
-                   res.append(") a2 on a1.user=a2.user UNION ALL ");
-                   res.append("select a2.user from(").append(leftChild.toSql());
-                   res.append(") a1 right join (").append(rightChild.toSql());
-                   res.append(") a2 on a1.user=a2.user");
+                    res.append("select a1.user from(").append(leftChild.toSql());
+                    res.append(") a1 left join (").append(rightChild.toSql());
+                    res.append(") a2 on a1.user=a2.user UNION ALL ");
+                    res.append("select a2.user from(").append(leftChild.toSql());
+                    res.append(") a1 right join (").append(rightChild.toSql());
+                    res.append(") a2 on a1.user=a2.user");
                 } else {
                     throw new RuntimeException();
                 }
@@ -533,14 +455,12 @@ public class Stereotypes implements pserver.pservlets.PService {
             return res.toString();
         }
     }
-    
-    private void addUsersToStereotype(DBAccess dbAccess, String clientName, String stereot, String rule) throws SQLException {
+
+    private int addUsersToStereotype(DBAccess dbAccess, String clientName, String stereot, String rule) throws SQLException {
+        int res = 0;
         SqlNode parent = new SqlNode(rule);
         parent.propagate();
-        System.out.println("\n" + parent.print(0));
-        System.out.println(parent.toSql());
-        System.out.println("===========================");
-        
+
         String insUsrSql = "INSERT INTO " + DBAccess.STEREOTYPE_USERS_TABLE
                 + "(" + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE
                 + "," + dbAccess.STEREOTYPE_USERS_TABLE_FIELD_USER
@@ -548,55 +468,40 @@ public class Stereotypes implements pserver.pservlets.PService {
                 + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + stereot + "',?,1,'" + clientName + "')";
         PreparedStatement prep = dbAccess.getConnection().prepareStatement(insUsrSql);
 
-        //if rule has or 
-        String sql = "SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " FROM "
-                + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName
-                + "' AND " + rule + " GROUP BY " + DBAccess.UATTR_TABLE_FIELD_USER;
-        //System.out.println("====> " + sql + " <======");
-        //else 
-        //create sql query with join like
-
-        //select temp1.user 
-        //from (select user from user_attributes where FK_psclient='rest' AND (attribute='computer' AND attribute_value=1))temp1 
-        //join (select user from user_attributes where FK_psclient='rest' AND (attribute='edu' AND attribute_value>=3))temp2 
-        //join (select user from user_attributes where FK_psclient='rest' AND (attribute='sex' AND attribute_value='male'))temp3 
-        //on temp1.user=temp2.user and temp1.user=temp3.user;
-
-
-        //rule=  (attribute='computer' AND attribute_value=1) AND (attribute='edu' AND attribute_value>=3)
-
-        //rule=  (attribute='computer' AND attribute_value=1) OR (attribute='edu' AND attribute_value>=3)
-
-        //rule=  (attribute='computer' AND attribute_value=1) AND (attribute='edu' AND attribute_value>=3) OR (attribute='edu' AND attribute_value>=3)
-
-
-        sql = "SELECT  temp.user FROM (SELECT " + DBAccess.UATTR_TABLE_FIELD_USER + " as user FROM "
-                + DBAccess.UATTR_TABLE + " WHERE FK_psclient='" + clientName
-                + "' AND " + rule + ") as temp";
-
-        PServerResultSet rs = dbAccess.executeQuery(sql);
+//        DEBUG:
+//        System.out.println("\n" + parent.print(0));
+//        System.out.println(parent.toSql());
+        PServerResultSet rs = dbAccess.executeQuery(parent.toSql());
         while (rs.next()) {
             String user = rs.getRs().getString(1);
             prep.setString(1, user);
             prep.addBatch();
         }
         rs.close();
-        prep.executeBatch();
+        for (Integer i : prep.executeBatch()) {
+            res += i;
+        }
         prep.close();
+        return res;
     }
 
-    private void updateStereotype(DBAccess dbAccess, String clientName, String stereotype) throws SQLException {
-        String sql = "DELETE FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
-        dbAccess.executeUpdate(sql);
+    private int updateStereotype(DBAccess dbAccess, String clientName, String stereotype) throws SQLException {
+        int res = 0;
+        String sql = "DELETE FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+        res += dbAccess.executeUpdate(sql);
         String subSelect = "SELECT '" + stereotype + "',up_feature,sum(up_value),'" + clientName + "' FROM " + DBAccess.UPROFILE_TABLE
                 + " WHERE up_user IN (SELECT su_user FROM stereotype_users WHERE su_stereotype = '" + stereotype + "' AND FK_psclient='" + clientName + "' ) GROUP BY up_feature";
 
-        sql = "INSERT INTO " + DBAccess.STERETYPE_PROFILES_TABLE
-                + "(" + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE
-                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE
-                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE
+        sql = "INSERT INTO " + DBAccess.STEREOTYPE_PROFILES_TABLE
+                + "(" + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE
+                + "," + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE
+                + "," + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE
                 + "," + DBAccess.FIELD_PSCLIENT + ") " + subSelect + "";
+        res += dbAccess.executeUpdate(sql);
+
+        sql = "update stereotype_profiles set sp_value=sp_numvalue";
         dbAccess.executeUpdate(sql);
+        return res;
     }
 
     /**
@@ -697,11 +602,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             success = false;
             WebServer.win.log.debug("-Problem inserting to DB: " + e);
         }
-        respBody.append("<?xml version=\"1.0\"?>\n");
-        respBody.append("<result>\n");
-        respBody.append("<row><num_of_rows>").append(rowsAffected);
-        respBody.append("</num_of_rows></row>\n");
-        respBody.append("</result>");
+        
         WebServer.win.log.debug("-Num of rows inserted: " + rowsAffected);
         return success;
     }
@@ -735,20 +636,20 @@ public class Stereotypes implements pserver.pservlets.PService {
         String subSelect = "SELECT '" + stereotype + "',up_feature, 0,'" + clientName + "' FROM " + DBAccess.UPROFILE_TABLE
                 + " WHERE up_user ='" + user + "' AND FK_psclient='" + clientName + "'";
 
-        String sql = "INSERT IGNORE INTO " + DBAccess.STERETYPE_PROFILES_TABLE
-                + "(" + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE
-                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE
-                + "," + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE
+        String sql = "INSERT IGNORE INTO " + DBAccess.STEREOTYPE_PROFILES_TABLE
+                + "(" + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE
+                + "," + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE
+                + "," + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE
                 + "," + DBAccess.FIELD_PSCLIENT + ") " + subSelect + "";
         dbAccess.executeUpdate(sql);
 
-        sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
-                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
+        sql = "UPDATE " + DBAccess.STEREOTYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
+                + " SET " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
                 + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
                 + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
-                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
+                + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE;
         dbAccess.executeUpdate(sql);
     }
 
@@ -1097,13 +998,13 @@ public class Stereotypes implements pserver.pservlets.PService {
     }
 
     private void updateStereotypeForDegree(DBAccess dbAccess, String stereotype, String user, String clientName, float degree) throws SQLException {
-        String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
-                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
+        String sql = "UPDATE " + DBAccess.STEREOTYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
+                + " SET " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
                 + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
                 + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
-                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
+                + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE;
         dbAccess.executeUpdate(sql);
     }
 
@@ -1593,13 +1494,13 @@ public class Stereotypes implements pserver.pservlets.PService {
      * @return The value of response code.
      */
     private int updateStereotypeWithUpdatededUser(DBAccess dbAccess, String clientName, String stereotype, String user, float degree) throws SQLException {
-        String sql = "UPDATE " + DBAccess.STERETYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
-                + " SET " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
+        String sql = "UPDATE " + DBAccess.STEREOTYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
+                + " SET " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
                 + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
                 + " WHERE " + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND "
-                + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
-                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STERETYPE_PROFILES_TABLE + "." + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE;
+                + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "= " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE;
         return dbAccess.executeUpdate(sql);
     }
 
@@ -2109,7 +2010,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             dbAccess.connect();
             //execute the command
             boolean success = true;
-            //success = updateStereotypes(queryParam, respBody, dbAccess);
+            success = updateStereotypes(queryParam, respBody, dbAccess);
             //check success
             if (!success) {
                 respCode = PSReqWorker.REQUEST_ERR;  //incomprehensible client request
@@ -2122,6 +2023,12 @@ public class Stereotypes implements pserver.pservlets.PService {
             return PSReqWorker.SERVER_ERR;
         }
         return respCode;
+    }
+
+    private boolean updateStereotypes(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+//        execSterRemStr;
+//        execSterAddStr
+        return false;
     }
 
     private void updateStereotypeWithRemovedUser(DBAccess dbAccess, String clientName, String stereot, String user, int qpSize) {

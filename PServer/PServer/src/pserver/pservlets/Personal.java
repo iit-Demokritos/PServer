@@ -2186,7 +2186,7 @@ public class Personal implements pserver.pservlets.PService {
                         rowsAffected += dbAccess.executeUpdate(query);
                         query = "delete from up_features WHERE uf_feature" + ftrCondition + " AND FK_psclient='" + clientName + "'";
                         rowsAffected += dbAccess.executeUpdate(query);
-                        query = "delete from " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + " " + ftrCondition + " AND FK_psclient='" + clientName + "'";
+                        query = "delete from " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + " " + ftrCondition + " AND FK_psclient='" + clientName + "'";
                         rowsAffected += dbAccess.executeUpdate(query);
                         query = "delete from " + DBAccess.COMMUNITY_PROFILES_TABLE + " WHERE " + DBAccess.COMMUNITY_PROFILES_TABLE_FIELD_FEATURE + " " + ftrCondition + " AND FK_psclient='" + clientName + "'";
                         rowsAffected += dbAccess.executeUpdate(query);
