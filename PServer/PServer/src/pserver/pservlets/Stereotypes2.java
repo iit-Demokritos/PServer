@@ -63,7 +63,7 @@ public class Stereotypes2 implements pserver.pservlets.PService {
             @Override
             public int runCommand(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
 //                return getStereotypesUsers(queryParam, respBody, dbAccess);
-                  throw new UnsupportedOperationException("Not supported yet.");
+                throw new UnsupportedOperationException("Not supported yet.");
             }
         });
         //get stereotypes features
@@ -498,7 +498,6 @@ public class Stereotypes2 implements pserver.pservlets.PService {
 //        WebServer.win.log.debug("-Num of rows returned: " + rowsAffected);
 //        return PSReqWorker.NORMAL;
 //    }
-
     private int getStereotypesFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -594,12 +593,21 @@ public class Stereotypes2 implements pserver.pservlets.PService {
         int comIdx = queryParam.qpIndexOfKeyNoCase("com");
         int lkeIdx = queryParam.qpIndexOfKeyNoCase("lke");
         //execute request
-        boolean success = true;
+        int success = PSReqWorker.NORMAL;
         String query;
         int rowsAffected = 0;
         try {
+            String table;
+            String[] where;
+
+            StringBuilder clntCondition = new StringBuilder();
+            clntCondition.append(DBAccess.FIELD_PSCLIENT);
+            clntCondition.append("='").append(clientName).append("'");
             //delete specified stereotypes            
             for (int i = 0; i < qpSize; i++) {
+                StringBuilder strCondition = new StringBuilder();
+                strCondition.append(DBAccess.FIELD_PSCLIENT);
+                strCondition.append("='").append(clientName).append("'");
                 if (i != comIdx && i != lkeIdx && i != clntIdx) {  //'com', 'lke' query parameters excluded
                     String key = (String) queryParam.getKey(i);
                     String stereot = (String) queryParam.getVal(i);
@@ -613,10 +621,10 @@ public class Stereotypes2 implements pserver.pservlets.PService {
                         query = "delete from stereotypes where st_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
                         rowsAffected += dbAccess.executeUpdate(query);
                     } else {
-                        success = false;
+                        success = PSReqWorker.SERVER_ERR;
                     }  //request is not valid, rollback
                 }
-                if (!success) {
+                if (success == PSReqWorker.SERVER_ERR) {
                     break;
                 }  //discontinue loop, rollback
             }
@@ -653,12 +661,11 @@ public class Stereotypes2 implements pserver.pservlets.PService {
             respBody.append("<row><num_of_rows>").append(rowsAffected).append("</num_of_rows></row>\n");
             respBody.append("</result>");
         } catch (SQLException e) {
+            success = PSReqWorker.SERVER_ERR;
             WebServer.win.log.debug("-Problem deleting from DB: " + e);
-            return PSReqWorker.SERVER_ERR;
         }
         WebServer.win.log.debug("-Num of rows deleted: " + rowsAffected);
-        return PSReqWorker.NORMAL;
-
+        return success;
 
     }
 
