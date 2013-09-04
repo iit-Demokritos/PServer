@@ -62,7 +62,8 @@ public class Stereotypes2 implements pserver.pservlets.PService {
         commands.put("getstrusr", new PServerCommand() {
             @Override
             public int runCommand(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-                return getStereotypesUsers(queryParam, respBody, dbAccess);
+//                return getStereotypesUsers(queryParam, respBody, dbAccess);
+                  throw new UnsupportedOperationException("Not supported yet.");
             }
         });
         //get stereotypes features
@@ -76,14 +77,15 @@ public class Stereotypes2 implements pserver.pservlets.PService {
         commands.put("rmkstr", new PServerCommand() {
             @Override
             public int runCommand(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-                return remakeStereotype(queryParam, respBody, dbAccess);
+//                return remakeStereotype(queryParam, respBody, dbAccess);
+                throw new UnsupportedOperationException("Not supported yet.");
             }
         });
         //remove stereotype
         commands.put("remstr", new PServerCommand() {
             @Override
             public int runCommand(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-                throw new UnsupportedOperationException("Not supported yet.");
+                return removeStereotype(queryParam, respBody, dbAccess);
             }
         });
         //add user to stereotype
@@ -293,11 +295,11 @@ public class Stereotypes2 implements pserver.pservlets.PService {
             if (ruleIdx == -1) {
                 String[] columns = {DBAccess.STEREOTYPE_TABLE_FIELD_STEREOTYPE, DBAccess.FIELD_PSCLIENT};
                 String[] values = {stereot, clientName};
-                rowsAffected = dbAccess.executeUpdate(buildInsertStatement(table, columns, values).toString());
+                rowsAffected = dbAccess.executeUpdate(DBAccess.buildInsertStatement(table, columns, values).toString());
             } else {
                 String[] columns = {DBAccess.STEREOTYPE_TABLE_FIELD_STEREOTYPE, DBAccess.STEREOTYPE_TABLE_FIELD_RULE, DBAccess.FIELD_PSCLIENT};
                 String[] values = {stereot, rule, clientName};
-                rowsAffected = dbAccess.executeUpdate(buildInsertStatement(table, columns, values).toString());
+                rowsAffected = dbAccess.executeUpdate(DBAccess.buildInsertStatement(table, columns, values).toString());
 //                rowsAffected += updateStereotypesUsers(dbAccess, clientName, stereot, rule);
 //                rowsAffected += updateStereotypesFeatures(dbAccess, clientName, stereot);
             }
@@ -317,7 +319,7 @@ public class Stereotypes2 implements pserver.pservlets.PService {
         //request properties
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
-        
+
         //Gather conditions
         HashMap<String, Integer> conditions = new HashMap();
         conditions.put("clnt", REQUIRED);
@@ -332,7 +334,7 @@ public class Stereotypes2 implements pserver.pservlets.PService {
             WebServer.win.log.error("-Request missing parameters");
             return PSReqWorker.REQUEST_ERR;
         }
-        
+
         int modIdx = queryParam.qpIndexOfKeyNoCase("mod");
         StringBuilder strCondition = new StringBuilder(conditions.get("str"));
         //if a mod is specified add the corresponding check
@@ -373,7 +375,7 @@ public class Stereotypes2 implements pserver.pservlets.PService {
             };
             String table = DBAccess.STEREOTYPE_TABLE;
             String[] where = {strCondition.toString(), clntCondition.toString()};
-            query = buildSelectStatement(table, columns, where).toString();
+            query = DBAccess.buildSelectStatement(table, columns, where).toString();
             PServerResultSet rs = dbAccess.executeQuery(query);
 
             ArrayList<String> response = new ArrayList();
@@ -399,103 +401,103 @@ public class Stereotypes2 implements pserver.pservlets.PService {
         return PSReqWorker.NORMAL;
     }
 
-    private int getStereotypesUsers(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        //Gather conditions
-        HashMap<String, Integer> conditions = new HashMap();
-        conditions.put("str", REQUIRED);
-        conditions.put("usr", OPTIONAL);
-        conditions.put("clnt", REQUIRED);
-        String[] condColumns = {
-            DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE,
-            DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER,
-            DBAccess.FIELD_PSCLIENT
-        };
-        try {
-            conditions = buildConditions(queryParam, conditions, condColumns);
-        } catch (Exception e) {
-            WebServer.win.log.error("-Request missing parameters");
-            return PSReqWorker.REQUEST_ERR;
-        }
-        
-//        int strIdx = queryParam.qpIndexOfKeyNoCase("str");
-//        int usrIdx = queryParam.qpIndexOfKeyNoCase("usr");
-//        if (strIdx == -1) {
-//            WebServer.win.log.error("-Request missing str parameter");
+//    private int getStereotypesUsers(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+//        //Gather conditions
+//        HashMap<String, Integer> conditions = new HashMap();
+//        conditions.put("str", REQUIRED);
+//        conditions.put("usr", OPTIONAL);
+//        conditions.put("clnt", REQUIRED);
+//        String[] condColumns = {
+//            DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE,
+//            DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER,
+//            DBAccess.FIELD_PSCLIENT
+//        };
+//        try {
+//            conditions = buildConditions(queryParam, conditions, condColumns);
+//        } catch (Exception e) {
+//            WebServer.win.log.error("-Request missing parameters");
 //            return PSReqWorker.REQUEST_ERR;
-//        }  //must exist
-//
-//        String stereotype = queryParam.getVal(strIdx).toString();
-//
-//        StringBuilder strCondition = new StringBuilder();
-//        strCondition.append(DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE);
-//        strCondition.append("='").append(stereotype);
-//        strCondition.append("') ");
-//
-//        //if a mod is specified add the corresponding check
-//        StringBuilder usrCondition = null;
-//        if (usrIdx != -1) {
-//            usrCondition = new StringBuilder();
-//            String usr = (String) queryParam.getVal(usrIdx);
-//            String column = DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER;
-//            //build condition
-//            strCondition.append("AND ").append(column).append("='");
-//            if (usr.contains("*")) {
-//                strCondition.append(usr.replace("*", "")).append("%'");
-//            } else {
-//                strCondition.append(usr).append("'");
-//            }
 //        }
 //
-//        StringBuilder clntCondition = new StringBuilder();
-//        clntCondition.append(DBAccess.FIELD_PSCLIENT);
-//        clntCondition.append("='").append(clientName).append("'");
-
-        //execute request
-        int rowsAffected = 0;
-        String query;
-        try {
-            //get matching records
-            String[] columns = {
-                DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER,
-                DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE
-            };
-            String table = DBAccess.STEREOTYPE_USERS_TABLE;
-            String[] where;
-            if (usrCondition != null) {
-                where = new String[3];
-                where[0] = strCondition.toString();
-                where[1] = usrCondition.toString();
-                where[2] = clntCondition.toString();
-            } else {
-                where = new String[2];
-                where[0] = strCondition.toString();
-                where[1] = clntCondition.toString();
-            }
-            query = buildSelectStatement(table, columns, where).toString();
-            PServerResultSet rs = dbAccess.executeQuery(query);
-
-            ArrayList<String> response = new ArrayList();
-            //format response body            
-            while (rs.next()) {
-                StringBuilder row = new StringBuilder();
-                String strVal = rs.getRs().getString(columns[0]);
-                String rule = rs.getRs().getString(columns[1]);
-                row.append("<row><usr>").append(strVal).append("</usr><dgr>");
-                row.append(rule).append("</dgr></row>\n");
-                rowsAffected += 1;  //number of result rows
-                response.add(row.toString());
-            }
-            //close resultset and statement
-            rs.close();
-            String[] resp = response.toArray(new String[response.size()]);
-            buildResponse(null, respBody, resp, dbAccess);
-        } catch (SQLException e) {
-            WebServer.win.log.debug("-Problem executing query: " + e);
-            return PSReqWorker.SERVER_ERR;
-        }
-        WebServer.win.log.debug("-Num of rows returned: " + rowsAffected);
-        return PSReqWorker.NORMAL;
-    }
+////        int strIdx = queryParam.qpIndexOfKeyNoCase("str");
+////        int usrIdx = queryParam.qpIndexOfKeyNoCase("usr");
+////        if (strIdx == -1) {
+////            WebServer.win.log.error("-Request missing str parameter");
+////            return PSReqWorker.REQUEST_ERR;
+////        }  //must exist
+////
+////        String stereotype = queryParam.getVal(strIdx).toString();
+////
+////        StringBuilder strCondition = new StringBuilder();
+////        strCondition.append(DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE);
+////        strCondition.append("='").append(stereotype);
+////        strCondition.append("') ");
+////
+////        //if a mod is specified add the corresponding check
+////        StringBuilder usrCondition = null;
+////        if (usrIdx != -1) {
+////            usrCondition = new StringBuilder();
+////            String usr = (String) queryParam.getVal(usrIdx);
+////            String column = DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER;
+////            //build condition
+////            strCondition.append("AND ").append(column).append("='");
+////            if (usr.contains("*")) {
+////                strCondition.append(usr.replace("*", "")).append("%'");
+////            } else {
+////                strCondition.append(usr).append("'");
+////            }
+////        }
+////
+////        StringBuilder clntCondition = new StringBuilder();
+////        clntCondition.append(DBAccess.FIELD_PSCLIENT);
+////        clntCondition.append("='").append(clientName).append("'");
+//
+//        //execute request
+//        int rowsAffected = 0;
+//        String query;
+//        try {
+//            //get matching records
+//            String[] columns = {
+//                DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER,
+//                DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE
+//            };
+//            String table = DBAccess.STEREOTYPE_USERS_TABLE;
+//            String[] where;
+//            if (usrCondition != null) {
+//                where = new String[3];
+//                where[0] = strCondition.toString();
+//                where[1] = usrCondition.toString();
+//                where[2] = clntCondition.toString();
+//            } else {
+//                where = new String[2];
+//                where[0] = strCondition.toString();
+//                where[1] = clntCondition.toString();
+//            }
+//            query = DBAccess.buildSelectStatement(table, columns, where).toString();
+//            PServerResultSet rs = dbAccess.executeQuery(query);
+//
+//            ArrayList<String> response = new ArrayList();
+//            //format response body            
+//            while (rs.next()) {
+//                StringBuilder row = new StringBuilder();
+//                String strVal = rs.getRs().getString(columns[0]);
+//                String rule = rs.getRs().getString(columns[1]);
+//                row.append("<row><usr>").append(strVal).append("</usr><dgr>");
+//                row.append(rule).append("</dgr></row>\n");
+//                rowsAffected += 1;  //number of result rows
+//                response.add(row.toString());
+//            }
+//            //close resultset and statement
+//            rs.close();
+//            String[] resp = response.toArray(new String[response.size()]);
+//            buildResponse(null, respBody, resp, dbAccess);
+//        } catch (SQLException e) {
+//            WebServer.win.log.debug("-Problem executing query: " + e);
+//            return PSReqWorker.SERVER_ERR;
+//        }
+//        WebServer.win.log.debug("-Num of rows returned: " + rowsAffected);
+//        return PSReqWorker.NORMAL;
+//    }
 
     private int getStereotypesFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         //request properties
@@ -555,7 +557,7 @@ public class Stereotypes2 implements pserver.pservlets.PService {
                 where[0] = strCondition.toString();
                 where[1] = clntCondition.toString();
             }
-            query = buildSelectStatement(table, columns, where).toString();
+            query = DBAccess.buildSelectStatement(table, columns, where).toString();
             PServerResultSet rs = dbAccess.executeQuery(query);
 
             ArrayList<String> response = new ArrayList();
@@ -581,136 +583,92 @@ public class Stereotypes2 implements pserver.pservlets.PService {
         return PSReqWorker.NORMAL;
     }
 
-    private int remakeStereotype(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
-    }
+//    private int remakeStereotype(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
+//    }
+    private int removeStereotype(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
 
-    //TODO: wrap bellow methods in an object and/or move them to DBAccess
-    //These might seem unnecesary but I believe they help in organizing the flow
-    //and could be used all arround the program inside a wrapper class that will
-    //fully utilize them. If nothing else they use StringBuilder which is way
-    //faster than the String concatenation used before.
-    private static StringBuilder buildInsertStatement(String table, String[] values) {
-        return buildInsertStatement(table, null, values);
-    }
-
-    private static StringBuilder buildInsertStatement(String table, String[] columns, String[] values) {
-        StringBuilder query = new StringBuilder("INSERT INTO ");
-        query.append(table).append(" ");
-        if (columns != null) {
-            query.append("(");
-            for (String s : columns) {
-                query.append(s).append(", ");
+        //request properties
+        int qpSize = queryParam.size();
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        int comIdx = queryParam.qpIndexOfKeyNoCase("com");
+        int lkeIdx = queryParam.qpIndexOfKeyNoCase("lke");
+        //execute request
+        boolean success = true;
+        String query;
+        int rowsAffected = 0;
+        try {
+            //delete specified stereotypes            
+            for (int i = 0; i < qpSize; i++) {
+                if (i != comIdx && i != lkeIdx && i != clntIdx) {  //'com', 'lke' query parameters excluded
+                    String key = (String) queryParam.getKey(i);
+                    String stereot = (String) queryParam.getVal(i);
+                    if (key.equalsIgnoreCase("str")) {
+                        query = "delete from stereotype_attributes where sp_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
+                        rowsAffected += dbAccess.executeUpdate(query);
+                        query = "delete from stereotype_profiles where sp_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
+                        rowsAffected += dbAccess.executeUpdate(query);
+                        query = "delete from stereotype_users where su_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
+                        rowsAffected += dbAccess.executeUpdate(query);
+                        query = "delete from stereotypes where st_stereotype='" + stereot + "' and FK_psclient='" + clientName + "' ";
+                        rowsAffected += dbAccess.executeUpdate(query);
+                    } else {
+                        success = false;
+                    }  //request is not valid, rollback
+                }
+                if (!success) {
+                    break;
+                }  //discontinue loop, rollback
             }
-            query.setLength(query.length() - 2);
-            query.append(") ");
-        }
-        query.append("VALUES ('");
-        for (String s : values) {
-            query.append(s).append("', '");
-        }
-        query.setLength(query.length() - 4);
-        query.append("')");
-        return query;
-    }
+            if (lkeIdx != -1) {  //delete stereotypes matching the pattern
+                String stereotPattern = (String) queryParam.getVal(lkeIdx);
 
-    private static StringBuilder buildSelectStatement(String table) {
-        String[] tables = {table};
-        return buildSelectStatement(tables, null, null, null, null, null);
-    }
-
-    private static StringBuilder buildSelectStatement(String table, String[] where) {
-        String[] tables = {table};
-        return buildSelectStatement(tables, null, null, null, null, where);
-    }
-
-    private static StringBuilder buildSelectStatement(String table, String[] columns, String[] where) {
-        String[] tables = {table};
-        return buildSelectStatement(tables, null, null, null, columns, where);
-    }
-
-    private static StringBuilder buildSelectStatement(String[] tables, String[] aliases, String[] joinTypes, String[] joins, String[] columns, String[] where) {
-        StringBuilder query = new StringBuilder("SELECT ");
-        if (columns == null) {
-            query.append("* ");
-        } else {
-            for (String s : columns) {
-                query.append(s).append(", ");
+                query = "delete from stereotype_attributes where sp_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
+                query = "delete from stereotype_profiles where sp_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
+                query = "delete from stereotype_users where su_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
+                query = "delete from stereotypes where st_stereotype like '" + stereotPattern + "%' and FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
             }
-            query.setLength(query.length() - 2);
-            query.append(" ");
-        }
-        query.append("FROM ");
-        if (tables.length != 1) {
-            query.append("(").append(tables[0]).append(") as ");
-            query.append(aliases[0]);
-            for (int i = 0; i < tables.length - 1; i++) {
-                query.append(" ").append(joinTypes[i]).append(" (");
-                query.append(tables[i + 1]).append(") as ");
-                query.append(aliases[i + 1]);
-                query.append(" ON ").append(joins[i]).append(" ");
+
+
+            if (qpSize == 2) {  //no 'str' and 'lke' query parameters specified
+                //delete rows of all stereotypes
+
+                query = "delete from stereotype_profiles WHERE FK_psclient='" + clientName + "' ";
+                rowsAffected = dbAccess.executeUpdate(query);
+                query = "delete from stereotypes WHERE FK_psclient='" + clientName + "' ";
+                rowsAffected = dbAccess.executeUpdate(query);
+                query = "delete from stereotype_attributes where FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
+                query = "delete from stereotype_users where FK_psclient='" + clientName + "' ";
+                rowsAffected += dbAccess.executeUpdate(query);
             }
-        } else {
-            query.append(tables[0]);
+            //format response body
+            //response will be used only in case of success            
+            respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+            respBody.append("<result>\n");
+            respBody.append("<row><num_of_rows>").append(rowsAffected).append("</num_of_rows></row>\n");
+            respBody.append("</result>");
+        } catch (SQLException e) {
+            WebServer.win.log.debug("-Problem deleting from DB: " + e);
+            return PSReqWorker.SERVER_ERR;
         }
-        if (where != null) {
-            query.append("WHERE ");
-            for (String s : where) {
-                query.append(s).append(" AND ");
-            }
-            query.setLength(query.length() - 5);
-        }
-        return query;
+        WebServer.win.log.debug("-Num of rows deleted: " + rowsAffected);
+        return PSReqWorker.NORMAL;
+
+
     }
 
-    private StringBuilder buildUpdateStatement(String table, String[] columns, String[] values) {
-        String[] tables = {table};
-        return buildUpdateStatement(tables, null, null, null, columns, values, null);
-    }
-
-    private StringBuilder buildUpdateStatement(String table, String[] columns, String[] values, String[] where) {
-        String[] tables = {table};
-        return buildUpdateStatement(tables, null, null, null, columns, values, where);
-    }
-
-    private StringBuilder buildUpdateStatement(String[] tables, String[] aliases, String[] joinTypes, String[] joins, String[] columns, String[] values, String[] where) {
-        StringBuilder query = new StringBuilder("UPDATE ");
-        if (tables.length != 1) {
-            query.append("(").append(tables[0]).append(") as ");
-            query.append(aliases[0]);
-            for (int i = 0; i < tables.length - 1; i++) {
-                query.append(" ").append(joinTypes[i]).append(" (");
-                query.append(tables[i + 1]).append(") as ");
-                query.append(aliases[i + 1]);
-                query.append(" ON ").append(joins[i]).append(" ");
-            }
-        } else {
-            query.append(tables[0]);
-        }
-        query.append("SET ");
-        for (int i = 0; i < columns.length; i++) {
-            query.append(columns[i]).append("='").append(values[i]);
-            query.append("', ");
-        }
-        query.setLength(query.length() - 2);
-        if (where != null) {
-            query.append(" WHERE ");
-            for (String s : where) {
-                query.append(s).append(" AND ");
-            }
-            query.setLength(query.length() - 5);
-        }
-        return query;
-    }
-
-    private StringBuilder buildDeleteStatement(String table, String where) {
-        StringBuilder query = new StringBuilder("DELETE FROM ");
-        query.append(table);
-        if (where != null) {
-            query.append(" WHERE ").append(where);
-        }
-        return query;
-    }
-
+    /**
+     *
+     * @param xslPath
+     * @param respBody
+     * @param content
+     * @param dbAccess
+     */
     private void buildResponse(String xslPath, StringBuffer respBody, String[] content, DBAccess dbAccess) {
         respBody.append(DBAccess.xmlHeader(xslPath));
         respBody.append("<result>\n");
@@ -720,10 +678,17 @@ public class Stereotypes2 implements pserver.pservlets.PService {
         respBody.append("</result>");
     }
 
-    public HashMap buildConditions(VectorMap queryParam, HashMap<String,Integer> conditions, String[] columns) {
+    /**
+     *
+     * @param queryParam
+     * @param conditions
+     * @param columns
+     * @return
+     */
+    public HashMap buildConditions(VectorMap queryParam, HashMap<String, Integer> conditions, String[] columns) {
         HashMap res = new HashMap();
         int i = -1;
-        for (String curKey:conditions.keySet()) {
+        for (String curKey : conditions.keySet()) {
             i++;
             int curIndex = queryParam.qpIndexOfKeyNoCase(curKey);
             if (curIndex == -1) {

@@ -862,4 +862,137 @@ public class DBAccess {
         }
         return true;
     }
+    
+    
+    
+    
+    
+     //TODO: wrap bellow methods in an object and/or move them to DBAccess
+    //These might seem unnecesary but I believe they help in organizing the flow
+    //and could be used all arround the program inside a wrapper class that will
+    //fully utilize them. If nothing else they use StringBuilder which is way
+    //faster than the String concatenation used before.
+    public static StringBuilder buildInsertStatement(String table, String[] values) {
+        return buildInsertStatement(table, null, values);
+    }
+
+    public static StringBuilder buildInsertStatement(String table, String[] columns, String[] values) {
+        StringBuilder query = new StringBuilder("INSERT INTO ");
+        query.append(table).append(" ");
+        if (columns != null) {
+            query.append("(");
+            for (String s : columns) {
+                query.append(s).append(", ");
+            }
+            query.setLength(query.length() - 2);
+            query.append(") ");
+        }
+        query.append("VALUES ('");
+        for (String s : values) {
+            query.append(s).append("', '");
+        }
+        query.setLength(query.length() - 4);
+        query.append("')");
+        return query;
+    }
+
+    public static StringBuilder buildSelectStatement(String table) {
+        String[] tables = {table};
+        return buildSelectStatement(tables, null, null, null, null, null);
+    }
+
+    public static StringBuilder buildSelectStatement(String table, String[] where) {
+        String[] tables = {table};
+        return buildSelectStatement(tables, null, null, null, null, where);
+    }
+
+    public static StringBuilder buildSelectStatement(String table, String[] columns, String[] where) {
+        String[] tables = {table};
+        return buildSelectStatement(tables, null, null, null, columns, where);
+    }
+
+    public static StringBuilder buildSelectStatement(String[] tables, String[] aliases, String[] joinTypes, String[] joins, String[] columns, String[] where) {
+        StringBuilder query = new StringBuilder("SELECT ");
+        if (columns == null) {
+            query.append("* ");
+        } else {
+            for (String s : columns) {
+                query.append(s).append(", ");
+            }
+            query.setLength(query.length() - 2);
+            query.append(" ");
+        }
+        query.append("FROM ");
+        if (tables.length != 1) {
+            query.append("(").append(tables[0]).append(") as ");
+            query.append(aliases[0]);
+            for (int i = 0; i < tables.length - 1; i++) {
+                query.append(" ").append(joinTypes[i]).append(" (");
+                query.append(tables[i + 1]).append(") as ");
+                query.append(aliases[i + 1]);
+                query.append(" ON ").append(joins[i]).append(" ");
+            }
+        } else {
+            query.append(tables[0]);
+        }
+        if (where != null) {
+            query.append("WHERE ");
+            for (String s : where) {
+                query.append(s).append(" AND ");
+            }
+            query.setLength(query.length() - 5);
+        }
+        return query;
+    }
+
+    public static StringBuilder buildUpdateStatement(String table, String[] columns, String[] values) {
+        String[] tables = {table};
+        return buildUpdateStatement(tables, null, null, null, columns, values, null);
+    }
+
+    public static StringBuilder buildUpdateStatement(String table, String[] columns, String[] values, String[] where) {
+        String[] tables = {table};
+        return buildUpdateStatement(tables, null, null, null, columns, values, where);
+    }
+
+    public static StringBuilder buildUpdateStatement(String[] tables, String[] aliases, String[] joinTypes, String[] joins, String[] columns, String[] values, String[] where) {
+        StringBuilder query = new StringBuilder("UPDATE ");
+        if (tables.length != 1) {
+            query.append("(").append(tables[0]).append(") as ");
+            query.append(aliases[0]);
+            for (int i = 0; i < tables.length - 1; i++) {
+                query.append(" ").append(joinTypes[i]).append(" (");
+                query.append(tables[i + 1]).append(") as ");
+                query.append(aliases[i + 1]);
+                query.append(" ON ").append(joins[i]).append(" ");
+            }
+        } else {
+            query.append(tables[0]);
+        }
+        query.append("SET ");
+        for (int i = 0; i < columns.length; i++) {
+            query.append(columns[i]).append("='").append(values[i]);
+            query.append("', ");
+        }
+        query.setLength(query.length() - 2);
+        if (where != null) {
+            query.append(" WHERE ");
+            for (String s : where) {
+                query.append(s).append(" AND ");
+            }
+            query.setLength(query.length() - 5);
+        }
+        return query;
+    }
+
+    public static StringBuilder buildDeleteStatement(String table, String where) {
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+        query.append(table);
+        if (where != null) {
+            query.append(" WHERE ").append(where);
+        }
+        return query;
+    }
+    
+    
 }
