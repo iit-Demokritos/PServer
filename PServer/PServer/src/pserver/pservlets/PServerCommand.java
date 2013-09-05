@@ -4,8 +4,9 @@
  */
 package pserver.pservlets;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import pserver.data.DBAccess;
-import pserver.data.VectorMap;
 
 /**
  *
@@ -13,6 +14,6 @@ import pserver.data.VectorMap;
  */
 public interface PServerCommand {
     
-    int runCommand(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess);
+    int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess);
     
 }
