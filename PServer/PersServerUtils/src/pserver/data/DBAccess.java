@@ -280,10 +280,10 @@ public class DBAccess {
         }
         String salt = rs.getString("salt");
         rs.close();
-        rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=SHA2('" + salt + pass + "',256);");
-        return rs.first()?true:false;
+        rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='" + name + "' and password=SHA2('" + salt + pass + "',256);");
+        return rs.first() ? true : false;
     }
-    
+
     /**
      * INSERT new user in the database
      */
@@ -551,8 +551,8 @@ public class DBAccess {
         stmt2.close();
         stmt.close();
         return total;
-    }    
-    
+    }
+
     public int clearUserCommunities(String clientName) throws SQLException {
         int total = 0;
         Statement stmt = this.connection.createStatement();
@@ -857,17 +857,14 @@ public class DBAccess {
         if (strName.length() == 0) {
             return false;
         }
-        if (strName.equals("*")) {
-            return false;
-        }
+//        if (strName.equals("*")) {
+//            return false;
+//        }
         return true;
     }
-    
-    
-    
-    
-    
-     //TODO: wrap bellow methods in an object and/or move them to DBAccess
+
+    //TODO injection
+    //DONE wrap bellow methods in an object and/or move them to DBAccess
     //These might seem unnecesary but I believe they help in organizing the flow
     //and could be used all arround the program inside a wrapper class that will
     //fully utilize them. If nothing else they use StringBuilder which is way
@@ -993,6 +990,19 @@ public class DBAccess {
         }
         return query;
     }
-    
-    
+
+    public static StringBuilder buildDeleteStatement(String table, String[] where) {
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+        query.append(table);
+        if (where != null) {
+            query.append(" WHERE ");
+            for (String clause : where) {
+                if (clause != null && !clause.equals("")) {
+                    query.append(clause).append(" AND ");
+                }
+            }
+            query.setLength(query.length() - 5);
+        }
+        return query;
+    }
 }
