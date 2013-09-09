@@ -23,7 +23,7 @@ public class PageConverter {
         int totalPage = 2;
         int MaxResults = 20;
         String[] contentTable = RString.split("\\n");
-        if (contentTable.length<=2){
+        if (contentTable.length <= 2) {
             return null;
         }
         totalPage = (((contentTable.length - 4) / MaxResults) + 1);
@@ -32,7 +32,7 @@ public class PageConverter {
         ConvertedBuffer.append(contentTable[2] + "\n");
 
 
-        if (PageIndex > totalPage ||PageIndex<=0) {
+        if (PageIndex > totalPage || PageIndex <= 0) {
             PageIndex = totalPage;
         }
         for (int i = 3; i < contentTable.length - 1; i++) {

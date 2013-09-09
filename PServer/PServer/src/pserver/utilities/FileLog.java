@@ -34,10 +34,11 @@ import pserver.*;
  * @author scify
  */
 public class FileLog {
+
     private String logPath;   //path of log file
     private long maxSize;     //log max size in bytes
     private boolean logOn = true;  //if false, no msgs at all are written
-    
+
     //initializers
     /**
      *
@@ -48,7 +49,7 @@ public class FileLog {
         this.logPath = logPath;
         this.maxSize = maxSize;
     }
-    
+
     //misc methods
     /**
      *
@@ -57,6 +58,7 @@ public class FileLog {
     public String getLogPath() {
         return logPath;
     }
+
     /**
      *
      * @return
@@ -64,6 +66,7 @@ public class FileLog {
     public long getMaxSize() {
         return maxSize;
     }
+
     /**
      *
      * @param maxSize
@@ -71,6 +74,7 @@ public class FileLog {
     public void setMaxSize(long maxSize) {
         this.maxSize = maxSize;
     }
+
     /**
      *
      * @return
@@ -79,6 +83,7 @@ public class FileLog {
         File log = new File(logPath);
         return log.length();
     }
+
     /**
      *
      * @param mode
@@ -86,24 +91,31 @@ public class FileLog {
     public void setLog(boolean mode) {
         logOn = mode;
     }
-    
+
     //write to log methods
     /**
      *
      * @param line
      */
     public void writeln(String line) {  //write line preceded by date / time
-        if ( ! logOn) return;
+        if (!logOn) {
+            return;
+        }
         write(now() + "  >  " + line + "\n");
     }
+
     /**
      *
      * @param msg
      */
     public void write(String msg) {  //plain write
-        if ( ! logOn) return;
+        if (!logOn) {
+            return;
+        }
         boolean append = true;
-        if (getSize() + msg.length() > maxSize) append = false;
+        if (getSize() + msg.length() > maxSize) {
+            append = false;
+        }
         //if msg.length() > maxSize, msg will still be writen
         try {
             FileOutputStream out = new FileOutputStream(logPath, append);  //truncate?
@@ -114,6 +126,7 @@ public class FileLog {
             WebServer.win.log.warn("Problem writing file " + logPath + ": " + e);
         }
     }
+
     /**
      *
      */
@@ -125,6 +138,7 @@ public class FileLog {
             WebServer.win.log.warn("Problem truncating file " + logPath + ": " + e);
         }
     }
+
     /**
      *
      * @param line
@@ -135,15 +149,15 @@ public class FileLog {
         writeln(line);
         logOn = old;
     }
-    
+
     //utility methods
     private String now() {  //current date - time
         Calendar rightNow = Calendar.getInstance();
-        return rightNow.get(Calendar.DAY_OF_MONTH) + "/" +
-                (rightNow.get(Calendar.MONTH)+1) + "/" +  //months from 0 to 11
-                rightNow.get(Calendar.YEAR) + " " +
-                rightNow.get(Calendar.HOUR_OF_DAY) + ":" +
-                rightNow.get(Calendar.MINUTE) + ":" +
-                rightNow.get(Calendar.SECOND);
+        return rightNow.get(Calendar.DAY_OF_MONTH) + "/"
+                + (rightNow.get(Calendar.MONTH) + 1) + "/" + //months from 0 to 11
+                rightNow.get(Calendar.YEAR) + " "
+                + rightNow.get(Calendar.HOUR_OF_DAY) + ":"
+                + rightNow.get(Calendar.MINUTE) + ":"
+                + rightNow.get(Calendar.SECOND);
     }
 }

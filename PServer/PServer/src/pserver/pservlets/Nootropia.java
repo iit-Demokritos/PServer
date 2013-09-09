@@ -80,7 +80,7 @@ public class Nootropia implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -427,11 +427,11 @@ public class Nootropia implements pserver.pservlets.PService {
 
             String sql;
             /*String sql = "DELETE FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
-            dbAccess.execute(sql);
-            sql = "DELETE FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
-            dbAccess.execute(sql);
-            sql = "DELETE FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
-            dbAccess.execute(sql);
+             dbAccess.execute(sql);
+             sql = "DELETE FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
+             dbAccess.execute(sql);
+             sql = "DELETE FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
+             dbAccess.execute(sql);
              */
             final int userSize = 1000;
             int offset = 0;
@@ -578,8 +578,9 @@ class NootropiaWeightThread extends Thread {
                 freqStmt.addBatch();
             }
             for (Set<String> pairs : setFreqs.keySet()) {
-                if( setFreqs.get(pairs) == 1 )
+                if (setFreqs.get(pairs) == 1) {
                     continue;
+                }
                 Iterator<String> iter = pairs.iterator();
                 String ftr1 = iter.next();
                 String ftr2 = iter.next();
@@ -595,7 +596,7 @@ class NootropiaWeightThread extends Thread {
                 //System.out.println( pairs.toString() + " " + setFreqs.get(pairs) );
                 coFreqStmt.addBatch();
             }
-            
+
             freqStmt.executeBatch();
             freqStmt.close();
             coFreqStmt.executeBatch();

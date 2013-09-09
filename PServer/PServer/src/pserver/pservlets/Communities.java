@@ -95,7 +95,7 @@ public class Communities implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String client = (String) queryParam.getVal(clntIdx);
         String clientName = client.substring(0, client.indexOf('|'));
@@ -903,10 +903,10 @@ public class Communities implements pserver.pservlets.PService {
      * Connects to database, creates feature groups with the parameters
      * specified and returns the response code.
      *
-     * @param clientName 
+     * @param clientName
      * @param dbAccess The database manager.
-     * @param metric 
-     * @throws SQLException  
+     * @param metric
+     * @throws SQLException
      */
     public void generateFtrDistances(DBAccess dbAccess, String clientName, VectorMetric metric) throws SQLException {
         PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
@@ -1521,7 +1521,8 @@ class CollaborativeProfileBuilderThread extends Thread {
      * A boolean for choosing or not the actual distance of users.
      */
     private boolean actualDist;
- /**
+
+    /**
      * Constructor with 4 parameters.
      *
      * Use this constructor to initialize the values of variables user,
@@ -1651,6 +1652,7 @@ class CollaborativeProfileBuilderThread extends Thread {
         }
         WebServer.win.log.echo("Processing for " + user + " Collaborative profile completed");
     }
+
     /**
      * Updates the collaborative profile specified with a given algorithm.
      *

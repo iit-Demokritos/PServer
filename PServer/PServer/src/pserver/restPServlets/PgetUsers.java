@@ -84,14 +84,14 @@ public class PgetUsers implements pserver.pservlets.PService {
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
-       
+
 
         PageConverter Pconverter = new PageConverter();
         StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
         response.delete(0, response.length());
         response.append(tempBuffer);
 
-        
+
         StringBuffer tempBuffer2 = converter.RConverter(response.toString(), responseType);
         response.delete(0, response.length());
         response.append(tempBuffer2);

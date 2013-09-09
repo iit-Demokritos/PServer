@@ -76,7 +76,6 @@ public class Admin implements pserver.pservlets.PService {
     public String getMimeType() {
         return Admin.html;
     }
-
     /**
      * A number containing the current response code.
      */
@@ -107,7 +106,7 @@ public class Admin implements pserver.pservlets.PService {
      */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-        synchronized(this){
+        synchronized (this) {
             respCode = PSReqWorker.NORMAL;
             queryParam = parameters;
             respBody = new StringBuffer();
@@ -117,7 +116,7 @@ public class Admin implements pserver.pservlets.PService {
             //find 'com' query param (case independent)
             int comIdx = queryParam.qpIndexOfKeyNoCase("com");
             //if 'com' param not present, request is invalid
-            if (comIdx == -1 ) {
+            if (comIdx == -1) {
                 respCode = PSReqWorker.REQUEST_ERR;
                 WebServer.win.log.error("-Request command does not exist");
                 return respCode;  //no point in proceeding
@@ -154,10 +153,10 @@ public class Admin implements pserver.pservlets.PService {
             return respCode;
         }
     }
-    
+
     /**
      * Check whether the admin credentials where correct
-     * 
+     *
      * @see #queryParam
      * @see #administrator_name
      * @see #administrator_pass
@@ -172,7 +171,7 @@ public class Admin implements pserver.pservlets.PService {
             respCode = PSReqWorker.ACCESS_DENIED;
             return false;
         }
-        
+
         String login_name = (String) queryParam.getVal(lnIdx);
         String login_pass = (String) queryParam.getVal(lpIdx);
 
@@ -190,7 +189,7 @@ public class Admin implements pserver.pservlets.PService {
 
         queryParam.remove(lnIdx);
         queryParam.remove(lnIdx);
-        
+
         return true;
     }
 
@@ -206,7 +205,7 @@ public class Admin implements pserver.pservlets.PService {
      * @return The value of response code.
      */
     private void comAdmiinUpdateProperties() {
-        
+
         Preferences pref = PersServer.pref;
 
         for (int i = 0; i < queryParam.size(); i++) {

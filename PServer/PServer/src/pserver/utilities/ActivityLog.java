@@ -33,15 +33,16 @@ import java.util.*;
  * @author scify
  */
 public class ActivityLog {
+
     private boolean logOn = true;    //if false, no msgs at all are displayed
     private boolean debugOn = true;  //if false, debug msgs are not displayed
-    
+
     /**
      *
      */
     public ActivityLog() {
     }
-    
+
     //activity reporting methods - they all change line afterwards
     /**
      *
@@ -50,6 +51,7 @@ public class ActivityLog {
     public void report(String msg) {
         echo("-- " + msg);
     }
+
     /**
      *
      * @param msg
@@ -57,6 +59,7 @@ public class ActivityLog {
     public void warn(String msg) {
         echo(" ! " + msg);
     }
+
     /**
      *
      * @param msg
@@ -64,19 +67,24 @@ public class ActivityLog {
     public void error(String msg) {
         echo(" # " + msg);
     }
+
     /**
      *
      * @param msg
      */
     public void debug(String msg) {
-        if (debugOn) echo("*>" + msg + "<*");
+        if (debugOn) {
+            echo("*>" + msg + "<*");
+        }
     }
+
     /**
      *
      */
     public void markStart() {
         echo("*** STARTED at " + now() + " ***");
     }
+
     /**
      *
      */
@@ -84,6 +92,7 @@ public class ActivityLog {
         echo("*** COMPLETED at " + now() + " ***");
         echo("");  //another new line
     }
+
     /**
      *
      */
@@ -91,21 +100,26 @@ public class ActivityLog {
         echo("### ABORDED at " + now() + " ###");
         echo("");  //another new line
     }
+
     /**
      *
      * @param msg
      */
     public void echo(String msg) {  //displays msg exactly as it is, plus newline
         //System.out.print('\r');
-        for(int i=0;i<"Type quit to terminate the server".length();i++)
+        for (int i = 0; i < "Type quit to terminate the server".length(); i++) {
             System.out.print("\b");
-        for(int i=0;i<"Type quit to terminate the server".length();i++)
+        }
+        for (int i = 0; i < "Type quit to terminate the server".length(); i++) {
             System.out.print(" ");
-        for(int i=0;i<"Type quit to terminate the server".length();i++)
+        }
+        for (int i = 0; i < "Type quit to terminate the server".length(); i++) {
             System.out.print("\b");
+        }
         //System.out.print('\r');
-        if ( logOn )
+        if (logOn) {
             System.out.println(msg);
+        }
         System.out.print("Type quit to terminate the server");
     }
 
@@ -119,7 +133,7 @@ public class ActivityLog {
         report(msg);
         logOn = old;
     }
-    
+
     /**
      *
      * @param mode
@@ -127,6 +141,7 @@ public class ActivityLog {
     public void setLog(boolean mode) {
         logOn = mode;
     }
+
     /**
      *
      * @param mode
@@ -134,15 +149,15 @@ public class ActivityLog {
     public void setDebug(boolean mode) {
         debugOn = mode;
     }
-    
+
     //utility methods
     private String now() {  //current date - time
         Calendar rightNow = Calendar.getInstance();
-        return rightNow.get(Calendar.DAY_OF_MONTH) + "/" +
-                (rightNow.get(Calendar.MONTH)+1) + "/" +  //months from 0 to 11
-                rightNow.get(Calendar.YEAR) + " " +
-                rightNow.get(Calendar.HOUR_OF_DAY) + ":" +
-                rightNow.get(Calendar.MINUTE) + ":" +
-                rightNow.get(Calendar.SECOND);
+        return rightNow.get(Calendar.DAY_OF_MONTH) + "/"
+                + (rightNow.get(Calendar.MONTH) + 1) + "/" + //months from 0 to 11
+                rightNow.get(Calendar.YEAR) + " "
+                + rightNow.get(Calendar.HOUR_OF_DAY) + ":"
+                + rightNow.get(Calendar.MINUTE) + ":"
+                + rightNow.get(Calendar.SECOND);
     }
 }

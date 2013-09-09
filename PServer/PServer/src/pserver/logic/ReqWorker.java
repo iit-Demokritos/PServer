@@ -220,10 +220,10 @@ public class ReqWorker extends Thread {
         parseQueryParam();
         //call rest url parser to take extra vars
         parseRestParams();
-        
+
         switchRespMode();
     }
-    
+
     /**
      * If request is restfully then convert ti to
      */
@@ -240,7 +240,7 @@ public class ReqWorker extends Thread {
         try {
             sock.setSoTimeout(WebServer.obj.reqTimeout);  //maximum blocking time in millisecs
             //open input stream to read from client
-            BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream(),Charset.forName("UTF-8")));
+            BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream(), Charset.forName("UTF-8")));
             //read client request
             int charRead;
             StringBuilder sBuilder = new StringBuilder();
@@ -252,8 +252,8 @@ public class ReqWorker extends Thread {
                 if (!in.ready()) {
                     break;
                 }
-            }          
-            request = java.net.URLDecoder.decode(sBuilder.toString(),"UTF-8");
+            }
+            request = java.net.URLDecoder.decode(sBuilder.toString(), "UTF-8");
             System.out.println(request);
         } catch (InterruptedIOException e) {  //'reqTimeout' expired
             WebServer.win.log.error(port + "-Timeout reading request: " + e);
@@ -265,7 +265,7 @@ public class ReqWorker extends Thread {
             WebServer.flog.writeln(port + "-Problem receiving: " + e);
             // System.out.println(e);
             return false;
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             WebServer.win.log.error(port + "-Empty request " + e);
             WebServer.flog.writeln(port + "-Empty request " + e);
             return false;
@@ -285,16 +285,16 @@ public class ReqWorker extends Thread {
             return false;
         }
         try {
-            String []reqLines = request.split("\n"); //Split request to lines
+            String[] reqLines = request.split("\n"); //Split request to lines
             String reqLine = reqLines[0];   //main request content in first line
             method = reqLine.substring(0, reqLine.indexOf(" "));
             reqLine = reqLine.substring(reqLine.indexOf("/"), reqLine.lastIndexOf(" "));
-            if (reqLine.indexOf("?")==-1) {//no query parameters or POST request
-                resURI = reqLine.substring(0,reqLine.length());
+            if (reqLine.indexOf("?") == -1) {//no query parameters or POST request
+                resURI = reqLine.substring(0, reqLine.length());
                 queryStr = "";
             } else {   //GET request with parameters
-                resURI = reqLine.substring(0,reqLine.indexOf("?"));
-                queryStr = reqLine.substring(reqLine.indexOf("?")+1, reqLine.length()).trim();
+                resURI = reqLine.substring(0, reqLine.indexOf("?"));
+                queryStr = reqLine.substring(reqLine.indexOf("?") + 1, reqLine.length()).trim();
             }
             if (method.equalsIgnoreCase("POST")) {
                 queryStr = "";
@@ -320,7 +320,7 @@ public class ReqWorker extends Thread {
         WebServer.flog.writeln(port + "-        " + resURI + ("".equals(queryStr) ? "" : "?" + queryStr));  //..continued from logRequest()
         return true;
     }
-    
+
     /**
      * Checks if the HTTP request method is supported.
      *
@@ -339,7 +339,7 @@ public class ReqWorker extends Thread {
         }
         return false;
     }
-    
+
     /**
      * Fills the {@link #queryParam} parameter.
      */
@@ -352,9 +352,9 @@ public class ReqWorker extends Thread {
             for (String temp : var.keySet()) {
                 queryParam.add(temp, var.get(temp));
             }
-           
+
             initParam[0] = resURI.substring(1);
-           
+
 
         }
     }

@@ -79,7 +79,7 @@ public class Personal implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -96,7 +96,7 @@ public class Personal implements pserver.pservlets.PService {
         }
         //recognize commAND encoded in request
         String com = (String) queryParam.getVal(comIdx);
-        System.out.println("================  "+com+"  ===========");
+        System.out.println("================  " + com + "  ===========");
         //operations of features
         if (com.equalsIgnoreCase("addftr")) {       //add new feature(s)
             respCode = comPersAddFtr(queryParam, respBody, dbAccess);
@@ -1539,16 +1539,16 @@ public class Personal implements pserver.pservlets.PService {
             //get matching records
 
             String sUserProfile = "SELECT up_feature FROM user_profiles "
-                    + "WHERE up_user "+usrCondition+" "
+                    + "WHERE up_user " + usrCondition + " "
                     + "AND FK_psclient = '" + clientName + "'";
             String query1 = "SELECT uf_feature AS up_feature,"
                     + " uf_numdefvalue AS up_numvalue FROM up_features "
-                    + "WHERE uf_feature NOT IN  ("+sUserProfile+") "
-                    + "AND  uf_feature "+ftrCondition+" "
+                    + "WHERE uf_feature NOT IN  (" + sUserProfile + ") "
+                    + "AND  uf_feature " + ftrCondition + " "
                     + "AND FK_psclient = '" + clientName + "'";
             String query2 = "SELECT up_feature, up_numvalue FROM user_profiles "
-                    + "WHERE up_user "+usrCondition+" "
-                    + "AND up_feature "+ftrCondition+" "
+                    + "WHERE up_user " + usrCondition + " "
+                    + "AND up_feature " + ftrCondition + " "
                     + "AND FK_psclient='" + clientName + "'";
 
             query = " ( " + query1 + " ) UNION ( " + query2 + " ) order by " + comparField + srtCondition + ";";
@@ -1791,7 +1791,7 @@ public class Personal implements pserver.pservlets.PService {
                             PNumData data = new PNumData(user, feature, newNumValue, System.currentTimeMillis(), sid);
                             rowsAffected += dbAccess.insertNewNumData(data, clientName);
                             rowsAffected += dbAccess.updateStereotypesFromUserAction(user, feature, numStep.floatValue(), clientName);
-                        }while (rs.next());
+                        } while (rs.next());
                         rs.close();
                         //ignore current user, feature record AND continue with next
                     } //else if numStep == null
@@ -2589,7 +2589,7 @@ public class Personal implements pserver.pservlets.PService {
                     String newVal = (String) queryParam.getVal(i);
                     //get value for current user, feature record
                     //update current user, attribute record
-                    query = "UPDATE user_attributes set attribute_value ='" + newVal + "' WHERE user = '" + user + "' AND FK_psclient='" + clientName + "' AND attribute " + sAttrCondition ;
+                    query = "UPDATE user_attributes set attribute_value ='" + newVal + "' WHERE user = '" + user + "' AND FK_psclient='" + clientName + "' AND attribute " + sAttrCondition;
                     //System.out.println("============================="+query);
                     rowsAffected += dbAccess.executeUpdate(query);
                 }
@@ -3104,7 +3104,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows updated: " + rowsAffected);
         return success;
     }
-  /**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the decay data as specified by the condition
@@ -3189,7 +3190,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-/**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the numeric data as specified by the condition
@@ -3282,7 +3284,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-/**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the attributes from table user_profiles as
@@ -3372,7 +3375,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-/**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the features from table user_profiles as
@@ -3404,7 +3408,8 @@ public class Personal implements pserver.pservlets.PService {
         }
         return respCode;
     }
-/**
+
+    /**
      * Method referring to execution part of process.
      *
      * Gets data from table user_profiles under condition parameters from

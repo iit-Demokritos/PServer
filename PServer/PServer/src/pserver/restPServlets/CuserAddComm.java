@@ -65,7 +65,7 @@ public class CuserAddComm implements pserver.pservlets.PService {
         PSparameters.add("com", "addusrcom");
         PSparameters.add("name", parameters.getVal(parameters.indexOfKey("communityname", 0)));
         PSparameters.add("usrs", parameters.getVal(parameters.indexOfKey("usernames", 0)));
-       
+
 
 
 ////        DebugLines

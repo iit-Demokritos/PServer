@@ -74,9 +74,9 @@ public class CfeatureList implements pserver.pservlets.PService {
 
         PSparameters.add("com", "getftrgrps");
         PSparameters.add("usr", parameters.getVal(parameters.indexOfKey("username", 0)));
-       
+
         if (parameters.qpIndexOfKeyNoCase("name") != -1) {
-                 PSparameters.add("name", parameters.getVal(parameters.indexOfKey("name", 0)));
+            PSparameters.add("name", parameters.getVal(parameters.indexOfKey("name", 0)));
         }
 
 

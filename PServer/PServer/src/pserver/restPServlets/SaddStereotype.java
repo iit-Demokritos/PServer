@@ -67,11 +67,11 @@ public class SaddStereotype implements pserver.pservlets.PService {
         PSparameters.add("com", "addstr");
 
         if (parameters.qpIndexOfKeyNoCase("stereotype") != -1) {
-                PSparameters.add("str", parameters.getVal(parameters.indexOfKey("stereotype", 0)));
+            PSparameters.add("str", parameters.getVal(parameters.indexOfKey("stereotype", 0)));
         }
-        
+
         if (parameters.qpIndexOfKeyNoCase("rule") != -1) {
-                PSparameters.add("rule", parameters.getVal(parameters.indexOfKey("rule", 0)));
+            PSparameters.add("rule", parameters.getVal(parameters.indexOfKey("rule", 0)));
         }
 
 ////        DebugLines

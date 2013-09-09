@@ -76,12 +76,12 @@ public class ResponseConverter {
         BufferedWriter pw = null;
 
         try {
-            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./convert.xml"),Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
-                               // write to convert.xml
-            if (xmlInput.equals("null")){
+            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./convert.xml"), Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
+            // write to convert.xml
+            if (xmlInput.equals("null")) {
                 pw.append("<result></result>");
             } else {
-                pw.append(xmlInput);   
+                pw.append(xmlInput);
             }
             pw.flush();
 
@@ -100,6 +100,7 @@ public class ResponseConverter {
         }
 
     }
+
     private void CreateJson(String jsonInput) {
 
         PrintWriter pw = null;

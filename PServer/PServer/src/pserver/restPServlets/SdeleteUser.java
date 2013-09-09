@@ -66,7 +66,7 @@ public class SdeleteUser implements pserver.pservlets.PService {
 
         PSparameters.add("com", "remusr");
 
-         if (parameters.qpIndexOfKeyNoCase("deletepairs") != -1) {
+        if (parameters.qpIndexOfKeyNoCase("deletepairs") != -1) {
             String stereotypes = (String) parameters.getVal(parameters.indexOfKey("deletepairs", 0));
 
             //        {"john","kostas"}

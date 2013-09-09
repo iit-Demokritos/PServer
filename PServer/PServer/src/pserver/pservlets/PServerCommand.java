@@ -13,7 +13,6 @@ import pserver.data.DBAccess;
  * @author scify
  */
 public interface PServerCommand {
-    
+
     int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess);
-    
 }

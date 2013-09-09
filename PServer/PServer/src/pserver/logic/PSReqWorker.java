@@ -128,7 +128,7 @@ public class PSReqWorker extends ReqWorker {
         //TODO: Check if contains resURI
         if (PersServer.pObj.pservlets.containsKey(resURI.toLowerCase().substring(1))) {
             respMode = SERVICE_MODE;
-            System.out.println(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)).toString()+"%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)).toString() + "%%%%%%%%%%%%%%%%%%%%%%%");
             analyzeServiceMode(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)));
             return;
         }
@@ -137,7 +137,6 @@ public class PSReqWorker extends ReqWorker {
         //the response will consist only of http header
         super.switchRespMode();  //mode set by base class
     }
-    
 
     /**
      *
@@ -177,10 +176,10 @@ public class PSReqWorker extends ReqWorker {
     private void analyzeServiceMode(PService servlet) {
         //Connection conn = connDB(url, user, pass);
         DBAccess dbAccess = new DBAccess(url, user, pass);
-        if (resURI.substring(1).endsWith(".xml")||resURI.substring(1).endsWith(".json")) {
+        if (resURI.substring(1).endsWith(".xml") || resURI.substring(1).endsWith(".json")) {
             try {
-               
-               servlet.init(initParam);
+
+                servlet.init(initParam);
             } catch (Exception ex) {
                 Logger.getLogger(PSReqWorker.class.getName()).log(Level.SEVERE, null, ex);
             }

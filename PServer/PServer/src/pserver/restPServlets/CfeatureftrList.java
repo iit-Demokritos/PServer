@@ -75,7 +75,7 @@ public class CfeatureftrList implements pserver.pservlets.PService {
         PSparameters.add("com", "getftrgrp");
         PSparameters.add("ftrgrp", parameters.getVal(parameters.indexOfKey("communityname", 0)));
 
-       
+
 
 
         //call the right service

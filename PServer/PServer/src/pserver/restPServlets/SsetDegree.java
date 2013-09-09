@@ -13,7 +13,7 @@ import pserver.utilities.ResponseConverter;
  *
  * @author Panagiotis Giotis <giotis.p@gmail.com>
  */
-public class SsetDegree implements pserver.pservlets.PService{
+public class SsetDegree implements pserver.pservlets.PService {
 
     private String responseType = pserver.pservlets.PService.xml;
 
@@ -53,8 +53,8 @@ public class SsetDegree implements pserver.pservlets.PService{
      */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-       
-         PService servlet = new pserver.pservlets.Stereotypes();
+
+        PService servlet = new pserver.pservlets.Stereotypes();
         VectorMap PSparameters = new VectorMap(parameters.size() + 1);
         VectorMap tempMap = null;
         ResponseConverter converter = new ResponseConverter();
@@ -105,8 +105,7 @@ public class SsetDegree implements pserver.pservlets.PService{
 
         return ResponseCode;
 
-        
-        
+
+
     }
-    
 }

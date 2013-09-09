@@ -31,8 +31,9 @@ import java.awt.*;
  * @author scify
  */
 public class Border extends Panel {
+
     int top, left, bottom, right;  //no of pixels for border
-    
+
     /**
      *
      * @param borderMe
@@ -42,13 +43,14 @@ public class Border extends Panel {
      * @param right
      */
     public Border(Component borderMe, int top, int left, int bottom, int right) {
-        this.top    = top;
-        this.left   = left;
+        this.top = top;
+        this.left = left;
         this.bottom = bottom;
-        this.right  = right;
+        this.right = right;
         setLayout(new BorderLayout());
         add(borderMe, "Center");
     }
+
     /**
      *
      * @return
@@ -57,4 +59,3 @@ public class Border extends Panel {
         return new Insets(top, left, bottom, right);
     }
 }
-

@@ -64,7 +64,7 @@ public class PBeansLoader {
         gClustering = new HashMap<String, GraphClustering>();
 
         while (e.hasMoreElements()) {
-            
+
             String pBeanName = (String) e.nextElement();               //e.g ps
             String paramName = (String) pref.getProperty(pBeanName); //e.g pserver.algorithms.metrics.CosineVectorMetric();
             int pos = ((String) pref.getProperty(pBeanName)).indexOf('(');

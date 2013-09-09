@@ -248,8 +248,8 @@ public class PersServer extends WebServer {
         //load additional settings of this class
         dbDriver = pref.getPref("database_driver");
         dbUrl = new StringBuilder().append("jdbc:").append(pref.getPref("database_url")).toString();
-        dbUrl+=dbUrl.contains("?")?"&":"?";
-        dbUrl+="useUnicode=true&characterEncoding=utf-8";
+        dbUrl += dbUrl.contains("?") ? "&" : "?";
+        dbUrl += "useUnicode=true&characterEncoding=utf-8";
         dbUser = pref.getPref("database_user");
         dbPass = pref.getPref("database_pass");
         //allowAnonymous=(pref.getPref("anonymous")).equals("off")? false:true;        
@@ -307,10 +307,12 @@ public class PersServer extends WebServer {
     }
 
     /**
-     * Creates a new {@link pserver.data.DBAccess#DBAccess(java.lang.String, java.lang.String, java.lang.String) DBAccess}
+     * Creates a new
+     * {@link pserver.data.DBAccess#DBAccess(java.lang.String, java.lang.String, java.lang.String) DBAccess}
      * object
      *
-     * @return A  {@link pserver.data.DBAccess#DBAccess(java.lang.String, java.lang.String, java.lang.String) DBAccess}
+     * @return A
+     * {@link pserver.data.DBAccess#DBAccess(java.lang.String, java.lang.String, java.lang.String) DBAccess}
      * object.
      */
     public DBAccess getNewDBAccess() {

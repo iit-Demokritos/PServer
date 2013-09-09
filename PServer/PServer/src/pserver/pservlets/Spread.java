@@ -48,10 +48,10 @@ public class Spread implements pserver.pservlets.PService {
     private float sCorrects2 = 0;
     private float all2 = 0;
     private float all = 0;
-    private float pParam =  0.46447277f;
+    private float pParam = 0.46447277f;
     private float cParam = 0.18148465f;
     private float sParam = 0.35405377f;
-    private float cParam2 =  0.47481096f;
+    private float cParam2 = 0.47481096f;
     private float sParam2 = 1.0f;
     private TreeMap<String, TreeMap<String, TreeMap<String, Float>>> profiles;
     private TreeMap<String, TreeMap<String, LinkedList<String>>> accocs;
@@ -95,7 +95,7 @@ public class Spread implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -3632,11 +3632,11 @@ public class Spread implements pserver.pservlets.PService {
                         }
 
                         /*if(  udist > cdist  )
-                        //out.println( freq + "," + cfreq + "," + sfreq + ",1" );
-                        else if ( udist > sdist )
-                        //out.println( freq + "," + cfreq + "," + sfreq + ",2" );
-                        else
-                        //out.println( freq + "," + cfreq + "," + sfreq + ",0" );
+                         //out.println( freq + "," + cfreq + "," + sfreq + ",1" );
+                         else if ( udist > sdist )
+                         //out.println( freq + "," + cfreq + "," + sfreq + ",2" );
+                         else
+                         //out.println( freq + "," + cfreq + "," + sfreq + ",0" );
                          *
                          */
                         weight += val * freq * coFeatureWeights.get(j);
@@ -3664,16 +3664,16 @@ public class Spread implements pserver.pservlets.PService {
 
                                 float sdist = Math.abs(trueVal - sval);
 
-                                if (cdist <= sdist ) {
-                                    this.cCorrects2 ++;
+                                if (cdist <= sdist) {
+                                    this.cCorrects2++;
                                     all2++;
                                 } else {
-                                    this.sCorrects2 ++;
+                                    this.sCorrects2++;
                                     all2++;
                                 }
 
 
-                                val = (val * cParam2 + sval * sParam2) / ( cParam2 + sParam2);
+                                val = (val * cParam2 + sval * sParam2) / (cParam2 + sParam2);
                             }
                             weight += val * freq * coFeatureWeights.get(j);
                             sum += freq * coFeatureWeights.get(j);
@@ -3725,7 +3725,7 @@ public class Spread implements pserver.pservlets.PService {
             return false;
         }
         System.out.println("    percents " + (this.pCorrects / all) + " : " + (this.cCorrects / all) + " : " + (this.sCorrects / all));
-        System.out.println("    percents2 "+ (this.cCorrects2 / all2) + " : " + (this.sCorrects2 / all2));
+        System.out.println("    percents2 " + (this.cCorrects2 / all2) + " : " + (this.sCorrects2 / all2));
         return true;
     }
 }

@@ -75,7 +75,7 @@ public class SgetStereotypeFeatures implements pserver.pservlets.PService {
 
 
         PSparameters.add("com", "getstr");
-        
+
         PSparameters.add("str", parameters.getVal(parameters.indexOfKey("stereotype", 0)));
 
         if (parameters.qpIndexOfKeyNoCase("where") == -1) {

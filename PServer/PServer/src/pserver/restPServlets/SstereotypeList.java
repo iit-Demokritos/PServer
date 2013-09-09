@@ -54,7 +54,7 @@ public class SstereotypeList implements pserver.pservlets.PService {
      */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-        
+
         PService servlet = new pserver.pservlets.Stereotypes();
         VectorMap PSparameters = new VectorMap(parameters.size() + 1);
         VectorMap tempMap = null;
@@ -85,7 +85,7 @@ public class SstereotypeList implements pserver.pservlets.PService {
 
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
-       
+
 
         PageConverter Pconverter = new PageConverter();
         StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
@@ -103,5 +103,4 @@ public class SstereotypeList implements pserver.pservlets.PService {
         return ResponseCode;
 
     }
-    
 }
