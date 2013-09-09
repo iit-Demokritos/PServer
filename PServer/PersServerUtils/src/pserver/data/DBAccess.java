@@ -890,6 +890,7 @@ public class DBAccess {
         }
         query.setLength(query.length() - 4);
         query.append("')");
+        System.out.println(query.toString());
         return query;
     }
 
@@ -933,7 +934,7 @@ public class DBAccess {
             query.append(tables[0]);
         }
         if (where != null) {
-            query.append("WHERE ");
+            query.append(" WHERE ");
             for (String s : where) {
                 query.append(s).append(" AND ");
             }
