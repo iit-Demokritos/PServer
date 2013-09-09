@@ -1094,7 +1094,6 @@ public class Stereotypes_old implements pserver.pservlets.PService {
                         Float numValue = DBAccess.strToNum(value);  //is it numeric?
                         double newNumValue;
                         int tmpRows = 0;
-                        //TODO Maybe initialize all values in stereotype creation
                         if (recFound == false) { //if recFound == false we assume that it was uninitialized and treat it as 0
                             newNumValue = numStep.doubleValue();
                             //insert new feature record

@@ -49,6 +49,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         //initialize commands
         commands = new HashMap<String,PServerCommand>();
         //add stereotype
+        //TODO check extreme
         commands.put("addstr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -56,6 +57,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //list stereotypes
+        //TODO check extreme
         commands.put("liststr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -63,6 +65,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //get stereotypes users
+        //TODO check extreme
         commands.put("getstrusr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -70,6 +73,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //get stereotypes features
+        //TODO check extreme
         commands.put("getstrftr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -77,6 +81,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //remake stereotype
+        //TODO check extreme
         commands.put("rmkstr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -84,6 +89,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //remove stereotype
+        //TODO check extreme
         commands.put("remstr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -91,6 +97,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //add user to stereotype
+        //TODO check normal/extreme
         commands.put("addusr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -98,6 +105,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //get users stereotypes
+        //TODO check normal/extreme
         commands.put("getusrstrs", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -105,6 +113,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //increase users degree of relevance with a stereotype
+        //TODO check normal/extreme
         commands.put("incdgr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -112,6 +121,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //sets users degree of relevance with a stereotype
+        //TODO check normal/extreme
         commands.put("setdgr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -119,6 +129,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //remove a user
+        //TODO check normal/extreme
         commands.put("remusr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -127,6 +138,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         });
         //update a stereotypes users removing current users and adding all users
         //that comply with the stereotypes rule
+        //TODO check normal/extreme
         commands.put("updusrs", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -134,6 +146,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //check current users and remove all that don't comply with the rule
+        //TODO check normal/extreme
         commands.put("chkusrs", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -142,6 +155,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //add users that comply with the rule
+        //TODO check normal/extreme
         commands.put("fndusrs", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -150,6 +164,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //add features
+        //TODO check normal/extreme
         commands.put("addftr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -157,6 +172,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //remove features
+        //TODO check normal/extreme
         commands.put("remftr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -164,6 +180,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //increase a feature value
+        //TODO check normal/extreme
         commands.put("incftr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -171,6 +188,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //set a feature value
+        //TODO check normal/extreme
         commands.put("setftr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -178,6 +196,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             }
         });
         //remove current features and add new based on the stereotypes users
+        //TODO check normal/extreme
         commands.put("updftr", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
@@ -363,14 +382,17 @@ public class Stereotypes implements pserver.pservlets.PService {
                 StringBuilder row = new StringBuilder();
                 String strVal = rs.getRs().getString(columns[0]);
                 String rule = rs.getRs().getString(columns[1]);
-                row.append("<row><str>").append(strVal).append("</str><rule>");
-                row.append(rule).append("</rule></row>\n");
+                row.append("<str>").append(strVal).append("</str><rule>");
+                row.append(rule).append("</rule>\n");
                 rowsAffected += 1;  //number of result rows
                 response.add(row.toString());
             }
             //close resultset and statement
             rs.close();
-            String[] resp = response.toArray(new String[response.size()]);
+            String[] resp = new String[response.size()];
+            for (int i = 0; i < response.size(); i++) {
+                resp[i] = response.get(i);
+            }
             buildResponse(null, respBody, resp, dbAccess);
         } catch (SQLException e) {
             WebServer.win.log.debug("-Problem executing query: " + e);
@@ -404,6 +426,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         try {
             //get matching records
             String[] columns = {
+                DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE,
                 DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER,
                 DBAccess.STEREOTYPE_USERS_TABLE_FIELD_DEGREE
             };
@@ -423,10 +446,12 @@ public class Stereotypes implements pserver.pservlets.PService {
             ArrayList<String> response = new ArrayList<String>();
             while (rs.next()) {
                 StringBuilder row = new StringBuilder();
-                String strVal = rs.getRs().getString(columns[0]);
-                String rule = rs.getRs().getString(columns[1]);
-                row.append("<row><usr>").append(strVal).append("</usr><dgr>");
-                row.append(rule).append("</dgr></row>\n");
+                String stereotype = rs.getRs().getString(columns[0]);
+                String strVal = rs.getRs().getString(columns[1]);
+                String rule = rs.getRs().getString(columns[2]);
+                row.append("<str>").append(stereotype).append("</str>");
+                row.append("<usr>").append(strVal).append("</usr><dgr>");
+                row.append(rule).append("</dgr>\n");
                 rowsAffected += 1;
                 response.add(row.toString());
             }
@@ -456,11 +481,11 @@ public class Stereotypes implements pserver.pservlets.PService {
         }
 
         StringBuilder strCondition = buildWhereClause(
-                DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE, stereot);
+                DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE, stereot);
         StringBuilder clntCondition = buildWhereClause(
                 DBAccess.FIELD_PSCLIENT, clientName);
         StringBuilder ftrCondition = buildWhereClause(
-                DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE, features);
+                DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE, features);
 
         //execute request
         int rowsAffected = 0;
@@ -468,10 +493,10 @@ public class Stereotypes implements pserver.pservlets.PService {
         try {
             //get matching records
             String[] columns = {
-                DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE,
-                DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE
+                DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE,
+                DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_VALUE
             };
-            String table = DBAccess.STEREOTYPE_STATISTICS_TABLE;
+            String table = DBAccess.STEREOTYPE_PROFILES_TABLE;
             String[] where;
             if (ftrCondition != null) {
                 where = new String[3];
@@ -490,8 +515,8 @@ public class Stereotypes implements pserver.pservlets.PService {
                 StringBuilder row = new StringBuilder();
                 String strVal = rs.getRs().getString(columns[0]);
                 String rule = rs.getRs().getString(columns[1]);
-                row.append("<row><ftr>").append(strVal).append("</ftr><value>");
-                row.append(rule).append("</value></row>\n");
+                row.append("<ftr>").append(strVal).append("</ftr><value>");
+                row.append(rule).append("</value>\n");
                 rowsAffected += 1;
                 response.add(row.toString());
             }
@@ -554,14 +579,15 @@ public class Stereotypes implements pserver.pservlets.PService {
                 for (String table : tables) {
                     rowsAffected += dbAccess.executeUpdate(DBAccess.buildDeleteStatement(table, clntCondition.toString()).toString());
                 }
-            }
+            } else {
             //delete specified stereotypes
-            for (String str : stereot) {
-                for (int i = 0; i < tables.length; i++) {
-                    StringBuilder strCondition = buildWhereClause(
-                            stereotype_columns[i], str);
-                    String[] where = {strCondition.toString(), clntCondition.toString()};
-                    rowsAffected += dbAccess.executeUpdate(DBAccess.buildDeleteStatement(tables[i], where).toString());
+                for (String str : stereot) {
+                    for (int i = 0; i < tables.length; i++) {
+                        StringBuilder strCondition = buildWhereClause(
+                                stereotype_columns[i], str);
+                        String[] where = {strCondition.toString(), clntCondition.toString()};
+                        rowsAffected += dbAccess.executeUpdate(DBAccess.buildDeleteStatement(tables[i], where).toString());
+                    }
                 }
             }
             //format response body
@@ -658,7 +684,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         query.setLength(query.length() - 2);
         res += dbAccess.executeUpdate(query.toString());
 
-        //TODO fix this
+        //TODO fix this to use StringBuilder
         String sql = "UPDATE " + DBAccess.STEREOTYPE_PROFILES_TABLE + "," + DBAccess.UPROFILE_TABLE
                 + " SET " + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "=" + DBAccess.STEREOTYPE_PROFILES_TABLE + "." + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + "+"
                 + degree + "*" + DBAccess.UPROFILE_TABLE + "." + DBAccess.UPROFILE_TABLE_FIELD_NUMVALUE
@@ -764,9 +790,9 @@ public class Stereotypes implements pserver.pservlets.PService {
                 if (rs.getRs().wasNull()) {
                     degreeVal = "";
                 }
-                row.append("<row><str>").append(stereotVal);
+                row.append("<str>").append(stereotVal);
                 row.append("</str><deg>").append(degreeVal);
-                row.append("</deg></row>\n");
+                row.append("</deg>\n");
                 rowsAffected += 1;  //number of result rows
                 response.add(row.toString());
             }
@@ -1143,7 +1169,7 @@ public class Stereotypes implements pserver.pservlets.PService {
             return PSReqWorker.REQUEST_ERR;
         }
         int rowsAffected = 0;
-        String table = DBAccess.STEREOTYPE_STATISTICS_TABLE;
+        String table = DBAccess.STEREOTYPE_PROFILES_TABLE;
         try {
             if (queryParam.get("ftr") == null) {
                 String[] where = {
@@ -1203,7 +1229,6 @@ public class Stereotypes implements pserver.pservlets.PService {
                     Float numValue = DBAccess.strToNum(value);  //is it numeric?
                     double newNumValue;
                     int tmpRows = 0;
-                    //TODO Maybe initialize all values in stereotype creation
                     if (recFound == false) { //if recFound == false we assume that it was uninitialized and treat it as 0
                         newNumValue = numStep.doubleValue();
                         //insert new feature record
@@ -1345,7 +1370,7 @@ public class Stereotypes implements pserver.pservlets.PService {
         respBody.append(DBAccess.xmlHeader(xslPath));
         respBody.append("<result>\n");
         for (String s : content) {
-            respBody.append("<row>").append(content).append("</row>\n");
+            respBody.append("<row>").append(s).append("</row>\n");
         }
         respBody.append("</result>");
     }
