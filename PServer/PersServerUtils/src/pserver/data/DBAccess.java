@@ -141,7 +141,7 @@ public class DBAccess {
     public static final String STEREOTYPE_PROFILES_TABLE = "stereotype_profiles";
     public static final String STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE = "sp_stereotype";
     public static final String STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE = "sp_feature";
-    public static final String STEREOTYPE_PROFILES_TABLE_FIELD_VALUE = "sp_numvalue";
+    public static final String STEREOTYPE_PROFILES_TABLE_FIELD_VALUE = "sp_value";
     public static final String STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE = "sp_numvalue";
     public static final String STEREOTYPE_STATISTICS_TABLE = "stereotype_feature_statistics";
     public static final String STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE = "stereotype";
@@ -890,7 +890,6 @@ public class DBAccess {
         }
         query.setLength(query.length() - 4);
         query.append("')");
-        System.out.println(query.toString());
         return query;
     }
 
@@ -967,7 +966,7 @@ public class DBAccess {
         } else {
             query.append(tables[0]);
         }
-        query.append("SET ");
+        query.append(" SET ");
         for (int i = 0; i < columns.length; i++) {
             query.append(columns[i]).append("='").append(values[i]);
             query.append("', ");
