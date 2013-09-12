@@ -26,36 +26,18 @@
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
 
-//===================================================================
-// ControlWin
-//
-// Main window of the application.
-//===================================================================
-package pserver.userInterface;
+package pserver.utilities;
 
-import javax.swing.*;
-import java.awt.*;
-
-import pserver.*;
-import pserver.utilities.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import pserver.data.DBAccess;
 
 /**
  *
  * @author scify
+ * @author Nick Zorbas <nickzorb@gmail.con>
  */
-public class ControlWin {
+public interface PServerCommand {
 
-    /**
-     *
-     */
-    public ActivityLog log;   //displays application messages
-
-    //initializer
-    /**
-     *
-     * @param appTitle
-     */
-    public ControlWin(String appTitle) {
-        log = new ActivityLog();
-    }
+    int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess);
 }
