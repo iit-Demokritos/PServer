@@ -9,7 +9,7 @@
     <body bgcolor="#FFFFCC">
 
         <pre>-getusr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=getusr&amp;usr=&lt;usr&gt;&amp;str=&lt;str_pattern&gt;[&amp;num=
+template: ster?clnt=&lt;name|pass&gt;&amp;com=getusrstrs&amp;usr=&lt;usr&gt;&amp;str=&lt;str_pattern&gt;[&amp;num=
           &lt;num_pattern&gt;&amp;srt=&lt;order_pattern&gt;]
           Order of query params is not important. Query params 'num',
           and 'srt' are optional. If ommited, 'num' defaults to '*',
@@ -35,8 +35,8 @@ descript: for the specified user, the stereotypes matching the pattern
           Which of the stereotypes with the same value will be part of
           the result depends on the stereotype name, which is a
           secondary field of ordering.
-example : ster?clnt=name|pass&amp;com=getusr&amp;usr=eddie&amp;str=*&amp;num=3
-          ster?clnt=name|pass&amp;com=getusr&amp;usr=w18&amp;str=visitor
+example : ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=eddie&amp;str=*&amp;num=3
+          ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=w18&amp;str=visitor
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : in this case the response body is as follows
           &lt;?xml version=&quot;1.0&quot;?&gt;

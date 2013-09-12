@@ -9,7 +9,7 @@
     <body bgcolor="#FFFFCC">
 
         <pre>-setdeg
-template: ster?clnt=&lt;name|pass&gt;&amp;com=setdeg&amp;usr=&lt;usr&gt;&amp;&lt;str_1&gt;=&lt;new_deg_1&gt;&amp;&lt;str_2&gt;=...
+template: ster?clnt=&lt;name|pass&gt;&amp;com=setdgr&amp;usr=&lt;usr&gt;&amp;&lt;str_1&gt;=&lt;new_deg_1&gt;&amp;&lt;str_2&gt;=...
           Order of query params is important: position of 'com'
           and 'usr' is not important, however updates of degrees
           are performed in the order they appear in the request.
@@ -22,7 +22,7 @@ descript: for the specified user, updates the degrees of the
           assigned to that user, corresponding degrees will not
           be updated (200 OK will still be returned). If the error
           code 401 is returned then no changes have taken place.
-example : ster?clnt=name|pass&amp;com=setdeg&amp;usr=0.34&amp;visitor=0.85&amp;expert=1.0
+example : ster?clnt=name|pass&amp;com=setdgr&amp;usr=0.34&amp;visitor=0.85&amp;expert=1.0
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : in this case the response body is as follows
           &lt;?xml version=&quot;1.0&quot;?&gt;
