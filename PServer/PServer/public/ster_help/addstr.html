@@ -7,9 +7,7 @@
     <body bgcolor="#FFFFCC">
         <pre>-addstr
 template: ster?clnt=&lt;name|pass&gt;&amp;com=addstr&amp;str=&lt;str&gt;[&amp;&lt;rule&gt;=pattern...]
-          Order of query params is not important. Feature
-          names must not end with '*' to be legal. Stereotype
-          names must not be '*', '-', or empty string.
+          Order of query params is not important. Stereotype name should not end with *.
 descript: A new stereotype based on the rule is inserted in the DB. The "rule" parameter is 
           a conjuction of logical operations on the demographic attribures. The form of the
           pattern is attr_name1[operator]val1|logial_operator|attr_name2[operator]val2...
@@ -17,7 +15,7 @@ descript: A new stereotype based on the rule is inserted in the DB. The "rule" p
 	  greater than, greater or equal than etc. We use the : and not the = symbol because of the
 	  url character restrictions. The logical operations are the "or" and "and". There can be 
 	  parenthesis too.
-	  If there is an existing stereotype with the same name an error will be returnsd.	  
+	  If there is an existing stereotype with the same name an error will be returned.	  
           Note that if no rule parameter exists then pserver will create an empty stereotype. If a rule 
           parameter exists pserver will find all the users that satisfies the rule and will create the stereorype
 	  profile

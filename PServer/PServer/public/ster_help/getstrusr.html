@@ -2,15 +2,23 @@
     <head>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-addstr template</title>
+        <title>-getstrusr template</title>
     </head>
     <body bgcolor="#FFFFCC">
         <pre>-addstr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=getstrusr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=getstrusr&str=str_pattern[&usr=usr_pattern]
           Order of query params is not important.
-descript: 
-example : 
+pattern : A stereotype pattern can use * to match the last part of a stereotype name.
+	  so "ster=some_ster.*" will return all stereotypes whose names begin with
+	  some_ster. while "ster=*" will return results from all stereotypes.
+	  Same principal applies to user pattern.
+descript: Returns all users matching usr_pattern (if one doesn't exist * is assumed)
+	  that belong to any stereotype matching str_pattern in (str, usr, degree)
+	  tuples.
+example : ster?clnt=&lt;name|pass&gt;&amp;com=getstrusr&str=strCat1.*&usr=temp.*
+	  ster?clnt=&lt;name|pass&gt;&amp;com=getstrusr&str=*
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : no response body exists.</pre>
+200 OK  : TODO: add response body
+		</pre>
     </body>
 </html>

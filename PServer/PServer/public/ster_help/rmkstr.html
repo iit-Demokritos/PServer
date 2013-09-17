@@ -2,15 +2,19 @@
     <head>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-addstr template</title>
+        <title>-rmkstr template</title>
     </head>
     <body bgcolor="#FFFFCC">
-        <pre>-addstr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=rmkstr
-          Order of query params is not important.
-descript: 
-example : ster?clnt=name|pass&amp;com=rmkstr
+        <pre>-rmkstr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=rmkstr&str=str_name
+          Order of query params is not important. Stereotype name
+	  must not end with *.
+descript: Resets a stereotype by removing all its users and features
+	  and adding users and their respective features based on the
+	  stereotypes rule.
+example : ster?clnt=&lt;name|pass&gt;&amp;com=rmkstr&str=testStr
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : no response body exists.</pre>
-    </body>
+200 OK  : TODO: add response body
+		</pre>
+	</body>
 </html>

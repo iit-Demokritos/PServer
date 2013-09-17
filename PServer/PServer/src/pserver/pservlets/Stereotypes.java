@@ -518,6 +518,7 @@ public class Stereotypes implements PService {
         String clientName = queryParam.get("clnt").get(0);
         String stereot = getParameter("str", queryParam);
         String features = getParameter("ftr", queryParam);
+        String order = getParameter("srt", queryParam);
         if (stereot == null) {
             WebServer.win.log.error("-Request missing str parameter");
             return PSReqWorker.REQUEST_ERR;
@@ -533,6 +534,11 @@ public class Stereotypes implements PService {
         StringBuilder ftrCondition = buildWhereClause(
                 DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE, features);
 
+        if (order.equalsIgnoreCase("asc")) {
+            order = " ORDER BY " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_VALUE + " ASC";
+        } else {
+            order = " ORDER BY " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_VALUE + " DESC";
+        }
         //execute request
         int rowsAffected = 0;
         String query;
@@ -553,7 +559,7 @@ public class Stereotypes implements PService {
             }
             where[0] = strCondition.toString();
             where[1] = clntCondition.toString();
-            query = DBAccess.buildSelectStatement(table, columns, where).toString();
+            query = DBAccess.buildSelectStatement(table, columns, where).append(order).toString();
             PServerResultSet rs = dbAccess.executeQuery(query);
 
             ArrayList<String> response = new ArrayList<String>();
@@ -1680,7 +1686,7 @@ public class Stereotypes implements PService {
         }
         StringBuilder res = new StringBuilder();
         res.append(column);
-        if (value.contains("*")) {
+        if (value.endsWith("*")) {
             res.append(" LIKE('");
             res.append(value.replace("*", "")).append("%')");
         } else {

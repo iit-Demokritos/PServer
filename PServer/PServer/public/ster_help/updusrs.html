@@ -2,15 +2,18 @@
     <head>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-addstr template</title>
+        <title>-updusrs template</title>
     </head>
     <body bgcolor="#FFFFCC">
-        <pre>-addstr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=updusrs
-          Order of query params is not important.
-descript: 
-example : ster?clnt=name|pass&amp;com=updusrs
+        <pre>-updusrs
+template: ster?clnt=&lt;name|pass&gt;&amp;com=updusrs&str=str_name
+          Order of query params is not important. Stereotype name must
+	  not end with *.
+descript: Removes current users that do not much the stereotype's rule and
+	  adds any new users that much the stereotype's rule.
+example : ster?clnt=name|pass&amp;com=updusrs&str=testStr1
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : no response body exists.</pre>
+200 OK  : TODO: add responses
+		</pre>
     </body>
 </html>

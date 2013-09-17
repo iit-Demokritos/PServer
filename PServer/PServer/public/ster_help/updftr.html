@@ -6,11 +6,13 @@
     </head>
     <body bgcolor="#FFFFCC">
         <pre>-addstr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=updftr
-          Order of query params is not important.
-descript: 
-example : ster?clnt=name|pass&amp;com=updftr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=updftr&str=str_name
+          Order of query params is not important. Stereotype name must not end with *.
+descript: Removes all features from the specified stereotype and then rebuilds its profile
+	  based on its users profiles.
+example : ster?clnt=name|pass&amp;com=updftr&str=testStr1
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : no response body exists.</pre>
+200 OK  : TODO: add response
+		</pre>
     </body>
 </html>

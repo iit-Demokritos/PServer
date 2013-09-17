@@ -2,15 +2,18 @@
     <head>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-addstr template</title>
+        <title>-fndusrs template</title>
     </head>
     <body bgcolor="#FFFFCC">
-        <pre>-addstr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=fndusrs
-          Order of query params is not important.
-descript: 
-example : 
+        <pre>-fndusrs
+template: ster?clnt=&lt;name|pass&gt;&amp;com=fndusrs&str=str_name
+          Order of query params is not important. Stereotype name should
+	  not end with *.
+descript: Finds and adds to the stereotype all users that don't belong to it
+	  but match it's rule. The initial degree is 1 for those users.
+example : ster?clnt=name|pass&amp;com=fndusrs&str=testStr1
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : no response body exists.</pre>
+200 OK  : TODO: add response
+		</pre>
     </body>
 </html>

@@ -3,16 +3,19 @@
     <head>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-incdeg template</title>
+        <title>-incftr template</title>
     </head>
 
     <body bgcolor="#FFFFCC">
 
-        <pre>-incdeg
-template: ster?clnt=&lt;name|pass&gt;&amp;amp;com=incftr
-          Order of query params is not important:
-descript: 
-example : 
+        <pre>-incftr
+template: ster?clnt=&lt;name|pass&gt;&amp;amp;com=incftr&str=str_name[&ftr1=dgr1&ftr2=dgr2...]
+          Order of query params is not important: Stereotype and feature names
+	  should not end with *.
+descript: Increases the feature's value by the given degree for the defined stereotype. If
+	  the stereotype didn't have a value for any of the specified features they will be added.
+	  If no ftr is specified nothing will be done.
+example : ster?clnt=&lt;name|pass&gt;&amp;amp;com=incftr&str=testStr1&testFtr1=12
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : in this case the response body is as follows
           &lt;?xml version=&quot;1.0&quot;?&gt;
@@ -20,11 +23,6 @@ returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
           &lt;result&gt;
           &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
           &lt;/result&gt;
-comments: the reference to the xsl file allows to view results
-          in a web browser. In case the response body is handled
-          directly by an application and not by a browser, this
-          reference to xsl can be ignored.</pre>
-
+		</pre>
     </body>
-
 </html>
