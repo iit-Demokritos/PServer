@@ -26,6 +26,15 @@ public class ResponseConverter {
 
     private String ConvertedResponse;
     private StringBuffer ConvertedBuffer;
+    private File tmpfile;
+
+    public ResponseConverter() {
+        try {
+            tmpfile = File.createTempFile("tmp", ".xml", new File("./"));
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      *
@@ -43,7 +52,7 @@ public class ResponseConverter {
         } else {
             ConvertJson();
         }
-
+        tmpfile.delete();
         return ConvertedBuffer;
     }
 
@@ -54,13 +63,14 @@ public class ResponseConverter {
     private void ConvertJson() {
 
         //convert xml to json
-
         String jsonObj = null;
 
         try {
-            jsonObj = XML.toJson(new File("./convert.xml"));
+//            jsonObj = XML.toJson(new File("./convert.xml"));
+            jsonObj = XML.toJson(tmpfile);
             String json = jsonObj.toString();
-            CreateJson(json);
+//            //DebugLine
+//            CreateJson(json);
             ConvertedBuffer.append(json);
         } catch (SAXException ex) {
             Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,12 +86,13 @@ public class ResponseConverter {
         BufferedWriter pw = null;
 
         try {
-            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./convert.xml"),Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
-                               // write to convert.xml
-            if (xmlInput.equals("null")){
+//            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./convert.xml"),Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
+            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmpfile), Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
+            // write to convert.xml
+            if (xmlInput.equals("null")) {
                 pw.append("<result></result>");
             } else {
-                pw.append(xmlInput);   
+                pw.append(xmlInput);
             }
             pw.flush();
 
@@ -100,6 +111,7 @@ public class ResponseConverter {
         }
 
     }
+
     private void CreateJson(String jsonInput) {
 
         PrintWriter pw = null;
