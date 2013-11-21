@@ -14941,3 +14941,11 @@
 1/8/2013 16:24:37  >  Messages log mode set to: on
 1/8/2013 16:24:38  >  Connected to DB: MySQL
 1/8/2013 16:24:41  >  Shutting down server, normal: true
+21/11/2013 12:18:37  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+21/11/2013 12:18:37  >  Messages log mode set to: on
+21/11/2013 12:18:37  >  Database connection failed
+21/11/2013 12:18:37  >  Shutting down server, normal: false
+21/11/2013 12:28:30  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+21/11/2013 12:28:30  >  Messages log mode set to: on
+21/11/2013 12:28:30  >  Connected to DB: MySQL
+21/11/2013 12:50:14  >  Shutting down server, normal: true

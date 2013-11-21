@@ -60,18 +60,15 @@ public class PgetFeatures implements pserver.pservlets.PService {
 
         int PageIndex;
         if (parameters.qpIndexOfKeyNoCase("pageindex") == -1) {
-            PageIndex = 1;
+            PageIndex = 0;
         } else {
             PageIndex = Integer.parseInt(parameters.getVal(parameters.indexOfKey("pageindex", 0)).toString());
         }
 
         // fix the VectorMap
-
         PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
 
-
         PSparameters.add("com", "getftrdef");
-
 
         PSparameters.add("ftr", parameters.getVal(parameters.indexOfKey("featuresPattern", 0)));
 
@@ -80,21 +77,21 @@ public class PgetFeatures implements pserver.pservlets.PService {
 //            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
 //            
 //        }
-
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
-        PageConverter Pconverter = new PageConverter();
-        StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
-        response.delete(0, response.length());
-        response.append(tempBuffer);
 
+        if (PageIndex != 0) {
+            PageConverter Pconverter = new PageConverter();
+            StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
+            response.delete(0, response.length());
+            response.append(tempBuffer);
+        }
 
         StringBuffer tempBuffer2 = converter.RConverter(response.toString(), responseType);
         response.delete(0, response.length());
         response.append(tempBuffer2);
         //DebugLine
         //        System.out.println("=====> " +response.toString() );
-
 
         return ResponseCode;
     }
