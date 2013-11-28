@@ -9,20 +9,20 @@
     <body bgcolor="#FFFFCC">
 
         <pre>-incftr
-template: ster?clnt=&lt;name|pass&gt;&amp;amp;com=incftr&str=str_name[&ftr1=dgr1&ftr2=dgr2...]
-          Order of query params is not important: Stereotype and feature names
-	  should not end with *.
-descript: Increases the feature's value by the given degree for the defined stereotype. If
-	  the stereotype didn't have a value for any of the specified features they will be added.
-	  If no ftr is specified nothing will be done.
-example : ster?clnt=&lt;name|pass&gt;&amp;amp;com=incftr&str=testStr1&testFtr1=12
+template: ster?clnt=&lt;name|pass&gt;&amp;com=incftr&amp;str=&lt;str&gt;&amp;ftr1=dgr1&amp;ftr2=dgr2...
+          Order of query params is not important:
+descript: For the stereotype &lt;str&gt; increases all features (ftr1, ftr2...)
+	  by the corresponding degrees (dgr1, dgr2...). If a feature didn't exist
+	  in the stereotype it is added using the corresponding degree as the default.
+example : ter?clnt=&lt;name|pass&gt;&amp;com=incftr&amp;str=testStr.1&amp;ftr.1=15&amp;ftr.test.5=0.5
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : in this case the response body is as follows
-          &lt;?xml version=&quot;1.0&quot;?&gt;
-          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
-          &lt;result&gt;
-          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
-          &lt;/result&gt;
-		</pre>
+200 OK  : example result body:
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;</pre>
+
     </body>
+
 </html>

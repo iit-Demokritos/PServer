@@ -6,19 +6,21 @@
     </head>
     <body bgcolor="#FFFFCC">
         <pre>-remftr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=remftr&str=str_pattern[&ftr=ftr_pattern&ftr=ftr_pattern...]
+template: ster?clnt=&lt;name|pass&gt;&amp;com=remftr&amp;str=&lt;str_pattern&gt;[&amp;ftr=&lt;ftr_pattern&gt;&amp;ftr=...]
           Order of query params is not important.
-pattern : A stereotype pattern can use * to match the last part of a stereotype name.
-	  so "ster=some_ster.*" will return all stereotypes whose names begin with
-	  some_ster. while "ster=*" will return results from all stereotypes.
-	  Same principal applies to feature pattern.
-descript: Removes any and all (stereotype, feature) pairs matching both str_pattern
-	  and ftr_pattern. If no ftr is defined * will be assumed.
-example : ster?clnt=name|pass&amp;com=remftr&str=*&ftr=testFtr1
-	  ster?clnt=name|pass&amp;com=remftr&str=testStr1.*&ftr=testFtrs5.*
-	  ster?clnt=name|pass&amp;com=remftr&str=testStr1.*
+pattern : ftr_pattern and str_pattern can be * or name, where name can be a path
+	  expression (group1.*)
+descript: Removes all features matching the ftr_patterns specified from all stereotypes
+	  matching the stereotype pattern specified. If no features patterns are
+	  specified * is assumed and all faetures are removed from all stereotypes
+	  matching str_pattern;
+example : ster?clnt=name|pass&amp;com=remftr&amp;str=test.*&amp;ftr=testFtr.sub1.*&amp;ftr=testFeature1
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : TODO: add response
-		</pre>
+200 OK  : example result body:
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;</pre>
     </body>
 </html>

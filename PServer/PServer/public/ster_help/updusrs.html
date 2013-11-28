@@ -6,14 +6,19 @@
     </head>
     <body bgcolor="#FFFFCC">
         <pre>-updusrs
-template: ster?clnt=&lt;name|pass&gt;&amp;com=updusrs&str=str_name
-          Order of query params is not important. Stereotype name must
-	  not end with *.
-descript: Removes current users that do not much the stereotype's rule and
-	  adds any new users that much the stereotype's rule.
-example : ster?clnt=name|pass&amp;com=updusrs&str=testStr1
+template: ster?clnt=&lt;name|pass&gt;&amp;com=updusrs&amp;str=&lt;str&gt;
+          Order of query params is not important.
+descript: Removes all users not matching the stereotypes rule and inserts
+	  any new users that do match. Performing this on a stereotype
+	  without a rule will not change the stereotypes users but will
+	  not cause an error.
+example : ster?clnt=name|pass&amp;com=updusrs&amp;str=test.1
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : TODO: add responses
-		</pre>
+200 OK  : example result body:
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;</pre>
     </body>
 </html>

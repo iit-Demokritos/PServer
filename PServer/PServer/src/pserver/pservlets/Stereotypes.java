@@ -223,7 +223,7 @@ public class Stereotypes implements PService {
             return PSReqWorker.REQUEST_ERR;
         }
         ArrayList<String> clientName = queryParam.get("clnt");
-        clientName.add(0, clientName.get(0).split("|")[0]);
+        clientName.add(0, clientName.get(0).split("[|]")[0]);
 
         return execute(queryParam, respBody, dbAccess);
     }
@@ -534,7 +534,7 @@ public class Stereotypes implements PService {
         StringBuilder ftrCondition = buildWhereClause(
                 DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE, features);
 
-        if (order.equalsIgnoreCase("asc")) {
+        if (order != null && order.equalsIgnoreCase("asc")) {
             order = " ORDER BY " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_VALUE + " ASC";
         } else {
             order = " ORDER BY " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_VALUE + " DESC";
@@ -1204,7 +1204,10 @@ public class Stereotypes implements PService {
         SqlNode parent = new SqlNode(rule);
         parent.propagate();
         String query = "DELETE FROM " + DBAccess.STEREOTYPE_USERS_TABLE
-                + " WHERE " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER + " NOT IN ( " + parent.toSql() + ")";
+                + " WHERE " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE
+                + "='" + stereot + "' AND " + DBAccess.FIELD_PSCLIENT + "='"
+                + clientName + "' AND " + DBAccess.STEREOTYPE_USERS_TABLE_FIELD_USER
+                + " NOT IN ( " + parent.toSql() + ")";
         try {
             respCode = dbAccess.executeUpdate(query);
         } catch (SQLException ex) {

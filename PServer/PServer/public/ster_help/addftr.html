@@ -6,14 +6,18 @@
     </head>
     <body bgcolor="#FFFFCC">
         <pre>-addftr
-template: ster?clnt=&lt;name|pass&gt;&amp;com=addftr&str=str_name[&ftr1=dgr1&ftr2=dgr2....]
-          Order of query params is not important. Stereotype and feature
-	  names must not end in *. If no features are specified nothing
-	  will be added.
-descript: Adds all specified feature - degree pairs to the specified stereotype
-example : ster?clnt=&lt;name|pass&gt;&amp;com=addftr&str=testStr1&testFeature1=15&testftr2=8
+template: ster?clnt=&lt;name|pass&gt;&amp;com=addftr&amp;str=&lt;str&gt;&amp;ftr1=dgr1[&amp;ftr2=dgr2...]
+          Order of query params is not important.
+descript: Adds to stereotype &lt;str&gt; all features specified using the corresponding
+	  degrees. If a feature already exists in the stereotype it instead sets its
+	  degree to the new degree specified.
+example : ster?clnt=name|pass&amp;com=addftr&amp;str=test.1&amp;testFtr.1=2&amp;testFtr.5=0.1
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : TODO: add result
-		</pre>
+200 OK  : example result body:
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;</pre>
     </body>
 </html>

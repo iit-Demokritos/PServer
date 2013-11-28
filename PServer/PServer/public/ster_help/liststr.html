@@ -28,23 +28,19 @@ descript: lists the stereotypes in the DB. From an original set of
           table 'stereotype_users') are returned. Result is ordered
           by stereotype name. If the final list is empty, a result
           without any row elements is returned in the XML answer.
-example : ster?clnt=name|pass&amp;com=lststr&amp;str=*
-          ster?clnt=name|pass&amp;com=lststr&amp;str=professionals&amp;mod=*
-          ster?clnt=name|pass&amp;com=lststr&amp;str=*&amp;mod=p
-          ster?clnt=name|pass&amp;com=lststr&amp;str=visitor&amp;mod=u
+example : ster?clnt=name|pass&amp;com=liststr&amp;str=*
+          ster?clnt=name|pass&amp;com=liststr&amp;str=professionals&amp;mod=*
+          ster?clnt=name|pass&amp;com=liststr&amp;str=*&amp;mod=p
+          ster?clnt=name|pass&amp;com=liststr&amp;str=visitor&amp;mod=u
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : in this case the response body is as follows
-          &lt;?xml version=&quot;1.0&quot;?&gt;
-          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/stereotypes.xsl&quot;?&gt;
-          &lt;result&gt;
-              &lt;row&gt;&lt;str&gt;stereotype&lt;/str&gt;&lt;/row&gt;
-              ...
-          &lt;/result&gt;
-comments: the reference to the xsl file allows to view results
-          in a web browser. In case the response body is handled
-          directly by an application and not by a browser, this
-          reference to xsl can be ignored.</pre>
-
+200 OK  : example result body:
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test&lt;/str&gt;&lt;rule&gt;null&lt;/rule&gt;
+	    &lt;/row&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test2&lt;/str&gt;&lt;rule&gt;age&lt;12|or|(age&gt;32|and|gender:f)&lt;/rule&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;</pre>
     </body>
-
 </html>

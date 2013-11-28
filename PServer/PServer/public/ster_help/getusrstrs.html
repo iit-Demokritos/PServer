@@ -9,15 +9,16 @@
     <body bgcolor="#FFFFCC">
 
         <pre>-getusrstrs
-template: ster?clnt=&lt;name|pass&gt;&amp;com=getusrstrs&amp;usr=&lt;usr&gt;&amp;str=&lt;str_pattern&gt;[&amp;num=
+template: ster?clnt=&lt;name|pass&gt;&amp;com=getusrstrs&amp;usr=&lt;usr_pattern&gt;&amp;str=&lt;str_pattern&gt;[&amp;num=
           &lt;num_pattern&gt;&amp;srt=&lt;order_pattern&gt;]
           Order of query params is not important. Query params 'num',
           and 'srt' are optional. If ommited, 'num' defaults to '*',
           and 'srt' defaults to 'desc'.
-pattern : for stereotypes, * | name.
+pattern : for stereotypes, * | name, name can be a path expression (group1.*)
+	  for users, * | name, name can be a path expression (group1.*)
           For num, * | &lt;integer&gt;.
           For srt, asc | desc. For 10-&gt;1 use 'desc'.
-descript: for the specified user, the stereotypes matching the pattern
+descript: for each user matching usr_pattern, the stereotypes matching str_pattern
           are found and sorted according to degree (based on 'srt'),
           and secondarily according to stereotype name (asc, A-&gt;Z).
           Then the first &lt;num_pattern&gt; rows are selected (or all, if
@@ -36,19 +37,15 @@ descript: for the specified user, the stereotypes matching the pattern
           the result depends on the stereotype name, which is a
           secondary field of ordering.
 example : ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=eddie&amp;str=*&amp;num=3
-          ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=w18&amp;str=visitor
+          ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=group1.*&amp;str=visitor
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : in this case the response body is as follows
           &lt;?xml version=&quot;1.0&quot;?&gt;
           &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/stereot_singleuser.xsl&quot;?&gt;
           &lt;result&gt;
-              &lt;row&gt;&lt;str&gt;stereotype&lt;/str&gt;&lt;deg&gt;degree&lt;/deg&gt;&lt;/row&gt;
+              &lt;row&gt;&lt;usr&gt;user&lt;/usr&gt;&lt;str&gt;stereotype&lt;/str&gt;&lt;deg&gt;degree&lt;/deg&gt;&lt;/row&gt;
               ...
-          &lt;/result&gt;
-comments: the reference to the xsl file allows to view results
-          in a web browser. In case the response body is handled
-          directly by an application and not by a browser, this
-          reference to xsl can be ignored.</pre>
+          &lt;/result&gt;</pre>
 
     </body>
 
