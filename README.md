@@ -11,13 +11,13 @@ PServer is implemented in Java and uses MySQL as its RDBMS. That means that if y
 
 1. [JAVA](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2. [MySQL Server](http://dev.mysql.com/downloads/mysql/)
-3. PServer files 
+3. [PServer files](http://pserver-project.org/downloads) 
 
 You can find more information about PServer in our [community](http://forum.scify.gr/viewforum.php?f=7) and in the below links:
 
 * [PServer Site](http://www.scify.gr/site/en/pserver-en)
 * [FAQ](http://www.scify.gr/site/en/pserver-faq-en)
-* User's Guide
+* [User's Guide](http://pserver-project.org/sites/default/files/PServerUsersGuide.pdf)
 * [wiki](http://scify.iit.demokritos.gr/SciFYwiki/doku.php?id=pserver) 
 
 See PServer in action in our [DemoSite](http://scify.iit.demokritos.gr/DemoSite/indexne.html).

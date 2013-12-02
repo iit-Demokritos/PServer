@@ -624,7 +624,7 @@ public class ReqWorker extends Thread {
         httpMsg = new StringBuffer(
                 "HTTP/1.0 " + status + "\n"
                 + "Date: " + new Date() + "\n"
-                + "Server: " + WebServer.obj.appName + " " + WebServer.obj.appVers + "\n");
+                + "Server: " + WebServer.obj.appName + " v" + WebServer.obj.appVers + "\n");
         if (rbFile != null || rbString != null) //there exists a response body
         {
             httpMsg.append(

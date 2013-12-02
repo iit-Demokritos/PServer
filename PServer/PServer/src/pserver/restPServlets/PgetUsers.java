@@ -83,19 +83,15 @@ public class PgetUsers implements pserver.pservlets.PService {
         VectorMap tempMap = null;
         ResponseConverter converter = new ResponseConverter();
 
-
         int PageIndex;
         if (parameters.qpIndexOfKeyNoCase("pageindex") == -1) {
-            PageIndex = 1;
+            PageIndex = 0;
         } else {
             PageIndex = Integer.parseInt(parameters.getVal(parameters.indexOfKey("pageindex", 0)).toString());
         }
 
-
         // fix the VectorMap
-
         PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
-
 
         PSparameters.add("com", "getusrs");
 
@@ -105,15 +101,16 @@ public class PgetUsers implements pserver.pservlets.PService {
             PSparameters.add("whr", parameters.getVal(parameters.indexOfKey("where", 0)));
         }
 
-
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
 
-        PageConverter Pconverter = new PageConverter();
-        StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
-        response.delete(0, response.length());
-        response.append(tempBuffer);
+        if (PageIndex != 0) {
+            PageConverter Pconverter = new PageConverter();
+            StringBuffer tempBuffer = Pconverter.PConverter(response.toString(), PageIndex);
+            response.delete(0, response.length());
+            response.append(tempBuffer);
+        }
 
 
         StringBuffer tempBuffer2 = converter.RConverter(response.toString(), responseType);
@@ -122,7 +119,6 @@ public class PgetUsers implements pserver.pservlets.PService {
 
         //DebugLine
         //        System.out.println("=====> " +response.toString() );
-
         return ResponseCode;
 
     }

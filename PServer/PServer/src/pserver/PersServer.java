@@ -244,7 +244,7 @@ public class PersServer extends WebServer {
         super.initVars();
         //override variable values as needed
         appName = "PServer";
-        appVers = "1.7";
+        appVers = "1.2";
         appCapt = " " + appName + " ver. " + appVers;
         prefHeader = appName + " settings";
     }
