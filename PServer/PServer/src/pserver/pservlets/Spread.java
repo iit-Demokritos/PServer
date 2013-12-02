@@ -1,19 +1,31 @@
-/* 
- * Copyright 2011 NCSR "Demokritos"
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");   
- * you may not use this file except in compliance with the License.   
+/*
+ * Copyright 2013 IIT , NCSR Demokritos - http://www.iit.demokritos.gr,
+ *                            SciFY NPO - http://www.scify.org
+ *
+ * This product is part of the PServer Free Software.
+ * For more information about PServer visit http://www.pserver-project.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- *    
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
+ * If this code or its output is used, extended, re-engineered, integrated,
+ * or embedded to any extent in another software or hardware, there MUST be
+ * an explicit attribution to this work in the resulting source code,
+ * the packaging (where such packaging exists), or user interface
+ * (where such an interface exists).
+ *
+ * The attribution must be of the form
+ * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
+
 package pserver.pservlets;
 
 import java.io.FileWriter;
@@ -48,10 +60,10 @@ public class Spread implements pserver.pservlets.PService {
     private float sCorrects2 = 0;
     private float all2 = 0;
     private float all = 0;
-    private float pParam =  0.46447277f;
+    private float pParam = 0.46447277f;
     private float cParam = 0.18148465f;
     private float sParam = 0.35405377f;
-    private float cParam2 =  0.47481096f;
+    private float cParam2 = 0.47481096f;
     private float sParam2 = 1.0f;
     private TreeMap<String, TreeMap<String, TreeMap<String, Float>>> profiles;
     private TreeMap<String, TreeMap<String, LinkedList<String>>> accocs;
@@ -95,7 +107,7 @@ public class Spread implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -646,7 +658,7 @@ public class Spread implements pserver.pservlets.PService {
             stersRs.close();
             stmt.close();
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -780,7 +792,7 @@ public class Spread implements pserver.pservlets.PService {
             stersRs.close();
             stmt.close();
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_FEATURE_SIMILARITY;
@@ -914,10 +926,10 @@ public class Spread implements pserver.pservlets.PService {
             stersRs.close();
             stmt.close();
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STERETYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+            sql = "SELECT " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STEREOTYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -1060,10 +1072,10 @@ public class Spread implements pserver.pservlets.PService {
             stersRs.close();
             stmt.close();
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STERETYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+            sql = "SELECT " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STEREOTYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -1229,7 +1241,7 @@ public class Spread implements pserver.pservlets.PService {
             sql = "SELECT " + DBAccess.UPROFILE_TABLE_FIELD_VALUE + " FROM " + DBAccess.UPROFILE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectUFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -1381,10 +1393,10 @@ public class Spread implements pserver.pservlets.PService {
             sql = "SELECT " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectUFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STERETYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+            sql = "SELECT " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STEREOTYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -1551,10 +1563,10 @@ public class Spread implements pserver.pservlets.PService {
             sql = "SELECT " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectUFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STERETYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+            sql = "SELECT " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STEREOTYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -2669,7 +2681,7 @@ public class Spread implements pserver.pservlets.PService {
             sql = "SELECT " + DBAccess.UPROFILE_TABLE_FIELD_VALUE + " FROM " + DBAccess.UPROFILE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UPROFILE_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectUFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -2838,10 +2850,10 @@ public class Spread implements pserver.pservlets.PService {
             sql = "SELECT " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectUFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STERETYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+            sql = "SELECT " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STEREOTYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -3033,10 +3045,10 @@ public class Spread implements pserver.pservlets.PService {
             sql = "SELECT " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectUFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STERETYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+            sql = "SELECT " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STEREOTYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -3545,10 +3557,10 @@ public class Spread implements pserver.pservlets.PService {
             sql = "SELECT " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_USER + "='" + user + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.FEATURE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectUFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
+            sql = "SELECT " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE + " FROM " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + "=?";
             PreparedStatement selectFtr = dbAccess.getConnection().prepareStatement(sql);
 
-            sql = "SELECT " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STERETYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STERETYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
+            sql = "SELECT " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE + " FROM " + DBAccess.STEREOTYPE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE + "='" + stereotype + "' AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY;
             PreparedStatement selectFtrFreq = dbAccess.getConnection().prepareStatement(sql);
 
             String sql1 = "SELECT " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + " ftr," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + " FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + "='' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "=? AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL;
@@ -3632,11 +3644,11 @@ public class Spread implements pserver.pservlets.PService {
                         }
 
                         /*if(  udist > cdist  )
-                        //out.println( freq + "," + cfreq + "," + sfreq + ",1" );
-                        else if ( udist > sdist )
-                        //out.println( freq + "," + cfreq + "," + sfreq + ",2" );
-                        else
-                        //out.println( freq + "," + cfreq + "," + sfreq + ",0" );
+                         //out.println( freq + "," + cfreq + "," + sfreq + ",1" );
+                         else if ( udist > sdist )
+                         //out.println( freq + "," + cfreq + "," + sfreq + ",2" );
+                         else
+                         //out.println( freq + "," + cfreq + "," + sfreq + ",0" );
                          *
                          */
                         weight += val * freq * coFeatureWeights.get(j);
@@ -3664,16 +3676,16 @@ public class Spread implements pserver.pservlets.PService {
 
                                 float sdist = Math.abs(trueVal - sval);
 
-                                if (cdist <= sdist ) {
-                                    this.cCorrects2 ++;
+                                if (cdist <= sdist) {
+                                    this.cCorrects2++;
                                     all2++;
                                 } else {
-                                    this.sCorrects2 ++;
+                                    this.sCorrects2++;
                                     all2++;
                                 }
 
 
-                                val = (val * cParam2 + sval * sParam2) / ( cParam2 + sParam2);
+                                val = (val * cParam2 + sval * sParam2) / (cParam2 + sParam2);
                             }
                             weight += val * freq * coFeatureWeights.get(j);
                             sum += freq * coFeatureWeights.get(j);
@@ -3725,7 +3737,7 @@ public class Spread implements pserver.pservlets.PService {
             return false;
         }
         System.out.println("    percents " + (this.pCorrects / all) + " : " + (this.cCorrects / all) + " : " + (this.sCorrects / all));
-        System.out.println("    percents2 "+ (this.cCorrects2 / all2) + " : " + (this.sCorrects2 / all2));
+        System.out.println("    percents2 " + (this.cCorrects2 / all2) + " : " + (this.sCorrects2 / all2));
         return true;
     }
 }

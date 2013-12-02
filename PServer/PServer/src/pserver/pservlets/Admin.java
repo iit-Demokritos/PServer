@@ -1,19 +1,31 @@
-/* 
- * Copyright 2011 NCSR "Demokritos"
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");   
- * you may not use this file except in compliance with the License.   
+/*
+ * Copyright 2013 IIT , NCSR Demokritos - http://www.iit.demokritos.gr,
+ *                            SciFY NPO - http://www.scify.org
+ *
+ * This product is part of the PServer Free Software.
+ * For more information about PServer visit http://www.pserver-project.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- *    
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
+ * If this code or its output is used, extended, re-engineered, integrated,
+ * or embedded to any extent in another software or hardware, there MUST be
+ * an explicit attribution to this work in the resulting source code,
+ * the packaging (where such packaging exists), or user interface
+ * (where such an interface exists).
+ *
+ * The attribution must be of the form
+ * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
+
 package pserver.pservlets;
 
 import pserver.data.VectorMap;
@@ -30,6 +42,8 @@ import pserver.utilities.*;
 /**
  *
  * @author alexandros
+ * @author scify
+ * @author Nick Zorbas <nickzorb@gmail.con>
  */
 public class Admin implements pserver.pservlets.PService {
 
@@ -76,7 +90,6 @@ public class Admin implements pserver.pservlets.PService {
     public String getMimeType() {
         return Admin.html;
     }
-
     /**
      * A number containing the current response code.
      */
@@ -107,7 +120,7 @@ public class Admin implements pserver.pservlets.PService {
      */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-        synchronized(this){
+        synchronized (this) {
             respCode = PSReqWorker.NORMAL;
             queryParam = parameters;
             respBody = new StringBuffer();
@@ -117,7 +130,7 @@ public class Admin implements pserver.pservlets.PService {
             //find 'com' query param (case independent)
             int comIdx = queryParam.qpIndexOfKeyNoCase("com");
             //if 'com' param not present, request is invalid
-            if (comIdx == -1 ) {
+            if (comIdx == -1) {
                 respCode = PSReqWorker.REQUEST_ERR;
                 WebServer.win.log.error("-Request command does not exist");
                 return respCode;  //no point in proceeding
@@ -154,10 +167,10 @@ public class Admin implements pserver.pservlets.PService {
             return respCode;
         }
     }
-    
+
     /**
      * Check whether the admin credentials where correct
-     * 
+     *
      * @see #queryParam
      * @see #administrator_name
      * @see #administrator_pass
@@ -172,7 +185,7 @@ public class Admin implements pserver.pservlets.PService {
             respCode = PSReqWorker.ACCESS_DENIED;
             return false;
         }
-        
+
         String login_name = (String) queryParam.getVal(lnIdx);
         String login_pass = (String) queryParam.getVal(lpIdx);
 
@@ -190,7 +203,7 @@ public class Admin implements pserver.pservlets.PService {
 
         queryParam.remove(lnIdx);
         queryParam.remove(lnIdx);
-        
+
         return true;
     }
 
@@ -206,7 +219,7 @@ public class Admin implements pserver.pservlets.PService {
      * @return The value of response code.
      */
     private void comAdmiinUpdateProperties() {
-        
+
         Preferences pref = PersServer.pref;
 
         for (int i = 0; i < queryParam.size(); i++) {

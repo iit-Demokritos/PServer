@@ -1,22 +1,33 @@
-/* 
- * Copyright 2011 NCSR "Demokritos"
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");   
- * you may not use this file except in compliance with the License.   
+/*
+ * Copyright 2013 IIT , NCSR Demokritos - http://www.iit.demokritos.gr,
+ *                            SciFY NPO - http://www.scify.org
+ *
+ * This product is part of the PServer Free Software.
+ * For more information about PServer visit http://www.pserver-project.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- *    
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
+ * If this code or its output is used, extended, re-engineered, integrated,
+ * or embedded to any extent in another software or hardware, there MUST be
+ * an explicit attribution to this work in the resulting source code,
+ * the packaging (where such packaging exists), or user interface
+ * (where such an interface exists).
+ *
+ * The attribution must be of the form
+ * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
+ 
 package pserver.data;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -31,9 +42,15 @@ import pserver.domain.PDecayData;
 import pserver.domain.PAttribute;
 import pserver.domain.PFeature;
 import pserver.domain.PNumData;
-import pserver.domain.PServerClient;
 import pserver.domain.PStereotype;
 import pserver.domain.PUser;
+
+/**
+ *
+ * @author scify
+ * @author Panagiotis Giotis <giotis.p@gmail.com>
+ * @author Nick Zorbas <nickzorb@gmail.con>
+ */
 
 public class DBAccess {
 
@@ -121,9 +138,6 @@ public class DBAccess {
     public static final String UCOMMUNITY_TABLE = "user_community";
     public static final String UCOMMUNITY_TABLE_FIELD_USER = "user";
     public static final String UCOMMUNITY_TABLE_FIELD_COMMUNITY = "community";
-    public static final String STEREOTYPE_TABLE = "stereotypes";
-    public static final String STEREOTYPE_TABLE_FIELD_STEREOTYPE = "st_stereotype";
-    public static final String STEREOTYPE_TABLE_FIELD_RULE = "st_rule";
     public static final String FEATURE_STATISTICS_TABLE = "user_feature_statistics";
     public static final String FEATURE_STATISTICS_TABLE_FIELD_USER = "user";
     public static final String FEATURE_STATISTICS_TABLE_FIELD_FEATURE = "ftr";
@@ -134,20 +148,23 @@ public class DBAccess {
     public static final String CFFEATURE_STATISTICS_TABLE_FIELD_FEATURE = "ftr";
     public static final String CFFEATURE_STATISTICS_TABLE_FIELD_VALUE = "value";
     public static final String CFFEATURE_STATISTICS_TABLE_FIELD_TYPE = "type";
+    public static final String STEREOTYPE_TABLE = "stereotypes";
+    public static final String STEREOTYPE_TABLE_FIELD_STEREOTYPE = "st_stereotype";
+    public static final String STEREOTYPE_TABLE_FIELD_RULE = "st_rule";
     public static final String STEREOTYPE_USERS_TABLE = "stereotype_users";
     public static final String STEREOTYPE_USERS_TABLE_FIELD_STEREOTYPE = "su_stereotype";
     public static final String STEREOTYPE_USERS_TABLE_FIELD_USER = "su_user";
     public static final String STEREOTYPE_USERS_TABLE_FIELD_DEGREE = "su_degree";
-    public static final String STERETYPE_PROFILES_TABLE = "stereotype_profiles";
-    public static final String STERETYPE_PROFILES_TABLE_FIELD_STEREOTYPE = "sp_stereotype";
-    public static final String STERETYPE_PROFILES_TABLE_FIELD_FEATURE = "sp_feature";
-    public static final String STERETYPE_PROFILES_TABLE_FIELD_VALUE = "sp_numvalue";
-    public static final String STERETYPE_PROFILES_TABLE_FIELD_NUMVALUE = "sp_numvalue";
-    public static final String STERETYPE_STATISTICS_TABLE = "stereotype_feature_statistics";
-    public static final String STERETYPE_STATISTICS_TABLE_FIELD_STEREOTYPE = "stereotype";
-    public static final String STERETYPE_STATISTICS_TABLE_FIELD_FEATURE = "ftr";
-    public static final String STERETYPE_STATISTICS_TABLE_FIELD_TYPE = "type";
-    public static final String STERETYPE_STATISTICS_TABLE_FIELD_VALUE = "value";
+    public static final String STEREOTYPE_PROFILES_TABLE = "stereotype_profiles";
+    public static final String STEREOTYPE_PROFILES_TABLE_FIELD_STEREOTYPE = "sp_stereotype";
+    public static final String STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE = "sp_feature";
+    public static final String STEREOTYPE_PROFILES_TABLE_FIELD_VALUE = "sp_value";
+    public static final String STEREOTYPE_PROFILES_TABLE_FIELD_NUMVALUE = "sp_numvalue";
+    public static final String STEREOTYPE_STATISTICS_TABLE = "stereotype_feature_statistics";
+    public static final String STEREOTYPE_STATISTICS_TABLE_FIELD_STEREOTYPE = "stereotype";
+    public static final String STEREOTYPE_STATISTICS_TABLE_FIELD_FEATURE = "ftr";
+    public static final String STEREOTYPE_STATISTICS_TABLE_FIELD_TYPE = "type";
+    public static final String STEREOTYPE_STATISTICS_TABLE_FIELD_VALUE = "value";
     public static final String SFTRASSOCIATIONS_TABLE = "stereotype_feature_associations";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_SRC = "ftr_src";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_DST = "ftr_dst";
@@ -280,10 +297,10 @@ public class DBAccess {
         }
         String salt = rs.getString("salt");
         rs.close();
-        rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='"+name+"' and password=SHA2('" + salt + pass + "',256);");
-        return rs.first()?true:false;
+        rs = stmt.executeQuery("SELECT * FROM pserver_clients where name='" + name + "' and password=SHA2('" + salt + pass + "',256);");
+        return rs.first() ? true : false;
     }
-    
+
     /**
      * INSERT new user in the database
      */
@@ -551,8 +568,8 @@ public class DBAccess {
         stmt2.close();
         stmt.close();
         return total;
-    }    
-    
+    }
+
     public int clearUserCommunities(String clientName) throws SQLException {
         int total = 0;
         Statement stmt = this.connection.createStatement();
@@ -857,9 +874,152 @@ public class DBAccess {
         if (strName.length() == 0) {
             return false;
         }
-        if (strName.equals("*")) {
-            return false;
-        }
+//        if (strName.equals("*")) {
+//            return false;
+//        }
         return true;
+    }
+
+    //TODO injection
+    //DONE wrap bellow methods in an object and/or move them to DBAccess
+    //These might seem unnecesary but I believe they help in organizing the flow
+    //and could be used all arround the program inside a wrapper class that will
+    //fully utilize them. If nothing else they use StringBuilder which is way
+    //faster than the String concatenation used before.
+    public static StringBuilder buildInsertStatement(String table, String[] values) {
+        return buildInsertStatement(table, null, values);
+    }
+
+    public static StringBuilder buildInsertStatement(String table, String[] columns, String[] values) {
+        StringBuilder query = new StringBuilder("INSERT INTO ");
+        query.append(table).append(" ");
+        if (columns != null) {
+            query.append("(");
+            for (String s : columns) {
+                query.append(s).append(", ");
+            }
+            query.setLength(query.length() - 2);
+            query.append(") ");
+        }
+        query.append("VALUES ('");
+        for (String s : values) {
+            query.append(s).append("', '");
+        }
+        query.setLength(query.length() - 4);
+        query.append("')");
+        return query;
+    }
+
+    public static StringBuilder buildSelectStatement(String table) {
+        String[] tables = {table};
+        return buildSelectStatement(tables, null, null, null, null, null);
+    }
+
+    public static StringBuilder buildSelectStatement(String table, String[] where) {
+        String[] tables = {table};
+        return buildSelectStatement(tables, null, null, null, null, where);
+    }
+
+    public static StringBuilder buildSelectStatement(String table, String[] columns, String[] where) {
+        String[] tables = {table};
+        return buildSelectStatement(tables, null, null, null, columns, where);
+    }
+
+    public static StringBuilder buildSelectStatement(String[] tables, String[] aliases, String[] joinTypes, String[] joins, String[] columns, String[] where) {
+        StringBuilder query = new StringBuilder("SELECT ");
+        if (columns == null) {
+            query.append("* ");
+        } else {
+            for (String s : columns) {
+                query.append(s).append(", ");
+            }
+            query.setLength(query.length() - 2);
+            query.append(" ");
+        }
+        query.append("FROM ");
+        if (tables.length != 1) {
+            query.append("(").append(tables[0]).append(") as ");
+            query.append(aliases[0]);
+            for (int i = 0; i < tables.length - 1; i++) {
+                query.append(" ").append(joinTypes[i]).append(" (");
+                query.append(tables[i + 1]).append(") as ");
+                query.append(aliases[i + 1]);
+                query.append(" ON ").append(joins[i]).append(" ");
+            }
+        } else {
+            query.append(tables[0]);
+        }
+        if (where != null) {
+            query.append(" WHERE ");
+            for (String s : where) {
+                query.append(s).append(" AND ");
+            }
+            query.setLength(query.length() - 5);
+        }
+        return query;
+    }
+
+    public static StringBuilder buildUpdateStatement(String table, String[] columns, String[] values) {
+        String[] tables = {table};
+        return buildUpdateStatement(tables, null, null, null, columns, values, null);
+    }
+
+    public static StringBuilder buildUpdateStatement(String table, String[] columns, String[] values, String[] where) {
+        String[] tables = {table};
+        return buildUpdateStatement(tables, null, null, null, columns, values, where);
+    }
+
+    public static StringBuilder buildUpdateStatement(String[] tables, String[] aliases, String[] joinTypes, String[] joins, String[] columns, String[] values, String[] where) {
+        StringBuilder query = new StringBuilder("UPDATE ");
+        if (tables.length != 1) {
+            query.append("(").append(tables[0]).append(") as ");
+            query.append(aliases[0]);
+            for (int i = 0; i < tables.length - 1; i++) {
+                query.append(" ").append(joinTypes[i]).append(" (");
+                query.append(tables[i + 1]).append(") as ");
+                query.append(aliases[i + 1]);
+                query.append(" ON ").append(joins[i]).append(" ");
+            }
+        } else {
+            query.append(tables[0]);
+        }
+        query.append(" SET ");
+        for (int i = 0; i < columns.length; i++) {
+            query.append(columns[i]).append("='").append(values[i]);
+            query.append("', ");
+        }
+        query.setLength(query.length() - 2);
+        if (where != null) {
+            query.append(" WHERE ");
+            for (String s : where) {
+                query.append(s).append(" AND ");
+            }
+            query.setLength(query.length() - 5);
+        }
+        return query;
+    }
+
+    public static StringBuilder buildDeleteStatement(String table, String where) {
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+        query.append(table);
+        if (where != null) {
+            query.append(" WHERE ").append(where);
+        }
+        return query;
+    }
+
+    public static StringBuilder buildDeleteStatement(String table, String[] where) {
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+        query.append(table);
+        if (where != null) {
+            query.append(" WHERE ");
+            for (String clause : where) {
+                if (clause != null && !clause.equals("")) {
+                    query.append(clause).append(" AND ");
+                }
+            }
+            query.setLength(query.length() - 5);
+        }
+        return query;
     }
 }

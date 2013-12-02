@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Language" content="en-us">
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <title>-setftr template</title>
+    </head>
+    <body bgcolor="#FFFFCC">
+        <pre>-setftr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=setftr&amp;str=&lt;str&gt;&amp;ftr1=dgr1[&amp;ftr2=dgr2...]
+          Order of query params is not important.
+descript: Sets for stereotype &lt;str&gt; all features specified to the corresponding
+	  degrees. If a feature didn't exists in the stereotype it instead ads it and
+	  sets its degree to the new degree specified.
+example : ster?clnt=name|pass&amp;com=setftr&amp;str=test.1&amp;testFtr.1=2&amp;testFtr.5=0.1
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : example result body:
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;</pre>
+    </body>
+</html>
+

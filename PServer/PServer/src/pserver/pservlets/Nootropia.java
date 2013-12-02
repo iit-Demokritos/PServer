@@ -1,19 +1,31 @@
-/* 
- * Copyright 2011 NCSR "Demokritos"
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");   
- * you may not use this file except in compliance with the License.   
+/*
+ * Copyright 2013 IIT , NCSR Demokritos - http://www.iit.demokritos.gr,
+ *                            SciFY NPO - http://www.scify.org
+ *
+ * This product is part of the PServer Free Software.
+ * For more information about PServer visit http://www.pserver-project.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- *    
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
+ * If this code or its output is used, extended, re-engineered, integrated,
+ * or embedded to any extent in another software or hardware, there MUST be
+ * an explicit attribution to this work in the resulting source code,
+ * the packaging (where such packaging exists), or user interface
+ * (where such an interface exists).
+ *
+ * The attribution must be of the form
+ * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
+
 package pserver.pservlets;
 
 import java.sql.Connection;
@@ -80,7 +92,7 @@ public class Nootropia implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -427,11 +439,11 @@ public class Nootropia implements pserver.pservlets.PService {
 
             String sql;
             /*String sql = "DELETE FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
-            dbAccess.execute(sql);
-            sql = "DELETE FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
-            dbAccess.execute(sql);
-            sql = "DELETE FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
-            dbAccess.execute(sql);
+             dbAccess.execute(sql);
+             sql = "DELETE FROM " + DBAccess.FEATURE_STATISTICS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.FEATURE_STATISTICS_TABLE_TYPE + "=" + DBAccess.STATISTICS_FREQUENCY_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
+             dbAccess.execute(sql);
+             sql = "DELETE FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_PHYSICAL_NORMALIZED + " AND " + DBAccess.FEATURE_STATISTICS_TABLE_USER + "<>''";
+             dbAccess.execute(sql);
              */
             final int userSize = 1000;
             int offset = 0;
@@ -578,8 +590,9 @@ class NootropiaWeightThread extends Thread {
                 freqStmt.addBatch();
             }
             for (Set<String> pairs : setFreqs.keySet()) {
-                if( setFreqs.get(pairs) == 1 )
+                if (setFreqs.get(pairs) == 1) {
                     continue;
+                }
                 Iterator<String> iter = pairs.iterator();
                 String ftr1 = iter.next();
                 String ftr2 = iter.next();
@@ -595,7 +608,7 @@ class NootropiaWeightThread extends Thread {
                 //System.out.println( pairs.toString() + " " + setFreqs.get(pairs) );
                 coFreqStmt.addBatch();
             }
-            
+
             freqStmt.executeBatch();
             freqStmt.close();
             coFreqStmt.executeBatch();

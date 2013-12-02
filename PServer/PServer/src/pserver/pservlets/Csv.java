@@ -1,19 +1,31 @@
-/* 
- * Copyright 2011 NCSR "Demokritos"
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");   
- * you may not use this file except in compliance with the License.   
+/*
+ * Copyright 2013 IIT , NCSR Demokritos - http://www.iit.demokritos.gr,
+ *                            SciFY NPO - http://www.scify.org
+ *
+ * This product is part of the PServer Free Software.
+ * For more information about PServer visit http://www.pserver-project.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- *    
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
+ * If this code or its output is used, extended, re-engineered, integrated,
+ * or embedded to any extent in another software or hardware, there MUST be
+ * an explicit attribution to this work in the resulting source code,
+ * the packaging (where such packaging exists), or user interface
+ * (where such an interface exists).
+ *
+ * The attribution must be of the form
+ * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
+
 package pserver.pservlets;
 
 import java.io.BufferedReader;
@@ -32,8 +44,8 @@ import pserver.logic.PSReqWorker;
 import pserver.utilities.ClientCredentialsChecker;
 
 /**
- * Contains all necessary methods for the importing of data to
- * PServer, using Comma Separated Values (CSV) files.
+ * Contains all necessary methods for the importing of data to PServer, using
+ * Comma Separated Values (CSV) files.
  *
  *
  * @author alexm
@@ -61,10 +73,9 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Creates a service for CSV-based import.
-     * The command is identified from its name and proper methods for the
-     * management of this command are called. A response code is produced
-     * depending on results.
+     * Creates a service for CSV-based import. The command is identified from
+     * its name and proper methods for the management of this command are
+     * called. A response code is produced depending on results.
      *
      * @param parameters The parameters needed for this service.
      * @param response The response string that is created.
@@ -83,7 +94,7 @@ public class Csv implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -125,14 +136,13 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Handler function that imports features to the database, given a
-     * CSV file.
+     * Handler function that imports features to the database, given a CSV file.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
      * @param dbAccess The database manager.
      * @return The value of response code.
-    */
+     */
     private int loadFeatures(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -166,7 +176,8 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Helper function performing the actual insertion of features to the database.
+     * Helper function performing the actual insertion of features to the
+     * database.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
@@ -253,14 +264,13 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Handler function that imports users to the database, given a
-     * CSV file.
+     * Handler function that imports users to the database, given a CSV file.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
      * @param dbAccess The database manager.
      * @return The value of response code.
-    */
+     */
     private int loadUsers(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -364,14 +374,14 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Handler function that imports numeric data logs (numlogs) to the database, given a
-     * CSV file.
+     * Handler function that imports numeric data logs (numlogs) to the
+     * database, given a CSV file.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
      * @param dbAccess The database manager.
      * @return The value of response code.
-    */
+     */
     private int loadLog(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -405,13 +415,14 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Helper function that performs the actual import of numeric data logs (numlogs) to the database.
+     * Helper function that performs the actual import of numeric data logs
+     * (numlogs) to the database.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
      * @param dbAccess The database manager.
      * @return True on success, otherwise false.
-    */
+     */
     private boolean execLoadLog(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         boolean success = true;
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -581,14 +592,14 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Handler function that imports feature groups to the database,
-     * given a CSV file.
+     * Handler function that imports feature groups to the database, given a CSV
+     * file.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
      * @param dbAccess The database manager.
      * @return The value of the response code.
-    */
+     */
     private int loadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) {
         int respCode = PSReqWorker.NORMAL;
         try {
@@ -623,13 +634,15 @@ public class Csv implements pserver.pservlets.PService {
     }
 
     /**
-     * Helper function that performs the actual import of feature groups to the database.
+     * Helper function that performs the actual import of feature groups to the
+     * database.
      *
      * @param queryParam The parameters of the query.
      * @param respBody The response message that is produced.
      * @param dbAccess The database manager.
      * @return True on success, otherwise false.
-    */    private boolean execLoadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
+     */
+    private boolean execLoadFeatureGroup(VectorMap queryParam, StringBuffer respBody, DBAccess dbAccess) throws Exception {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         //System.out.println( "clnt = " + clientName );

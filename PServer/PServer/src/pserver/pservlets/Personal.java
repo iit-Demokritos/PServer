@@ -1,19 +1,31 @@
-/* 
- * Copyright 2011 NCSR "Demokritos"
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");   
- * you may not use this file except in compliance with the License.   
+/*
+ * Copyright 2013 IIT , NCSR Demokritos - http://www.iit.demokritos.gr,
+ *                            SciFY NPO - http://www.scify.org
+ *
+ * This product is part of the PServer Free Software.
+ * For more information about PServer visit http://www.pserver-project.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- *    
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
+ * If this code or its output is used, extended, re-engineered, integrated,
+ * or embedded to any extent in another software or hardware, there MUST be
+ * an explicit attribution to this work in the resulting source code,
+ * the packaging (where such packaging exists), or user interface
+ * (where such an interface exists).
+ *
+ * The attribution must be of the form
+ * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
+
 package pserver.pservlets;
 
 import java.sql.SQLException;
@@ -37,6 +49,9 @@ import pserver.utilities.ClientCredentialsChecker;
 /**
  * Contains all necessary methods for the management of Personal mode of
  * PServer.
+ * 
+ * @author scify
+ * @author Nick Zorbas <nickzorb@gmail.con>
  */
 public class Personal implements pserver.pservlets.PService {
 
@@ -79,7 +94,7 @@ public class Personal implements pserver.pservlets.PService {
         if (!ClientCredentialsChecker.check(dbAccess, queryParam)) {
             return PSReqWorker.REQUEST_ERR;  //no point in proceeding
         }
-        
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
         clientName = clientName.substring(0, clientName.indexOf('|'));
@@ -96,7 +111,7 @@ public class Personal implements pserver.pservlets.PService {
         }
         //recognize commAND encoded in request
         String com = (String) queryParam.getVal(comIdx);
-        System.out.println("================  "+com+"  ===========");
+        System.out.println("================  " + com + "  ===========");
         //operations of features
         if (com.equalsIgnoreCase("addftr")) {       //add new feature(s)
             respCode = comPersAddFtr(queryParam, respBody, dbAccess);
@@ -1539,16 +1554,16 @@ public class Personal implements pserver.pservlets.PService {
             //get matching records
 
             String sUserProfile = "SELECT up_feature FROM user_profiles "
-                    + "WHERE up_user "+usrCondition+" "
+                    + "WHERE up_user " + usrCondition + " "
                     + "AND FK_psclient = '" + clientName + "'";
             String query1 = "SELECT uf_feature AS up_feature,"
                     + " uf_numdefvalue AS up_numvalue FROM up_features "
-                    + "WHERE uf_feature NOT IN  ("+sUserProfile+") "
-                    + "AND  uf_feature "+ftrCondition+" "
+                    + "WHERE uf_feature NOT IN  (" + sUserProfile + ") "
+                    + "AND  uf_feature " + ftrCondition + " "
                     + "AND FK_psclient = '" + clientName + "'";
             String query2 = "SELECT up_feature, up_numvalue FROM user_profiles "
-                    + "WHERE up_user "+usrCondition+" "
-                    + "AND up_feature "+ftrCondition+" "
+                    + "WHERE up_user " + usrCondition + " "
+                    + "AND up_feature " + ftrCondition + " "
                     + "AND FK_psclient='" + clientName + "'";
 
             query = " ( " + query1 + " ) UNION ( " + query2 + " ) order by " + comparField + srtCondition + ";";
@@ -1791,7 +1806,7 @@ public class Personal implements pserver.pservlets.PService {
                             PNumData data = new PNumData(user, feature, newNumValue, System.currentTimeMillis(), sid);
                             rowsAffected += dbAccess.insertNewNumData(data, clientName);
                             rowsAffected += dbAccess.updateStereotypesFromUserAction(user, feature, numStep.floatValue(), clientName);
-                        }while (rs.next());
+                        } while (rs.next());
                         rs.close();
                         //ignore current user, feature record AND continue with next
                     } //else if numStep == null
@@ -2186,7 +2201,7 @@ public class Personal implements pserver.pservlets.PService {
                         rowsAffected += dbAccess.executeUpdate(query);
                         query = "delete from up_features WHERE uf_feature" + ftrCondition + " AND FK_psclient='" + clientName + "'";
                         rowsAffected += dbAccess.executeUpdate(query);
-                        query = "delete from " + DBAccess.STERETYPE_PROFILES_TABLE + " WHERE " + DBAccess.STERETYPE_PROFILES_TABLE_FIELD_FEATURE + " " + ftrCondition + " AND FK_psclient='" + clientName + "'";
+                        query = "delete from " + DBAccess.STEREOTYPE_PROFILES_TABLE + " WHERE " + DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE + " " + ftrCondition + " AND FK_psclient='" + clientName + "'";
                         rowsAffected += dbAccess.executeUpdate(query);
                         query = "delete from " + DBAccess.COMMUNITY_PROFILES_TABLE + " WHERE " + DBAccess.COMMUNITY_PROFILES_TABLE_FIELD_FEATURE + " " + ftrCondition + " AND FK_psclient='" + clientName + "'";
                         rowsAffected += dbAccess.executeUpdate(query);
@@ -2589,7 +2604,7 @@ public class Personal implements pserver.pservlets.PService {
                     String newVal = (String) queryParam.getVal(i);
                     //get value for current user, feature record
                     //update current user, attribute record
-                    query = "UPDATE user_attributes set attribute_value ='" + newVal + "' WHERE user = '" + user + "' AND FK_psclient='" + clientName + "' AND attribute " + sAttrCondition ;
+                    query = "UPDATE user_attributes set attribute_value ='" + newVal + "' WHERE user = '" + user + "' AND FK_psclient='" + clientName + "' AND attribute " + sAttrCondition;
                     //System.out.println("============================="+query);
                     rowsAffected += dbAccess.executeUpdate(query);
                 }
@@ -3104,7 +3119,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows updated: " + rowsAffected);
         return success;
     }
-  /**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the decay data as specified by the condition
@@ -3189,7 +3205,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-/**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the numeric data as specified by the condition
@@ -3282,7 +3299,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-/**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the attributes from table user_profiles as
@@ -3372,7 +3390,8 @@ public class Personal implements pserver.pservlets.PService {
         WebServer.win.log.debug("-Num of rows found: " + rowsAffected);
         return success;
     }
-/**
+
+    /**
      * Method referring to command part of process.
      *
      * Connects to database, gets the features from table user_profiles as
@@ -3404,7 +3423,8 @@ public class Personal implements pserver.pservlets.PService {
         }
         return respCode;
     }
-/**
+
+    /**
      * Method referring to execution part of process.
      *
      * Gets data from table user_profiles under condition parameters from

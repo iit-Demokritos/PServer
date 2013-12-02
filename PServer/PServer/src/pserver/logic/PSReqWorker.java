@@ -1,18 +1,29 @@
-/* 
- * Copyright 2011 NCSR "Demokritos"
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");   
- * you may not use this file except in compliance with the License.   
+/*
+ * Copyright 2013 IIT , NCSR Demokritos - http://www.iit.demokritos.gr,
+ *                            SciFY NPO - http://www.scify.org
+ *
+ * This product is part of the PServer Free Software.
+ * For more information about PServer visit http://www.pserver-project.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- *    
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
+ * If this code or its output is used, extended, re-engineered, integrated,
+ * or embedded to any extent in another software or hardware, there MUST be
+ * an explicit attribution to this work in the resulting source code,
+ * the packaging (where such packaging exists), or user interface
+ * (where such an interface exists).
+ *
+ * The attribution must be of the form
+ * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
 //===================================================================
 // PSReqWorker
@@ -70,6 +81,7 @@ import pserver.pservlets.*;
 /**
  *
  * @author scify
+ * @author Nick Zorbas <nickzorb@gmail.con>
  */
 public class PSReqWorker extends ReqWorker {
     //modes of response specify process of responding.
@@ -128,7 +140,7 @@ public class PSReqWorker extends ReqWorker {
         //TODO: Check if contains resURI
         if (PersServer.pObj.pservlets.containsKey(resURI.toLowerCase().substring(1))) {
             respMode = SERVICE_MODE;
-            System.out.println(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)).toString()+"%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)).toString() + "%%%%%%%%%%%%%%%%%%%%%%%");
             analyzeServiceMode(PersServer.pObj.pservlets.get(resURI.toLowerCase().substring(1)));
             return;
         }
@@ -137,7 +149,6 @@ public class PSReqWorker extends ReqWorker {
         //the response will consist only of http header
         super.switchRespMode();  //mode set by base class
     }
-    
 
     /**
      *
@@ -177,10 +188,10 @@ public class PSReqWorker extends ReqWorker {
     private void analyzeServiceMode(PService servlet) {
         //Connection conn = connDB(url, user, pass);
         DBAccess dbAccess = new DBAccess(url, user, pass);
-        if (resURI.substring(1).endsWith(".xml")||resURI.substring(1).endsWith(".json")) {
+        if (resURI.substring(1).endsWith(".xml") || resURI.substring(1).endsWith(".json")) {
             try {
-               
-               servlet.init(initParam);
+
+                servlet.init(initParam);
             } catch (Exception ex) {
                 Logger.getLogger(PSReqWorker.class.getName()).log(Level.SEVERE, null, ex);
             }
