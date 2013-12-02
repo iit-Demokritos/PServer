@@ -25,7 +25,6 @@
  * The attribution must be of the form
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
-
 package pserver.pservlets;
 
 import pserver.utilities.PServerCommand;
@@ -44,8 +43,8 @@ import pserver.logic.PSReqWorker;
 import pserver.utilities.ClientCredentialsChecker;
 
 /**
- * This class contains all methods required for the management of
- * Stereotypes mode of PServer. Extends {@link PService}
+ * This class contains all methods required for the management of Stereotypes
+ * mode of PServer. Extends {@link PService}
  *
  * @author scify
  * @author Nick Zorbas <nickzorb@gmail.com>
@@ -73,9 +72,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Overridden method of init from {@link PService}. Inserts all
-     * available commands into a <code>HashMap</code> maping their names to a
-     * wrapped function.
+     * Overridden method of init from {@link PService}. Inserts all available
+     * commands into a <code>HashMap</code> maping their names to a wrapped
+     * function.
      *
      * @param params An array of strings containing the parameters
      * @throws Exception Default Exception is thrown.
@@ -163,7 +162,7 @@ public class Stereotypes implements PService {
                 return resp >= 0 ? PSReqWorker.NORMAL : resp;
             }
         });
-        commands.put("fndusrs", new PServerCommand() {
+        commands.put("findusrs", new PServerCommand() {
             @Override
             public int runCommand(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
                 int resp = findUsers(queryParam, respBody, dbAccess);
@@ -203,10 +202,11 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Begins execution of a stereotype mode request. Returns a result
-     * code depending on the result {@link pserver.logic.ReqWorker}.
+     * Begins execution of a stereotype mode request. Returns a result code
+     * depending on the result {@link pserver.logic.ReqWorker}.
      *
-     * <p>Servicing a request might remove certain parameters so servicing one
+     * <p>
+     * Servicing a request might remove certain parameters so servicing one
      * request with multiple services may result in unpredictable behaviour.</p>
      *
      * @param parameters The parameters of this request.
@@ -229,8 +229,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Selects the appropriate command for the request and begins it's
-     * execution while handling certain exceptions.
+     * Selects the appropriate command for the request and begins it's execution
+     * while handling certain exceptions.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -281,10 +281,10 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an addstr request by adding the stereotype and then
-     * adding to it all appropriate users based on the stereotype's
-     * rule, if one was provided. Finally it calculates the stereotype's
-     * profile based on it's users.
+     * Executes an addstr request by adding the stereotype and then adding to it
+     * all appropriate users based on the stereotype's rule, if one was
+     * provided. Finally it calculates the stereotype's profile based on it's
+     * users.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -335,11 +335,10 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a liststr request by adding to the response buffer
-     * all stereotypes matching parameter "str" with their respective
-     * rules. Also uses parameter mod to only show stereotypes without
-     * users (if "mod" maps to "u") or stereotypes without features (if "mod"
-     * maps to "p").
+     * Executes a liststr request by adding to the response buffer all
+     * stereotypes matching parameter "str" with their respective rules. Also
+     * uses parameter mod to only show stereotypes without users (if "mod" maps
+     * to "u") or stereotypes without features (if "mod" maps to "p").
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -427,10 +426,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a getstrusr request by adding to the response buffer
-     * all appropriate tuples (stereotype, user, degree) for
-     * stereotypes matching parameter "str" and users matching parameter
-     * "usr".
+     * Executes a getstrusr request by adding to the response buffer all
+     * appropriate tuples (stereotype, user, degree) for stereotypes matching
+     * parameter "str" and users matching parameter "usr".
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -503,10 +501,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a getstrftr request by adding to the response buffer
-     * all appropriate tuples (stereotype, feature, degree) for
-     * stereotypes matching parameter "str" and features matching
-     * parameter "ftr".
+     * Executes a getstrftr request by adding to the response buffer all
+     * appropriate tuples (stereotype, feature, degree) for stereotypes matching
+     * parameter "str" and features matching parameter "ftr".
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -588,8 +585,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a rmkstr request by executing an updusrs request and
-     * an updftrs request.
+     * Executes a rmkstr request by executing an updusrs request and an updftrs
+     * request.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -597,17 +594,56 @@ public class Stereotypes implements PService {
      * @return int the response code {@link ReqWorker}.
      */
     private int remakeStereotype(HashMap<String, ArrayList<String>> queryParam, StringBuffer respBody, DBAccess dbAccess) {
-        int respCode = updateUsers(queryParam, respBody, dbAccess);
-        if (respCode == PSReqWorker.NORMAL) {
-            respCode = updateFeatures(queryParam, respBody, dbAccess);
+        String clientName = queryParam.get("clnt").get(0);
+        String stereot = getParameter("str", queryParam);
+        if (stereot == null) {
+            WebServer.win.log.error("-Request missing str parameter");
+            return PSReqWorker.REQUEST_ERR;
+        } else if (!DBAccess.legalStrName(stereot)) {
+            WebServer.win.log.error("-Invalid stereotype name");
+            return PSReqWorker.REQUEST_ERR;
         }
-        return respCode;
+        StringBuilder strCondition = buildWhereClause(
+                DBAccess.STEREOTYPE_TABLE_FIELD_STEREOTYPE, stereot);
+        StringBuilder clntCondition = buildWhereClause(
+                DBAccess.FIELD_PSCLIENT, clientName);
+        String query;
+        int rowsAffected = 0;
+        try {
+            //get matching records
+            String[] columns = {
+                DBAccess.STEREOTYPE_TABLE_FIELD_STEREOTYPE,
+                DBAccess.STEREOTYPE_TABLE_FIELD_RULE
+            };
+            String table = DBAccess.STEREOTYPE_TABLE;
+            String[] where = {strCondition.toString(), clntCondition.toString()};
+            PServerResultSet rs = dbAccess.executeQuery(
+                    DBAccess.buildSelectStatement(table, columns, where).toString());
+            while (rs.next()) {
+                HashMap<String, ArrayList<String>> tempqueryParam = (HashMap<String, ArrayList<String>>) queryParam.clone();
+                ArrayList<String> str = new ArrayList();
+                str.add(rs.getRs().getString(columns[0]));
+                tempqueryParam.put("str", str);
+                int respCode = updateUsers(tempqueryParam, respBody, dbAccess);
+                if (respCode == PSReqWorker.NORMAL) {
+                    rowsAffected += respCode;
+                    respCode = updateFeatures(tempqueryParam, respBody, dbAccess);
+                    rowsAffected += respCode >= 0 ? respCode : 0;
+                }
+            }
+            //close resultset and statement
+            rs.close();
+        } catch (SQLException e) {
+            WebServer.win.log.debug("-Problem executing query: " + e);
+            return PSReqWorker.SERVER_ERR;
+        }
+        return rowsAffected;
     }
 
     /**
-     * Executes a remstr request by removing any and all references to
-     * all stereotypes matching parameter "str" or all stereotypes if
-     * parameter "str" is null.
+     * Executes a remstr request by removing any and all references to all
+     * stereotypes matching parameter "str" or all stereotypes if parameter
+     * "str" is null.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -679,9 +715,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an addusr request by adding a user to all stereotypes
-     * provided with the degree provided. Also updates stereotype profiles
-     * by adding the new user's features.
+     * Executes an addusr request by adding a user to all stereotypes provided
+     * with the degree provided. Also updates stereotype profiles by adding the
+     * new user's features.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -744,9 +780,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Updates a stereotype's profile by adding a new users features to
-     * the current stereotype's features. This is called as part of the
-     * addusr request;
+     * Updates a stereotype's profile by adding a new users features to the
+     * current stereotype's features. This is called as part of the addusr
+     * request;
      *
      * @param clientName the client performing the request.
      * @param stereotype the stereotype being updated.
@@ -799,7 +835,6 @@ public class Stereotypes implements PService {
         sql.append(clientName).append("' AND u.");
         sql.append(DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE);
         sql.append("=s.").append(DBAccess.UPROFILE_TABLE_FIELD_FEATURE);
-        //TODO test
         res += dbAccess.executeUpdate(sql.toString());
         return res;
     }
@@ -854,10 +889,10 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a getusrstrs request by listing all tuples
-     * (user, stereotype, degree) for users matching parameter "str"
-     * and stereotypes matching parameter "str" if it exists or "*"
-     * otherwise, and appends the response to the response buffer.
+     * Executes a getusrstrs request by listing all tuples (user, stereotype,
+     * degree) for users matching parameter "str" and stereotypes matching
+     * parameter "str" if it exists or "*" otherwise, and appends the response
+     * to the response buffer.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -942,9 +977,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an incdeg request by increasing the degree of all users
-     * matching parameter "usr" to all stereotypes given by the
-     * given degrees.
+     * Executes an incdeg request by increasing the degree of all users matching
+     * parameter "usr" to all stereotypes given by the given degrees.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1020,9 +1054,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a setdeg request by setting the degree of all users
-     * matching parameter "usr" to all stereotypes given to the
-     * given degrees.
+     * Executes a setdeg request by setting the degree of all users matching
+     * parameter "usr" to all stereotypes given to the given degrees.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1091,9 +1124,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a remusr request by deleting all references matching
-     * the tuples (user, stereotype) provided. This does not affect the
-     * stereotypes' profiles.
+     * Executes a remusr request by deleting all references matching the tuples
+     * (user, stereotype) provided. This does not affect the stereotypes'
+     * profiles.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1136,8 +1169,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an updusrs request by initiating a chkusrs and a
-     * fndusrs request. This does not affect the stereotypes profiles.
+     * Executes an updusrs request by initiating a chkusrs and a fndusrs
+     * request. This does not affect the stereotypes profiles.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1159,9 +1192,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a chkusrs request by removing any users associated with
-     * the stereotype that don't match the stereotype's rule.
-     * This does not affect the stereotype's profile.
+     * Executes a chkusrs request by removing any users associated with the
+     * stereotype that don't match the stereotype's rule. This does not affect
+     * the stereotype's profile.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1218,9 +1251,9 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a fndusrs request by adding to the stereotype any users
-     * that are not currently associated with it but comply to the
-     * stereotypes rule. This does not affect the stereotype's profile.
+     * Executes a fndusrs request by adding to the stereotype any users that are
+     * not currently associated with it but comply to the stereotypes rule. This
+     * does not affect the stereotype's profile.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1288,9 +1321,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an addftrs request by adding all features provided by
-     * tuples (feature, degree) to the stereotype provided by parameter
-     * "str".
+     * Executes an addftrs request by adding all features provided by tuples
+     * (feature, degree) to the stereotype provided by parameter "str".
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1362,9 +1394,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes a remftrs request by removing all references to the
-     * features provided from the stereotypes matching parameter
-     * "str".
+     * Executes a remftrs request by removing all references to the features
+     * provided from the stereotypes matching parameter "str".
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1418,10 +1449,10 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an incftrs request by increasing the stereotype profile
-     * values corresponding to the stereotype provided from parameter
-     * "str" and the features provided by the values provided from the
-     * tuples (feature, value).
+     * Executes an incftrs request by increasing the stereotype profile values
+     * corresponding to the stereotype provided from parameter "str" and the
+     * features provided by the values provided from the tuples (feature,
+     * value).
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1494,10 +1525,10 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an setftrs request by setting the stereotype profile
-     * values corresponding to the stereotype provided from parameter
-     * "str" and the features provided to the values provided from the
-     * tuples (feature, value).
+     * Executes an setftrs request by setting the stereotype profile values
+     * corresponding to the stereotype provided from parameter "str" and the
+     * features provided to the values provided from the tuples (feature,
+     * value).
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1571,8 +1602,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Executes an updftrs request by removing all stereotypes features
-     * and recollecting all features of the stereotypes users.
+     * Executes an updftrs request by removing all stereotypes features and
+     * recollecting all features of the stereotypes users.
      *
      * @param queryParam The parameters of this request.
      * @param respBody A <code>StringBuffer</code> to append the results to.
@@ -1637,8 +1668,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Escapes certain characters to make sure that the resulting
-     * string can be put inside an xml response.
+     * Escapes certain characters to make sure that the resulting string can be
+     * put inside an xml response.
      *
      * @param s The <code>String</code> to be encoded
      * @return The encoded <code>String</code>
@@ -1653,8 +1684,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * Converts a <code>VectorMap</code> of parameters to a
-     * <code>HashMap</code> of parameters for ease of use.
+     * Converts a <code>VectorMap</code> of parameters to a <code>HashMap</code>
+     * of parameters for ease of use.
      *
      * @param queryParam The <code>VectorMap</code> to be converted
      * @return The converted <code>HashMap</code>
@@ -1678,7 +1709,7 @@ public class Stereotypes implements PService {
 
     /**
      * Formats a standarized simple where clause.
-     * 
+     *
      * @param column The target column
      * @param value The target value
      * @return the where clause
@@ -1699,8 +1730,8 @@ public class Stereotypes implements PService {
     }
 
     /**
-     * This class handles the building of a complex sql statement that
-     * matches the rules provided for stereotypes.
+     * This class handles the building of a complex sql statement that matches
+     * the rules provided for stereotypes.
      */
     private class SqlNode {
 
@@ -1728,8 +1759,8 @@ public class Stereotypes implements PService {
 
         /**
          * Returns current statement.
-         * 
-         * @return  current statement
+         *
+         * @return current statement
          */
         public String getStatement() {
             return statement;
@@ -1754,8 +1785,8 @@ public class Stereotypes implements PService {
         }
 
         /**
-         * Adds a child node, if it's the first one as the left child
-         * else as the right child.
+         * Adds a child node, if it's the first one as the left child else as
+         * the right child.
          *
          * @param child the new child
          */
@@ -1780,7 +1811,7 @@ public class Stereotypes implements PService {
 
         /**
          * Returns wether this node has children
-         * 
+         *
          * @return true or false
          */
         public boolean isLeaf() {
@@ -1807,9 +1838,8 @@ public class Stereotypes implements PService {
         }
 
         /**
-         * Finds where this node's current statement should be cut into
-         * a left child an unbreakable simple statement and a right
-         * child.
+         * Finds where this node's current statement should be cut into a left
+         * child an unbreakable simple statement and a right child.
          *
          * @return where the statement should be cut or -1 if it cannot
          */
@@ -1839,9 +1869,9 @@ public class Stereotypes implements PService {
         }
 
         /**
-         * Break this nodes statement and then continue breaking it's
-         * childs etc until we are left only with nodes with simple
-         * (unbreakable) statements.
+         * Break this nodes statement and then continue breaking it's childs etc
+         * until we are left only with nodes with simple (unbreakable)
+         * statements.
          */
         public void propagate() {
             int firstPar = statement.indexOf("(");
@@ -1875,7 +1905,7 @@ public class Stereotypes implements PService {
 
         /**
          * Output a nice formate string of this node and its children
-         * 
+         *
          * @param n how deep this node is
          * @return the resulting string
          */
@@ -1894,9 +1924,8 @@ public class Stereotypes implements PService {
         }
 
         /**
-         * Generate the sql code corresponding to this node and it's
-         * children.
-         * 
+         * Generate the sql code corresponding to this node and it's children.
+         *
          * @return the resulting string sql statement
          */
         public String toSql() {
@@ -1917,8 +1946,7 @@ public class Stereotypes implements PService {
                 res.append("select u.user from users u join user_attributes ");
                 res.append("at on u.user=at.user where at.attribute='");
                 res.append(tokens[0]).append("' AND at.attribute_value");
-                res.append(comparison).append("'").append(tokens[1]);
-                res.append("'");
+                res.append(comparison).append(tokens[1]);
             } else {
                 if (statement.equalsIgnoreCase("AND")) {
                     res.append("select a1.user from((").append(leftChild.toSql());
@@ -1938,7 +1966,7 @@ public class Stereotypes implements PService {
             return res.toString();
         }
     }
-    
+
     private String getParameter(String parameter, HashMap parameters) {
         Object res = parameters.get(parameter);
         if (res == null) {

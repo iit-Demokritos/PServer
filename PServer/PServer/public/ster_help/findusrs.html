@@ -2,16 +2,16 @@
     <head>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-addstr template</title>
+        <title>-findusrs template</title>
     </head>
     <body bgcolor="#FFFFCC">
-        <pre>-fndusrs
-template: ster?clnt=&lt;name|pass&gt;&amp;com=fndusrs&amp;
+        <pre>-findusrs
+template: ster?clnt=&lt;name|pass&gt;&amp;com=findusrs&amp;str=&lt;str&gt;
           Order of query params is not important.
 descript: Finds and adds to the stereotype all users matching its rule.
 	  Performing this on a stereotype without a rule will not change 
 	  the stereotypes users but will not cause an error.
-example : ster?clnt=name|pass&amp;com=fndusrs&amp;str=test.1
+example : ster?clnt=name|pass&amp;com=findusrs&amp;str=test.1
 returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
 200 OK  : example result body:
 	  &lt;result&gt;
