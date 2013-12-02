@@ -1,19 +1,12 @@
--- MySQL dump 10.13  Distrib 5.1.62, for debian-linux-gnu (i486)
---
--- Host: localhost    Database: pserver3
--- ------------------------------------------------------
--- Server version	5.1.62-0ubuntu0.10.04.1
+DROP DATABASE IF EXISTS PServerDBname;
+CREATE DATABASE PServerDBname
+CHARACTER SET utf8
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci
+DEFAULT COLLATE utf8_general_ci;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+USE PServerDBname;
+
 
 --
 -- Table structure for table `attributes`
@@ -571,16 +564,6 @@ CREATE TABLE `users` (
   `decay_factor` float NOT NULL,
   PRIMARY KEY (`user`,`FK_psclient`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT=COMPACT
-/*!50100 PARTITION BY KEY (FK_psclient) */;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-05-28  4:02:07
+grant all privileges on PServerDBname.* to 'PServerDBUsername'@'localhost' identified by 'PServerDBPassword' with grant option;

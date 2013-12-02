@@ -14949,3 +14949,44 @@
 21/11/2013 12:28:30  >  Messages log mode set to: on
 21/11/2013 12:28:30  >  Connected to DB: MySQL
 21/11/2013 12:50:14  >  Shutting down server, normal: true
+21/11/2013 14:23:3  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+21/11/2013 14:23:3  >  Messages log mode set to: on
+21/11/2013 14:23:3  >  Connected to DB: MySQL
+21/11/2013 14:23:9  >  Shutting down server, normal: true
+25/11/2013 12:14:58  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+25/11/2013 12:14:58  >  Messages log mode set to: on
+25/11/2013 12:14:58  >  Connected to DB: MySQL
+25/11/2013 14:8:15  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+25/11/2013 14:8:15  >  Messages log mode set to: on
+25/11/2013 14:8:16  >  Connected to DB: MySQL
+25/11/2013 14:8:25  >  Request from /127.0.0.1 (55899)
+25/11/2013 14:8:25  >  55899-        /
+25/11/2013 14:8:26  >  Request from /127.0.0.1 (55900)
+25/11/2013 14:8:26  >  55900-        /favicon.ico
+25/11/2013 14:8:26  >  Request from /127.0.0.1 (55901)
+25/11/2013 14:8:26  >  55901-        /favicon.ico
+25/11/2013 14:9:56  >  Shutting down server, normal: true
+25/11/2013 14:10:0  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+25/11/2013 14:10:0  >  Messages log mode set to: on
+25/11/2013 14:10:1  >  Connected to DB: MySQL
+25/11/2013 14:10:4  >  Request from /127.0.0.1 (55922)
+25/11/2013 14:10:4  >  55922-        /
+25/11/2013 14:10:48  >  Shutting down server, normal: true
+25/11/2013 14:10:51  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+25/11/2013 14:10:51  >  Messages log mode set to: on
+25/11/2013 14:10:52  >  Connected to DB: MySQL
+25/11/2013 14:10:54  >  Request from /127.0.0.1 (55933)
+25/11/2013 14:10:54  >  55933-        /
+25/11/2013 14:15:27  >  Shutting down server, normal: true
+25/11/2013 14:19:2  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+25/11/2013 14:19:2  >  Messages log mode set to: on
+25/11/2013 14:19:2  >  Connected to DB: MySQL
+25/11/2013 15:2:4  >  Shutting down server, normal: true
+25/11/2013 15:4:36  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+25/11/2013 15:4:36  >  Messages log mode set to: on
+25/11/2013 15:4:37  >  Connected to DB: MySQL
+25/11/2013 15:5:16  >  Shutting down server, normal: true
+25/11/2013 15:6:32  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+25/11/2013 15:6:32  >  Messages log mode set to: on
+25/11/2013 15:6:33  >  Connected to DB: MySQL
+25/11/2013 15:7:0  >  Shutting down server, normal: true
