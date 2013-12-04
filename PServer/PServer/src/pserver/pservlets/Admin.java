@@ -517,7 +517,7 @@ public class Admin implements pserver.pservlets.PService {
     private String upperTemplate(String name, String password) {
         String htmlCode = "<HTML>"
                 + "<HEAD><TITLE>PServer Administration panel</TITLE></HEAD>"
-                + "<BODY bgcolor=\"#FFFFCC\">"
+                + "<BODY bgcolor=\"#eee\">"
                 + "<FONT >"
                 + "<P align=\"center\"><FONT size=\"18px\">PServer Administration panel</FONT></P>"
                 + "<TABLE>"
@@ -526,7 +526,7 @@ public class Admin implements pserver.pservlets.PService {
                 + menu(name, password)
                 + "</TD>"
                 + "<TD align=\"left\" valign=\"top\">"
-                + "<TABLE bgcolor=\"#ffdc75\"  width=\"100%\"><TR><TD align=\"left\" valign=\"top\">";
+                + "<TABLE bgcolor=\"#E0E0EB\"  width=\"100%\"><TR><TD align=\"left\" valign=\"top\">";
         return htmlCode;
     }
 
@@ -555,29 +555,32 @@ public class Admin implements pserver.pservlets.PService {
      */
     private String menu(String name, String password) {
         return "<TABLE BORDER=\"1\"><TR><TD><TABLE border=\"1\" bordercolor=\"#000000\" cellpadding=\"3\" cellspacing=\"0\" width=\"180\">"
-                + "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >"
+                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
                 + "<A href=\"/admin?login_name=" + name + "&login_password=" + password + "&com=login\">Index page</a>"
                 + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >"
+                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
                 + "<A href=\"/admin?login_name=" + name + "&login_password=" + password + "&com=mkusrfrm\">PServer clients</a>"
                 + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >"
+                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
                 + "<A href=\"/admin?login_name=" + name + "&login_password=" + password + "&com=chngpropfrm\">Change PServer properties</a>"
                 + "</TD</TR>"
-                + //"<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >" +
+                + //"<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >" +
                 //"<A href=\"/admin?login_name=" + name + "&login_password=" + password + "&com=checkdb\">Check PServer database</a>" +
                 //"</TD</TR>" +
-                "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >"
+                "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
                 + "<A href=\"/pers_help/pers_mode.html\" target=\"_blank\">Pers mode help</a>"
                 + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >"
+                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
                 + "<A href=\"/ster_help/ster_mode.html\" target=\"_blank\">Ster mode help</a>"
                 + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >"
+                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
                 + "<A href=\"/commu_help/commu_mode.html\" target=\"_blank\">Commu mode help</a>"
                 + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#ffdc75\" nowrap=\"nowrap\" align=\"left\" >"
+                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
                 + "<A href=\"/csv_help/csv_mode.html\" target=\"_blank\">Csv mode help</a>"
+                + "</TD</TR>"
+                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
+                + "<A href=\"http://scify.iit.demokritos.gr/SciFYwiki/doku.php?id=v1.0\" target=\"_blank\">REST API</a>"
                 + "</TD</TR>"
                 + "</TABLE></TD</TR></TABLE>";
     }

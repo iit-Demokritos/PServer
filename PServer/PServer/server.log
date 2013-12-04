@@ -14990,3 +14990,387 @@
 25/11/2013 15:6:32  >  Messages log mode set to: on
 25/11/2013 15:6:33  >  Connected to DB: MySQL
 25/11/2013 15:7:0  >  Shutting down server, normal: true
+4/12/2013 10:50:21  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 10:50:21  >  Messages log mode set to: on
+4/12/2013 10:50:21  >  Connected to DB: MySQL
+4/12/2013 10:50:28  >  Request from /127.0.0.1 (36729)
+4/12/2013 10:50:28  >  36729-        /
+4/12/2013 10:50:28  >  Request from /127.0.0.1 (36730)
+4/12/2013 10:50:32  >  36730-        /admin?com=login&login_name=root&login_password=root
+4/12/2013 10:50:34  >  Request from /127.0.0.1 (36732)
+4/12/2013 10:50:34  >  36732-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 10:53:4  >  Shutting down server, normal: true
+4/12/2013 10:53:9  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 10:53:9  >  Messages log mode set to: on
+4/12/2013 10:53:9  >  Connected to DB: MySQL
+4/12/2013 10:53:13  >  Request from /127.0.0.1 (36741)
+4/12/2013 10:53:13  >  36741-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 10:54:12  >  Request from /127.0.0.1 (36748)
+4/12/2013 10:54:12  >  36748-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 10:56:8  >  Shutting down server, normal: true
+4/12/2013 10:58:2  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 10:58:2  >  Messages log mode set to: on
+4/12/2013 10:58:2  >  Connected to DB: MySQL
+4/12/2013 10:58:6  >  Request from /127.0.0.1 (36831)
+4/12/2013 10:58:6  >  36831-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 10:58:45  >  Shutting down server, normal: true
+4/12/2013 10:59:1  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 10:59:1  >  Messages log mode set to: on
+4/12/2013 10:59:1  >  Connected to DB: MySQL
+4/12/2013 10:59:4  >  Request from /127.0.0.1 (36834)
+4/12/2013 10:59:4  >  36834-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 10:59:32  >  Shutting down server, normal: true
+4/12/2013 10:59:42  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 10:59:42  >  Messages log mode set to: on
+4/12/2013 10:59:42  >  Connected to DB: MySQL
+4/12/2013 10:59:45  >  Request from /127.0.0.1 (36837)
+4/12/2013 10:59:45  >  36837-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 11:0:31  >  Shutting down server, normal: true
+4/12/2013 11:0:35  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 11:0:35  >  Messages log mode set to: on
+4/12/2013 11:0:35  >  Connected to DB: MySQL
+4/12/2013 11:0:39  >  Request from /127.0.0.1 (36840)
+4/12/2013 11:0:39  >  36840-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 11:1:5  >  Shutting down server, normal: true
+4/12/2013 11:1:8  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 11:1:8  >  Messages log mode set to: on
+4/12/2013 11:1:9  >  Connected to DB: MySQL
+4/12/2013 11:1:11  >  Request from /127.0.0.1 (36844)
+4/12/2013 11:1:11  >  36844-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 11:3:0  >  Shutting down server, normal: true
+4/12/2013 11:3:19  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 11:3:19  >  Messages log mode set to: on
+4/12/2013 11:3:19  >  Connected to DB: MySQL
+4/12/2013 11:3:23  >  Request from /127.0.0.1 (36847)
+4/12/2013 11:3:23  >  36847-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 11:4:11  >  Shutting down server, normal: true
+4/12/2013 11:4:25  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 11:4:25  >  Messages log mode set to: on
+4/12/2013 11:4:26  >  Connected to DB: MySQL
+4/12/2013 11:7:47  >  Request from /127.0.0.1 (36889)
+4/12/2013 11:7:47  >  36889-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 11:8:8  >  Request from /127.0.0.1 (36891)
+4/12/2013 11:8:8  >  36891-        /
+4/12/2013 11:8:41  >  Request from /127.0.0.1 (36894)
+4/12/2013 11:8:41  >  36894-        /admin?com=login&login_name=root&login_password=root
+4/12/2013 11:8:46  >  Request from /127.0.0.1 (36896)
+4/12/2013 11:8:46  >  36896-        /
+4/12/2013 11:11:14  >  Request from /127.0.0.1 (36903)
+4/12/2013 11:11:14  >  36903-        /
+4/12/2013 11:11:36  >  Request from /127.0.0.1 (36906)
+4/12/2013 11:11:36  >  36906-        /admin?com=login&login_name=root&login_password=root
+4/12/2013 11:14:17  >  Request from /127.0.0.1 (36912)
+4/12/2013 11:14:17  >  36912-        /ster_help/ster_mode.html
+4/12/2013 11:14:17  >  Request from /127.0.0.1 (36913)
+4/12/2013 11:14:17  >  Request from /127.0.0.1 (36914)
+4/12/2013 11:14:17  >  36913-        /ster_help/menu.html
+4/12/2013 11:14:17  >  36914-        /ster_help/index.html
+4/12/2013 11:17:27  >  Request from /127.0.0.1 (36915)
+4/12/2013 11:17:27  >  36915-        /admin?login_name=root&login_password=root&com=chngpropfrm
+4/12/2013 11:17:33  >  Request from /127.0.0.1 (36916)
+4/12/2013 11:17:33  >  36916-        /admin?login_name=root&login_password=root&com=login
+4/12/2013 11:18:8  >  Request from /127.0.0.1 (36917)
+4/12/2013 11:18:8  >  36917-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 11:18:9  >  Request from /127.0.0.1 (36919)
+4/12/2013 11:18:9  >  36919-        /admin?login_name=root&login_password=root&com=login
+4/12/2013 11:18:11  >  Request from /127.0.0.1 (36920)
+4/12/2013 11:18:11  >  36920-        /admin?login_name=root&login_password=root&com=login
+4/12/2013 11:18:11  >  Request from /127.0.0.1 (36921)
+4/12/2013 11:18:11  >  36921-        /admin?login_name=root&login_password=root&com=login
+4/12/2013 11:18:13  >  Request from /127.0.0.1 (36922)
+4/12/2013 11:18:13  >  36922-        /admin?login_name=root&login_password=root&com=mkusrfrm
+4/12/2013 11:18:15  >  Request from /127.0.0.1 (36924)
+4/12/2013 11:18:15  >  36924-        /admin?login_name=root&login_password=root&com=chngpropfrm
+4/12/2013 11:18:17  >  Request from /127.0.0.1 (36925)
+4/12/2013 11:18:17  >  36925-        /pers_help/pers_mode.html
+4/12/2013 11:18:17  >  Request from /127.0.0.1 (36926)
+4/12/2013 11:18:17  >  Request from /127.0.0.1 (36927)
+4/12/2013 11:18:17  >  36927-        /pers_help/pers_index.html
+4/12/2013 11:18:17  >  36926-        /pers_help/menu.html
+4/12/2013 11:18:21  >  Request from /127.0.0.1 (36928)
+4/12/2013 11:18:21  >  36928-        /commu_help/commu_mode.html
+4/12/2013 11:18:21  >  Request from /127.0.0.1 (36930)
+4/12/2013 11:18:21  >  Request from /127.0.0.1 (36929)
+4/12/2013 11:18:21  >  36930-        /commu_help/commu_index.html
+4/12/2013 11:18:21  >  36929-        /commu_help/menu.html
+4/12/2013 11:22:2  >  Request from /127.0.0.1 (36933)
+4/12/2013 11:22:2  >  36933-        /ster_help/addstr.html
+4/12/2013 11:22:41  >  Request from /127.0.0.1 (36934)
+4/12/2013 11:22:41  >  36934-        /ster_help/remstr.html
+4/12/2013 11:23:18  >  Request from /127.0.0.1 (36935)
+4/12/2013 11:23:18  >  36935-        /ster_help/getstrusr.html
+4/12/2013 11:23:29  >  Request from /127.0.0.1 (36936)
+4/12/2013 11:23:29  >  36936-        /ster_help/rmkstr.html
+4/12/2013 11:24:48  >  Request from /127.0.0.1 (36937)
+4/12/2013 11:24:48  >  36937-        /ster_help/updftr.html
+4/12/2013 11:40:51  >  Request from /127.0.0.1 (37024)
+4/12/2013 11:40:51  >  37024-        /ster_help/addstr.html
+4/12/2013 11:43:17  >  Request from /127.0.0.1 (37025)
+4/12/2013 11:43:17  >  37025-        /ster_help/remstr.html
+4/12/2013 11:45:3  >  Request from /127.0.0.1 (37027)
+4/12/2013 11:45:3  >  37027-        /ster_help/liststr.html
+4/12/2013 11:47:45  >  Request from /127.0.0.1 (37032)
+4/12/2013 11:47:45  >  37032-        /ster_help/ster_mode.html
+4/12/2013 11:47:45  >  Request from /127.0.0.1 (37033)
+4/12/2013 11:47:45  >  Request from /127.0.0.1 (37034)
+4/12/2013 11:47:45  >  37034-        /ster_help/index.html
+4/12/2013 11:47:45  >  37033-        /ster_help/menu.html
+4/12/2013 11:47:47  >  Request from /127.0.0.1 (37035)
+4/12/2013 11:47:47  >  37035-        /ster_help/liststr.html
+4/12/2013 11:54:59  >  Request from /127.0.0.1 (37039)
+4/12/2013 11:54:59  >  37039-        /ster_help/rmkstr.html
+4/12/2013 12:0:42  >  Request from /127.0.0.1 (37049)
+4/12/2013 12:0:42  >  37049-        /ster_help/getstrftr.html
+4/12/2013 12:2:1  >  Request from /127.0.0.1 (37050)
+4/12/2013 12:2:1  >  37050-        /ster_help/getstrusr.html
+4/12/2013 12:4:17  >  Request from /127.0.0.1 (37051)
+4/12/2013 12:4:17  >  37051-        /ster_help/addftr.html
+4/12/2013 12:21:18  >  Request from /127.0.0.1 (37196)
+4/12/2013 12:21:18  >  37196-        /ster_help/remftr.html
+4/12/2013 12:57:4  >  Request from /127.0.0.1 (39110)
+4/12/2013 12:57:4  >  39110-        /admin?login_name=root&login_password=root&com=login
+4/12/2013 13:0:45  >  Request from /127.0.0.1 (39118)
+4/12/2013 13:0:45  >  39118-        /ster_help/remftr.html
+4/12/2013 13:3:33  >  Request from /127.0.0.1 (39119)
+4/12/2013 13:3:33  >  39119-        /ster_help/incftr.html
+4/12/2013 13:3:37  >  Request from /127.0.0.1 (39120)
+4/12/2013 13:3:37  >  39120-        /ster_help/setftr.html
+4/12/2013 13:6:17  >  Request from /127.0.0.1 (39123)
+4/12/2013 13:6:17  >  39123-        /ster_help/setdgr.html
+4/12/2013 13:6:22  >  Request from /127.0.0.1 (39124)
+4/12/2013 13:6:22  >  39124-        /ster_help/incdgr.html
+4/12/2013 13:6:33  >  Request from /127.0.0.1 (39125)
+4/12/2013 13:6:33  >  39125-        /ster_help/chkusrs.html
+4/12/2013 13:6:34  >  Request from /127.0.0.1 (39126)
+4/12/2013 13:6:34  >  39126-        /ster_help/findusrs.html
+4/12/2013 13:6:52  >  Request from /127.0.0.1 (39127)
+4/12/2013 13:6:52  >  39127-        /ster_help/addftr.html
+4/12/2013 13:8:13  >  Request from /127.0.0.1 (39128)
+4/12/2013 13:8:13  >  39128-        /ster_help/remftr.html
+4/12/2013 13:9:0  >  Request from /127.0.0.1 (39129)
+4/12/2013 13:9:0  >  39129-        /ster_help/remftr.html
+4/12/2013 13:9:29  >  Request from /127.0.0.1 (39130)
+4/12/2013 13:9:29  >  39130-        /ster_help/incftr.html
+4/12/2013 13:10:58  >  Request from /127.0.0.1 (39133)
+4/12/2013 13:10:58  >  39133-        /ster_help/setftr.html
+4/12/2013 13:12:1  >  Request from /127.0.0.1 (39134)
+4/12/2013 13:12:1  >  39134-        /ster_help/updftr.html
+4/12/2013 13:12:50  >  Request from /127.0.0.1 (39137)
+4/12/2013 13:12:50  >  39137-        /ster_help/updusrs.html
+4/12/2013 13:13:4  >  Request from /127.0.0.1 (39138)
+4/12/2013 13:13:4  >  39138-        /ster_help/chkusrs.html
+4/12/2013 13:13:21  >  Request from /127.0.0.1 (39139)
+4/12/2013 13:13:21  >  39139-        /ster_help/updusrs.html
+4/12/2013 13:15:38  >  Request from /127.0.0.1 (39141)
+4/12/2013 13:15:38  >  39141-        /ster_help/updftr.html
+4/12/2013 13:17:1  >  Request from /127.0.0.1 (39144)
+4/12/2013 13:17:1  >  39144-        /ster_help/updusrs.html
+4/12/2013 13:18:49  >  Request from /127.0.0.1 (39145)
+4/12/2013 13:18:49  >  39145-        /ster_help/chkusrs.html
+4/12/2013 13:18:59  >  Request from /127.0.0.1 (39146)
+4/12/2013 13:18:59  >  39146-        /ster_help/remftr.html
+4/12/2013 13:19:4  >  Request from /127.0.0.1 (39147)
+4/12/2013 13:19:4  >  39147-        /ster_help/updftr.html
+4/12/2013 13:19:9  >  Request from /127.0.0.1 (39148)
+4/12/2013 13:19:9  >  39148-        /ster_help/chkusrs.html
+4/12/2013 13:20:41  >  Request from /127.0.0.1 (39149)
+4/12/2013 13:20:41  >  39149-        /ster_help/findusrs.html
+4/12/2013 13:22:19  >  Request from /127.0.0.1 (39154)
+4/12/2013 13:22:19  >  39154-        /ster_help/addusr.html
+4/12/2013 13:25:1  >  Request from /127.0.0.1 (39155)
+4/12/2013 13:25:1  >  39155-        /ster_help/remusr.html
+4/12/2013 13:26:48  >  Request from /127.0.0.1 (39160)
+4/12/2013 13:26:48  >  39160-        /ster_help/incdgr.html
+4/12/2013 14:28:28  >  Request from /127.0.0.1 (39378)
+4/12/2013 14:28:28  >  39378-        /ster_help/addstr.html
+4/12/2013 14:28:59  >  Request from /127.0.0.1 (39379)
+4/12/2013 14:28:59  >  39379-        /ster_help/liststr.html
+4/12/2013 14:29:27  >  Request from /127.0.0.1 (39380)
+4/12/2013 14:29:27  >  39380-        /ster_help/liststr.html
+4/12/2013 14:29:41  >  Request from /127.0.0.1 (39381)
+4/12/2013 14:29:41  >  39381-        /ster_help/getstrusr.html
+4/12/2013 14:29:52  >  Request from /127.0.0.1 (39382)
+4/12/2013 14:29:52  >  39382-        /ster_help/getstrftr.html
+4/12/2013 14:29:57  >  Request from /127.0.0.1 (39383)
+4/12/2013 14:29:57  >  39383-        /ster_help/rmkstr.html
+4/12/2013 14:32:21  >  Request from /127.0.0.1 (39388)
+4/12/2013 14:32:21  >  39388-        /ster_help/findusrs.html
+4/12/2013 14:32:29  >  Request from /127.0.0.1 (39389)
+4/12/2013 14:32:29  >  39389-        /ster_help/addftr.html
+4/12/2013 14:32:31  >  Request from /127.0.0.1 (39390)
+4/12/2013 14:32:31  >  39390-        /ster_help/addftr.html
+4/12/2013 14:32:32  >  Request from /127.0.0.1 (39391)
+4/12/2013 14:32:32  >  39391-        /ster_help/incftr.html
+4/12/2013 14:32:32  >  Request from /127.0.0.1 (39392)
+4/12/2013 14:32:32  >  39392-        /ster_help/setftr.html
+4/12/2013 14:32:33  >  Request from /127.0.0.1 (39393)
+4/12/2013 14:32:33  >  39393-        /ster_help/updftr.html
+4/12/2013 14:32:35  >  Request from /127.0.0.1 (39394)
+4/12/2013 14:32:35  >  39394-        /ster_help/updusrs.html
+4/12/2013 14:32:50  >  Request from /127.0.0.1 (39395)
+4/12/2013 14:32:50  >  39395-        /ster_help/updftr.html
+4/12/2013 14:33:4  >  Request from /127.0.0.1 (39396)
+4/12/2013 14:33:4  >  39396-        /ster_help/rmkstr.html
+4/12/2013 14:33:42  >  Request from /127.0.0.1 (39401)
+4/12/2013 14:33:42  >  39401-        /ster_help/rmkstr.html
+4/12/2013 15:10:53  >  Shutting down server, normal: true
+4/12/2013 15:10:59  >  Server started at panagiotis-iit/127.0.1.1, port 1111
+4/12/2013 15:10:59  >  Messages log mode set to: on
+4/12/2013 15:11:0  >  Connected to DB: MySQL
+4/12/2013 15:16:26  >  Request from /127.0.0.1 (39648)
+4/12/2013 15:16:26  >  39648-        /
+4/12/2013 15:16:31  >  Request from /127.0.0.1 (39649)
+4/12/2013 15:16:31  >  39649-        /admin?com=login&login_name=root&login_password=root
+4/12/2013 15:16:44  >  Request from /127.0.0.1 (39651)
+4/12/2013 15:16:44  >  39651-        /ster_help/incdgr.html
+4/12/2013 15:18:29  >  Request from /127.0.0.1 (39652)
+4/12/2013 15:18:29  >  39652-        /ster_help/setdgr.html
+4/12/2013 15:41:19  >  Request from /127.0.0.1 (39671)
+4/12/2013 15:41:19  >  39671-        /ster_help/ster_mode.html
+4/12/2013 15:41:19  >  Request from /127.0.0.1 (39672)
+4/12/2013 15:41:19  >  Request from /127.0.0.1 (39673)
+4/12/2013 15:41:19  >  39672-        /ster_help/menu.html
+4/12/2013 15:41:19  >  39673-        /ster_help/index.html
+4/12/2013 15:41:21  >  Request from /127.0.0.1 (39674)
+4/12/2013 15:41:21  >  39674-        /ster_help/getstrusr.html
+4/12/2013 15:41:21  >  Request from /127.0.0.1 (39675)
+4/12/2013 15:41:21  >  39675-        /ster_help/addusr.html
+4/12/2013 15:41:22  >  Request from /127.0.0.1 (39676)
+4/12/2013 15:41:22  >  39676-        /ster_help/updusrs.html
+4/12/2013 15:41:41  >  Request from /127.0.0.1 (39677)
+4/12/2013 15:41:41  >  39677-        /ster_help/ster_mode.html
+4/12/2013 15:41:41  >  Request from /127.0.0.1 (39678)
+4/12/2013 15:41:41  >  Request from /127.0.0.1 (39679)
+4/12/2013 15:41:41  >  39678-        /ster_help/menu.html
+4/12/2013 15:41:41  >  39679-        /ster_help/index.html
+4/12/2013 15:41:42  >  Request from /127.0.0.1 (39680)
+4/12/2013 15:41:42  >  39680-        /ster_help/getusrstrs.html
+4/12/2013 15:41:43  >  Request from /127.0.0.1 (39681)
+4/12/2013 15:41:43  >  39681-        /ster_help/remstr.html
+4/12/2013 15:41:43  >  Request from /127.0.0.1 (39682)
+4/12/2013 15:41:43  >  39682-        /ster_help/getstrftr.html
+4/12/2013 15:41:44  >  Request from /127.0.0.1 (39683)
+4/12/2013 15:41:44  >  39683-        /ster_help/addstr.html
+4/12/2013 15:41:44  >  Request from /127.0.0.1 (39684)
+4/12/2013 15:41:44  >  39684-        /ster_help/index.html
+4/12/2013 15:41:45  >  Request from /127.0.0.1 (39685)
+4/12/2013 15:41:45  >  39685-        /ster_help/liststr.html
+4/12/2013 15:41:49  >  Request from /127.0.0.1 (39686)
+4/12/2013 15:41:49  >  39686-        /commu_help/commu_mode.html
+4/12/2013 15:41:49  >  Request from /127.0.0.1 (39688)
+4/12/2013 15:41:49  >  Request from /127.0.0.1 (39687)
+4/12/2013 15:41:49  >  39688-        /commu_help/commu_index.html
+4/12/2013 15:41:49  >  39687-        /commu_help/menu.html
+4/12/2013 15:41:50  >  Request from /127.0.0.1 (39689)
+4/12/2013 15:41:50  >  39689-        /commu_help/mkcom.html
+4/12/2013 15:41:51  >  Request from /127.0.0.1 (39690)
+4/12/2013 15:41:51  >  39690-        /commu_help/calcudist.html
+4/12/2013 15:41:51  >  Request from /127.0.0.1 (39691)
+4/12/2013 15:41:51  >  39691-        /commu_help/calcftrdist.html
+4/12/2013 15:41:51  >  Request from /127.0.0.1 (39692)
+4/12/2013 15:41:51  >  39692-        /commu_help/mkftrgrp.html
+4/12/2013 15:41:52  >  Request from /127.0.0.1 (39693)
+4/12/2013 15:41:52  >  39693-        /commu_help/erasecom.html
+4/12/2013 15:41:52  >  Request from /127.0.0.1 (39694)
+4/12/2013 15:41:52  >  39694-        /commu_help/eraseftrgrp.html
+4/12/2013 15:41:53  >  Request from /127.0.0.1 (39695)
+4/12/2013 15:41:53  >  39695-        /commu_help/sqlcom.html
+4/12/2013 15:41:53  >  Request from /127.0.0.1 (39696)
+4/12/2013 15:41:53  >  39696-        /commu_help/sqlftrgrp.html
+4/12/2013 15:41:54  >  Request from /127.0.0.1 (39697)
+4/12/2013 15:41:54  >  39697-        /commu_help/addftrgrp.html
+4/12/2013 15:41:54  >  Request from /127.0.0.1 (39698)
+4/12/2013 15:41:55  >  39698-        /commu_help/rmftrgrp.html
+4/12/2013 15:41:55  >  Request from /127.0.0.1 (39699)
+4/12/2013 15:41:55  >  39699-        /commu_help/getftrgrps.html
+4/12/2013 15:41:56  >  Request from /127.0.0.1 (39700)
+4/12/2013 15:41:56  >  39700-        /commu_help/getftrgrp.html
+4/12/2013 15:41:56  >  Request from /127.0.0.1 (39701)
+4/12/2013 15:41:56  >  39701-        /commu_help/addusrcom.html
+4/12/2013 15:42:1  >  Request from /127.0.0.1 (39702)
+4/12/2013 15:42:1  >  39702-        /commu_help/getftrgrp.html
+4/12/2013 15:42:2  >  Request from /127.0.0.1 (39703)
+4/12/2013 15:42:2  >  39703-        /commu_help/addusrcom.html
+4/12/2013 15:42:5  >  Request from /127.0.0.1 (39704)
+4/12/2013 15:42:5  >  39704-        /commu_help/getusrcomp.html
+4/12/2013 15:42:5  >  Request from /127.0.0.1 (39705)
+4/12/2013 15:42:5  >  39705-        /commu_help/rmfusrcom.html
+4/12/2013 15:42:6  >  Request from /127.0.0.1 (39706)
+4/12/2013 15:42:6  >  39706-        /commu_help/getusrcomp.html
+4/12/2013 15:42:7  >  Request from /127.0.0.1 (39707)
+4/12/2013 15:42:7  >  39707-        /commu_help/rmfusrcom.html
+4/12/2013 15:42:7  >  Request from /127.0.0.1 (39708)
+4/12/2013 15:42:7  >  39708-        /commu_help/getusrcomp.html
+4/12/2013 15:42:8  >  Request from /127.0.0.1 (39709)
+4/12/2013 15:42:8  >  39709-        /commu_help/getusrcomu.html
+4/12/2013 15:42:19  >  Request from /127.0.0.1 (39712)
+4/12/2013 15:42:19  >  39712-        /commu_help/commu_mode.html
+4/12/2013 15:42:19  >  Request from /127.0.0.1 (39713)
+4/12/2013 15:42:19  >  Request from /127.0.0.1 (39714)
+4/12/2013 15:42:19  >  39713-        /commu_help/menu.html
+4/12/2013 15:42:19  >  39714-        /commu_help/commu_index.html
+4/12/2013 15:42:20  >  Request from /127.0.0.1 (39715)
+4/12/2013 15:42:20  >  39715-        /commu_help/getusrcomp.html
+4/12/2013 15:44:27  >  Request from /127.0.0.1 (39717)
+4/12/2013 15:44:27  >  39717-        /commu_help/rmftrgrp.html
+4/12/2013 15:44:28  >  Request from /127.0.0.1 (39718)
+4/12/2013 15:44:28  >  39718-        /commu_help/addftrgrp.html
+4/12/2013 15:44:29  >  Request from /127.0.0.1 (39719)
+4/12/2013 15:44:29  >  39719-        /commu_help/getusrcomu.html
+4/12/2013 15:44:30  >  Request from /127.0.0.1 (39720)
+4/12/2013 15:44:30  >  39720-        /commu_help/getusrcomp.html
+4/12/2013 15:45:44  >  Request from /127.0.0.1 (39721)
+4/12/2013 15:45:44  >  39721-        /commu_help/commu_mode.html
+4/12/2013 15:45:44  >  Request from /127.0.0.1 (39723)
+4/12/2013 15:45:44  >  Request from /127.0.0.1 (39722)
+4/12/2013 15:45:44  >  39723-        /commu_help/commu_index.html
+4/12/2013 15:45:44  >  39722-        /commu_help/menu.html
+4/12/2013 15:45:45  >  Request from /127.0.0.1 (39724)
+4/12/2013 15:45:45  >  39724-        /commu_help/getusrcomp.html
+4/12/2013 15:45:47  >  Request from /127.0.0.1 (39725)
+4/12/2013 15:45:47  >  39725-        /commu_help/getusrcomu.html
+4/12/2013 15:45:48  >  Request from /127.0.0.1 (39726)
+4/12/2013 15:45:48  >  39726-        /commu_help/getusrcomp.html
+4/12/2013 15:45:48  >  Request from /127.0.0.1 (39727)
+4/12/2013 15:45:48  >  39727-        /commu_help/rmfusrcom.html
+4/12/2013 15:45:49  >  Request from /127.0.0.1 (39728)
+4/12/2013 15:45:49  >  39728-        /commu_help/addusrcom.html
+4/12/2013 15:45:51  >  Request from /127.0.0.1 (39729)
+4/12/2013 15:45:51  >  39729-        /commu_help/getftrgrp.html
+4/12/2013 15:45:52  >  Request from /127.0.0.1 (39730)
+4/12/2013 15:45:52  >  39730-        /commu_help/addusrcom.html
+4/12/2013 15:45:53  >  Request from /127.0.0.1 (39731)
+4/12/2013 15:45:53  >  39731-        /commu_help/mkcom.html
+4/12/2013 15:45:54  >  Request from /127.0.0.1 (39732)
+4/12/2013 15:45:54  >  39732-        /commu_help/calcudist.html
+4/12/2013 15:45:54  >  Request from /127.0.0.1 (39733)
+4/12/2013 15:45:54  >  39733-        /commu_help/calcftrdist.html
+4/12/2013 15:45:54  >  Request from /127.0.0.1 (39734)
+4/12/2013 15:45:54  >  39734-        /commu_help/mkftrgrp.html
+4/12/2013 15:45:55  >  Request from /127.0.0.1 (39735)
+4/12/2013 15:45:55  >  39735-        /commu_help/erasecom.html
+4/12/2013 15:45:55  >  Request from /127.0.0.1 (39736)
+4/12/2013 15:45:55  >  39736-        /commu_help/eraseftrgrp.html
+4/12/2013 15:45:56  >  Request from /127.0.0.1 (39737)
+4/12/2013 15:45:56  >  39737-        /commu_help/sqlcom.html
+4/12/2013 15:45:56  >  Request from /127.0.0.1 (39738)
+4/12/2013 15:45:56  >  39738-        /commu_help/sqlftrgrp.html
+4/12/2013 15:45:57  >  Request from /127.0.0.1 (39739)
+4/12/2013 15:45:57  >  39739-        /commu_help/addftrgrp.html
+4/12/2013 15:45:57  >  Request from /127.0.0.1 (39740)
+4/12/2013 15:45:57  >  39740-        /commu_help/rmftrgrp.html
+4/12/2013 15:45:58  >  Request from /127.0.0.1 (39741)
+4/12/2013 15:45:58  >  39741-        /commu_help/getftrgrps.html
+4/12/2013 15:45:58  >  Request from /127.0.0.1 (39742)
+4/12/2013 15:45:58  >  39742-        /commu_help/getftrgrp.html
+4/12/2013 15:45:59  >  Request from /127.0.0.1 (39743)
+4/12/2013 15:45:59  >  39743-        /commu_help/addusrcom.html
+4/12/2013 15:46:40  >  Request from /127.0.0.1 (39746)
+4/12/2013 15:46:40  >  39746-        /commu_help/commu_mode.html
+4/12/2013 15:46:40  >  Request from /127.0.0.1 (39747)
+4/12/2013 15:46:40  >  39747-        /commu_help/menu.html
+4/12/2013 15:46:40  >  Request from /127.0.0.1 (39748)
+4/12/2013 15:46:40  >  39748-        /commu_help/commu_index.html
+4/12/2013 15:46:44  >  Request from /127.0.0.1 (39749)
+4/12/2013 15:46:44  >  39749-        /commu_help/addusrcom.html
+4/12/2013 15:47:3  >  Shutting down server, normal: true

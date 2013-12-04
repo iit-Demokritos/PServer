@@ -832,9 +832,9 @@ public class Stereotypes implements PService {
         sql.append("='").append(stereotype).append("' AND u.");
         sql.append(DBAccess.FIELD_PSCLIENT).append("='").append(clientName);
         sql.append("' AND s.").append(DBAccess.FIELD_PSCLIENT).append("='");
-        sql.append(clientName).append("' AND u.");
+        sql.append(clientName).append("' AND s.");
         sql.append(DBAccess.STEREOTYPE_PROFILES_TABLE_FIELD_FEATURE);
-        sql.append("=s.").append(DBAccess.UPROFILE_TABLE_FIELD_FEATURE);
+        sql.append("=u.").append(DBAccess.UPROFILE_TABLE_FIELD_FEATURE);
         res += dbAccess.executeUpdate(sql.toString());
         return res;
     }
