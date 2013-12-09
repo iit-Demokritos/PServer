@@ -3,7 +3,6 @@
 !src/
 !public/
 !libraries/
-!server.ini
 !pbeans.ini
 !mime.ini
 !LICENSE.txt
