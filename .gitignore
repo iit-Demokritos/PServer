@@ -3,6 +3,5 @@
 !src/
 !public/
 !libraries/
-!pbeans.ini
-!mime.ini
+!DefaultSystemFiles/
 !LICENSE.txt
