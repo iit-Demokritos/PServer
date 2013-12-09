@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Language" content="en-us">
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <title>-addstr template</title>
+    </head>
+    <body bgcolor="#eee">
+        <pre>-remstr
+template: ster?clnt=&lt;name|pass&gt;&amp;com=remstr&amp;str=&lt;str_pattern&gt;
+          Order of query params is not important.
+pattern : for stereotype: * | name, name can be a path expression (group1.*)
+descript: Removes all stereotypes matching str_pattern
+example : ster?clnt=name|pass&amp;com=remstr&amp;str=*
+	  ster?clnt=name|pass&amp;com=remstr&amp;str=test.*
+returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
+200 OK  : example result body:
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;</pre>
+    </body>
+</html>
