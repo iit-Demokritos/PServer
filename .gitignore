@@ -1,0 +1,12 @@
+/PServer/*
+!/PServer/src/
+!/PServer/public/
+!/PServer/libraries/
+!/PServer/server.ini
+!/PServer/pbeans.ini
+!/PServer/mime.ini
+!/PServer/LICENSE.txt
+/PersServerUtils/*
+!/PersServerUtils/libraries/
+!/PersServerUtils/src/
+!/PersServerUtils/LICENSE.txt
