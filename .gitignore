@@ -1,7 +1,8 @@
-/PServer/PServer/*
+/PServer/PersServer/*
 /PServer/PersServerUtils/*
 !src/
 !public/
 !libraries/
 !DefaultSystemFiles/
 !LICENSE.txt
+!*.java
