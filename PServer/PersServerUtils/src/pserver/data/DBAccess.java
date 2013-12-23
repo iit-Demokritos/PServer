@@ -178,21 +178,47 @@ public class DBAccess {
     private String user;        //The database user
     private String pass;        //The database passsword
 
-    public DBAccess() {
+    private static DBAccess instance = null;
+    private static DBAccess ConInstance = null;
+    private static DBAccess EmptyInstance = null;
+    
+    private DBAccess() {
         this.connected = false;
     }
 
-    public DBAccess(String url, String user, String pass) {
+    private DBAccess(String url, String user, String pass) {
         this.connected = false;
         this.url = url;
         this.user = user;
         this.pass = pass;
     }
 
-    public DBAccess(Connection con) {
+    private DBAccess(Connection con) {
         this.connected = true;
         this.connection = con;
     }
+    public static DBAccess getInstance(String url, String user, String pass) {
+        if (instance == null) {
+            return new DBAccess(url, user, pass);
+        }else{
+            return instance;
+        }
+    }
+    public static DBAccess getInstance(Connection con) {
+        if (ConInstance == null) {
+            return new DBAccess(con);
+        }else{
+            return ConInstance;
+        }
+    }
+    public static DBAccess getInstance() {
+        if (EmptyInstance == null) {
+            return new DBAccess();
+        }else{
+            return EmptyInstance;
+        }
+    }
+    
 
     public Connection newConnection() throws SQLException {
         Connection con = DriverManager.getConnection(this.url, this.user, this.pass);

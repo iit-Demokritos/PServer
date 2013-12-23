@@ -187,7 +187,8 @@ public class PSReqWorker extends ReqWorker {
      */
     private void analyzeServiceMode(PService servlet) {
         //Connection conn = connDB(url, user, pass);
-        DBAccess dbAccess = new DBAccess(url, user, pass);
+//        DBAccess dbAccess = new DBAccess(url, user, pass);
+        DBAccess dbAccess = DBAccess.getInstance(url, user, pass);
         if (resURI.substring(1).endsWith(".xml") || resURI.substring(1).endsWith(".json")) {
             try {
 
@@ -201,6 +202,11 @@ public class PSReqWorker extends ReqWorker {
         respCode = servlet.service(queryParam, response, dbAccess);
     }
 
+//    ====================================================
+//    NOT USED
+//    private Connection connDB
+//    private void disconnDB
+//    ====================================================
     /**
      * Database connection method
      *

@@ -280,7 +280,8 @@ public class PersServer extends WebServer {
         DBAccess dbAccess = null;
         try {
             Class.forName(dbDriver);
-            dbAccess = new DBAccess(dbUrl, dbUser, dbPass);
+//            dbAccess = new DBAccess(dbUrl, dbUser, dbPass);
+            dbAccess = DBAccess.getInstance(dbUrl, dbUser, dbPass);
             //conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
             dbAccess.connect();
             try {
@@ -327,6 +328,6 @@ public class PersServer extends WebServer {
      * object.
      */
     public DBAccess getNewDBAccess() {
-        return new DBAccess(dbUrl, dbUser, dbPass);
+        return DBAccess.getInstance(dbUrl, dbUser, dbPass);
     }
 }
