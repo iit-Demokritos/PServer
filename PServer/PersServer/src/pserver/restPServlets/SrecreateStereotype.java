@@ -27,8 +27,13 @@
  */
 package pserver.restPServlets;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
+import pserver.pservlets.PService;
+import pserver.utilities.PageConverter;
+import pserver.utilities.ResponseConverter;
 
 /**
  *
@@ -65,9 +70,46 @@ public class SrecreateStereotype implements pserver.pservlets.PService {
         }
     }
 
+    /**
+     *
+     * @param parameters
+     * @param response
+     * @param dbAccess
+     * @return
+     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        PService servlet = new pserver.pservlets.Stereotypes();
+        try {
+            servlet.init(null);
+        } catch (Exception ex) {
+            Logger.getLogger(SaddStereotype.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        VectorMap PSparameters = new VectorMap(parameters.size() + 1);
+        VectorMap tempMap = null;
+        ResponseConverter converter = new ResponseConverter();
+
+        // fix the VectorMap
+        PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
+
+        PSparameters.add("com", "rmkstr");
+
+        if (parameters.qpIndexOfKeyNoCase("stereotype") != -1) {
+            PSparameters.add("str", parameters.getVal(parameters.indexOfKey("stereotype", 0)));
+        }
+
+        //call the right service
+        int ResponseCode = servlet.service(PSparameters, response, dbAccess);
+
+        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer);
+
+        //DebugLine
+        //        System.out.println("=====> " +response.toString() );
+        return ResponseCode;
+
     }
 
 }

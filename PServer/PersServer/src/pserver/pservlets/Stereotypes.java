@@ -620,7 +620,7 @@ public class Stereotypes implements PService {
             PServerResultSet rs = dbAccess.executeQuery(
                     DBAccess.buildSelectStatement(table, columns, where).toString());
             while (rs.next()) {
-                HashMap<String, ArrayList<String>> tempqueryParam =  (HashMap<String, ArrayList<String>>) queryParam.clone();
+                HashMap<String, ArrayList<String>> tempqueryParam = (HashMap<String, ArrayList<String>>) queryParam.clone();
                 ArrayList<String> str = new ArrayList<String>();
                 str.add(rs.getRs().getString(columns[0]));
                 tempqueryParam.put("str", str);
