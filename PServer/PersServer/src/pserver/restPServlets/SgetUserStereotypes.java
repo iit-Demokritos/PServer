@@ -38,7 +38,7 @@ import pserver.utilities.ResponseConverter;
  *
  * @author Panagiotis Giotis <giotis.p@gmail.com>
  */
-public class SgetUsersStereotypes implements pserver.pservlets.PService {
+public class SgetUserStereotypes implements pserver.pservlets.PService {
 
     private String responseType = pserver.pservlets.PService.xml;
 

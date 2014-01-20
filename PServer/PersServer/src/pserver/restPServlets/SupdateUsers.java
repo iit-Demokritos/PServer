@@ -25,19 +25,16 @@
  * The attribution must be of the form
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
-
 package pserver.restPServlets;
 
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
-import pserver.pservlets.PService;
-import pserver.utilities.ResponseConverter;
 
 /**
  *
  * @author Panagiotis Giotis <giotis.p@gmail.com>
  */
-public class SdeleteUser implements pserver.pservlets.PService {
+public class SupdateUsers implements pserver.pservlets.PService {
 
     private String responseType = pserver.pservlets.PService.xml;
 
@@ -68,67 +65,9 @@ public class SdeleteUser implements pserver.pservlets.PService {
         }
     }
 
-    /**
-     *
-     * @param parameters
-     * @param response
-     * @param dbAccess
-     * @return
-     */
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-
-        PService servlet = new pserver.pservlets.Stereotypes();
-        VectorMap PSparameters = new VectorMap(parameters.size() + 1);
-        VectorMap tempMap = null;
-        ResponseConverter converter = new ResponseConverter();
-
-        // fix the VectorMap
-
-        PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
-
-
-        PSparameters.add("com", "remusr");
-
-        if (parameters.qpIndexOfKeyNoCase("deletepairs") != -1) {
-            String stereotypes = (String) parameters.getVal(parameters.indexOfKey("deletepairs", 0));
-
-            //        {"john","kostas"}
-            stereotypes = stereotypes.replace("{", "");
-            stereotypes = stereotypes.replace("}", "");
-            stereotypes.trim();
-            String[] StereotypesTable = stereotypes.split(",");
-
-            for (String tempstr : StereotypesTable) {
-                tempstr = tempstr.replace("\"", "");
-                String[] StereotypesValues = tempstr.trim().split(":");
-
-                PSparameters.add(StereotypesValues[0], StereotypesValues[1]);
-
-            }
-
-        }
-
-
-//        //        DebugLines
-//        for (int i = 0; i < PSparameters.size(); i++) {
-//            System.out.println("===>  " + PSparameters.getKey(i) + " == " + PSparameters.getVal(i));
-//
-//        }
-
-
-        //call the right service
-        int ResponseCode = servlet.service(PSparameters, response, dbAccess);
-
-        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
-        response.delete(0, response.length());
-        response.append(tempBuffer);
-
-        //DebugLine
-        //        System.out.println("=====> " +response.toString() );
-
-
-        return ResponseCode;
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
