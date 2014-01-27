@@ -406,7 +406,7 @@ public class Stereotypes implements PService {
                 String strVal = rs.getRs().getString(columns[0]);
                 String rule = rs.getRs().getString(columns[1]);
                 row.append("<str>").append(xml_encode(strVal)).append("</str><rule>");
-                row.append(xml_encode(rule)).append("</rule>\n");
+                row.append(xml_encode(rule)).append("</rule>");
                 rowsAffected += 1;  //number of result rows
                 response.add(row.toString());
             }
@@ -484,7 +484,7 @@ public class Stereotypes implements PService {
                 String rule = rs.getRs().getString(columns[2]);
                 row.append("<str>").append(xml_encode(stereotype)).append("</str>");
                 row.append("<usr>").append(xml_encode(strVal)).append("</usr><dgr>");
-                row.append(xml_encode(rule)).append("</dgr>\n");
+                row.append(xml_encode(rule)).append("</dgr>");
                 rowsAffected += 1;
                 response.add(row.toString());
             }
@@ -568,7 +568,7 @@ public class Stereotypes implements PService {
                 String rule = rs.getRs().getString(columns[2]);
                 row.append("<str>").append(xml_encode(str)).append("</str>");
                 row.append("<ftr>").append(xml_encode(strVal)).append("</ftr><value>");
-                row.append(xml_encode(rule)).append("</value>\n");
+                row.append(xml_encode(rule)).append("</value>");
                 rowsAffected += 1;
                 response.add(row.toString());
             }
@@ -962,7 +962,7 @@ public class Stereotypes implements PService {
                 row.append("<usr>").append(xml_encode(userVal));
                 row.append("</usr><str>").append(xml_encode(stereotVal));
                 row.append("</str><deg>").append(xml_encode(degreeVal));
-                row.append("</deg>\n");
+                row.append("</deg>");
                 rowsAffected += 1;  //number of result rows
                 response.add(row.toString());
             }

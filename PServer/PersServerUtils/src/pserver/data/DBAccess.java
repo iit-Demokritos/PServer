@@ -838,7 +838,7 @@ public class DBAccess {
         //Transforms 'pattern' INTO a string to be used
         //after SQL: "...order by <field>" + condition
         if (pattern == null) {
-            return null;
+            return "";
         }
         String condition;
         if (pattern.equals("asc")) {

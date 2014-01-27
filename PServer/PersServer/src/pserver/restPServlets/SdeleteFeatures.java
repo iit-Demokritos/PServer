@@ -27,8 +27,12 @@
  */
 package pserver.restPServlets;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
+import pserver.pservlets.PService;
+import pserver.utilities.ResponseConverter;
 
 /**
  *
@@ -67,7 +71,54 @@ public class SdeleteFeatures implements pserver.pservlets.PService {
 
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        PService servlet = new pserver.pservlets.Stereotypes();
+        try {
+            servlet.init(null);
+        } catch (Exception ex) {
+            Logger.getLogger(SaddStereotype.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        VectorMap PSparameters = new VectorMap(parameters.size() + 1);
+        VectorMap tempMap = null;
+        ResponseConverter converter = new ResponseConverter();
+
+        // fix the VectorMap
+        PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
+
+        PSparameters.add("com", "remftr");
+        PSparameters.add("str", parameters.getVal(parameters.indexOfKey("stereotype", 0)));
+
+        if (parameters.qpIndexOfKeyNoCase("features") != -1) {
+            String stereotypes = (String) parameters.getVal(parameters.indexOfKey("features", 0));
+
+            stereotypes = stereotypes.replace("{", "");
+            stereotypes = stereotypes.replace("}", "");
+            stereotypes.trim();
+            String[] StereotypesTable = stereotypes.split(",");
+
+            for (String tempstr : StereotypesTable) {
+                tempstr = tempstr.replace("\"", "");
+                PSparameters.add("ftr", tempstr);
+
+            }
+
+        }
+
+////        DebugLines
+//        for(int i=0; i<PSparameters.size();i++){
+//            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
+//            
+//        }
+        //call the right service
+        int ResponseCode = servlet.service(PSparameters, response, dbAccess);
+
+        StringBuffer tempBuffer = converter.RConverter(response.toString(), responseType);
+        response.delete(0, response.length());
+        response.append(tempBuffer);
+
+        //DebugLine
+        //        System.out.println("=====> " +response.toString() );
+        return ResponseCode;
     }
 
 }

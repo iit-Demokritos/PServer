@@ -25,18 +25,19 @@
  * The attribution must be of the form
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
-
 package pserver.restPServlets;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
 import pserver.pservlets.PService;
 import pserver.utilities.ResponseConverter;
+
 /**
  *
  * @author Panagiotis Giotis <giotis.p@gmail.com>
  */
-
 
 public class SincreaseFeaturesValue implements pserver.pservlets.PService {
 
@@ -79,24 +80,25 @@ public class SincreaseFeaturesValue implements pserver.pservlets.PService {
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
 
-
         PService servlet = new pserver.pservlets.Stereotypes();
+        try {
+            servlet.init(null);
+        } catch (Exception ex) {
+            Logger.getLogger(SaddStereotype.class.getName()).log(Level.SEVERE, null, ex);
+        }
         VectorMap PSparameters = new VectorMap(parameters.size() + 1);
         VectorMap tempMap = null;
         ResponseConverter converter = new ResponseConverter();
 
         // fix the VectorMap
-
         PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
 
-
-        PSparameters.add("com", "incval");
+        PSparameters.add("com", "incftr");
         PSparameters.add("str", parameters.getVal(parameters.indexOfKey("stereotype", 0)));
 
         if (parameters.qpIndexOfKeyNoCase("featurelist") != -1) {
             String features = (String) parameters.getVal(parameters.indexOfKey("featurelist", 0));
 
-            //        {"john","kostas"}
             features = features.replace("{", "");
             features = features.replace("}", "");
             features = features.trim();
@@ -117,7 +119,6 @@ public class SincreaseFeaturesValue implements pserver.pservlets.PService {
 //            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
 //            
 //        }
-
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
@@ -127,10 +128,7 @@ public class SincreaseFeaturesValue implements pserver.pservlets.PService {
 
         //DebugLine
         //        System.out.println("=====> " +response.toString() );
-
-
         return ResponseCode;
-
 
     }
 }

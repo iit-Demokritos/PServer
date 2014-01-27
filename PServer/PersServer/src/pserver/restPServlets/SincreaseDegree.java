@@ -25,9 +25,10 @@
  * The attribution must be of the form
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
-
 package pserver.restPServlets;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
 import pserver.pservlets.PService;
@@ -78,24 +79,25 @@ public class SincreaseDegree implements pserver.pservlets.PService {
     @Override
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
 
-
         PService servlet = new pserver.pservlets.Stereotypes();
+        try {
+            servlet.init(null);
+        } catch (Exception ex) {
+            Logger.getLogger(SaddStereotype.class.getName()).log(Level.SEVERE, null, ex);
+        }
         VectorMap PSparameters = new VectorMap(parameters.size() + 1);
         VectorMap tempMap = null;
         ResponseConverter converter = new ResponseConverter();
 
         // fix the VectorMap
-
         PSparameters.add("clnt", parameters.getVal(parameters.indexOfKey("clientcredentials", 0)));
 
-
-        PSparameters.add("com", "incdeg");
+        PSparameters.add("com", "incdgr");
         PSparameters.add("usr", parameters.getVal(parameters.indexOfKey("username", 0)));
 
         if (parameters.qpIndexOfKeyNoCase("stereotypelist") != -1) {
             String stereotypes = (String) parameters.getVal(parameters.indexOfKey("stereotypelist", 0));
 
-            //        {"john","kostas"}
             stereotypes = stereotypes.replace("{", "");
             stereotypes = stereotypes.replace("}", "");
             stereotypes.trim();
@@ -116,7 +118,6 @@ public class SincreaseDegree implements pserver.pservlets.PService {
 //            System.out.println("===>  "+PSparameters.getKey(i)+" == "+PSparameters.getVal(i));
 //            
 //        }
-
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 
@@ -126,10 +127,7 @@ public class SincreaseDegree implements pserver.pservlets.PService {
 
         //DebugLine
         //        System.out.println("=====> " +response.toString() );
-
-
         return ResponseCode;
-
 
     }
 }
