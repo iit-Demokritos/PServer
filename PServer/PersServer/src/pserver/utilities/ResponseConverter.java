@@ -29,6 +29,7 @@
 package pserver.utilities;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -51,14 +52,14 @@ public class ResponseConverter {
 
     private String ConvertedResponse;
     private StringBuffer ConvertedBuffer;
-    private File tmpfile;
+//    private File tmpfile;
 
     public ResponseConverter() {
-        try {
-            tmpfile = File.createTempFile("tmp", ".xml", new File("./"));
-        } catch (IOException ex) {
-            Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            tmpfile = File.createTempFile("tmp", ".xml", new File("./"));
+//        } catch (IOException ex) {
+//            Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -70,19 +71,20 @@ public class ResponseConverter {
     public StringBuffer RConverter(String RString, String RType) {
         ConvertedBuffer = new StringBuffer();
         ConvertedResponse = RString;
-        CreateXml(RString);
+        ConvertedBuffer.append(ConvertedResponse);
+//        CreateXml(RString);
 
         if (RType.equals("text/xml")) {
-            ConvertXML();
+           return ConvertedBuffer;
         } else {
             ConvertJson();
         }
-        tmpfile.delete();
+//        tmpfile.delete();
         return ConvertedBuffer;
     }
 
     private void ConvertXML() {
-        ConvertedBuffer.append(ConvertedResponse);
+//        ConvertedBuffer.append(ConvertedResponse);
     }
 
     private void ConvertJson() {
@@ -92,10 +94,11 @@ public class ResponseConverter {
 
         try {
 //            jsonObj = XML.toJson(new File("./convert.xml"));
-            jsonObj = XML.toJson(tmpfile);
+            jsonObj = XML.toJson(new ByteArrayInputStream(this.ConvertedBuffer.toString().getBytes(Charset.forName("UTF-8"))));
             String json = jsonObj.toString();
 //            //DebugLine
 //            CreateJson(json);
+            ConvertedBuffer.delete(0, ConvertedBuffer.length());
             ConvertedBuffer.append(json);
         } catch (SAXException ex) {
             Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,54 +111,57 @@ public class ResponseConverter {
 
     private void CreateXml(String xmlInput) {
 
-        BufferedWriter pw = null;
+//        BufferedWriter pw = null;
 
-        try {
+//        try {
 //            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./convert.xml"),Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
-            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmpfile), Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
+//            pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmpfile), Charset.forName("UTF-8")));  //If the file already exists, start writing at the end of it.
+            
             // write to convert.xml
             if (xmlInput.equals("null")) {
-                pw.append("<result></result>");
+                ConvertedBuffer.append("<result></result>");
             } else {
-                pw.append(xmlInput);
+                ConvertedBuffer.append(xmlInput);
             }
-            pw.flush();
+//            pw.flush();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            //Close the PrintWriter
-            if (pw != null) {
-                try {
-                    pw.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }
+//        } 
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        } 
+//        finally {
+//            //Close the PrintWriter
+//            if (pw != null) {
+//                try {
+//                    pw.close();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(ResponseConverter.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//
+//        }
 
     }
 
-    private void CreateJson(String jsonInput) {
-
-        PrintWriter pw = null;
-
-        try {
-            pw = new PrintWriter(new FileWriter("./convert.json"));  //If the file already exists, start writing at the end of it.
-
-            pw.println(jsonInput);                                  // write to convert.xml
-            pw.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            //Close the PrintWriter
-            if (pw != null) {
-                pw.close();
-            }
-
-        }
-
-    }
+//    private void CreateJson(String jsonInput) {
+//
+//        PrintWriter pw = null;
+//
+//        try {
+//            pw = new PrintWriter(new FileWriter("./convert.json"));  //If the file already exists, start writing at the end of it.
+//
+//            pw.println(jsonInput);                                  // write to convert.xml
+//            pw.flush();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            //Close the PrintWriter
+//            if (pw != null) {
+//                pw.close();
+//            }
+//
+//        }
+//
+//    }
 }
