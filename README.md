@@ -1,7 +1,7 @@
 PServer
 =======
 
-_Current Version_ **v1.1**
+_Current Version_ **v1.2**
 
 PServer is an application that is developed by the National Center of Scientific Research “Demokritos” of Greece and is a general purpose personalization server. So PServer is a program with functionality that can be used by different kind of applications that need to provide personalized services. SciFY (www.scify.org), in collaboration with “NCSR Demokritos”, finilised and documented PServer and makes sure that this technology will be offered to all for free, with all needed support: it is widely distributing and supporting PServer building relevant communities.
 
