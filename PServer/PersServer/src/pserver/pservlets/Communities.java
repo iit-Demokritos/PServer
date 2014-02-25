@@ -63,7 +63,7 @@ import pserver.utilities.ClientCredentialsChecker;
  * PServer.
  */
 public class Communities implements pserver.pservlets.PService {
-////////////////////////////////
+
     /**
      * Overridden method of init from {@link PService} Does nothing here.
      *
