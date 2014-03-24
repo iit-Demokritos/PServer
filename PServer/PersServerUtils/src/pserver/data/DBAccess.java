@@ -171,6 +171,7 @@ public class DBAccess {
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_WEIGHT = "weight";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_TYPE = "type";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_STEREOTYPE = "stereotype";
+    public static final String FIELD_PSUSERID = "user";
     private Connection connection = null;
     private Statement statement = null;
     private boolean connected;

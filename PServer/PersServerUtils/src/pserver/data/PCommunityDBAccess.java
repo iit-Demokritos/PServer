@@ -34,6 +34,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pserver.algorithms.metrics.VectorMetric;
@@ -99,13 +100,70 @@ public class PCommunityDBAccess {
         return result;
     }
 
+    
     public void generateUserDistances(String clientName, VectorMetric metric, int dataRelationType, int numOfThreads, String features) throws SQLException {
         String ftrs[] = null;
         if (features != null) {
             features = features.replace("*", "%");
             ftrs = features.split("\\|");
         }
+        
+        // TODO: Add system parameter for step S
+        // Fetch all user IDs
+        String sql = "SELECT " + DBAccess.FIELD_PSUSERID + " FROM " + 
+                DBAccess.USER_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + 
+                "='" + clientName + "'";
+        Statement stmt = dbAccess.getConnection().createStatement();
 
+        ResultSet rs = stmt.executeQuery(sql);
+        // Store in users list all the IDs fetched
+        ArrayList<String> users = new ArrayList<String>();
+        while (rs.next()) {
+            users.add(rs.getString(1));
+        }
+        rs.close();
+        stmt.close();
+
+        PUserDBAccess pudb = new PUserDBAccess(dbAccess);
+
+        ExecutorService threadExecutor = Executors.newFixedThreadPool(numOfThreads);
+        
+        final int STEP_SIZE = 1000;
+        
+        // For every S users
+        for (int i = 0; i < users.size(); i += STEP_SIZE) {
+            // Fetch them
+            
+            // For every S users after F, init a list H
+            
+                // Get user profiles
+                // Split the list of H into e.g. 4 (# of threads) sublists
+                // For every sublist
+                    // Calculate the distance between F and each item of the sublist
+                // Wait for thread termination
+                // Store results
+        } // end for every S users
+        
+
+
+        long to = System.currentTimeMillis();
+        ArrayList<PUser> pusers = new ArrayList<PUser>(users.size());
+        int counter = 0;
+        // TODO: Remove hard-coded memory limitations
+        for (int i = 0; i < users.size(); i++) {
+            
+        }
+        
+    }
+    
+    public void generateUserDistancesORIGINAL(String clientName, VectorMetric metric, int dataRelationType, int numOfThreads, String features) throws SQLException {
+        String ftrs[] = null;
+        if (features != null) {
+            features = features.replace("*", "%");
+            ftrs = features.split("\\|");
+        }
+
+        // TODO: Do stepwise (in K-user steps)
         String sql = "SELECT * FROM " + DBAccess.USER_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
         Statement stmt = dbAccess.getConnection().createStatement();
 
@@ -124,6 +182,7 @@ public class PCommunityDBAccess {
         long to = System.currentTimeMillis();
         ArrayList<PUser> pusers = new ArrayList<PUser>(users.size());
         int counter = 0;
+        // TODO: Remove hard-coded memory limitations
         for (int i = 0; i < users.size(); i++) {
             String userName1 = users.get(i);
             long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
@@ -154,13 +213,15 @@ public class PCommunityDBAccess {
             }/
             System.out.println("time for " + userName1 + " = " + (System.currentTimeMillis() - t) + " average profile loading time = " + (totalT * 1.0 / users.size()));*/
         }
+        // TODO: Check if the following line should be commented
         makeUserDistances(pusers, users, users.size(), threadExecutor, dataRelationType, clientName, metric, ftrs, pudb);
+        
         threadExecutor.shutdown();
         System.out.println("total time " + ((System.currentTimeMillis() - to) / 60000.0));
         System.out.println("counter " + counter);
         while (threadExecutor.isTerminated() == false) {
             try {
-                Thread.sleep(5000);
+                threadExecutor.awaitTermination(1, TimeUnit.DAYS);
             } catch (InterruptedException ex) {
             }
         }
@@ -214,22 +275,32 @@ public class PCommunityDBAccess {
     private void makeUserDistances(ArrayList<PUser> pusers, ArrayList<String> users, int uPos, ExecutorService threadExecutor, int dataRelationType, String clientName, VectorMetric metric, String ftrs[], PUserDBAccess pudb) throws SQLException {
         long memoryTime;
         long batchTime = System.currentTimeMillis();
+        // For each user fetched
         for (int i = 0; i < pusers.size(); i++) {
             //System.out.println("Calculatining distances for " + pusers.size() + " users ");
+            
+            // Get its profile
             PUser target = pusers.get(i);
             long t = System.currentTimeMillis();
+            
+            // For each user following the current
             for (int j = i + 1; j < pusers.size(); j++) {
+                // Got to whom we must compare
                 PUser comparWith = pusers.get(j);
+                // Queue comparison to executor
                 threadExecutor.execute(new UserCompareThread(clientName, metric, dataRelationType, target, comparWith));
             }
             memoryTime = (System.currentTimeMillis() - t);
             //System.out.println("memory time for " + target.getName() + " = " + memoryTime);
             //System.out.println("name 1 " + pusers.get(pusers.size() - 1).getName() + " next " + users.get(uPos));            
         }
+        
+        // At this point we have compared to ALL the users fetched
 
+        // For ALL the users after the current block fetched
         for (int j = uPos; j < users.size(); j++) {
-            long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
-            long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+//            long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
+//            long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
             //System.out.println(j + " used memory " + usedMemory);
             PUser comparWith = pudb.getUserProfile(users.get(j), ftrs, clientName, false);
             for (int i = 0; i < pusers.size(); i++) {
