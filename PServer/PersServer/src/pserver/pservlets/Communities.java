@@ -726,7 +726,8 @@ public class Communities implements pserver.pservlets.PService {
         //execute the command
         try {
             boolean success = true;
-            dbAccess.setAutoCommit(false);
+//Panagiotis change from:dbAccess.setAutoCommit(false);
+            dbAccess.setAutoCommit(true);
             success = execMakeUserDistances(queryParam, respBody, dbAccess);
             //-end transaction body
             if (success) {
