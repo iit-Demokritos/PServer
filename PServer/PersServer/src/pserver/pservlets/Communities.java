@@ -534,10 +534,13 @@ public class Communities implements pserver.pservlets.PService {
         }
         String thStr = (String) queryParam.getVal(threasholdIdx);
         int op = 0;
+        String thChar ="";
         if (thStr.startsWith("<")) {
             op = 1;
+            thChar="<";
         } else if (thStr.startsWith(">")) {
             op = 2;
+            thChar=">";
         } else {
             WebServer.win.log.error("-The parameter th starts neither with < nor > ");
             return false;
@@ -555,9 +558,13 @@ public class Communities implements pserver.pservlets.PService {
         try {
             dbAccess.clearUserCommunities(clientName);
             PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
-            pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_BINARY_SIMILARITY);
-            pdbAccess.generateBinarySimilarities(dbAccess, clientName, op, threashold);
-            String sql = "SELECT * FROM " + DBAccess.UASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_BINARY_SIMILARITY;
+//            pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_BINARY_SIMILARITY);
+//            pdbAccess.generateBinarySimilarities(dbAccess, clientName, op, threashold);
+//            String sql = "SELECT * FROM " + DBAccess.UASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_BINARY_SIMILARITY;
+             String sql = "SELECT * FROM " + DBAccess.UASSOCIATIONS_TABLE + " WHERE " 
+                    + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " 
+                    + DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT + thChar + threashold + " AND " 
+                    + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_SIMILARITY;
             UserCommunityManager cManager = new UserCommunityManager(dbAccess, clientName);
             algorithm.execute(sql, cManager, dbAccess);
         } catch (SQLException ex) {
@@ -727,7 +734,7 @@ public class Communities implements pserver.pservlets.PService {
         try {
             boolean success = true;
 //Panagiotis change from:dbAccess.setAutoCommit(false);
-            dbAccess.setAutoCommit(true);
+            dbAccess.setAutoCommit(false);
             success = execMakeUserDistances(queryParam, respBody, dbAccess);
             //-end transaction body
             if (success) {
