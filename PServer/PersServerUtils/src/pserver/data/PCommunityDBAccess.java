@@ -125,42 +125,72 @@ public class PCommunityDBAccess {
         stmt.close();
 
         PUserDBAccess pudb = new PUserDBAccess(dbAccess);
-
+        System.out.println("NumOfThreads= "+numOfThreads);
         ExecutorService threadExecutor = Executors.newFixedThreadPool(numOfThreads);
-
         final int STEP_SIZE = 1000;
-
+        int count = 1;
         // For every S users
         for (int i = 0; i < users.size(); i += STEP_SIZE) {
             //init frame end poind
-            int endpoind = i + STEP_SIZE;
-            if (endpoind > users.size()) {
-                endpoind = users.size();
+            int endpoindA = i + STEP_SIZE;
+            if (endpoindA > users.size()) {
+                endpoindA = users.size();
             }
-            // Fetch them
+
             //Add the users of the current frame in list
-            ArrayList<String> cUserFrame = new ArrayList<String>(
-                    users.subList(i, endpoind));
+            ArrayList<String> cUserFrameA = new ArrayList<String>(
+                    users.subList(i, endpoindA));
+            // Get user profiles to compare
+            ArrayList<PUser> FrameAUsersProfiles = new ArrayList<PUser>();
+            for (String tmpuser : cUserFrameA) {
+                FrameAUsersProfiles.add(pudb.getUserProfile(tmpuser, ftrs, clientName, false));
+            }
 
             // For every S users after F, init a list H
             //for each user in the frame
-            for (String cUser : cUserFrame) {
+            for (String cUser : cUserFrameA) {
+                System.out.println(count++);
                 //init a list with users after them
-                ArrayList<String> CompareUserList = new ArrayList<String>(
-                        users.subList(users.indexOf(cUser) + 1, users.size()));
+//                ArrayList<String> CompareUserList = new ArrayList<String>(
+//                        users.subList(users.indexOf(cUser) + 1, users.size()));
+                ArrayList<PUser> CompUsersProfiles = new ArrayList<PUser>(
+                        FrameAUsersProfiles.subList(users.indexOf(cUser) + 1,
+                                FrameAUsersProfiles.size()));
 
-                // Get user profiles to compare
-                ArrayList<PUser> CompUsersProfiles = new ArrayList<PUser>();
-                for (String tmpuser : CompareUserList) {
-                    CompUsersProfiles.add(pudb.getUserProfile(tmpuser, ftrs, clientName, false));
+                if (endpoindA == users.size()) {
+                    // Calculate the distance between F and each item of the sublist
+                    // and Store results
+                    makeUserDistances(FrameAUsersProfiles.get(users.indexOf(cUser)),
+                            CompUsersProfiles, dataRelationType, clientName, metric);
                 }
-                // Split the list of H into e.g. 4 (# of threads) sublists
+//???? Split the list of H into e.g. 4 (# of threads) sublists???
+                // from the FrameB set start point the endpoint of the 
+                //FrameA and move it by step size until the end of users list
                 // For every sublist
-                // Calculate the distance between F and each item of the sublist
-                // and Store results
-                makeUserDistances(pudb.getUserProfile(cUser, ftrs, clientName, false), CompUsersProfiles, dataRelationType, clientName, metric);
-                // Wait for thread termination
+                for (int j = endpoindA; j < users.size(); j += STEP_SIZE) {
+                    int endpoindB = i + STEP_SIZE;
+                    if (endpoindB > users.size()) {
+                        endpoindB = users.size();
+                    }
 
+                    //Add the users of the current frameB in list
+                    ArrayList<String> cUserFrameB = new ArrayList<String>(
+                            users.subList(j, endpoindB));
+                    // add users profiles from FameB to compare
+                    for (String tmpuser : cUserFrameB) {
+                        CompUsersProfiles.add(pudb.getUserProfile(tmpuser, ftrs, clientName, false));
+                    }
+
+                    // Calculate the distance between F and each item of the sublist
+                    // and Store results
+                    makeUserDistances(FrameAUsersProfiles.get(users.indexOf(cUser)),
+                            CompUsersProfiles, dataRelationType, clientName, metric);
+                    CompUsersProfiles.clear();
+
+                }
+
+                // Wait for thread termination
+                dbAccess.commit();
             } // end for every user in the frame
 
         } // end for every S users
@@ -172,7 +202,6 @@ public class PCommunityDBAccess {
 //        for (int i = 0; i < users.size(); i++) {
 //
 //        }
-
     }
 
     public void generateUserDistancesORIGINAL(String clientName, VectorMetric metric, int dataRelationType, int numOfThreads, String features) throws SQLException {
@@ -290,25 +319,28 @@ public class PCommunityDBAccess {
          */
         return 0;
     }
-    
+
     /**
      * Get distances between user profiles and store the data in DB
+     *
      * @param user1 The user profile of the first user
-     * @param CompareWithUsers A list with users profiles to compare the first user
+     * @param CompareWithUsers A list with users profiles to compare the first
+     * user
      * @param dataRelationType data relation type
      * @param clientName the current client name
      * @param metric metric for calculating the distance
-     * @throws SQLException 
+     * @throws SQLException
      */
     private void makeUserDistances(PUser user1, ArrayList<PUser> CompareWithUsers, int dataRelationType, String clientName, VectorMetric metric) throws SQLException {
-
+        Statement stmt = getDbAccess().getConnection().createStatement();
         // For each user in the CompareWithUsers do comparison
         for (PUser user2 : CompareWithUsers) {
             //Get distance between user1 and user2
             float dist = metric.getDistance(user1.getVector(), user2.getVector());
             //save distance to DB
-            saveUserSimilarity(user1, user2, dist, clientName, dataRelationType);
+            saveUserSimilarity(user1, user2, dist, clientName, dataRelationType, stmt);
         }
+        stmt.close();
     }
 
     private void makeUserDistancesOriginal(ArrayList<PUser> pusers, ArrayList<String> users, int uPos, ExecutorService threadExecutor, int dataRelationType, String clientName, VectorMetric metric, String ftrs[], PUserDBAccess pudb) throws SQLException {
@@ -349,11 +381,11 @@ public class PCommunityDBAccess {
         //System.out.println("Elapsed time for " + pusers.size() + " user is " + (System.currentTimeMillis() - batchTime));
     }
 
-    private void saveUserSimilarity(PUser user1, PUser user2, float dist, String clientName, int dataRelationType) throws SQLException {
-        Statement stmt = getDbAccess().getConnection().createStatement();
+    private void saveUserSimilarity(PUser user1, PUser user2, float dist, String clientName, int dataRelationType, Statement stmt) throws SQLException {
+//        Statement stmt = getDbAccess().getConnection().createStatement();
         String sql = "INSERT INTO " + DBAccess.UASSOCIATIONS_TABLE + "(" + DBAccess.UASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + user1.getName() + "','" + user2.getName() + "'," + dist + "," + dataRelationType + ",'" + clientName + "')";
         stmt.executeUpdate(sql);
-        stmt.close();
+//        stmt.close();
     }
 
 //    class UserCompareThread extends Thread {

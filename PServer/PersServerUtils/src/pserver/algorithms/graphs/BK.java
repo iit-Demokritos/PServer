@@ -25,7 +25,6 @@
  * The attribution must be of the form
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
-
 package pserver.algorithms.graphs;
 
 import java.sql.SQLException;
@@ -60,38 +59,37 @@ public class BK implements GraphClustering {
         cliques = new LinkedList<Set<String>>();
     }
 
-    public void execute( String querySql, GraphClusterManager graphClusterManager, DBAccess dbAccess ) throws SQLException {
+    public void execute(String querySql, GraphClusterManager graphClusterManager, DBAccess dbAccess) throws SQLException {
         this.dbAccess = dbAccess;
         this.graphClusterManager = graphClusterManager;
-        PServerResultSet rs = this.dbAccess.executeQuery( querySql );
+        PServerResultSet rs = this.dbAccess.executeQuery(querySql);
 
-        while ( rs.next() ) {
+        while (rs.next()) {
 
-            String obj1 = rs.getRs().getString( 1 );
-            String obj2 = rs.getRs().getString( 2 );
+            String obj1 = rs.getRs().getString(1);
+            String obj2 = rs.getRs().getString(2);
 
             //System.out.println( obj1 + " " + obj2 );
-
-            if ( connections.get( obj1 ) == null ) {
-                this.connections.put( obj1, new ArrayList<String>() );
+            if (connections.get(obj1) == null) {
+                this.connections.put(obj1, new ArrayList<String>());
             }
-            if ( connections.get( obj2 ) == null ) {
-                this.connections.put( obj2, new ArrayList<String>() );
+            if (connections.get(obj2) == null) {
+                this.connections.put(obj2, new ArrayList<String>());
             }
 
-            connections.get( obj1 ).add( obj2 );
-            connections.get( obj2 ).add( obj1 );
+            connections.get(obj1).add(obj2);
+            connections.get(obj2).add(obj1);
 
-            if ( nodes.get( obj1 ) == null ) {
-                nodes.put( obj1, 1 );
+            if (nodes.get(obj1) == null) {
+                nodes.put(obj1, 1);
             } else {
-                nodes.put( obj1, nodes.get( obj1 ) + 1 );
+                nodes.put(obj1, nodes.get(obj1) + 1);
             }
 
-            if ( nodes.get( obj2 ) == null ) {
-                nodes.put( obj2, 1 );
+            if (nodes.get(obj2) == null) {
+                nodes.put(obj2, 1);
             } else {
-                nodes.put( obj2, nodes.get( obj2 ) + 1 );
+                nodes.put(obj2, nodes.get(obj2) + 1);
             }
         }
 
@@ -99,13 +97,13 @@ public class BK implements GraphClustering {
         Set<String> nodeNames = nodes.keySet();
 
         //System.out.println( "\nTotal Num of nodes " + this.nodes.size() );
-
-        for ( String node : nodeNames ) {
-        //this.connections.get( node ).add( node );
-        System.out.println( "node " + node + " has " + this.connections.get( node ).size() + " links" );
+        for (String node : nodeNames) {
+            //this.connections.get( node ).add( node );
+            System.out.println("node " + node + " has " + this.connections.get(node).size() + " links");
         }
-        if( nodeNames.size() == 0 )
+        if (nodeNames.size() == 0) {
             return;
+        }
         getMaximalCliques();
     }
 
@@ -113,71 +111,73 @@ public class BK implements GraphClustering {
         LinkedList<String> R = new LinkedList<String>();
         LinkedList<String> P = new LinkedList<String>();
         Set<String> nodeNames = nodes.keySet();
-        for ( String node : nodeNames ) {
-            P.add( node );
-        }
+        P.addAll(nodeNames);
+//        for ( String node : nodeNames ) {
+//            P.add( node );
+//        }
         LinkedList<String> X = new LinkedList<String>();
-        System.out.println( "\r\ncalling Bron-Kerbosch algorithm \r\n" );
-        runBK( R, P, X );
+        System.out.println("\r\ncalling Bron-Kerbosch algorithm \r\n");
+        runBK(R, P, X);
         R = null;
         P = null;
-        X = null;        
-        System.out.println( "Bron-Kerbosch Algorithm terminated\r\n" );
+        X = null;
+        System.out.println("Bron-Kerbosch Algorithm terminated\r\n");
         return this.cliques;
     }
 
     private int svar = 0;
 
-    private void runBK( LinkedList<String> R, LinkedList<String> P, LinkedList<String> X ) throws SQLException {
-        if ( P.size() == 0 && X.size() == 0 ) {
-            Set<String> clique = new HashSet<String>( R.size() );
-            for ( String node : R ) {
-                clique.add( node );
-            }
-            System.out.println( "New clique num - " + (cl++) + " size " + clique.size() );
-            graphClusterManager.addGraphCluster( clique );
+    private void runBK(LinkedList<String> R, LinkedList<String> P, LinkedList<String> X) throws SQLException {
+        if (P.size() == 0 && X.size() == 0) {
+            Set<String> clique = new HashSet<String>(R.size());
+            clique.addAll(R);
+//            for (String node : R) {
+//                clique.add(node);
+//            }
+            System.out.println("New clique num - " + (cl++) + " size " + clique.size());
+            graphClusterManager.addGraphCluster(clique);
             svar = 0;
-        } else {            
-            svar ++;
-            if( svar > this.connections.size() ){
+        } else {
+            svar++;
+            if (svar > this.connections.size()) {
                 svar = 0;
                 return;
             }
             String max = "";
             int degree = 0;
-            for ( String n : P ) {                
-                int newDegree = this.connections.get( n ).size();
-                if ( degree < newDegree ) {
+            for (String n : P) {
+                int newDegree = this.connections.get(n).size();
+                if (degree < newDegree) {
                     max = n;
                     degree = newDegree;
-                }                
+                }
             }
             Iterator<String> it = P.iterator();
-            while ( it.hasNext() ) {                
-                String i = it.next();                
-                if ( this.connections.get( i ).contains( max ) == true ) {
+            while (it.hasNext()) {
+                String i = it.next();
+                if (this.connections.get(i).contains(max) == true) {
                     continue;
                 }
                 it.remove();
-                LinkedList<String> Rnew = new LinkedList<String>( R );
-                Rnew.add( i );
+                LinkedList<String> Rnew = new LinkedList<String>(R);
+                Rnew.add(i);
                 LinkedList<String> Pnew = new LinkedList<String>();
                 LinkedList<String> Xnew = new LinkedList<String>();
-                ArrayList<String> links = this.connections.get( i );
-                for ( String l : links ) {
-                    if ( P.contains( l ) ) {
-                        Pnew.add( l );
+                ArrayList<String> links = this.connections.get(i);
+                for (String l : links) {
+                    if (P.contains(l)) {
+                        Pnew.add(l);
                     }
-                    if ( X.contains( l ) ) {
-                        Xnew.add( l );
+                    if (X.contains(l)) {
+                        Xnew.add(l);
                     }
                 }
-                runBK( Rnew, Pnew, Xnew );
+                runBK(Rnew, Pnew, Xnew);
                 Rnew = null;
                 Pnew = null;
                 Xnew = null;
                 System.gc();
-                X.add( i );
+                X.add(i);
             }
         }
     }
