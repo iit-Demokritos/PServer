@@ -127,7 +127,7 @@ public class PCommunityDBAccess {
         PUserDBAccess pudb = new PUserDBAccess(dbAccess);
         System.out.println("NumOfThreads= "+numOfThreads);
         ExecutorService threadExecutor = Executors.newFixedThreadPool(numOfThreads);
-        final int STEP_SIZE = 1000;
+        final int STEP_SIZE = 2000;
         int count = 1;
         // For every S users
         for (int i = 0; i < users.size(); i += STEP_SIZE) {
@@ -337,6 +337,7 @@ public class PCommunityDBAccess {
         for (PUser user2 : CompareWithUsers) {
             //Get distance between user1 and user2
             float dist = metric.getDistance(user1.getVector(), user2.getVector());
+            if(Float.isNaN(dist))continue;
             //save distance to DB
             saveUserSimilarity(user1, user2, dist, clientName, dataRelationType, stmt);
         }
