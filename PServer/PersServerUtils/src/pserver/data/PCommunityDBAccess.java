@@ -127,7 +127,7 @@ public class PCommunityDBAccess {
         PUserDBAccess pudb = new PUserDBAccess(dbAccess);
         System.out.println("NumOfThreads= "+numOfThreads);
         ExecutorService threadExecutor = Executors.newFixedThreadPool(numOfThreads);
-        final int STEP_SIZE = 2000;
+        final int STEP_SIZE = 1000;
         int count = 1;
         // For every S users
         for (int i = 0; i < users.size(); i += STEP_SIZE) {
@@ -154,13 +154,13 @@ public class PCommunityDBAccess {
 //                ArrayList<String> CompareUserList = new ArrayList<String>(
 //                        users.subList(users.indexOf(cUser) + 1, users.size()));
                 ArrayList<PUser> CompUsersProfiles = new ArrayList<PUser>(
-                        FrameAUsersProfiles.subList(users.indexOf(cUser) + 1,
+                        FrameAUsersProfiles.subList(cUserFrameA.indexOf(cUser) + 1,
                                 FrameAUsersProfiles.size()));
 
                 if (endpoindA == users.size()) {
                     // Calculate the distance between F and each item of the sublist
                     // and Store results
-                    makeUserDistances(FrameAUsersProfiles.get(users.indexOf(cUser)),
+                    makeUserDistances(FrameAUsersProfiles.get(cUserFrameA.indexOf(cUser)),
                             CompUsersProfiles, dataRelationType, clientName, metric);
                 }
 //???? Split the list of H into e.g. 4 (# of threads) sublists???
@@ -168,7 +168,7 @@ public class PCommunityDBAccess {
                 //FrameA and move it by step size until the end of users list
                 // For every sublist
                 for (int j = endpoindA; j < users.size(); j += STEP_SIZE) {
-                    int endpoindB = i + STEP_SIZE;
+                    int endpoindB = j + STEP_SIZE;
                     if (endpoindB > users.size()) {
                         endpoindB = users.size();
                     }
@@ -183,7 +183,7 @@ public class PCommunityDBAccess {
 
                     // Calculate the distance between F and each item of the sublist
                     // and Store results
-                    makeUserDistances(FrameAUsersProfiles.get(users.indexOf(cUser)),
+                    makeUserDistances(FrameAUsersProfiles.get(cUserFrameA.indexOf(cUser)),
                             CompUsersProfiles, dataRelationType, clientName, metric);
                     CompUsersProfiles.clear();
 
