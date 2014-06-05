@@ -123,7 +123,8 @@ public class PCommunityDBAccess {
         }
         rs.close();
         stmt.close();
-
+        users.remove("gprofile");
+        
         PUserDBAccess pudb = new PUserDBAccess(dbAccess);
         System.out.println("NumOfThreads= "+numOfThreads);
         ExecutorService threadExecutor = Executors.newFixedThreadPool(numOfThreads);
@@ -155,7 +156,7 @@ public class PCommunityDBAccess {
 //                        users.subList(users.indexOf(cUser) + 1, users.size()));
                 ArrayList<PUser> CompUsersProfiles = new ArrayList<PUser>(
                         FrameAUsersProfiles.subList(cUserFrameA.indexOf(cUser) + 1,
-                                FrameAUsersProfiles.size()));
+                        FrameAUsersProfiles.size()));
 
                 if (endpoindA == users.size()) {
                     // Calculate the distance between F and each item of the sublist
