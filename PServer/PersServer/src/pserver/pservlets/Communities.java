@@ -27,39 +27,21 @@
  */
 package pserver.pservlets;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import pserver.PersServer;
 import pserver.WebServer;
-import pserver.algorithms.graphs.GraphClustering;
 import pserver.algorithms.metrics.VectorMetric;
 import pserver.data.DBAccess;
-import pserver.data.FeatureGroupManager;
 import pserver.data.PCommunityDBAccess;
-import pserver.data.PCommunityProfileResultSet;
-import pserver.data.PFeatureGroupDBAccess;
-import pserver.data.PFeatureGroupProfileResultSet;
-import pserver.data.PUserDBAccess;
-import pserver.data.UserCommunityManager;
 import pserver.data.VectorMap;
-import pserver.domain.PFeatureGroup;
-import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
 import pserver.utilities.ClientCredentialsChecker;
 
 /**
  * Contains all necessary methods for the management of Communities mode of
  * PServer.
+ *
+ * @author Panagiotis Giotis <giotis.p@gmail.com>
  */
 public class Communities implements pserver.pservlets.PService {
 
@@ -332,7 +314,7 @@ public class Communities implements pserver.pservlets.PService {
 
     /**
      * Method referring to execution part of process.
-     * 
+     *
      * Calculate the user association weights
      *
      * @param queryParam The parameters of the query.
@@ -385,7 +367,37 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuCalculateFeatureAssociation(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            //Panagiotis change from:dbAccess.setAutoCommit(false);
+            dbAccess.setAutoCommit(false);
+            //execute Calculate feature Association function
+            success = execCalculateFeatureAssociation(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (SQLException e) {  //problem with transaction
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-DB Transaction problem: " + e);
+        }
+        return respCode;
     }
 
     /**
@@ -398,7 +410,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuMakeCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute the make communities function
+            success = execMakeCommunities(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -411,7 +455,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuMakeFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute the add feature groups function
+            success = execMakeFeatureGroups(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -424,7 +500,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuDeleteCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute delete communities function
+            success = execDeleteCommunities(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -437,7 +545,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuDeleteFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute the delete feature groups function
+            success = execDeleteFeatureGroups(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -450,7 +590,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute get communities function
+            success = execGetCommunities(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -463,7 +635,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute get feature groups function
+            success = execGetFeatureGroups(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -476,7 +680,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetCommunityProfile(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute get community profile function
+            success = execGetCommunityProfile(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -488,7 +724,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetFeatureGroupProfile(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute get feature group profile function
+            success = execGetFeatureGroupProfile(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -501,7 +769,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetCommunityUsers(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute get community users function
+            success = execGetCommunityUsers(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -514,7 +814,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute the get feature group features function
+            success = execGetFeatureGroupFeatures(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -527,7 +859,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetUserCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute the get user's communities function
+            success = execGetUserCommunities(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -540,7 +904,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetFeatureFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute the get feature's feature groups function
+            success = execGetFeatureFeatureGroups(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -553,7 +949,39 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetAlgorithms(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute get algorithms function
+            success = execGetAlgorithms(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
     }
 
     /**
@@ -566,7 +994,350 @@ public class Communities implements pserver.pservlets.PService {
      */
     private int comCommuGetMetrics(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
+        int respCode = PSReqWorker.NORMAL;
+        try {
+            //first connect to DB
+            dbAccess.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return PSReqWorker.SERVER_ERR;
+        }
+
+        try {
+            boolean success = true;
+            dbAccess.setAutoCommit(false);
+            //execute the get metrics function
+            success = execCommuGetMetrics(queryParam, respBody, dbAccess);
+            //if function execute successfully
+            if (success) {
+                //commit changes
+                dbAccess.commit();
+            } else {
+                //if not success rollback
+                dbAccess.rollback();
+                respCode = PSReqWorker.REQUEST_ERR;
+                WebServer.win.log.warn("-DB rolled back, data not saved");
+            }
+
+            //disconnect from DB
+            dbAccess.disconnect();
+        } catch (Exception e) {
+            respCode = PSReqWorker.SERVER_ERR;
+            WebServer.win.log.error("-Transaction problem: " + e);
+            e.printStackTrace();
+        }
+        return respCode;
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execAddCommunity(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+
+        //TODO: implement by Giannis
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execAddFeatureGroup(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+
+        //TODO: implement by Giannis
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execAddUserAssociation(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam
+     * @param respBody
+     * @param dbAccess
+     * @return
+     */
+    private boolean execCalculateUserAssociation(VectorMap queryParam, 
+            StringBuffer respBody, DBAccess dbAccess) {
+        int rowsAffected = 0;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int smetricIdx = queryParam.qpIndexOfKeyNoCase("smetric");
+        if (smetricIdx == -1) {
+            WebServer.win.log.error("-The parameter smetric is missing: ");
+            return false;
+        }
+
+        String smetricName = (String) queryParam.getVal(smetricIdx);
+
+        int ftrIdx = queryParam.qpIndexOfKeyNoCase("ftrs");
+        String features = null;
+        if (ftrIdx != -1) {
+            features = (String) queryParam.getVal(ftrIdx);
+        }
+
+        boolean success = true;
+
+        VectorMetric metric = PersServer.pbeansLoadader.getVMetrics().get(smetricName);
+        if (metric == null) {
+            WebServer.win.log.error("-There is no metric with name: " + smetricName);
+            return false;
+        }
+
+        try {
+            generateDistances(dbAccess, clientName, metric, features);
+            //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
+        } catch (SQLException ex) {
+            success = false;
+            ex.printStackTrace();
+            WebServer.win.log.debug("-Problem executing query: " + ex);
+        }
+
+        return success;
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execCalculateFeatureAssociation(VectorMap queryParam, 
+            StringBuffer respBody, DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execMakeCommunities(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+
+        //TODO: implement by Giannis
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execMakeFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+
+        //TODO: implement by Giannis
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execDeleteCommunities(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execDeleteFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetCommunities(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetCommunityProfile(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+
+        //TODO: implement by Giannis
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetFeatureGroupProfile(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+
+        //TODO: implement by Giannis
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetCommunityUsers(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetUserCommunities(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetFeatureFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetAlgorithms(VectorMap queryParam, StringBuffer respBody,
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execCommuGetMetrics(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody, 
+            DBAccess dbAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 
+     * @param dbAccess
+     * @param clientName
+     * @param metric
+     * @param features
+     * @throws SQLException 
+     */
+    private void generateDistances(DBAccess dbAccess, String clientName, VectorMetric metric,
+            String features) throws SQLException {
+        PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
+        pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_SIMILARITY);
+        pdbAccess.generateUserDistances(clientName, metric, DBAccess.RELATION_SIMILARITY,
+                Integer.parseInt(PersServer.pref.getPref("thread_num")), features);
     }
 
 }
