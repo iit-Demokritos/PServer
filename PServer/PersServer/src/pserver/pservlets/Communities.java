@@ -28,12 +28,17 @@
 package pserver.pservlets;
 
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.PersServer;
 import pserver.WebServer;
 import pserver.algorithms.metrics.VectorMetric;
 import pserver.data.DBAccess;
 import pserver.data.PCommunityDBAccess;
+import pserver.data.PUserDBAccess;
 import pserver.data.VectorMap;
+import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
 import pserver.utilities.ClientCredentialsChecker;
 
@@ -1037,7 +1042,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execAddCommunity(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execAddCommunity(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
@@ -1052,7 +1057,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execAddFeatureGroup(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execAddFeatureGroup(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
@@ -1067,9 +1072,75 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execAddUserAssociation(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execAddUserAssociation(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        int rowsAffected = 0;
+        boolean success = true;
+
+        //get parameter client
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        //parameters username1,username2 and get user's profile 
+        int user1Idx = queryParam.qpIndexOfKeyNoCase("user1");
+        if (user1Idx == -1) {
+            WebServer.win.log.error("-The parameter user1 is missing: ");
+            return false;
+        }
+
+        int user2Idx = queryParam.qpIndexOfKeyNoCase("user2");
+        if (user2Idx == -1) {
+            WebServer.win.log.error("-The parameter user2 is missing: ");
+            return false;
+        }
+        String username1 = (String) queryParam.getVal(user1Idx);
+        String username2 = (String) queryParam.getVal(user2Idx);
+
+        //create PUserDBAccess object to get user profile
+        PUserDBAccess pudb = new PUserDBAccess(dbAccess);
+        PUser user1 = null;
+        PUser user2 = null;
+        try {
+            user1 = pudb.getUserProfile(username1, null, clientName, false);
+            user2 = pudb.getUserProfile(username2, null, clientName, false);
+        } catch (SQLException ex) {
+            WebServer.win.log.debug("-Problem executing query: " + ex);
+            return false;
+        }
+
+        //Get parameter weight
+        int weightIdx = queryParam.qpIndexOfKeyNoCase("weight");
+        if (weightIdx == -1) {
+            WebServer.win.log.error("-The parameter weight is missing: ");
+            return false;
+        }
+        float weight = Float.parseFloat((String) queryParam.getVal(weightIdx));
+
+        //Get parameter type
+        int typeIdx = queryParam.qpIndexOfKeyNoCase("type");
+        if (typeIdx == -1) {
+            WebServer.win.log.error("-The parameter type is missing: ");
+            return false;
+        }  
+        int type = Integer.parseInt((String) queryParam.getVal(typeIdx));
+
+        //Create a DB statment
+        Statement stmt = null;
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+
+            //Make PCommunity DB Access to call saveUserSimilarity
+            PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
+            pdbAccess.saveUserSimilarity(user1, user2, weight, clientName, type, stmt);
+
+            stmt.close();
+        } catch (SQLException ex) {
+            WebServer.win.log.debug("-Problem executing query: " + ex);
+            return false;
+        }
+
+        return success;
     }
 
     /**
@@ -1080,14 +1151,14 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess
      * @return
      */
-    private boolean execCalculateUserAssociation(VectorMap queryParam, 
+    private boolean execCalculateUserAssociation(VectorMap queryParam,
             StringBuffer respBody, DBAccess dbAccess) {
         int rowsAffected = 0;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
 
-        int smetricIdx = queryParam.qpIndexOfKeyNoCase("smetric");
+        int smetricIdx = queryParam.qpIndexOfKeyNoCase("algorithm");
         if (smetricIdx == -1) {
             WebServer.win.log.error("-The parameter smetric is missing: ");
             return false;
@@ -1129,7 +1200,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execCalculateFeatureAssociation(VectorMap queryParam, 
+    private boolean execCalculateFeatureAssociation(VectorMap queryParam,
             StringBuffer respBody, DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1142,7 +1213,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execMakeCommunities(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execMakeCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
@@ -1157,7 +1228,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execMakeFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execMakeFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
@@ -1172,7 +1243,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execDeleteCommunities(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execDeleteCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1185,7 +1256,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execDeleteFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execDeleteFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1198,7 +1269,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetCommunities(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execGetCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1211,7 +1282,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execGetFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1224,22 +1295,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetCommunityProfile(VectorMap queryParam, StringBuffer respBody, 
-            DBAccess dbAccess) {
-
-        //TODO: implement by Giannis
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Method referring to execution part of process.
-     *
-     * @param queryParam The parameters of the query.
-     * @param respBody The response message that is produced.
-     * @param dbAccess The database manager.
-     * @return The value of response code.
-     */
-    private boolean execGetFeatureGroupProfile(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execGetCommunityProfile(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
@@ -1254,7 +1310,22 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetCommunityUsers(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execGetFeatureGroupProfile(VectorMap queryParam, StringBuffer respBody,
+            DBAccess dbAccess) {
+
+        //TODO: implement by Giannis
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method referring to execution part of process.
+     *
+     * @param queryParam The parameters of the query.
+     * @param respBody The response message that is produced.
+     * @param dbAccess The database manager.
+     * @return The value of response code.
+     */
+    private boolean execGetCommunityUsers(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1267,7 +1338,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetUserCommunities(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execGetUserCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1280,7 +1351,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetFeatureFeatureGroups(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execGetFeatureFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1306,7 +1377,7 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execCommuGetMetrics(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execCommuGetMetrics(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1319,18 +1390,18 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody, 
+    private boolean execGetFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
-     * 
+     *
      * @param dbAccess
      * @param clientName
      * @param metric
      * @param features
-     * @throws SQLException 
+     * @throws SQLException
      */
     private void generateDistances(DBAccess dbAccess, String clientName, VectorMetric metric,
             String features) throws SQLException {
