@@ -36,6 +36,7 @@ import pserver.WebServer;
 import pserver.algorithms.metrics.VectorMetric;
 import pserver.data.DBAccess;
 import pserver.data.PCommunityDBAccess;
+import pserver.data.PFeatureGroupDBAccess;
 import pserver.data.PUserDBAccess;
 import pserver.data.VectorMap;
 import pserver.domain.PUser;
@@ -1166,6 +1167,7 @@ public class Communities implements pserver.pservlets.PService {
 
         String smetricName = (String) queryParam.getVal(smetricIdx);
 
+        //TODO: remove - clean
         int ftrIdx = queryParam.qpIndexOfKeyNoCase("ftrs");
         String features = null;
         if (ftrIdx != -1) {
@@ -1202,7 +1204,38 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execCalculateFeatureAssociation(VectorMap queryParam,
             StringBuffer respBody, DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               int rowsAffected = 0;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int smetricIdx = queryParam.qpIndexOfKeyNoCase("algorithm");
+        if (smetricIdx == -1) {
+            WebServer.win.log.error("-The parameter smetric is missing: ");
+            return false;
+        }
+
+        String smetricName = (String) queryParam.getVal(smetricIdx);
+
+       
+        boolean success = true;
+
+        VectorMetric metric = PersServer.pbeansLoadader.getVMetrics().get(smetricName);
+        if (metric == null) {
+            WebServer.win.log.error("-There is no metric with name: " + smetricName);
+            return false;
+        }
+
+        try {
+            generateFtrDistances(dbAccess, clientName, metric);
+            //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
+        } catch (SQLException ex) {
+            success = false;
+            ex.printStackTrace();
+            WebServer.win.log.debug("-Problem executing query: " + ex);
+        }
+
+        return success;
     }
 
     /**
@@ -1409,6 +1442,15 @@ public class Communities implements pserver.pservlets.PService {
         pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_SIMILARITY);
         pdbAccess.generateUserDistances(clientName, metric, DBAccess.RELATION_SIMILARITY,
                 Integer.parseInt(PersServer.pref.getPref("thread_num")), features);
+    }
+
+    
+    
+    private void generateFtrDistances(DBAccess dbAccess, String clientName, VectorMetric metric) throws SQLException {
+        PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
+        pdbAccess.deleteFeatureAccociations(clientName, DBAccess.RELATION_SIMILARITY);
+        pdbAccess.generateFtrDistances(clientName, metric, DBAccess.RELATION_SIMILARITY,
+                Integer.parseInt(PersServer.pref.getPref("thread_num")));
     }
 
 }
