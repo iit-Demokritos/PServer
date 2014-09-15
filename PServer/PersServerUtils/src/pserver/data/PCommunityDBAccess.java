@@ -383,7 +383,7 @@ public class PCommunityDBAccess {
         //System.out.println("Elapsed time for " + pusers.size() + " user is " + (System.currentTimeMillis() - batchTime));
     }
 
-    private void saveUserSimilarity(PUser user1, PUser user2, float dist, String clientName, int dataRelationType, Statement stmt) throws SQLException {
+    public void saveUserSimilarity(PUser user1, PUser user2, float dist, String clientName, int dataRelationType, Statement stmt) throws SQLException {
 //        Statement stmt = getDbAccess().getConnection().createStatement();
         String sql = "INSERT INTO " + DBAccess.UASSOCIATIONS_TABLE + "(" + DBAccess.UASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + user1.getName() + "','" + user2.getName() + "'," + dist + "," + dataRelationType + ",'" + clientName + "')";
         stmt.executeUpdate(sql);
