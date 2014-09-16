@@ -29,6 +29,10 @@ package pserver.pservlets;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pserver.PersServer;
@@ -42,6 +46,9 @@ import pserver.data.VectorMap;
 import pserver.domain.PUser;
 import pserver.logic.PSReqWorker;
 import pserver.utilities.ClientCredentialsChecker;
+import pserver.utilities.JSon;
+import socialpserver.CommunityAPI;
+//import pserver.PersServer
 
 /**
  * Contains all necessary methods for the management of Communities mode of
@@ -1047,6 +1054,22 @@ public class Communities implements pserver.pservlets.PService {
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
+        
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        
+        int NameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        String name = (String) queryParam.getVal(NameIdx);
+        
+        int UsersIdx = queryParam.qpIndexOfKeyNoCase("users");
+        String users = (String) queryParam.getVal(UsersIdx);
+        
+        HashSet<String> usersSet = new HashSet<String>(JSon.unjsonize(users, HashSet.class));
+        
+        
+        CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
+        communityAPI.addCustomCommunity(name, usersSet);
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1250,6 +1273,24 @@ public class Communities implements pserver.pservlets.PService {
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        
+        int algorithmIdx = queryParam.qpIndexOfKeyNoCase("algorithm");
+        String algorithm = (String) queryParam.getVal(algorithmIdx);
+        
+        int typeIdx = queryParam.qpIndexOfKeyNoCase("type");
+        int type = (int) queryParam.getVal(typeIdx);
+        
+        int parametersIdx = queryParam.qpIndexOfKeyNoCase("parameters");
+        String parameters = (String) queryParam.getVal(parametersIdx);
+        
+        HashMap<String, String> parametersMap = new HashMap<String, String>(JSon.unjsonize(parameters, HashMap.class));
+        
+        CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
+        
+        communityAPI.makeCommunities(algorithm, type, parametersMap);
+                
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1332,6 +1373,18 @@ public class Communities implements pserver.pservlets.PService {
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        
+        int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        String name = (String) queryParam.getVal(nameIdx);
+        
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("ftrpattern");
+        String pattern = (String) queryParam.getVal(patternIdx);
+        
+        CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
+        communityAPI.getCentroid(name);
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
