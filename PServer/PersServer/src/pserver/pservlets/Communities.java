@@ -29,12 +29,8 @@ package pserver.pservlets;
 
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pserver.PersServer;
 import pserver.WebServer;
 import pserver.algorithms.metrics.VectorMetric;
@@ -1054,23 +1050,28 @@ public class Communities implements pserver.pservlets.PService {
             DBAccess dbAccess) {
 
         //TODO: implement by Giannis
-        
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
-        
+
         int NameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        if (NameIdx == -1) {
+            WebServer.win.log.error("-The parameter name is missing: ");
+            return false;
+        }
         String name = (String) queryParam.getVal(NameIdx);
-        
+
         int UsersIdx = queryParam.qpIndexOfKeyNoCase("users");
+        if (UsersIdx == -1) {
+            WebServer.win.log.error("-The parameter users is missing: ");
+            return false;
+        }
         String users = (String) queryParam.getVal(UsersIdx);
-        
         HashSet<String> usersSet = new HashSet<String>(JSon.unjsonize(users, HashSet.class));
-        
-        
+
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        communityAPI.addCustomCommunity(name, usersSet);
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        communityAPI.addCustomCommunity(name, usersSet);
+
+        return communityAPI.addCustomCommunity(name, usersSet);
     }
 
     /**
@@ -1146,7 +1147,7 @@ public class Communities implements pserver.pservlets.PService {
         if (typeIdx == -1) {
             WebServer.win.log.error("-The parameter type is missing: ");
             return false;
-        }  
+        }
         int type = Integer.parseInt((String) queryParam.getVal(typeIdx));
 
         //Create a DB statment
@@ -1227,7 +1228,7 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execCalculateFeatureAssociation(VectorMap queryParam,
             StringBuffer respBody, DBAccess dbAccess) {
-               int rowsAffected = 0;
+        int rowsAffected = 0;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -1240,7 +1241,6 @@ public class Communities implements pserver.pservlets.PService {
 
         String smetricName = (String) queryParam.getVal(smetricIdx);
 
-       
         boolean success = true;
 
         VectorMetric metric = PersServer.pbeansLoadader.getVMetrics().get(smetricName);
@@ -1275,23 +1275,33 @@ public class Communities implements pserver.pservlets.PService {
         //TODO: implement by Giannis
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
-        
+
         int algorithmIdx = queryParam.qpIndexOfKeyNoCase("algorithm");
+        if (algorithmIdx == -1) {
+            WebServer.win.log.error("-The parameter algorithm is missing: ");
+            return false;
+        }
         String algorithm = (String) queryParam.getVal(algorithmIdx);
-        
+
         int typeIdx = queryParam.qpIndexOfKeyNoCase("type");
+        if (typeIdx == -1) {
+            WebServer.win.log.error("-The parameter type is missing: ");
+            return false;
+        }
         int type = (int) queryParam.getVal(typeIdx);
-        
+
+        HashMap<String, String> parametersMap = new HashMap<String, String>();
         int parametersIdx = queryParam.qpIndexOfKeyNoCase("parameters");
-        String parameters = (String) queryParam.getVal(parametersIdx);
-        
-        HashMap<String, String> parametersMap = new HashMap<String, String>(JSon.unjsonize(parameters, HashMap.class));
-        
+        String parameters = null;
+        if (parametersIdx != -1) {
+            parameters = (String) queryParam.getVal(parametersIdx);
+            parametersMap.putAll(JSon.unjsonize(parameters, HashMap.class));
+        }
+
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        
-        communityAPI.makeCommunities(algorithm, type, parametersMap);
-                
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+//        communityAPI.makeCommunities(algorithm, type, parametersMap);
+        return communityAPI.makeCommunities(algorithm, type, parametersMap);
     }
 
     /**
@@ -1372,20 +1382,28 @@ public class Communities implements pserver.pservlets.PService {
     private boolean execGetCommunityProfile(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
+        boolean success = true;
         //TODO: implement by Giannis
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
-        
+
         int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        if (nameIdx == -1) {
+            WebServer.win.log.error("-The parameter smetric is missing: ");
+            return false;
+        }
         String name = (String) queryParam.getVal(nameIdx);
-        
+
+        String pattern = null;
         int patternIdx = queryParam.qpIndexOfKeyNoCase("ftrpattern");
-        String pattern = (String) queryParam.getVal(patternIdx);
-        
+        if (patternIdx != -1) {
+            pattern = (String) queryParam.getVal(patternIdx);
+        }
+
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        communityAPI.getCentroid(name);
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        communityAPI.getCentroid(name,pattern);
+
+        return success;
     }
 
     /**
@@ -1497,8 +1515,6 @@ public class Communities implements pserver.pservlets.PService {
                 Integer.parseInt(PersServer.pref.getPref("thread_num")), features);
     }
 
-    
-    
     private void generateFtrDistances(DBAccess dbAccess, String clientName, VectorMetric metric) throws SQLException {
         PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
         pdbAccess.deleteFeatureAccociations(clientName, DBAccess.RELATION_SIMILARITY);
