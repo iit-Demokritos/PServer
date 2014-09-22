@@ -27,10 +27,13 @@
  */
 package pserver.pservlets;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.PersServer;
 import pserver.WebServer;
 import pserver.algorithms.metrics.VectorMetric;
@@ -1048,8 +1051,8 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execAddCommunity(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
+        boolean success = true;
 
-        //TODO: implement by Giannis
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
 
@@ -1069,9 +1072,15 @@ public class Communities implements pserver.pservlets.PService {
         HashSet<String> usersSet = new HashSet<String>(JSon.unjsonize(users, HashSet.class));
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-//        communityAPI.addCustomCommunity(name, usersSet);
+        //TODO: change aris function to return truu/false for success run
+        success = communityAPI.addCustomCommunity(name, usersSet);
 
-        return communityAPI.addCustomCommunity(name, usersSet);
+//        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<response>" + success + "</response>\n");
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1150,6 +1159,11 @@ public class Communities implements pserver.pservlets.PService {
         }
         int type = Integer.parseInt((String) queryParam.getVal(typeIdx));
 
+        //Check if exist association type  if not add it to MetricsType map
+        if (!PersServer.pbeansLoadader.getVMetricsType().containsValue(type)) {
+            PersServer.pbeansLoadader.addVMetricsType(type);
+        }
+
         //Create a DB statment
         Statement stmt = null;
         try {
@@ -1162,8 +1176,14 @@ public class Communities implements pserver.pservlets.PService {
             stmt.close();
         } catch (SQLException ex) {
             WebServer.win.log.debug("-Problem executing query: " + ex);
+            respBody.append("<result>\n");
+            respBody.append("<success>false</success>\n");
+            respBody.append("</result>");
             return false;
         }
+        respBody.append("<result>\n");
+        respBody.append("<success>" + success + "</success>\n");
+        respBody.append("</result>");
 
         return success;
     }
@@ -1206,8 +1226,10 @@ public class Communities implements pserver.pservlets.PService {
             return false;
         }
 
+        int MetricType = PersServer.pbeansLoadader.getVMetricsType().get(smetricName);
+
         try {
-            generateDistances(dbAccess, clientName, metric, features);
+            generateDistances(dbAccess, clientName, metric, features, MetricType);
             //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
         } catch (SQLException ex) {
             success = false;
@@ -1244,13 +1266,15 @@ public class Communities implements pserver.pservlets.PService {
         boolean success = true;
 
         VectorMetric metric = PersServer.pbeansLoadader.getVMetrics().get(smetricName);
+
         if (metric == null) {
             WebServer.win.log.error("-There is no metric with name: " + smetricName);
             return false;
         }
+        int MetricType = PersServer.pbeansLoadader.getVMetricsType().get(smetricName);
 
         try {
-            generateFtrDistances(dbAccess, clientName, metric);
+            generateFtrDistances(dbAccess, clientName, metric, MetricType);
             //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
         } catch (SQLException ex) {
             success = false;
@@ -1272,7 +1296,8 @@ public class Communities implements pserver.pservlets.PService {
     private boolean execMakeCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
-        //TODO: implement by Giannis
+        boolean success = true;
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
 
@@ -1300,8 +1325,15 @@ public class Communities implements pserver.pservlets.PService {
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
 
-//        communityAPI.makeCommunities(algorithm, type, parametersMap);
-        return communityAPI.makeCommunities(algorithm, type, parametersMap);
+        //TODO: change aris function to return truu/false for success run
+        success = communityAPI.makeCommunities(algorithm, type, parametersMap);
+
+//        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<response>" + success + "</response>\n");
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1329,7 +1361,36 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execDeleteCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        boolean success = true;
+        int rowsDeleted = 0;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
+        String pattern = null;
+        try {
+            //if pattern exists delete the specific communitites
+            if (patternIdx != -1) {
+                pattern = pattern.replaceAll("\\*", "%");
+                rowsDeleted = dbAccess.DeleteUserCommunities(clientName, pattern);
+            } else {
+                //ellse delete all communities
+                rowsDeleted = dbAccess.clearUserCommunities(clientName);
+            }
+
+        } catch (SQLException e) {
+            success = false;
+            WebServer.win.log.error("-Problem inserting to DB: " + e);
+        }
+
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>" + rowsDeleted + "</num_of_rows></row>\n");
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1355,7 +1416,43 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = true;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        String pattern = null;
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
+        String sql = "select " + DBAccess.COMMUNITIES_TABLE_FIELD_COMMUNITY
+                + " from " + DBAccess.COMMUNITIES_TABLE
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName;
+        if (patternIdx != -1) {
+            pattern = (String) queryParam.getVal(patternIdx);
+            sql = sql + " and " + DBAccess.COMMUNITIES_TABLE_FIELD_COMMUNITY
+                    + " like '" + pattern + "'";
+        }
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        //TODO: change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        respBody.append("<result>\n");
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                respBody.append("<row>"
+                        + "<community>" + rs.getString(1) + "</community>"
+                        + "</row>\n");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1383,7 +1480,7 @@ public class Communities implements pserver.pservlets.PService {
             DBAccess dbAccess) {
 
         boolean success = true;
-        //TODO: implement by Giannis
+
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
 
@@ -1401,7 +1498,23 @@ public class Communities implements pserver.pservlets.PService {
         }
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        communityAPI.getCentroid(name,pattern);
+        //TODO: Aris add pattern on his function
+        HashMap<String, Float> CommunityProfile = new HashMap<String, Float>(
+                communityAPI.getCentroid(name, pattern));
+
+        //TODO: make xsl and change header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+
+        for (String cFeature : CommunityProfile.keySet()) {
+
+            respBody.append("<row>"
+                    + "<ftr_name>" + cFeature + "</ftr_name>"
+                    + "<ftr_value>" + CommunityProfile.get(cFeature) + "</ftr_value>"
+                    + "</row>\n");
+
+        }
+        respBody.append("</result>");
 
         return success;
     }
@@ -1431,7 +1544,43 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetCommunityUsers(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = true;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        String pattern = null;
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("usrpattern");
+        String sql = "select " + DBAccess.USER_TABLE_FIELD_USER
+                + " from " + DBAccess.UCOMMUNITY_TABLE
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName;
+        if (patternIdx != -1) {
+            pattern = (String) queryParam.getVal(patternIdx);
+            sql = sql + " and " + DBAccess.USER_TABLE_FIELD_USER
+                    + " like '" + pattern + "'";
+        }
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        //TODO: change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        respBody.append("<result>\n");
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                respBody.append("<row>"
+                        + "<user>" + rs.getString(1) + "</user>"
+                        + "</row>\n");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1444,7 +1593,51 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetUserCommunities(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = true;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int usernameIdx = queryParam.qpIndexOfKeyNoCase("username");
+        if (usernameIdx == -1) {
+            WebServer.win.log.error("-The parameter username is missing: ");
+            return false;
+        }
+        String username = (String) queryParam.getVal(usernameIdx);
+
+        String pattern = null;
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
+        String sql = "select " + DBAccess.COMMUNITIES_TABLE_FIELD_COMMUNITY
+                + " from " + DBAccess.UCOMMUNITY_TABLE
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName
+                + " and " + DBAccess.USER_TABLE_FIELD_USER + "='" + username;
+        if (patternIdx != -1) {
+            pattern = (String) queryParam.getVal(patternIdx);
+            sql = sql + " and " + DBAccess.USER_TABLE_FIELD_USER
+                    + " like '" + pattern + "'";
+        }
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        //TODO: change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        respBody.append("<result>\n");
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                respBody.append("<row>"
+                        + "<community>" + rs.getString(1) + "</community>"
+                        + "</row>\n");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1470,6 +1663,7 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetAlgorithms(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
+        //TODO: call aris function
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1483,7 +1677,20 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execCommuGetMetrics(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = true;
+
+        HashMap<String, Integer> MetricsType = new HashMap<String, Integer>(
+                PersServer.pbeansLoadader.getVMetricsType());
+
+        respBody.append("<result>\n");
+        //for each metric in PServer 
+        for (String cMetric : MetricsType.keySet()) {
+            respBody.append("<row><MetricName>" + cMetric + "</MetricName>"
+                    + "<MetricType>" + MetricsType.get(cMetric) + "</MetricType></row>\n");
+        }
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1508,14 +1715,23 @@ public class Communities implements pserver.pservlets.PService {
      * @throws SQLException
      */
     private void generateDistances(DBAccess dbAccess, String clientName, VectorMetric metric,
-            String features) throws SQLException {
+            String features, int AssociationType) throws SQLException {
+
         PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
-        pdbAccess.deleteUserAccociations(clientName, DBAccess.RELATION_SIMILARITY);
-        pdbAccess.generateUserDistances(clientName, metric, DBAccess.RELATION_SIMILARITY,
+        pdbAccess.deleteUserAccociations(clientName, AssociationType);
+        pdbAccess.generateUserDistances(clientName, metric, AssociationType,
                 Integer.parseInt(PersServer.pref.getPref("thread_num")), features);
     }
 
-    private void generateFtrDistances(DBAccess dbAccess, String clientName, VectorMetric metric) throws SQLException {
+    /**
+     *
+     * @param dbAccess
+     * @param clientName
+     * @param metric
+     * @throws SQLException
+     */
+    private void generateFtrDistances(DBAccess dbAccess, String clientName,
+            VectorMetric metric, int AssociationType) throws SQLException {
         PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
         pdbAccess.deleteFeatureAccociations(clientName, DBAccess.RELATION_SIMILARITY);
         pdbAccess.generateFtrDistances(clientName, metric, DBAccess.RELATION_SIMILARITY,
