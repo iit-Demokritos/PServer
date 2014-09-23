@@ -993,7 +993,6 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
-
     /**
      * Method referring to execution part of process.
      *
@@ -1025,7 +1024,7 @@ public class Communities implements pserver.pservlets.PService {
         HashSet<String> usersSet = new HashSet<String>(JSon.unjsonize(users, HashSet.class));
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        //TODO: change aris function to return truu/false for success run
+        
         success = communityAPI.addCustomCommunity(name, usersSet);
 
 //        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
@@ -1253,12 +1252,12 @@ public class Communities implements pserver.pservlets.PService {
         }
         String algorithm = (String) queryParam.getVal(algorithmIdx);
 
-        int typeIdx = queryParam.qpIndexOfKeyNoCase("type");
+        int typeIdx = queryParam.qpIndexOfKeyNoCase("association");
         if (typeIdx == -1) {
-            WebServer.win.log.error("-The parameter type is missing: ");
+            WebServer.win.log.error("-The parameter association is missing: ");
             return false;
         }
-        int type = (int) queryParam.getVal(typeIdx);
+        String type = (String) queryParam.getVal(typeIdx);
 
         HashMap<String, String> parametersMap = new HashMap<String, String>();
         int parametersIdx = queryParam.qpIndexOfKeyNoCase("parameters");
@@ -1269,8 +1268,6 @@ public class Communities implements pserver.pservlets.PService {
         }
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-
-        //TODO: change aris function to return truu/false for success run
         success = communityAPI.makeCommunities(algorithm, type, parametersMap);
 
 //        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
@@ -1443,7 +1440,6 @@ public class Communities implements pserver.pservlets.PService {
         }
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        //TODO: Aris add pattern on his function
         HashMap<String, Float> CommunityProfile = new HashMap<String, Float>(
                 communityAPI.getCentroid(name, pattern));
 
@@ -1609,9 +1605,33 @@ public class Communities implements pserver.pservlets.PService {
     private boolean execGetAlgorithms(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         //TODO: call aris function
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        boolean success = true;
 
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+        
+        CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
+
+        HashMap<String, String> algorithmMap = new HashMap<String, String>();
+        algorithmMap.putAll(communityAPI.algorithmDocumentation());
+
+        //TODO: make xsl and change header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+
+        for (String cAlgorithm : algorithmMap.keySet()) {
+
+            respBody.append("<row>"
+                    + "<algorithm_name>" + cAlgorithm + "</algorithm_name>"
+                    + "<algorithm_value>" + algorithmMap.get(cAlgorithm) + "</algorithm_value>"
+                    + "</row>\n");
+
+        }
+
+        respBody.append("</result>");
+
+        return success;
+    }
 
     /**
      * Method referring to execution part of process.
