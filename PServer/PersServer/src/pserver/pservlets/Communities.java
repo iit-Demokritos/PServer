@@ -171,9 +171,6 @@ public class Communities implements pserver.pservlets.PService {
         } else if (com.equalsIgnoreCase("getalgorithms")) {
             //get all cluster algorithms  
             respCode = comCommuGetAlgorithms(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("getmetrics")) {
-            //get all metric algorithms
-            respCode = comCommuGetMetrics(queryParam, respBody, dbAccess);
         } else {
             respCode = PSReqWorker.REQUEST_ERR;
             WebServer.win.log.error("-Request command not recognized");
@@ -996,50 +993,6 @@ public class Communities implements pserver.pservlets.PService {
         return respCode;
     }
 
-    /**
-     * Method referring to execution part of process.
-     *
-     * @param queryParam The parameters of the query.
-     * @param respBody The response message that is produced.
-     * @param dbAccess The database manager.
-     * @return The value of response code.
-     */
-    private int comCommuGetMetrics(VectorMap queryParam, StringBuffer respBody,
-            DBAccess dbAccess) {
-        int respCode = PSReqWorker.NORMAL;
-        try {
-            //first connect to DB
-            dbAccess.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return PSReqWorker.SERVER_ERR;
-        }
-
-        try {
-            boolean success = true;
-            dbAccess.setAutoCommit(false);
-            //execute the get metrics function
-            success = execCommuGetMetrics(queryParam, respBody, dbAccess);
-            //if function execute successfully
-            if (success) {
-                //commit changes
-                dbAccess.commit();
-            } else {
-                //if not success rollback
-                dbAccess.rollback();
-                respCode = PSReqWorker.REQUEST_ERR;
-                WebServer.win.log.warn("-DB rolled back, data not saved");
-            }
-
-            //disconnect from DB
-            dbAccess.disconnect();
-        } catch (Exception e) {
-            respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-Transaction problem: " + e);
-            e.printStackTrace();
-        }
-        return respCode;
-    }
 
     /**
      * Method referring to execution part of process.
@@ -1152,17 +1105,12 @@ public class Communities implements pserver.pservlets.PService {
         float weight = Float.parseFloat((String) queryParam.getVal(weightIdx));
 
         //Get parameter type
-        int typeIdx = queryParam.qpIndexOfKeyNoCase("type");
+        int typeIdx = queryParam.qpIndexOfKeyNoCase("AssociationType");
         if (typeIdx == -1) {
-            WebServer.win.log.error("-The parameter type is missing: ");
+            WebServer.win.log.error("-The parameter AssociationType is missing: ");
             return false;
         }
-        int type = Integer.parseInt((String) queryParam.getVal(typeIdx));
-
-        //Check if exist association type  if not add it to MetricsType map
-        if (!PersServer.pbeansLoadader.getVMetricsType().containsValue(type)) {
-            PersServer.pbeansLoadader.addVMetricsType(type);
-        }
+        String type = (String) queryParam.getVal(typeIdx);
 
         //Create a DB statment
         Statement stmt = null;
@@ -1171,7 +1119,7 @@ public class Communities implements pserver.pservlets.PService {
 
             //Make PCommunity DB Access to call saveUserSimilarity
             PCommunityDBAccess pdbAccess = new PCommunityDBAccess(dbAccess);
-            pdbAccess.saveUserSimilarity(user1, user2, weight, clientName, type, stmt);
+            pdbAccess.saveUserSimilarity(user1, user2, weight, clientName, type.hashCode(), stmt);
 
             stmt.close();
         } catch (SQLException ex) {
@@ -1226,10 +1174,8 @@ public class Communities implements pserver.pservlets.PService {
             return false;
         }
 
-        int MetricType = PersServer.pbeansLoadader.getVMetricsType().get(smetricName);
-
         try {
-            generateDistances(dbAccess, clientName, metric, features, MetricType);
+            generateDistances(dbAccess, clientName, metric, features, smetricName.hashCode());
             //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
         } catch (SQLException ex) {
             success = false;
@@ -1271,10 +1217,9 @@ public class Communities implements pserver.pservlets.PService {
             WebServer.win.log.error("-There is no metric with name: " + smetricName);
             return false;
         }
-        int MetricType = PersServer.pbeansLoadader.getVMetricsType().get(smetricName);
 
         try {
-            generateFtrDistances(dbAccess, clientName, metric, MetricType);
+            generateFtrDistances(dbAccess, clientName, metric, smetricName.hashCode());
             //pdbAccess.generateBinaryUserRelations( clientName, DBAccess.SIMILARITY_RELATION, DBAccess.BINARY_SIMILARITY_RELATION, threashold );
         } catch (SQLException ex) {
             success = false;
@@ -1667,31 +1612,6 @@ public class Communities implements pserver.pservlets.PService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * Method referring to execution part of process.
-     *
-     * @param queryParam The parameters of the query.
-     * @param respBody The response message that is produced.
-     * @param dbAccess The database manager.
-     * @return The value of response code.
-     */
-    private boolean execCommuGetMetrics(VectorMap queryParam, StringBuffer respBody,
-            DBAccess dbAccess) {
-        boolean success = true;
-
-        HashMap<String, Integer> MetricsType = new HashMap<String, Integer>(
-                PersServer.pbeansLoadader.getVMetricsType());
-
-        respBody.append("<result>\n");
-        //for each metric in PServer 
-        for (String cMetric : MetricsType.keySet()) {
-            respBody.append("<row><MetricName>" + cMetric + "</MetricName>"
-                    + "<MetricType>" + MetricsType.get(cMetric) + "</MetricType></row>\n");
-        }
-        respBody.append("</result>");
-
-        return success;
-    }
 
     /**
      * Method referring to execution part of process.

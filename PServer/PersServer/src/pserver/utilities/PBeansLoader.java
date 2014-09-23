@@ -57,7 +57,6 @@ public class PBeansLoader {
 //    private HashMap<String, PService> pservlets = null;
     private PShashMap<String, PService> pservlets = null;
     private HashMap<String, VectorMetric> vMetrics = null;
-    private HashMap<String, Integer> vMetricsType = null;
     private HashMap<String, GraphClustering> gClustering = null;
 
     /**
@@ -74,9 +73,7 @@ public class PBeansLoader {
 //      pservlets = new HashMap<String, PService>();
         pservlets = new PShashMap<String, PService>();
         vMetrics = new HashMap<String, VectorMetric>();
-        vMetricsType = new HashMap<String, Integer>();
         gClustering = new HashMap<String, GraphClustering>();
-        int TypeCount=1;
 
         while (e.hasMoreElements()) {
 
@@ -116,8 +113,6 @@ public class PBeansLoader {
                             VectorMetric metric = (VectorMetric) serviceClass.newInstance();
                             WebServer.win.log.forceReport("loaded Vector Metric: " + className + " with name " + pBeanName);
                             vMetrics.put(pBeanName.toLowerCase(), metric);
-                            vMetricsType.put(pBeanName.toLowerCase(), TypeCount);
-                            TypeCount++;
                         } else if (interfaces[j].getName().endsWith("pserver.algorithms.graphs.GraphClustering")) { //loads the metric beans
                             GraphClustering clustering = (GraphClustering) serviceClass.newInstance();
                             WebServer.win.log.forceReport("loaded Graph Clustering algorithm: " + className + " with name " + pBeanName);
@@ -188,18 +183,6 @@ public class PBeansLoader {
         return vMetrics;
     }
     
-    /**
-     * @return the vMetricsType
-     */
-    public HashMap<String, Integer> getVMetricsType() {
-        return vMetricsType;
-    }
-    /**
-     * @return the vMetricsType
-     */
-    public void addVMetricsType(int AssociationType) {
-        vMetricsType.put(Integer.toString(AssociationType), AssociationType);
-    }
 
     /**
      * @return the gClustering
