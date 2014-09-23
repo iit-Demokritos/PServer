@@ -1104,9 +1104,9 @@ public class Communities implements pserver.pservlets.PService {
         float weight = Float.parseFloat((String) queryParam.getVal(weightIdx));
 
         //Get parameter type
-        int typeIdx = queryParam.qpIndexOfKeyNoCase("AssociationType");
+        int typeIdx = queryParam.qpIndexOfKeyNoCase("association");
         if (typeIdx == -1) {
-            WebServer.win.log.error("-The parameter AssociationType is missing: ");
+            WebServer.win.log.error("-The parameter association is missing: ");
             return false;
         }
         String type = (String) queryParam.getVal(typeIdx);
