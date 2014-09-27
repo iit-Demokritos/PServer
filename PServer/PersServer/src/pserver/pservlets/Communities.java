@@ -1024,7 +1024,7 @@ public class Communities implements pserver.pservlets.PService {
         HashSet<String> usersSet = new HashSet<String>(JSon.unjsonize(users, HashSet.class));
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        
+
         success = communityAPI.addCustomCommunity(name, usersSet);
 
 //        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
@@ -1045,9 +1045,36 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execAddFeatureGroup(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
+        boolean success = true;
 
-        //TODO: implement by Giannis
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int NameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        if (NameIdx == -1) {
+            WebServer.win.log.error("-The parameter name is missing: ");
+            return false;
+        }
+        String name = (String) queryParam.getVal(NameIdx);
+
+        int FeaturesIdx = queryParam.qpIndexOfKeyNoCase("features");
+        if (FeaturesIdx == -1) {
+            WebServer.win.log.error("-The parameter features is missing: ");
+            return false;
+        }
+        String Features = (String) queryParam.getVal(FeaturesIdx);
+        HashSet<String> featuresSet = new HashSet<String>(JSon.unjsonize(Features, HashSet.class));
+
+        CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
+
+//        success = communityAPI.addCustomFeatureGroup(name, featuresSet);
+
+//        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<response>" + success + "</response>\n");
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1152,7 +1179,7 @@ public class Communities implements pserver.pservlets.PService {
 
         int smetricIdx = queryParam.qpIndexOfKeyNoCase("algorithm");
         if (smetricIdx == -1) {
-            WebServer.win.log.error("-The parameter smetric is missing: ");
+            WebServer.win.log.error("-The parameter algorithm is missing: ");
             return false;
         }
 
@@ -1202,7 +1229,7 @@ public class Communities implements pserver.pservlets.PService {
 
         int smetricIdx = queryParam.qpIndexOfKeyNoCase("algorithm");
         if (smetricIdx == -1) {
-            WebServer.win.log.error("-The parameter smetric is missing: ");
+            WebServer.win.log.error("-The parameter algorithm is missing: ");
             return false;
         }
 
@@ -1315,6 +1342,7 @@ public class Communities implements pserver.pservlets.PService {
         try {
             //if pattern exists delete the specific communitites
             if (patternIdx != -1) {
+                pattern = (String) queryParam.getVal(patternIdx);
                 pattern = pattern.replaceAll("\\*", "%");
                 rowsDeleted = dbAccess.DeleteUserCommunities(clientName, pattern);
             } else {
@@ -1367,9 +1395,10 @@ public class Communities implements pserver.pservlets.PService {
         int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
         String sql = "select " + DBAccess.COMMUNITIES_TABLE_FIELD_COMMUNITY
                 + " from " + DBAccess.COMMUNITIES_TABLE
-                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName;
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
         if (patternIdx != -1) {
             pattern = (String) queryParam.getVal(patternIdx);
+            pattern = pattern.replaceAll("\\*", "%");
             sql = sql + " and " + DBAccess.COMMUNITIES_TABLE_FIELD_COMMUNITY
                     + " like '" + pattern + "'";
         }
@@ -1391,6 +1420,7 @@ public class Communities implements pserver.pservlets.PService {
             stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         respBody.append("</result>");
 
@@ -1428,32 +1458,45 @@ public class Communities implements pserver.pservlets.PService {
 
         int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
         if (nameIdx == -1) {
-            WebServer.win.log.error("-The parameter smetric is missing: ");
+            WebServer.win.log.error("-The parameter name is missing: ");
             return false;
         }
         String name = (String) queryParam.getVal(nameIdx);
+
+        String sql = "SELECT feature, feature_value FROM community_profiles  "
+                + "WHERE community = '" + name + "' ";
 
         String pattern = null;
         int patternIdx = queryParam.qpIndexOfKeyNoCase("ftrpattern");
         if (patternIdx != -1) {
             pattern = (String) queryParam.getVal(patternIdx);
+            pattern = pattern.replaceAll("\\*", "%");
+            sql = sql + "AND feature LIKE '" + pattern + "' ";
         }
 
-        CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
-        HashMap<String, Float> CommunityProfile = new HashMap<String, Float>(
-                communityAPI.getCentroid(name, pattern));
+        sql = sql + "AND FK_psclient = '" + clientName + "' "
+                + "order by feature_value DESC;";
 
-        //TODO: make xsl and change header
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        //TODO: change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
         respBody.append("<result>\n");
-
-        for (String cFeature : CommunityProfile.keySet()) {
-
-            respBody.append("<row>"
-                    + "<ftr_name>" + cFeature + "</ftr_name>"
-                    + "<ftr_value>" + CommunityProfile.get(cFeature) + "</ftr_value>"
-                    + "</row>\n");
-
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                respBody.append("<row>"
+                        + "<ftr_name>" + rs.getString("feature") + "</ftr_name>"
+                        + "<ftr_value>" + rs.getString("feature_value") + "</ftr_value>"
+                        + "</row>\n");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         respBody.append("</result>");
 
@@ -1490,13 +1533,22 @@ public class Communities implements pserver.pservlets.PService {
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
 
+        int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        if (nameIdx == -1) {
+            WebServer.win.log.error("-The parameter name is missing: ");
+            return false;
+        }
+        String name = (String) queryParam.getVal(nameIdx);
+
         String pattern = null;
         int patternIdx = queryParam.qpIndexOfKeyNoCase("usrpattern");
         String sql = "select " + DBAccess.USER_TABLE_FIELD_USER
                 + " from " + DBAccess.UCOMMUNITY_TABLE
-                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName;
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'"
+                + " and " + DBAccess.UCOMMUNITY_TABLE_FIELD_COMMUNITY + "='" + name + "'";
         if (patternIdx != -1) {
             pattern = (String) queryParam.getVal(patternIdx);
+            pattern = pattern.replaceAll("\\*", "%");
             sql = sql + " and " + DBAccess.USER_TABLE_FIELD_USER
                     + " like '" + pattern + "'";
         }
@@ -1550,10 +1602,11 @@ public class Communities implements pserver.pservlets.PService {
         int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
         String sql = "select " + DBAccess.COMMUNITIES_TABLE_FIELD_COMMUNITY
                 + " from " + DBAccess.UCOMMUNITY_TABLE
-                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName
-                + " and " + DBAccess.USER_TABLE_FIELD_USER + "='" + username;
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'"
+                + " and " + DBAccess.USER_TABLE_FIELD_USER + "='" + username + "'";
         if (patternIdx != -1) {
             pattern = (String) queryParam.getVal(patternIdx);
+            pattern = pattern.replaceAll("\\*", "%");
             sql = sql + " and " + DBAccess.USER_TABLE_FIELD_USER
                     + " like '" + pattern + "'";
         }
@@ -1609,7 +1662,7 @@ public class Communities implements pserver.pservlets.PService {
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
-        
+
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
 
         HashMap<String, String> algorithmMap = new HashMap<String, String>();
@@ -1672,9 +1725,10 @@ public class Communities implements pserver.pservlets.PService {
      */
     private void generateFtrDistances(DBAccess dbAccess, String clientName,
             VectorMetric metric, int AssociationType) throws SQLException {
+        
         PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
-        pdbAccess.deleteFeatureAccociations(clientName, DBAccess.RELATION_SIMILARITY);
-        pdbAccess.generateFtrDistances(clientName, metric, DBAccess.RELATION_SIMILARITY,
+        pdbAccess.deleteFeatureAccociations(clientName, AssociationType);
+        pdbAccess.generateFtrDistances(clientName, metric, AssociationType,
                 Integer.parseInt(PersServer.pref.getPref("thread_num")));
     }
 
