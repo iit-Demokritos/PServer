@@ -58,8 +58,9 @@ public class PCommunityDBAccess {
      */
 
     public void deleteUserAccociations(String clientName, int relationType) throws SQLException {
-        getDbAccess().executeUpdate("DELETE FROM " + DBAccess.UASSOCIATIONS_TABLE + " WHERE " + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + " = "
-                + relationType + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'");
+        getDbAccess().executeUpdate("DELETE FROM " + DBAccess.UASSOCIATIONS_TABLE 
+                + " WHERE " + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + " = " + relationType 
+                + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'");
     }
 
     public void generateBinarySimilarities(DBAccess dbAccess, String clientName, int op, float threashold) throws SQLException {
