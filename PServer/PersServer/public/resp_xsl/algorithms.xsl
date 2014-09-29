@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="/">
         <html>
@@ -7,21 +8,23 @@
             </head>
             <body>
                 <br></br>
-                <h2>Community profile: 
-                    <xsl:for-each select="result">
-                        <xsl:value-of select="community"/>
-                    </xsl:for-each>
-                </h2>
+                <h2>Algorithms: </h2>
                 <p></p>
                 <table border="1" cellpadding="4">
-                    
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Parammeters
+                    </th>
+                       
                     <xsl:for-each select="result/row">
                         <tr>
                             <td>
-                                <xsl:value-of select="ftr_name"/>
+                                <xsl:value-of select="algorithm_name"/>
                             </td>
                             <td>
-                                <xsl:value-of select="ftr_value"/>
+                                <xsl:value-of select="algorithm_value"/>
                             </td>
                         </tr>
                     </xsl:for-each>

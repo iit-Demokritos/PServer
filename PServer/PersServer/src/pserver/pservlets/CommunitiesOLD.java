@@ -1028,7 +1028,10 @@ public class CommunitiesOLD implements pserver.pservlets.PService {
             PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
             pdbAccess.deleteFeatureAccociations(clientName, DBAccess.RELATION_BINARY_SIMILARITY);
             pdbAccess.generateBinarySimilarities(dbAccess, clientName, op, threashold);
-            String sql = "SELECT * FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "' AND " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_BINARY_SIMILARITY;
+            String sql = "SELECT * FROM " + DBAccess.UFTRASSOCIATIONS_TABLE 
+                    + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName 
+                    + "' AND " 
+                    + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "=" + DBAccess.RELATION_BINARY_SIMILARITY;
             FeatureGroupManager ftrManager = new FeatureGroupManager(dbAccess, clientName);
             algorithm.execute(sql, ftrManager, dbAccess);
         } catch (SQLException ex) {

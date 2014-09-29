@@ -1405,8 +1405,8 @@ public class Communities implements pserver.pservlets.PService {
 
         Statement stmt = null;
         ResultSet rs = null;
-        //TODO: change xsl header
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        //change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/communities.xsl"));
         respBody.append("<result>\n");
         try {
             stmt = dbAccess.getConnection().createStatement();
@@ -1480,12 +1480,13 @@ public class Communities implements pserver.pservlets.PService {
         Statement stmt = null;
         ResultSet rs = null;
 
-        //TODO: change xsl header
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        //change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/community_profile.xsl"));
         respBody.append("<result>\n");
         try {
             stmt = dbAccess.getConnection().createStatement();
             rs = stmt.executeQuery(sql);
+            respBody.append("<community>" + name + "</community>");
             while (rs.next()) {
                 respBody.append("<row>"
                         + "<ftr_name>" + rs.getString("feature") + "</ftr_name>"
@@ -1555,9 +1556,10 @@ public class Communities implements pserver.pservlets.PService {
 
         Statement stmt = null;
         ResultSet rs = null;
-        //TODO: change xsl header
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        //change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/community_users.xsl"));
         respBody.append("<result>\n");
+        respBody.append("<community>" + name + "</community>\n");
         try {
             stmt = dbAccess.getConnection().createStatement();
             rs = stmt.executeQuery(sql);
@@ -1613,9 +1615,10 @@ public class Communities implements pserver.pservlets.PService {
 
         Statement stmt = null;
         ResultSet rs = null;
-        //TODO: change xsl header
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_feature_groups.xsl"));
+        //change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/user_communities.xsl"));
         respBody.append("<result>\n");
+        respBody.append("<username>" + username + "</username>\n");
         try {
             stmt = dbAccess.getConnection().createStatement();
             rs = stmt.executeQuery(sql);
@@ -1657,7 +1660,7 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetAlgorithms(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        //TODO: call aris function
+        //call aris function
         boolean success = true;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
@@ -1668,8 +1671,8 @@ public class Communities implements pserver.pservlets.PService {
         HashMap<String, String> algorithmMap = new HashMap<String, String>();
         algorithmMap.putAll(communityAPI.algorithmDocumentation());
 
-        //TODO: make xsl and change header
-        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        //make xsl and change header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/algorithms.xsl"));
         respBody.append("<result>\n");
 
         for (String cAlgorithm : algorithmMap.keySet()) {

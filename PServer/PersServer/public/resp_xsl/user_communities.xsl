@@ -1,27 +1,27 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="/">
         <html>
             <head>
-                <title>Community profile view</title>
+                <title>Users in community view</title>
             </head>
             <body>
                 <br></br>
-                <h2>Community profile: 
+                <h2>Communities for username: 
                     <xsl:for-each select="result">
-                        <xsl:value-of select="community"/>
+                        <xsl:value-of select="username"/>
                     </xsl:for-each>
                 </h2>
                 <p></p>
                 <table border="1" cellpadding="4">
-                    
+                    <th>
+                        Communities
+                    </th>
                     <xsl:for-each select="result/row">
                         <tr>
                             <td>
-                                <xsl:value-of select="ftr_name"/>
-                            </td>
-                            <td>
-                                <xsl:value-of select="ftr_value"/>
+                                <xsl:value-of select="community"/>
                             </td>
                         </tr>
                     </xsl:for-each>
