@@ -1068,7 +1068,6 @@ public class Communities implements pserver.pservlets.PService {
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
 
 //        success = communityAPI.addCustomFeatureGroup(name, featuresSet);
-
 //        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
         respBody.append("<result>\n");
         respBody.append("<response>" + success + "</response>\n");
@@ -1316,8 +1315,42 @@ public class Communities implements pserver.pservlets.PService {
     private boolean execMakeFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
-        //TODO: implement by Giannis
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               boolean success = true;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int algorithmIdx = queryParam.qpIndexOfKeyNoCase("algorithm");
+        if (algorithmIdx == -1) {
+            WebServer.win.log.error("-The parameter algorithm is missing: ");
+            return false;
+        }
+        String algorithm = (String) queryParam.getVal(algorithmIdx);
+
+        int typeIdx = queryParam.qpIndexOfKeyNoCase("association");
+        if (typeIdx == -1) {
+            WebServer.win.log.error("-The parameter association is missing: ");
+            return false;
+        }
+        String type = (String) queryParam.getVal(typeIdx);
+
+        HashMap<String, String> parametersMap = new HashMap<String, String>();
+        int parametersIdx = queryParam.qpIndexOfKeyNoCase("parameters");
+        String parameters = null;
+        if (parametersIdx != -1) {
+            parameters = (String) queryParam.getVal(parametersIdx);
+            parametersMap.putAll(JSon.unjsonize(parameters, HashMap.class));
+        }
+
+        CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
+        success = communityAPI.makeFeatureGroups(algorithm, type, parametersMap);
+
+//        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<response>" + success + "</response>\n");
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1352,7 +1385,7 @@ public class Communities implements pserver.pservlets.PService {
 
         } catch (SQLException e) {
             success = false;
-            WebServer.win.log.error("-Problem inserting to DB: " + e);
+            WebServer.win.log.error("-Problem delete from DB: " + e);
         }
 
         respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
@@ -1373,7 +1406,37 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execDeleteFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        boolean success = true;
+        int rowsDeleted = 0;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
+        String pattern = null;
+        try {
+            //if pattern exists delete the specific feature groups
+            if (patternIdx != -1) {
+                pattern = (String) queryParam.getVal(patternIdx);
+                pattern = pattern.replaceAll("\\*", "%");
+                rowsDeleted = dbAccess.DeleteFeatureCommunities(clientName, pattern);
+            } else {
+                //ellse delete all feature groups
+                rowsDeleted = dbAccess.clearFeatureGroups(clientName);
+            }
+
+        } catch (SQLException e) {
+            success = false;
+            WebServer.win.log.error("-Problem delete from DB: " + e);
+        }
+
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<row><num_of_rows>" + rowsDeleted + "</num_of_rows></row>\n");
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1437,7 +1500,45 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = true;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        String pattern = null;
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
+        String sql = "select " + DBAccess.FTRGROUPS_TABLE_FIELD_FTRGROUP
+                + " from " + DBAccess.FTRGROUPS_TABLE
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+        if (patternIdx != -1) {
+            pattern = (String) queryParam.getVal(patternIdx);
+            pattern = pattern.replaceAll("\\*", "%");
+            sql = sql + " and " + DBAccess.FTRGROUPS_TABLE_FIELD_FTRGROUP
+                    + " like '" + pattern + "'";
+        }
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        //change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/ftrgroups.xsl"));
+        respBody.append("<result>\n");
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                respBody.append("<row>"
+                        + "<ftrgroup>" + rs.getString(1) + "</ftrgroup>"
+                        + "</row>\n");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1704,9 +1805,10 @@ public class Communities implements pserver.pservlets.PService {
 
     /**
      *
-     * @param dbAccess
-     * @param clientName
-     * @param metric
+      * Generate user distances between tow user vector profiles
+     * @param dbAccess The DB access
+     * @param clientName The current client name
+     * @param metric The metric to calculate den distance
      * @param features
      * @throws SQLException
      */
@@ -1720,15 +1822,15 @@ public class Communities implements pserver.pservlets.PService {
     }
 
     /**
-     *
-     * @param dbAccess
-     * @param clientName
-     * @param metric
+     * Generate feature distances between tow feature vectors
+     * @param dbAccess The DB access
+     * @param clientName The current client name
+     * @param metric The metric to calculate den distance
      * @throws SQLException
      */
     private void generateFtrDistances(DBAccess dbAccess, String clientName,
             VectorMetric metric, int AssociationType) throws SQLException {
-        
+
         PFeatureGroupDBAccess pdbAccess = new PFeatureGroupDBAccess(dbAccess);
         pdbAccess.deleteFeatureAccociations(clientName, AssociationType);
         pdbAccess.generateFtrDistances(clientName, metric, AssociationType,
