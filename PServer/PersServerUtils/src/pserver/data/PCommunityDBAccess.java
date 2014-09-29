@@ -58,8 +58,9 @@ public class PCommunityDBAccess {
      */
 
     public void deleteUserAccociations(String clientName, int relationType) throws SQLException {
-        getDbAccess().executeUpdate("DELETE FROM " + DBAccess.UASSOCIATIONS_TABLE + " WHERE " + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + " = "
-                + relationType + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'");
+        getDbAccess().executeUpdate("DELETE FROM " + DBAccess.UASSOCIATIONS_TABLE 
+                + " WHERE " + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + " = " + relationType 
+                + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'");
     }
 
     public void generateBinarySimilarities(DBAccess dbAccess, String clientName, int op, float threashold) throws SQLException {
@@ -196,13 +197,6 @@ public class PCommunityDBAccess {
 
         } // end for every S users
 
-//        long to = System.currentTimeMillis();
-//        ArrayList<PUser> pusers = new ArrayList<PUser>(users.size());
-//        int counter = 0;
-//        // TODO: Remove hard-coded memory limitations
-//        for (int i = 0; i < users.size(); i++) {
-//
-//        }
     }
 
     public void generateUserDistancesORIGINAL(String clientName, VectorMetric metric, int dataRelationType, int numOfThreads, String features) throws SQLException {
@@ -383,7 +377,7 @@ public class PCommunityDBAccess {
         //System.out.println("Elapsed time for " + pusers.size() + " user is " + (System.currentTimeMillis() - batchTime));
     }
 
-    private void saveUserSimilarity(PUser user1, PUser user2, float dist, String clientName, int dataRelationType, Statement stmt) throws SQLException {
+    public void saveUserSimilarity(PUser user1, PUser user2, float dist, String clientName, int dataRelationType, Statement stmt) throws SQLException {
 //        Statement stmt = getDbAccess().getConnection().createStatement();
         String sql = "INSERT INTO " + DBAccess.UASSOCIATIONS_TABLE + "(" + DBAccess.UASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ('" + user1.getName() + "','" + user2.getName() + "'," + dist + "," + dataRelationType + ",'" + clientName + "')";
         stmt.executeUpdate(sql);

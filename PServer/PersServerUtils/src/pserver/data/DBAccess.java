@@ -606,6 +606,22 @@ public class DBAccess {
         stmt.close();
         return total;
     }
+    
+    public int DeleteUserCommunities(String clientName,String pattern) throws SQLException {
+        int total = 0;
+        Statement stmt = this.connection.createStatement();
+        total += stmt.executeUpdate("DELETE FROM user_community where " 
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + COMMUNITIES_TABLE_FIELD_COMMUNITY + " LIKE '"+ pattern +"'");
+        total += stmt.executeUpdate("DELETE FROM community_profiles where " 
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + COMMUNITIES_TABLE_FIELD_COMMUNITY + " LIKE '"+ pattern +"'");
+        total += stmt.executeUpdate("DELETE FROM communities where " 
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + COMMUNITIES_TABLE_FIELD_COMMUNITY + " LIKE '"+ pattern +"'");
+        stmt.close();
+        return total;
+    }
 
     public int clearFeatureGroups(String clientName) throws SQLException {
         int total = 0;
