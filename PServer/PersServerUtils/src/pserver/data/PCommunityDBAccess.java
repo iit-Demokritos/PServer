@@ -197,13 +197,6 @@ public class PCommunityDBAccess {
 
         } // end for every S users
 
-//        long to = System.currentTimeMillis();
-//        ArrayList<PUser> pusers = new ArrayList<PUser>(users.size());
-//        int counter = 0;
-//        // TODO: Remove hard-coded memory limitations
-//        for (int i = 0; i < users.size(); i++) {
-//
-//        }
     }
 
     public void generateUserDistancesORIGINAL(String clientName, VectorMetric metric, int dataRelationType, int numOfThreads, String features) throws SQLException {
