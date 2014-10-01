@@ -153,9 +153,6 @@ public class Communities implements pserver.pservlets.PService {
         } else if (com.equalsIgnoreCase("getcommprofile")) {
             //get user community profile
             respCode = comCommuGetCommunityProfile(queryParam, respBody, dbAccess);
-        } else if (com.equalsIgnoreCase("getftrgroupprofile")) {
-            //get feature group profile
-            respCode = comCommuGetFeatureGroupProfile(queryParam, respBody, dbAccess);
         } else if (com.equalsIgnoreCase("getcommusers")) {
             //get list with all users in a community
             respCode = comCommuGetCommunityUsers(queryParam, respBody, dbAccess);
@@ -725,50 +722,6 @@ public class Communities implements pserver.pservlets.PService {
     }
 
     /**
-     *
-     * @param queryParam The parameters of the query.
-     * @param respBody The response message that is produced.
-     * @param dbAccess The database manager.
-     * @return The value of response code.
-     */
-    private int comCommuGetFeatureGroupProfile(VectorMap queryParam, StringBuffer respBody,
-            DBAccess dbAccess) {
-        int respCode = PSReqWorker.NORMAL;
-        try {
-            //first connect to DB
-            dbAccess.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return PSReqWorker.SERVER_ERR;
-        }
-
-        try {
-            boolean success = true;
-            dbAccess.setAutoCommit(false);
-            //execute get feature group profile function
-            success = execGetFeatureGroupProfile(queryParam, respBody, dbAccess);
-            //if function execute successfully
-            if (success) {
-                //commit changes
-                dbAccess.commit();
-            } else {
-                //if not success rollback
-                dbAccess.rollback();
-                respCode = PSReqWorker.REQUEST_ERR;
-                WebServer.win.log.warn("-DB rolled back, data not saved");
-            }
-
-            //disconnect from DB
-            dbAccess.disconnect();
-        } catch (Exception e) {
-            respCode = PSReqWorker.SERVER_ERR;
-            WebServer.win.log.error("-Transaction problem: " + e);
-            e.printStackTrace();
-        }
-        return respCode;
-    }
-
-    /**
      * Method referring to execution part of process.
      *
      * @param queryParam
@@ -1315,7 +1268,7 @@ public class Communities implements pserver.pservlets.PService {
     private boolean execMakeFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
 
-               boolean success = true;
+        boolean success = true;
 
         int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
         String clientName = (String) queryParam.getVal(clntIdx);
@@ -1406,7 +1359,7 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execDeleteFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        
+
         boolean success = true;
         int rowsDeleted = 0;
 
@@ -1613,21 +1566,6 @@ public class Communities implements pserver.pservlets.PService {
      * @param dbAccess The database manager.
      * @return The value of response code.
      */
-    private boolean execGetFeatureGroupProfile(VectorMap queryParam, StringBuffer respBody,
-            DBAccess dbAccess) {
-
-        //TODO: implement by Giannis
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Method referring to execution part of process.
-     *
-     * @param queryParam The parameters of the query.
-     * @param respBody The response message that is produced.
-     * @param dbAccess The database manager.
-     * @return The value of response code.
-     */
     private boolean execGetCommunityUsers(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
         boolean success = true;
@@ -1710,7 +1648,7 @@ public class Communities implements pserver.pservlets.PService {
         if (patternIdx != -1) {
             pattern = (String) queryParam.getVal(patternIdx);
             pattern = pattern.replaceAll("\\*", "%");
-            sql = sql + " and " + DBAccess.USER_TABLE_FIELD_USER
+            sql = sql + " and " + DBAccess.COMMUNITIES_TABLE_FIELD_COMMUNITY
                     + " like '" + pattern + "'";
         }
 
@@ -1748,7 +1686,53 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetFeatureFeatureGroups(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = true;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int featurenameIdx = queryParam.qpIndexOfKeyNoCase("featurename");
+        if (featurenameIdx == -1) {
+            WebServer.win.log.error("-The parameter featurename is missing: ");
+            return false;
+        }
+        String featurename = (String) queryParam.getVal(featurenameIdx);
+
+        String pattern = null;
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("pattern");
+        String sql = "select " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP
+                + " from " + DBAccess.FTRGROUP_FEATURES_TABLE
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'"
+                + " and " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME + "='" + featurename + "'";
+        if (patternIdx != -1) {
+            pattern = (String) queryParam.getVal(patternIdx);
+            pattern = pattern.replaceAll("\\*", "%");
+            sql = sql + " and " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP
+                    + " like '" + pattern + "'";
+        }
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        //change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/feature_ftrgroups.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<ftr>" + featurename + "</ftr>\n");
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                respBody.append("<row>"
+                        + "<ftrgroup>" + rs.getString(1) + "</ftrgroup>"
+                        + "</row>\n");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
@@ -1800,12 +1784,59 @@ public class Communities implements pserver.pservlets.PService {
      */
     private boolean execGetFeatureGroupFeatures(VectorMap queryParam, StringBuffer respBody,
             DBAccess dbAccess) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean success = true;
+
+        int clntIdx = queryParam.qpIndexOfKeyNoCase("clnt");
+        String clientName = (String) queryParam.getVal(clntIdx);
+
+        int nameIdx = queryParam.qpIndexOfKeyNoCase("name");
+        if (nameIdx == -1) {
+            WebServer.win.log.error("-The parameter name is missing: ");
+            return false;
+        }
+        String name = (String) queryParam.getVal(nameIdx);
+
+        String pattern = null;
+        int patternIdx = queryParam.qpIndexOfKeyNoCase("ftrpattern");
+        String sql = "select " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME
+                + " from " + DBAccess.FTRGROUP_FEATURES_TABLE
+                + " where " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'"
+                + " and " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP + "='" + name + "'";
+        if (patternIdx != -1) {
+            pattern = (String) queryParam.getVal(patternIdx);
+            pattern = pattern.replaceAll("\\*", "%");
+            sql = sql + " and " + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME
+                    + " like '" + pattern + "'";
+        }
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        //change xsl header
+        respBody.append(DBAccess.xmlHeader("/resp_xsl/ftrgroups_features.xsl"));
+        respBody.append("<result>\n");
+        respBody.append("<ftrgroup>" + name + "</ftrgroup>\n");
+        try {
+            stmt = dbAccess.getConnection().createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                respBody.append("<row>"
+                        + "<ftr>" + rs.getString(1) + "</ftr>"
+                        + "</row>\n");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Communities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        respBody.append("</result>");
+
+        return success;
     }
 
     /**
      *
-      * Generate user distances between tow user vector profiles
+     * Generate user distances between tow user vector profiles
+     *
      * @param dbAccess The DB access
      * @param clientName The current client name
      * @param metric The metric to calculate den distance
@@ -1823,6 +1854,7 @@ public class Communities implements pserver.pservlets.PService {
 
     /**
      * Generate feature distances between tow feature vectors
+     *
      * @param dbAccess The DB access
      * @param clientName The current client name
      * @param metric The metric to calculate den distance
