@@ -16,7 +16,7 @@
                 <p></p>
                 <table border="1" cellpadding="4">
                     <th>
-                        Communities
+                        Feature Groups
                     </th>
                     <xsl:for-each select="result/row">
                         <tr>

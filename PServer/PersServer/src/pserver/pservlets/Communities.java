@@ -1020,7 +1020,7 @@ public class Communities implements pserver.pservlets.PService {
 
         CommunityAPI communityAPI = new CommunityAPI(dbAccess, clientName);
 
-//        success = communityAPI.addCustomFeatureGroup(name, featuresSet);
+        success = communityAPI.addCustomFeatureGroup(name, featuresSet);
 //        respBody.append(DBAccess.xmlHeader("/resp_xsl/rows.xsl"));
         respBody.append("<result>\n");
         respBody.append("<response>" + success + "</response>\n");
