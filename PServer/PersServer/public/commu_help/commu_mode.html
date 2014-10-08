@@ -86,13 +86,54 @@
                         <a href="#" class="list-group-item" onclick="loadcontent('getalgorithms')">
                             getalgorithms
                         </a>
-                        <a href="#" class="list-group-item" onclick="loadcontent('getmetrics')">
-                            getmetrics
-                        </a>
 
                     </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-5 col-md-offset-1">
+
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Description:
+                                    </strong> 
+                                </td>
+                                <td id="description">
+                                    <!--Mark-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Return types:
+                                    </strong> 
+                                </td>
+                                <td id="rt">
+                                    <!--Jacob-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Methods:
+                                    </strong>
+                                </td>
+                                <td>GET/POST</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br></br>
+                    <div class="well well-sm" id="URL">
+                        <h3>
+<!--                            URL:-->
+                        </h3>
+                        <div class="highlight">
+                            <!--1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                        </div>
+                    </div>
+                    <br></br>
 
                     <table class="table table-striped">
                         <thead>
@@ -103,29 +144,50 @@
                                 <th>Example</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="params">
+<!--                            <tr>
                                 <td>Mark</td>
-                                <td><span class="label label-success">Success</span></td>
+                                <td><span class="label label-success">Optional</span></td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                             </tr>
                             <tr>
                                 <td>Jacob</td>
-                                <td><span class="label label-success">Success</span></td>
+                                <td><span class="label label-success">Optional</span></td>
                                 <td>@fat</td>
                                 <td>@fat</td>
                             </tr>
                             <tr>
                                 <td>Larry</td>
-                                <td><span class="label label-danger">Danger</span></td>
+                                <td><span class="label label-danger">Required</span></td>
                                 <td>@twitter</td>
                                 <td>@twitter</td>
-                            </tr>
+                            </tr>-->
                         </tbody>
                     </table>
 
-<div class="well well-sm">...</div>
+                    <div class="well well-sm" id="example">
+                        <h3>
+                            Example:
+                        </h3>
+                        <div class="highlight">
+                            <span id="ExURL">
+                            <!--http://localhost:1111/1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                            </span>
+                            <pre id="ExResponse">
+<!--&lt;result&gt;
+    &lt;row&gt;
+        &lt;algorithm_name&gt;
+        betw
+        &lt;/algorithm_name&gt;
+        &lt;algorithm_value&gt;
+        edgesToRemove-&gt;default:5
+        &lt;/algorithm_value&gt;
+    &lt;/row&gt;
+&lt;/result&gt;-->
+                            </pre>
+                        </div>
+                    </div>
 
 
                 </div>

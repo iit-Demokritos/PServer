@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+Get a list all clustering algorithms and their properties
+    </description>
+    <rt>
+XML    
+    </rt>
+    <URL>
+    commu?clnt=&lt;name|pass&gt;&#38;com=getalgorithms
+    </URL>
+    <parameter>
+        <name>
+        clnt
+        </name>
+        <status>
+        required
+        </status>
+        <paramdesc>
+        The Client credentials
+        </paramdesc>
+        <example>
+        clnt=&lt;name|pass&gt;
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+        com
+        </name>
+        <status>
+        required
+        </status>
+        <paramdesc>
+        Command to get clustering algorithms
+        </paramdesc>
+        <example>
+        com=getalgorithms
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

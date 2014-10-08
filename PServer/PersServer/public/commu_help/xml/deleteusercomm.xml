@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<root>
+    <description>
+Delete communities with given community pattern name. If pattern name 
+is empty then will delete all user communities from PServer
+    </description>
+    <rt>
+    XML
+    </rt>
+    <URL>
+    commu?clnt=&lt;name|pass&gt;&#38;com=deleteusercomm&#38;pattern=null_3556498_1
+    </URL>
+    <parameter>
+        <name>
+        clnt
+        </name>
+        <status>
+        required
+        </status>
+        <paramdesc>
+        The Client credentials
+        </paramdesc>
+        <example>
+          clnt=&lt;name|pass&gt;
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+        com
+        </name>
+        <status>
+        required
+        </status>
+        <paramdesc>
+        Command to delete communities
+        </paramdesc>
+        <example>
+        com=deleteusercomm
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+        pattern
+        </name>
+        <status>
+        optional
+        </status>
+        <paramdesc>
+        The delete pattern name
+        </paramdesc>
+        <example>
+        pattern= algorithm.assocType.name
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>
