@@ -12,8 +12,9 @@ function clearcontent() {
     $("#ExURL").html("");
     $("#ExResponse").html("");
     $("#params").html("");
+    $("#command").html("");
 }
-function loadcontent(name) {
+function loadcontent(name,command) {
     
     clearcontent();
 
@@ -71,6 +72,7 @@ function loadcontent(name) {
                 $("#ExURL").html(ExURL);
                 $("#ExResponse").html(ExResponse);
                 $("#params").html(paramHtml);
+                $("#command").html(command);
             });
         }
     });

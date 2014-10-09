@@ -12,3 +12,7 @@ body {
     background-color: #eee;
     margin-top: 50px;
 } 
+
+#myTab{
+    border-bottom-width: 10px;
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Get a list all clustering algorithms and their properties
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/community/:ClientCredentials/cluster/algorithms.xml
+    </URL>
+    <URL>
+        1.0/community/:ClientCredentials/cluster/algorithms.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>
