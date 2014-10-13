@@ -6,20 +6,25 @@ and open the template in the editor.
 -->
 <root>
     <description>
-        Add custom community on PServer
+        inserts new (feature, default value) pairs. Must
+        be used while initializing the personalization service
+        For features that are added at a later stage, the
+        profile of all users is updated to include them as well.
+        If one or more feature names already exist in DB, or
+        if one or more feature names are not legal names,
+        code 401 (request error) will be returned. If the
+        error code 401 is returned then none of the feature
+        pairs in the request has been inserted in the DB.
     </description>
     <rt>
-        XML/JSON
+        XML
     </rt>
     <URL>
-        1.0/community/:ClientCredentials/cluster/custom/users.xml
-    </URL>
-    <URL>
-        1.0/community/:ClientCredentials/cluster/custom/users.json
+        pers?clnt=name|pass&amp;com=addftr&amp;ftr_1=def_val_1&amp;ftr_2=def_val_2
     </URL>
     <parameter>
         <name>
-            :ClientCredentials
+            clnt
         </name>
         <status>
             required
@@ -28,74 +33,43 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            name|pass
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-            name
+            com
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            The community name
+            The add features command
         </paramdesc>
         <example>
-            name=testcommunity
+            com=addftr
         </example>
     </parameter> 
     <parameter>
         <name>
-            users
+            ftr_name=def_val_value
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            List with users who belongs
+            The feature name with the default value
         </paramdesc>
         <example>
-            users=[“user1”,”user2”]
+            lang.en=0&amp;lang.gr=1
         </example>
     </parameter> 
     <ExURL>
-       
+        pers?clnt=name|pass&amp;com=addftr&amp;lang.en=0&amp;lang.fr=0&amp;lang.gr=1
     </ExURL>
     <ExResponse>
-
+        200 OK, 401 (fail, request error), 501 (fail, server error)
+        200 OK  : no response body exists.
     </ExResponse>
 </root>
 
-
-
-
-<html>
-
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-addftr template</title>
-    </head>
-
-    <body bgcolor="#eee">
-
-        <pre>-addftr
-template: pers?clnt=&lt;name|pass&gt;&amp;com=addftr&amp;&lt;ftr_1&gt;=&lt;def_val_1&gt;&amp;&lt;ftr_2&gt;=...
-          Order of query params is not important. Feature
-          names must not end with '*' to be legal.
-descript: inserts new (feature, default value) pairs. Must
-          be used while initializing the personalization service
-          For features that are added at a later stage, the
-          profile of all users is updated to include them as well.
-          If one or more feature names already exist in DB, or
-          if one or more feature names are not legal names,
-          code 401 (request error) will be returned. If the
-          error code 401 is returned then none of the feature
-          pairs in the request has been inserted in the DB.
-example : pers?clnt=name|pass&amp;com=addftr&amp;lang.en=0&amp;lang.fr=0&amp;lang.gr=1
-returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : no response body exists.</pre>
-
-    </body>
-
-</html>

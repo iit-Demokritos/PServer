@@ -6,16 +6,24 @@ and open the template in the editor.
 -->
 <root>
     <description>
-        Returns a list with all users that has a name that satisfies the pattern.
+        inserts new (attribute, default value) pairs. Must
+          be used while initializing the personalization service
+          For attributes that are added at a later stage, the
+          profile of all users is updated to include them as well.
+          If one or more attribute names already exist in DB, or
+          if one or more attribute names are not legal names,
+          code 401 (request error) will be returned. If the
+          error code 401 is returned then none of the feature
+          pairs in the request has been inserted in the DB.
     </description>
     <rt>
         XML/JSON
     </rt>
     <URL>
-        1.0/personal/:ClientCredentials/users.xml
+        1.0/personal/:ClientCredentials/Add_Attributes.xml
     </URL>
     <URL>
-        1.0/personal/:ClientCredentials/users.json
+        1.0/personal/:ClientCredentials/Add_Attributes.json
     </URL>
     <parameter>
         <name>
@@ -33,36 +41,20 @@ and open the template in the editor.
     </parameter> 
     <parameter>
         <name>
-            where
+            attributes
         </name>
         <status>
-            optional
+            required
         </status>
         <paramdesc>
-            The pattern name of the username.
-            If no pattern return all users list
+            A List of pairs attribute name and default value
         </paramdesc>
         <example>
-            where=user.p*
-        </example>
-    </parameter> 
-    <parameter>
-        <name>
-            pageindex
-        </name>
-        <status>
-            optional
-        </status>
-        <paramdesc>
-           The page index of N users.
-            If no page index return all users
-        </paramdesc>
-        <example>
-            pageindex=2
+            attributes={"attr_name1":"value","attr_name2":"value"}
         </example>
     </parameter> 
     <ExURL>
-       
+
     </ExURL>
     <ExResponse>
 

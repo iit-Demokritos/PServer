@@ -1,22 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
-<!--<html>
-    <head>
-        <title>Untitled Document</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1253">
-    </head>
-
-    <frameset rows="*" framespacing="0" frameborder="yes" border="0">
-        <frameset cols="136,*" framespacing="0" frameborder="yes" border="0">
-            <frame src="menu.html" name="leftFrame" scrolling="NO" noresize>
-            <frame src="commu_index.html" name="mainFrame">
-        </frameset>
-    </frameset>
-    <noframes><body>
-        </body></noframes>
-</html>-->
 <html>
     <head>
-        <title>Community api</title>
+        <title>Personal API</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -47,32 +31,12 @@
                                 addattr
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('addddt', 'addddt')">
-                                addddt
-                            </a>
-                            <a href="#" class="list-group-item" 
                                onclick="loadcontent('addftr', 'addftr')">
                                 addftr
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('addndt', 'addndt')">
-                                addndt
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('caldcy', 'caldcy')">
-                                caldcy
-                            </a>
-                            <a href="#" class="list-group-item" 
                                onclick="loadcontent('getattrdef', 'getattrdef')">
                                 getattrdef
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('getavg', 'getavg')">
-                                getavg
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('getdrt', 'getdrt')">
-                                getdrt
                             </a>
                             <a href="#" class="list-group-item" 
                                onclick="loadcontent('getftrdef', 'getftrdef')">
@@ -99,20 +63,8 @@
                                 remattr
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('remdcy', 'remdcy')">
-                                remdcy
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('remddt', 'remddt')">
-                                remddt
-                            </a>
-                            <a href="#" class="list-group-item" 
                                onclick="loadcontent('remftr', 'remftr')">
                                 remftr
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('remndt', 'remndt')">
-                                remndt
                             </a>
                             <a href="#" class="list-group-item" 
                                onclick="loadcontent('remusr', 'remusr')">
@@ -125,10 +77,6 @@
                             <a href="#" class="list-group-item" 
                                onclick="loadcontent('setattrdef', 'setattrdef')">
                                 setattrdef
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('setdcy', 'setdcy')">
-                                setdcy
                             </a>
                             <a href="#" class="list-group-item" 
                                onclick="loadcontent('setftrdef', 'setftrdef')">
@@ -147,100 +95,79 @@
                         <div class="list-group">
 
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Raddattr', 'addattr')">
-                                addattr
+                               onclick="loadcontent('Raddattr', 
+                                           '1.0/personal/:ClientCredentials/Add_Attributes')">
+                                1.0/personal/:ClientCredentials/Add_Attributes
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Raddddt', 'addddt')">
-                                addddt
+                               onclick="loadcontent('Raddftr', 
+                                   '1.0/personal/:ClientCredentials/Add_Features')">
+                                1.0/personal/:ClientCredentials/Add_Features
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Raddftr', 'addftr')">
-                                addftr
+                               onclick="loadcontent('Rgetattrdef', 
+                                   '1.0/personal/:ClientCredentials/Attributes')">
+                                1.0/personal/:ClientCredentials/Attributes
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Raddndt', 'addndt')">
-                                addndt
+                               onclick="loadcontent('Rgetftrdef', 
+                                   '1.0/personal/:ClientCredentials/Features')">
+                                1.0/personal/:ClientCredentials/Features
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rcaldcy', 'caldcy')">
-                                caldcy
+                               onclick="loadcontent('Rgetusrattr', 
+                                   '1.0/personal/:ClientCredentials/Users_Attributes')">
+                                1.0/personal/:ClientCredentials/Users_Attributes
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rgetattrdef', 'getattrdef')">
-                                getattrdef
+                               onclick="loadcontent('Rgetusrftr', 
+                                   '1.0/personal/:ClientCredentials/Users_Features')">
+                                1.0/personal/:ClientCredentials/Users_Features
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rgetavg', 'getavg')">
-                                getavg
+                               onclick="loadcontent('Rgetusrs', 
+                                           '1.0/personal/:ClientCredentials/users')">
+                                1.0/personal/:ClientCredentials/users
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rgetdrt', 'getdrt')">
-                                getdrt
+                               onclick="loadcontent('Rincval', 
+                                   '1.0/personal/:ClientCredentials/Increase_Users_Values')">
+                                1.0/personal/:ClientCredentials/Increase_Users_Values
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rgetftrdef', 'getftrdef')">
-                                getftrdef
+                               onclick="loadcontent('Rremattr', 
+                                   '1.0/personal/:ClientCredentials/Delete_Attributes')">
+                                1.0/personal/:ClientCredentials/Delete_Attributes
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rgetusrattr', 'getusrattr')">
-                                getusrattr
+                               onclick="loadcontent('Rremftr', 
+                                   '1.0/personal/:ClientCredentials/Delete_Features')">
+                                1.0/personal/:ClientCredentials/Delete_Features
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rgetusrftr', 'getusrftr')">
-                                getusrftr
+                               onclick="loadcontent('Rremusr', 
+                                   '1.0/personal/:ClientCredentials/Delete_Users')">
+                                1.0/personal/:ClientCredentials/Delete_Users
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rgetusrs', 'getusrs')">
-                                getusrs
+                               onclick="loadcontent('Rsetattr', 
+                                   '1.0/personal/:ClientCredentials/Update_Users_Attributes')">
+                                1.0/personal/:ClientCredentials/Update_Users_Attributes
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rincval', 'incval')">
-                                incval
+                               onclick="loadcontent('Rsetattrdef', 
+                                   '1.0/personal/:ClientCredentials/Update_Attributes')">
+                                1.0/personal/:ClientCredentials/Update_Attributes
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rremattr', 'remattr')">
-                                remattr
+                               onclick="loadcontent('Rsetftrdef', 
+                                   '1.0/personal/:ClientCredentials/Update_Features')">
+                                1.0/personal/:ClientCredentials/Update_Features
                             </a>
                             <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rremdcy', 'remdcy')">
-                                remdcy
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rremddt', 'remddt')">
-                                remddt
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rremftr', 'remftr')">
-                                remftr
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rremndt', 'remndt')">
-                                remndt
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rremusr', 'remusr')">
-                                remusr
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rsetattr', 'setattr')">
-                                setattr
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rsetattrdef', 'setattrdef')">
-                                setattrdef
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rsetdcy', 'setdcy')">
-                                setdcy
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rsetftrdef', 'setftrdef')">
-                                setftrdef
-                            </a>
-                            <a href="#" class="list-group-item" 
-                               onclick="loadcontent('Rsetusr', 'setusr')">
-                                setusr
+                               onclick="loadcontent('Rsetusr', 
+                                   '1.0/personal/:ClientCredentials/Post_User')">
+                                1.0/personal/:ClientCredentials/Post_User
                             </a>
 
                         </div>

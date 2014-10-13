@@ -25,7 +25,6 @@ function loadcontent(name,command) {
         success: function(xml) {
 
             $(xml).find('root').each(function() {
-
                 var $item = $(this);
                 var description = $item.find('description').text().trim();
                 var rt = $item.find('rt').text().trim();

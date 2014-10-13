@@ -6,16 +6,20 @@ and open the template in the editor.
 -->
 <root>
     <description>
-        Add custom community on PServer
+        Set users profile with attribute and feature values.
+        if the user already exists in the DB, for this user are updated
+        the new value(s). If the user is a new user, the new user
+        feature values are initialized into the DB, and then, the value(s) of
+        matching feature(s),attribute(s) will be updated to the new value(s).
     </description>
     <rt>
         XML/JSON
     </rt>
     <URL>
-        1.0/community/:ClientCredentials/cluster/custom/users.xml
+        1.0/personal/:ClientCredentials/Post_User.xml
     </URL>
     <URL>
-        1.0/community/:ClientCredentials/cluster/custom/users.json
+        1.0/personal/:ClientCredentials/Post_User.json
     </URL>
     <parameter>
         <name>
@@ -33,30 +37,44 @@ and open the template in the editor.
     </parameter> 
     <parameter>
         <name>
-            name
+            username
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            The community name
+            The user's name
         </paramdesc>
         <example>
-            name=testcommunity
+            username=kostas
         </example>
     </parameter> 
     <parameter>
         <name>
-            users
+            attr
         </name>
         <status>
-            required
+            optional
         </status>
         <paramdesc>
-            List with users who belongs
+            List with pairs of attribute name and values
         </paramdesc>
         <example>
-            users=[“user1”,”user2”]
+             attr={"attribute_name1":"value","attribute_name2":"value"}
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            List with pairs of feature name and values
+        </paramdesc>
+        <example>
+            ftr={"feature_name1":"value","feature_name2":"value"}
         </example>
     </parameter> 
     <ExURL>
@@ -66,49 +84,3 @@ and open the template in the editor.
 
     </ExResponse>
 </root>
-
-
-
-
-
-
-
-<html>
-
-    <head>
-        <meta http-equiv="Content-Language" content="en-us">
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-setusr template</title>
-    </head>
-
-    <body bgcolor="#eee">
-
-        <pre>-setusr
-template: pers?clnt=&lt;name|pass&gt;&amp;com=setusr&amp;usr=&lt;usr&gt;[&amp;&lt;ftr_pattern_1&gt;=&lt;ftr_value_1&gt;&amp;...][&amp;&lt;attr_pattern_1&gt;=&lt;attr_value_1&gt;&amp;...]
-          Order of query params is important: position of 'com'
-          is not important, however updates of feature and attribute values
-          are performed in the order they appear in the request.
-          User name cannot be empty string.
-pattern : * | name[.*], where name is a path expression
-descript: if the user already exists in the DB, the value(s) of the
-          feature(s)/attribute(s) matching the pattern(s) for this user are updated
-          to the new value(s). If the user is a new user, the new user
-          feature values are initialized into the DB (using the def
-          values in 'up_features',attributes tables), and then, the value(s) of
-          matching feature(s),attribute(s) will be updated to the new value(s). If
-          no feature and attributes matches a pattern no value will be updated (200 OK
-          will still be returned). Note that if no (feature pattern, value) or (attribute pattern, value)
-          pairs exist in the request, the user profile and user_attributes will still be
-          initialized if it is a new user (otherwise nothing will happen,
-          200 OK will still be returned). If the error code 401 is returned,
-          then no changes have taken place in the DB.
-          to specify the table (attributes,up_feature) that the parameters belong we must insert the prefix 
-          attr_ or ftr_. If we do not use any prefix PServer set the paremeters to up_feature table
-          the prefixes will be removed from the parameter names  
-example : pers?clnt=name|pass&amp;com=setusr&amp;usr=kostas&amp;attr_lang.*=0&amp;attr_lang.gr=1&amp;attr_gender=male;ftr_bank=1
-returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : no response body exists.</pre>
-
-    </body>
-
-</html>

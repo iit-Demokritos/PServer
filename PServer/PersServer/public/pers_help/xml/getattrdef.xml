@@ -6,20 +6,21 @@ and open the template in the editor.
 -->
 <root>
     <description>
-        Add custom community on PServer
+        selects all attributes matching the attribute
+        pattern and formats an XML answer with their
+        names and def values. If no feature in DB
+        matches the pattern, the result will not have
+        any row elements (200 OK will still be returned).
     </description>
     <rt>
-        XML/JSON
+        XML
     </rt>
     <URL>
-        1.0/community/:ClientCredentials/cluster/custom/users.xml
-    </URL>
-    <URL>
-        1.0/community/:ClientCredentials/cluster/custom/users.json
+        pers?clnt=name|pass&amp;com=getattrdef&amp;attr=attr_pattern
     </URL>
     <parameter>
         <name>
-            :ClientCredentials
+            clnt
         </name>
         <status>
             required
@@ -28,84 +29,46 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            name|pass
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-            name
+            com
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            The community name
+            The get attributes default values command
         </paramdesc>
         <example>
-            name=testcommunity
+            com=getattrdef
         </example>
     </parameter> 
     <parameter>
         <name>
-            users
+            attr
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            List with users who belongs
+            The attribute pattern
         </paramdesc>
         <example>
-            users=[“user1”,”user2”]
+            attr=lang.*
         </example>
     </parameter> 
     <ExURL>
-       
+        pers?clnt=name|pass&amp;com=getattrdef&amp;attr=lang.*
     </ExURL>
     <ExResponse>
-
-    </ExResponse>
-</root>
-
-
-
-
-
-<html>
-
-    <head>
-        <meta http-equiv="Content-Language" content="en-us">
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>-addftr template</title>
-    </head>
-
-    <body bgcolor="#eee">
-
-        <pre>-getattrdef
-template: pers?clnt=&lt;name|pass&gt;&amp;com=getattrdef&amp;attr=&lt;attr_pattern&gt;
-          Order of query params is not important.
-pattern : * | name[.*], where name is a path expression
-descript: selects all attributes matching the attribute
-          pattern and formats an XML answer with their
-          names and def values. If no feature in DB
-          matches the pattern, the result will not have
-          any row elements (200 OK will still be returned).
-          The results are sorted according to ascending
-          attribute name (a-&gt;z, 1-&gt;10).
-example : pers?clnt=name|pass&amp;com=getattrdef&amp;attr=lang.*
-returns : 200 OK, 401 (fail, request error), 501 (fail, server error)
-200 OK  : in this case the response body is as follows
           &lt;?xml version=&quot;1.0&quot;?&gt;
           &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/up_attributes.xsl&quot;?&gt;
           &lt;result&gt;
               &lt;row&gt;&lt;attr&gt;feature&lt;/attr&gt;&lt;defval&gt;default value&lt;/defval&gt;&lt;/row&gt;
-              ...
+        ...
           &lt;/result&gt;
-comments: the reference to the xsl file allows to view results
-          in a web browser. In case the response body is handled
-          directly by an application and not by a browser, this
-          reference to xsl can be ignored.</pre>
-
-    </body>
-
-</html>
+    </ExResponse>
+</root>
