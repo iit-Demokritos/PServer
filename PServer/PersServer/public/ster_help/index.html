@@ -1,52 +1,334 @@
 <html>
-
     <head>
-        <title>PServer help</title>
-        <meta http-equiv="Content-Language" content="en-us">
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>Stereotype Mode</title>
+        <title>Stereotype API</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/custom.css" rel="stylesheet">
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.js"></script>
+        <script src="../js/custom.js"></script>
     </head>
+    <body>
 
-    <body bgcolor="#eee">
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#base" role="tab" data-toggle="tab">Base API</a></li>
+            <li><a href="#rest" role="tab" data-toggle="tab">REST API</a></li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div  id="myTabContent" class="tab-content col-md-3">
 
-        <h1>Stereotype Mode</h1>
-        <p>&nbsp;</p>
-        <pre>In Stereotype Mode, the server offers support for stereotypes.
-Stereotypes are categories of users with specific characteristics.
-Each stereotype has a profile that is defined by means of (feature,
-value) tupples. Features can be entities relevant to specific
-applications, while values give an estimation about the stereotype
-relevence to corresponding features. Each stereotype may have
-its own different features. Features can be organized in a
-tree or graph based manner, for easily managing conceptual
-hierarchies. This organization is encoded in the name of every
-feature as a path expression, and is setup by applications.
-Users can be assigned stereotypes, together with a degree of
-relevence, showing how relevent is a stereotype to a user.
-A user may be assigned several stereotypes (not the same twice).
-The DB structure: stereotypes (st_stereotype) with key 'st_stereotype',
-stereotype_profiles (sp_stereotype, sp_feature, sp_value, sp_numvalue)
-with key 'sp_stereotype' and 'sp_feature', stereotype_users
-(su_user, su_stereotype, su_degree) with key 'su_user' and
-'su_stereotype'. If a field in 'stereotypes' is deleted, the deletion
-is cascaded to 'stereotype_profiles' and 'stereotype_users', because
-of referential integrity constraints. The field 'sp_numvalue' is
-&quot;invisible&quot;: it is not part of the results of 'select' queries,
-and contains the numeric equivalent of the string value in field
-'sp_value', or NULL if the string cannot be converted to numeric.
-This duplicate field is used mainly to allow for two types of value
-comparisons: string and numeric. Note that the primary data type for
-values is always string, as it is more general, and that the numeric
-version always correspond to the string version. Also note that
-values intented to be numeric must use '.' for the decimal part when
-given as strings. If ',' is used, the string will not be successfully
-converted to numeric, and its numeric equivalent will be NULL. The
-field 'su_degree' is numeric (double), and when its values are
-exchanged as strings they follow the rules described above. This
-field also contain NULLs for values that could not be converted to
-numeric.
-        </pre>
+                    <div class="tab-pane active col-md-8" id="base">
+
+                        <div class="list-group">
+
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('addstr', 'addstr')">
+                                addstr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('liststr', 'liststr')">
+                                liststr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getstrusr', 'getstrusr')">
+                                getstrusr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getstrftr', 'getstrftr')">
+                                getstrftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('rmkstr', 'rmkstr')">
+                                getusrattr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('remstr', 'remstr')">
+                                remstr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('addusr', 'addusr')">
+                                addusr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getusrstrs', 'getusrstrs')">
+                                getusrstrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('incdgr', 'incdgr')">
+                                incdgr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('setdgr', 'setdgr')">
+                                setdgr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('remusr', 'remusr')">
+                                remusr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('updusrs', 'updusrs')">
+                                updusrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('chkusrs', 'chkusrs')">
+                                chkusrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('findusrs', 'findusrs')">
+                                findusrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('addftr', 'addftr')">
+                                addftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('remftr', 'remftr')">
+                                remftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('incftr', 'incftr')">
+                                incftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('setftr', 'setftr')">
+                                setftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('updftr', 'updftr')">
+                                updftr
+                            </a>
+
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="rest">
+
+                        <div class="list-group">
+
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Raddstr',
+                                               'addstr')">
+                                addstr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rliststr',
+                                               'liststr')">
+                                liststr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetstrusr',
+                                               'getstrusr')">
+                                getstrusr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetstrftr',
+                                               'getstrftr')">
+                                getstrftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rrmkstr',
+                                               'rmkstr')">
+                                getusrattr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rremstr',
+                                               'remstr')">
+                                remstr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Raddusr',
+                                               'addusr')">
+                                addusr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetusrstrs',
+                                               'getusrstrs')">
+                                getusrstrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rincdgr',
+                                               'incdgr')">
+                                incdgr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rsetdgr',
+                                               'setdgr')">
+                                setdgr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rremusr',
+                                               'remusr')">
+                                remusr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rupdusrs',
+                                               'updusrs')">
+                                updusrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rchkusrs',
+                                               'chkusrs')">
+                                chkusrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rfindusrs',
+                                               'findusrs')">
+                                findusrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Raddftr',
+                                               'addftr')">
+                                addftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rremftr',
+                                               'remftr')">
+                                remftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rincftr',
+                                               'incftr')">
+                                incftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rsetftr',
+                                               'setftr')">
+                                setftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rupdftr',
+                                               'updftr')">
+                                updftr
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-5 col-md-offset-1">
+
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Command:
+                                    </strong> 
+                                </td>
+                                <td id="command">
+                                    <!--Mark-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Description:
+                                    </strong> 
+                                </td>
+                                <td id="description">
+                                    <!--Mark-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Return types:
+                                    </strong> 
+                                </td>
+                                <td id="rt">
+                                    <!--Jacob-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Methods:
+                                    </strong>
+                                </td>
+                                <td>GET/POST</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br></br>
+                    <div class="well well-sm" id="URL">
+                        <h3>
+                            <!--                            URL:-->
+                        </h3>
+                        <div class="highlight">
+                            <!--1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                        </div>
+                    </div>
+                    <br></br>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Parameter Name</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody id="params">
+                            <!--                            <tr>
+                                                            <td>Mark</td>
+                                                            <td><span class="label label-success">Optional</span></td>
+                                                            <td>@mdo</td>
+                                                            <td>@mdo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jacob</td>
+                                                            <td><span class="label label-success">Optional</span></td>
+                                                            <td>@fat</td>
+                                                            <td>@fat</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Larry</td>
+                                                            <td><span class="label label-danger">Required</span></td>
+                                                            <td>@twitter</td>
+                                                            <td>@twitter</td>
+                                                        </tr>-->
+                        </tbody>
+                    </table>
+
+                    <div class="well well-sm" id="example">
+                        <h3>
+                            Example:
+                        </h3>
+                        <div class="highlight">
+                            <span id="ExURL">
+                                <!--http://localhost:1111/1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                            </span>
+                            <pre id="ExResponse">
+<!--&lt;result&gt;
+    &lt;row&gt;
+        &lt;algorithm_name&gt;
+        betw
+        &lt;/algorithm_name&gt;
+        &lt;algorithm_value&gt;
+        edgesToRemove-&gt;default:5
+        &lt;/algorithm_value&gt;
+    &lt;/row&gt;
+&lt;/result&gt;-->
+                            </pre>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
 
     </body>
-
 </html>

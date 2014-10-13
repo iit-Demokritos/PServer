@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified user, updates the degrees of the
+          stereotypes in the query string, to the new degrees.
+          Degrees in the query string that cannot be converted
+          to numeric (double) will be considered as NULLs when
+          updating the DB. If the specified user does not exist,
+          or if some stereotypes in the query string are not
+          assigned to that user, corresponding degrees will not
+          be updated (200 OK will still be returned). If the error
+          code 401 is returned then no changes have taken place.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass&amp;com=setdgr&amp;usr=usr&amp;str_1=new_deg_1&amp;str_2=...
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Set stereotype degree for a user command
+        </paramdesc>
+        <example>
+            com=setdgr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+           Tha user's name
+        </paramdesc>
+        <example>
+            usr=0.34
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str_name=value
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+           Pairs with feature name and values
+        </paramdesc>
+        <example>
+            visitor=0.85&amp;expert=1.0
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=setdgr&amp;usr=0.34&amp;visitor=0.85&amp;expert=1.0
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>

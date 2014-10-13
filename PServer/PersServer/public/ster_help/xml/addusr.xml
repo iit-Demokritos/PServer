@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+       assigns stereotypes to a user with an associated degree.
+          Degree is numeric (double), and expresses relevence.
+          For the 'degree' parameters in query string that cannot
+          be converted to numeric, NULLs will be inserted in DB.
+          The stereotypes must already exist in the DB. If a
+          stereotype in the query string does not already exists
+          in the DB, or if a (usr, str) pair already exists, then
+          code 401 (request error) will be returned. If the error
+          code 401 is returned then no records have been inserted
+          in the DB.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+       ster?clnt=name|pass&amp;com=addusr&amp;usr=usrname&amp;str_1=deg_1&amp;str_2=...
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Add user to stereotype command
+        </paramdesc>
+        <example>
+            com=addus
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The username
+        </paramdesc>
+        <example>
+            usr=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str_name=degree
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Pairs of stereotype and degree that user belongs to stereotype
+        </paramdesc>
+        <example>
+           expert=0.9
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=addusr&amp;usr=kostas&amp;visitor=0.78&amp;expert=0.9
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>
