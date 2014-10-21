@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+removes all records with stereotypes matching the pairs user-stereotype
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass&amp;com=remusr[&amp;usr_1=str_1&amp;usr_2=...]
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The remove user command
+        </paramdesc>
+        <example>
+            com=remusr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr_name=str_name
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            pairs of username and steretype tha we want to remove the user
+        </paramdesc>
+        <example>
+           george=visitor&amp;george=english
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=remusr&amp;john=experts&amp;george=visitor&amp;george=english
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        lists the stereotypes in the DB. From an original set of
+        the stereotypes that match the stereotype pattern (that
+        is, all stereotypes if str pattern is '*', a single
+        stereotype if name exists in table 'stereotypes', or
+        none if name does not exist or table is empty. A subset
+        is selected and listed as follows: (a) if the mode pattern
+        is '*', all stereotypes in the original set are returned
+        without additional filtering, (b) if the mode pattern is
+        'p', only the stereotypes of the original set that do not
+        have any associated feature (do not exist in table
+        'stereotype_profiles') are returned, and (c) if the mode
+        pattern is 'u' only the stereotypes of the original set
+        that have not been assigned to any user (do not exist in
+        table 'stereotype_users') are returned. Result is ordered
+        by stereotype name. If the final list is empty, a result
+        without any row elements is returned in the XML answer.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass;&amp;com=liststr&amp;str=str_pattern[&amp;mod=mod_pattern]
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The add features command
+        </paramdesc>
+        <example>
+            com=addftr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype name pattern
+        </paramdesc>
+        <example>
+            str=professionals
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            mod
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            The mode pattern (*|p|u)
+        </paramdesc>
+        <example>
+            mod=*
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=liststr&amp;str=*
+        ster?clnt=name|pass&amp;com=liststr&amp;str=professionals&amp;mod=*
+        ster?clnt=name|pass&amp;com=liststr&amp;str=*&amp;mod=p
+        ster?clnt=name|pass&amp;com=liststr&amp;str=visitor&amp;mod=u
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test&lt;/str&gt;&lt;rule&gt;null&lt;/rule&gt;
+	    &lt;/row&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test2&lt;/str&gt;&lt;rule&gt;age&lt;12|or|(age&gt;32|and|gender:f)&lt;/rule&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>
