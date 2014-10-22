@@ -11,14 +11,17 @@ and open the template in the editor.
         sets its degree to the new degree specified.
     </description>
     <rt>
-        XML
+        XML/JSON
     </rt>
     <URL>
-        ster?clnt=name|pass&amp;com=setftr&amp;str=strname&amp;ftr1=dgr1[&amp;ftr2=dgr2...]
+        1.0/stereotype/:ClientCredentials/set_features.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/set_features.json
     </URL>
     <parameter>
         <name>
-            clnt
+            :ClientCredentials
         </name>
         <status>
             required
@@ -27,45 +30,41 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            clnt=name|pass
+            name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-            com
+            stereotype
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            Set stereotypes features command
+            The stereotype name
         </paramdesc>
         <example>
-            com=setftr
+            stereotype=educated
         </example>
     </parameter> 
     <parameter>
         <name>
-            ftr_name=value
+            featurelist
         </name>
         <status>
             required
         </status>
         <paramdesc>
-           Pairs of feature name with their value
+            A List of pairs feature name and feature value
         </paramdesc>
         <example>
-            testFtr.1=2&amp;testFtr.5=0.1
+            featurelist={"ftr_name1":"value","ftr_name2":"value"}
         </example>
     </parameter> 
     <ExURL>
-        ster?clnt=name|pass&amp;com=setftr&amp;str=test.1&amp;testFtr.1=2&amp;testFtr.5=0.1
+
     </ExURL>
     <ExResponse>
-	  &lt;result&gt;
-	    &lt;row&gt;
-	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
-	    &lt;/row&gt;
-	  &lt;/result&gt;
+
     </ExResponse>
 </root>

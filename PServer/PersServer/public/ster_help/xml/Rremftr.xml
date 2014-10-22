@@ -6,20 +6,23 @@ and open the template in the editor.
 -->
 <root>
     <description>
-        Removes all features matching the ftr_patterns specified from all stereotypes
+        Removes all features matching the feature list specified from all stereotypes
         matching the stereotype pattern specified. If no features patterns are
-        specified * is assumed and all faetures are removed from all stereotypes
-        matching str_pattern;
+        specified * is assumed and all features are removed from all stereotypes
+        matching stereotype pattern;
     </description>
-    <rt>
-        XML
+      <rt>
+        XML/JSON
     </rt>
     <URL>
-        ster?clnt=name|pass&amp;com=remftr&amp;str=str_pattern&amp;ftr=ftr_pattern
+        1.0/stereotype/:ClientCredentials/delete_features.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/delete_features.json
     </URL>
     <parameter>
         <name>
-            clnt
+            :ClientCredentials
         </name>
         <status>
             required
@@ -28,26 +31,12 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            clnt=name|pass
+            name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-            com
-        </name>
-        <status>
-            required
-        </status>
-        <paramdesc>
-            The remove features command
-        </paramdesc>
-        <example>
-            com=remftr
-        </example>
-    </parameter> 
-    <parameter>
-        <name>
-            str
+            stereotype
         </name>
         <status>
             required
@@ -56,31 +45,27 @@ and open the template in the editor.
             The stereotype pattern name
         </paramdesc>
         <example>
-            str=test.*
+           stereotype=educated
         </example>
     </parameter> 
     <parameter>
         <name>
-            ftr
+            features
         </name>
         <status>
-            optional
+            required
         </status>
         <paramdesc>
-            The feature pattern name
+            A List features for delete
         </paramdesc>
         <example>
-            ftr=testFtr.sub1.*
+            features={"ftr_name1","ftr_name2"}
         </example>
     </parameter> 
     <ExURL>
-        ster?clnt=name|pass&amp;com=remftr&amp;str=test.*&amp;ftr=testFtr.sub1.*
+
     </ExURL>
     <ExResponse>
-	  &lt;result&gt;
-	    &lt;row&gt;
-	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
-	    &lt;/row&gt;
-	  &lt;/result&gt;
+
     </ExResponse>
 </root>

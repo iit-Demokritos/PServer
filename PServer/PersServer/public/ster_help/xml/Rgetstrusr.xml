@@ -6,18 +6,21 @@ and open the template in the editor.
 -->
 <root>
     <description>
-       for each stereotype matching str_pattern, 
-       the users matching usr_pattern are found and returned
+       for each stereotype matching stereotype pattern, 
+       the users matching where are found and returned
     </description>
-    <rt>
-        XML
+      <rt>
+        XML/JSON
     </rt>
     <URL>
-        ster?clnt=name|pass&amp;com=getstrusr&amp;str=str_pattern&amp;usr=usr_pattern
+        1.0/stereotype/:ClientCredentials/users.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/users.json
     </URL>
     <parameter>
         <name>
-            clnt
+            :ClientCredentials
         </name>
         <status>
             required
@@ -26,65 +29,55 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            clnt=name|pass
+            name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-            com
+            stereotype
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            Get stereotype users command
+            Stereotype pattern name
         </paramdesc>
         <example>
-            com=getstrusr
+            stereotype=educated
         </example>
     </parameter> 
     <parameter>
         <name>
-            str
+            where
         </name>
         <status>
-            required
+            optional
         </status>
         <paramdesc>
-            The stereotype name
+            User's pattern name. Idf no pattern return all users.
         </paramdesc>
         <example>
-            str=professionals
+            where=kost*
         </example>
     </parameter> 
     <parameter>
         <name>
-            usr
+            pageindex
         </name>
         <status>
-            required
+            optional
         </status>
         <paramdesc>
-            The username pattern
+           The number of the page with N=20 items. If no pageindex set, return the whole list
         </paramdesc>
         <example>
-           usr=temp.*
+            pageindex=2
         </example>
     </parameter> 
     <ExURL>
-        ster?clnt=name|pass&amp;com=getstrusr&amp;str=professionals&amp;usr=temp.*
+
     </ExURL>
     <ExResponse>
-	  &lt;result&gt;
-	    &lt;row&gt;
-	      &lt;str&gt;test2&lt;/str&gt;&lt;usr&gt;temp.2&lt;/usr&gt;&lt;dgr&gt;0.3&lt;/dgr&gt;
-	    &lt;/row&gt;
-	    &lt;row&gt;
-	      &lt;str&gt;test2&lt;/str&gt;&lt;usr&gt;temp.1&lt;/usr&gt;&lt;dgr&gt;1.5&lt;/dgr&gt;
-	    &lt;/row&gt;
-	    &lt;row&gt;
-	      &lt;str&gt;test&lt;/str&gt;&lt;usr&gt;temp.1&lt;/usr&gt;&lt;dgr&gt;1&lt;/dgr&gt;
-	    &lt;/row&gt;
-	  &lt;/result&gt;
+
     </ExResponse>
 </root>

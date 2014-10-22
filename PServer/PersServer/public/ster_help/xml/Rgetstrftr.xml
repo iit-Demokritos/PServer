@@ -11,15 +11,18 @@ and open the template in the editor.
         the pattern or if stereotype does not exist, the result will not have any
         'row' elements (200 OK will still be returned).
     </description>
-    <rt>
-        XML
+     <rt>
+        XML/JSON
     </rt>
     <URL>
-        ster?clnt=name|pass&amp;com=getstrftr&amp;str=str_pattern&amp;ftr=ftr_pattern
+        1.0/stereotype/:ClientCredentials/features.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/features.json
     </URL>
     <parameter>
         <name>
-            clnt
+            :ClientCredentials
         </name>
         <status>
             required
@@ -28,65 +31,55 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            clnt=name|pass
+            name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-            com
+            stereotype
         </name>
         <status>
-            required
+            optional
         </status>
         <paramdesc>
-            get stereotypes command
+            The stereotype name
         </paramdesc>
         <example>
-            com=getstrftr
+            stereotype=education
         </example>
     </parameter> 
     <parameter>
         <name>
-            str
+            where
         </name>
         <status>
-            required
+            optional
         </status>
         <paramdesc>
-            The stereotype pattern
+            Feature pattern name. If no pattern return all the list
         </paramdesc>
         <example>
-           str=*
+            where=edu*
         </example>
     </parameter> 
     <parameter>
         <name>
-            ftr
+            pageindex
         </name>
         <status>
-            required
+            optional
         </status>
         <paramdesc>
-            The feature pattern
+           The number of the page with N=20 items. If no pageindex set, return the whole list
         </paramdesc>
         <example>
-           ftr=page6.*
+            pageindex=2
         </example>
     </parameter> 
     <ExURL>
-        ster?clnt=name|pass&amp;com=getstrftr&amp;str=*&amp;ftr=page6.*
+
     </ExURL>
     <ExResponse>
-	  &lt;result&gt;
-	    &lt;row&gt;
-	      &lt;str&gt;test2&lt;/str&gt;&lt;ftr&gt;test.2&lt;/ftr&gt;value&gt;23&lt;/value&gt;
-	    &lt;/row&gt;
-	    &lt;row&gt;
-	      &lt;str&gt;test2&lt;/str&gt;&lt;ftr&gt;test.1&lt;/ftr&gt;value&gt;15&lt;/value&gt;
-	    &lt;/row&gt;
-	    &lt;row&gt;
-	      &lt;str&gt;test&lt;/str&gt;&lt;ftr&gt;test.1&lt;/ftr&gt;value&gt;12&lt;/value&gt;
-	    &lt;/row&gt;
-	  &lt;/result&gt;
+
     </ExResponse>
 </root>

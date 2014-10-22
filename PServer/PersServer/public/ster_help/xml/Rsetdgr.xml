@@ -16,15 +16,18 @@ and open the template in the editor.
           be updated (200 OK will still be returned). If the error
           code 401 is returned then no changes have taken place.
     </description>
-    <rt>
-        XML
+       <rt>
+        XML/JSON
     </rt>
     <URL>
-        ster?clnt=name|pass&amp;com=setdgr&amp;usr=usr&amp;str_1=new_deg_1&amp;str_2=...
+        1.0/stereotype/:ClientCredentials/set_degree.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/set_degree.json
     </URL>
     <parameter>
         <name>
-            clnt
+            :ClientCredentials
         </name>
         <status>
             required
@@ -33,59 +36,41 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            clnt=name|pass
+            name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-            com
+            username
         </name>
         <status>
             required
         </status>
         <paramdesc>
-            Set stereotype degree for a user command
+           The user's name
         </paramdesc>
         <example>
-            com=setdgr
+            username=kostas
         </example>
     </parameter> 
     <parameter>
         <name>
-            usr
+            stereotypelist
         </name>
         <status>
             required
         </status>
         <paramdesc>
-           Tha user's name
+            A List of pairs stereotype name and degree value
         </paramdesc>
         <example>
-            usr=0.34
-        </example>
-    </parameter> 
-    <parameter>
-        <name>
-            str_name=value
-        </name>
-        <status>
-            required
-        </status>
-        <paramdesc>
-           Pairs with feature name and values
-        </paramdesc>
-        <example>
-            visitor=0.85&amp;expert=1.0
+            stereotypelist={"str_name1":"degree","str_name2":"degree"}
         </example>
     </parameter> 
     <ExURL>
-        ster?clnt=name|pass&amp;com=setdgr&amp;usr=0.34&amp;visitor=0.85&amp;expert=1.0
+
     </ExURL>
     <ExResponse>
-	  &lt;result&gt;
-	    &lt;row&gt;
-	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
-	    &lt;/row&gt;
-	  &lt;/result&gt;
+
     </ExResponse>
 </root>
