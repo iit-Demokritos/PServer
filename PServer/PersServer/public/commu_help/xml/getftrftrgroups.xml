@@ -7,68 +7,68 @@ and open the template in the editor.
 
 <root>
     <description>
-Get a list with feature groups that the given feature belongs
+        Get a list with feature groups that the given feature belongs
     </description>
     <rt>
-    XML
+        XML
     </rt>
     <URL>
-    commu?clnt=&lt;name|pass&gt;&#38;com=getftrftrgroups&#38;featurename=  &#38;pattern=tes*
+        commu?clnt=name|pass&#38;com=getftrftrgroups&#38;featurename=txt&#38;pattern=tes*
     </URL>
     <parameter>
         <name>
-        clnt
+            clnt
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        The Client credentials
+            The Client credentials
         </paramdesc>
         <example>
-        clnt=&lt;name|pass&gt;
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-        com
+            com
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        Command to get feature groups  where a feature belongs
+            Command to get feature groups  where a feature belongs
         </paramdesc>
         <example>
-        com=getftrftrgroups
+            com=getftrftrgroups
         </example>
     </parameter> 
     <parameter>
         <name>
-        featurename
+            featurename
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        the feature name
+            the feature name
         </paramdesc>
         <example>
-        featurename= 
+            featurename=txt
         </example>
     </parameter> 
     <parameter>
         <name>
-        pattern
+            pattern
         </name>
         <status>
-        optional
+            optional
         </status>
         <paramdesc>
-        Feature group filter. Returns all feature groups if no pattern exists
+            Feature group filter. Returns all feature groups if no pattern exists
         </paramdesc>
         <example>
-        pattern=tes*
+            pattern=tes*
         </example>
     </parameter> 
     <ExURL>

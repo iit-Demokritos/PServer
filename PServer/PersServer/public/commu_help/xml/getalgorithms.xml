@@ -8,46 +8,55 @@ and open the template in the editor.
 
 <root>
     <description>
-Get a list all clustering algorithms and their properties
+        Get a list all clustering algorithms and their properties
     </description>
     <rt>
-XML    
+        XML    
     </rt>
     <URL>
-    commu?clnt=&lt;name|pass&gt;&#38;com=getalgorithms
+        commu?clnt=name|pass&#38;com=getalgorithms
     </URL>
     <parameter>
         <name>
-        clnt
+            clnt
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        The Client credentials
+            The Client credentials
         </paramdesc>
         <example>
-        clnt=&lt;name|pass&gt;
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-        com
+            com
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        Command to get clustering algorithms
+            Command to get clustering algorithms
         </paramdesc>
         <example>
-        com=getalgorithms
+            com=getalgorithms
         </example>
     </parameter> 
     <ExURL>
-    
+        http://localhost:1111/commu?clnt=name|pass&#38;com=getalgorithms
     </ExURL>
     <ExResponse>
-    
+&lt;result&gt;
+    &lt;row&gt;
+        &lt;algorithm_name&gt;
+        betw
+        &lt;/algorithm_name&gt;
+        &lt;algorithm_value&gt;
+        edgesToRemove-&gt;default:5
+        &lt;/algorithm_value&gt;
+    &lt;/row&gt;
+&lt;/result&gt;
     </ExResponse>
 </root>

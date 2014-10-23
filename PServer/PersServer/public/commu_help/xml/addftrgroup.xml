@@ -8,68 +8,68 @@ and open the template in the editor.
 
 <root>
     <description>
-Add custom feature group on PServer
+        Add custom feature group on PServer
     </description>
     <rt>
-    XML
+        XML
     </rt>
     <URL>
-    commu?clnt=&lt;name|pass&gt;&#38;com=addftrgroup&#38;name=testftrgroup&#38;features=[“ftr1”,”ftr2”]
+        commu?clnt=name|pass&#38;com=addftrgroup&#38;name=testftrgroup&#38;features=[“ftr1”,”ftr2”]
     </URL>
     <parameter>
         <name>
-        clnt
+            clnt
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        The Client credentials
+            The Client credentials
         </paramdesc>
         <example>
-        clnt=&lt;name|pass&gt;
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-        com
+            com
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        add custom feature group command
+            add custom feature group command
         </paramdesc>
         <example>
-        com=addftrgroup
+            com=addftrgroup
         </example>
     </parameter> 
     <parameter>
         <name>
-        name
+            name
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        feature group name
+            feature group name
         </paramdesc>
         <example>
-        name=testftrgroup
+            name=testftrgroup
         </example>
     </parameter> 
     <parameter>
         <name>
-        features
+            features
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        feature list with features which belongs to that feature group
+            feature list with features which belongs to that feature group
         </paramdesc>
         <example>
-        features=[“ftr1”,”ftr2”
+            features=[“ftr1”,”ftr2”]
         </example>
     </parameter> 
     <ExURL>

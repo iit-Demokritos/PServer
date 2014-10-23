@@ -12,7 +12,7 @@ and open the template in the editor.
         XML
     </rt>
     <URL>
-        commu?clnt=&lt;name|pass&gt;&#38;com=addcomm&#38;name=testcommunity&#38;users=[“user1”,”user2”]
+        commu?clnt=name|pass&#38;com=addcomm&#38;name=testcommunity&#38;users=[“user1”,”user2”]
     </URL>
     <parameter>
         <name>
@@ -25,7 +25,7 @@ and open the template in the editor.
             The client credentials
         </paramdesc>
         <example>
-            clnt=&lt;name|pass&gt;
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
@@ -71,19 +71,10 @@ and open the template in the editor.
         </example>
     </parameter> 
     <ExURL>
-        http://localhost:1111/1.0/community/lastfm|experiment123/cluster/algorithms.xml
+
     </ExURL>
     <ExResponse>
-&lt;result&gt;
-    &lt;row&gt;
-        &lt;algorithm_name&gt;
-        betw
-        &lt;/algorithm_name&gt;
-        &lt;algorithm_value&gt;
-        edgesToRemove-&gt;default:5
-        &lt;/algorithm_value&gt;
-    &lt;/row&gt;
-&lt;/result&gt;
+
     </ExResponse>
 </root>
       

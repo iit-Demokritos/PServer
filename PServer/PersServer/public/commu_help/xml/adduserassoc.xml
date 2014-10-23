@@ -8,97 +8,97 @@ and open the template in the editor.
 
 <root>
     <description>
-Add association weight between two users in PServer for specific
-association type 
+        Add association weight between two users in PServer for specific
+        association type 
     </description>
     <rt>
-    XML
+        XML
     </rt>
     <URL>
-    commu?clnt=&lt;name|pass&gt;&gt;com=adduserassoc&gt;user1=test1&gt;user2=test2&gt;weight=0.9&gt;association=5
+        commu?clnt=name|pass&amp;com=adduserassoc&amp;user1=test1&amp;user2=test2&amp;weight=0.9&amp;association=cos
     </URL>
     <parameter>
         <name>
-        clnt
+            clnt
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        The Client credentials
+            The Client credentials
         </paramdesc>
         <example>
-         clnt=&lt;name|pass&gt;
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-        com
+            com
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        Add user association command
+            Add user association command
         </paramdesc>
         <example>
-        com=adduserassoc
+            com=adduserassoc
         </example>
     </parameter> 
     <parameter>
         <name>
-        user1
+            user1
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        the first user
+            the first user
         </paramdesc>
         <example>
-        user1=test1
+            user1=test1
         </example>
     </parameter> 
     <parameter>
         <name>
-        user2
+            user2
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        the second user
+            the second user
         </paramdesc>
         <example>
-        user2=test2
+            user2=test2
         </example>
     </parameter> 
     <parameter>
         <name>
-        weight
+            weight
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        the association weight between two users
+            the association weight between two users
         </paramdesc>
         <example>
-        weight= 0.9
+            weight=0.9
         </example>
     </parameter> 
     <parameter>
         <name>
-        association
+            association
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        the association type
+            the association type
         </paramdesc>
         <example>
-        association=5
+            association=5
         </example>
     </parameter> 
     <ExURL>

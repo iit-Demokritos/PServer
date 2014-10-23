@@ -34,9 +34,18 @@ and open the template in the editor.
         </example>
     </parameter> 
     <ExURL>
-    
+        http://localhost:1111/1.0/community/lastfm|experiment123/cluster/algorithms.xml
     </ExURL>
     <ExResponse>
-    
+&lt;result&gt;
+    &lt;row&gt;
+        &lt;algorithm_name&gt;
+        betw
+        &lt;/algorithm_name&gt;
+        &lt;algorithm_value&gt;
+        edgesToRemove-&gt;default:5
+        &lt;/algorithm_value&gt;
+    &lt;/row&gt;
+&lt;/result&gt;
     </ExResponse>
 </root>

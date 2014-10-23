@@ -7,68 +7,68 @@ and open the template in the editor.
 
 <root>
     <description>
-Get list of features which consists the given feature group name
+        Get list of features which consists the given feature group name
     </description>
     <rt>
-XML    
+        XML    
     </rt>
     <URL>
-    commu?clnt=&lt;name|pass&gt;&#38;com=getftrgroupfeatures&#38;name=  &#38;ftrpattern=tes*
+        commu?clnt=name|pass&#38;com=getftrgroupfeatures&#38;name=type_algorithm_assocType_name&#38;ftrpattern=tes*
     </URL>
     <parameter>
         <name>
-        clnt
+            clnt
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        The Client credentials
+            The Client credentials
         </paramdesc>
         <example>
-        clnt=&lt;name|pass&gt;
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-        com
+            com
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        Command to get feature group features 
+            Command to get feature group features 
         </paramdesc>
         <example>
-        com=getftrgroupfeatures
+            com=getftrgroupfeatures
         </example>
     </parameter> 
     <parameter>
         <name>
-        name
+            name
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        the feature group name
+            the feature group name
         </paramdesc>
         <example>
-        name=
+            name=type_algorithm_assocType_name
         </example>
     </parameter> 
     <parameter>
         <name>
-        ftrpattern
+            ftrpattern
         </name>
         <status>
-        optional
+            optional
         </status>
         <paramdesc>
-        Feature group features filter. Returns all if no ftrpattern exists
+            Feature group features filter. Returns all if no ftrpattern exists
         </paramdesc>
         <example>
-        ftrpattern=tes*
+            ftrpattern=tes*
         </example>
     </parameter> 
     <ExURL>

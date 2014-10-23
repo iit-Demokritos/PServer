@@ -8,69 +8,69 @@ and open the template in the editor.
 
 <root>
     <description>
-Calculate association between all users in PServer with specific metric
- algorithm
+        Calculate association between all users in PServer with specific metric
+        algorithm
     </description>
     <rt>
-    XML
+        XML
     </rt>
     <URL>
-    commu?clnt=&lt;name|pass&gt;&#38;com=calcuassoc&#38;algorithm=cos
+        commu?clnt=name|pass&gt;&#38;com=calcuassoc&#38;algorithm=cos
     </URL>
     <parameter>
         <name>
-        clnt
+            clnt
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        The Client credentials
+            The Client credentials
         </paramdesc>
         <example>
-         clnt=&lt;name|pass&gt;
+            clnt=name|pass
         </example>
     </parameter> 
     <parameter>
         <name>
-        com
+            com
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        Calculate user Association command
+            Calculate user Association command
         </paramdesc>
         <example>
-        com=calcuassoc
+            com=calcuassoc
         </example>
     </parameter> 
     <parameter>
         <name>
-        algorithm
+            algorithm
         </name>
         <status>
-        required
+            required
         </status>
         <paramdesc>
-        The metric algorithm to calculate the user association
+            The metric algorithm to calculate the user association
         </paramdesc>
         <example>
-        algorithm=cos
+            algorithm=cos
         </example>
     </parameter> 
     <parameter>
         <name>
-        properties
+            properties
         </name>
         <status>
-        optional
+            optional
         </status>
         <paramdesc>
-        custom properties for this algorithm
+            custom properties for this algorithm
         </paramdesc>
         <example>
-        properties={”pr1”:”pr1value”,”pr2”:”pr2value”}
+            properties={”pr1”:”pr1value”,”pr2”:”pr2value”}
         </example>
     </parameter> 
     <ExURL>

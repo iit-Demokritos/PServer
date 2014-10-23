@@ -20,7 +20,7 @@ and open the template in the editor.
         XML
     </rt>
     <URL>
-        pers?clnt=&lt;name|pass&gt;&#38;com=addattr&#38;attr_1=def_val_1&#38;attr_2=def_val_2
+        pers?clnt=name|pass&#38;com=addattr&#38;attr_1=def_val_1&#38;attr_2=def_val_2
     </URL>
     <parameter>
         <name>
