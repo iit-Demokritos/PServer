@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        For the stereotype &lt;str&gt; increases all features (ftr1, ftr2...)
+	  by the corresponding degrees (dgr1, dgr2...). If a feature didn't exist
+	  in the stereotype it is added using the corresponding degree as the default.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+       ster?clnt=name|pass&amp;com=incftr&amp;str=strname&amp;ftr1=dgr1&amp;ftr2=dgr2...
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+           Increase feature command
+        </paramdesc>
+        <example>
+            com=incftr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr_name=increase_step
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Pairs of feature name and increase step
+        </paramdesc>
+        <example>
+           ftr.1=15&amp;ftr.test.5=0.5
+        </example>
+    </parameter> 
+    <ExURL>
+       ster?clnt=&lt;name|pass&gt;&amp;com=incftr&amp;str=testStr.1&amp;ftr.1=15&amp;ftr.test.5=0.5
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>

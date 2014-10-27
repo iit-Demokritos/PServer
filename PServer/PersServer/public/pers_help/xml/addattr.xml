@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        inserts new (attribute, default value) pairs. Must
+        be used while initializing the personalization service
+        For attributes that are added at a later stage, the
+        profile of all users is updated to include them as well.
+        If one or more attribute names already exist in DB, or
+        if one or more attribute names are not legal names,
+        code 401 (request error) will be returned. If the
+        error code 401 is returned then none of the feature
+        pairs in the request has been inserted in the DB.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&#38;com=addattr&#38;attr_1=def_val_1&#38;attr_2=def_val_2
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The add attributes command
+        </paramdesc>
+        <example>
+            com=addattr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            attr_name = def_val
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The attribute name with the default value
+        </paramdesc>
+        <example>
+            age=18,
+            gender=male
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=addattr&amp;lang.en=0&amp;lang.1=ENGLISH&amp;lang.2=GREEK&amp;gender=male
+    </ExURL>
+    <ExResponse>
+        200 OK, 401 (fail, request error), 501 (fail, server error)
+        200 OK  : no response body exists.
+    </ExResponse>
+</root>

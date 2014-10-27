@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Calculate association between all users in PServer with specific metric
+        algorithm
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/community/:ClientCredentials/association/users.xml
+    </URL>
+    <URL>
+        1.0/community/:ClientCredentials/association/users.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            algorithm
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The metric algorithm to calculate the user association
+        </paramdesc>
+        <example>
+            algorithm=cos
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            properties
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            custom properties for this algorithm
+        </paramdesc>
+        <example>
+            properties={”pr1”:”pr1value”,”pr2”:”pr2value”}
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

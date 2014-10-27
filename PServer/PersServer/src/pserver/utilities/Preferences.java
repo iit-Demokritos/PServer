@@ -78,7 +78,7 @@ public class Preferences {
         defPref.put("max_log_size", "50000000");
         defPref.put("port", "1111");
         defPref.put("ssl", "off");
-        defPref.put("database_driver", "org.gjt.mm.mysql.Driver");
+        defPref.put("database_driver", "com.mysql.jdbc.Driver");
         defPref.put("database_url", "mysql://localhost/pserver?rewriteBatchedStatements=true");
         defPref.put("database_user", "pserver");
         defPref.put("database_pass", "pserver");

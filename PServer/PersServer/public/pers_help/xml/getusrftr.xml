@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified user, the features matching the pattern
+        are found. If no feature in DB matches the pattern 
+        or if user does not exist, the result will not have any
+        'row' elements (200 OK will still be returned).
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=getusrftr&amp;usr=username&amp;ftr=ftr_pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The get user's features command
+        </paramdesc>
+        <example>
+            com=getusrftr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            usr=user1234
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The features pattern
+        </paramdesc>
+        <example>
+            ftr=page5.*
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=getusrftr&amp;usr=152&amp;ftr=page5.*
+    </ExURL>
+    <ExResponse>
+        &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/singleuser_profile.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;ftr&gt;feature&lt;/ftr&gt;&lt;val&gt;value&lt;/val&gt;&lt;/row&gt;
+        ...
+          &lt;/result&gt;
+    </ExResponse>
+</root>
+

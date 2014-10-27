@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Delete feature groups with given group pattern name. If pattern name 
+        is empty then will delete all user communities from PServer
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/community/:ClientCredentials/delete/features.xml
+    </URL>
+    <URL>
+        1.0/community/:ClientCredentials/delete/features.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Command to delete feature groups
+        </paramdesc>
+        <example>
+            com=deleteftrgroup
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            pattern
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            The delete pattern name
+        </paramdesc>
+        <example>
+            pattern= algorithm.assocType.name
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified user, updates the degrees of the
+          stereotypes in the query string, to the new degrees.
+          Degrees in the query string that cannot be converted
+          to numeric (double) will be considered as NULLs when
+          updating the DB. If the specified user does not exist,
+          or if some stereotypes in the query string are not
+          assigned to that user, corresponding degrees will not
+          be updated (200 OK will still be returned). If the error
+          code 401 is returned then no changes have taken place.
+    </description>
+       <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/set_degree.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/set_degree.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            username
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+           The user's name
+        </paramdesc>
+        <example>
+            username=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotypelist
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            A List of pairs stereotype name and degree value
+        </paramdesc>
+        <example>
+            stereotypelist={"str_name1":"degree","str_name2":"degree"}
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

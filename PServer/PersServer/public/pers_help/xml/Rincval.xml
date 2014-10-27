@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Increase the values of the given feature list.
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/personal/:ClientCredentials/Increase_Users_Values.xml
+    </URL>
+    <URL>
+        1.0/personal/:ClientCredentials/Increase_Users_Values.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            username
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            username=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            featurelist
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            List of pairs with feature name and step value to increase 
+        </paramdesc>
+        <example>
+            featurelist={"feature_name1":"4","feature_name2":"-2"}
+        </example>
+    </parameter> 
+    <ExURL>
+       
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

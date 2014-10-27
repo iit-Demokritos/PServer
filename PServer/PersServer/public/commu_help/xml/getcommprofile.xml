@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Get profile for the given community name
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        commu?clnt=name|pass&#38;com=getcommprofile&#38;name=type_algorithm_assocType_name&#38;ftrpattern=txt.*
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Command to get user community profile
+        </paramdesc>
+        <example>
+            com=getcommprofile
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            name
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            the community name
+        </paramdesc>
+        <example>
+            name=type_algorithm_assocType_name
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftrpattern
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            Profile feature filter. Returns the hole profile if no ftrpattern exists
+        </paramdesc>
+        <example>
+            ftrpattern=txt.*
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

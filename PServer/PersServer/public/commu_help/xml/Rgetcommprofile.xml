@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Get profile for the given community name
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/community/:ClientCredentials/community.xml
+    </URL>
+    <URL>
+        1.0/community/:ClientCredentials/community.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            name
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            the community name
+        </paramdesc>
+        <example>
+            name= algorithm.assocType.name
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftrpattern
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            Profile feature filter. Returns the hole profile if no ftrpattern exists
+
+        </paramdesc>
+        <example>
+            ftrpattern=txt.*
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+       assigns stereotypes to a user with an associated degree.
+          Degree is numeric (double), and expresses relevence.
+          For the 'degree' parameters in query string that cannot
+          be converted to numeric, NULLs will be inserted in DB.
+          The stereotypes must already exist in the DB. If a
+          stereotype in the query string does not already exists
+          in the DB, or if a (usr, str) pair already exists, then
+          code 401 (request error) will be returned. If the error
+          code 401 is returned then no records have been inserted
+          in the DB.
+    </description>
+      <rt>
+        XML/JSON
+    </rt>
+    <URL>
+       1.0/stereotype/:ClientCredentials/add_user.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/add_user.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            username
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+           The user's name that we want to add to a stereotype
+        </paramdesc>
+        <example>
+            username=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotypes
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            A List of pairs stereotype name and degree that user belongs to this stereotype
+        </paramdesc>
+        <example>
+            attributes={"str_name1":"degree","str_name2":"degree"}
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Get list with attribute name and value in PServer.
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/personal/:ClientCredentials/Attributes.xml
+    </URL>
+    <URL>
+        1.0/personal/:ClientCredentials/Attributes.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            attributesPattern
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The pattern name of the attribute.
+        </paramdesc>
+        <example>
+           attributesPattern=user.p*
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            pageindex
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+           The page index of N attributes.
+            If no page index return all attributes
+        </paramdesc>
+        <example>
+            pageindex=2
+        </example>
+    </parameter> 
+    <ExURL>
+       
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

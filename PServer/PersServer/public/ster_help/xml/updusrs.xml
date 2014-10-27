@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Removes all users not matching the stereotypes rule and inserts
+        any new users that do match. Performing this on a stereotype
+        without a rule will not change the stereotypes users but will
+        not cause an error.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass&amp;com=updusrs&amp;str=strname
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The update users command
+        </paramdesc>
+        <example>
+            com=updusrs
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The sterotype name to update users
+        </paramdesc>
+        <example>
+            str=test.1
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=updusrs&amp;str=test.1
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>

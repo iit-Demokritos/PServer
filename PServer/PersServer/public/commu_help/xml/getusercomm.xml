@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Get list with community names depends to given pattern name 
+        If pattern name is empty then will return all user communities from
+        PServer
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        commu?clnt=name|pass&#38;com=getusercomm&#38;pattern=type_algorithm_assocType_name
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Command to get user communities
+        </paramdesc>
+        <example>
+            com=getusercomm
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            pattern
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            The pattern name
+        </paramdesc>
+        <example>
+            pattern=type_algorithm_assocType_name
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

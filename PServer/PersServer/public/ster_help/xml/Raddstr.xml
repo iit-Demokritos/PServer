@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        A new stereotype based on the rule is inserted in the DB. The "rule" parameter is 
+        a conjuction of logical operations on the demographic attribures. The form of the
+        pattern is attr_name1[operator]val1|logial_operator|attr_name2[operator]val2...
+        The operator for comparison can be : for equality and &gt;,&gt;:.&lt;:,&lt;,&lt;&gt; for 	  
+        greater than, greater or equal than etc. We use the : and not the = symbol because of the
+        url character restrictions. The logical operations are the "or" and "and". There can be 
+        parenthesis too. String literals should be enclosed in quotation makrs.
+        If there is an existing stereotype with the same name an error will be returned.	  
+        Note that if no rule parameter exists then pserver will create an empty stereotype. If a rule 
+        parameter exists pserver will find all the users that satisfies the rule and will create the stereorype
+        profile
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/add_stereotype.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/add_stereotype.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotype
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype name
+        </paramdesc>
+        <example>
+            stereotype=educated
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            rule
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotypes rule
+        </paramdesc>
+        <example>
+            rule=expert.computer:"yes"|and|educ:3
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>
