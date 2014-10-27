@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for each user matching usr_pattern, the stereotypes matching str_pattern
+        are found and sorted according to degree. If no stereotype in DB matches the pattern
+        or if the user does not exist, the result will not have any
+        'row' elements (200 OK will still be returned).
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=usr_pattern&amp;str=str_pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Gete user's stereotypes command
+        </paramdesc>
+        <example>
+            com=getusrstrs
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            usr=eddie
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Stereotype name pattern
+        </paramdesc>
+        <example>
+            str=*
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=eddie&amp;str=*&amp;num=3
+        ster?clnt=name|pass&amp;com=getusrstrs&amp;usr=group1.*&amp;str=visitor
+    </ExURL>
+    <ExResponse>
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/stereot_singleuser.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;usr&gt;user&lt;/usr&gt;&lt;str&gt;stereotype&lt;/str&gt;&lt;deg&gt;degree&lt;/deg&gt;&lt;/row&gt;
+        ...
+          &lt;/result&gt;
+    </ExResponse>
+</root>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+       for each stereotype matching str_pattern, 
+       the users matching usr_pattern are found and returned
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass&amp;com=getstrusr&amp;str=str_pattern&amp;usr=usr_pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Get stereotype users command
+        </paramdesc>
+        <example>
+            com=getstrusr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype name
+        </paramdesc>
+        <example>
+            str=professionals
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The username pattern
+        </paramdesc>
+        <example>
+           usr=temp.*
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=getstrusr&amp;str=professionals&amp;usr=temp.*
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test2&lt;/str&gt;&lt;usr&gt;temp.2&lt;/usr&gt;&lt;dgr&gt;0.3&lt;/dgr&gt;
+	    &lt;/row&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test2&lt;/str&gt;&lt;usr&gt;temp.1&lt;/usr&gt;&lt;dgr&gt;1.5&lt;/dgr&gt;
+	    &lt;/row&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test&lt;/str&gt;&lt;usr&gt;temp.1&lt;/usr&gt;&lt;dgr&gt;1&lt;/dgr&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Update features default value
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/personal/:ClientCredentials/Update_Features.xml
+    </URL>
+    <URL>
+        1.0/personal/:ClientCredentials/Update_Features.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            features
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            List with pairs of feature name and the new default value
+        </paramdesc>
+        <example>
+            features={"ftr1":"new_value","ftr2":"new_value"}
+        </example>
+    </parameter> 
+    <ExURL>
+       
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

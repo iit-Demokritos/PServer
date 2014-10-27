@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified user, the relevence degree for each specified
+          stereotype is increased by x (decreased if x is negative),
+          where x is the step corresponding to that stereotype. Rows with
+          NULL degrees are not affected. If no matches are found, or if
+          all matches have NULL degrees, no records will be updated
+          (200 OK will still be returned). If any step_i parameter
+          cannot be converted to numeric, 401 is returned. If the error
+          code 401 is returned then no updates have taken place in the DB.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass&amp;amp;com=incdgr&amp;usr=usr&amp;str_1=step_1&amp;...
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Increase stereotype degree command for given stereotype
+        </paramdesc>
+        <example>
+            com=incdgr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            usr=john
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str_name=inc_step
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Pairs of stereotype name with step to increase
+        </paramdesc>
+        <example>
+           visitor=-0.1&amp;expert=1
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=incdgr&amp;usr=john&amp;visitor=-0.1&amp;expert=1
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;num_of_rows&gt;1&lt;/num_of_rows&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        selects all features matching the feature
+        pattern and formats an XML answer with their
+        names and def values. If no feature in DB
+        matches the pattern, the result will not have
+        any row elements (200 OK will still be returned).
+        The results are sorted according to ascending
+        feature name (a-&gt;z, 1-&gt;10).
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=getftrdef&amp;ftr=ftr_pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The get feature default values command
+        </paramdesc>
+        <example>
+            com=getftrdef
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The feature pattern
+        </paramdesc>
+        <example>
+            ftr=lang.*
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=getftrdef&amp;ftr=lang.*
+    </ExURL>
+    <ExResponse>
+        &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/up_features.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;ftr&gt;feature&lt;/ftr&gt;&lt;defval&gt;default value&lt;/defval&gt;&lt;/row&gt;
+        ...
+        &lt;/result&gt;
+    </ExResponse>
+</root>
+

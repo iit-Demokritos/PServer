@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified user, the value for each specified attribute
+        is updated to x , where x is the value corresponding
+        to that attribute.
+        If no matches are found no records will be updated
+        (200 OK will still be returned). If the error
+        code 401 is returned then no updates have taken place in the DB.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=&lt;name|pass&gt;&amp;com=setattr&amp;usr=username&amp;attr_1=...
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The set attribute command
+        </paramdesc>
+        <example>
+            com=setattr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            usr=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            att_name=attr_value
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            the attribute name with value to set on user 
+        </paramdesc>
+        <example>
+            lang=GR
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=setattr&amp;usr=kostas&amp;lang=GR
+    </ExURL>
+    <ExResponse>
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+    </ExResponse>
+</root>

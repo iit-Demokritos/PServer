@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        if the user already exists in the DB, the value(s) of the
+        feature(s)/attribute(s) matching the pattern(s) for this user are updated
+        to the new value(s). If the user is a new user, the new user
+        feature values are initialized into the DB (using the def
+        values in 'up_features',attributes tables), and then, the value(s) of
+        matching feature(s),attribute(s) will be updated to the new value(s). If
+        no feature and attributes matches a pattern no value will be updated (200 OK
+        will still be returned). Note that if no (feature pattern, value) or (attribute pattern, value)
+        pairs exist in the request, the user profile and user_attributes will still be
+        initialized if it is a new user (otherwise nothing will happen,
+        200 OK will still be returned). If the error code 401 is returned,
+        then no changes have taken place in the DB.
+        to specify the table (attributes,up_feature) that the parameters belong we must insert the prefix 
+        attr_ or ftr_. If we do not use any prefix PServer set the paremeters to up_feature table
+        the prefixes will be removed from the parameter names
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=&lt;name|pass&gt;&amp;com=setusr&amp;usr=username[&amp;ftr_pattern_1=ftr_value_1&amp;...][&amp;attr_pattern_1=attr_value_1&amp;...]
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The add community command
+        </paramdesc>
+        <example>
+            com=addcomm
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The username of the user that we want to se attributes and features.
+        </paramdesc>
+        <example>
+            usr=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            attr_name = attr_val
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The attribute name with the value
+        </paramdesc>
+        <example>
+            attr_lang.*=0&amp;attr_lang.gr=1
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr_name = ftr_val
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The feature name with the value
+        </paramdesc>
+        <example>
+            ftr_bank=1&amp;ftr_text=5
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=setusr&amp;usr=kostas&amp;attr_lang.*=0&amp;attr_lang.gr=1&amp;attr_gender=male;ftr_bank=1 
+    </ExURL>
+    <ExResponse>
+        200 OK, 401 (fail, request error), 501 (fail, server error)
+        200 OK  : no response body exists.
+    </ExResponse>
+</root>

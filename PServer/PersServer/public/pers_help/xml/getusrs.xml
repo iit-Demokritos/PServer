@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Returns all the users that has a name that satisfies the whr pattern
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=getusrs&amp;whr=pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The get users command
+        </paramdesc>
+        <example>
+            com=getusrs
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            whr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The users pattern
+        </paramdesc>
+        <example>
+            whr=*
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?com=getusrs&amp;whr=*
+    </ExURL>
+    <ExResponse>
+        &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/user_profile.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;usr&gt;user&lt;/usr&gt;&lt;/row&gt;
+            ...
+        &lt;/result&gt;
+    </ExResponse>
+</root>

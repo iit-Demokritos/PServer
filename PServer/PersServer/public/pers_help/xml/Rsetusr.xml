@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Set users profile with attribute and feature values.
+        if the user already exists in the DB, for this user are updated
+        the new value(s). If the user is a new user, the new user
+        feature values are initialized into the DB, and then, the value(s) of
+        matching feature(s),attribute(s) will be updated to the new value(s).
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/personal/:ClientCredentials/Post_User.xml
+    </URL>
+    <URL>
+        1.0/personal/:ClientCredentials/Post_User.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            username
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            username=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            attr
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            List with pairs of attribute name and values
+        </paramdesc>
+        <example>
+             attr={"attribute_name1":"value","attribute_name2":"value"}
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            List with pairs of feature name and values
+        </paramdesc>
+        <example>
+            ftr={"feature_name1":"value","feature_name2":"value"}
+        </example>
+    </parameter> 
+    <ExURL>
+       
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

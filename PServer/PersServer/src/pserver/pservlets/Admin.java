@@ -569,22 +569,13 @@ public class Admin implements pserver.pservlets.PService {
                 //"<A href=\"/admin?login_name=" + name + "&login_password=" + password + "&com=checkdb\">Check PServer database</a>" +
                 //"</TD</TR>" +
                 "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
-                + "<A href=\"/pers_help/pers_mode.html\" target=\"_blank\">Pers mode help</a>"
+                + "<A href=\"/pers_help/index.html\" target=\"_blank\">Pers mode help</a>"
                 + "</TD</TR>"
                 + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
-                + "<A href=\"/ster_help/ster_mode.html\" target=\"_blank\">Ster mode help</a>"
+                + "<A href=\"/ster_help/index.html\" target=\"_blank\">Ster mode help</a>"
                 + "</TD</TR>"
                 + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
-                + "<A href=\"/commu_help/commu_mode.html\" target=\"_blank\">Commu mode help</a>"
-                + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
-                + "<A href=\"/csv_help/csv_mode.html\" target=\"_blank\">Csv mode help</a>"
-                + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
-                + "<A href=\"http://scify.iit.demokritos.gr/SciFYwiki/doku.php?id=pserverbaseapi\" target=\"_blank\">BASE API Documentation</a>"
-                + "</TD</TR>"
-                + "<TR><TD bgcolor=\"#E0E0EB\" nowrap=\"nowrap\" align=\"left\" >"
-                + "<A href=\"http://scify.iit.demokritos.gr/SciFYwiki/doku.php?id=v1.0\" target=\"_blank\">REST API Documentation</a>"
+                + "<A href=\"/commu_help/index.html\" target=\"_blank\">Commu mode help</a>"
                 + "</TD</TR>"
                 + "</TABLE></TD</TR></TABLE>";
     }

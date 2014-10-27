@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified user, the attributes matching the pattern
+        are found. If no feature in DB matches the pattern 
+        or if user does not exist, the result will not have any
+        'row' elements (200 OK will still be returned).
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=getusrattr&amp;usr=username&amp;attr=attr_pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The get user's attributes command
+        </paramdesc>
+        <example>
+            com=getusrattr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            user
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            usr=user152
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            attr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The attribute pattern
+        </paramdesc>
+        <example>
+            attr=page5.*
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=getusrattr&amp;usr=152&amp;attr=page5.*
+    </ExURL>
+    <ExResponse>
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/singleuser_attributes.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;attr&gt;feature&lt;/attr&gt;&lt;val&gt;value&lt;/val&gt;&lt;/row&gt;
+        ...
+          &lt;/result&gt;
+    </ExResponse>
+</root>

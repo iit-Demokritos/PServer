@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        removes all records specified by 'usr' query
+          parameters. If no matching records are found
+          no records will be deleted (200 OK will still
+          be returned). If no 'usr' query parameters exist,
+          the records for all users will be deleted. If the
+          error code 401 is returned then no record has
+          been deleted.
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=remusr&amp;usr=user_pattern
+    </URL>
+ <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The remove user command
+        </paramdesc>
+        <example>
+            com=remusr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            The delete pattern name
+        </paramdesc>
+        <example>
+            usr=john*
+        </example>
+    </parameter> 
+    <ExURL>
+       pers?clnt=name|pass&amp;com=remusr&amp;usr=john*
+    </ExURL>
+    <ExResponse>
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+          Note that the 'number of relevant rows' is not the
+          number of removed users. The removed users are given
+          by : (deleted rows / number of features).
+    </ExResponse>
+</root>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for each user matching username pattern, the stereotypes matching where
+        are found and sorted according to degree. If no stereotype in DB matches the pattern
+        or if the user does not exist, the result will not have any
+        'row' elements (200 OK will still be returned).
+    </description>
+      <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/user_stereotypes.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/user_stereotypes.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            username
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            User's name
+        </paramdesc>
+        <example>
+            username=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            where
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            Stereotype pattern name. Idf no pattern return all stereotypes
+        </paramdesc>
+        <example>
+            where=educ*
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            pageindex
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+           The number of the page with N=20 items. If no pageindex set, return the whole list
+        </paramdesc>
+        <example>
+            pageindex=2
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

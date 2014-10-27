@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Add custom feature group on PServer
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/community/:ClientCredentials/cluster/custom/features.xml
+    </URL>
+    <URL>
+        1.0/community/:ClientCredentials/cluster/custom/features.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            name
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            feature group name
+        </paramdesc>
+        <example>
+            name=testftrgroup
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            features
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            feature list with features which belongs to that feature group
+        </paramdesc>
+        <example>
+            features=[“ftr1”,”ftr2”
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>
