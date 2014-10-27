@@ -18,7 +18,7 @@ PServer is implemented in Java and uses MySQL as its RDBMS. That means that if y
 
 You can find more information about PServer in our [community](http://forum.scify.gr/viewforum.php?f=7) and in the below links:
 
-* [PServer Site](http://www.scify.gr/site/en/pserver-en)
+* [PServer Site](http://pserver-project.org/)
 * [FAQ](http://www.scify.gr/site/en/pserver-faq-en)
 * [User's Guide](http://pserver-project.org/sites/default/files/PServerUsersGuide.pdf)
 
