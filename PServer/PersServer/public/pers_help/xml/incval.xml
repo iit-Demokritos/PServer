@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified user, the value for each specified feature
+        is increased by x (decreased if x is negative), where x is
+        the step corresponding to that feature. Rows with string
+        values that cannot be converted to numeric, are not affected.
+        If no matches are found, or if all matches have values that
+        cannot be converted to numeric, no records will be updated
+        (200 OK will still be returned). If any &lt;step_i&gt; parameter
+        cannot be converted to numeric, 401 is returned. If the error
+        code 401 is returned then no updates have taken place in the DB.
+        If the log parameter is been used then the transaction will be loged 
+        into the num data table
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=incval&amp;usr=username&amp;ftr_1=step_1
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The increase value command
+        </paramdesc>
+        <example>
+            com=incval
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            usr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The user's name
+        </paramdesc>
+        <example>
+            usr=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr_name=ftr_step
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The pair of feature name and the step to increase
+        </paramdesc>
+        <example>
+            lang.gr=1&amp;expert=-0.34
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=incval&amp;usr=kostas&amp;lang.gr=1&amp;expert=-0.34
+    </ExURL>
+    <ExResponse>
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+    </ExResponse>
+</root>

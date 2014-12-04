@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Calculate association between all features in PServer with specific metric
+        algorithm
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        commu?clnt=name|pass&#38;com=calcuftrassoc&#38;algorithm=metis
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Calculate features Association command
+        </paramdesc>
+        <example>
+            com=calcuftrassoc
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            algorithm
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The metric algorithm to calculate the feature association
+        </paramdesc>
+        <example>
+            algorithm=metis
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            properties
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            custom properties for this algorithm
+        </paramdesc>
+        <example>
+            properties=[”pr1”:”pr1value”,”pr2”:”pr2value”]
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

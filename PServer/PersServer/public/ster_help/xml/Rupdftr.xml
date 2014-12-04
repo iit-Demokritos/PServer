@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Removes all features from the stereotype and then adds and sets
+        all features as needed based on the stereotypes current users
+        and their degrees.
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/update_features.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/update_features.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotype
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype name
+        </paramdesc>
+        <example>
+            stereotype=educated
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

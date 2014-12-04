@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        removes all records with stereotypes matching the pairs user-stereotype
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/delete_user.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/delete_user.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            deletepairs
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            A List of pairs usr_name and str_name
+        </paramdesc>
+        <example>
+            attributes={"usr_name":"str_name","usr_name":"str_name"}
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

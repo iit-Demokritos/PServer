@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<root>
+    <description>
+        Get a list with communities that the given user belongs
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        commu?clnt=name|pass&#38;com=getusrcommu&#38;username=kostas&#38;pattern=tes*
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Command to get communities where a user belongs
+        </paramdesc>
+        <example>
+            com=getusrcommu
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            username
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            the username
+        </paramdesc>
+        <example>
+            name=kostas
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            pattern
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            Communities filter. Returns all communities if no pattern exists
+        </paramdesc>
+        <example>
+            pattern=tes*
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

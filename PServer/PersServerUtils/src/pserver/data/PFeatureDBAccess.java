@@ -60,11 +60,15 @@ public class PFeatureDBAccess {
         return vector;
     }
 
-    public PServerVector getFeatureVector(String featureName, String clientName, boolean b) throws SQLException {
+    public PServerVector getFeatureVector(String featureName, String clientName,
+            boolean b) throws SQLException {
+       
         PServerVector vector = new PServerVector();
         vector.setName(featureName);
         
-        String sql = "SELECT * FROM " + DBAccess.UPROFILE_TABLE + " WHERE " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "=? AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";        
+        String sql = "SELECT * FROM " + DBAccess.UPROFILE_TABLE 
+                + " WHERE " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + "=? "
+                + "AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";        
         PreparedStatement ftrStmt = dbAccess.getConnection().prepareStatement(sql);
         ftrStmt.setString(1, featureName);       
 
@@ -72,7 +76,8 @@ public class PFeatureDBAccess {
         ResultSet rs = ftrStmt.executeQuery();
         //System.out.println("sql " +sql + " time " + (System.currentTimeMillis() - t) );
         while (rs.next()) {
-            vector.getVectorValues().put( rs.getString(DBAccess.UPROFILE_TABLE_FIELD_FEATURE), rs.getFloat(DBAccess.UPROFILE_TABLE_FIELD_VALUE));
+            vector.getVectorValues().put( rs.getString(DBAccess.UPROFILE_TABLE_FIELD_USER)
+                    , rs.getFloat(DBAccess.UPROFILE_TABLE_FIELD_VALUE));
         }
         rs.close();
         ftrStmt.close();

@@ -25,7 +25,6 @@
  * The attribution must be of the form
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
-
 package pserver.data;
 
 import java.sql.PreparedStatement;
@@ -35,8 +34,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pserver.algorithms.metrics.VectorMetric;
 import pserver.domain.PFeatureGroup;
 import pserver.domain.PServerVector;
@@ -60,8 +57,9 @@ public class PFeatureGroupDBAccess {
      * Deletes the user Graph of a specific type
      */
     public void deleteFeatureAccociations(String clientName, int relationType) throws SQLException {
-        getDbAccess().executeUpdate("DELETE FROM " + DBAccess.UFTRASSOCIATIONS_TABLE + " WHERE " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + " = "
-                + relationType + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'");
+        getDbAccess().executeUpdate("DELETE FROM " + DBAccess.UFTRASSOCIATIONS_TABLE
+                + " WHERE " + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + " = " + relationType
+                + " AND " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'");
     }
 
     public void generateBinarySimilarities(DBAccess dbAccess, String clientName, int op, float threashold) throws SQLException {
@@ -83,7 +81,8 @@ public class PFeatureGroupDBAccess {
      *
      * This function returns a Result Set on the top of the Ftr_group table
      *
-     * @param whrCondition the condition for the sql query to constrained the results
+     * @param whrCondition the condition for the sql query to constrained the
+     * results
      * @return the result set
      * @throws java.sql.SQLException
      */
@@ -152,7 +151,104 @@ public class PFeatureGroupDBAccess {
         return rows;
     }
 
-    public void generateFtrDistances(String clientName, VectorMetric metric, int dataRelationType, int numOfThreads) throws SQLException {
+    public void generateFtrDistances(String clientName, VectorMetric metric,
+            int dataRelationType, int numOfThreads) throws SQLException {
+        
+        System.out.println("Generating Feature distances");
+
+        // TODO: Add system parameter for step S
+        // Fetch all feature names
+        String sql = "SELECT DISTINCT " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE
+                + " FROM " + DBAccess.UPROFILE_TABLE
+                + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
+        Statement stmt = dbAccess.getConnection().createStatement();
+
+        ResultSet rs = stmt.executeQuery(sql);
+        // Store in features list all the feature name fetched
+        ArrayList<String> features = new ArrayList<String>();
+        while (rs.next()) {
+            features.add(rs.getString(1));
+        }
+        rs.close();
+        stmt.close();
+
+        System.out.println("Feature loaded");
+
+        PFeatureDBAccess pfdb = new PFeatureDBAccess(dbAccess);
+
+        System.out.println("NumOfThreads= " + numOfThreads);
+        ExecutorService threadExecutor = Executors.newFixedThreadPool(numOfThreads);
+        final int STEP_SIZE = 1000;
+        int count = 1;
+        // For every S features
+        for (int i = 0; i < features.size(); i += STEP_SIZE) {
+            //init frame end poind
+            int endpoindA = i + STEP_SIZE;
+            if (endpoindA > features.size()) {
+                endpoindA = features.size();
+            }
+
+            //Add the features of the current frame in list
+            ArrayList<String> cFeatureFrameA = new ArrayList<String>(
+                    features.subList(i, endpoindA));
+            // Get feature profiles to compare
+            ArrayList<PServerVector> FrameAFeatureVectors = new ArrayList<PServerVector>();
+            for (String tmpfeature : cFeatureFrameA) {
+                FrameAFeatureVectors.add(pfdb.getFeatureVector(tmpfeature, clientName, true));
+            }
+
+            // For every S feature after F, init a list H
+            //for each feature in the frame
+            for (String cfeature : cFeatureFrameA) {
+                System.out.println(count++);
+                //init a list with features after them
+                ArrayList<PServerVector> CompFeatureProfiles = new ArrayList<PServerVector>(
+                        FrameAFeatureVectors.subList(cFeatureFrameA.indexOf(cfeature) + 1,
+                                FrameAFeatureVectors.size()));
+
+                if (endpoindA == features.size()) {
+                    // Calculate the distance between F and each item of the sublist
+                    // and Store results
+                    makeFeatureDistances(FrameAFeatureVectors.get(cFeatureFrameA.indexOf(cfeature)),
+                            CompFeatureProfiles, dataRelationType, clientName, metric);
+                }
+                //???? Split the list of H into e.g. 4 (# of threads) sublists???
+                // from the FrameB set start point the endpoint of the 
+                //FrameA and move it by step size until the end of features list
+                // For every sublist
+                for (int j = endpoindA; j < features.size(); j += STEP_SIZE) {
+                    int endpoindB = j + STEP_SIZE;
+                    if (endpoindB > features.size()) {
+                        endpoindB = features.size();
+                    }
+
+                    //Add the feature of the current frameB in list
+                    ArrayList<String> cFeatureFrameB = new ArrayList<String>(
+                            features.subList(j, endpoindB));
+                    // add features profiles from FameB to compare
+                    for (String tmpfeature : cFeatureFrameB) {
+                        CompFeatureProfiles.add(pfdb.getFeatureVector(tmpfeature, clientName, true));
+                    }
+
+                    // Calculate the distance between F and each item of the sublist
+                    // and Store results
+                    makeFeatureDistances(FrameAFeatureVectors.get(cFeatureFrameA.indexOf(cfeature)),
+                            CompFeatureProfiles, dataRelationType, clientName, metric);
+                    CompFeatureProfiles.clear();
+
+                }
+
+                // Wait for thread termination
+                dbAccess.commit();
+            } // end for every feature in the frame
+
+        } // end for every S features
+
+    }
+
+    public void generateFtrDistancesOLD(String clientName, VectorMetric metric,
+            int dataRelationType, int numOfThreads) throws SQLException {
+
         System.out.println("Generating Feature distances");
         String sql = "SELECT DISTINCT " + DBAccess.UPROFILE_TABLE_FIELD_FEATURE + " FROM " + DBAccess.UPROFILE_TABLE + " WHERE " + DBAccess.FIELD_PSCLIENT + "='" + clientName + "'";
         Statement stmt = dbAccess.getConnection().createStatement();
@@ -179,12 +275,12 @@ public class PFeatureGroupDBAccess {
         for (int i = 0; i < features.size(); i++) {
             String featureName = features.get(i);
             long totalFree = Runtime.getRuntime().freeMemory() + Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory();
-            System.out.println(i + " vectors loaded");            
+            System.out.println(i + " vectors loaded");
             if (totalFree >= 54000000) {
                 PServerVector fvector = pfdb.getFeatureVector(featureName, clientName, false);
                 ftrVectors.add(fvector);
             } else {
-                makeUserDistances(ftrVectors, features, i, threadExecutor, dataRelationType, clientName, metric, pfdb);
+                makeUserDistancesOriginal(ftrVectors, features, i, threadExecutor, dataRelationType, clientName, metric, pfdb);
                 ftrVectors.clear();
                 PServerVector fvector = pfdb.getFeatureVector(featureName, clientName, false);
                 ftrVectors.add(fvector);
@@ -193,20 +289,63 @@ public class PFeatureGroupDBAccess {
         }
         System.out.println("loading Time is " + (System.currentTimeMillis() - time + " for " + ftrVectors.size() + " vectors"));
         if (ftrVectors.size() > 0) {
-            makeUserDistances(ftrVectors, features, features.size(), threadExecutor, dataRelationType, clientName, metric, pfdb);
+            makeUserDistancesOriginal(ftrVectors, features, features.size(), threadExecutor, dataRelationType, clientName, metric, pfdb);
         }
 
     }
 
-    private void makeUserDistances(ArrayList<PServerVector> ftrVectors, ArrayList<String> features, int ftrPos, ExecutorService threadExecutor, int dataRelationType, String clientName, VectorMetric metric, PFeatureDBAccess pfdb) throws SQLException {
+    private void makeFeatureDistances(PServerVector feature1,
+            ArrayList<PServerVector> CompareWithFeatures, int dataRelationType,
+            String clientName, VectorMetric metric) throws SQLException {
+
+        Statement stmt = getDbAccess().getConnection().createStatement();
+        // For each feature in the CompareWithFeatures do comparison
+        for (PServerVector feature2 : CompareWithFeatures) {
+            //Get distance between feature1 and feature2
+            float dist = metric.getDistance(feature1, feature2);
+            if (Float.isNaN(dist)) {
+                continue;
+            }
+            //save distance to DB
+            saveFeatureSimilarity(feature1, feature2, dist, clientName,
+                    dataRelationType, stmt);
+        }
+        stmt.close();
+    }
+
+    public void saveFeatureSimilarity(PServerVector feature1, PServerVector feature2,
+            float dist, String clientName, int dataRelationType, Statement stmt) throws SQLException {
+//        Statement stmt = getDbAccess().getConnection().createStatement();
+        String sql = "INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE
+                + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + ","
+                + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + ","
+                + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + ","
+                + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + ","
+                + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_USR + ","
+                + DBAccess.FIELD_PSCLIENT + ") VALUES ('"
+                + feature1.getName() + "','"
+                + feature2.getName() + "',"
+                + dist + ","
+                + dataRelationType + ",'"
+                + clientName + "','"
+                + clientName + "')";
+        stmt.executeUpdate(sql);
+//        stmt.close();
+    }
+
+    private void makeUserDistancesOriginal(ArrayList<PServerVector> ftrVectors, ArrayList<String> features, int ftrPos, ExecutorService threadExecutor, int dataRelationType, String clientName, VectorMetric metric, PFeatureDBAccess pfdb) throws SQLException {
         long memoryTime;
         long batchTime = System.currentTimeMillis();
         System.out.println("Calculatining distances for " + ftrVectors.size() + " features ");
-        String sql = "INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES (?, ?,?," + dataRelationType + ",'" + clientName + "')";
+        String sql = "INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE 
+                + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," 
+                + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," 
+                + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," 
+                + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," 
+                + DBAccess.FIELD_PSCLIENT + ") VALUES (?, ?,?," + dataRelationType + ",'" + clientName + "')";
 
         //StringBuilder sqlsb = new StringBuilder();
         //sqlsb.append("INSERT INTO " + DBAccess.UFTRASSOCIATIONS_TABLE + "(" + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_SRC + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_DST + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_WEIGHT + "," + DBAccess.UFTRASSOCIATIONS_TABLE_FIELD_TYPE + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ");
-
         final int totalBatchSize = 50000;
 
         PreparedStatement sstmt = getDbAccess().getConnection().prepareStatement(sql);
@@ -331,10 +470,10 @@ public class PFeatureGroupDBAccess {
         @Override
         public void run() {
             /*try {
-            //addFeatureSimilarity(sstmt, vector1, vector2, metric, clientName, dataRelationType);
-            } catch (SQLException ex) {
-            exception = ex;
-            }*/
+             //addFeatureSimilarity(sstmt, vector1, vector2, metric, clientName, dataRelationType);
+             } catch (SQLException ex) {
+             exception = ex;
+             }*/
         }
 
         /**

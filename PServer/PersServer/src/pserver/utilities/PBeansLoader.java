@@ -182,6 +182,7 @@ public class PBeansLoader {
     public HashMap<String, VectorMetric> getVMetrics() {
         return vMetrics;
     }
+    
 
     /**
      * @return the gClustering

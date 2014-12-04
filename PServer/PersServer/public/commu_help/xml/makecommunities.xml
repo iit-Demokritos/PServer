@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<root>
+    <description>
+        Make user communities with given clustering algorithm and association
+        type 
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        commu?clnt=name|pass&#38;com=makecommunities&#38;algorithm=metis&#38;association=cos&#38;properties=[“param1”:”>0.5”]
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Command to make user communities
+        </paramdesc>
+        <example>
+            com=makecommunities
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            algorithm
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The clustering algorithm to make user communities
+        </paramdesc>
+        <example>
+            algorithm=metis e.g  
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            association
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            User association type for the clustering
+        </paramdesc>
+        <example>
+            association=cos
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            parameters
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            custom parameters for the clustering algorithm
+        </paramdesc>
+        <example>
+            properties=[”pr1”:”pr1value”,”pr2”:”pr2value”]
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

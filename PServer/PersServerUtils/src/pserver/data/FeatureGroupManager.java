@@ -57,8 +57,11 @@ public class FeatureGroupManager implements GraphClusterManager {
         Statement stmt = dbAccess.getConnection().createStatement();
         stmt.execute( "INSERT INTO " + DBAccess.FTRGROUPS_TABLE + " (" + DBAccess.FTRGROUPS_TABLE_FIELD_FTRGROUP + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( 'ftrgroup_" + numOfCliques + "', '" + clientName + "')" );
         for ( String n : cluster ) {
-            String subSql = "INSERT INTO " + DBAccess.FTRGROUP_FEATURES_TABLE + " (" + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME + "," +
-                    DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP + "," + DBAccess.FIELD_PSCLIENT + ") VALUES ( '" + n + "','ftrgroup_" + numOfCliques + "', '" + clientName + "')";
+            String subSql = "INSERT INTO " + DBAccess.FTRGROUP_FEATURES_TABLE 
+                    + " (" + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_NAME + "," 
+                    + DBAccess.FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP + "," 
+                    + DBAccess.FIELD_PSCLIENT + ") "
+                    + "VALUES ( '" + n + "','ftrgroup_" + numOfCliques + "', '" + clientName + "')";
             stmt.execute( subSql );
         }
         stmt.close();

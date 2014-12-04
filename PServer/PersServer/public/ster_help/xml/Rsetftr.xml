@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Sets for stereotype str all features specified to the corresponding
+        degrees. If a feature didn't exists in the stereotype it instead ads it and
+        sets its degree to the new degree specified.
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/set_features.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/set_features.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotype
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype name
+        </paramdesc>
+        <example>
+            stereotype=educated
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            featurelist
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            A List of pairs feature name and feature value
+        </paramdesc>
+        <example>
+            featurelist={"ftr_name1":"value","ftr_name2":"value"}
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

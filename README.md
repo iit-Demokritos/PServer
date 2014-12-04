@@ -1,7 +1,7 @@
 PServer
 =======
 
-_Current Version_ **v1.1**
+_Current Version_ **v1.3**
 
 PServer is an application that is developed by the National Center of Scientific Research “Demokritos” of Greece and is a general purpose personalization server. So PServer is a program with functionality that can be used by different kind of applications that need to provide personalized services. SciFY (www.scify.org), in collaboration with “NCSR Demokritos”, finilised and documented PServer and makes sure that this technology will be offered to all for free, with all needed support: it is widely distributing and supporting PServer building relevant communities.
 
@@ -12,14 +12,16 @@ PServer is implemented in Java and uses MySQL as its RDBMS. That means that if y
 1. [JAVA](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2. [MySQL Server](http://dev.mysql.com/downloads/mysql/)
 3. [PServer files](http://pserver-project.org/downloads) 
+4. [CMake](http://www.cmake.org/) 
+5. [Make for linux](https://www.gnu.org/software/make/) | [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm)
+6. [gcc](https://gcc.gnu.org/) 
 
 You can find more information about PServer in our [community](http://forum.scify.gr/viewforum.php?f=7) and in the below links:
 
-* [PServer Site](http://www.scify.gr/site/en/pserver-en)
+* [PServer Site](http://pserver-project.org/)
 * [FAQ](http://www.scify.gr/site/en/pserver-faq-en)
 * [User's Guide](http://pserver-project.org/sites/default/files/PServerUsersGuide.pdf)
-* [wiki](http://scify.iit.demokritos.gr/SciFYwiki/doku.php?id=pserver) 
 
-See PServer in action in our [DemoSite](http://scify.iit.demokritos.gr/DemoSite/indexne.html).
+See PServer in action in our [DemoSite](http://test.newsumontheweb.org/).
 
 Finally, if you want to support us or contribute please visit the follow link. [Support Us](http://www.scify.gr/site/en/support-us)

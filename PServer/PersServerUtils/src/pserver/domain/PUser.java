@@ -79,6 +79,7 @@ public class PUser {
 
     public void setFeature( String ftrName, float value ) {
         this.features.put( ftrName, value );
+        this.vector.setVectorValues(this.features);
     }
 
     public void setAttribute( String attrName, String value ) {

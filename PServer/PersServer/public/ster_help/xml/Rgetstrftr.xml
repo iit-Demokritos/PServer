@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified stereotype, the features matching the pattern
+        are found and sorted according to value. If no feature in DB matches 
+        the pattern or if stereotype does not exist, the result will not have any
+        'row' elements (200 OK will still be returned).
+    </description>
+     <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/features.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/features.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotype
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            The stereotype name
+        </paramdesc>
+        <example>
+            stereotype=education
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            where
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            Feature pattern name. If no pattern return all the list
+        </paramdesc>
+        <example>
+            where=edu*
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            pageindex
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+           The number of the page with N=20 items. If no pageindex set, return the whole list
+        </paramdesc>
+        <example>
+            pageindex=2
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

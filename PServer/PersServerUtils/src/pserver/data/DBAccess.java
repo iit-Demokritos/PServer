@@ -25,7 +25,6 @@
  * The attribution must be of the form
  * "Powered by PServer, IIT NCSR Demokritos , SciFY"
  */
- 
 package pserver.data;
 
 import java.sql.Statement;
@@ -51,7 +50,6 @@ import pserver.domain.PUser;
  * @author Panagiotis Giotis <giotis.p@gmail.com>
  * @author Nick Zorbas <nickzorb@gmail.con>
  */
-
 public class DBAccess {
 
     public static final int RELATION_TEMPORARY = 0;
@@ -171,6 +169,7 @@ public class DBAccess {
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_WEIGHT = "weight";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_TYPE = "type";
     public static final String SFTRASSOCIATIONS_TABLE_FIELD_STEREOTYPE = "stereotype";
+    public static final String FIELD_PSUSERID = "user";
     private Connection connection = null;
     private Statement statement = null;
     private boolean connected;
@@ -181,7 +180,7 @@ public class DBAccess {
     private static DBAccess instance = null;
     private static DBAccess ConInstance = null;
     private static DBAccess EmptyInstance = null;
-    
+
     private DBAccess() {
         this.connected = false;
     }
@@ -197,28 +196,30 @@ public class DBAccess {
         this.connected = true;
         this.connection = con;
     }
+
     public static DBAccess getInstance(String url, String user, String pass) {
         if (instance == null) {
             return new DBAccess(url, user, pass);
-        }else{
+        } else {
             return instance;
         }
     }
+
     public static DBAccess getInstance(Connection con) {
         if (ConInstance == null) {
             return new DBAccess(con);
-        }else{
+        } else {
             return ConInstance;
         }
     }
+
     public static DBAccess getInstance() {
         if (EmptyInstance == null) {
             return new DBAccess();
-        }else{
+        } else {
             return EmptyInstance;
         }
     }
-    
 
     public Connection newConnection() throws SQLException {
         Connection con = DriverManager.getConnection(this.url, this.user, this.pass);
@@ -599,9 +600,28 @@ public class DBAccess {
     public int clearUserCommunities(String clientName) throws SQLException {
         int total = 0;
         Statement stmt = this.connection.createStatement();
-        total += stmt.executeUpdate("DELETE FROM user_community where " + FIELD_PSCLIENT + "='" + clientName + "' ");
-        total += stmt.executeUpdate("DELETE FROM community_profiles where " + FIELD_PSCLIENT + "='" + clientName + "' ");
-        total += stmt.executeUpdate("DELETE FROM communities where " + FIELD_PSCLIENT + "='" + clientName + "' ");
+        total += stmt.executeUpdate("DELETE FROM user_community "
+                + "where " + FIELD_PSCLIENT + "='" + clientName + "' ");
+        total += stmt.executeUpdate("DELETE FROM community_profiles "
+                + "where " + FIELD_PSCLIENT + "='" + clientName + "' ");
+        total += stmt.executeUpdate("DELETE FROM communities "
+                + "where " + FIELD_PSCLIENT + "='" + clientName + "' ");
+        stmt.close();
+        return total;
+    }
+
+    public int DeleteUserCommunities(String clientName, String pattern) throws SQLException {
+        int total = 0;
+        Statement stmt = this.connection.createStatement();
+        total += stmt.executeUpdate("DELETE FROM user_community where "
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + COMMUNITIES_TABLE_FIELD_COMMUNITY + " LIKE '" + pattern + "'");
+        total += stmt.executeUpdate("DELETE FROM community_profiles where "
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + COMMUNITIES_TABLE_FIELD_COMMUNITY + " LIKE '" + pattern + "'");
+        total += stmt.executeUpdate("DELETE FROM communities where "
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + COMMUNITIES_TABLE_FIELD_COMMUNITY + " LIKE '" + pattern + "'");
         stmt.close();
         return total;
     }
@@ -609,8 +629,23 @@ public class DBAccess {
     public int clearFeatureGroups(String clientName) throws SQLException {
         int total = 0;
         Statement stmt = this.connection.createStatement();
-        total += stmt.executeUpdate("DELETE FROM ftrgroup_features WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'");
-        total += stmt.executeUpdate("DELETE FROM ftrgroups WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'");
+        total += stmt.executeUpdate("DELETE FROM ftrgroup_features "
+                + "WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'");
+        total += stmt.executeUpdate("DELETE FROM ftrgroups "
+                + "WHERE " + FIELD_PSCLIENT + " = '" + clientName + "'");
+        stmt.close();
+        return total;
+    }
+
+    public int DeleteFeatureCommunities(String clientName, String pattern) throws SQLException {
+        int total = 0;
+        Statement stmt = this.connection.createStatement();
+        total += stmt.executeUpdate("DELETE FROM ftrgroup_features WHERE "
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                + FTRGROUP_FEATURES_TABLE_FIELD_FEATURE_GROUP + " LIKE '" + pattern + "'");
+        total += stmt.executeUpdate("DELETE FROM ftrgroups WHERE "
+                + FIELD_PSCLIENT + "='" + clientName + "' AND "
+                 + FTRGROUPS_TABLE_FIELD_FTRGROUP + " LIKE '" + pattern + "'");
         stmt.close();
         return total;
     }
@@ -838,7 +873,7 @@ public class DBAccess {
         //Transforms 'pattern' INTO a string to be used
         //after SQL: "...order by <field>" + condition
         if (pattern == null) {
-            return null;
+            return "";
         }
         String condition;
         if (pattern.equals("asc")) {

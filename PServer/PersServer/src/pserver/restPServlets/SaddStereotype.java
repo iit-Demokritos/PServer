@@ -28,6 +28,8 @@
 
 package pserver.restPServlets;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pserver.data.DBAccess;
 import pserver.data.VectorMap;
 import pserver.pservlets.PService;
@@ -79,6 +81,11 @@ public class SaddStereotype implements pserver.pservlets.PService {
     public int service(VectorMap parameters, StringBuffer response, DBAccess dbAccess) {
 
         PService servlet = new pserver.pservlets.Stereotypes();
+        try {
+            servlet.init(null);
+        } catch (Exception ex) {
+            Logger.getLogger(SaddStereotype.class.getName()).log(Level.SEVERE, null, ex);
+        }
         VectorMap PSparameters = new VectorMap(parameters.size() + 1);
         VectorMap tempMap = null;
         ResponseConverter converter = new ResponseConverter();
@@ -104,6 +111,8 @@ public class SaddStereotype implements pserver.pservlets.PService {
 //            
 //        }
 
+        
+        
         //call the right service
         int ResponseCode = servlet.service(PSparameters, response, dbAccess);
 

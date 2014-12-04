@@ -1,0 +1,298 @@
+<html>
+    <head>
+        <title>Personal API</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/custom.css" rel="stylesheet">
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.js"></script>
+        <script src="../js/custom.js"></script>
+    </head>
+    <body>
+
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#base" role="tab" data-toggle="tab">Base API</a></li>
+            <li><a href="#rest" role="tab" data-toggle="tab">REST API</a></li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div  id="myTabContent" class="tab-content col-md-3">
+
+                    <div class="tab-pane active col-md-8" id="base">
+
+                        <div class="list-group">
+
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('addattr', 'addattr')">
+                                addattr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('addftr', 'addftr')">
+                                addftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getattrdef', 'getattrdef')">
+                                getattrdef
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getftrdef', 'getftrdef')">
+                                getftrdef
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getusrattr', 'getusrattr')">
+                                getusrattr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getusrftr', 'getusrftr')">
+                                getusrftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getusrs', 'getusrs')">
+                                getusrs
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('incval', 'incval')">
+                                incval
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('remattr', 'remattr')">
+                                remattr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('remftr', 'remftr')">
+                                remftr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('remusr', 'remusr')">
+                                remusr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('setattr', 'setattr')">
+                                setattr
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('setattrdef', 'setattrdef')">
+                                setattrdef
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('setftrdef', 'setftrdef')">
+                                setftrdef
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('setusr', 'setusr')">
+                                setusr
+                            </a>
+
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="rest">
+
+                        <div class="list-group">
+
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Raddattr', 
+                                           '1.0/personal/:ClientCredentials/Add_Attributes')">
+                                1.0/personal/:ClientCredentials/Add_Attributes
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Raddftr', 
+                                   '1.0/personal/:ClientCredentials/Add_Features')">
+                                1.0/personal/:ClientCredentials/Add_Features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetattrdef', 
+                                   '1.0/personal/:ClientCredentials/Attributes')">
+                                1.0/personal/:ClientCredentials/Attributes
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetftrdef', 
+                                   '1.0/personal/:ClientCredentials/Features')">
+                                1.0/personal/:ClientCredentials/Features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetusrattr', 
+                                   '1.0/personal/:ClientCredentials/Users_Attributes')">
+                                1.0/personal/:ClientCredentials/Users_Attributes
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetusrftr', 
+                                   '1.0/personal/:ClientCredentials/Users_Features')">
+                                1.0/personal/:ClientCredentials/Users_Features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetusrs', 
+                                           '1.0/personal/:ClientCredentials/users')">
+                                1.0/personal/:ClientCredentials/users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rincval', 
+                                   '1.0/personal/:ClientCredentials/Increase_Users_Values')">
+                                1.0/personal/:ClientCredentials/Increase_Users_Values
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rremattr', 
+                                   '1.0/personal/:ClientCredentials/Delete_Attributes')">
+                                1.0/personal/:ClientCredentials/Delete_Attributes
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rremftr', 
+                                   '1.0/personal/:ClientCredentials/Delete_Features')">
+                                1.0/personal/:ClientCredentials/Delete_Features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rremusr', 
+                                   '1.0/personal/:ClientCredentials/Delete_Users')">
+                                1.0/personal/:ClientCredentials/Delete_Users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rsetattr', 
+                                   '1.0/personal/:ClientCredentials/Update_Users_Attributes')">
+                                1.0/personal/:ClientCredentials/Update_Users_Attributes
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rsetattrdef', 
+                                   '1.0/personal/:ClientCredentials/Update_Attributes')">
+                                1.0/personal/:ClientCredentials/Update_Attributes
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rsetftrdef', 
+                                   '1.0/personal/:ClientCredentials/Update_Features')">
+                                1.0/personal/:ClientCredentials/Update_Features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rsetusr', 
+                                   '1.0/personal/:ClientCredentials/Post_User')">
+                                1.0/personal/:ClientCredentials/Post_User
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-5 col-md-offset-1">
+
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Command:
+                                    </strong> 
+                                </td>
+                                <td id="command">
+                                    <!--Mark-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Description:
+                                    </strong> 
+                                </td>
+                                <td id="description">
+                                    <!--Mark-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Return types:
+                                    </strong> 
+                                </td>
+                                <td id="rt">
+                                    <!--Jacob-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Methods:
+                                    </strong>
+                                </td>
+                                <td>GET/POST</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br></br>
+                    <div class="well well-sm" id="URL">
+                        <h3>
+                            <!--                            URL:-->
+                        </h3>
+                        <div class="highlight">
+                            <!--1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                        </div>
+                    </div>
+                    <br></br>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Parameter Name</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody id="params">
+                            <!--                            <tr>
+                                                            <td>Mark</td>
+                                                            <td><span class="label label-success">Optional</span></td>
+                                                            <td>@mdo</td>
+                                                            <td>@mdo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jacob</td>
+                                                            <td><span class="label label-success">Optional</span></td>
+                                                            <td>@fat</td>
+                                                            <td>@fat</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Larry</td>
+                                                            <td><span class="label label-danger">Required</span></td>
+                                                            <td>@twitter</td>
+                                                            <td>@twitter</td>
+                                                        </tr>-->
+                        </tbody>
+                    </table>
+
+                    <div class="well well-sm" id="example">
+                        <h3>
+                            Example:
+                        </h3>
+                        <div class="highlight">
+                            <span id="ExURL">
+                                <!--http://localhost:1111/1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                            </span>
+                            <pre id="ExResponse">
+<!--&lt;result&gt;
+    &lt;row&gt;
+        &lt;algorithm_name&gt;
+        betw
+        &lt;/algorithm_name&gt;
+        &lt;algorithm_value&gt;
+        edgesToRemove-&gt;default:5
+        &lt;/algorithm_value&gt;
+    &lt;/row&gt;
+&lt;/result&gt;-->
+                            </pre>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </body>
+</html>

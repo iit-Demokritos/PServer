@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        lists the stereotypes in the DB. From an original set of
+        the stereotypes that match the stereotype pattern (that
+        is, all stereotypes if str pattern is '*', a single
+        stereotype if name exists in table 'stereotypes', or
+        none if name does not exist or table is empty. Result is ordered
+        by stereotype name. If the final list is empty, a result
+        without any row elements is returned in the XML answer.
+    </description>
+        <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/stereotypes.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/stereotypes.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            where
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            Stereotype pattern name
+        </paramdesc>
+        <example>
+            where=edu*
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            pageindex
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+           The number of the page with N=20 items. If no pageindex set, return the whole list
+        </paramdesc>
+        <example>
+            pageindex=2
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

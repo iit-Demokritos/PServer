@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+       Removes all stereotypes matching in stereotype list
+    </description>
+    <rt>
+        XML/JSON
+    </rt>
+    <URL>
+       1.0/stereotype/:ClientCredentials/delete_stereotype.xml
+    </URL>
+    <URL>
+       1.0/stereotype/:ClientCredentials/delete_stereotype.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotype
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+           A list with stereotype name to delete. If no list then delete all stereotypes
+        </paramdesc>
+        <example>
+            stereotype={"str_name1","str_name2"}
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        for the specified stereotype, the features matching the pattern
+        are found and sorted according to value. If no feature in DB matches 
+        the pattern or if stereotype does not exist, the result will not have any
+        'row' elements (200 OK will still be returned).
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        ster?clnt=name|pass&amp;com=getstrftr&amp;str=str_pattern&amp;ftr=ftr_pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            get stereotypes command
+        </paramdesc>
+        <example>
+            com=getstrftr
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            str
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype pattern
+        </paramdesc>
+        <example>
+           str=*
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The feature pattern
+        </paramdesc>
+        <example>
+           ftr=page6.*
+        </example>
+    </parameter> 
+    <ExURL>
+        ster?clnt=name|pass&amp;com=getstrftr&amp;str=*&amp;ftr=page6.*
+    </ExURL>
+    <ExResponse>
+	  &lt;result&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test2&lt;/str&gt;&lt;ftr&gt;test.2&lt;/ftr&gt;value&gt;23&lt;/value&gt;
+	    &lt;/row&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test2&lt;/str&gt;&lt;ftr&gt;test.1&lt;/ftr&gt;value&gt;15&lt;/value&gt;
+	    &lt;/row&gt;
+	    &lt;row&gt;
+	      &lt;str&gt;test&lt;/str&gt;&lt;ftr&gt;test.1&lt;/ftr&gt;value&gt;12&lt;/value&gt;
+	    &lt;/row&gt;
+	  &lt;/result&gt;
+    </ExResponse>
+</root>

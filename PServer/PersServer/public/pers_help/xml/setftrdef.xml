@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        updates the def value of all features matching
+        the feature pattern(s) to the new def value(s).
+        The new def values will affect only subsequent
+        user profiles. Old profiles keep the old def values.
+        If no feature in DB matches a pattern, no def value
+        will be updated (200 OK will still be returned).
+        If the error code 401 is returned then none
+        of the features matching the request pattern(s)
+        has been updated to the new def value(s).
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=setftrdef&amp;ftr_pattern_1=new_def_val_1
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The set new features default value command
+        </paramdesc>
+        <example>
+            com=setftrdef
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            ftr_pattern=new_def_val
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The feature name with new deafult value
+        </paramdesc>
+        <example>
+            the_times.politics=0
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=setftrdef&amp;the_times.politics=0&amp;the_times.athletics=1
+    </ExURL>
+    <ExResponse>
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/rows.xsl&quot;?&gt;
+          &lt;result&gt;
+          &lt;row&gt;&lt;num_of_rows&gt;number of relevant rows&lt;/num_of_rows&gt;&lt;/row&gt;
+          &lt;/result&gt;
+    </ExResponse>
+</root>

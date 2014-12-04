@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Add custom community on PServer
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        commu?clnt=name|pass&#38;com=addcomm&#38;name=testcommunity&#38;users=[“user1”,”user2”]
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The add community command
+        </paramdesc>
+        <example>
+            com=addcomm
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            name
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The community name
+        </paramdesc>
+        <example>
+            name=testcommunity
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            users
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            List with users who belongs
+        </paramdesc>
+        <example>
+            users=[“user1”,”user2”]
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>
+      

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <description>
+        Add custom feature group on PServer
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        commu?clnt=name|pass&#38;com=addftrgroup&#38;name=testftrgroup&#38;features=[“ftr1”,”ftr2”]
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            add custom feature group command
+        </paramdesc>
+        <example>
+            com=addftrgroup
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            name
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            feature group name
+        </paramdesc>
+        <example>
+            name=testftrgroup
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            features
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            feature list with features which belongs to that feature group
+        </paramdesc>
+        <example>
+            features=[“ftr1”,”ftr2”]
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

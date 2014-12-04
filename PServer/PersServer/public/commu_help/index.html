@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!--<html>
+    <head>
+        <title>Untitled Document</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1253">
+    </head>
+
+    <frameset rows="*" framespacing="0" frameborder="yes" border="0">
+        <frameset cols="136,*" framespacing="0" frameborder="yes" border="0">
+            <frame src="menu.html" name="leftFrame" scrolling="NO" noresize>
+            <frame src="commu_index.html" name="mainFrame">
+        </frameset>
+    </frameset>
+    <noframes><body>
+        </body></noframes>
+</html>-->
+<html>
+    <head>
+        <title>Community api</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/custom.css" rel="stylesheet">
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.js"></script>
+        <script src="../js/custom.js"></script>
+    </head>
+    <body>
+        
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#base" role="tab" data-toggle="tab">Base API</a></li>
+            <li><a href="#rest" role="tab" data-toggle="tab">REST API</a></li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div  id="myTabContent" class="tab-content col-md-3">
+
+                    <div class="tab-pane active col-md-8" id="base">
+
+                        <div class="list-group">
+
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('addcomm','addcomm')">
+                                addcomm
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('addftrgroup','addftrgroup')">
+                                addftrgroup
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('adduserassoc','adduserassoc')">
+                                adduserassoc
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('calcuassoc','calcuassoc')">
+                                calcuassoc
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('calcuftrassoc','calcuftrassoc')">
+                                calcuftrassoc
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('makecommunities','makecommunities')">
+                                makecommunities
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('makeftrgroups','makeftrgroups')">
+                                makeftrgroups
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('deleteusercomm','deleteusercomm')">
+                                deleteusercomm
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('deleteftrgroup','deleteftrgroup')">
+                                deleteftrgroup
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getusercomm','getusercomm')">
+                                getusercomm
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getftrgroups','getftrgroups')">
+                                getftrgroups
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getcommprofile','getcommprofile')">
+                                getcommprofile
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getcommusers','getcommusers')">
+                                getcommusers
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getftrgroupfeatures','getftrgroupfeatures')">
+                                getftrgroupfeatures
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getusrcommu','getusrcommu')">
+                                getusrcommu
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getftrftrgroups','getftrftrgroups')">
+                                getftrftrgroups
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('getalgorithms','getalgorithms')">
+                                getalgorithms
+                            </a>
+
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="rest">
+
+                        <div class="list-group">
+
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Raddcomm',
+                                          '1.0/community/:ClientCredentials/cluster/custom/users' )">
+                                1.0/community/:ClientCredentials/cluster/custom/users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Raddftrgroup',
+                                   '1.0/community/:ClientCredentials/cluster/custom/features')">
+                                1.0/community/:ClientCredentials/cluster/custom/features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Radduserassoc',
+                                   '1.0/community/:ClientCredentials/association/custom/users')">
+                                1.0/community/:ClientCredentials/association/custom/users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rcalcuassoc',
+                                   '1.0/community/:ClientCredentials/association/users')">
+                                1.0/community/:ClientCredentials/association/users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rcalcuftrassoc',
+                                   '1.0/community/:ClientCredentials/association/features')">
+                                1.0/community/:ClientCredentials/association/features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rmakecommunities',
+                                   '1.0/community/:ClientCredentials/cluster/users')">
+                                1.0/community/:ClientCredentials/cluster/users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rmakeftrgroups',
+                                   '1.0/community/:ClientCredentials/cluster/features')">
+                                1.0/community/:ClientCredentials/cluster/features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rdeleteusercomm',
+                                   '1.0/community/:ClientCredentials/delete/users')">
+                                1.0/community/:ClientCredentials/delete/users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rdeleteftrgroup',
+                                   '1.0/community/:ClientCredentials/delete/features')">
+                                1.0/community/:ClientCredentials/delete/features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetusercomm',
+                                   '1.0/community/:ClientCredentials/communities')">
+                                1.0/community/:ClientCredentials/communities
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetftrgroups',
+                                   '1.0/community/:ClientCredentials/feature_groups')">
+                                1.0/community/:ClientCredentials/feature_groups
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetcommprofile',
+                                   '1.0/community/:ClientCredentials/community')">
+                                1.0/community/:ClientCredentials/community
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetcommusers',
+                                   '1.0/community/:ClientCredentials/community/users')">
+                                1.0/community/:ClientCredentials/community/users
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetftrgroupfeatures',
+                                   '1.0/community/:ClientCredentials/feature_groups/features')">
+                                1.0/community/:ClientCredentials/feature_groups/features
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetusrcommu',
+                                   '1.0/community/:ClientCredentials/user/communities')">
+                                1.0/community/:ClientCredentials/user/communities
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetftrftrgroups',
+                                   '1.0/community/:ClientCredentials/feature/feature_groups')">
+                                1.0/community/:ClientCredentials/feature/feature_groups
+                            </a>
+                            <a href="#" class="list-group-item" 
+                               onclick="loadcontent('Rgetalgorithms',
+                                   '1.0/community/:ClientCredentials/cluster/algorithms')">
+                                1.0/community/:ClientCredentials/cluster/algorithms
+                            </a>
+                           
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-5 col-md-offset-1">
+
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Command:
+                                    </strong> 
+                                </td>
+                                <td id="command">
+                                    <!--Mark-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Description:
+                                    </strong> 
+                                </td>
+                                <td id="description">
+                                    <!--Mark-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Return types:
+                                    </strong> 
+                                </td>
+                                <td id="rt">
+                                    <!--Jacob-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Methods:
+                                    </strong>
+                                </td>
+                                <td>GET/POST</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br></br>
+                    <div class="well well-sm" id="URL">
+                        <h3>
+                            <!--                            URL:-->
+                        </h3>
+                        <div class="highlight">
+                            <!--1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                        </div>
+                    </div>
+                    <br></br>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Parameter Name</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody id="params">
+                            <!--                            <tr>
+                                                            <td>Mark</td>
+                                                            <td><span class="label label-success">Optional</span></td>
+                                                            <td>@mdo</td>
+                                                            <td>@mdo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jacob</td>
+                                                            <td><span class="label label-success">Optional</span></td>
+                                                            <td>@fat</td>
+                                                            <td>@fat</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Larry</td>
+                                                            <td><span class="label label-danger">Required</span></td>
+                                                            <td>@twitter</td>
+                                                            <td>@twitter</td>
+                                                        </tr>-->
+                        </tbody>
+                    </table>
+
+                    <div class="well well-sm" id="example">
+                        <h3>
+                            Example:
+                        </h3>
+                        <div class="highlight">
+                            <span id="ExURL">
+                                <!--http://localhost:1111/1.0/community/lastfm|experiment123/cluster/algorithms.xml-->
+                            </span>
+                            <pre id="ExResponse">
+<!--&lt;result&gt;
+    &lt;row&gt;
+        &lt;algorithm_name&gt;
+        betw
+        &lt;/algorithm_name&gt;
+        &lt;algorithm_value&gt;
+        edgesToRemove-&gt;default:5
+        &lt;/algorithm_value&gt;
+    &lt;/row&gt;
+&lt;/result&gt;-->
+                            </pre>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        selects all attributes matching the attribute
+        pattern and formats an XML answer with their
+        names and def values. If no feature in DB
+        matches the pattern, the result will not have
+        any row elements (200 OK will still be returned).
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        pers?clnt=name|pass&amp;com=getattrdef&amp;attr=attr_pattern
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The get attributes default values command
+        </paramdesc>
+        <example>
+            com=getattrdef
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            attr
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The attribute pattern
+        </paramdesc>
+        <example>
+            attr=lang.*
+        </example>
+    </parameter> 
+    <ExURL>
+        pers?clnt=name|pass&amp;com=getattrdef&amp;attr=lang.*
+    </ExURL>
+    <ExResponse>
+          &lt;?xml version=&quot;1.0&quot;?&gt;
+          &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;/resp_xsl/up_attributes.xsl&quot;?&gt;
+          &lt;result&gt;
+              &lt;row&gt;&lt;attr&gt;feature&lt;/attr&gt;&lt;defval&gt;default value&lt;/defval&gt;&lt;/row&gt;
+        ...
+          &lt;/result&gt;
+    </ExResponse>
+</root>

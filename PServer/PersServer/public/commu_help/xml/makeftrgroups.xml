@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<root>
+    <description>
+        Make feature groups with given clustering algorithm and association
+        type 
+    </description>
+    <rt>
+        XML
+    </rt>
+    <URL>
+        /commu?clnt=name|pass&#38;com=makeftrgroups&#38;algorithm=metis&#38;association=cos&#38;parameters={“accosThreshold”:”0.999”}
+    </URL>
+    <parameter>
+        <name>
+            clnt
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The Client credentials
+        </paramdesc>
+        <example>
+            clnt=name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            com
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            Command to make feature groups
+        </paramdesc>
+        <example>
+            com=makeftrgroups
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            algorithm
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The clustering algorithm to make feature groups
+        </paramdesc>
+        <example>
+            algorithm=metis e.g
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            association
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            User association type for the clustering
+        </paramdesc>
+        <example>
+            association=cos
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            parameters
+        </name>
+        <status>
+            optional
+        </status>
+        <paramdesc>
+            custom parameters for the clustering algorithm
+        </paramdesc>
+        <example>
+            parameters={“accosThreshold”:”0.999”}
+        </example>
+    </parameter> 
+    <ExURL>
+    
+    </ExURL>
+    <ExResponse>
+    
+    </ExResponse>
+</root>

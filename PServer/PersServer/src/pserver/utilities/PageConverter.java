@@ -55,7 +55,6 @@ public class PageConverter {
         ConvertedBuffer.append(contentTable[1] + "\n");
         ConvertedBuffer.append(contentTable[2] + "\n");
 
-
         if (PageIndex > totalPage || PageIndex <= 0) {
             PageIndex = totalPage;
         }

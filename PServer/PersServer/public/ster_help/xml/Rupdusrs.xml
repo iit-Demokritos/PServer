@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Removes all users not matching the stereotypes rule and inserts
+        any new users that do match. Performing this on a stereotype
+        without a rule will not change the stereotypes users but will
+        not cause an error.
+    </description>
+      <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/update_users.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/update_users.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotype
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype name
+        </paramdesc>
+        <example>
+           stereotype=educated
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>

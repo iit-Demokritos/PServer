@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+    <description>
+        Removes all features matching the feature list specified from all stereotypes
+        matching the stereotype pattern specified. If no features patterns are
+        specified * is assumed and all features are removed from all stereotypes
+        matching stereotype pattern;
+    </description>
+      <rt>
+        XML/JSON
+    </rt>
+    <URL>
+        1.0/stereotype/:ClientCredentials/delete_features.xml
+    </URL>
+    <URL>
+        1.0/stereotype/:ClientCredentials/delete_features.json
+    </URL>
+    <parameter>
+        <name>
+            :ClientCredentials
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The client credentials
+        </paramdesc>
+        <example>
+            name|pass
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            stereotype
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            The stereotype pattern name
+        </paramdesc>
+        <example>
+           stereotype=educated
+        </example>
+    </parameter> 
+    <parameter>
+        <name>
+            features
+        </name>
+        <status>
+            required
+        </status>
+        <paramdesc>
+            A List features for delete
+        </paramdesc>
+        <example>
+            features={"ftr_name1","ftr_name2"}
+        </example>
+    </parameter> 
+    <ExURL>
+
+    </ExURL>
+    <ExResponse>
+
+    </ExResponse>
+</root>
